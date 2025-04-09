@@ -1,8 +1,8 @@
 {
   "mappings": [
-    "/content/edge-forms-2/:/",
-    "/content/edge-forms-2/configuration:/.helix/config.json",
-    "/content/edge-forms-2/metadata:/metadata.json"
+    "/content/edge-forms-oscar/:/",
+    "/content/edge-forms-oscar/configuration:/.helix/config.json",
+    "/content/edge-forms-oscar/metadata:/metadata.json"
   ],
   "includes": [
     "/content/",
