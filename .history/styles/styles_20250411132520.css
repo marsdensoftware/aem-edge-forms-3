@@ -1,0 +1,217 @@
+/*
+ * Copyright 2020 Adobe. All rights reserved.
+ * Licensed under the Apache License, Version 2.0
+ */
+
+:root {
+    /* Base Colors 
+    --background-color: white;
+    --light-color: #f8f8f8;
+    --dark-color: #505050;
+    --text-color: #131313;
+    --link-color: #3b63fb;
+    --link-hover-color: #1d3ecf;
+    --color-text: #333;
+    --line-height-base: 1.5;*/
+
+    /* === BRAND COLOURS === */
+    --color-primary: #017ac9; /* MSD Blue */
+    --color-primary-navy: #134276;
+    --color-primary-dark-navy: #162c45;
+
+    --color-secondary-teal: #35c0ba;
+    --color-accessible-teal: #23807b;
+    --color-salmon: #f75c58;
+    --color-purple: #3a54a1;
+
+    --color-green: #06b271;
+    --color-green-light: #e0f0de;
+    --color-grey: #696969;
+
+    /* === UI USAGE COLORS === */
+
+    /* Text */
+    --text-accent: #017ac9; /* Brand MSD Blue */
+    --text-dark: #134276; /* Brand MSD Navy */
+    --text-primary: #1f1f1f; /* Black-80 */
+    --text-secondary: #666666; /* Black-60 */
+    --text-white: #f0f0f0; /* Light grey for dark bg */
+    --text-error: #c94040; /* Feedback Red */
+    --text-success: #3c7a2e; /* Feedback Green */
+
+    /* Background */
+    --bg-accent: #017ac9;
+    --bg-dark: #134276;
+    --bg-primary: #ffffff; /* White */
+    --bg-secondary: #f4f4f4; /* Black-05 */
+    --bg-tertiary: #e0e0e0; /* Black-10 */
+    --bg-error: #c94040;
+    --bg-success: #3c7a2e;
+    --bg-warning: #f7922b;
+
+    /* Icon */
+    --icon-accent: #017ac9; /* MSD Blue */
+    --icon-dark: #134276;
+    --icon-primary: #1f1f1f; /* Black-80 */
+    --icon-secondary: #666666; /* Black-60 */
+    --icon-light: #f0f0f0; /* Light icon on dark bg */
+    --icon-error: #c94040;
+    --icon-success: #3c7a2e;
+    --icon-warning: #f7922b;
+
+    /* Stroke */
+    --stroke-accent: #017ac9;
+    --stroke-primary: #1f1f1f;
+    --stroke-secondary: #666666;
+    --stroke-error: #c94040;
+    --stroke-focus: #cb5edb; /* Feedback Pink */
+}
+
+body {
+    display: none;
+    margin: 0;
+}
+
+body.appear {
+    display: block;
+}
+
+header {
+    height: var(--nav-height);
+}
+
+header .header,
+footer .footer {
+    visibility: hidden;
+}
+
+header .header[data-block-status="loaded"],
+footer .footer[data-block-status="loaded"] {
+    visibility: visible;
+}
+
+code,
+pre {
+    font-size: var(--body-font-size-s);
+}
+
+pre {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--light-color);
+    overflow-x: auto;
+    white-space: pre;
+}
+
+main > div {
+    margin: 40px 16px;
+}
+
+input,
+textarea,
+select,
+button {
+    font: inherit;
+}
+
+/* links */
+a:any-link {
+    color: var(--link-color);
+    text-decoration: none;
+    word-break: break-word;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* buttons */
+a.button:any-link,
+button {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%;
+    margin: 12px 0;
+    border: 2px solid transparent;
+    border-radius: 2.4em;
+    padding: 0.5em 1.2em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--link-color);
+    color: var(--background-color);
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.button:hover,
+a.button:focus,
+button:hover,
+button:focus {
+    background-color: var(--link-hover-color);
+    cursor: pointer;
+}
+
+button:disabled,
+button:disabled:hover {
+    background-color: var(--light-color);
+    cursor: unset;
+}
+
+a.button.secondary,
+button.secondary {
+    background-color: unset;
+    border: 2px solid currentcolor;
+    color: var(--text-color);
+}
+
+main img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+.icon {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.icon img {
+    height: 100%;
+    width: 100%;
+}
+
+/* sections */
+main > .section {
+    margin: 40px 0;
+}
+
+main > .section > div {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+}
+
+main > .section:first-of-type {
+    margin-top: 0;
+}
+
+@media (width >= 900px) {
+    main > .section > div {
+        padding: 0 32px;
+    }
+}
+
+/* section metadata */
+main .section.light,
+main .section.highlight {
+    background-color: var(--light-color);
+    margin: 0;
+    padding: 40px 0;
+}
