@@ -1,7 +1,7 @@
 /*
  * buttons.css
  * Base button styles and state handling
-
+ */
 
 a.button:any-link,
 button {
@@ -47,4 +47,3 @@ button.secondary {
   border: 2px solid var(--link-color);
   color: var(--link-color);
 }
- */
