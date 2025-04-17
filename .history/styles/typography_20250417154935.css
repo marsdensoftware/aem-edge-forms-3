@@ -1,3 +1,45 @@
+/*
+ * typography.css
+ * Base font styles and weights
+ */
+
+:root {
+    --font-family: "Atkinson Hyperlegible Next", sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --base-font-size: 16px;
+
+    /* Headings */
+    --h1-size: clamp(48px, 5.2vw, 61px);
+    --h2-size: clamp(38px, 4vw, 48px);
+    --h3-size: clamp(32px, 3.5vw, 40px);
+    --h4-size: clamp(24px, 2.5vw, 32px);
+    --h5-size: clamp(22px, 2vw, 24px);
+    --h6-size: 20px;
+
+    /* Text */
+    --subtitle-size: 28px;
+    --strap-title-size: 20px;
+    --paragraph-large: clamp(18px, 1.5vw, 20px);
+    --paragraph-default: 16px;
+    --paragraph-small: 12px;
+
+    --line-height-heading: 1.2;
+    --line-height-text: 1.5;
+    --letter-spacing: 0;
+    --text-color: var(--text-primary);
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--base-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-text);
+    color: var(--text-color);
+}
+
 body {
     font-family: var(--font-family);
     font-size: var(--base-font-size);
