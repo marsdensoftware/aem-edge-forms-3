@@ -1,0 +1,58 @@
+/* Primary Button Large */
+.button.primary {
+    display: inline-block;
+    font-family: var(--font-base);
+    font-size: clamp(1rem, 1.2vw, 1.125rem); /* ~16–18px */
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+
+    padding: 0.75rem 1.5rem; /* 12px vertical, 24px horizontal */
+    min-height: 48px;
+    border-radius: 9999px;
+
+    width: fit-content;
+    max-width: 100%;
+
+    background-color: var(--color-primary-dark);
+    color: #fff;
+
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+/* Hover State */
+.button.primary:hover {
+    background: linear-gradient(
+        to right,
+        #0053a4,
+        #017ac9
+    ); /* Simulate Figma's Gradient-Blue */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Elevation-3 look */
+}
+
+/* Active State */
+.button.primary:active {
+    background-color: var(--color-primary-darker); /* Background/Dark/Dark */
+    transform: scale(0.98);
+}
+
+/* Fix if strong is wrapping text */
+.button.primary strong {
+    all: unset;
+    font-weight: inherit;
+}
+
+.button.primary:hover::after {
+    content: " (hover)";
+    font-size: 0.8rem;
+    color: yellow;
+}
+.button.primary:active::after {
+    content: " (active)";
+    font-size: 0.8rem;
+    color: red;
+}

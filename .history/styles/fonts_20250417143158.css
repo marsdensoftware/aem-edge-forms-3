@@ -27,14 +27,14 @@
     --text-color: #131313;
 }
 
-body {
+/*body {
     font-family: var(--font-family);
     font-size: var(--base-font-size);
     font-weight: var(--font-weight-regular);
     line-height: var(--line-height-text);
     color: var(--text-color);
     margin: 2rem;
-}
+}*/
 
 h1,
 h2,
