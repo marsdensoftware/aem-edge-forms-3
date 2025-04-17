@@ -46,9 +46,8 @@ h6 {
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-heading);
     letter-spacing: var(--letter-spacing);
-    /*color: var(--text-color);*/
+    color: var(--text-color);
     margin-bottom: 1rem;
-    color: red !important;
 }
 
 h1 {

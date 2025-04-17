@@ -45,14 +45,3 @@
     all: unset;
     font-weight: inherit;
 }
-
-.button.primary:hover::after {
-    content: " (hover)";
-    font-size: 0.8rem;
-    color: yellow;
-}
-.button.primary:active::after {
-    content: " (active)";
-    font-size: 0.8rem;
-    color: red;
-}
