@@ -1,5 +1,9 @@
 /* buttons.css */
 
+.button.primary {
+    background: red !important;
+}
+
 /* Large Primary Button */
 .button.primary {
     display: inline-block;
