@@ -1,10 +1,5 @@
 /* buttons.css */
 
-.button-container > em {
-    all: unset;
-    font-style: normal;
-}
-
 /******** Primary Button: Large */
 .button.primary {
     display: inline-block;
@@ -61,7 +56,6 @@
 }
 
 /******** Secondary Button: Large */
-
 .button.secondary {
     display: inline-block;
     font-family: var(--font-base);

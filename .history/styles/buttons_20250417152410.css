@@ -1,10 +1,5 @@
 /* buttons.css */
 
-.button-container > em {
-    all: unset;
-    font-style: normal;
-}
-
 /******** Primary Button: Large */
 .button.primary {
     display: inline-block;
@@ -61,6 +56,12 @@
 }
 
 /******** Secondary Button: Large */
+
+/* Reset styling for <em> wrapper around secondary buttons */
+.button.secondary em {
+    all: unset;
+    font-style: normal;
+}
 
 .button.secondary {
     display: inline-block;
