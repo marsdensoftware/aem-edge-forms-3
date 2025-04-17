@@ -24,8 +24,3 @@
     all: unset;
     font-weight: inherit;
 }
-
-.button.primary {
-    width: fit-content;
-    max-width: 100%;
-}
