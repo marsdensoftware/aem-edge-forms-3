@@ -19,13 +19,3 @@
     transition: background-color 0.25s ease, box-shadow 0.2s ease,
         transform 0.1s ease;
 }
-
-.button.primary strong {
-    all: unset;
-    font-weight: inherit;
-}
-
-.button.primary {
-    width: fit-content;
-    max-width: 100%;
-}
