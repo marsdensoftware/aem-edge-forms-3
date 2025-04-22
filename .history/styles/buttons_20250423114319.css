@@ -1,0 +1,71 @@
+/* Secondary Button: Large */
+
+.cmp-button--secondary.cmp-button--large .cmp-button__link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Spacing-Spacing-200, 8px);
+    padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+
+    font-family: var(--font-base);
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+
+    border-radius: var(--Corner-radius-Round, 999px);
+    border: var(--Stroke-weight-Button-stroke, 2px) solid
+        var(--Stroke-Secondary, #999);
+    background: transparent;
+    color: var(--Stroke-Secondary, #999);
+
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.cmp-button--secondary.cmp-button--large .cmp-button__link:hover {
+    border-color: var(--Stroke-Primary, #333);
+    background: var(--Background-Light-Primary, #fff);
+    color: var(--Stroke-Primary, #333);
+}
+
+.cmp-button--secondary.cmp-button--large .cmp-button__link:active {
+    border-color: var(--Stroke-Accent, #017ac9);
+    background: var(--Background-Light-Primary, #fff);
+    color: var(--Stroke-Accent, #017ac9);
+    transform: scale(0.98);
+}
+
+/* Secondary Button: Small */
+
+.cmp-button--secondary.cmp-button--small .cmp-button__link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Spacing-Spacing-200, 8px);
+    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+
+    font-family: var(--font-base);
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+
+    border-radius: var(--Corner-radius-Round, 999px);
+    border: var(--Stroke-weight-Button-stroke, 2px) solid
+        var(--Stroke-Secondary, #999);
+    background: var(--Background-Light-Primary, #fff);
+    color: var(--Stroke-Secondary, #999);
+
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.cmp-button--secondary.cmp-button--small .cmp-button__link:hover {
+    border-color: var(--Stroke-Primary, #333);
+    color: var(--Stroke-Primary, #333);
+}
+
+.cmp-button--secondary.cmp-button--small .cmp-button__link:active {
+    border-color: var(--Stroke-Accent, #017ac9);
+    color: var(--Stroke-Accent, #017ac9);
+    transform: scale(0.98);
+}
