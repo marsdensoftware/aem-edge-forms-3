@@ -7,15 +7,19 @@
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
 
-  font-family: var(--font-base);
-  font-weight: 500;
-  text-decoration: none;
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 24px; /* 120% */
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
   text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
 
+  text-decoration: none;
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
   background: transparent;
-  color: var(--Stroke-Secondary, #999);
 
   transition: all 0.25s ease;
   cursor: pointer;
@@ -34,7 +38,114 @@
   transform: scale(0.98);
 }
 
+
 /* Secondary Button: Small */
 .button.secondary.small {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 24px;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
+
+  text-decoration: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: var(--Background-Light-Primary, #fff);
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.button.secondary.small:hover {
+  border-color: var(--Stroke-Primary, #333);
+  color: var(--Stroke-Primary, #333);
+}
+
+.button.secondary.small:active {
+  border-color: var(--Stroke-Accent, #017ac9);
+  color: var(--Stroke-Accent, #017ac9);
+  transform: scale(0.98);
+}
+
+
+/* Primary Button: Large */
+
+.button.primary {
+  display: inline-block;
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 24px;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+  border-radius: var(--Corner-radius-Round, 9999px);
+  background-color: var(--color-primary-dark, #003f7f);
+  color: #fff;
+
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.button.primary:hover {
+  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+
+.button.primary:focus {
+  outline: none;
+}
+
+.button.primary:active {
+  transform: scale(0.98);
+}
+
+
+/* Primary Button: Small */
+
+.button.primary.small {
+  display: inline-block;
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 24px;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+
+  padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+  border-radius: var(--Corner-radius-Round, 9999px);
+  background-color: var(--color-primary-dark, #003f7f);
+  color: #fff;
+
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.button.primary.small:hover {
+  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+
+.button.primary.small:focus {
+  outline: none;
+}
+
+.button.primary.small:active {
+  transform: scale(0.98);
 }
