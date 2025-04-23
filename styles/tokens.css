@@ -13,6 +13,13 @@
   --Stroke-Accent: #017AC9;
 
   --Background-Light-Primary: #FFF;
+  --Text-Dark-Secondary: #666;
 
-  --font-base: "Atkinson Hyperlegible Next", sans-serif;
+  --Typography-Font-family-Primary-font: "Atkinson Hyperlegible Next", sans-serif;
+  --Typography-Sizes-Components-Button-default: 20px;
+  --Typography-Font-weight-Regular: 400;
+  --Typography-Spacing-Character-Default: 0px;
+
+  --color-primary-dark: #003f7f;
+  --elevation-2: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
