@@ -23,3 +23,20 @@
   --color-primary-dark: #003f7f;
   --elevation-2: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+  --Background-Dark-Accent: #017AC9;
+  --Background-Dark-Dark: #134276;
+
+  --Gradient-Blue: linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%);
+  --Brand-MSD-Blue: #017AC9;
+  --Brand-MSD-Navy: #134276;
+
+  --Elevation-Position-X-Level-2: 0px;
+  --Elevation-Position-Y-Level-2: 4px;
+  --Elevation-Blur-Level-2: 8px;
+  --Elevation-Spread-Level-2: 0px;
+
+  --Elevation-Position-X-Level-3: 0px;
+  --Elevation-Position-Y-Level-3: 8px;
+  --Elevation-Blur-Level-3: 16px;
+  --Elevation-Spread-Level-3: 0px;

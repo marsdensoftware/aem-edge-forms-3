@@ -80,7 +80,12 @@
 /* Primary Button: Large */
 
 .button.primary {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+
   font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
@@ -89,27 +94,34 @@
   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
   text-align: center;
   text-decoration: none;
-
-  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
-  border-radius: var(--Corner-radius-Round, 9999px);
-  background-color: var(--color-primary-dark, #003f7f);
   color: #fff;
+
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Accent, #017AC9);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
+              var(--Elevation-Position-Y-Level-2, 4px)
+              var(--Elevation-Blur-Level-2, 8px)
+              var(--Elevation-Spread-Level-2, 0px)
+              rgba(0, 0, 0, 0.20);
 
   border: none;
   cursor: pointer;
-  transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
 }
 
 .button.primary:hover {
-  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
-  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
-}
-
-.button.primary:focus {
-  outline: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
+  box-shadow: var(--Elevation-Position-X-Level-3, 0px)
+              var(--Elevation-Position-Y-Level-3, 8px)
+              var(--Elevation-Blur-Level-3, 16px)
+              var(--Elevation-Spread-Level-3, 0px)
+              rgba(0, 0, 0, 0.20);
 }
 
 .button.primary:active {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Dark, #134276);
   transform: scale(0.98);
 }
 
