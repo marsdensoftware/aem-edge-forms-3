@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      -   # This sets the pipeline to trigger on changes to the SIT branch in Azure DevOps
+      -  main # This sets the pipeline to trigger on changes to the SIT branch in Azure DevOps
 
 pool:
   vmImage: 'ubuntu-latest'  # Specifies the agent pool and image for running the job. Adjust if necessary.
