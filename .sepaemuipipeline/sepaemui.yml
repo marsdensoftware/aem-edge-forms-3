@@ -1,38 +1,30 @@
 trigger:
   branches:
     include:
-      -  main # This sets the pipeline to trigger on changes to the SIT branch in Azure DevOps
+      - main  # to trigger this pipeline on changes to 'main' branch
 
 pool:
-  vmImage: 'ubuntu-latest'  # Specifies the agent pool and image for running the job. Adjust if necessary.
+  vmImage: 'ubuntu-latest'
 
-stages:
-- stage: 'SyncToAdobeCloudManager'
-  displayName: 'Sync Azure SIT Branch to Adobe Cloud Manager'
-  jobs:
-  - job: 'SyncJob'
-    displayName: 'Push Changes to Adobe Cloud Manager'
-    steps:
-    - checkout: self
-      fetchDepth: 0
+steps:
+- checkout: self
 
-    - task: Bash@3
-      displayName: 'Push to Adobe Cloud Manager'
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo "current branch : $(Build.SourceBranchName)"
-          
-          echo "machine git.cloudmanager.adobe.com" >> ~/.netrc
-          echo "login $(AEMLEARNING_ADOBE_GIT_USERNAME1)" >> ~/.netrc
-          echo "password $(AEMLEARNING_ADOBE_GIT_TOKEN)" >> ~/.netrc
-          echo "🔍 Dumping .netrc for verification:"
-          sed -E 's/(password )(........).*/\1\2...REDACTED/' ~/.netrc
+- script: |
+    echo "Setting up SSH key"
+    mkdir -p ~/.ssh
+    echo "$GITHUB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-          chmod 600 ~/.netrc
-          echo "Display content in netrc"
-          cat ~/.netrc
-          git remote add adobe $(AEMLEARNING_ADOBE_GIT_URL)
-          
-          echo "Pushing current HEAD $(Build.SourceBranchName) to adobe"
-          git push --verbose --force adobe HEAD:$(Build.SourceBranchName)
+    echo "Adding GitHub remote"
+    git remote add github git@github.com:marsdensoftware/sep-aem-ui.git
+
+    echo "Pull the latest from ADO main branch"
+    git fetch origin main
+    git checkout origin/main
+
+    echo "Push to GitHub main branch"
+    git push -u github main
+  displayName: 'Push Code to GitHub'
+  env:
+    GITHUB_SSH_PRIVATE_KEY: $(GITHUB_SSH_PRIVATE_KEY)
