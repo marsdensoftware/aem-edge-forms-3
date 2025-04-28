@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+      -   # This sets the pipeline to trigger on changes to the SIT branch in Azure DevOps
+
+pool:
+  vmImage: 'ubuntu-latest'  # Specifies the agent pool and image for running the job. Adjust if necessary.
+
+stages:
+- stage: 'SyncToAdobeCloudManager'
+  displayName: 'Sync Azure SIT Branch to Adobe Cloud Manager'
+  jobs:
+  - job: 'SyncJob'
+    displayName: 'Push Changes to Adobe Cloud Manager'
+    steps:
+    - checkout: self
+      fetchDepth: 0
+
+    - task: Bash@3
+      displayName: 'Push to Adobe Cloud Manager'
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "current branch : $(Build.SourceBranchName)"
+          
+          echo "machine git.cloudmanager.adobe.com" >> ~/.netrc
+          echo "login $(AEMLEARNING_ADOBE_GIT_USERNAME1)" >> ~/.netrc
+          echo "password $(AEMLEARNING_ADOBE_GIT_TOKEN)" >> ~/.netrc
+          echo "🔍 Dumping .netrc for verification:"
+          sed -E 's/(password )(........).*/\1\2...REDACTED/' ~/.netrc
+
+          chmod 600 ~/.netrc
+          echo "Display content in netrc"
+          cat ~/.netrc
+          git remote add adobe $(AEMLEARNING_ADOBE_GIT_URL)
+          
+          echo "Pushing current HEAD $(Build.SourceBranchName) to adobe"
+          git push --verbose --force adobe HEAD:$(Build.SourceBranchName)
