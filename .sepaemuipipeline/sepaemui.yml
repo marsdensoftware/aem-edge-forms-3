@@ -8,23 +8,14 @@ pool:
 
 steps:
 - checkout: self
+  persistCredentials: true
 
 - script: |
-    echo "Setting up SSH key"
-    mkdir -p ~/.ssh
-    echo "$GITHUB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-    ssh-keyscan github.com >> ~/.ssh/known_hosts
-
+    
     echo "Adding GitHub remote"
-    git remote add github git@github.com:marsdensoftware/sep-aem-ui.git
+    git remote add github https://$(GITHUB_PAT)@github.com/your-github-username/your-private-repo.git
+    git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
 
-    echo "Pull the latest from ADO main branch"
-    git fetch origin main
-    git checkout origin/main
-
-    echo "Push to GitHub main branch"
-    git push -u github main
   displayName: 'Push Code to GitHub'
   env:
     GITHUB_SSH_PRIVATE_KEY: $(GITHUB_SSH_PRIVATE_KEY)
