@@ -20,7 +20,7 @@ steps:
     git fetch github
     # Checkout the current branch being built
     #git checkout $(Build.SourceBranchName)
-    #git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
+    git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
 
   displayName: 'Push Code to GitHub'
   #env:
