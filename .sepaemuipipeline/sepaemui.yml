@@ -13,7 +13,7 @@ steps:
 - script: |
     
     echo "Adding GitHub remote"
-    git remote add github https://$(GITHUB_PAT)@github.com:marsdensoftware/sep-aem-ui.git
+    git remote add github https://$(GITHUB_PAT)@github.com/marsdensoftware/sep-aem-ui.git
     # Fetch the latest changes from both origin and github remotes
     #git fetch origin
     git fetch github
