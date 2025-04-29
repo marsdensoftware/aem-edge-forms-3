@@ -156,6 +156,18 @@
     ]
   },
   {
+    "id": "customsearch",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Title",
+        "label": "Title",
+        "required": true
+      }
+    ]
+  },
+  {
     "id": "embed-adaptive-form",
     "fields": [
       {

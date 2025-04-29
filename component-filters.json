@@ -42,6 +42,10 @@
     ]
   },
   {
+    "id": "customsearch",
+    "components": null
+  },
+  {
     "id": "form",
     "components": [
       "captcha",
@@ -80,7 +84,8 @@
       "hero",
       "cards",
       "columns",
-      "quote"
+      "quote",
+      "customsearch"
     ]
   }
 ]
