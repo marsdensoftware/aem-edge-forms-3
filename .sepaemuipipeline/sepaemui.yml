@@ -13,7 +13,7 @@ steps:
 - script: |
     
     echo "Adding GitHub remote"
-    git remote add github https://$(GITHUB_PAT)@github.com/your-github-username/your-private-repo.git
+    git remote add github https://$(GITHUB_PAT)@github.com:marsdensoftware/sep-aem-ui.git
     git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
 
   displayName: 'Push Code to GitHub'
