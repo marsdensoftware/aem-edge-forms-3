@@ -17,7 +17,7 @@ steps:
     echo "GitHub remote success"
     # Fetch the latest changes from both origin and github remotes
     git fetch origin
-    git fetch github
+    #git fetch github
     # Checkout the current branch being built
     echo "Checking out the current branch"
     git checkout $(Build.SourceBranchName)
