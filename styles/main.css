@@ -1,0 +1,286 @@
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+/*
+ * colors.css
+ * Brand, UI, Grayscale, and Feedback color tokens
+ */
+:root {
+  /* Brand */
+  --color-primary: #017ac9;
+  --color-primary-navy: #134276;
+  --color-primary-dark-navy: #162c45;
+  --color-secondary-teal: #35c0ba;
+  --color-accessible-teal: #23807b;
+  --color-salmon: #f75c58;
+  --color-purple: #3a54a1;
+  --color-green: #06b271;
+  --color-green-light: #e0f0de;
+  --color-grey: #696969;
+  /* UI Text */
+  --text-accent: #017ac9;
+  --text-dark: #134276;
+  --text-primary: #1f1f1f;
+  --text-secondary: #666666;
+  --text-white: #f0f0f0;
+  --text-error: #c94040;
+  --text-success: #3c7a2e;
+  /* UI Background */
+  --bg-accent: #017ac9;
+  --bg-dark: #134276;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f4;
+  --bg-tertiary: #e0e0e0;
+  --bg-error: #c94040;
+  --bg-success: #3c7a2e;
+  --bg-warning: #f7922b;
+  /* UI Icons */
+  --icon-accent: #017ac9;
+  --icon-dark: #134276;
+  --icon-primary: #1f1f1f;
+  --icon-secondary: #666666;
+  --icon-light: #f0f0f0;
+  --icon-error: #c94040;
+  --icon-success: #3c7a2e;
+  --icon-warning: #f7922b;
+  /* UI Stroke */
+  --stroke-accent: #017ac9;
+  --stroke-primary: #1f1f1f;
+  --stroke-secondary: #666666;
+  --stroke-error: #c94040;
+  --stroke-focus: #cb5edb;
+  /* Greyscale */
+  --grey-black-100: #000000;
+  --grey-black-80: #333333;
+  --grey-black-60: #666666;
+  --grey-black-40: #999999;
+  --grey-black-20: #cccccc;
+  --grey-black-10: #dddddd;
+  --grey-black-05: #f2f2f2;
+  --grey-white: #ffffff;
+  /* Feedback */
+  --feedback-green: #388314;
+  --feedback-orange: #fa7f14;
+  --feedback-red: #d03633;
+  --feedback-pink: #b53cde;
+  /* buttons */
+  --color-primary: #017ac9;
+  --color-primary-dark: #134276;
+  --color-primary-darker: #0a2a56; /* Approximation of Background/Dark/Dark */
+}
+
+:root {
+  --Spacing-Spacing-200: 0.5rem;
+  --Spacing-Spacing-300: 0.75rem;
+  --Spacing-Spacing-400: 1rem;
+  --Spacing-Spacing-500: 1.5rem;
+  --Spacing-Spacing-600: 2rem;
+  --Corner-radius-Round: 62.4375rem;
+  --Stroke-weight-Button-stroke: 0.125rem;
+  --Stroke-Secondary: #999;
+  --Stroke-Primary: #333;
+  --Stroke-Accent: #017ac9;
+  --Background-Light-Primary: #fff;
+  --Text-Dark-Secondary: #666;
+  --Typography-Font-family-Primary-font: "Atkinson Hyperlegible Next",
+      sans-serif;
+  --Typography-Sizes-Components-Button-default: 1.25rem;
+  --Typography-Font-weight-Regular: 400;
+  --Typography-Spacing-Character-Default: 0;
+  --color-primary-dark: #003f7f;
+  --elevation-2: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+}
+
+.button.secondary:focus {
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: var(--Background-Light-Primary, #fff);
+  box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem var(--Stroke-Focus, #b53cde);
+  outline: none;
+}
+
+/*
+    My preferences of class naming is using BEM https://getbem.com/introduction/
+    In this case of a button will be:
+
+    BASE
+    .button (base style. Padding, margin, etc)
+
+    MODIFIER
+    .button--[modifier] (expanding on base style and add it's own style. IE colour, extra padding, etc)
+    IE .button--primary
+
+    STATE
+    .button--is-[state] (for specific style related state NOT hover, focus, etc)
+    IE .button--is-hidden, .button--primary-is-visible
+*/
+.button {
+  /* Secondary Button: Large */
+  /* Primary Button: Large */
+}
+.button.secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem; /* 120% */
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
+  text-decoration: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  /* Secondary Button: Small */
+}
+.button.secondary:hover {
+  border-color: var(--Stroke-Primary, #333);
+  background: var(--Background-Light-Primary, #fff);
+  color: var(--Stroke-Primary, #333);
+}
+.button.secondary:active {
+  border-color: var(--Stroke-Accent, #017ac9);
+  background: var(--Background-Light-Primary, #fff);
+  color: var(--Stroke-Accent, #017ac9);
+  transform: scale(0.98);
+}
+.button.secondary.small {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
+  text-decoration: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: var(--Background-Light-Primary, #fff);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.button.secondary:hover {
+  border-color: var(--Stroke-Primary, #333);
+  color: var(--Stroke-Primary, #333);
+}
+.button.secondary:active {
+  border-color: var(--Stroke-Accent, #017ac9);
+  color: var(--Stroke-Accent, #017ac9);
+  transform: scale(0.98);
+}
+.button.primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Accent, #017ac9);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+  /* Primary Button: Small */
+}
+.button.primary:hover {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017ac9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
+  box-shadow: var(--Elevation-Position-X-Level-3, 0px) var(--Elevation-Position-Y-Level-3, 8px) var(--Elevation-Blur-Level-3, 16px) var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+}
+.button.primary:active {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Dark, #134276);
+  transform: scale(0.98);
+}
+.button.primary:focus {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Dark, #134276);
+  outline: none;
+}
+.button.primary.small {
+  display: inline-block;
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+  padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+  border-radius: var(--Corner-radius-Round, 9999px);
+  background-color: var(--color-primary-dark, #003f7f);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+.button.primary.small:hover {
+  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+.button.primary.small:focus {
+  outline: none;
+}
+.button.primary.small:active {
+  transform: scale(0.98);
+}
+
+.button-icon-primary {
+  /* Primary Icon Button: Large */
+  /* Primary Icon Button: Small */
+}
+.button-icon-primary.large {
+  display: inline-flex;
+  min-width: 90rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  border-radius: var(--Corner-radius-Large, 16px);
+  background: var(--Greys-White, #fff);
+}
+.button-icon-primary.small {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Accent, #017ac9);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+.button-icon-primary.small:hover {
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017ac9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
+  box-shadow: var(--Elevation-Position-X-Level-3, 0px) var(--Elevation-Position-Y-Level-3, 8px) var(--Elevation-Blur-Level-3, 16px) var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+}
+.button-icon-primary.small:active {
+  background: var(--Background-Dark-Dark, #134276);
+  transform: scale(0.95);
+}

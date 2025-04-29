@@ -1,0 +1,12 @@
+// TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+
+// Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
+@use './settings/colors.scss';
+@use './settings/tokens.scss';
+// Components
+@use './components/buttons.scss';

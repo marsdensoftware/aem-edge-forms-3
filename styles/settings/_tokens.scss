@@ -1,5 +1,32 @@
 // Design Tokens - SCSS Version
 
+:root {
+    --Spacing-Spacing-200: 8px;
+    --Spacing-Spacing-300: 12px;
+    --Spacing-Spacing-400: 16px;
+    --Spacing-Spacing-500: 24px;
+    --Spacing-Spacing-600: 32px;
+
+    --Corner-radius-Round: 999px;
+
+    --Stroke-weight-Button-stroke: 2px;
+    --Stroke-Secondary: #999;
+    --Stroke-Primary: #333;
+    --Stroke-Accent: #017ac9;
+
+    --Background-Light-Primary: #fff;
+    --Text-Dark-Secondary: #666;
+
+    --Typography-Font-family-Primary-font: 'Atkinson Hyperlegible Next',
+        sans-serif;
+    --Typography-Sizes-Components-Button-default: 20px;
+    --Typography-Font-weight-Regular: 400;
+    --Typography-Spacing-Character-Default: 0px;
+
+    --color-primary-dark: #003f7f;
+    --elevation-2: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 // === Colors ===
 $color-primary: #017ac9;
 $color-primary-navy: #134276;
