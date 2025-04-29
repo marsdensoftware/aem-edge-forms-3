@@ -16,13 +16,13 @@ steps:
     git remote add github https://$(GITHUB_PAT)@github.com/gregwilk/ADO-SEP-UI-LEARNING
     echo "GitHub remote success"
     # Fetch the latest changes from both origin and github remotes
-    git fetch origin
-    git fetch github
+    #git fetch origin
+    #git fetch github
     # Checkout the current branch being built
     echo "Checking out the current branch"
     git checkout $(Build.SourceBranchName)
-    echo "Merging destination branch into current branch"
-    git merge github/$(Build.SourceBranchName) --strategy-option ours || echo "Merge conflicts resolved by overriding source branch changes"
+    #echo "Merging destination branch into current branch"
+    #git merge github/$(Build.SourceBranchName) --strategy-option ours || echo "Merge conflicts resolved by overriding source branch changes"
     git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
 
   displayName: 'Push Code to GitHub'
