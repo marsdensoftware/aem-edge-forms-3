@@ -3,10 +3,5 @@
  * Master import file for all modular CSS
  */
 
-@import url('./colors.css');
-@import url('./typography.css');
 @import url('./layout.css');
-@import url('./buttons.css');
-@import url('./forms.css');
-@import url('./tables.css');
 @import url('./grid.css');

@@ -6,7 +6,7 @@
 */
 
 // Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
-@use './settings/colors.scss';
-@use './settings/tokens.scss';
+@use './settings';
 // Components
-@use './components/buttons.scss';
+@use './base';
+@use './components';
