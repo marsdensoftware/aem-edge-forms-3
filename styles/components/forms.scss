@@ -1,0 +1,20 @@
+// Example tokens are assumed to be already defined/imported elsewhere
+
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+
+.cmp-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-Spacing-400);
+  font-family: var(--Font-Family-Base);
+  font-size: var(--Font-Size-Base);
+  color: var(--Text-Primary);
+  @media (max-width: $breakpoint-sm) {
+    gap: var(--Spacing-Spacing-300);
+    font-size: 0.9375rem;
+  }
+}
+
+// (rest of the SCSS omitted for brevity — this is where the full content would go)
