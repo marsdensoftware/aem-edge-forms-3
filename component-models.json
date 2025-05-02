@@ -4964,6 +4964,35 @@
         ]
       },
       {
+        "id": "formhero",
+        "fields": [
+          {
+            "component": "container",
+            "name": "basic",
+            "label": "Basic",
+            "collapsible": false,
+            "fields": [
+              {
+                "component": "text",
+                "name": "name",
+                "label": "Name",
+                "valueType": "string",
+                "required": true,
+                "valueFormat": "regexp",
+                "validation": {
+                  "regExp": "^[^$].*",
+                  "customErrorMsg": "Name cannot start with $"
+                }
+              },
+              {
+                "component": "text",
+                "name": "jcr:title",
+                "label": "Title",
+                "valueType": "string"
+              }
+            ]
+          },
+      {
         "component": "container",
         "name": "help",
         "label": "Help Content",
