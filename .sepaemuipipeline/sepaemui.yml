@@ -13,7 +13,7 @@ steps:
 - script: |
     
     echo "Adding GitHub remote"
-    git remote add github https://$(GITHUB_PAT)@github.com/gregwilk/ADO-SEP-UI-LEARNING
+    git remote add github https://$(GITHUB_PAT)@github.com/marsdensoftware/aem-edge-forms-3
     echo "GitHub remote success"
     # Fetch the latest changes from both origin and github remotes
     git fetch origin
