@@ -1,0 +1,8 @@
+/* _elevation.css */
+:root {
+  --elevation-1: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  --elevation-2: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  --elevation-3: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  --elevation-4: 0px 16px 32px rgba(0, 0, 0, 0.2);
+  --elevation-5: 0px 32px 64px rgba(0, 0, 0, 0.2);
+}
