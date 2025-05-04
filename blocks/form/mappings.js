@@ -1,6 +1,6 @@
 import { loadCSS } from '../../scripts/aem.js';
 
-let customComponents = ['form-hero'];
+let customComponents = ['range'];
 const OOTBComponentDecorators = ['file-input', 'wizard', 'modal', 'tnc', 'toggleable-link', 'rating', 'datetime', 'list', 'location', 'accordion', 'password'];
 
 export function setCustomComponents(components) {
