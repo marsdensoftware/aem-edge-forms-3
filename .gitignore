@@ -20,3 +20,4 @@ helix-importer-ui
 /playwright/.cache/
 test/e2e/reports/
 LoginAuth.json
+.history/
