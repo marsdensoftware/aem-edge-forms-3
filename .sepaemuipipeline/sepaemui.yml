@@ -9,13 +9,14 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
+  fetchDepth: 0  # get full commit history
 
 - script: |
     
-    echo "Source branch (raw): $(Build.SourceBranchName)"
+    echo "Source branch (raw): $(Build.SourceBranch)"
     
     # Strip 'refs/heads/' to get the clean branch name
-    BRANCH_NAME=$(echo "$(Build.SourceBranchName)" | sed 's#refs/heads/##')
+    BRANCH_NAME=$(echo "$(Build.SourceBranch)" | sed 's#refs/heads/##')
 
     echo "Cleaned branch name: $BRANCH_NAME"
     
