@@ -8,21 +8,18 @@
   align-items: center;
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
-
   font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
   line-height: 24px; /* 120% */
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0);
   text-align: center;
   color: var(--Text-Dark-Secondary, #666);
-
   text-decoration: none;
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
   background: transparent;
-
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -48,21 +45,18 @@
   align-items: center;
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
-
   font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
   line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0);
   text-align: center;
   color: var(--Text-Dark-Secondary, #666);
-
   text-decoration: none;
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
   background: var(--Background-Light-Primary, #fff);
-
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -85,7 +79,7 @@
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
   background: var(--Background-Light-Primary, #FFF);
-  box-shadow: 0px 0px 0px 2px #FFF, 0px 0px 0px 4px var(--Stroke-Focus, #B53CDE);
+  box-shadow: 0 0 0 2px #FFF, 0 0 0 4px var(--Stroke-Focus, #B53CDE);
   outline: none;
 }
 
@@ -98,25 +92,22 @@
   align-items: center;
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
-
   font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
   line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0);
   text-align: center;
   text-decoration: none;
   color: #fff;
-
   border-radius: var(--Corner-radius-Round, 999px);
   background: var(--Background-Dark-Accent, #017AC9);
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
+  box-shadow: var(--Elevation-Position-X-Level-2, 0)
               var(--Elevation-Position-Y-Level-2, 4px)
               var(--Elevation-Blur-Level-2, 8px)
-              var(--Elevation-Spread-Level-2, 0px)
-              rgba(0, 0, 0, 0.20);
-
+              var(--Elevation-Spread-Level-2, 0)
+              rgb(0 0 0 / 20%);
   border: none;
   cursor: pointer;
   transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
@@ -125,11 +116,11 @@
 .button.primary:hover {
   border-radius: var(--Corner-radius-Round, 999px);
   background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
-  box-shadow: var(--Elevation-Position-X-Level-3, 0px)
+  box-shadow: var(--Elevation-Position-X-Level-3, 0)
               var(--Elevation-Position-Y-Level-3, 8px)
               var(--Elevation-Blur-Level-3, 16px)
-              var(--Elevation-Spread-Level-3, 0px)
-              rgba(0, 0, 0, 0.20);
+              var(--Elevation-Spread-Level-3, 0)
+              rgb(0 0 0 / 20%);
 }
 
 .button.primary:active {
@@ -156,22 +147,20 @@
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
   line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0);
   text-align: center;
   text-decoration: none;
-
   padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
   border-radius: var(--Corner-radius-Round, 9999px);
   background-color: var(--color-primary-dark, #003f7f);
   color: #fff;
-
   border: none;
   cursor: pointer;
   transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
 }
 
 .button.primary.small:hover {
-  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  box-shadow: var(--elevation-2, 0 4px 6px rgb(0 0 0 / 10%));
   transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
 }
 
@@ -206,21 +195,21 @@
   aspect-ratio: 1 / 1;
   border-radius: var(--Corner-radius-Round, 999px);
   background: var(--Background-Dark-Accent, #017AC9);
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
+  box-shadow: var(--Elevation-Position-X-Level-2, 0)
               var(--Elevation-Position-Y-Level-2, 4px)
               var(--Elevation-Blur-Level-2, 8px)
-              var(--Elevation-Spread-Level-2, 0px)
-              rgba(0, 0, 0, 0.20);
+              var(--Elevation-Spread-Level-2, 0)
+              rgb(0 0 0 / 20%);
   transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
 }
 
 .button-icon-primary.small:hover {
   background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
-  box-shadow: var(--Elevation-Position-X-Level-3, 0px)
+  box-shadow: var(--Elevation-Position-X-Level-3, 0)
               var(--Elevation-Position-Y-Level-3, 8px)
               var(--Elevation-Blur-Level-3, 16px)
-              var(--Elevation-Spread-Level-3, 0px)
-              rgba(0, 0, 0, 0.20);
+              var(--Elevation-Spread-Level-3, 0)
+              rgb(0 0 0 / 20%);
 }
 
 .button-icon-primary.small:active {
