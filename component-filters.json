@@ -20,7 +20,7 @@
   },
   {
     "id": "cards",
-    "components": ["card", "button"]
+    "components": ["card"]
   },
   {
     "id": "columns",
