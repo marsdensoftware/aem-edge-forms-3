@@ -3,6 +3,9 @@ coverage/*
 logs/*
 node_modules/*
 
+.project
+.settings/*
+
 helix-importer-ui
 .DS_Store
 *.bak
