@@ -4991,7 +4991,9 @@
                 "valueType": "string"
               }
             ]
-          },
+          }
+        ]
+      },
       {
         "component": "container",
         "name": "help",
