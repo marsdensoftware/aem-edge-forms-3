@@ -618,12 +618,14 @@
                     "jcr:title": "Text",
                     "fieldType": "plain-text",
                     "textIsRich": true,
+                    "colspan": 6,
                     "value": "Adaptive Form Text Component",
                     "sling:resourceType": "core/fd/components/form/text/v1/text"
                   },
                   "image": {
                     "jcr:title": "Image",
                     "fieldType": "image",
+                    "colspan": 6,
                     "sling:resourceType": "core/fd/components/form/image/v1/image"
                   }
                 }
