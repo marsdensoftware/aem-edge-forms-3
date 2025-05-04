@@ -659,6 +659,24 @@
               }
             }
           }
+        },
+        {
+          "title": "Job Seeker Intro",
+          "id": "jobseekerintro",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Job Seeker Intro",
+                  "model": "jobseekerintro",
+                  "jobseekerintroText_titleType": "h2",
+                  "jobseekerintroText_title": "<h2>Let's set up your jobseeker profile!</h2>",
+                  "jobseekerintroText_description": "<p>Tell us what kind of work you're after, and any skills or experience you have. You can save and exit anytime — or come back and update your profile later.</p>"
+                }
+              }
+            }
+          }
         }
       ]
     }

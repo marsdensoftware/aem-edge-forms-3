@@ -1,0 +1,458 @@
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+/*
+ * Brand, UI, Grayscale, and Feedback color tokens
+ */
+/* Brand */
+/* UI Text */
+/* UI Background */
+/* UI Icons */
+/* UI Stroke */
+/* Greyscale */
+/* Feedback */
+/* buttons */
+/* Approximation of Background/Dark/Dark */
+/*
+    Typography settings and mixin
+    Refer to this file from your component
+    To leverage typography properties and
+    Pre-defined mixins
+*/
+/* Headings */
+/* Text */
+/*
+    This can be baked into the context
+    Of where the properties will be used
+*/
+/* utilities.css */
+/* spacing utilities */
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 2rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 2rem;
+}
+
+/* text alignment */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* display */
+.d-block {
+  display: block;
+}
+
+.d-inline {
+  display: inline;
+}
+
+/* elevation utilities */
+.shadow-1 {
+  box-shadow: var(--elevation-1);
+}
+
+.shadow-2 {
+  box-shadow: var(--elevation-2);
+}
+
+.shadow-3 {
+  box-shadow: var(--elevation-3);
+}
+
+.shadow-4 {
+  box-shadow: var(--elevation-4);
+}
+
+.shadow-5 {
+  box-shadow: var(--elevation-5);
+}
+
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+/*
+    Various typography classes helpers
+    Can be in Utils.scss?
+*/
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Atkinson Hyperlegible Next", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(3rem, 5.2vw, 3.8125rem);
+}
+
+h2 {
+  font-size: clamp(2.375rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: 2rem;
+}
+@media (min-width: 768px) {
+  h3 {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  h3 {
+    font-size: 2.625rem;
+  }
+}
+
+h4 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+h5 {
+  font-size: clamp(1.375rem, 2vw, 1.5rem);
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+p {
+  font-size: 0.75rem;
+}
+@media (min-width: 768px) {
+  p {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1200px) {
+  p {
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+  }
+}
+
+.subtitle {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-light);
+  font-size: var(--subtitle-size);
+  line-height: var(--line-height-text);
+  margin-bottom: 1rem;
+}
+
+.strap-title {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-light);
+  font-size: var(--strap-title-size);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph Variants */
+.p-large {
+  font-size: var(--paragraph-large);
+  font-weight: var(--font-weight-regular);
+}
+
+.p-small {
+  font-size: var(--paragraph-small);
+  font-weight: var(--font-weight-regular);
+}
+
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+/*
+    Based style applied directly to the elements
+    Overide this element inside the component
+    If necessary
+*/
+body {
+  font-family: "Atkinson Hyperlegible Next", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+picture {
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.75em 1em;
+  border: 1px solid var(--grey-black-20);
+}
+
+th {
+  background-color: var(--grey-black-05);
+  font-weight: var(--font-weight-bold);
+}
+
+tr:nth-child(even) td {
+  background-color: var(--grey-black-05);
+}
+
+.button.secondary:focus {
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: var(--Background-Light-Primary, #fff);
+  box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem var(--Stroke-Focus, #b53cde);
+  outline: none;
+}
+
+/*
+    My preferences of class naming is using BEM https://getbem.com/introduction/
+    In this case of a button will be:
+
+    BASE
+    .button (base style. Padding, margin, etc)
+
+    MODIFIER
+    .button--[modifier] (expanding on base style and add it's own style. IE colour, extra padding, etc)
+    IE .button--primary
+
+    STATE
+    .button--is-[state] (for specific style related state NOT hover, focus, etc)
+    IE .button--is-hidden, .button--primary-is-visible
+*/
+.button {
+  /* Secondary Button: Large */
+  /* Primary Button: Large */
+}
+.button.secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem; /* 120% */
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
+  text-decoration: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  /* Secondary Button: Small */
+}
+.button.secondary:hover {
+  border-color: var(--Stroke-Primary, #333);
+  background: var(--Background-Light-Primary, #fff);
+  color: var(--Stroke-Primary, #333);
+}
+.button.secondary:active {
+  border-color: var(--Stroke-Accent, #017ac9);
+  background: var(--Background-Light-Primary, #fff);
+  color: var(--Stroke-Accent, #017ac9);
+  transform: scale(0.98);
+}
+.button.secondary.small {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  color: var(--Text-Dark-Secondary, #666);
+  text-decoration: none;
+  border-radius: var(--Corner-radius-Round, 999px);
+  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
+  background: var(--Background-Light-Primary, #fff);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.button.secondary:hover {
+  border-color: var(--Stroke-Primary, #333);
+  color: var(--Stroke-Primary, #333);
+}
+.button.secondary:active {
+  border-color: var(--Stroke-Accent, #017ac9);
+  color: var(--Stroke-Accent, #017ac9);
+  transform: scale(0.98);
+}
+.button.primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-Spacing-200, 8px);
+  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Accent, #017ac9);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+  /* Primary Button: Small */
+}
+.button.primary:hover {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017ac9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
+  box-shadow: var(--Elevation-Position-X-Level-3, 0px) var(--Elevation-Position-Y-Level-3, 8px) var(--Elevation-Blur-Level-3, 16px) var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+}
+.button.primary:active {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Dark, #134276);
+  transform: scale(0.98);
+}
+.button.primary:focus {
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Dark, #134276);
+  outline: none;
+}
+.button.primary.small {
+  display: inline-block;
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Regular, 400);
+  line-height: 1.5rem;
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  text-align: center;
+  text-decoration: none;
+  padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-500, 24px);
+  border-radius: var(--Corner-radius-Round, 9999px);
+  background-color: var(--color-primary-dark, #003f7f);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+.button.primary.small:hover {
+  box-shadow: var(--elevation-2, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+.button.primary.small:focus {
+  outline: none;
+}
+.button.primary.small:active {
+  transform: scale(0.98);
+}
+
+.button-icon-primary {
+  /* Primary Icon Button: Large */
+  /* Primary Icon Button: Small */
+}
+.button-icon-primary.large {
+  display: inline-flex;
+  min-width: 90rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  border-radius: var(--Corner-radius-Large, 16px);
+  background: var(--Greys-White, #fff);
+}
+.button-icon-primary.small {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border-radius: var(--Corner-radius-Round, 999px);
+  background: var(--Background-Dark-Accent, #017ac9);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+}
+.button-icon-primary.small:hover {
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017ac9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
+  box-shadow: var(--Elevation-Position-X-Level-3, 0px) var(--Elevation-Position-Y-Level-3, 8px) var(--Elevation-Blur-Level-3, 16px) var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+}
+.button-icon-primary.small:active {
+  background: var(--Background-Dark-Dark, #134276);
+  transform: scale(0.95);
+}
+
+/*
+    The latest file included in this file
+    Will have the highest specificity
+    Overiding the previous style
+*/
+.cmp-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-Spacing-400);
+  font-family: var(--Font-Family-Base);
+  font-size: var(--Font-Size-Base);
+  color: var(--Text-Primary);
+}
+@media (min-width: 768px) {
+  .cmp-form {
+    gap: var(--Spacing-Spacing-300);
+    font-size: 0.9375rem;
+  }
+}

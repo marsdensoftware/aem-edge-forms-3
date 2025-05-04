@@ -5020,5 +5020,38 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "jobseekerintro",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Logo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Logo alt text",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "jobseekerintroText_title",
+        "label": "Title",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "jobseekerintroText_description",
+        "label": "Description",
+        "required": true
+      }
+    ]
   }
 ]

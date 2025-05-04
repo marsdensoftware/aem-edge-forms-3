@@ -1,0 +1,82 @@
+/*
+    Typography settings and mixin
+    Refer to this file from your component
+    To leverage typography properties and
+    Pre-defined mixins
+*/
+@use './breakpoints' as *;
+
+$font-family: 'Atkinson Hyperlegible Next', sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$base-font-size: 16px;
+
+/* Headings */
+$h1-size: clamp(48px, 5.2vw, 61px);
+$h2-size: clamp(38px, 4vw, 48px);
+
+$h3-size: 32px;
+$h3-size-tablet: 40px;
+$h3-size-desktop: 42px;
+
+$h4-size: clamp(24px, 2.5vw, 32px);
+$h5-size: clamp(22px, 2vw, 24px);
+$h6-size: 20px;
+
+/* Text */
+$subtitle-size: 28px;
+$strap-title-size: 20px;
+$paragraph-large: clamp(18px, 1.5vw, 20px);
+$paragraph-default: 16px;
+$paragraph-small: 12px;
+
+$line-height-heading: 1.2;
+$line-height-text: 1.5;
+$letter-spacing: 0;
+$text-color: var(--text-primary);
+
+@mixin heading-level-1 {
+    font-size: $h1-size;
+}
+
+@mixin heading-level-2 {
+    font-size: $h2-size;
+}
+
+@mixin heading-level-3 {
+    font-size: $h3-size;
+
+    @include media('tablet') {
+        font-size: $h3-size-tablet;
+    }
+
+    @include media('desktop') {
+        font-size: $h3-size-desktop;
+    }
+}
+
+@mixin heading-level-4 {
+    font-size: $h4-size;
+}
+
+@mixin heading-level-5 {
+    font-size: $h5-size;
+}
+
+@mixin heading-level-6 {
+    font-size: $h6-size;
+}
+
+@mixin paragraph {
+    font-size: $paragraph-small;
+
+    @include media('tablet') {
+        font-size: $paragraph-default;
+    }
+
+    @include media('desktop') {
+        font-size: $paragraph-large;
+    }
+}
