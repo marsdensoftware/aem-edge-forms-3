@@ -9,6 +9,7 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
+  fetchDepth: 0  # get full commit history
 
 - script: |
     
