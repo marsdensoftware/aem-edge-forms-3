@@ -12,18 +12,30 @@ steps:
 
 - script: |
     
+    echo "Source branch (raw): $(Build.SourceBranchName)"
+    
+    # Strip 'refs/heads/' to get the clean branch name
+    BRANCH_NAME=$(echo "$(Build.SourceBranchName)" | sed 's#refs/heads/##')
+
+    echo "Cleaned branch name: $BRANCH_NAME"
+    
     echo "Adding GitHub remote"
     git remote add github https://$(GITHUB_PAT)@github.com/marsdensoftware/aem-edge-forms-3
     echo "GitHub remote success"
+    
     # Fetch the latest changes from both origin and github remotes
     git fetch origin
+    
     #git fetch github
     # Checkout the current branch being built
-    echo "Checking out the current branch"
-    git checkout $(Build.SourceBranchName)
+    #echo "Checking out the current branch"
+    #git checkout $(Build.SourceBranchName)
+    
     #echo "Merging destination branch into current branch"
     #git merge github/$(Build.SourceBranchName) --strategy-option ours || echo "Merge conflicts resolved by overriding source branch changes"
-    git push github $(Build.SourceBranchName):$(Build.SourceBranchName) --force
+    
+    echo "Pushing HEAD to GitHub branch: $BRANCH_NAME"
+    git push --force github HEAD:$BRANCH_NAME
 
   displayName: 'Push Code to GitHub'
   #env:
