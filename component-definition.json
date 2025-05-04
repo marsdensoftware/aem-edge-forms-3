@@ -604,6 +604,34 @@
           }
         },
         {
+          "title": "Form Hero",
+          "id": "formhero",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Hero",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "value": "Adaptive Form Text Component",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                  },
+                  "image": {
+                    "jcr:title": "Image",
+                    "fieldType": "image",
+                    "sling:resourceType": "core/fd/components/form/image/v1/image"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Wizard",
           "id": "wizard",
           "plugins": {
