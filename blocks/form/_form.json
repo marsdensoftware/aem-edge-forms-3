@@ -192,7 +192,8 @@
         "telephone-input",
         "text-input",
         "tnc",
-        "wizard"
+        "wizard",
+        "form-hero"
       ]
     }
   ]

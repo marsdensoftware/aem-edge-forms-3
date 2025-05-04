@@ -787,3 +787,11 @@ main div.form-wrapper {
         margin: 0;
     }
 }
+
+/* SEP customizations */
+.checkbox-wrapper > input {
+    order: 2;
+}
+.checkbox-wrapper > label {
+    order: 1;
+}
