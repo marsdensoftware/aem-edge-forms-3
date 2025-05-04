@@ -36,7 +36,7 @@ steps:
     #git merge github/$(Build.SourceBranchName) --strategy-option ours || echo "Merge conflicts resolved by overriding source branch changes"
     
     echo "Pushing HEAD to GitHub branch: $BRANCH_NAME"
-    git push --force github HEAD:$BRANCH_NAME
+    git push --force github HEAD:$(Build.SourceBranch)
 
   displayName: 'Push Code to GitHub'
   #env:
