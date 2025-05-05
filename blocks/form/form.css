@@ -632,6 +632,7 @@ main .form .button-wrapper button:focus {
     outline: none;
 }
 
+/* addition of the icon to the next button */
 main .form .button-wrapper button::after {
     content: "";
     display: inline-block;
@@ -648,6 +649,7 @@ main .form .button-wrapper button:hover::after {
     transform: translateX(2px);
 }
 
+/* Wizard menu items */
 .wizard-menu-items {
     display: flex;
     gap: 50px;

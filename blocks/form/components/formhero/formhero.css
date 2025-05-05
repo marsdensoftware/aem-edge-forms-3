@@ -8,7 +8,7 @@ main .form form .wizard {
     flex-direction: column;
     gap: 32px;
     padding: 48px 32px;
-    /*background-color: #f9f9f9;*/
+    /*background-color: #f9f9f9;**/
     background-color: pink;
 }
 .formhero h2 {
