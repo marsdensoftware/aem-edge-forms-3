@@ -78,6 +78,7 @@ export default function decorate(block) {
         next.text = 'next';
         const nextOffset = pager.next();
         if (nextOffset !== null) {
+          console.log('got next', nextOffset);
           next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
         } else {
           next.disabled = true;
@@ -92,6 +93,8 @@ export default function decorate(block) {
 
   div0.append(button0);
   block.append(div0);
-  // TODO why is this failing to load? because we need to return it?
-  return block;
+  /*
+   * N.B. the block will be reported as failing to load if a matching stylesheet
+   * is not found even if the JS loads
+   */
 }
