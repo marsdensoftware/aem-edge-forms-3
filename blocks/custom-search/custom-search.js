@@ -72,7 +72,7 @@ export default function decorate(block) {
         prev.text = 'prev';
         const prevOffset = pager.prev();
         if (prevOffset !== null) {
-          prev.href = `/${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}`;
+          prev.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}`;
         } else {
           prev.disabled = true;
         }
@@ -81,7 +81,7 @@ export default function decorate(block) {
         next.text = 'next';
         const nextOffset = pager.next();
         if (nextOffset !== null) {
-          next.href = `/?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}`;
+          next.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}`;
         } else {
           next.disabled = true;
         }
