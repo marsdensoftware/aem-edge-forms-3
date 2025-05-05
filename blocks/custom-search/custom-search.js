@@ -65,7 +65,7 @@ export default function decorate(block) {
           if (prevOffset !== null) {
             prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
           } else {
-            pref.disabled = true;
+            prev.disabled = true;
           }
 
           const next = document.createElement('a');
