@@ -1,5 +1,13 @@
 // TODO can we export and use other functions??
 
+function toInt(o) {
+  if (o === null || typeof o === 'undefined') {
+    return null;
+  }
+  const n = Number(o);
+  return Number.isSafeInteger(n) ? n : null;
+}
+
 function searchResults(jsonResults) {
   const htmlResults = document.createElement('table');
   htmlResults.id = 'results';
@@ -104,8 +112,8 @@ export default async function decorate(block) {
   block.append(div0);
 
   const queryParams = new URLSearchParams(window.location.search);
-  pager.offset = queryParams.get(pager.offsetArg) ?? pager.offset;
-  pager.pageSize = queryParams.get(pager.pageSizeArg) ?? pager.pageSize;
+  pager.offset = toInt(queryParams.get(pager.offsetArg)) ?? pager.offset;
+  pager.pageSize = toInt(queryParams.get(pager.pageSizeArg)) ?? pager.pageSize;
 
   console.log('decorate called', pager, wrapper);
   await renderSearch(pager, wrapper); // TODO does this invalidate the div0 reference?
