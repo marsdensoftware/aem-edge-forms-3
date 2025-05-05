@@ -36,7 +36,6 @@ export default function decorate(block) {
         return r.json();
       })
       .then((j) => {
-        pager.total = j.total ?? pager.total;
         let results = document.getElementById('results');
         if (results === null) {
           results = document.createElement('table');
@@ -60,6 +59,9 @@ export default function decorate(block) {
 
         // window.location.search = queryParams.toString(); // does this cause a reload?
         // TODO use history.pushState or .replaceState instead
+
+        pager.total = j.total ?? pager.total;
+        console.log('pager', pager);
 
         // TODO allow loading the results without reloading the whole page
         const nav = document.createElement('div');
