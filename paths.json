@@ -1,7 +1,7 @@
 {
   "mappings": [
-    "/content/edge-forms-rebecca/:/",
-    "/content/edge-forms-rebecca/configuration:/.helix/config.json",
+    "/content/gregkw-forms/:/",
+    "/content/gregkw-forms/configuration:/.helix/config.json",
     "/content/edge-forms-rebecca/metadata:/metadata.json"
   ],
   "includes": [
