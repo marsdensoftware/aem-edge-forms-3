@@ -1,12 +1,273 @@
-/*
- * styles.css
- * Master import file for all modular CSS
- */
+:root {
+  --font-family: "Atkinson Hyperlegible Next", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --base-font-size: 1rem;
+  /* Headings */
+  --h1-size: clamp(3rem, 5.2vw, 3.8125rem);
+  --h2-size: clamp(2.375rem, 4vw, 3rem);
+  --h3-size: clamp(2rem, 3.5vw, 2.5rem);
+  --h4-size: clamp(1.5rem, 2.5vw, 2rem);
+  --h5-size: clamp(1.375rem, 2vw, 1.5rem);
+  --h6-size: 1.25rem;
+  /* Text */
+  --subtitle-size: 1.75rem;
+  --strap-title-size: 1.25rem;
+  --paragraph-large: clamp(1.125rem, 1.5vw, 1.25rem);
+  --paragraph-default: 1rem;
+  --paragraph-small: 0.75rem;
+  --line-height-heading: 1.2;
+  --line-height-text: 1.5;
+  --letter-spacing: 0;
+  --text-color: var(--text-primary);
+}
 
-@import url('./colors.css');
-@import url('./typography.css');
-@import url('./layout.css');
-@import url('./buttons.css');
-@import url('./forms.css');
-@import url('./tables.css');
-@import url('./grid.css');
+/* fallback fonts */
+@font-face {
+  font-family: roboto-condensed-fallback;
+  size-adjust: 88.82%;
+  src: local("Arial");
+}
+@font-face {
+  font-family: roboto-fallback;
+  size-adjust: 99.529%;
+  src: local("Arial");
+}
+@media (width >= 900px) {
+  :root {
+    /* body sizes */
+    --body-font-size-m: 1.125rem;
+    --body-font-size-s: 1rem;
+    --body-font-size-xs: 0.875rem;
+    /* heading sizes */
+    --heading-font-size-xxl: 2.8125rem;
+    --heading-font-size-xl: 2.25rem;
+    --heading-font-size-l: 1.75rem;
+    --heading-font-size-m: 1.375rem;
+    --heading-font-size-s: 1.25rem;
+    --heading-font-size-xs: 1.125rem;
+  }
+}
+body {
+  display: none;
+}
+
+body.appear {
+  display: block;
+}
+
+header {
+  height: var(--nav-height);
+}
+
+header .header,
+footer .footer {
+  visibility: hidden;
+}
+
+header .header[data-block-status=loaded],
+footer .footer[data-block-status=loaded] {
+  visibility: visible;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  line-height: 1.25;
+  scroll-margin: 2.5rem;
+}
+
+h1 {
+  font-size: var(--heading-font-size-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+}
+
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+}
+
+code,
+pre {
+  font-size: var(--body-font-size-s);
+}
+
+pre {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--light-color);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+main > div {
+  margin: 2.5rem 1rem;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+/* links */
+a:-moz-any-link {
+  color: var(--link-color);
+  text-decoration: none;
+  word-break: break-word;
+}
+a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* buttons */
+a.button:-moz-any-link {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0.75rem 0;
+  border: 2px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.5em 1.2em;
+  font-family: var(--body-font-family);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+a.button:any-link,
+button {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0.75rem 0;
+  border: 2px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.5em 1.2em;
+  font-family: var(--body-font-family);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.button:hover,
+a.button:focus,
+button:hover,
+button:focus {
+  background-color: var(--link-hover-color);
+  cursor: pointer;
+}
+
+button:disabled,
+button:disabled:hover {
+  background-color: var(--light-color);
+  cursor: unset;
+}
+
+a.button.secondary,
+button.secondary {
+  background-color: unset;
+  border: 2px solid currentcolor;
+  color: var(--text-color);
+}
+
+main img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.icon {
+  display: inline-block;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.icon img {
+  height: 100%;
+  width: 100%;
+}
+
+/* sections */
+main > .section {
+  margin: 2.5rem 0;
+}
+
+main > .section > div {
+  max-width: 75rem;
+  margin: auto;
+  padding: 0 1.5rem;
+}
+
+main > .section:first-of-type {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 2rem;
+  }
+}
+/* section metadata */
+main .section.light,
+main .section.highlight {
+  background-color: var(--light-color);
+  margin: 0;
+  padding: 2.5rem 0;
+}
