@@ -656,6 +656,7 @@
                   "panel": {
                     "jcr:title": "Panel",
                     "fieldType": "panel",
+                    "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "item-1":{
                             "fieldType": "panel",
                             "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
