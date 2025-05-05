@@ -657,7 +657,6 @@
                     "jcr:title": "Panel",
                     "fieldType": "panel",
                     "item-1":{
-                        "panel": {
                             "fieldType": "panel",
                             "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                             "text": {
@@ -670,10 +669,9 @@
                                 "fieldType": "image",
                                 "sling:resourceType": "core/fd/components/form/image/v1/image"
                             }
-                        }
+                       
                     },
                     "item-2":{
-                        "panel": {
                             "fieldType": "panel",
                             "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                             "text": {
@@ -686,10 +684,9 @@
                                 "fieldType": "image",
                                 "sling:resourceType": "core/fd/components/form/image/v1/image"
                             }
-                        }
+                       
                     },
                     "item-3":{
-                        "panel": {
                             "fieldType": "panel",
                             "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                             "text": {
@@ -703,7 +700,7 @@
                                 "sling:resourceType": "core/fd/components/form/image/v1/image"
                             }
                         }
-                    }
+                   
                  }
               }
             }
