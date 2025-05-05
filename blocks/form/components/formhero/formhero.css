@@ -1,4 +1,8 @@
 /* COMPILED CSS VERSION OF FORMHERO.SCSS */
+main .form form .wizard {
+    background-color: pink;
+}
+
 .formhero {
     display: flex;
     flex-direction: column;
