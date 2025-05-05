@@ -72,7 +72,7 @@ export default function decorate(block) {
         prev.text = 'prev';
         const prevOffset = pager.prev();
         if (prevOffset !== null) {
-          prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+          prev.href = `/${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}`;
         } else {
           prev.disabled = true;
         }
@@ -81,7 +81,7 @@ export default function decorate(block) {
         next.text = 'next';
         const nextOffset = pager.next();
         if (nextOffset !== null) {
-          next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+          next.href = `/?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}`;
         } else {
           next.disabled = true;
         }
