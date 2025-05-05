@@ -88,4 +88,6 @@ export default function decorate(block) {
 
   div0.append(button0);
   block.append(div0);
+  // TODO why is this failing to load? because we need to return it?
+  return block;
 }
