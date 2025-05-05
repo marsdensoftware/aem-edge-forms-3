@@ -13,7 +13,11 @@ export default function decorate(block) {
     // TODO clamp?
     prev: () => (this.offset > 0 ? this.offset - this.pageSize : null),
 
-    next: () => (this.total !== null ? this.offset + this.pageSize : null),
+    next: () => {
+      const res = this.total !== null ? this.offset + this.pageSize : null;
+      console.log('next called', this, res);
+      return res;
+    },
   };
 
   // eslint-disable-next-line no-unused-vars -- development WIP
