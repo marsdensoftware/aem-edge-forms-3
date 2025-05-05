@@ -57,7 +57,8 @@
       "text-input",
       "tnc",
       "wizard",
-      "formhero"
+      "formhero",
+      "formwelcome"
     ]
   }
 ]
