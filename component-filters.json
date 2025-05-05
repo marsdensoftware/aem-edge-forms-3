@@ -21,7 +21,7 @@
   },
   {
     "id": "cards",
-    "components": ["card"]
+    "components": ["card", "button"]
   },
   {
     "id": "columns",
