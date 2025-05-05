@@ -42,7 +42,7 @@
     --form-button-background-color: var(--button-primary-color);
     --form-button-background-hover-color: var(--button-primary-hover-color);
     --form-button-border: 2px solid transparent;
-    --form-button-padding: 15px 50px;*/
+    --form-button-padding: 15px 50px;
     --form-upload-color: var(--form-label-color);
     --form-upload-font-size: var(--form-font-size-xs);
     --form-upload-background-color: var(--background-color-primary);
@@ -420,9 +420,8 @@ input::file-selector-button {
     text-align: center;
 }
 
-main .form button {
-    /*color: var(--form-button-color);*/
-    color: blueviolet;
+/*main .form button {
+    color: var(--form-button-color);
     background: var(--form-button-background-color);
     border: var(--form-button-border);
     padding: var(--form-button-padding);
@@ -437,7 +436,7 @@ main form .file-wrapper > button {
 
 main .form button:hover {
     background: var(--form-button-background-hover-color);
-}
+}*/
 
 main .submit-wrapper {
     width: var(--form-submit-width);
