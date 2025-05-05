@@ -1,4 +1,4 @@
 export default function decorate(panel) {
-  //alert('I am a form hero component.');
+  panel.classList.add('panel-heroform');
   return panel;
 }
