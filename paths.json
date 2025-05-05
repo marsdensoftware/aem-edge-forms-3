@@ -1,6 +1,6 @@
 {
   "mappings": [
-    "/content/gregkw-forms/:/",
+    "/content/gregkw-forms/index:/index.html",
     "/content/gregkw-forms/configuration:/.helix/config.json",
     "/content/edge-forms-rebecca/metadata:/metadata.json"
   ],
