@@ -1,0 +1,37 @@
+/* Wizard Button Wrapper */
+.wizard-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--Spacing-Spacing-600, 32px);
+  margin-top: var(--Spacing-Spacing-800, 48px);
+}
+
+/* Shared wizard button base */
+.wizard-button {
+  min-width: 120px;
+  text-transform: uppercase;
+  font-weight: var(--Typography-Font-weight-Medium, 500);
+  letter-spacing: 0.5px;
+}
+
+/* Specific tweaks */
+.wizard-button-prev .button {
+  background: var(--Background-Light-Primary, #fff);
+  color: var(--Text-Dark-Secondary, #666);
+}
+
+.wizard-button-next .button {
+  background: var(--Background-Dark-Accent, #017ac9);
+  color: var(--Text-Light-Primary, #fff);
+}
+
+/* Optional Hover and Focus Enhancements */
+.wizard-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.wizard-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--Stroke-Focus, #b53cde);
+}
