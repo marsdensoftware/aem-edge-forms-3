@@ -56,33 +56,34 @@ export default function decorate(block) {
             });
 
           results.append(row);
-          // window.location.search = queryParams.toString(); // does this cause a reload?
-          // TODO use history.pushState or .replaceState instead
-
-          // TODO allow loading the results without reloading the whole page
-          const nav = document.createElement('div');
-          const prev = document.createElement('a');
-          prev.text = 'prev';
-          const prevOffset = pager.prev();
-          if (prevOffset !== null) {
-            prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
-          } else {
-            prev.disabled = true;
-          }
-
-          const next = document.createElement('a');
-          next.text = 'next';
-          const nextOffset = pager.next();
-          if (nextOffset !== null) {
-            next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
-          } else {
-            next.disabled = true;
-          }
-
-          nav.append(prev);
-          nav.append(next);
-          results.append(nav);
         });
+
+        // window.location.search = queryParams.toString(); // does this cause a reload?
+        // TODO use history.pushState or .replaceState instead
+
+        // TODO allow loading the results without reloading the whole page
+        const nav = document.createElement('div');
+        const prev = document.createElement('a');
+        prev.text = 'prev';
+        const prevOffset = pager.prev();
+        if (prevOffset !== null) {
+          prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+        } else {
+          prev.disabled = true;
+        }
+
+        const next = document.createElement('a');
+        next.text = 'next';
+        const nextOffset = pager.next();
+        if (nextOffset !== null) {
+          next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+        } else {
+          next.disabled = true;
+        }
+
+        nav.append(prev);
+        nav.append(next);
+        results.append(nav);
       })
       .catch((e) => console.log(`Error: ${e.message}`));
   };
