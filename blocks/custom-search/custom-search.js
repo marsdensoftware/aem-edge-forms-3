@@ -57,6 +57,7 @@ export default function decorate(block) {
 
           results.append(row);
           // window.location.search = queryParams.toString(); // does this cause a reload?
+          // TODO use history.pushState or .replaceState instead
 
           // TODO allow loading the results without reloading the whole page
           const nav = document.createElement('div');
