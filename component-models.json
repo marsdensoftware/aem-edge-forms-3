@@ -4964,6 +4964,18 @@
         ]
       },
       {
+        "id": "formwelcome",
+        "fields": [
+          {
+            "component": "container",
+            "name": "basic",
+            "label": "Basic",
+            "collapsible": false,
+            "fields": []
+          }
+        ]
+      },
+      {
         "id": "formhero",
         "fields": [
           {
