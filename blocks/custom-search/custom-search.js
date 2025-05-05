@@ -2,8 +2,6 @@
 // TODO can we export and use other functions??
 
 export default function decorate(block) {
-  const pageSize = 10;
-
   const Pager = {
     offset: 0,
     offsetArg: 'skip',
