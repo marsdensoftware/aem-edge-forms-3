@@ -11,7 +11,7 @@ export default function decorate(block) {
     pageSize: 10,
     pageSizeArg: 'limit',
 
-    total: 0,
+    total: null,
     // TODO clamp?
     prev: () => (this.offset > 0 ? this.offset - this.pageSize : null),
 
@@ -26,7 +26,11 @@ export default function decorate(block) {
   button0.innerText = 'Custom Button';
 
   button0.onclick = async function () {
-    await fetch(`https://dummyjson.com/users?limit=${pageSize}&select=id,firstName,lastName,age,gender,birthDate,company`)
+    const queryParams = new URLSearchParams(window.location.search);
+    pager.offset = queryParams.get(pager.offsetArg) ?? pager.offset;
+    pager.pageSize = queryParams.get(pager.pageSizeArg) ?? pager.pageSize;
+
+    await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
       .then((r) => {
         if (!r.ok) {
           throw new Error(`Received: ${r.status}`);
@@ -34,12 +38,14 @@ export default function decorate(block) {
         return r.json();
       })
       .then((j) => {
+        pager.total = j.total ?? pager.total;
         let results = document.getElementById('results');
         if (results === null) {
           results = document.createElement('table');
           results.id = 'results';
           div0.append(results);
         }
+        // TODO need to nuke previous contents of results if using AJAX without infinite paging
         j.users.forEach((resultRow) => {
           const row = document.createElement('tr');
 
@@ -52,12 +58,30 @@ export default function decorate(block) {
             });
 
           results.append(row);
-        });
+          window.location.search = queryParams.toString(); // does this cause a reload?
 
-        // if j.skip+j.limit >= j.total, no more pages
-        // if j.skip == 0, no previous pages
-        // next page = pagecount++ * limit, or skip+limit
-        // prev page = skip-pageSize (not limit, as on the last page it may be truncated)
+          // TODO allow loading the results without reloading the whole page
+          const nav = document.createElement('p');
+          const prev = document.createElement('a');
+          const prevOffset = pager.prev();
+          if (prevOffset !== null) {
+            prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+          } else {
+            pref.disabled = true;
+          }
+
+          const next = document.createElement('a');
+          const nextOffset = pager.prev();
+          if (nextOffset !== null) {
+            next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
+          } else {
+            next.disabled = true;
+          }
+
+          nav.append(prev);
+          nav.append(next);
+          results.append(nav);
+        });
       })
       .catch((e) => console.log(`Error: ${e.message}`));
   };
