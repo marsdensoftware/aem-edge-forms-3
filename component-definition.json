@@ -613,6 +613,7 @@
                 "template": {
                   "jcr:title": "Form Hero",
                   "fieldType": "panel",
+                  "fd:viewType": "formhero",
                   "minOccur": 1,
                   "text": {
                     "jcr:title": "Text",
