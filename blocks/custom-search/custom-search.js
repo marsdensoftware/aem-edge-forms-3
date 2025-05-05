@@ -94,22 +94,26 @@ export default async function decorate(block) {
   const pager = Object.create(Pager);
 
   const div0 = document.createElement('div');
-  div0.id = 'results-wrapper';
 
   const button0 = document.createElement('button');
   button0.innerText = 'Custom Button';
 
+  const wrapper = document.createElement('div');
+  wrapper.id = 'results-wrapper';
+  div0.append(button0, wrapper);
+  block.append(div0);
+
   const queryParams = new URLSearchParams(window.location.search);
   pager.offset = queryParams.get(pager.offsetArg) ?? pager.offset;
   pager.pageSize = queryParams.get(pager.pageSizeArg) ?? pager.pageSize;
-  await renderSearch(pager, div0); // TODO does this invalidate the div0 reference?
+
+  console.log('decorate called', pager, wrapper);
+  await renderSearch(pager, wrapper); // TODO does this invalidate the div0 reference?
+  console.log('got', wrapper);
 
   button0.onclick = async () => {
-    await renderSearch(pager, div0);
+    await renderSearch(pager, wrapper);
   };
-
-  div0.append(button0);
-  block.append(div0);
   /*
    * N.B. the block will be reported as failing to load if a matching stylesheet
    * is not found even if the JS loads
