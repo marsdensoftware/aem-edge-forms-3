@@ -59,7 +59,7 @@ export default function decorate(block) {
           // window.location.search = queryParams.toString(); // does this cause a reload?
 
           // TODO allow loading the results without reloading the whole page
-          const nav = document.createElement('p');
+          const nav = document.createElement('div');
           const prev = document.createElement('a');
           const prevOffset = pager.prev();
           if (prevOffset !== null) {
