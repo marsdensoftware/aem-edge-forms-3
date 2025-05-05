@@ -632,6 +632,22 @@ main .form .button-wrapper button:focus {
     outline: none;
 }
 
+main .form .button-wrapper button::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: var(--Spacing-Spacing-200, 8px);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><path d='M12.6465 3.15088L11.1734 4.62402L15.5076 8.95827H0.831055V11.0416H15.5077L11.1734 15.3759L12.6465 16.849L19.4956 9.99995L12.6465 3.15088Z' fill='white'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+main .form .button-wrapper button:hover::after {
+    transform: translateX(2px);
+}
+
 .wizard-menu-items {
     display: flex;
     gap: 50px;
