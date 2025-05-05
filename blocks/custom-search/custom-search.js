@@ -11,12 +11,12 @@ export default function decorate(block) {
 
     total: null,
     // TODO clamp?
-    prev: () => (this.offset > 0 ? this.offset - this.pageSize : null),
+    prev() {
+      return this.offset > 0 ? this.offset - this.pageSize : null;
+    },
 
-    next: () => {
-      const res = this.total !== null ? this.offset + this.pageSize : null;
-      console.log('next called', this, res);
-      return res;
+    next() {
+      return this.total !== null ? this.offset + this.pageSize : null;
     },
   };
 
@@ -65,7 +65,6 @@ export default function decorate(block) {
         // TODO use history.pushState or .replaceState instead
 
         pager.total = j.total ?? pager.total;
-        console.log('pager', pager);
 
         // TODO allow loading the results without reloading the whole page
         const nav = document.createElement('div');
@@ -82,7 +81,6 @@ export default function decorate(block) {
         next.text = 'next';
         const nextOffset = pager.next();
         if (nextOffset !== null) {
-          console.log('got next', nextOffset);
           next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
         } else {
           next.disabled = true;
