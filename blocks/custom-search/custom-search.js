@@ -1,7 +1,6 @@
 // TODO can we import?
 // TODO can we export and use other functions??
 
-
 export default function decorate(block) {
   const pageSize = 10;
 
@@ -14,11 +13,12 @@ export default function decorate(block) {
 
     total: 0,
     // TODO clamp?
-    prev: () => this.offset > 0 ? this.offset - this.pageSize : null,
+    prev: () => (this.offset > 0 ? this.offset - this.pageSize : null),
 
-    next: () => this.total !== null ? this.offset + this.pageSize : null,
+    next: () => (this.total !== null ? this.offset + this.pageSize : null),
   };
 
+  // eslint-disable-next-line no-unused-vars -- development WIP
   const pager = Object.create(Pager);
 
   const div0 = document.createElement('div');
@@ -43,11 +43,13 @@ export default function decorate(block) {
         j.users.forEach((resultRow) => {
           const row = document.createElement('tr');
 
-          for (let [_, value] of Object.entries(resultRow).sort((a, b) => a < b ? -1 : a > b ? 1 : 0)) {
-            const elem = document.createElement('td');
-            elem.innerText = typeof value !== 'object' ? value : JSON.stringify(value);
-            row.append(elem);
-          }
+          Object.entries(resultRow)
+            .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+            .forEach(([_, value]) => {
+              const elem = document.createElement('td');
+              elem.innerText = typeof value !== 'object' ? value : JSON.stringify(value);
+              row.append(elem);
+            });
 
           results.append(row);
         });
