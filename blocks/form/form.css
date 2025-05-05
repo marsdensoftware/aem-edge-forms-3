@@ -438,6 +438,39 @@ main .form button:hover {
     background: var(--form-button-background-hover-color);
 }*/
 
+main .form button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Spacing-Spacing-200, 8px);
+    padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
+
+    font-family: var(
+        --Typography-Font-family-Primary-font,
+        "Atkinson Hyperlegible Next"
+    );
+    font-size: var(--Typography-Sizes-Components-Button-default, 20px);
+    font-style: normal;
+    font-weight: var(--Typography-Font-weight-Regular, 400);
+    line-height: 24px;
+    letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+
+    border-radius: var(--Corner-radius-Round, 999px);
+    background: var(--Background-Dark-Accent, #017ac9);
+    box-shadow: var(--Elevation-Position-X-Level-2, 0px)
+        var(--Elevation-Position-Y-Level-2, 4px)
+        var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px)
+        rgba(0, 0, 0, 0.2);
+
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease, box-shadow 0.25s ease,
+        transform 0.1s ease;
+}
+
 main .submit-wrapper {
     width: var(--form-submit-width);
 }
