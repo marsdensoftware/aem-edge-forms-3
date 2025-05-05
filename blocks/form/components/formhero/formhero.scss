@@ -1,0 +1,39 @@
+@import './_wizard-buttons';
+
+.formhero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-Spacing-600, 32px);
+  padding: var(--Spacing-Spacing-800, 48px) var(--Spacing-Spacing-600, 32px);
+  background-color: var(--Background-Light-Primary, #f9f9f9);
+}
+
+.formhero h2 {
+  font-family: var(--Typography-Font-family-Primary-font);
+  font-size: clamp(1.75rem, 2vw, 2.25rem);
+  font-weight: var(--Typography-Font-weight-Medium);
+  margin-bottom: var(--Spacing-Spacing-400, 16px);
+  color: var(--Text-Dark-Primary, #333);
+}
+
+.formhero .form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-Spacing-400, 16px);
+}
+
+@media (min-width: 768px) {
+  .formhero {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .formhero .form-fields {
+    width: 60%;
+  }
+
+  .formhero .wizard-button-wrapper {
+    width: 35%;
+    align-self: flex-end;
+  }
+}
