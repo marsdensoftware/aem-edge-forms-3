@@ -1,7 +1,78 @@
-// TODO can we import?
 // TODO can we export and use other functions??
 
-export default function decorate(block) {
+function searchResults(jsonResults) {
+  const htmlResults = document.createElement('table');
+  htmlResults.id = 'results';
+  jsonResults.users.forEach((resultRow) => {
+    const row = document.createElement('tr');
+
+    Object.entries(resultRow)
+      .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+      .forEach(([_, value]) => {
+        const elem = document.createElement('td');
+        elem.innerText = typeof value !== 'object' ? value : JSON.stringify(value);
+        row.append(elem);
+      });
+
+    htmlResults.append(row);
+  });
+
+  return htmlResults;
+}
+
+function pageLink(offset, name, pager) {
+  const link = document.createElement('a');
+  link.text = name;
+  if (offset !== null) {
+    link.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${offset}`;
+  } else {
+    link.disabled = true;
+  }
+  return link;
+}
+
+function searchPaging(pager) {
+  const nav = document.createElement('div');
+  const prev = pageLink(pager.prev(), 'prev', pager);
+  const next = pageLink(pager.next(), 'next', pager);
+
+  nav.append(prev, next);
+  return nav;
+}
+
+async function renderSearch(pager, oldWrapper) {
+  if (oldWrapper === null) {
+    console.log('Can\'t render to a null node');
+    return;
+  }
+  await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
+    .then((r) => {
+      if (!r.ok) {
+        throw new Error(`Received: ${r.status}`);
+      }
+      return r.json();
+    })
+    .then((j) => {
+      const wrapper = document.createElement('div');
+      wrapper.id = 'results-wrapper';
+
+      const results = searchResults(j);
+
+      // window.location.search = queryParams.toString(); // does this cause a reload?
+      // TODO use history.pushState or .replaceState instead
+
+      pager.total = j.total ?? pager.total;
+
+      // TODO allow loading the results without reloading the whole page
+      const pageNav = searchPaging(pager);
+      wrapper.append(results, pageNav);
+
+      oldWrapper.replaceWith(wrapper);
+    })
+    .catch((e) => console.log(`Error: ${e.message}`));
+}
+
+export default async function decorate(block) {
   const Pager = {
     offset: 0,
     offsetArg: 'skip',
@@ -20,77 +91,21 @@ export default function decorate(block) {
     },
   };
 
-  // eslint-disable-next-line no-unused-vars -- development WIP
   const pager = Object.create(Pager);
 
   const div0 = document.createElement('div');
+  div0.id = 'results-wrapper';
+
   const button0 = document.createElement('button');
   button0.innerText = 'Custom Button';
 
-  button0.onclick = async function () {
-    const queryParams = new URLSearchParams(window.location.search);
-    pager.offset = queryParams.get(pager.offsetArg) ?? pager.offset;
-    pager.pageSize = queryParams.get(pager.pageSizeArg) ?? pager.pageSize;
+  const queryParams = new URLSearchParams(window.location.search);
+  pager.offset = queryParams.get(pager.offsetArg) ?? pager.offset;
+  pager.pageSize = queryParams.get(pager.pageSizeArg) ?? pager.pageSize;
+  await renderSearch(pager, div0); // TODO does this invalidate the div0 reference?
 
-    await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error(`Received: ${r.status}`);
-        }
-        return r.json();
-      })
-      .then((j) => {
-        let results = document.getElementById('results');
-        if (results === null) {
-          results = document.createElement('table');
-          results.id = 'results';
-          div0.append(results);
-        }
-        // TODO need to nuke previous contents of results if using AJAX without infinite paging
-        j.users.forEach((resultRow) => {
-          const row = document.createElement('tr');
-
-          Object.entries(resultRow)
-            .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
-            .forEach(([_, value]) => {
-              const elem = document.createElement('td');
-              elem.innerText = typeof value !== 'object' ? value : JSON.stringify(value);
-              row.append(elem);
-            });
-
-          results.append(row);
-        });
-
-        // window.location.search = queryParams.toString(); // does this cause a reload?
-        // TODO use history.pushState or .replaceState instead
-
-        pager.total = j.total ?? pager.total;
-
-        // TODO allow loading the results without reloading the whole page
-        const nav = document.createElement('div');
-        const prev = document.createElement('a');
-        prev.text = 'prev';
-        const prevOffset = pager.prev();
-        if (prevOffset !== null) {
-          prev.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}`;
-        } else {
-          prev.disabled = true;
-        }
-
-        const next = document.createElement('a');
-        next.text = 'next';
-        const nextOffset = pager.next();
-        if (nextOffset !== null) {
-          next.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}`;
-        } else {
-          next.disabled = true;
-        }
-
-        nav.append(prev);
-        nav.append(next);
-        results.append(nav);
-      })
-      .catch((e) => console.log(`Error: ${e.message}`));
+  button0.onclick = async () => {
+    await renderSearch(pager, div0);
   };
 
   div0.append(button0);
