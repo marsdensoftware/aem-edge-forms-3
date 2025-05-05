@@ -438,7 +438,7 @@ main .form button:hover {
     background: var(--form-button-background-hover-color);
 }*/
 
-main .form button {
+main .form .button-wrapper button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
