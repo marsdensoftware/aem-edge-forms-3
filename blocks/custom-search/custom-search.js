@@ -61,7 +61,7 @@ export default function decorate(block) {
           // TODO allow loading the results without reloading the whole page
           const nav = document.createElement('div');
           const prev = document.createElement('a');
-          prev.innerText = 'prev';
+          prev.text = 'prev';
           const prevOffset = pager.prev();
           if (prevOffset !== null) {
             prev.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${prevOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
@@ -70,7 +70,7 @@ export default function decorate(block) {
           }
 
           const next = document.createElement('a');
-          next.innerText = 'next';
+          next.text = 'next';
           const nextOffset = pager.prev();
           if (nextOffset !== null) {
             next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
