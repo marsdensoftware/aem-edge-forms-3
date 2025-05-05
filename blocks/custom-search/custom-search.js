@@ -33,6 +33,13 @@ function pageLink(offset, name, pager) {
   link.text = name;
   if (offset !== null) {
     link.href = `?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${offset}`;
+    link.onclick = async function (e) {
+      e.preventDefault();
+      pager.offset = offset;
+      console.log('render with new offset', offset);
+      // eslint-disable-next-line no-use-before-define
+      await renderSearch(pager);
+    };
   } else {
     link.disabled = true;
   }
@@ -48,9 +55,10 @@ function searchPaging(pager) {
   return nav;
 }
 
-async function renderSearch(pager, oldWrapper) {
-  if (oldWrapper === null) {
-    console.log('Can\'t render to a null node');
+async function renderSearch(pager) {
+  const oldWrapper = document.getElementById('results-wrapper');
+  if (oldWrapper === null || typeof oldWrapper === 'undefined') {
+    console.log('Can\'t render to a non-existent node');
     return;
   }
   await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
@@ -65,17 +73,19 @@ async function renderSearch(pager, oldWrapper) {
       wrapper.id = 'results-wrapper';
 
       const results = searchResults(j);
-
-      // window.location.search = queryParams.toString(); // does this cause a reload?
-      // TODO use history.pushState or .replaceState instead
+      console.log('parsed new results');
 
       pager.total = j.total ?? pager.total;
 
-      // TODO allow loading the results without reloading the whole page
       const pageNav = searchPaging(pager);
       wrapper.append(results, pageNav);
 
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set(pager.offsetArg, pager.offset);
+      newUrl.searchParams.set(pager.pageSizeArg, pager.pageSize);
+
       oldWrapper.replaceWith(wrapper);
+      window.history.pushState({}, '', newUrl.toString());
     })
     .catch((e) => console.log(`Error: ${e.message}`));
 }
@@ -112,15 +122,16 @@ export default async function decorate(block) {
   block.append(div0);
 
   const queryParams = new URLSearchParams(window.location.search);
-  pager.offset = toInt(queryParams.get(pager.offsetArg)) ?? pager.offset;
+  const offset = toInt(queryParams.get(pager.offsetArg));
+  pager.offset = offset ?? pager.offset;
   pager.pageSize = toInt(queryParams.get(pager.pageSizeArg)) ?? pager.pageSize;
 
-  console.log('decorate called', pager, wrapper);
-  await renderSearch(pager, wrapper); // TODO does this invalidate the div0 reference?
-  console.log('got', wrapper);
+  if (offset !== null) {
+    await renderSearch(pager);
+  }
 
   button0.onclick = async () => {
-    await renderSearch(pager, wrapper);
+    await renderSearch(pager);
   };
   /*
    * N.B. the block will be reported as failing to load if a matching stylesheet
