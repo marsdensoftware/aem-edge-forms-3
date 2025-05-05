@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p137277-e1382426.adobeaemcloud.com/bin/franklin.delivery/marsdensoftware/aem-edge-forms-3/main"
+    url: "https://author-p137277-e1382426.adobeaemcloud.com/bin/franklin.delivery/marsdensoftware/gregkw-forms/feature-gregkw"
     type: "markup"
     suffix: ".html"
