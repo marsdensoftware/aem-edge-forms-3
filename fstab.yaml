@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p137277-e1382426.adobeaemcloud.com/bin/franklin.delivery/marsdensoftware/aem-edge-forms-2/main"
+    url: "https://author-p137277-e1382426.adobeaemcloud.com/bin/franklin.delivery/marsdensoftware/aem-edge-forms-3/okey-poc-search-paging"
     type: "markup"
     suffix: ".html"
