@@ -72,7 +72,7 @@ export default function decorate(block) {
 
           const next = document.createElement('a');
           next.text = 'next';
-          const nextOffset = pager.prev();
+          const nextOffset = pager.next();
           if (nextOffset !== null) {
             next.href = `https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${nextOffset}&select=id,firstName,lastName,age,gender,birthDate,company`;
           } else {
