@@ -1,0 +1,36 @@
+{
+  "definitions": [
+    {
+      "title": "Icon with text",
+      "id": "iconwithtext",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "jcr:title": "Icon with text",
+              "fieldType": "Icon with text"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "iconwithtext",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "...": "../../../icon-with-text/_iconwithtext.json"
+        },
+        {
+          "...": "../form-common/_help-container.json"
+        }
+      ]
+    }
+  ]
+}
