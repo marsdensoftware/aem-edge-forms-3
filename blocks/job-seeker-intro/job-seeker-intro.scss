@@ -4,7 +4,7 @@
   &.job-seeker-intro {
     min-height: 400px;
 
-    @include media('tablet-large') {
+    @include media('desktop') {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -21,7 +21,7 @@
       max-width: 160px;
       margin: 0 auto;
 
-      @include media('tablet-large') {
+      @include media('desktop') {
         order: 2;
         max-width: 240px;
       }
@@ -47,7 +47,7 @@
         @include heading-level-3;
       }
 
-      @include media('tablet-large') {
+      @include media('desktop') {
         text-align: left;
         order: 1;
         width: 510px;
