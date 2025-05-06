@@ -1,10 +1,10 @@
-.hlx/*
-coverage/*
-logs/*
-node_modules/*
+.hlx/
+coverage/
+logs/
+node_modules/
 
 .project
-.settings/*
+.settings/
 
 helix-importer-ui
 .DS_Store
