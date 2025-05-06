@@ -18,7 +18,8 @@
       "fragment",
       "form",
       "embed-adaptive-form",
-      "jobseekerintro"
+      "jobseekerintro",
+      "iconwithtext"
     ]
   },
   {
@@ -68,10 +69,12 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard",
-      "formhero",
-      "formwelcome"
+      "wizard"
     ]
+  },
+  {
+    "id": "iconwithtext",
+    "components": null
   },
   {
     "id": "jobseekerintro",
