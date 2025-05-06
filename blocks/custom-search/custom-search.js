@@ -8,10 +8,8 @@ function toInt(o) {
   return Number.isSafeInteger(n) ? n : null;
 }
 
-function searchResults(jsonResults) {
-  const htmlResults = document.createElement('table');
-  htmlResults.id = 'results';
-  jsonResults.users.forEach((resultRow) => {
+function searchResultsAsRows(jsonResults) {
+  return jsonResults.users.map((resultRow) => {
     const row = document.createElement('tr');
 
     Object.entries(resultRow)
@@ -22,10 +20,8 @@ function searchResults(jsonResults) {
         row.append(elem);
       });
 
-    htmlResults.append(row);
+    return row;
   });
-
-  return htmlResults;
 }
 
 function pageLink(offset, name, pager) {
@@ -36,7 +32,6 @@ function pageLink(offset, name, pager) {
     link.onclick = async function (e) {
       e.preventDefault();
       pager.offset = offset;
-      console.log('render with new offset', offset);
       // eslint-disable-next-line no-use-before-define
       await renderSearch(pager);
     };
@@ -55,10 +50,13 @@ function searchPaging(pager) {
   return nav;
 }
 
-async function renderSearch(pager) {
+async function renderSearch(pager, observer) {
+  pager.loading = true;
+
   const oldWrapper = document.getElementById('results-wrapper');
   if (oldWrapper === null || typeof oldWrapper === 'undefined') {
     console.log('Can\'t render to a non-existent node');
+    pager.loading = false;
     return;
   }
   await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
@@ -69,29 +67,78 @@ async function renderSearch(pager) {
       return r.json();
     })
     .then((j) => {
-      const wrapper = document.createElement('div');
-      wrapper.id = 'results-wrapper';
-
-      const results = searchResults(j);
-      console.log('parsed new results');
-
       pager.total = j.total ?? pager.total;
 
-      const pageNav = searchPaging(pager);
-      wrapper.append(results, pageNav);
+      const rows = searchResultsAsRows(j);
+
+      let results = document.getElementById('results');
+      let firstResults = false;
+      if (!pager.infinite || results === null) {
+        results = document.createElement('table');
+        results.id = 'results';
+        firstResults = true;
+      }
+      results.append(...rows);
 
       const newUrl = new URL(window.location.href);
-      newUrl.searchParams.set(pager.offsetArg, pager.offset);
-      newUrl.searchParams.set(pager.pageSizeArg, pager.pageSize);
+      let updateUrl = false;
+      if (!pager.infinite) {
+        newUrl.searchParams.set(pager.offsetArg, pager.offset);
+        updateUrl = true;
 
-      oldWrapper.replaceWith(wrapper);
-      window.history.pushState({}, '', newUrl.toString());
+        const wrapper = document.createElement('div');
+        wrapper.id = 'results-wrapper';
+
+        const pageNav = searchPaging(pager);
+        wrapper.append(results, pageNav);
+        oldWrapper.replaceWith(wrapper);
+      } else {
+        if (firstResults) {
+          oldWrapper.append(results);
+        }
+        document.getElementById('search').onclick = null;
+        observer.observe(document.querySelector('#results > tr:last-child'));
+      }
+
+      const oldPageSize = newUrl.searchParams.get(pager.pageSizeArg);
+      /* eslint-disable-next-line eqeqeq */
+      if (oldPageSize != pager.pageSize) {
+        newUrl.searchParams.set(pager.pageSizeArg, pager.pageSize);
+        updateUrl = true;
+      }
+      if (updateUrl) {
+        window.history.pushState({}, '', newUrl.toString());
+      }
     })
     .catch((e) => console.log(`Error: ${e.message}`));
+
+  pager.loading = false;
+}
+
+function parseFlag(qs, name) {
+  if (!qs.has(name)) {
+    return null;
+  }
+  const value = qs.get(name);
+  if (value === null || typeof value === 'undefined' || value === '') { // a flag with no value is true
+    return true;
+  }
+  if (['true', '1', 'on', 'yes'].includes(value.toLowerCase())) {
+    return true;
+  }
+  if (['false', '0', 'off', 'no'].includes(value.toLowerCase())) {
+    return false;
+  }
+  return null;
 }
 
 export default async function decorate(block) {
   const Pager = {
+    loading: false,
+
+    infinite: false,
+    infiniteArg: 'infinite',
+
     offset: 0,
     offsetArg: 'skip',
 
@@ -105,7 +152,8 @@ export default async function decorate(block) {
     },
 
     next() {
-      return this.total !== null ? this.offset + this.pageSize : null;
+      return (this.total !== null && this.offset + this.pageSize < this.total)
+        ? this.offset + this.pageSize : null;
     },
   };
 
@@ -114,6 +162,7 @@ export default async function decorate(block) {
   const div0 = document.createElement('div');
 
   const button0 = document.createElement('button');
+  button0.id = 'search';
   button0.innerText = 'Custom Button';
 
   const wrapper = document.createElement('div');
@@ -122,17 +171,38 @@ export default async function decorate(block) {
   block.append(div0);
 
   const queryParams = new URLSearchParams(window.location.search);
-  const offset = toInt(queryParams.get(pager.offsetArg));
-  pager.offset = offset ?? pager.offset;
+  let offset = null;
+  if (!pager.infinite) {
+    offset = toInt(queryParams.get(pager.offsetArg));
+    pager.offset = offset ?? pager.offset;
+  }
+  pager.infinite = parseFlag(queryParams, pager.infiniteArg) ?? pager.infinite;
   pager.pageSize = toInt(queryParams.get(pager.pageSizeArg)) ?? pager.pageSize;
 
+  const observer = new IntersectionObserver(async (entries, cbObserver) => {
+    // N.B. this runs on the main thread
+    if (!entries.some((e) => e.isIntersecting) || pager.loading) {
+      return;
+    }
+
+    const next = pager.next();
+    if (next !== null) {
+      pager.offset = next;
+      await renderSearch(pager, cbObserver);
+    }
+  }, {
+    root: null,
+    threshold: 0.5,
+  });
+
   if (offset !== null) {
-    await renderSearch(pager);
+    await renderSearch(pager, observer);
   }
 
   button0.onclick = async () => {
-    await renderSearch(pager);
+    await renderSearch(pager, observer);
   };
+
   /*
    * N.B. the block will be reported as failing to load if a matching stylesheet
    * is not found even if the JS loads
