@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --background-color-primary: #fff;
   --label-color: #666;
   --border-color: #818a91;
@@ -58,7 +58,7 @@
   --form-wizard-step-legend-font-size: 1.1rem;
   --form-field-gap: 5px;
 
-  // Card styling variables
+  /* Card styling variables */
   --form-card-border-color: #e0e0e0;
   --form-card-border-radius: 4px;
   --form-card-padding: 0.6rem 0.8rem;
@@ -70,9 +70,12 @@
   --form-card-selected-shadow: 0 0 0 1px var(--button-primary-color);
   --form-card-transition: all 0.15s ease-in-out;
 }
-*/
 
-/* main .form pre {
+* {
+  box-sizing: border-box;
+}
+
+main .form pre {
   display: none;
 }
 
@@ -124,21 +127,21 @@ main .form .field-description {
 main .form form .field-invalid .field-description {
   color: var(--form-error-color);
   font-weight: 700;
-} */
+}
 
 /**
  * Required field indicator
  */
-/* [data-required='true'] > label::after {
+[data-required='true'] > label::after {
   content: '*';
   color: var(--form-error-color);
   padding-inline-start: 5px;
-} */
+}
 
 /**
    * Required field indicator not required for checkboxes and radio buttons
    */
-/* .radio-wrapper > label::after,
+.radio-wrapper > label::after,
 .checkbox-wrapper > label::after {
   content: none;
 }
@@ -383,18 +386,18 @@ main .form form fieldset.cards > .checkbox-wrapper > input:focus ~ label {
 main .form .form-image-wrapper img {
   max-width: 100%;
   height: auto;
-} */
+}
 
 /* For cards with icons or images */
-/* main .form form fieldset.cards > .radio-wrapper > label > img,
+main .form form fieldset.cards > .radio-wrapper > label > img,
 main .form form fieldset.cards > .checkbox-wrapper > label > img {
   max-width: 18px;
   max-height: 18px;
   object-fit: contain;
-} */
+}
 
 /* Responsive adjustments for cards */
-/* @media (width <= 768px) {
+@media (width <= 768px) {
   main .form form fieldset.cards > .radio-wrapper,
   main .form form fieldset.cards > .checkbox-wrapper {
     min-width: 100%;
@@ -456,10 +459,10 @@ main .file-wrapper .field-dropregion {
   margin: 11px 0 8px;
   padding: 32px;
   text-align: center;
-} */
+}
 
 /* Repeatable Styling */
-/* main .form form .repeat-actions {
+main .form form .repeat-actions {
   grid-column: span 12;
   order: 2;
 }
@@ -478,10 +481,10 @@ main .form form .item-remove {
 main .form form div[data-variant='addRemoveButtons'] .item-add,
 main .form form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
-} */
+}
 
 /* End of Repeatable Styling */
-/* main .form .file-description {
+main .form .file-description {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -534,10 +537,10 @@ main .form .button-wrapper button[disabled]:hover {
   border: 3px solid var(--button-secondary-color);
   color: var(--button-secondary-color);
   background-color: transparent;
-} */
+}
 
 /** Wizard Styling */
-/* main .form form .wizard {
+main .form form .wizard {
   display: grid;
   counter-reset: wizard-step-counter;
   grid-template-columns: minmax(0, 1fr);
@@ -610,10 +613,10 @@ main .form form .wizard .wizard-menu-active-item::before {
   main .form button {
     width: unset;
   }
-} */
+}
 
 /* wizard title on left */
-/* main .form form .wizard.left {
+main .form form .wizard.left {
   display: flex;
 }
 
@@ -684,10 +687,10 @@ main .form .file-wrapper .file-drag-area {
   gap: 20px;
   justify-content: center;
   align-items: center;
-} */
+}
 
 /* grid css */
-/* main .form form .field-wrapper .field-description {
+main .form form .field-wrapper .field-description {
   grid-column: span 12;
 }
 
@@ -764,31 +767,31 @@ main
 
 main .form form:not(.edit-mode) .captcha-wrapper {
   display: none;
-}  */
+}
 
-/* main .form form .radio-group-wrapper.horizontal,
+main .form form .radio-group-wrapper.horizontal,
 main .form form .checkbox-group-wrapper.horizontal {
   display: flex;
   flex-flow: row wrap;
   gap: inherit;
-} */
+}
 
-/* main .form form .radio-group-wrapper.horizontal .field-description,
+main .form form .radio-group-wrapper.horizontal .field-description,
 main .form form .checkbox-group-wrapper.horizontal .field-description {
   width: 100%;
   order: 1;
   margin-top: 0.5rem;
-} */
+}
 
-/* main div.form-wrapper {
+main div.form-wrapper {
   background: white;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
-} */
+  /* box-shadow: 0 4px 24px rgb(0 0 0 / 8%); */
+}
 
 /* Responsive adjustments for mobile */
-/* @media (width <= 599px) {
+@media (width <= 599px) {
   :root {
     --form-field-horz-gap: 10px;
   }
@@ -800,12 +803,12 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
 
     margin: 0;
   }
-} */
+}
 
 /* SEP customizations */
-/* .checkbox-wrapper > input {
+.checkbox-wrapper > input {
   order: 2;
 }
 .checkbox-wrapper > label {
   order: 1;
-} */
+}
