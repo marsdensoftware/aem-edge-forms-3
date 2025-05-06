@@ -2038,67 +2038,39 @@
     "id": "iconwithtext",
     "fields": [
       {
-        "component": "container",
-        "name": "basic",
-        "label": "Basic",
-        "collapsible": false,
-        "fields": [
-          {
-            "component": "reference",
-            "valueType": "string",
-            "name": "image",
-            "label": "Logo",
-            "multi": false
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "imageAlt",
-            "label": "Logo alt text",
-            "required": true
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "iconwithtextText_title",
-            "label": "Title",
-            "required": true
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "iconwithtextText_description",
-            "label": "Description",
-            "required": true
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "iconwithtextText2_description",
-            "label": "Description",
-            "required": true
-          }
-        ]
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Logo",
+        "multi": false
       },
       {
-        "component": "container",
-        "name": "help",
-        "label": "Help Content",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "richtext",
-            "name": "description",
-            "label": "Help text",
-            "valueType": "string"
-          },
-          {
-            "component": "richtext",
-            "name": "tooltip",
-            "label": "Short description",
-            "valueType": "string"
-          }
-        ]
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Logo alt text",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconwithtextText_title",
+        "label": "Title",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconwithtextText_description",
+        "label": "Description",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconwithtextText2_description",
+        "label": "Description",
+        "required": true
       }
     ]
   },

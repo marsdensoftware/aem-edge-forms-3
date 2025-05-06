@@ -313,11 +313,14 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "jcr:title": "Icon with text",
-                  "fieldType": "panel",
-                  "fd:viewType": "iconwithtext"
+                  "name": "Icon with text",
+                  "model": "iconwithtext",
+                  "iconwithtextText_titleType": "h2",
+                  "iconwithtextText_title": "<h2>Heading level 2</h2>",
+                  "iconwithtextText_description": "<p>Paragraph one</p>",
+                  "iconwithtextText2_description": "<p>Paragraph two</p>"
                 }
               }
             }
