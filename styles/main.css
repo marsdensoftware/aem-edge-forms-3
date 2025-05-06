@@ -206,6 +206,10 @@ p {
     Overide this element inside the component
     If necessary
 */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Atkinson Hyperlegible Next", sans-serif;
   font-size: 1rem;
@@ -243,6 +247,10 @@ th {
 
 tr:nth-child(even) td {
   background-color: var(--grey-black-05);
+}
+
+main div.form-wrapper {
+  box-shadow: none;
 }
 
 .button.secondary:focus {
