@@ -78,6 +78,7 @@ async function renderSearch(pager, observer) {
         results.id = 'results';
         firstResults = true;
       }
+      // TODO use DocumentFragment
       results.append(...rows);
 
       const newUrl = new URL(window.location.href);
@@ -158,19 +159,8 @@ export default async function decorate(block) {
   };
 
   const pager = Object.create(Pager);
-
-  const div0 = document.createElement('div');
-
-  const button0 = document.createElement('button');
-  button0.id = 'search';
-  button0.innerText = 'Custom Button';
-
-  const wrapper = document.createElement('div');
-  wrapper.id = 'results-wrapper';
-  div0.append(button0, wrapper);
-  block.append(div0);
-
   const queryParams = new URLSearchParams(window.location.search);
+
   let offset = null;
   if (!pager.infinite) {
     offset = toInt(queryParams.get(pager.offsetArg));
@@ -178,6 +168,35 @@ export default async function decorate(block) {
   }
   pager.infinite = parseFlag(queryParams, pager.infiniteArg) ?? pager.infinite;
   pager.pageSize = toInt(queryParams.get(pager.pageSizeArg)) ?? pager.pageSize;
+
+  const div0 = document.createElement('div');
+
+  const label = document.createElement('label');
+  const modeName = document.createElement('span');
+  modeName.innerText = 'Infinite scroll';
+  label.append(modeName);
+  const mode = document.createElement('input');
+  mode.type = 'checkbox';
+  mode.checked = pager.infinite;
+  mode.onclick = function (_) {
+    const modeQueryParams = new URLSearchParams(window.location.search);
+    modeQueryParams.set(pager.infiniteArg, true);
+    modeQueryParams.delete(pager.offsetArg);
+
+    pager.infinite = this.checked;
+    window.location.search = modeQueryParams.toString(); // force a reload to clear state
+  };
+  label.append(mode);
+  div0.append(label);
+
+  const button0 = document.createElement('button');
+  button0.id = 'search';
+  button0.innerText = 'Search';
+
+  const wrapper = document.createElement('div');
+  wrapper.id = 'results-wrapper';
+  div0.append(button0, wrapper);
+  block.append(div0);
 
   const observer = new IntersectionObserver(async (entries, cbObserver) => {
     // N.B. this runs on the main thread
