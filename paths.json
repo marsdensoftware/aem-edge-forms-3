@@ -1,8 +1,8 @@
 {
   "mappings": [
-    "/content/edge-forms-seno/:/",
-    "/content/edge-forms-seno/configuration:/.helix/config.json",
-    "/content/edge-forms-seno/metadata:/metadata.json"
+    "/content/edge-forms-rebecca/:/",
+    "/content/edge-forms-rebecca/configuration:/.helix/config.json",
+    "/content/edge-forms-rebecca/metadata:/metadata.json"
   ],
   "includes": ["/content/", "/content/dam/"]
 }
