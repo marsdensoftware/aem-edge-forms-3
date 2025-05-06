@@ -9,11 +9,13 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: $base-font-size;
+}
+
 body {
   font-family: $font-family;
-  font-size: $base-font-size;
   font-weight: $font-weight-regular;
-  line-height: $line-height-text;
   color: $text-color;
 }
 
@@ -36,14 +38,14 @@ th,
 td {
   text-align: left;
   padding: 0.75em 1em;
-  border: 1px solid var(--grey-black-20);
+  border: 1px solid $grey-black-20;
 }
 
 th {
-  background-color: var(--grey-black-05);
-  font-weight: var(--font-weight-bold);
+  background-color: $grey-black-05;
+  font-weight: $font-weight-bold;
 }
 
 tr:nth-child(even) td {
-  background-color: var(--grey-black-05);
+  background-color: $grey-black-05;
 }

@@ -1,10 +1,25 @@
-// TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
 /*
-    The latest file included in this file
-    Will have the highest specificity
-    Overiding the previous style
+  The latest file included in this file
+  Will have the highest specificity
+  Overiding the previous style
+
+
+  Class naming is using BEM https://getbem.com/introduction/
+  IE:
+
+  BASE
+  .button (base style. Padding, margin, etc)
+
+  MODIFIER
+  .button--[modifier] (expanding on base style and add it's own style. IE colour, extra padding, etc)
+  IE .button--primary
+
+  STATE
+  .button--is-[state] (for specific style related state NOT hover, focus, etc)
+  IE .button--is-hidden, .button--primary-is-visible
 */
 
+// TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
 // Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
 @use './settings';
 // Components
