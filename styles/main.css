@@ -249,10 +249,6 @@ tr:nth-child(even) td {
   background-color: var(--grey-black-05);
 }
 
-main div.form-wrapper {
-  box-shadow: none;
-}
-
 .button.secondary:focus {
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Secondary, #999);
