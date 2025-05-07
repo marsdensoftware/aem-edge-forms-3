@@ -11,66 +11,54 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: $font-family;
-    font-weight: $font-weight-bold;
-    line-height: $line-height-heading;
-    letter-spacing: $letter-spacing;
-    color: $text-color;
-    margin-bottom: 1rem;
+  font-family: $font-family;
+  font-weight: 700;
 }
 
 h1 {
-    @include heading-level-1;
+  @include heading-level-1;
 }
 
 h2 {
-    @include heading-level-2;
+  @include heading-level-2;
 }
 
 h3 {
-    @include heading-level-3;
+  @include heading-level-3;
 }
 
 h4 {
-    @include heading-level-4;
+  @include heading-level-4;
 }
 
 h5 {
-    @include heading-level-5;
+  @include heading-level-5;
 }
 
 h6 {
-    @include heading-level-6;
+  @include heading-level-6;
 }
 
 p {
-    @include paragraph;
+  @include font-body-default;
 }
 
 .subtitle {
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-light);
-    font-size: var(--subtitle-size);
-    line-height: var(--line-height-text);
-    margin-bottom: 1rem;
+  font-size: 28px;
+  line-height: 130%;
 }
 
 .strap-title {
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-light);
-    font-size: var(--strap-title-size);
-    line-height: 1;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
 }
 
 /* Paragraph Variants */
 .p-large {
-    font-size: var(--paragraph-large);
-    font-weight: var(--font-weight-regular);
+  @include font-body-large;
 }
 
 .p-small {
-    font-size: var(--paragraph-small);
-    font-weight: var(--font-weight-regular);
+  @include font-body-small;
 }

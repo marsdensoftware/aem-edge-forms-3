@@ -10,13 +10,17 @@
 }
 
 html {
-  font-size: $base-font-size;
+  font-size: $size-font-base;
 }
 
 body {
   font-family: $font-family;
-  font-weight: $font-weight-regular;
-  color: $text-color;
+  font-weight: 400;
+  color: $text-primary;
+}
+
+p {
+  font-weight: 400;
 }
 
 ul {
@@ -43,7 +47,7 @@ td {
 
 th {
   background-color: $color-grey-black-05;
-  font-weight: $font-weight-bold;
+  font-weight: 700;
 }
 
 tr:nth-child(even) td {
