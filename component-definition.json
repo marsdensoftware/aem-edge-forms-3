@@ -670,11 +670,13 @@
                     "fieldType": "plain-text",
                     "textIsRich": true,
                     "value": "Adaptive Form Text Component",
+                    "colspan": 6,
                     "sling:resourceType": "core/fd/components/form/text/v1/text"
                   },
                   "panel": {
                     "jcr:title": "Panel",
                     "fieldType": "panel",
+                    "colspan": 6,
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "item-1":{
                             "fieldType": "panel",
