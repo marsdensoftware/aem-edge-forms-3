@@ -13,7 +13,6 @@ const OOTBComponentDecorators = [
   'location',
   'accordion',
   'password',
-  'iconwithtext',
 ]
 
 export function setCustomComponents(components) {
