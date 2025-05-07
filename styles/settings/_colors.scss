@@ -12,6 +12,7 @@ $color-secondary-purple: #3a54a1;
 $color-tertiary-green: #06b271;
 $color-tertiary-green-light: #e0f0de;
 $color-tertiary-grey: #696969;
+$color-focus-state: #b53cde;
 
 // Neutral Colours
 $color-grey-black-05: #f2f2f2;
@@ -28,6 +29,13 @@ $color-feedback-green: #388314;
 $color-feedback-orange: #fa7f14;
 $color-feedback-red: #d03633;
 $color-feedback-pink: #b53cde;
+
+// To animate button background colour
+$color-primary-animated: linear-gradient(
+  0,
+  $color-primary 25%,
+  $color-primary 100%
+);
 
 // Gradient
 $color-gradient-blue: linear-gradient(

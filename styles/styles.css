@@ -25,7 +25,7 @@
 }
 
 /* fallback fonts */
-@font-face {
+/* @font-face {
   font-family: roboto-condensed-fallback;
   size-adjust: 88.82%;
   src: local('Arial');
@@ -34,7 +34,7 @@
   font-family: roboto-fallback;
   size-adjust: 99.529%;
   src: local('Arial');
-}
+} */
 @media (width >= 900px) {
   :root {
     /* body sizes */
@@ -133,19 +133,19 @@ pre {
   white-space: pre;
 } */
 
-main > div {
+/* main > div {
   margin: 2.5rem 1rem;
-}
+} */
 
-input,
+/* input,
 textarea,
 select,
 button {
   font: inherit;
-}
+} */
 
 /* links */
-a:-moz-any-link {
+/* a:-moz-any-link {
   color: var(--link-color);
   text-decoration: none;
   word-break: break-word;
@@ -159,10 +159,10 @@ a:any-link {
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
-}
+} */
 
 /* buttons */
-a.button:-moz-any-link {
+/* a.button:-moz-any-link {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
@@ -182,8 +182,8 @@ a.button:-moz-any-link {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-a.button:any-link,
+} */
+/* a.button:any-link,
 button {
   box-sizing: border-box;
   display: inline-block;
@@ -204,8 +204,8 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
+} */
+/*
 a.button:hover,
 a.button:focus,
 button:hover,
@@ -225,9 +225,9 @@ button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color);
-}
+} */
 
-main img {
+/* main img {
   max-width: 100%;
   width: auto;
   height: auto;
@@ -242,10 +242,10 @@ main img {
 .icon img {
   height: 100%;
   width: 100%;
-}
+} */
 
 /* sections */
-main > .section {
+/* main > .section {
   margin: 2.5rem 0;
 }
 
@@ -257,17 +257,17 @@ main > .section > div {
 
 main > .section:first-of-type {
   margin-top: 0;
-}
+} */
 
-@media (width >= 900px) {
+/* @media (width >= 900px) {
   main > .section > div {
     padding: 0 2rem;
   }
-}
+} */
 /* section metadata */
-main .section.light,
+/* main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 2.5rem 0;
-}
+} */

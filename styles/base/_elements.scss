@@ -53,3 +53,32 @@ th {
 tr:nth-child(even) td {
   background-color: $color-grey-black-05;
 }
+
+a,
+button {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+a {
+  font-size: 16px;
+  color: $color-primary;
+  box-shadow: none;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:active {
+    color: $color-primary-navy;
+  }
+
+  &:visited {
+    color: $color-primary;
+
+    &:hover,
+    &:active {
+      color: $color-primary-navy;
+    }
+  }
+}
