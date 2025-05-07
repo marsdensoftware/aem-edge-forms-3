@@ -1,5 +1,5 @@
 :root {
-  --font-family: "Atkinson Hyperlegible Next", sans-serif;
+  --font-family: 'Atkinson Hyperlegible Next', sans-serif;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -28,12 +28,12 @@
 @font-face {
   font-family: roboto-condensed-fallback;
   size-adjust: 88.82%;
-  src: local("Arial");
+  src: local('Arial');
 }
 @font-face {
   font-family: roboto-fallback;
   size-adjust: 99.529%;
-  src: local("Arial");
+  src: local('Arial');
 }
 @media (width >= 900px) {
   :root {
@@ -67,12 +67,12 @@ footer .footer {
   visibility: hidden;
 }
 
-header .header[data-block-status=loaded],
-footer .footer[data-block-status=loaded] {
+header .header[data-block-status='loaded'],
+footer .footer[data-block-status='loaded'] {
   visibility: visible;
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -84,8 +84,8 @@ h6 {
   font-weight: 600;
   line-height: 1.25;
   scroll-margin: 2.5rem;
-}
-
+} */
+/*
 h1 {
   font-size: var(--heading-font-size-xxl);
 }
@@ -108,8 +108,8 @@ h5 {
 
 h6 {
   font-size: var(--heading-font-size-xs);
-}
-
+} */
+/*
 p,
 dl,
 ol,
@@ -131,7 +131,7 @@ pre {
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
-}
+} */
 
 main > div {
   margin: 2.5rem 1rem;
