@@ -4880,6 +4880,108 @@
     ]
   },
   {
+    "title": "Form Hero",
+    "id": "formhero",
+    "plugins": {
+      "xwalk": {
+        "page": {
+          "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+          "template": {
+            "jcr:title": "Form Hero",
+            "fieldType": "panel",
+            "fd:viewType": "formhero",
+            "minOccur": 1,
+            "text": {
+              "jcr:title": "Text",
+              "fieldType": "plain-text",
+              "textIsRich": true,
+              "colspan": 6,
+              "value": "Adaptive Form Text Component",
+              "sling:resourceType": "core/fd/components/form/text/v1/text"
+            },
+            "image": {
+              "jcr:title": "Image",
+              "fieldType": "image",
+              "colspan": 6,
+              "sling:resourceType": "core/fd/components/form/image/v1/image"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "title": "Form Welcome",
+    "id": "formwelcome",
+    "plugins": {
+      "xwalk": {
+        "page": {
+          "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+          "template": {
+            "jcr:title": "Form Welcome",
+            "fieldType": "panel",
+            "fd:viewType": "formwelcome",
+            "minOccur": 1,
+            "text": {
+              "jcr:title": "Text",
+              "fieldType": "plain-text",
+              "textIsRich": true,
+              "value": "Adaptive Form Text Component",
+              "sling:resourceType": "core/fd/components/form/text/v1/text"
+            },
+            "panel": {
+              "jcr:title": "Panel",
+              "fieldType": "panel",
+              "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+              "item-1": {
+                "fieldType": "panel",
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "text": {
+                  "fieldType": "plain-text",
+                  "textIsRich": true,
+                  "value": "Adaptive Form Text Component",
+                  "sling:resourceType": "core/fd/components/form/text/v1/text"
+                },
+                "image": {
+                  "fieldType": "image",
+                  "sling:resourceType": "core/fd/components/form/image/v1/image"
+                }
+              },
+              "item-2": {
+                "fieldType": "panel",
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "text": {
+                  "fieldType": "plain-text",
+                  "textIsRich": true,
+                  "value": "Adaptive Form Text Component",
+                  "sling:resourceType": "core/fd/components/form/text/v1/text"
+                },
+                "image": {
+                  "fieldType": "image",
+                  "sling:resourceType": "core/fd/components/form/image/v1/image"
+                }
+              },
+              "item-3": {
+                "fieldType": "panel",
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "text": {
+                  "fieldType": "plain-text",
+                  "textIsRich": true,
+                  "value": "Adaptive Form Text Component",
+                  "sling:resourceType": "core/fd/components/form/text/v1/text"
+                },
+                "image": {
+                  "fieldType": "image",
+                  "sling:resourceType": "core/fd/components/form/image/v1/image"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
     "id": "wizard",
     "fields": [
       {
