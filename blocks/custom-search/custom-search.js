@@ -180,10 +180,14 @@ export default async function decorate(block) {
   mode.checked = pager.infinite;
   mode.onclick = function (_) {
     const modeQueryParams = new URLSearchParams(window.location.search);
-    modeQueryParams.set(pager.infiniteArg, true);
-    modeQueryParams.delete(pager.offsetArg);
-
     pager.infinite = this.checked;
+    if (this.checked) {
+      modeQueryParams.set(pager.infiniteArg, true);
+      modeQueryParams.delete(pager.offsetArg);
+    } else {
+      modeQueryParams.delete(pager.infiniteArg);
+    }
+
     window.location.search = modeQueryParams.toString(); // force a reload to clear state
   };
   label.append(mode);
