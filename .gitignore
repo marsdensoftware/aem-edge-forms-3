@@ -1,7 +1,10 @@
-.hlx/*
-coverage/*
-logs/*
-node_modules/*
+.hlx/
+coverage/
+logs/
+node_modules/
+
+.project
+.settings/
 
 .project
 .settings/*

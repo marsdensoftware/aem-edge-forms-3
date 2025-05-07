@@ -1,0 +1,98 @@
+@use '../settings' as *;
+
+.button {
+  @include elevation-2;
+  border-radius: $border-round;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+  padding: $spacing-400 $spacing-600;
+  font-style: normal;
+  transition: all 0.2s ease-in-out;
+
+  &.small {
+    padding: $spacing-300 $spacing-500;
+    font-size: 16px;
+  }
+
+  /*
+    PRIMARY
+  */
+  &.primary {
+    background-image: $color-primary-animated;
+    color: $color-white;
+    z-index: 1;
+
+    &::after {
+      transition: opacity 0.2s ease-in-out;
+      border-radius: $border-round;
+      position: absolute;
+      content: '';
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: $color-gradient-blue;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      background: $color-primary-navy;
+    }
+  }
+
+  /*
+    HOLLOW
+  */
+  &.hollow,
+  &.secondary {
+    color: $text-primary;
+    border: 2px solid $stroke-secondary;
+
+    &:hover {
+      border-color: $stroke-primary;
+    }
+
+    &:active {
+      border: 2px solid $stroke-accent;
+    }
+  }
+}
+
+.link {
+  color: $color-primary;
+  box-shadow: none;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:active {
+    color: $color-primary-navy;
+  }
+
+  &:visited {
+    color: $color-primary;
+
+    &:hover,
+    &:active {
+      color: $color-primary-navy;
+    }
+  }
+
+  &.small {
+    font-size: 16px;
+  }
+
+  &.large {
+    font-size: 20px;
+  }
+}
