@@ -1,0 +1,47 @@
+@use '../../../../styles/settings' as *;
+@use '../formhero/formhero' as *;
+
+.wizard {
+  .panel-formwelcome {
+    @extend %common-panel-spacing;
+    max-width: 500px;
+    width: 100%;
+    margin: 32px auto;
+
+    @include media('desktop') {
+    }
+
+    legend {
+      display: none;
+    }
+
+    .panel-formwelcome__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:not(:last-child) {
+        margin-bottom: $spacing-500;
+      }
+    }
+
+    .panel-formwelcome__header {
+      h2 {
+        @include heading-level-3;
+        margin-bottom: 32px;
+      }
+    }
+
+    .panel-formwelcome__item-image {
+      width: 100%;
+      max-width: 60px;
+      order: 1;
+    }
+
+    .panel-formwelcome__item-content {
+      h3 {
+        @include font-body-large;
+      }
+    }
+  }
+}
