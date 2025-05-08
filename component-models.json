@@ -4946,11 +4946,12 @@
             "component": "text",
             "name": "linkText",
             "label": "Link Text"
-          },
+          },          
           {
-            "component": "text",
-            "name": "linkTitle",
-            "label": "Link Title"
+            "component": "boolean",
+            "name": "linkOpenInNewTab",
+            "label": "Open link in new tab",
+            "valueType": "boolean"
           }
         ]
       }
