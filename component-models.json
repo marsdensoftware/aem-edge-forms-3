@@ -4887,7 +4887,20 @@
         "name": "basic",
         "label": "Basic",
         "collapsible": false,
-        "fields": []
+        "fields": [
+            {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          }
+        ]
       }
     ]
   },
@@ -4899,7 +4912,20 @@
         "name": "basic",
         "label": "Basic",
         "collapsible": false,
-        "fields": []
+        "fields": [
+            {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          }
+        ]
       }
     ]
   },
