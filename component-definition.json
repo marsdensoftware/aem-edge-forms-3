@@ -638,7 +638,6 @@
                     "jcr:title": "Text",
                     "fieldType": "plain-text",
                     "textIsRich": true,
-                    "colspan": 6,
                     "value": "Please enter your contextual help content",
                     "sling:resourceType": "core/fd/components/form/text/v1/text"
                   }

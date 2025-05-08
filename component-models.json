@@ -4938,12 +4938,6 @@
             "valueType": "string"
           },
           {
-            "component": "text",
-            "name": "headline",
-            "label": "Headline",
-            "valueType": "string"
-          },
-          {
             "component": "aem-content",
             "name": "link",
             "label": "Link"
@@ -4951,12 +4945,12 @@
           {
             "component": "text",
             "name": "linkText",
-            "label": "Text"
+            "label": "Link Text"
           },
           {
             "component": "text",
             "name": "linkTitle",
-            "label": "Title"
+            "label": "Link Title"
           }
         ]
       }
