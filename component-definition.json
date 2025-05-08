@@ -623,6 +623,31 @@
           }
         },
         {
+          "title": "Form Contextual Help",
+          "id": "formcontexttualhelp",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Contextual Help",
+                  "fieldType": "panel",
+                  "fd:viewType": "formcontexttualhelp",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "colspan": 6,
+                    "value": "Please enter your contextual help content",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Hero",
           "id": "formhero",
           "plugins": {
