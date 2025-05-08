@@ -1,0 +1,31 @@
+@use '../../../../styles/settings' as *;
+@use '../../../../styles/components/buttons' as *;
+
+.wizard {
+  > legend.field-label,
+  .wizard-menu-items {
+    display: none;
+  }
+
+  .wizard-button-wrapper {
+    padding: $spacing-400;
+    border-top: 1px solid $stroke-secondary;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .wizard-button-next {
+      margin-left: auto;
+    }
+
+    .button[name='next'] {
+      @extend %button;
+      @extend %button--primary;
+    }
+
+    .button[name='back'] {
+      @extend %button;
+      @extend %button--hollow;
+    }
+  }
+}
