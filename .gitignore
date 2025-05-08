@@ -13,6 +13,7 @@ helix-importer-ui
 .nyc_output
 
 .env*
+!.env.example
 .vscode
 /test-results/
 /playwright-report/
