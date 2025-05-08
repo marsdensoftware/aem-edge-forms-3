@@ -17,6 +17,7 @@ body {
   font-family: $font-family;
   font-weight: 400;
   color: $text-primary;
+  margin: 0;
 }
 
 p {
@@ -52,6 +53,11 @@ th {
 
 tr:nth-child(even) td {
   background-color: $color-grey-black-05;
+}
+
+img,
+picture {
+  width: 100%;
 }
 
 a,

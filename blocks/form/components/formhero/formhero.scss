@@ -1,0 +1,46 @@
+@use '../../../../styles/settings' as *;
+
+.wizard {
+  // Specificity
+  .panel-heroform {
+    margin: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    @include media('desktop') {
+      flex-direction: row;
+      padding: 60px 0;
+      text-align: left;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 930px;
+      margin: 32px auto;
+    }
+  }
+
+  .panel-heroform__picture {
+    width: 100%;
+    max-width: 160px;
+
+    @include media('desktop') {
+      max-width: 240px;
+      order: 1;
+    }
+  }
+
+  .panel-heroform__content {
+    h2 {
+      @include heading-level-1;
+    }
+
+    p {
+      @include font-body-large;
+    }
+
+    @include media('desktop') {
+      width: 510px;
+    }
+  }
+}
