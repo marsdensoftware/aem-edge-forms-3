@@ -4899,6 +4899,12 @@
               "regExp": "^[^$].*",
               "customErrorMsg": "Name cannot start with $"
             }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
           }
         ]
       }
@@ -4924,6 +4930,12 @@
               "regExp": "^[^$].*",
               "customErrorMsg": "Name cannot start with $"
             }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
           }
         ]
       }
