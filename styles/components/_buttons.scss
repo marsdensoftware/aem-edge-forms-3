@@ -11,6 +11,16 @@
   font-style: normal;
   transition: all 0.2s ease-in-out;
 
+  &:hover {
+    color: $color-white;
+  }
+
+  &:visited {
+    &:hover {
+      color: $color-white;
+    }
+  }
+
   &.small {
     padding: $spacing-300 $spacing-500;
     font-size: 16px;
@@ -59,11 +69,18 @@
     border: 2px solid $stroke-secondary;
 
     &:hover {
+      color: $text-primary;
       border-color: $stroke-primary;
     }
 
     &:active {
       border: 2px solid $stroke-accent;
+    }
+
+    &:visited {
+      &:hover {
+        color: $text-primary;
+      }
     }
   }
 }
