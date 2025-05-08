@@ -21,8 +21,7 @@
     "update": "npm run update:core && npm run update:formula && npm run update:formatters",
     "watch:ts": "tsc --watch",
     "gulp": "gulp",
-    "aem:up": "aem up ${AEM_UP_ARGS}",
-    "dev": "concurrently --kill-others \"npm run aem:up\" \"npm run watch:ts\" \"npm run gulp\""
+    "dev": "concurrently --kill-others \"aem up\" \"npm run watch:ts\" \"npm run gulp\""
   },
   "c8": {
     "exclude": [
