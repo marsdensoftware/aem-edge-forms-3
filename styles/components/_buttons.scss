@@ -1,5 +1,61 @@
 @use '../settings' as *;
 
+// PLACEHOLDER
+// TODO: potentially take this out to it's own file
+%button--primary {
+  background-image: $color-primary-animated;
+  color: $color-white;
+  z-index: 1;
+
+  &::after {
+    transition: opacity 0.2s ease-in-out;
+    border-radius: $border-round;
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: $color-gradient-blue;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &:visited {
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    background: $color-primary-navy;
+  }
+}
+
+%button--hollow {
+  background: none;
+  color: $color-primary-dark-navy;
+  border: 2px solid $stroke-secondary;
+
+  &:hover {
+    border-color: $stroke-primary;
+  }
+
+  &:active {
+    border-color: $stroke-accent;
+  }
+}
+
+%button,
 .button {
   @include elevation-2;
   border-radius: $border-round;
@@ -11,6 +67,11 @@
   font-style: normal;
   transition: all 0.2s ease-in-out;
 
+  &:focus {
+    box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-focus-state;
+    outline: 3px solid transparent;
+  }
+
   &.small {
     padding: $spacing-300 $spacing-500;
     font-size: 16px;
@@ -20,34 +81,7 @@
     PRIMARY
   */
   &.primary {
-    background-image: $color-primary-animated;
-    color: $color-white;
-    z-index: 1;
-
-    &::after {
-      transition: opacity 0.2s ease-in-out;
-      border-radius: $border-round;
-      position: absolute;
-      content: '';
-      display: block;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-image: $color-gradient-blue;
-      z-index: -1;
-      opacity: 0;
-    }
-
-    &:hover {
-      &::after {
-        opacity: 1;
-      }
-    }
-
-    &:active {
-      background: $color-primary-navy;
-    }
+    @extend %button--primary;
   }
 
   /*
@@ -55,16 +89,7 @@
   */
   &.hollow,
   &.secondary {
-    color: $text-primary;
-    border: 2px solid $stroke-secondary;
-
-    &:hover {
-      border-color: $stroke-primary;
-    }
-
-    &:active {
-      border: 2px solid $stroke-accent;
-    }
+    @extend %button--hollow;
   }
 }
 

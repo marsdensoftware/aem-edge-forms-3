@@ -1,39 +1,57 @@
-@import './_wizard-buttons';
+@use '../../../../styles/settings' as *;
 
-.formhero {
-  display: flex;
-  flex-direction: column;
-  gap: var(--Spacing-Spacing-600, 32px);
-  padding: var(--Spacing-Spacing-800, 48px) var(--Spacing-Spacing-600, 32px);
-  background-color: var(--Background-Light-Primary, #f9f9f9);
+%common-panel-spacing {
+  margin: 32px 0;
+  padding: 0 16px;
+
+  @include media('desktop') {
+    padding: 60px 0;
+  }
 }
 
-.formhero h2 {
-  font-family: var(--Typography-Font-family-Primary-font);
-  font-size: clamp(1.75rem, 2vw, 2.25rem);
-  font-weight: var(--Typography-Font-weight-Medium);
-  margin-bottom: var(--Spacing-Spacing-400, 16px);
-  color: var(--Text-Dark-Primary, #333);
-}
+.wizard {
+  // Specificity
+  .panel-heroform {
+    @extend %common-panel-spacing;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 
-.formhero .form-fields {
-  display: flex;
-  flex-direction: column;
-  gap: var(--Spacing-Spacing-400, 16px);
-}
-
-@media (min-width: 768px) {
-  .formhero {
-    flex-direction: row;
-    justify-content: space-between;
+    @include media('desktop') {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 930px;
+      margin: 32px auto;
+    }
   }
 
-  .formhero .form-fields {
-    width: 60%;
+  .panel-heroform__picture {
+    width: 100%;
+    max-width: 160px;
+    margin-bottom: 32px;
+
+    @include media('desktop') {
+      max-width: 240px;
+      order: 1;
+    }
   }
 
-  .formhero .wizard-button-wrapper {
-    width: 35%;
-    align-self: flex-end;
+  .panel-heroform__content {
+    h2 {
+      @include heading-level-1;
+      margin-bottom: $spacing-500;
+    }
+
+    p {
+      @include font-body-large;
+      margin-bottom: 12px;
+    }
+
+    @include media('desktop') {
+      width: 510px;
+    }
   }
 }
