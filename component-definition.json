@@ -647,6 +647,23 @@
           }
         },
         {
+          "title": "Form Output Field",
+          "id": "formoutputfield",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/text/v1/text",
+                "template": {
+                  "jcr:title": "Form Output Field",
+                  "fieldType": "plain-text",
+                  "textIsRich": false,
+                  "fd:viewType": "formoutputfield"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Hero",
           "id": "formhero",
           "plugins": {

@@ -1,6 +1,6 @@
 import { loadCSS } from '../../scripts/aem.js'
 
-let customComponents = ['formhero', 'formwelcome', 'formcontexttualhelp']
+let customComponents = ['formhero', 'formwelcome', 'formcontexttualhelp', 'formoutputfield']
 const OOTBComponentDecorators = [
   'file-input',
   'wizard',

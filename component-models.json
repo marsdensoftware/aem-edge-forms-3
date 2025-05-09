@@ -4958,6 +4958,52 @@
     ]
   },
   {
+      "id": "formoutputfield",
+      "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "dataRef",
+            "label": "Bind reference",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "type",
+            "label": "Type",
+            "valueType": "string",
+            "value": "text",
+            "options": [
+              {
+                "name": "text",
+                "value": "Text"
+              },
+              {
+                "name": "number",
+                "value": "Number"
+              },
+              {
+                "name": "date",
+                "value": "Date"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "formhero",
     "fields": [
       {
