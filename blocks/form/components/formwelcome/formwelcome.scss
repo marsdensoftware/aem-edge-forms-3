@@ -3,7 +3,6 @@
 
 .wizard {
   .panel-formwelcome {
-    @extend %common-panel-spacing;
     max-width: 500px;
     width: 100%;
     margin: 32px auto;

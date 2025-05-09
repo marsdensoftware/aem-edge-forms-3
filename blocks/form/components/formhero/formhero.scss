@@ -1,18 +1,8 @@
 @use '../../../../styles/settings' as *;
 
-%common-panel-spacing {
-  margin: 32px 0;
-  padding: 0 16px;
-
-  @include media('desktop') {
-    padding: 60px 0;
-  }
-}
-
 .wizard {
   // Specificity
   .panel-formhero {
-    @extend %common-panel-spacing;
     display: flex;
     flex-direction: column;
     align-items: center;
