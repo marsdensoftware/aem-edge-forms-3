@@ -1,4 +1,5 @@
 @use '../../styles/settings' as *;
+@use '../../styles/components/buttons' as *;
 
 :root {
   --background-color-primary: #fff;
@@ -424,25 +425,26 @@ input::file-selector-button {
 }
 
 main .form button {
-  color: var(--form-button-color);
-  background: var(--form-button-background-color);
-  border: var(--form-button-border);
-  padding: var(--form-button-padding);
-  font-size: var(--form-button-font-size);
-  border-radius: unset;
-  width: 100%;
+  @extend %button--primary;
 }
 
 main form .file-wrapper > button {
   display: flex;
 }
 
-main .form button:hover {
-  background: var(--form-button-background-hover-color);
-}
+// main .form button:hover {
+//   background: var(--form-button-background-hover-color);
+// }
 
 main .submit-wrapper {
-  width: var(--form-submit-width);
+  // width: var(--form-submit-width);
+  padding: 32px 24px;
+
+  button {
+    @extend %button--hollow;
+    display: block;
+    margin-left: auto;
+  }
 }
 
 main .form textarea:disabled,
@@ -612,11 +614,11 @@ main .form form .wizard .wizard-menu-active-item::before {
   font-weight: 600;
 }
 
-@media (width >= 600px) {
-  main .form button {
-    width: unset;
-  }
-}
+// @media (width >= 600px) {
+//   main .form button {
+//     width: unset;
+//   }
+// }
 
 /* wizard title on left */
 main .form form .wizard.left {
