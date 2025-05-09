@@ -392,6 +392,23 @@ main .form .form-image-wrapper img {
   height: auto;
 }
 
+.panel-wrapper {
+  &.field-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 24px;
+
+    .image-wrapper picture {
+      max-width: 150px;
+
+      @include media('desktop') {
+        max-width: 300px;
+      }
+    }
+  }
+}
+
 /* For cards with icons or images */
 main .form form fieldset.cards > .radio-wrapper > label > img,
 main .form form fieldset.cards > .checkbox-wrapper > label > img {
@@ -438,7 +455,6 @@ main form .file-wrapper > button {
 
 main .submit-wrapper {
   // width: var(--form-submit-width);
-  padding: 32px 24px;
 
   button {
     @extend %button--hollow;
