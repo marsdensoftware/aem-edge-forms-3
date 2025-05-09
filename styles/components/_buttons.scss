@@ -4,6 +4,7 @@
 // TODO: potentially take this out to it's own file
 %button--primary {
   background-image: $color-primary-animated;
+  border: 2px solid $stroke-accent;
   color: $color-white;
   z-index: 1;
 
@@ -45,6 +46,17 @@
   background: none;
   color: $color-primary-dark-navy;
   border: 2px solid $stroke-secondary;
+
+  &::after {
+    content: '';
+    display: none;
+  }
+
+  &:hover,
+  &:active {
+    color: $color-primary-dark-navy;
+    background: none;
+  }
 
   &:hover {
     border-color: $stroke-primary;
