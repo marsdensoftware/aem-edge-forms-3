@@ -11,7 +11,7 @@
 
 .wizard {
   // Specificity
-  .panel-heroform {
+  .panel-formhero {
     @extend %common-panel-spacing;
     display: flex;
     flex-direction: column;
@@ -28,18 +28,19 @@
     }
   }
 
-  .panel-heroform__picture {
+  .panel-formhero__picture {
     width: 100%;
     max-width: 160px;
     margin-bottom: 32px;
 
     @include media('desktop') {
       max-width: 240px;
-      order: 1;
     }
   }
 
-  .panel-heroform__content {
+  .panel-formhero__content {
+    order: 1;
+
     h2 {
       @include heading-level-1;
       margin-bottom: $spacing-500;
@@ -51,6 +52,7 @@
     }
 
     @include media('desktop') {
+      order: 0;
       width: 510px;
     }
   }

@@ -8,8 +8,8 @@ export default function decorate(panel: Element) {
   items.forEach((e) => {
     e.classList.add('panel-formwelcome__item')
     const divs = e.querySelectorAll('div')
-    divs[0].classList.add('panel-formwelcome__item-image')
-    divs[1].classList.add('panel-formwelcome__item-content')
+    divs[0].classList.add('panel-formwelcome__item-content')
+    divs[1].classList.add('panel-formwelcome__item-image')
   })
   return panel
 }
