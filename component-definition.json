@@ -652,11 +652,10 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "resourceType": "core/fd/components/form/numberinput/v1/numberinput",
                 "template": {
                   "jcr:title": "Form Output Field",
-                  "textIsRich": false,
-                  "fieldType": "panel",
+                  "fieldType": "number-input",
                   "fd:viewType": "formoutputfield"
                 }
               }
