@@ -22,6 +22,12 @@
 .wizard {
   @extend %common-panel-spacing;
 
+  .current-wizard-step {
+    @include media('desktop') {
+      padding: 60px 0;
+    }
+  }
+
   > legend.field-label,
   .wizard-menu-items {
     display: none;
@@ -33,6 +39,10 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    @include media('desktop') {
+      margin-top: 32px;
+    }
 
     .wizard-button-next {
       margin-left: auto;
