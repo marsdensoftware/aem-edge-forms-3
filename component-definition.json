@@ -655,7 +655,7 @@
                 "resourceType": "core/fd/components/form/text/v1/text",
                 "template": {
                   "jcr:title": "Form Output Field",
-                  "fieldType": "number-input",
+                  "fieldType": "plain-text",
                   "fd:viewType": "formoutputfield"
                 }
               }
@@ -705,19 +705,19 @@
                   "fieldType": "panel",
                   "fd:viewType": "formwelcome",
                   "minOccur": 1,
-                  "text": {
-                    "jcr:title": "Text",
-                    "fieldType": "plain-text",
-                    "textIsRich": true,
-                    "value": "Adaptive Form Text Component",
-                    "colspan": 6,
-                    "sling:resourceType": "core/fd/components/form/text/v1/text"
-                  },
                   "panel": {
                     "jcr:title": "Panel",
                     "fieldType": "panel",
                     "colspan": 6,
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                        "jcr:title": "Text",
+                        "fieldType": "plain-text",
+                        "textIsRich": true,
+                        "value": "Adaptive Form Text Component",
+                        "colspan": 6,
+                        "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
                     "item-1":{
                             "fieldType": "panel",
                             "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
