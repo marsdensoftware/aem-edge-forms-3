@@ -6,4 +6,16 @@
 // this script should execute after script.js but before the the universal editor cors script
 // and any block being loaded
 
-console.log('Editor Customizations');
+function waitForTinyMCE(callback) {
+  const interval = setInterval(() => {
+    if (window.tinymce) {
+      clearInterval(interval);
+      callback();
+    }
+  }, 50);
+}
+
+// Usage:
+waitForTinyMCE(() => {
+  console.log('TinyMCE is available!');
+});
