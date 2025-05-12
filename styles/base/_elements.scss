@@ -74,10 +74,11 @@ button {
 
 a {
   font-size: 16px;
-  color: $color-primary;
+  color: $color-grey-black-80;
   box-shadow: none;
-  text-decoration: none;
+  text-decoration: underline;
   transition: all 0.2s ease-in-out;
+
 
   &:hover,
   &:active {
@@ -85,7 +86,7 @@ a {
   }
 
   &:visited {
-    color: $color-primary;
+    color: $color-grey-black-80;
 
     &:hover,
     &:active {
