@@ -16,7 +16,7 @@ In the case of resuming page position on reload, there is no standardised approa
 
 # React
 
-In principle, using React would avoid some usability and compatibility concerns, allow us to leverage existing UI libraries that implement common functionality, and reduce the developer effort involved.
+In principle, using React would avoid some usability and compatibility concerns, allow us to leverage existing UI libraries that implement common functionality, and reduce the developer effort involved. Implementing paging should be very easy, but first it requires setting up React.
 
 In practice, I ran into a number of technical issues trying to integrate React.
 
