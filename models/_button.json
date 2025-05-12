@@ -53,7 +53,7 @@
             },
             {
               "name": "Link",
-              "value": "button--link"
+              "value": "buttonLink"
             }
           ]
         }
