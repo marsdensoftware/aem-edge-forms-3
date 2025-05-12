@@ -13,10 +13,14 @@ export default async function decorate(block) {
 
   const div1 = document.createElement('div');
   div1.id = 'test-root';
-  div0.append(div1);
+  const p = document.createElement('p');
+  p.innerText = 'This is a paragraph';
+  p.id = 'test-test';
+
+  div0.append(div1, p);
   block.append(div0);
 
-  console.log('adding divs!');
+  console.log('adding html!');
 
 
   /*const domNode = div1;// document.getElementById('test-root');
