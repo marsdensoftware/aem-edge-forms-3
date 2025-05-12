@@ -9,13 +9,15 @@ function ReactTestHeader() {
 
 export default async function decorate(block) {
   const div0 = document.createElement('div');
+  div0.id = 'div0';
 
   const div1 = document.createElement('div');
   div1.id = 'test-root';
+
   div0.append(div1);
   block.append(div0);
 
-  const domNode = document.getElementById('test-root');
+  const domNode = div1;// document.getElementById('test-root');
   const root = createRoot(domNode);
   root.render(<ReactTestHeader />);
 }
