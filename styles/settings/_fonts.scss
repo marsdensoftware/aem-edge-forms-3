@@ -6,7 +6,7 @@
 */
 @use './breakpoints' as *;
 
-$font-family: 'Atkinson Hyperlegible Next', sans-serif;
+$font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
 $size-font-base: 16px;
 
 /* Headings */
@@ -19,6 +19,7 @@ $size-font-h6: 20px;
 
 /* Text */
 $size-font-subtitle: 28px;
+$size-font-strap-title-small: 16px; /* new */
 $size-font-strap-title: 20px;
 $size-font-body-default: $size-font-base;
 $size-font-body-small: 12px;

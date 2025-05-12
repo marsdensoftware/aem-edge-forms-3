@@ -25,3 +25,10 @@
 // Components
 @use './base';
 @use './components';
+
+/*added this for a quick demo, can remove thanks, Rebecca*/
+.default-content-wrapper {
+  padding: 120px 80px;
+  width:980px;
+  margin: 0 auto;
+}
