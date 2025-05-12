@@ -13,11 +13,13 @@ export default async function decorate(block) {
 
   const div1 = document.createElement('div');
   div1.id = 'test-root';
-
   div0.append(div1);
   block.append(div0);
 
-  const domNode = div1;// document.getElementById('test-root');
+  console.log('adding divs!');
+
+
+  /*const domNode = div1;// document.getElementById('test-root');
   const root = createRoot(domNode);
-  root.render(<ReactTestHeader />);
+  root.render(<ReactTestHeader />);*/
 }
