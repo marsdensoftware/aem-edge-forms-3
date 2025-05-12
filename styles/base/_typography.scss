@@ -1,33 +1,38 @@
-
 /*
   Cleaned and Optimized Typography SCSS
 */
 
 @use '../settings' as *;
-
-
-// _mixins.scss
-
-
-
-
-
 /* ------------------------------
    Headings
 ------------------------------ */
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $font-family;
-  /*font-weight: 700;*/ /*Rebecca added this*/
- /* margin: 0; */ /*Rebecca added this*/
 }
 
-h1 { @include heading-level-1; }
-h2 { @include heading-level-2; }
-h3 { @include heading-level-3; }
-h4 { @include heading-level-4; }
-h5 { @include heading-level-5; }
-h6 { @include heading-level-6; }
+h1 {
+  @include heading-level-1;
+}
+h2 {
+  @include heading-level-2;
+}
+h3 {
+  @include heading-level-3;
+}
+h4 {
+  @include heading-level-4;
+}
+h5 {
+  @include heading-level-5;
+}
+h6 {
+  @include heading-level-6;
+}
 
 /* ------------------------------
    Body text
@@ -36,14 +41,18 @@ h6 { @include heading-level-6; }
 /*Rebecca added this*/
 p {
   font-size: $size-font-base;
-  /*margin: 0 0 24px 0;*/
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 /*Rebecca added this*/
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 0 24px 0;
 
   &:last-child {
@@ -87,13 +96,16 @@ h1, h2, h3, h4, h5, h6 {
    Paragraph Variants
 ------------------------------ */
 
-.p-large { @include font-body-large; }
-.p-small { @include font-body-small; }
+.p-large {
+  @include font-body-large;
+}
+.p-small {
+  @include font-body-small;
+}
 
 /* ------------------------------
    Form Typography (AEM Forms)
 ------------------------------ */
-
 
 main .form label,
 main .form fieldset.checkbox-group-wrapper legend,
@@ -103,11 +115,10 @@ main .form fieldset.radio-group-wrapper legend {
   color: var(--Text-Dark-Secondary, #666);
 }
 
-
 main .form .field-label {
   --form-label-color: var(--Text-Dark-Primary, #333);
   color: var(--form-label-color);
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   font-size: var(--Typography-Sizes-Components-Label, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Medium, 500);
@@ -133,7 +144,7 @@ main .form select {
   overflow: hidden;
   text-overflow: ellipsis;
 
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
   line-height: 24px;
@@ -146,7 +157,7 @@ main .form textarea.is-filled {
   color: var(--Text-Dark-Primary, #333);
   text-overflow: ellipsis;
 
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -162,7 +173,7 @@ main .form ::placeholder {
   overflow: hidden;
   color: var(--Text-Dark-Secondary, #666);
   text-overflow: ellipsis;
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -172,7 +183,7 @@ main .form ::placeholder {
 
 main .form .helper-text {
   color: var(--Text-Dark-Primary, #333);
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -185,7 +196,7 @@ main .form .helper-text {
 ------------------------------ */
 
 main .form .field-error {
-  color: var(--Feedback-Error, #C32030);
+  color: var(--Feedback-Error, #c32030);
   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -194,7 +205,7 @@ main .form .field-error {
 }
 
 main .form .field-validation-success {
-  color: var(--Feedback-Success, #007A4D);
+  color: var(--Feedback-Success, #007a4d);
   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);

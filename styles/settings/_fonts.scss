@@ -6,7 +6,7 @@
 */
 @use './breakpoints' as *;
 
-$font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+$font-family: 'Atkinson Hyperlegible Next', sans-serif;
 $size-font-base: 16px;
 
 /* Headings */
