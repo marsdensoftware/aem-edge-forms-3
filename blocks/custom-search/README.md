@@ -4,9 +4,9 @@ This document discusses two approaches to paging search results.
 
 We could implement paging logic ourselves in plain JavaScript. A complete working proof of concept of this can be made live by using the Universal Editor to add a "Custom Search" block to the edge-forms-oscar site in AEM. The PoC includes AJAX paging and optional infinite scroll but does not address some usability concerns.
 
-There are essentially zero obstacles to this approach; creating a model and block in AEM and adding code for that block works as intended. However, rven a simple feature like paging requires a significant amount of boilerplate. The more code we write, the more potential for errors - average bugs per line of code is usually roughly constant.
+There are essentially zero obstacles to this approach; creating a model and block in AEM and adding code for that block works as intended. However, even a simple feature like paging requires a significant amount of boilerplate. The more code we write, the more potential for errors - average bugs per line of code is usually roughly constant.
 
-In general, we should look at avoiding unecessary page renders by creating and managing DOM elements outside the page hierarchy and then adding them when they are ready. Specific to paging, depending on the scope of use, we may have to implement virtual paging to acheive high performance.
+In general, we should look at avoiding unnecessary page renders by creating and managing DOM elements outside the page hierarchy and then adding them when they are ready. Specific to paging, depending on the scope of use, we may have to implement virtual paging to achieve high performance.
 
 The new(ish) Observer API makes implementing basic infinite scroll fairly easy. It's not clear whether the use of a dummy element at the bottom of the page of a `:last-child` selector is better from a technical perspective.
 
@@ -30,7 +30,7 @@ Both of these options allow for anyone with authoring access in the UE to break 
 Further, this is not typically how React is used and is likely to cause compatibility issues with some React libraries. We would have to be careful to maintain the normal page flow with a combination of React and styling supported by AEM.
 
 
-We wouldn't be able to rely on the AEM workflow, we have to transpile JSX ahead of time in our own build step. This is not a signficant issue on its own, but it means that we have to find somewhere to inject an input map to allow each page to load React.
+We wouldn't be able to rely on the AEM workflow, we have to transpile JSX ahead of time in our own build step. This is not a significant issue on its own, but it means that we have to find somewhere to inject an input map to allow each page to load React.
 
 At the moment, injecting an import map into the AEM head HTML does not work - perhaps it is getting stripped. We need to find somewhere else to successfully inject this for a React-based approach to work.
 
