@@ -50,6 +50,8 @@
     "@aemforms/af-core": "0.22.121",
     "@aemforms/af-custom-functions": "1.0.14",
     "@aemforms/af-formatters": "0.22.121",
+    "@babel/cli": "^7.27.2",
+    "@babel/core": "^7.27.1",
     "@babel/eslint-parser": "7.25.9",
     "@babel/preset-react": "^7.27.1",
     "@testing-library/dom": "9.3.4",
