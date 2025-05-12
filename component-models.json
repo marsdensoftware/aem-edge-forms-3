@@ -5034,7 +5034,7 @@
     ]
   },
   {
-    "id": "customsearch",
+    "id": "reactsearch",
     "fields": [
       {
         "component": "text",
