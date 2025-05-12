@@ -1,7 +1,9 @@
 [
   {
     "id": "main",
-    "components": ["section"]
+    "components": [
+      "section"
+    ]
   },
   {
     "id": "section",
@@ -13,7 +15,6 @@
       "hero",
       "cards",
       "columns",
-      "customsearch",
       "fragment",
       "form",
       "embed-adaptive-form"
@@ -21,15 +22,24 @@
   },
   {
     "id": "cards",
-    "components": ["card", "button"]
+    "components": [
+      "card"
+    ]
   },
   {
     "id": "columns",
-    "components": ["column"]
+    "components": [
+      "column"
+    ]
   },
   {
     "id": "column",
-    "components": ["text", "image", "button", "title"]
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
   },
   {
     "id": "customsearch",
@@ -63,5 +73,9 @@
       "tnc",
       "wizard"
     ]
+  },
+  {
+    "id": "customsearch",
+    "components": null
   }
 ]

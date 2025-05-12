@@ -5032,5 +5032,17 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "customsearch",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Title",
+        "label": "Title",
+        "required": true
+      }
+    ]
   }
 ]
