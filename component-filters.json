@@ -1,7 +1,9 @@
 [
   {
     "id": "main",
-    "components": ["section"]
+    "components": [
+      "section"
+    ]
   },
   {
     "id": "section",
@@ -22,15 +24,24 @@
   },
   {
     "id": "cards",
-    "components": ["card"]
+    "components": [
+      "card"
+    ]
   },
   {
     "id": "columns",
-    "components": ["column"]
+    "components": [
+      "column"
+    ]
   },
   {
     "id": "column",
-    "components": ["text", "image", "button", "title"]
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
   },
   {
     "id": "form",
@@ -58,11 +69,7 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard",
-      "formhero",
-      "formoutputfield",
-      "formwelcome",
-      "formcontexttualhelp"
+      "wizard"
     ]
   },
   {
