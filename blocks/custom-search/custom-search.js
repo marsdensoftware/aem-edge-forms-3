@@ -77,9 +77,11 @@ async function renderSearch(pager, observer) {
         results = document.createElement('table');
         results.id = 'results';
         firstResults = true;
+        results.append(document.createElement('tbody'));
       }
+      const resultsBody = results.children[0];
       // TODO use DocumentFragment
-      results.append(...rows);
+      resultsBody.append(...rows);
 
       const newUrl = new URL(window.location.href);
       let updateUrl = false;
@@ -98,7 +100,7 @@ async function renderSearch(pager, observer) {
           oldWrapper.append(results);
         }
         document.getElementById('search').onclick = null;
-        observer.observe(document.querySelector('#results > tr:last-child'));
+        observer.observe(document.querySelector('#results > tbody > tr:last-child'));
       }
 
       const oldPageSize = newUrl.searchParams.get(pager.pageSizeArg);
