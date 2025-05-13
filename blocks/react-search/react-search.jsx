@@ -59,7 +59,7 @@ function ReactTestHeader() {
       <InfiniteScroll
         dataLength={total}
         next={() => {console.log('more'); }}
-        hasMore={pager.next() !== null}
+        hasMore={true}
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: 'center' }}>

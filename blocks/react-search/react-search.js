@@ -27827,7 +27827,7 @@ function ReactTestHeader() {
     next: function next() {
       console.log('more');
     },
-    hasMore: pager.next() !== null,
+    hasMore: true,
     loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Loading..."),
     endMessage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       style: {
