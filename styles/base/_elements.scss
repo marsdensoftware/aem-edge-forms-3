@@ -24,7 +24,8 @@ p {
   font-weight: 400;
 }
 
-ul {
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -78,7 +79,6 @@ a {
   box-shadow: none;
   text-decoration: underline;
   transition: all 0.2s ease-in-out;
-
 
   &:hover,
   &:active {
