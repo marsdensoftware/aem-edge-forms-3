@@ -1,4 +1,5 @@
 /* eslint-disable */
+var react_search;
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -27304,7 +27305,7 @@ function _decorate() {
 }
 })();
 
-exports["react-search"] = __webpack_exports__;
+react_search = __webpack_exports__;
 /******/ })()
 ;
 //# sourceMappingURL=react-search.js.map
