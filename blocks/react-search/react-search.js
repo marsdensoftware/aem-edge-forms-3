@@ -27816,9 +27816,11 @@ function ReactTestHeader() {
       key: row.id
     }, Object.entries(row).map(function (_ref2) {
       var _ref3 = _slicedToArray(_ref2, 2),
-        _ = _ref3[0],
+        name = _ref3[0],
         value = _ref3[1];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, _typeof(value) !== 'object' ? value : JSON.stringify(value));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        key: name
+      }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
     }));
   }))));
 }
@@ -27850,11 +27852,10 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('adding html!');
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
-        case 10:
+        case 9:
         case "end":
           return _context2.stop();
       }

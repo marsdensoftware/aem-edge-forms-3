@@ -59,7 +59,7 @@ function ReactTestHeader() {
         <table>
           <tbody>
             {results.map((row) => <tr key={row.id}>{
-              Object.entries(row).map(([_, value]) => <td>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+              Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
             }</tr>)}
           </tbody>
         </table>}
@@ -92,8 +92,6 @@ export default async function decorate(block) {
 
   div0.append(div1);
   block.append(div0);
-
-  console.log('adding html!');
 
   const domNode = document.getElementById('test-root');
   const root = createRoot(domNode);
