@@ -20,17 +20,20 @@ async function searchResults(pager) {
 function ReactTestHeader() {
   const [results, setResults] = useState([]);
   const [total, setTotal] = useState(null);
+  let offset = 0;
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
   //},
 
-  const nextPage = function(pager) {
-    return (pager.total !== null && pager.offset + pager.pageSize < pager.total)
-      ? pager.offset + pager.pageSize : null;
+  // TODO make pager extend react.component or make separate usestate vars for parts
+
+  const nextPage = function(total, offset, pageSize) {
+    return (total !== null && offset + pageSize < total)
+      ? offset + pageSize : null;
   };
 
-  const [pager, setPager] = useState({
+  const pager = {
     loading: false,
 
     infinite: false,
@@ -44,19 +47,19 @@ function ReactTestHeader() {
 
     total: null,
     // TODO clamp?
-  });
+  };
 
   const search = async () => {
-    const newResults = searchResults(pager);
+    const newResults = searchResults({pager, total: total, offset: offset});
     //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
     setTotal(newResults.total);
   };
 
-  useEffect(async () => {
+  /*useEffect(async () => {
     console.log('useEffect fired', pager);
     await search();
-  }, [pager]);
+  }, [pager]);*/
 
   return (
     <div>
@@ -68,12 +71,11 @@ function ReactTestHeader() {
       <InfiniteScroll
         dataLength={total}
         next={async () => {
-          const next = nextPage(pager);
+          const next = nextPage(total, offset, pager.pageSize);
           console.log('more?:', next);
           if (next !== null) {
-            const newPager = {...pager, offset: next};
-            setPager(newPager);
-            console.log('try to load', newPager, pager);
+            offset = next;
+            await searchResults();
           }
         }}
         hasMore={true}
