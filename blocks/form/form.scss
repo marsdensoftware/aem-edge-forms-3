@@ -1,5 +1,8 @@
 @use '../../styles/settings' as *;
 @use '../../styles/components/buttons' as *;
+/// AEM DEFAULT FORM STYLE
+/// FURTHER DEVELOPMENT SHOULD BE IN /styles/base/_forms.scss
+/// This can be commented out if interfering with our own custom styles
 
 // :root {
 //   --background-color-primary: #fff;
