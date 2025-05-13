@@ -27822,7 +27822,7 @@ function ReactTestHeader() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button",
     onClick: search
-  }, "React Search"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
     next: function next() {
       console.log('more');
@@ -27834,7 +27834,7 @@ function ReactTestHeader() {
         textAlign: 'center'
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
-  }, results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: row.id
     }, Object.entries(row).map(function (_ref2) {

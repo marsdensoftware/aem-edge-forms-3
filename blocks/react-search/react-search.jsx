@@ -56,6 +56,7 @@ function ReactTestHeader() {
       <label>Total</label>
       <p>{total}</p>
       <button type="button" onClick={search}>React Search</button>
+      {results &&
       <InfiniteScroll
         dataLength={total}
         next={() => {console.log('more'); }}
@@ -67,15 +68,14 @@ function ReactTestHeader() {
           </p>
         }
       >
-        {results &&
-          <table>
-            <tbody>
-              {results.map((row) => <tr key={row.id}>{
-                Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-              }</tr>)}
-            </tbody>
-          </table>}
-      </InfiniteScroll>
+        <table>
+          <tbody>
+            {results.map((row) => <tr key={row.id}>{
+              Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+            }</tr>)}
+          </tbody>
+        </table>
+      </InfiniteScroll>}
     </div>
   );
 }
