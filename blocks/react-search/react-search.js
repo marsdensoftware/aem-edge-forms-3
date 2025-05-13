@@ -27812,7 +27812,10 @@ function ReactTestHeader() {
     type: "button",
     onClick: search
   }, "React Search"), results.map(function (row) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, row.map(function (_ref2) {
+    {
+      console.log(row);
+    }
+    /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, Object.entries(row).map(function (_ref2) {
       var _ref3 = _slicedToArray(_ref2, 2),
         _ = _ref3[0],
         value = _ref3[1];

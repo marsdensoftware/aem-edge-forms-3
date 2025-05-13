@@ -53,7 +53,10 @@ function ReactTestHeader() {
     <div>
       <h1>Hello from React!</h1>
       <button type="button" onClick={search}>React Search</button>
-      {results.map((row) => <tr>{row.map(([_, value]) => <td>value/</td>)}</tr>)}
+      {results.map((row) => { {console.log(row);} <tr>{
+        Object.entries(row).map(([_, value]) => <td>value/</td>)
+      }</tr>}
+      )}
     </div>
   );
 }
