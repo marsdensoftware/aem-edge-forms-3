@@ -1,21 +1,36 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 // eslint-disable-next-line no-unused-vars
 function ReactTestHeader() {
+  const [results, setResults] = useState([]);
+  const [total, setTotal] = useState(null);
+
+  const search = async () => {
+    const newResults = await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error(`Received: ${r.status}`);
+        }
+        return r.json();
+      })
+      .catch((e) => console.log(`Error: ${e.message}`));
+    setResults(newResults.users);
+    setTotal(newResults.total);
+  };
+
   return (
     <div>
       <h1>Hello from React!</h1>
-      <button type="button">React Search</button>
+      <button type="button" onClick={search}>React Search</button>
+      {results.map((row) => <tr>{row.map(([_, value]) => <td>value/</td>)}</tr>)}
     </div>
   );
 }
-
-
 
 function Scroll() {
   <InfiniteScroll
