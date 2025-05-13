@@ -45,6 +45,7 @@ function ReactTestHeader() {
         return r.json();
       })
       .catch((e) => console.log(`Error: ${e.message}`));
+    pager.total = newResults.total;
     setResults(newResults.users);
     setTotal(newResults.total);
   };

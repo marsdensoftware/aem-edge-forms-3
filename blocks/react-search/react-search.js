@@ -27796,9 +27796,10 @@ function ReactTestHeader() {
             });
           case 2:
             newResults = _context.sent;
+            pager.total = newResults.total;
             setResults(newResults.users);
             setTotal(newResults.total);
-          case 5:
+          case 6:
           case "end":
             return _context.stop();
         }
