@@ -67,6 +67,11 @@ fieldset {
 
   label {
     @extend %label-common-style;
+
+    &::before {
+      background-image: none;
+      transition: all 0.1s ease-in-out;
+    }
   }
 
   input[type='checkbox'] {
@@ -106,12 +111,9 @@ fieldset {
     @extend %label-common-style;
     position: relative;
 
+    &:focus,
     &::before,
     &::after {
-      border-radius: $border-radius-round;
-    }
-
-    &:focus {
       border-radius: $border-radius-round;
     }
   }
