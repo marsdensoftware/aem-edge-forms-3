@@ -27288,7 +27288,7 @@ function _decorate() {
           div0.append(div1, p);
           block.append(div0);
           console.log('adding html!');
-          domNode = div1; // document.getElementById('test-root');
+          domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(domNode);
           root.render(/*#__PURE__*/React.createElement(ReactTestHeader, null));
         case 13:
