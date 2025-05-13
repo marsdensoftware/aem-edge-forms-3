@@ -27830,23 +27830,24 @@ function ReactTestHeader() {
   }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
     next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var next;
+      var next, newPager;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             next = nextPage(pager);
             console.log('more?:', next);
             if (!(next !== null)) {
-              _context2.next = 7;
+              _context2.next = 8;
               break;
             }
-            setPager(_objectSpread(_objectSpread({}, pager), {}, {
+            newPager = _objectSpread(_objectSpread({}, pager), {}, {
               offset: next
-            }));
-            console.log('try to load', pager);
-            _context2.next = 7;
+            });
+            setPager(newPager);
+            console.log('try to load', newPager, pager);
+            _context2.next = 8;
             return search();
-          case 7:
+          case 8:
           case "end":
             return _context2.stop();
         }

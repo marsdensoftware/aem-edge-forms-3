@@ -62,8 +62,9 @@ function ReactTestHeader() {
           const next = nextPage(pager);
           console.log('more?:', next);
           if (next !== null) {
-            setPager({...pager, offset: next});
-            console.log('try to load', pager);
+            const newPager = {...pager, offset: next};
+            setPager(newPager);
+            console.log('try to load', newPager, pager);
             await search();
           }
         }}
