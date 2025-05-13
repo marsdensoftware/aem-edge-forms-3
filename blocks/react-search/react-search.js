@@ -27274,7 +27274,7 @@ function decorate(_x) {
 }
 function _decorate() {
   _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(block) {
-    var div0, div1, p;
+    var div0, div1, p, domNode, root;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -27288,11 +27288,10 @@ function _decorate() {
           div0.append(div1, p);
           block.append(div0);
           console.log('adding html!');
-
-          /*const domNode = div1;// document.getElementById('test-root');
-          const root = createRoot(domNode);
-          root.render(<ReactTestHeader />);*/
-        case 10:
+          domNode = div1; // document.getElementById('test-root');
+          root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(domNode);
+          root.render(/*#__PURE__*/React.createElement(ReactTestHeader, null));
+        case 13:
         case "end":
           return _context.stop();
       }

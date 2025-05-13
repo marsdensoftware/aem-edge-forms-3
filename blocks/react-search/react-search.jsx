@@ -23,7 +23,7 @@ export default async function decorate(block) {
   console.log('adding html!');
 
 
-  /*const domNode = div1;// document.getElementById('test-root');
+  const domNode = div1;// document.getElementById('test-root');
   const root = createRoot(domNode);
-  root.render(<ReactTestHeader />);*/
+  root.render(<ReactTestHeader />);
 }
