@@ -27818,7 +27818,7 @@ function ReactTestHeader() {
       var _ref3 = _slicedToArray(_ref2, 2),
         _ = _ref3[0],
         value = _ref3[1];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, "value/");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, value);
     }));
   }))));
 }
