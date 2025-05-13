@@ -19,9 +19,13 @@ export default function decorate(fieldDiv, fieldJson) {
         console.log('Form is available:', form);
         const field = form.getElement(fieldJson.id);
         if (field) {
-            field.subscribe((e) => {
-                // Subscribe to field change event
-
+            // Subscribe to field change event
+            field.subscribe((payload) => {
+                const { changes, field: fieldModel } = payload;
+                const {
+                    id, name, fieldType, ':type': componentType, readOnly, type, displayValue, displayFormat, displayValueExpression,
+                    activeChild,
+                } = fieldModel;
             }, 'fieldChanged');
         }
     });
