@@ -45,7 +45,7 @@ function ReactTestHeader() {
       })
       .catch((e) => console.log(`Error: ${e.message}`));
     setPager({...pager, total: newResults.total});
-    setResults(newResults.users);
+    setResults([...results.concat(newResults.users)]);
     setTotal(newResults.total);
   };
 
