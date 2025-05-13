@@ -1,6 +1,6 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -48,6 +48,10 @@ function ReactTestHeader() {
     setResults([...results.concat(newResults.users)]);
     setTotal(newResults.total);
   };
+
+  useEffect(() => {
+    console.log('useEffect fired', pager);
+  }, [pager]);
 
   return (
     <div>
