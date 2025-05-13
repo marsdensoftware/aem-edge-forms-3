@@ -52,10 +52,12 @@ function ReactTestHeader() {
   return (
     <div>
       <h1>Hello from React!</h1>
+      <label>Total</label>
+      <p>{total}</p>
       <button type="button" onClick={search}>React Search</button>
-      {results.map((row) => { {console.log(row);} <tr>{
-        Object.entries(row).map(([_, value]) => <td>value/</td>)
-      }</tr>}
+      {results.map((row) => <tr>{
+        Object.entries(row).map(([_, value]) => {console.log(row, value); <td>value/</td>})
+      }</tr>
       )}
     </div>
   );

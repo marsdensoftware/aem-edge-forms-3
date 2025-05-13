@@ -27808,18 +27808,16 @@ function ReactTestHeader() {
       return _ref.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button",
     onClick: search
   }, "React Search"), results.map(function (row) {
-    {
-      console.log(row);
-    }
-    /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, Object.entries(row).map(function (_ref2) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, Object.entries(row).map(function (_ref2) {
       var _ref3 = _slicedToArray(_ref2, 2),
         _ = _ref3[0],
         value = _ref3[1];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, "value/");
+      console.log(row, value);
+      /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, "value/");
     }));
   }));
 }
