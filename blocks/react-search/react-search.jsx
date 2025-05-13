@@ -59,10 +59,7 @@ function ReactTestHeader() {
         <table>
           <tbody>
             {results.map((row) => <tr key={row.id}>{
-              Object.entries(row).map(([_, value]) => {
-                console.log(row, value);
-                <td>value/</td>
-              })
+              Object.entries(row).map(([_, value]) => <td>value/</td>)
             }</tr>)}
           </tbody>
         </table>}
