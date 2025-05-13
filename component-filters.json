@@ -69,7 +69,11 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard"
+      "wizard",
+      "formhero",
+      "formoutputfield",
+      "formwelcome",
+      "formcontexttualhelp"
     ]
   },
   {

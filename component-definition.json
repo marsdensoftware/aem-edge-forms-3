@@ -548,6 +548,22 @@
           }
         },
         {
+          "title": "Form Output Field",
+          "id": "formoutputfield",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Form Output Field",
+                  "fieldType": "text-input",
+                  "fd:viewType": "formoutputfield"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {
