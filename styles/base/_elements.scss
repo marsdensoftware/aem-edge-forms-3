@@ -24,7 +24,8 @@ p {
   font-weight: 400;
 }
 
-ul {
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -62,14 +63,10 @@ picture {
 
 a,
 button {
+  @extend %state-focus;
   display: inline-block;
   cursor: pointer;
   font-weight: 400;
-
-  &:focus {
-    box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-focus-state;
-    outline: 3px solid transparent;
-  }
 }
 
 a {
@@ -78,7 +75,6 @@ a {
   box-shadow: none;
   text-decoration: underline;
   transition: all 0.2s ease-in-out;
-
 
   &:hover,
   &:active {

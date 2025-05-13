@@ -2,17 +2,28 @@
       Main colour
 *************************/
 // Brand Colours
-$color-primary: #017ac9;
-$color-primary-navy: #134276;
-$color-primary-dark-navy: #162c45;
-$color-secondary-teal: #35c0ba;
-$color-secondary-accessible-teal: #23807b;
-$color-secondary-salmon: #f75c58;
-$color-secondary-purple: #3a54a1;
-$color-tertiary-green: #06b271;
-$color-tertiary-green-light: #e0f0de;
-$color-tertiary-grey: #696969;
+
+// Primary Colours
+$color-primary: #017ac9; // MSD Blue
+
+// Primary Supporting
+$color-primary-navy: #134276;      // MSD Navy
+$color-primary-dark-navy: #162c45; // MSD Dark Navy
+
+// Secondary Colours
+$color-secondary-teal: #35c0ba;             // MSD Teal
+$color-secondary-accessible-teal: #23807b;  // Accessible Teal
+$color-secondary-salmon: #f75c58;           // MSD Salmon
+$color-secondary-purple: #3a54a1;           // MSD Purple
+
+// Tertiary Colours
+$color-tertiary-green: #06b271;         // MSD Green
+$color-tertiary-green-light: #e0f0de;   // MSD Green light
+$color-tertiary-grey: #696969;          // MSD Grey
+
+// Focus State
 $color-focus-state: #b53cde;
+
 
 // Neutral Colours
 $color-grey-black-05: #f2f2f2;
@@ -29,6 +40,20 @@ $color-feedback-green: #388314;
 $color-feedback-orange: #fa7f14;
 $color-feedback-red: #d03633;
 $color-feedback-pink: #b53cde;
+
+// Shades Navy
+$color-shade-navy-60: #718ead;
+$color-shade-navy-45: #95aac1;
+$color-shade-navy-40: #a1b3c8;
+$color-shade-navy-30: #b8c6d6;
+$color-shade-navy-20: #d0d9e4;
+
+// Shades Blue
+$color-shade-blue-60: #67afdf;
+$color-shade-blue-40: #99cae9;
+$color-shade-blue-25: #bfdef1;
+$color-shade-blue-10: #e6f2fa;
+$color-shade-blue-04: #f5fafd;
 
 // To animate button background colour
 $color-primary-animated: linear-gradient(
