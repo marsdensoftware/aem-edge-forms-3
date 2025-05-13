@@ -55,32 +55,28 @@ function ReactTestHeader() {
       <label>Total</label>
       <p>{total}</p>
       <button type="button" onClick={search}>React Search</button>
-      {results &&
-        <table>
-          <tbody>
-            {results.map((row) => <tr key={row.id}>{
-              Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-            }</tr>)}
-          </tbody>
-        </table>}
+      <InfiniteScroll
+        dataLength={total}
+        next={fetchData}
+        hasMore={pager.next() !== null}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        {results &&
+          <table>
+            <tbody>
+              {results.map((row) => <tr key={row.id}>{
+                Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+              }</tr>)}
+            </tbody>
+          </table>}
+      </InfiniteScroll>
     </div>
   );
-}
-
-function Scroll() {
-  <InfiniteScroll
-    dataLength={items.length}
-    next={fetchData}
-    hasMore={true}
-    loader={<h4>Loading...</h4>}
-    endMessage={
-      <p style={{ textAlign: 'center' }}>
-        <b>Yay! You have seen it all</b>
-      </p>
-    }
-  >
-    {items}
-  </InfiniteScroll>
 }
 
 export default async function decorate(block) {

@@ -13,7 +13,6 @@ function searchResultsAsRows(jsonResults) {
     const row = document.createElement('tr');
 
     Object.entries(resultRow)
-      .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
       .forEach(([_, value]) => {
         const elem = document.createElement('td');
         elem.innerText = typeof value !== 'object' ? value : JSON.stringify(value);
