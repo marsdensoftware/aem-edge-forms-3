@@ -116,15 +116,15 @@ main .form > div:not(:first-child) {
 //   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 // }
 
-main .form form fieldset {
-  border: var(--form-fieldset-border);
-  margin: var(--form-fieldset-marign);
-  width: 100%;
-}
+// main .form form fieldset {
+//   border: var(--form-fieldset-border);
+//   margin: var(--form-fieldset-marign);
+//   width: 100%;
+// }
 
-main .form form fieldset fieldset {
-  padding: 0;
-}
+// main .form form fieldset fieldset {
+//   padding: 0;
+// }
 
 main .form .field-description {
   color: var(--form-label-color);
@@ -149,9 +149,9 @@ main .form form .field-invalid .field-description {
    * Required field indicator not required for checkboxes and radio buttons
    */
 //  .checkbox-wrapper > label::after
-.radio-wrapper > label::after {
-  content: none;
-}
+// .radio-wrapper > label::after {
+//   content: none;
+// }
 
 // main .form form .checkbox-wrapper.field-invalid {
 //   flex-wrap: wrap;
@@ -179,36 +179,36 @@ main .form select {
 }
 
 // main .form input:hover,
-main .form select:hover {
-  border-color: rgb(90 92 96);
-}
+// main .form select:hover {
+//   border-color: rgb(90 92 96);
+// }
 
-main .form input:disabled {
-  background-color: var(--form-input-disable-color);
-}
+// main .form input:disabled {
+//   background-color: var(--form-input-disable-color);
+// }
 
 // main .form form .checkbox-wrapper.field-invalid > input
 
-main .form form .radio-wrapper.field-invalid > input {
-  outline: 1px solid var(--form-error-color);
-}
+// main .form form .radio-wrapper.field-invalid > input {
+//   outline: 1px solid var(--form-error-color);
+// }
 
-main .form input[type='file'] {
-  border: none;
-  padding-inline-start: 0;
-  background: unset;
-  color: unset;
-}
+// main .form input[type='file'] {
+//   border: none;
+//   padding-inline-start: 0;
+//   background: unset;
+//   color: unset;
+// }
 
 // main .form input[type='checkbox'],
-main .form input[type='radio'] {
-  width: 16px;
-  height: 16px;
-  flex: none;
-  margin: 0;
-  position: static;
-  z-index: 1;
-}
+// main .form input[type='radio'] {
+//   width: 16px;
+//   height: 16px;
+//   flex: none;
+//   margin: 0;
+//   position: static;
+//   z-index: 1;
+// }
 
 main .form textarea {
   min-height: 100px;
@@ -225,33 +225,33 @@ main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
 }
 
 // main .form label,
-main .form fieldset.checkbox-group-wrapper legend,
-main .form fieldset.radio-group-wrapper legend {
-  font-weight: var(--form-label-font-weight);
-  font-size: var(--form-label-font-size);
-  color: var(--form-label-color);
-}
+// main .form fieldset.checkbox-group-wrapper legend,
+// main .form fieldset.radio-group-wrapper legend {
+//   font-weight: var(--form-label-font-weight);
+//   font-size: var(--form-label-font-size);
+//   color: var(--form-label-color);
+// }
 
-main .form form .wizard > legend {
-  width: 100%;
-}
+// main .form form .wizard > legend {
+//   width: 100%;
+// }
 
-main .form form fieldset.checkbox-group-wrapper,
-main .form form fieldset.radio-group-wrapper {
-  padding-left: 0;
-  margin-left: 0;
-}
+// main .form form fieldset.checkbox-group-wrapper,
+// main .form form fieldset.radio-group-wrapper {
+//   padding-left: 0;
+//   margin-left: 0;
+// }
 
-main .form form fieldset.checkbox-group-wrapper > legend,
-main .form form fieldset.radio-group-wrapper > legend {
-  padding-left: 0;
-}
+// main .form form fieldset.checkbox-group-wrapper > legend,
+// main .form form fieldset.radio-group-wrapper > legend {
+//   padding-left: 0;
+// }
 
-main .form label.required::after {
-  content: '*';
-  color: var(--form-label-color);
-  padding-inline-start: 5px;
-}
+// main .form label.required::after {
+//   content: '*';
+//   color: var(--form-label-color);
+//   padding-inline-start: 5px;
+// }
 
 // main .form form p,
 // main .form form .repeat-wrapper,
@@ -269,23 +269,23 @@ main .form label.required::after {
 // }
 
 // main .form form .checkbox-wrapper,
-main .form form .radio-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0;
-  gap: 8px;
-}
+// main .form form .radio-wrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-items: center;
+//   margin: 0;
+//   gap: 8px;
+// }
 
 // main .form form fieldset > .checkbox-wrapper {
-main .form form fieldset > .radio-wrapper {
-  margin-left: var(--form-field-gap);
-}
+// main .form form fieldset > .radio-wrapper {
+//   margin-left: var(--form-field-gap);
+// }
 
-// main .form .checkbox-wrapper label
-main .form .radio-wrapper label {
-  flex-basis: calc(100% - 24px);
-}
+// // main .form .checkbox-wrapper label
+// main .form .radio-wrapper label {
+//   flex-basis: calc(100% - 24px);
+// }
 
 // main .form fieldset.link .checkbox-wrapper label {
 //   flex-basis: unset;
@@ -417,27 +417,27 @@ main .form .form-image-wrapper img {
 
 /* For cards with icons or images */
 // main .form form fieldset.cards > .checkbox-wrapper > label > img
-main .form form fieldset.cards > .radio-wrapper > label > img {
-  max-width: 18px;
-  max-height: 18px;
-  object-fit: contain;
-}
+// main .form form fieldset.cards > .radio-wrapper > label > img {
+//   max-width: 18px;
+//   max-height: 18px;
+//   object-fit: contain;
+// }
 
 /* Responsive adjustments for cards */
 // main .form form fieldset.cards > .checkbox-wrapper
 @media (width <= 768px) {
-  main .form form fieldset.cards > .radio-wrapper {
-    min-width: 100%;
-  }
+  // main .form form fieldset.cards > .radio-wrapper {
+  //   min-width: 100%;
+  // }
 
   main .form form fieldset.cards.horizontal {
     flex-wrap: wrap;
   }
 
   // main .form form fieldset.cards.horizontal > .checkbox-wrapper
-  main .form form fieldset.cards.horizontal > .radio-wrapper {
-    min-width: 100%;
-  }
+  // main .form form fieldset.cards.horizontal > .radio-wrapper {
+  //   min-width: 100%;
+  // }
 }
 
 input::file-selector-button {
@@ -797,19 +797,19 @@ main .form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-main .form form .radio-group-wrapper.horizontal,
-main .form form .checkbox-group-wrapper.horizontal {
-  display: flex;
-  flex-flow: row wrap;
-  gap: inherit;
-}
+// main .form form .radio-group-wrapper.horizontal,
+// main .form form .checkbox-group-wrapper.horizontal {
+//   display: flex;
+//   flex-flow: row wrap;
+//   gap: inherit;
+// }
 
-main .form form .radio-group-wrapper.horizontal .field-description,
-main .form form .checkbox-group-wrapper.horizontal .field-description {
-  width: 100%;
-  order: 1;
-  margin-top: 0.5rem;
-}
+// main .form form .radio-group-wrapper.horizontal .field-description,
+// main .form form .checkbox-group-wrapper.horizontal .field-description {
+//   width: 100%;
+//   order: 1;
+//   margin-top: 0.5rem;
+// }
 
 // main div.form-wrapper {
 //   background: white;
@@ -818,16 +818,16 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
 // }
 
 /* Responsive adjustments for mobile */
-@media (width <= 599px) {
-  :root {
-    --form-field-horz-gap: 10px;
-  }
+// @media (width <= 599px) {
+//   :root {
+//     --form-field-horz-gap: 10px;
+//   }
 
-  main .form form .wizard {
-    .wizard-menu-items {
-      gap: 20px;
-    }
+//   main .form form .wizard {
+//     .wizard-menu-items {
+//       gap: 20px;
+//     }
 
-    margin: 0;
-  }
-}
+//     margin: 0;
+//   }
+// }

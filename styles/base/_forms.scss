@@ -6,6 +6,10 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
+fieldset {
+  border: 0;
+}
+
 // Not sure what is this
 .cmp-form {
   display: flex;
@@ -21,40 +25,48 @@ input[type='checkbox'] {
   }
 }
 
+%label-common-style {
+  @extend %state-focus;
+  color: $text-secondary;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    margin-right: $spacing-200;
+    display: block;
+    width: 26px;
+    height: 26px;
+    border: 2px solid $color-shade-navy-45;
+  }
+
+  &::before {
+    border-radius: $border-radius-mid;
+  }
+
+  &:hover {
+    color: $text-primary;
+
+    &::before {
+      border: 2px solid $stroke-accent;
+    }
+  }
+}
+
 // TODO: as this grew bigger, could potentially break up into it's own file
 // IE: _checkboxes.scss, _radios.scss
-/*
-  Checkbox
-*/
+
+/********************
+      CHECKBOX
+********************/
 .checkbox-wrapper {
   display: flex;
   align-items: center;
 
   label {
-    @extend %state-focus;
-    color: $text-secondary;
-    font-size: 20px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-
-    &::before {
-      content: '';
-      margin-right: $spacing-200;
-      display: block;
-      width: 26px;
-      height: 26px;
-      border: 2px solid $color-shade-navy-45;
-      border-radius: $border-radius-mid;
-    }
-
-    &:hover {
-      color: $text-primary;
-
-      &::before {
-        border: 2px solid $stroke-accent;
-      }
-    }
+    @extend %label-common-style;
   }
 
   input[type='checkbox'] {
@@ -73,6 +85,59 @@ input[type='checkbox'] {
           background-position: center;
           background-repeat: no-repeat;
           background-size: contain;
+        }
+      }
+    }
+  }
+}
+
+/********************
+      RADIO
+********************/
+
+.radio-group-wrapper {
+  display: flex;
+}
+
+.radio-wrapper {
+  display: flex;
+
+  label {
+    @extend %label-common-style;
+    position: relative;
+
+    &::before,
+    &::after {
+      border-radius: $border-radius-round;
+    }
+
+    &:focus {
+      border-radius: $border-radius-round;
+    }
+  }
+
+  input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+
+    &:checked {
+      + label {
+        color: $text-primary;
+
+        &::before {
+          border-color: $stroke-accent;
+        }
+
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          left: 1px;
+          top: 1px;
+          width: 12px;
+          height: 12px;
+          border: 8px solid $stroke-accent;
         }
       }
     }
