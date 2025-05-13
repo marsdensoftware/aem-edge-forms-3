@@ -34,7 +34,7 @@ function ReactTestHeader() {
     },
   };
 
-  const pager = Object.create(Pager);
+  const [pager, setPager] = useState(Object.create(Pager));
 
   const search = async () => {
     const newResults = await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
@@ -45,7 +45,7 @@ function ReactTestHeader() {
         return r.json();
       })
       .catch((e) => console.log(`Error: ${e.message}`));
-    pager.total = newResults.total;
+    setPager({...pager, total: newResults.total});
     setResults(newResults.users);
     setTotal(newResults.total);
   };
