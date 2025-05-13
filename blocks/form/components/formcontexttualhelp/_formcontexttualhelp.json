@@ -75,6 +75,9 @@
     }
   ],
   "filters": [
-      "text"
+    {
+      "id": "formcontexttualhelp",
+      "components": null
+    }
   ]
 }

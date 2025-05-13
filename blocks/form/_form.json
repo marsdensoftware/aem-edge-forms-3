@@ -198,6 +198,9 @@
         "tnc",
         "wizard"
       ]
+    },
+    {
+      "...": "./components/formcontexttualhelp/_*.json#/filters"
     }
   ]
 }
