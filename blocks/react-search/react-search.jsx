@@ -5,6 +5,17 @@ import { createRoot } from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+async function searchResults(pager) {
+  return await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
+    .then((r) => {
+      if (!r.ok) {
+        throw new Error(`Received: ${r.status}`);
+      }
+      return r.json();
+    })
+    .catch((e) => console.log(`Error: ${e.message}`));
+}
+
 // eslint-disable-next-line no-unused-vars
 function ReactTestHeader() {
   const [results, setResults] = useState([]);
@@ -36,21 +47,15 @@ function ReactTestHeader() {
   });
 
   const search = async () => {
-    const newResults = await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error(`Received: ${r.status}`);
-        }
-        return r.json();
-      })
-      .catch((e) => console.log(`Error: ${e.message}`));
-    setPager({...pager, total: newResults.total});
+    const newResults = searchResults(pager);
+    //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
     setTotal(newResults.total);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     console.log('useEffect fired', pager);
+    await search();
   }, [pager]);
 
   return (
@@ -69,7 +74,6 @@ function ReactTestHeader() {
             const newPager = {...pager, offset: next};
             setPager(newPager);
             console.log('try to load', newPager, pager);
-            await search();
           }
         }}
         hasMore={true}
