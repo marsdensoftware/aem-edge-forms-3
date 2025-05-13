@@ -59,10 +59,11 @@ function ReactTestHeader() {
       <InfiniteScroll
         dataLength={total}
         next={async () => {
-          console.log('more?');
           const next = nextPage(pager);
+          console.log('more?:', next);
           if (next !== null) {
             setPager({...pager, offset: next});
+            console.log('try to load', pager);
             await search();
           }
         }}

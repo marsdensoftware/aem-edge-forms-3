@@ -27830,18 +27830,19 @@ function ReactTestHeader() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            console.log('more?');
             next = nextPage(pager);
+            console.log('more?:', next);
             if (!(next !== null)) {
-              _context2.next = 6;
+              _context2.next = 7;
               break;
             }
             setPager(_objectSpread(_objectSpread({}, pager), {}, {
               offset: next
             }));
-            _context2.next = 6;
+            console.log('try to load', pager);
+            _context2.next = 7;
             return search();
-          case 6:
+          case 7:
           case "end":
             return _context2.stop();
         }
