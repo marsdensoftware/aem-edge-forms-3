@@ -27761,6 +27761,24 @@ function ReactTestHeader() {
     _useState4 = _slicedToArray(_useState3, 2),
     total = _useState4[0],
     setTotal = _useState4[1];
+  var Pager = {
+    loading: false,
+    infinite: false,
+    infiniteArg: 'infinite',
+    offset: 0,
+    offsetArg: 'skip',
+    pageSize: 10,
+    pageSizeArg: 'limit',
+    total: null,
+    // TODO clamp?
+    prev: function prev() {
+      return this.offset > 0 ? this.offset - this.pageSize : null;
+    },
+    next: function next() {
+      return this.total !== null && this.offset + this.pageSize < this.total ? this.offset + this.pageSize : null;
+    }
+  };
+  var pager = Object.create(Pager);
   var search = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var newResults;

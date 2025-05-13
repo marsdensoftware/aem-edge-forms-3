@@ -10,6 +10,32 @@ function ReactTestHeader() {
   const [results, setResults] = useState([]);
   const [total, setTotal] = useState(null);
 
+  const Pager = {
+    loading: false,
+
+    infinite: false,
+    infiniteArg: 'infinite',
+
+    offset: 0,
+    offsetArg: 'skip',
+
+    pageSize: 10,
+    pageSizeArg: 'limit',
+
+    total: null,
+    // TODO clamp?
+    prev() {
+      return this.offset > 0 ? this.offset - this.pageSize : null;
+    },
+
+    next() {
+      return (this.total !== null && this.offset + this.pageSize < this.total)
+        ? this.offset + this.pageSize : null;
+    },
+  };
+
+  const pager = Object.create(Pager);
+
   const search = async () => {
     const newResults = await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
       .then((r) => {
