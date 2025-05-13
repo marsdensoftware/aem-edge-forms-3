@@ -1,0 +1,63 @@
+{
+    "definitions": [
+        {
+            "title": "Job Seeker Intro",
+            "id": "jobseekerintro",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/block/v1/block",
+                        "template": {
+                            "name": "Job Seeker Intro",
+                            "model": "jobseekerintro",
+                            "jobseekerintroText_titleType": "h2",
+                            "jobseekerintroText_title": "<h2>Let's set up your jobseeker profile!</h2>",
+                            "jobseekerintroText_description": "<p>Tell us what kind of work you're after, and any skills or experience you have. You can save and exit anytime — or come back and update your profile later.</p>"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "jobseekerintro",
+            "fields": [
+                {
+                    "component": "reference",
+                    "valueType": "string",
+                    "name": "image",
+                    "label": "Logo",
+                    "multi": false
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "imageAlt",
+                    "label": "Logo alt text",
+                    "required": true
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "jobseekerintroText_title",
+                    "label": "Title",
+                    "required": true
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "jobseekerintroText_description",
+                    "label": "Description",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "filters": [
+        {
+            "id": "jobseekerintro",
+            "components": null
+        }
+    ]
+}

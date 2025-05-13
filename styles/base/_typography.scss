@@ -1,0 +1,66 @@
+/*
+    Various typography classes helpers
+    Can be in Utils.scss?
+*/
+@use '../settings' as *;
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family;
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  @include heading-level-1;
+}
+
+h2 {
+  @include heading-level-2;
+}
+
+h3 {
+  @include heading-level-3;
+}
+
+h4 {
+  @include heading-level-4;
+}
+
+h5 {
+  @include heading-level-5;
+}
+
+h6 {
+  @include heading-level-6;
+}
+
+p {
+  @include font-body-default;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 28px;
+  line-height: 130%;
+}
+
+.strap-title {
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+/* Paragraph Variants */
+.p-large {
+  @include font-body-large;
+}
+
+.p-small {
+  @include font-body-small;
+}

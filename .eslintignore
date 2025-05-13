@@ -6,3 +6,5 @@ blocks/form/rules/functions.js
 scripts/editor-support.js
 scripts/editor-support-rte.js
 /test
+blocks/**/*.js
+scripts/**/*.js

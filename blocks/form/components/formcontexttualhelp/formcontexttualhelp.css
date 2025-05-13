@@ -1,0 +1,13 @@
+.panel-formcontexttualhelp {
+    background-color: #F2F2F2;
+}
+
+.panel-formcontexttualhelp .panel-formcontextualhelp__icon {
+    content: url('info-icon.png');
+    width: 24px;
+}
+
+.panel-formcontexttualhelp .panel-formcontextualhelp__footer__link-icon {
+    content: url('external-icon.png');
+    width: 22px;
+}
