@@ -59,7 +59,7 @@ function ReactTestHeader() {
         <table>
           <tbody>
             {results.map((row) => <tr key={row.id}>{
-              Object.entries(row).map(([_, value]) => <td>{value}</td>)
+              Object.entries(row).map(([_, value]) => <td>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
             }</tr>)}
           </tbody>
         </table>}
