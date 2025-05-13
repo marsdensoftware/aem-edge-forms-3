@@ -27811,7 +27811,7 @@ function ReactTestHeader() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button",
     onClick: search
-  }, "React Search"), results.map(function (row) {
+  }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, results.map(function (row) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, Object.entries(row).map(function (_ref2) {
       var _ref3 = _slicedToArray(_ref2, 2),
         _ = _ref3[0],
@@ -27819,7 +27819,7 @@ function ReactTestHeader() {
       console.log(row, value);
       /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, "value/");
     }));
-  }));
+  })));
 }
 function Scroll() {
   /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
