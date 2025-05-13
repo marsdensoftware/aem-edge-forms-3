@@ -27766,24 +27766,25 @@ function ReactTestHeader() {
     _useState4 = _slicedToArray(_useState3, 2),
     total = _useState4[0],
     setTotal = _useState4[1];
-  var Pager = {
-    loading: false,
-    infinite: false,
-    infiniteArg: 'infinite',
-    offset: 0,
-    offsetArg: 'skip',
-    pageSize: 10,
-    pageSizeArg: 'limit',
-    total: null,
-    // TODO clamp?
-    prev: function prev() {
-      return this.offset > 0 ? this.offset - this.pageSize : null;
-    },
-    next: function next() {
-      return this.total !== null && this.offset + this.pageSize < this.total ? this.offset + this.pageSize : null;
-    }
+
+  //  prev() {
+  //  return this.offset > 0 ? this.offset - this.pageSize : null;
+  //},
+
+  var nextPage = function nextPage(pager) {
+    return pager.total !== null && pager.offset + pager.pageSize < pager.total ? pager.offset + pager.pageSize : null;
   };
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.create(Pager)),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      loading: false,
+      infinite: false,
+      infiniteArg: 'infinite',
+      offset: 0,
+      offsetArg: 'skip',
+      pageSize: 10,
+      pageSizeArg: 'limit',
+      total: null
+      // TODO clamp?
+    }),
     _useState6 = _slicedToArray(_useState5, 2),
     pager = _useState6[0],
     setPager = _useState6[1];
@@ -27830,7 +27831,7 @@ function ReactTestHeader() {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             console.log('more?');
-            next = pager.next();
+            next = nextPage(pager);
             if (!(next !== null)) {
               _context2.next = 6;
               break;

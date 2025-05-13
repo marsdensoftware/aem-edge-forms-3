@@ -10,7 +10,16 @@ function ReactTestHeader() {
   const [results, setResults] = useState([]);
   const [total, setTotal] = useState(null);
 
-  const Pager = {
+  //  prev() {
+  //  return this.offset > 0 ? this.offset - this.pageSize : null;
+  //},
+
+  const nextPage = function(pager) {
+    return (pager.total !== null && pager.offset + pager.pageSize < pager.total)
+      ? pager.offset + pager.pageSize : null;
+  };
+
+  const [pager, setPager] = useState({
     loading: false,
 
     infinite: false,
@@ -24,17 +33,7 @@ function ReactTestHeader() {
 
     total: null,
     // TODO clamp?
-    prev() {
-      return this.offset > 0 ? this.offset - this.pageSize : null;
-    },
-
-    next() {
-      return (this.total !== null && this.offset + this.pageSize < this.total)
-        ? this.offset + this.pageSize : null;
-    },
-  };
-
-  const [pager, setPager] = useState(Object.create(Pager));
+  });
 
   const search = async () => {
     const newResults = await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
@@ -61,7 +60,7 @@ function ReactTestHeader() {
         dataLength={total}
         next={async () => {
           console.log('more?');
-          const next = pager.next();
+          const next = nextPage(pager);
           if (next !== null) {
             setPager({...pager, offset: next});
             await search();
