@@ -6,6 +6,21 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
+// Not sure what is this
+.cmp-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-Spacing-400);
+  font-family: var(--Font-Family-Base);
+  font-size: var(--Font-Size-Base);
+  color: var(--Text-Primary);
+
+  @include media('tablet') {
+    gap: var(--Spacing-Spacing-300);
+    font-size: 0.9375rem;
+  }
+}
+
 // TODO: as this grew bigger, could potentially break up into it's own file
 // IE: _checkboxes.scss, _radios.scss
 /*
