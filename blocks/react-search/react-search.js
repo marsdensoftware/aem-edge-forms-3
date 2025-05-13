@@ -27824,9 +27824,28 @@ function ReactTestHeader() {
     onClick: search
   }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
-    next: function next() {
-      console.log('more');
-    },
+    next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var next;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            console.log('more?');
+            next = pager.next();
+            if (!(next !== null)) {
+              _context2.next = 6;
+              break;
+            }
+            setPager(_objectSpread(_objectSpread({}, pager), {}, {
+              offset: next
+            }));
+            _context2.next = 6;
+            return search();
+          case 6:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    })),
     hasMore: true,
     loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Loading..."),
     endMessage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
@@ -27837,10 +27856,10 @@ function ReactTestHeader() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: row.id
-    }, Object.entries(row).map(function (_ref2) {
-      var _ref3 = _slicedToArray(_ref2, 2),
-        name = _ref3[0],
-        value = _ref3[1];
+    }, Object.entries(row).map(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        name = _ref4[0],
+        value = _ref4[1];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
         key: name
       }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
@@ -27851,10 +27870,10 @@ function decorate(_x) {
   return _decorate.apply(this, arguments);
 }
 function _decorate() {
-  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(block) {
+  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(block) {
     var div0, div1, domNode, root;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
           div0 = document.createElement('div');
           div0.id = 'div0';
@@ -27867,9 +27886,9 @@ function _decorate() {
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
         case 9:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _decorate.apply(this, arguments);
 }

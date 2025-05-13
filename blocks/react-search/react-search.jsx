@@ -59,7 +59,14 @@ function ReactTestHeader() {
       {results &&
       <InfiniteScroll
         dataLength={total}
-        next={() => {console.log('more'); }}
+        next={async () => {
+          console.log('more?');
+          const next = pager.next();
+          if (next !== null) {
+            setPager({...pager, offset: next});
+            await search();
+          }
+        }}
         hasMore={true}
         loader={<h4>Loading...</h4>}
         endMessage={
