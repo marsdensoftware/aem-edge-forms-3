@@ -27813,7 +27813,9 @@ function ReactTestHeader() {
     onClick: search
   }, "React Search"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
-    next: fetchData,
+    next: function next() {
+      console.log('more');
+    },
     hasMore: pager.next() !== null,
     loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Loading..."),
     endMessage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {

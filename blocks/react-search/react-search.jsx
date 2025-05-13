@@ -57,7 +57,7 @@ function ReactTestHeader() {
       <button type="button" onClick={search}>React Search</button>
       <InfiniteScroll
         dataLength={total}
-        next={fetchData}
+        next={() => {console.log('more'); }}
         hasMore={pager.next() !== null}
         loader={<h4>Loading...</h4>}
         endMessage={
