@@ -3,6 +3,7 @@
 // PLACEHOLDER
 // TODO: potentially take this out to it's own file
 %button--primary {
+  @extend %state-focus;
   background-image: $color-primary-animated;
   border: 2px solid $stroke-accent;
   color: $color-white;
@@ -39,10 +40,16 @@
 
   &:active {
     background: $color-primary-navy;
+    color: $color-white;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
   }
 }
 
 %button--hollow {
+  @extend %state-focus;
   background: none;
   color: $color-primary-dark-navy;
   border: 2px solid $stroke-secondary;
@@ -64,6 +71,10 @@
 
   &:active {
     border-color: $stroke-accent;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
   }
 }
 
