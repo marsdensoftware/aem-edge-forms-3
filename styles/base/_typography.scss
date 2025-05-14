@@ -103,17 +103,23 @@ h6 {
   @include font-body-small;
 }
 
+/********************************************************************************************/
+// Font family is set from the HTML root, it will be applied for all of the HTML elements
+// All Form related like input style, select style, etc should live in the _forms.scss file
+// This is TEXT only related style, heading, paragraph, small, em, strong, etc
+/********************************************************************************************/
+
 /* ------------------------------
    Form Typography (AEM Forms)
 ------------------------------ */
 
 // main .form label,
-main .form fieldset.checkbox-group-wrapper legend,
-main .form fieldset.radio-group-wrapper legend {
-  font-weight: var(--form-label-font-weight);
-  font-size: var(--form-label-font-size);
-  color: var(--Text-Dark-Secondary, #666);
-}
+// main .form fieldset.checkbox-group-wrapper legend,
+// main .form fieldset.radio-group-wrapper legend {
+//   font-weight: var(--form-label-font-weight);
+//   font-size: var(--form-label-font-size);
+//   color: var(--Text-Dark-Secondary, #666);
+// }
 
 // main .form .field-label {
 // --form-label-color: var(--Text-Dark-Primary, #333);
@@ -142,83 +148,82 @@ main .form fieldset.radio-group-wrapper legend {
 //   border-radius: 0.25rem;
 // }
 
-main .form input.is-filled,
-main .form textarea.is-filled {
-  overflow: hidden;
-  color: var(--Text-Dark-Primary, #333);
-  text-overflow: ellipsis;
+// main .form input.is-filled,
+// main .form textarea.is-filled {
+//   overflow: hidden;
+//   color: var(--Text-Dark-Primary, #333);
+//   text-overflow: ellipsis;
 
-  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  font-size: var(--Typography-Sizes-Components-Input-text, 20px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-}
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 24px;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
 
 /* ------------------------------
    Placeholder & Helper Text
 ------------------------------ */
 
-main .form ::placeholder {
-  overflow: hidden;
-  color: var(--Text-Dark-Secondary, #666);
-  text-overflow: ellipsis;
-  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  font-size: var(--Typography-Sizes-Components-Input-text, 20px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-}
+// main .form ::placeholder {
+//   overflow: hidden;
+//   color: var(--Text-Dark-Secondary, #666);
+//   text-overflow: ellipsis;
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 24px;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
 
-main .form .helper-text {
-  color: var(--Text-Dark-Primary, #333);
-  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 140%;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-}
+// main .form .helper-text {
+//   color: var(--Text-Dark-Primary, #333);
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
 
-/* ------------------------------
-   Validation & Error Messages
------------------------------- */
+// /* ------------------------------
+//    Validation & Error Messages
+// ------------------------------ */
 
-main .form .field-error {
-  color: var(--Feedback-Error, #c32030);
-  font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 140%;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-}
+// main .form .field-error {
+//   color: var(--Feedback-Error, #c32030);
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
 
-main .form .field-validation-success {
-  color: var(--Feedback-Success, #007a4d);
-  font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 140%;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-}
+// main .form .field-validation-success {
+//   color: var(--Feedback-Success, #007a4d);
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
 
 /* ------------------------------
    Button Typography
 ------------------------------ */
 
-main .form button,
-main .form .button,
-.button {
-  font-family: $font-family;
-  font-size: $size-font-base;
-}
+// main .form button,
+// main .form .button,
+// .button {
+//   // font-family: $font-family;
+//   font-size: $size-font-base;
+// }
 
 /* ------------------------------
    Base Font for Entire Form
 ------------------------------ */
-
-main .form {
-  font-family: $font-family;
-}
+// main .form {
+//   font-family: $font-family;
+// }

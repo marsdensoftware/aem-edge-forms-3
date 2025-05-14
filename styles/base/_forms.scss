@@ -1,6 +1,7 @@
 @use '../settings' as *;
 // Default style
 label,
+input[type='text'],
 input[type='radio'],
 input[type='checkbox'] {
   cursor: pointer;
@@ -22,6 +23,41 @@ fieldset {
   @include media('tablet') {
     gap: var(--Spacing-Spacing-300);
     font-size: 0.9375rem;
+  }
+}
+
+// Input field
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  input[type='text'] {
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    padding: $spacing-400;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
   }
 }
 
