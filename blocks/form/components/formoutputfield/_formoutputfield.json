@@ -6,10 +6,10 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "resourceType": "core/fd/components/form/textinput/v1/textinput",
             "template": {
               "jcr:title": "Form Output Field",
-              "fieldType": "panel",
+              "fieldType": "text-input",
               "fd:viewType": "formoutputfield"
             }
           }
