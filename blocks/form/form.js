@@ -191,7 +191,7 @@ function createRadioOrCheckboxGroup(fd) {
   const wrapper = createFieldSet({ ...fd });
   const type = fd.fieldType.split('-')[0];
   
-  const { variant, 'afs:layout': layout, withIcon } = fd.properties;
+  const { variant, 'afs:layout': layout, withIcon, enumIconNames } = fd.properties;
   if (variant === 'cards') {
     wrapper.classList.add(variant);
   } else {
@@ -210,7 +210,7 @@ function createRadioOrCheckboxGroup(fd) {
     
   fd?.enum?.forEach((value, index) => {
     const label = (typeof fd?.enumNames?.[index] === 'object' && fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
-    const iconName = fd?.enumIconNames?.[index];
+    const iconName = enumIconNames?.[index];
     const id = getId(fd.name);
     const field = createRadioOrCheckbox({
       name: fd.name,
@@ -222,7 +222,7 @@ function createRadioOrCheckboxGroup(fd) {
     });
     
     if(withIcon && iconName){
-        field.classList.add(`${iconName}`);
+        field.classList.add(`icon-${iconName}`);
     }
     
     field.classList.remove('field-wrapper', `field-${toClassName(fd.name)}`);
