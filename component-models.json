@@ -618,6 +618,22 @@
             "multi": true
           },
           {
+            "component": "select",
+            "name": "icon",
+            "label": "Icon",
+            "options": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Cards",
+                "value": "cards"
+              }
+            ],
+            "value": "default"
+          },
+          {
             "component": "text",
             "name": "default",
             "label": "Default option",
@@ -1333,6 +1349,22 @@
             "label": "Options (Display Value)",
             "valueType": "string",
             "multi": true
+          },
+          {
+            "component": "select",
+            "name": "icon",
+            "label": "Icon",
+            "options": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Cards",
+                "value": "cards"
+              }
+            ],
+            "value": "default"
           },
           {
             "component": "text",
@@ -3055,6 +3087,22 @@
             "label": "Options (Display Value)",
             "valueType": "string",
             "multi": true
+          },
+          {
+            "component": "select",
+            "name": "icon",
+            "label": "Icon",
+            "options": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Cards",
+                "value": "cards"
+              }
+            ],
+            "value": "default"
           },
           {
             "component": "text",
