@@ -1,4 +1,5 @@
 @use '../settings' as *;
+
 // Default style
 label,
 input[type='text'],
@@ -38,7 +39,7 @@ fieldset {
     line-height: 120%;
     font-weight: 500;
     margin-bottom: 0.25rem;
-    color: $text-secondary; // change from pink to token
+    color: $text-secondary;
   }
 
   input[type='text'],
