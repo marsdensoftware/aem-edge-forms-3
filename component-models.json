@@ -618,7 +618,7 @@
             "multi": true
           },
           {
-            "component": "select",
+            "component": "text",
             "name": "icon",
             "label": "Icon",
             "options": [
@@ -1352,7 +1352,7 @@
             "multi": true
           },
           {
-            "component": "select",
+            "component": "text",
             "name": "icon",
             "label": "Icon",
             "options": [
@@ -3091,7 +3091,7 @@
             "multi": true
           },
           {
-            "component": "select",
+            "component": "text",
             "name": "icon",
             "label": "Icon",
             "options": [

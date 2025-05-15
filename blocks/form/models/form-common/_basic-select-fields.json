@@ -19,7 +19,7 @@
             "multi": true
         },
         {
-            "component": "select",
+            "component": "text",
             "name": "icon",
             "label": "Icon",
             "options": [
