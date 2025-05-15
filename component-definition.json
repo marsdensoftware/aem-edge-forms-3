@@ -509,6 +509,7 @@
                   "jcr:title": "Form Contextual Help",
                   "fieldType": "panel",
                   "fd:viewType": "formcontextualhelp",
+                  "helpType": "info",
                   "minOccur": 1,
                   "text": {
                     "jcr:title": "Text",
