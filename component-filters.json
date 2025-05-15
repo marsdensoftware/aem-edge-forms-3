@@ -63,7 +63,7 @@
       "formhero",
       "formoutputfield",
       "formwelcome",
-      "formcontexttualhelp",
+      "formcontextualhelp",
       "number-input",
       "panel",
       "password",
@@ -75,10 +75,6 @@
       "tnc",
       "wizard"
     ]
-  },
-  {
-    "id": "formcontexttualhelp",
-    "components": null
   },
   {
     "id": "iconwithtext",

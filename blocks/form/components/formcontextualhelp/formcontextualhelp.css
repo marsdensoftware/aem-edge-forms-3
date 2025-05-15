@@ -1,0 +1,21 @@
+.panel-formcontextualhelp {
+    background-color: #F2F2F2;
+}
+
+.panel-formcontextualhelp--warning{
+    background-color: lemonchiffon
+}
+
+panel-formcontextualhelp--error{
+    background-color:darksalmon;
+}
+
+.panel-formcontextualhelp .panel-formcontextualhelp__icon {
+    content: url('info-icon.png');
+    width: 24px;
+}
+
+.panel-formcontextualhelp .panel-formcontextualhelp__footer__link-icon {
+    content: url('external-icon.png');
+    width: 22px;
+}

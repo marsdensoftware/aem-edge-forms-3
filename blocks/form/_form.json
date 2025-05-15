@@ -186,7 +186,7 @@
         "formhero",
         "formoutputfield",
         "formwelcome",
-        "formcontexttualhelp",
+        "formcontextualhelp",
         "number-input",
         "panel",
         "password",
@@ -198,9 +198,6 @@
         "tnc",
         "wizard"
       ]
-    },
-    {
-      "...": "./components/formcontexttualhelp/_*.json#/filters"
     }
   ]
 }
