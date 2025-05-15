@@ -60,6 +60,10 @@
       "form-modal",
       "form-reset-button",
       "form-submit-button",
+      "formhero",
+      "formoutputfield",
+      "formwelcome",
+      "formcontexttualhelp",
       "number-input",
       "panel",
       "password",
@@ -69,12 +73,12 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard",
-      "formhero",
-      "formoutputfield",
-      "formwelcome",
-      "formcontexttualhelp"
+      "wizard"
     ]
+  },
+  {
+    "id": "formcontexttualhelp",
+    "components": null
   },
   {
     "id": "iconwithtext",

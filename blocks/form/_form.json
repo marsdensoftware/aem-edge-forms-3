@@ -85,7 +85,7 @@
               "component": "text",
               "name": "spreadsheetUrl",
               "label": "Spreadsheet Url",
-              "valueType": "string" 
+              "valueType": "string"
           },
           {
               "component": "container",
@@ -183,6 +183,10 @@
         "form-modal",
         "form-reset-button",
         "form-submit-button",
+        "formhero",
+        "formoutputfield",
+        "formwelcome",
+        "formcontexttualhelp",
         "number-input",
         "panel",
         "password",
@@ -194,6 +198,9 @@
         "tnc",
         "wizard"
       ]
+    },
+    {
+      "...": "./components/formcontexttualhelp/_*.json#/filters"
     }
   ]
 }

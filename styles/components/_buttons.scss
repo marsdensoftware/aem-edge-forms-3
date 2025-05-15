@@ -3,13 +3,15 @@
 // PLACEHOLDER
 // TODO: potentially take this out to it's own file
 %button--primary {
+  @extend %state-focus;
   background-image: $color-primary-animated;
+  border: 2px solid $stroke-accent;
   color: $color-white;
   z-index: 1;
 
   &::after {
     transition: opacity 0.2s ease-in-out;
-    border-radius: $border-round;
+    border-radius: $border-radius-round;
     position: absolute;
     content: '';
     display: block;
@@ -38,13 +40,30 @@
 
   &:active {
     background: $color-primary-navy;
+    color: $color-white;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
   }
 }
 
 %button--hollow {
+  @extend %state-focus;
   background: none;
   color: $color-primary-dark-navy;
   border: 2px solid $stroke-secondary;
+
+  &::after {
+    content: '';
+    display: none;
+  }
+
+  &:hover,
+  &:active {
+    color: $color-primary-dark-navy;
+    background: none;
+  }
 
   &:hover {
     border-color: $stroke-primary;
@@ -53,12 +72,16 @@
   &:active {
     border-color: $stroke-accent;
   }
+
+  &:focus {
+    border-radius: $border-radius-round;
+  }
 }
 
 %button,
 .button {
   @include elevation-2;
-  border-radius: $border-round;
+  border-radius: $border-radius-round;
   text-decoration: none;
   text-align: center;
   position: relative;

@@ -1,10 +1,11 @@
 /*
-    Various typography classes helpers
-    Can be in Utils.scss?
+  Cleaned and Optimized Typography SCSS
 */
-@use '../settings' as *;
 
-/* Headings */
+@use '../settings' as *;
+/* ------------------------------
+   Headings
+------------------------------ */
 h1,
 h2,
 h3,
@@ -12,55 +13,217 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
-  font-weight: 700;
-  margin: 0;
 }
 
 h1 {
   @include heading-level-1;
 }
-
 h2 {
   @include heading-level-2;
 }
-
 h3 {
   @include heading-level-3;
 }
-
 h4 {
   @include heading-level-4;
 }
-
 h5 {
   @include heading-level-5;
 }
-
 h6 {
   @include heading-level-6;
 }
 
-p {
-  @include font-body-default;
-  margin: 0;
-}
+/* ------------------------------
+   Body text
+------------------------------ */
 
+/*Rebecca added this*/
+p {
+  font-size: $size-font-base;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+/*Rebecca added this*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 24px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+/*Rebecca added this*/
 .subtitle {
+  font-family: $font-family;
   font-size: 28px;
   line-height: 130%;
+  margin: 0 0 40px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
+/*Rebecca added this*/
 .strap-title {
+  font-family: $font-family;
   font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/*Rebecca added this*/
+.strap-title-small {
+  font-family: $font-family;
+  font-size: 16px;
   line-height: 100%;
   text-transform: uppercase;
 }
 
-/* Paragraph Variants */
+/* ------------------------------
+   Paragraph Variants
+------------------------------ */
+
 .p-large {
   @include font-body-large;
 }
-
 .p-small {
   @include font-body-small;
 }
+
+/********************************************************************************************/
+// Font family is set from the HTML root, it will be applied for all of the HTML elements
+// All Form related like input style, select style, etc should live in the _forms.scss file
+// This is TEXT only related style, heading, paragraph, small, em, strong, etc
+/********************************************************************************************/
+
+/* ------------------------------
+   Form Typography (AEM Forms)
+------------------------------ */
+
+// main .form label,
+// main .form fieldset.checkbox-group-wrapper legend,
+// main .form fieldset.radio-group-wrapper legend {
+//   font-weight: var(--form-label-font-weight);
+//   font-size: var(--form-label-font-size);
+//   color: var(--Text-Dark-Secondary, #666);
+// }
+
+// main .form .field-label {
+// --form-label-color: var(--Text-Dark-Primary, #333);
+// color: var(--form-label-color);
+// $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+// font-size: var(--Typography-Sizes-Components-Label, 20px);
+// font-style: normal;
+// font-weight: var(--Typography-Font-weight-Medium, 500);
+// line-height: 24px;
+// letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+// main .form input,
+// main .form textarea,
+// main .form select {
+//   background-color: var(--form-input-background-color);
+//   border: var(--form-input-border-size) solid var(--form-input-border-color);
+//   width: 100%;
+//   height: 2.625rem;
+//   color: var(--Text-Dark-Secondary, #666);
+//   padding: var(--form-input-padding);
+//   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
+//   max-width: unset;
+//   margin-top: 0.5rem;
+//   margin-bottom: 1rem;
+//   border-radius: 0.25rem;
+// }
+
+// main .form input.is-filled,
+// main .form textarea.is-filled {
+//   overflow: hidden;
+//   color: var(--Text-Dark-Primary, #333);
+//   text-overflow: ellipsis;
+
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 24px;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+/* ------------------------------
+   Placeholder & Helper Text
+------------------------------ */
+
+// main .form ::placeholder {
+//   overflow: hidden;
+//   color: var(--Text-Dark-Secondary, #666);
+//   text-overflow: ellipsis;
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Components-Input-text, 20px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 24px;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+// main .form .helper-text {
+//   color: var(--Text-Dark-Primary, #333);
+//   $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+// /* ------------------------------
+//    Validation & Error Messages
+// ------------------------------ */
+
+// main .form .field-error {
+//   color: var(--Feedback-Error, #c32030);
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+// main .form .field-validation-success {
+//   color: var(--Feedback-Success, #007a4d);
+//   font-size: var(--Typography-Sizes-Body-Default-paragraph, 16px);
+//   font-style: normal;
+//   font-weight: var(--Typography-Font-weight-Regular, 400);
+//   line-height: 140%;
+//   letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+// }
+
+/* ------------------------------
+   Button Typography
+------------------------------ */
+
+// main .form button,
+// main .form .button,
+// .button {
+//   // font-family: $font-family;
+//   font-size: $size-font-base;
+// }
+
+/* ------------------------------
+   Base Font for Entire Form
+------------------------------ */
+// main .form {
+//   font-family: $font-family;
+// }

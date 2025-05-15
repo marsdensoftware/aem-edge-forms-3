@@ -25,3 +25,4 @@ helix-importer-ui
 test/e2e/reports/
 LoginAuth.json
 .history/
+assets/

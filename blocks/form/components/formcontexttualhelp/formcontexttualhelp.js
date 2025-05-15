@@ -47,10 +47,10 @@ export default function decorate(panelEl, model) {
             linkEl.appendChild(iconEl);
         }
 
-        // Append it to the existing element
+        // Append the link to the footer
         footerEl.appendChild(linkEl);
 
-        // Append the new div to the existing element
+        // Append the footer to the main element
         panelEl.appendChild(footerEl);
     }
 

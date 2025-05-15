@@ -1,7 +1,7 @@
 export default function decorate(panel) {
-    panel.classList.add('panel-heroform');
+    panel.classList.add('panel-formhero');
     const divs = panel.querySelectorAll('div');
-    divs[0].classList.add('panel-heroform__picture');
-    divs[1].classList.add('panel-heroform__content');
+    divs[0].classList.add('panel-formhero__content');
+    divs[1].classList.add('panel-formhero__picture');
     return panel;
 }
