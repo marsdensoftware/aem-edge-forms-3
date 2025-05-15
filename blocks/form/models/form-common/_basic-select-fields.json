@@ -32,6 +32,7 @@
                     "value": "cards"
                 }
             ],
+            "multi": true,
             "value": "default"
         },
         {

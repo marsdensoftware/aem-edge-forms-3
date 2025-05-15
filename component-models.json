@@ -631,6 +631,7 @@
                 "value": "cards"
               }
             ],
+            "multi": true,
             "value": "default"
           },
           {
@@ -1364,6 +1365,7 @@
                 "value": "cards"
               }
             ],
+            "multi": true,
             "value": "default"
           },
           {
@@ -3102,6 +3104,7 @@
                 "value": "cards"
               }
             ],
+            "multi": true,
             "value": "default"
           },
           {
