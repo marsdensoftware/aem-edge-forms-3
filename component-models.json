@@ -618,21 +618,27 @@
             "multi": true
           },
           {
+            "component": "boolean",
+            "name": "withIcon",
+            "label": "Enable Icon",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
             "component": "text",
-            "name": "icon",
+            "name": "enumIconNames",
             "label": "Icon",
-            "options": [
-              {
-                "name": "Default",
-                "value": "default"
-              },
-              {
-                "name": "Cards",
-                "value": "cards"
-              }
-            ],
+            "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default"
+            "value": "default",
+            "condition": {
+              "===": [
+                {
+                  "var": "withIcon"
+                },
+                true
+              ]
+            }
           },
           {
             "component": "text",
@@ -1352,21 +1358,27 @@
             "multi": true
           },
           {
+            "component": "boolean",
+            "name": "withIcon",
+            "label": "Enable Icon",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
             "component": "text",
-            "name": "icon",
+            "name": "enumIconNames",
             "label": "Icon",
-            "options": [
-              {
-                "name": "Default",
-                "value": "default"
-              },
-              {
-                "name": "Cards",
-                "value": "cards"
-              }
-            ],
+            "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default"
+            "value": "default",
+            "condition": {
+              "===": [
+                {
+                  "var": "withIcon"
+                },
+                true
+              ]
+            }
           },
           {
             "component": "text",
@@ -3091,21 +3103,27 @@
             "multi": true
           },
           {
+            "component": "boolean",
+            "name": "withIcon",
+            "label": "Enable Icon",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
             "component": "text",
-            "name": "icon",
+            "name": "enumIconNames",
             "label": "Icon",
-            "options": [
-              {
-                "name": "Default",
-                "value": "default"
-              },
-              {
-                "name": "Cards",
-                "value": "cards"
-              }
-            ],
+            "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default"
+            "value": "default",
+            "condition": {
+              "===": [
+                {
+                  "var": "withIcon"
+                },
+                true
+              ]
+            }
           },
           {
             "component": "text",

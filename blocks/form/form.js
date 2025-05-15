@@ -186,11 +186,31 @@ function setConstraintsMessage(field, messages = {}) {
   });
 }
 
+//###SEP-NJ Added support for icon
 function createRadioOrCheckboxGroup(fd) {
   const wrapper = createFieldSet({ ...fd });
   const type = fd.fieldType.split('-')[0];
+  
+  const { variant, 'afs:layout': layout, withIcon } = fd.properties;
+  if (variant === 'cards') {
+    wrapper.classList.add(variant);
+  } else {
+    wrapper.classList.remove('cards');
+  }
+  if (layout?.orientation === 'horizontal') {
+    wrapper.classList.add('horizontal');
+  }
+  if (layout?.orientation === 'vertical') {
+    wrapper.classList.remove('horizontal');
+  }
+  
+  if(withIcon){
+      wrapper.classList.add('radio-group-wrapper--with-icon');
+  }
+    
   fd?.enum?.forEach((value, index) => {
     const label = (typeof fd?.enumNames?.[index] === 'object' && fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
+    const iconName = fd?.enumIconNames?.[index];
     const id = getId(fd.name);
     const field = createRadioOrCheckbox({
       name: fd.name,
@@ -200,18 +220,11 @@ function createRadioOrCheckboxGroup(fd) {
       enum: [value],
       required: fd.required,
     });
-    const { variant, 'afs:layout': layout } = fd.properties;
-    if (variant === 'cards') {
-      wrapper.classList.add(variant);
-    } else {
-      wrapper.classList.remove('cards');
+    
+    if(withIcon && iconName){
+        field.classList.add(`${iconName}`);
     }
-    if (layout?.orientation === 'horizontal') {
-      wrapper.classList.add('horizontal');
-    }
-    if (layout?.orientation === 'vertical') {
-      wrapper.classList.remove('horizontal');
-    }
+    
     field.classList.remove('field-wrapper', `field-${toClassName(fd.name)}`);
     const input = field.querySelector('input');
     input.id = id;
