@@ -1,13 +1,20 @@
 # Front end development checklist
 
 Checklist for front end development to keep track of front end milestone.
-Status
+
+## Statuses
+
 ✅ Done
+
 ❌ Todo
+
 ❌❌ Depends on AEM (Needs to build in AEM)
+
 ❓ Unknown
 
 ## Base
+
+Base elements styling when it is build within AEM Universal Editor
 
 | Type                      | Status | Reason                    |
 | ------------------------- | ------ | ------------------------- |
@@ -16,6 +23,7 @@ Status
 | Brand colour              | ✅     |                           |
 | [Typography](#typography) | ❌     | Not all variant available |
 | [Button](#button)         | ❌     | Not all variant available |
+| [Form](#form)             | ❌     | Not all variant available |
 
 ### Typography
 
@@ -42,10 +50,21 @@ Status
 
 ### Button
 
-| Type               | Status | Reason                  |
-| ------------------ | ------ | ----------------------- |
-| Button primary     | ✅     |                         |
-| Button hollow      | ✅     |                         |
-| Button link        | ❌❌   | No option to add in AEM |
-| Button icon        | ❌❌   | No option to add in AEM |
-| Button icon hollow | ❌❌   | No option to add in AEM |
+| Type                     | Status | Reason                     |
+| ------------------------ | ------ | -------------------------- |
+| Button default           | ❓     | Waiting designer to decide |
+| Button primary           | ✅     |                            |
+| Button primary small     | ❌❌   |                            |
+| Button hollow            | ✅     |                            |
+| Button hollow small      | ❌❌   |                            |
+| Button link              | ❌❌   | No option to add in AEM    |
+| Button link small        | ❌❌   | No option to add in AEM    |
+| Button icon              | ❌❌   | No option to add in AEM    |
+| Button icon small        | ❌❌   | No option to add in AEM    |
+| Button icon hollow       | ❌❌   | No option to add in AEM    |
+| Button icon hollow small | ❌❌   | No option to add in AEM    |
+
+### Form
+
+| Type | Status | Reason |
+| ---- | ------ | ------ |
