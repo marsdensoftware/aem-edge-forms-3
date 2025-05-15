@@ -36,6 +36,27 @@
           "collapsible": false,
           "fields": [
             {
+              "component": "select",
+              "name": "type",
+              "label": "Type",
+              "valueType": "string",
+              "value": "text",
+              "options": [
+                {
+                  "name": "info",
+                  "value": "Info"
+                },
+                {
+                  "name": "warning",
+                  "value": "Warning"
+                },
+                {
+                  "name": "Error",
+                  "value": "error"
+                }
+              ]
+            },
+            {
               "component": "text",
               "name": "name",
               "label": "Name",

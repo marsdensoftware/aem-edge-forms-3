@@ -12,6 +12,9 @@ export default function decorate(panelEl, model) {
     lIconEl.classList.add('panel-formcontextualhelp__icon');
 
     legendEl.prepend(lIconEl);
+    
+    const type = properties.type || 'info';
+    panelEl.classList.add('panel-formcontexttualhelp--'+type);
 
     if (properties.link && properties.linkText) {
         // Create the footer div
