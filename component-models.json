@@ -622,7 +622,7 @@
             "name": "withIcon",
             "label": "Enable Icon",
             "valueType": "boolean",
-            "value": true
+            "value": false
           },
           {
             "component": "text",
@@ -630,7 +630,7 @@
             "label": "Icon",
             "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default",
+            "value": "",
             "condition": {
               "===": [
                 {
@@ -1362,7 +1362,7 @@
             "name": "withIcon",
             "label": "Enable Icon",
             "valueType": "boolean",
-            "value": true
+            "value": false
           },
           {
             "component": "text",
@@ -1370,7 +1370,7 @@
             "label": "Icon",
             "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default",
+            "value": "",
             "condition": {
               "===": [
                 {
@@ -3107,7 +3107,7 @@
             "name": "withIcon",
             "label": "Enable Icon",
             "valueType": "boolean",
-            "value": true
+            "value": false
           },
           {
             "component": "text",
@@ -3115,7 +3115,7 @@
             "label": "Icon",
             "description": "Enter the name of the icon. list-search",
             "multi": true,
-            "value": "default",
+            "value": "",
             "condition": {
               "===": [
                 {
