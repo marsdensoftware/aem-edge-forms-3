@@ -13,7 +13,7 @@ export default function decorate(panelEl, model) {
 
     legendEl.prepend(lIconEl);
     
-    const type = properties.type || 'info';
+    const type = properties.helpType || 'info';
     panelEl.classList.add('panel-formcontexttualhelp--'+type);
 
     if (properties.link && properties.linkText) {

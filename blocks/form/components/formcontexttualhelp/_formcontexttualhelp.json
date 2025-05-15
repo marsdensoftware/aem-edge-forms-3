@@ -37,18 +37,18 @@
           "fields": [
             {
               "component": "select",
-              "name": "type",
+              "name": "helpType",
               "label": "Type",
               "valueType": "string",
               "value": "text",
               "options": [
                 {
-                  "name": "info",
-                  "value": "Info"
+                  "name": "Info",
+                  "value": "info"
                 },
                 {
-                  "name": "warning",
-                  "value": "Warning"
+                  "name": "Warning",
+                  "value": "warning"
                 },
                 {
                   "name": "Error",
