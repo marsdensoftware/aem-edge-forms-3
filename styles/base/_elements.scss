@@ -21,13 +21,32 @@ body {
 }
 
 p {
-  font-weight: 400;
+  font-size: $font-size-base;
+  margin-bottom: $spacing-300;
+  color: $text-secondary;
 }
 
-ul,
+/*ul,
 ol {
   margin: 0;
   padding: 0;
+}*/
+
+// added RW
+ol,
+ul {
+  padding-left: $spacing-600;
+  margin-bottom: $spacing-400;
+
+  li {
+    font-size: $font-size-base;
+    line-height: 1.6;
+    margin-bottom: $spacing-200;
+
+    &::marker {
+      color: $stroke-tertiary;
+    }
+  }
 }
 
 picture {
