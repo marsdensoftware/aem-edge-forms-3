@@ -37,7 +37,8 @@ function renderOverview(panel) {
         }
 
         const div = panel.querySelector('.overview');
-
+        div.innerHTML = '';
+        
         entries.forEach((el, index) => {
             div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
         });
