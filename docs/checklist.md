@@ -74,3 +74,5 @@ Base elements styling when it is build within AEM Universal Editor
 | Input checkbox variant | ❌❌   | No option to add in AEM |
 | Input radio default    | ✅     |                         | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
 | Input radio variant    | ❌❌   | No option to add in AEM |
+| Input select           | ❌     |
+| Input select variant   | ❌     |
