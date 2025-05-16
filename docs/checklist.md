@@ -50,27 +50,27 @@ Base elements styling when it is build within AEM Universal Editor
 
 ### Button
 
-| Type                     | Status | Reason                                                                                                              |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------- |
-| Button default           | ❓     | Waiting designer to decide                                                                                          |
-| Button primary           | ✅     | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html) |
-| Button primary small     | ❌❌   |                                                                                                                     |
-| Button hollow            | ✅     | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html) |
-| Button hollow small      | ❌❌   |                                                                                                                     |
-| Button link              | ❌❌   | No option to add in AEM                                                                                             |
-| Button link small        | ❌❌   | No option to add in AEM                                                                                             |
-| Button icon              | ❌❌   | No option to add in AEM                                                                                             |
-| Button icon small        | ❌❌   | No option to add in AEM                                                                                             |
-| Button icon hollow       | ❌❌   | No option to add in AEM                                                                                             |
-| Button icon hollow small | ❌❌   | No option to add in AEM                                                                                             |
+| Type                     | Status | Reason                     | Link to check                                                                                                       |
+| ------------------------ | ------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Button default           | ❓     | Waiting designer to decide |
+| Button primary           | ✅     |                            | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html) |
+| Button primary small     | ❌❌   |                            |
+| Button hollow            | ✅     |                            | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html) |
+| Button hollow small      | ❌❌   |                            |
+| Button link              | ❌❌   | No option to add in AEM    |
+| Button link small        | ❌❌   | No option to add in AEM    |
+| Button icon              | ❌❌   | No option to add in AEM    |
+| Button icon small        | ❌❌   | No option to add in AEM    |
+| Button icon hollow       | ❌❌   | No option to add in AEM    |
+| Button icon hollow small | ❌❌   | No option to add in AEM    |
 
 ### Form
 
-| Type                   | Status | Reason                                                                                                             |
-| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
-| Input field default    | ✅     | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
-| Input field variant    | ❌❌   | No option to add in AEM                                                                                            |
-| Input checkbox default | ✅     | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
-| Input checkbox variant | ❌❌   | No option to add in AEM                                                                                            |
-| Input radio default    | ✅     | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
-| Input radio variant    | ❌❌   | No option to add in AEM                                                                                            |
+| Type                   | Status | Reason                  | Link to check                                                                                                      |
+| ---------------------- | ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Input field default    | ✅     |                         | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
+| Input field variant    | ❌❌   | No option to add in AEM |
+| Input checkbox default | ✅     |                         | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
+| Input checkbox variant | ❌❌   | No option to add in AEM |
+| Input radio default    | ✅     |                         | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html) |
+| Input radio variant    | ❌❌   | No option to add in AEM |
