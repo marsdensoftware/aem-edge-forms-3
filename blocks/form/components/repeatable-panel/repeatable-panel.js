@@ -62,14 +62,13 @@ export default function decorate(el, field, container) {
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
                         console.log('Form is available:');
+                        const panel = el.closest('.repeat-wrapper');
                         const form = panel.closest('form');
 
-                        form?.addEventListener('item:add', (event) => {
+                        form.addEventListener('item:add', (event) => {
                             const entry = panel.querySelector(event.detail.item.id);
                             toggleEditMode(entry, true);
                         });
-
-                        const panel = el.closest('.repeat-wrapper');
 
                         panel.classList.add('panel-repeatable-panel');
 
