@@ -61,13 +61,14 @@ export default function decorate(el, field, container) {
                 ) {
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
-                        console.log('Form is available:', form);
+                        console.log('Form is available:');
+                        const form = panel.closest('form');
 
-                        panel.closest('form')?.addEventListener('item:add', (event) => {
+                        form?.addEventListener('item:add', (event) => {
                             const entry = panel.querySelector(event.detail.item.id);
                             toggleEditMode(entry, true);
                         });
-                        
+
                         const panel = el.closest('.repeat-wrapper');
 
                         panel.classList.add('panel-repeatable-panel');
@@ -114,6 +115,9 @@ export default function decorate(el, field, container) {
     }
 
     function toggleEditMode(entry, visible) {
+        if (!entry) {
+            return;
+        }
         if (visible) {
             panel.classList.add('edit-mode');
             entry.classList.add('edit-mode');
