@@ -363,6 +363,7 @@
                 "template": {
                   "jcr:title": "Radio Group",
                   "fieldType": "radio-group",
+                  "fd:viewType": "radio-group",
                   "enum": [
                     "0",
                     "1"
@@ -500,7 +501,7 @@
         },
         {
           "title": "Form Contextual Help",
-          "id": "formcontexttualhelp",
+          "id": "formcontextualhelp",
           "plugins": {
             "xwalk": {
               "page": {
@@ -508,7 +509,8 @@
                 "template": {
                   "jcr:title": "Form Contextual Help",
                   "fieldType": "panel",
-                  "fd:viewType": "formcontexttualhelp",
+                  "fd:viewType": "formcontextualhelp",
+                  "helpType": "info",
                   "minOccur": 1,
                   "text": {
                     "jcr:title": "Text",
@@ -686,6 +688,24 @@
                   "jcr:title": "Rating",
                   "fieldType": "number-input",
                   "fd:viewType": "rating"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Repeatable Panel",
+          "id": "repeatable-panel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Repeatable Panel",
+                  "fieldType": "panel",
+                  "fd:viewType": "repeatable-panel",
+                  "minOccur": 1,
+                  "repeatable": true
                 }
               }
             }

@@ -1,0 +1,21 @@
+.panel-repeatable-panel{
+    background-color:aquamarine;
+}
+
+.panel-repeatable-panel [data-repeatable]{
+    display: none;
+}
+
+.panel-repeatable-panel [data-repeatable].edit-mode{
+    display: block;
+}
+
+.panel-repeatable-panel .btn-save,
+.panel-repeatable-panel .btn-cancel{
+    display: none;
+}
+
+.panel-repeatable-panel .edit-mode .btn-save,
+.panel-repeatable-panel .edit-mode .btn-cancel{
+    display: block;
+}

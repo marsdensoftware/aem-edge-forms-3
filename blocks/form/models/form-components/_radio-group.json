@@ -10,6 +10,7 @@
                         "template": {
                             "jcr:title": "Radio Group",
                             "fieldType": "radio-group",
+                            "fd:viewType": "radio-group",
                             "enum": [
                                 "0",
                                 "1"

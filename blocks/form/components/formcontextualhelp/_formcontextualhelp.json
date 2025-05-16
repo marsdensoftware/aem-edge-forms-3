@@ -2,7 +2,7 @@
   "definitions": [
     {
       "title": "Form Contextual Help",
-      "id": "formcontexttualhelp",
+      "id": "formcontextualhelp",
       "plugins": {
         "xwalk": {
           "page": {
@@ -10,7 +10,8 @@
             "template": {
               "jcr:title": "Form Contextual Help",
               "fieldType": "panel",
-              "fd:viewType": "formcontexttualhelp",
+              "fd:viewType": "formcontextualhelp",
+              "helpType": "info",
               "minOccur": 1,
               "text": {
                 "jcr:title": "Text",
@@ -27,7 +28,7 @@
   ],
   "models": [
     {
-      "id": "formcontexttualhelp",
+      "id": "formcontextualhelp",
       "fields": [
         {
           "component": "container",
@@ -35,6 +36,27 @@
           "label": "Basic",
           "collapsible": false,
           "fields": [
+            {
+              "component": "select",
+              "name": "helpType",
+              "label": "Type",
+              "valueType": "string",
+              "value": "text",
+              "options": [
+                {
+                  "name": "Info",
+                  "value": "info"
+                },
+                {
+                  "name": "Warning",
+                  "value": "warning"
+                },
+                {
+                  "name": "Error",
+                  "value": "error"
+                }
+              ]
+            },
             {
               "component": "text",
               "name": "name",
@@ -76,7 +98,7 @@
   ],
   "filters": [
     {
-      "id": "formcontexttualhelp",
+      "id": "formcontextualhelp",
       "components": null
     }
   ]

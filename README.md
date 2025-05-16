@@ -1,5 +1,9 @@
 # AEM EDGE DELIVERY SERVICES
 
+## Front End development checklist
+
+[Front end checklist milestone](/docs/checklist.md)
+
 ## Environments
 
 - Live: https://main--aem-edge-forms-3--marsdensoftware.aem.page/

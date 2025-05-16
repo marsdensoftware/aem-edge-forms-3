@@ -108,6 +108,9 @@ $bg-error: $color-feedback-red;
 $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
 
+/* Token-based background */
+$bg-light-secondary: var(--Background-Light-Secondary, #F5FAFD); // RW
+
 /* UI Icons */
 $icon-accent: $color-primary;
 $icon-dark: $color-primary-navy;
