@@ -19,7 +19,7 @@ function addButtonSave(panel) {
     btn.addEventListener('click', () => {
         alert('Save');
     });
-    
+
     return btn;
 }
 
@@ -31,12 +31,12 @@ function addButtonCancel(panel) {
     btn.addEventListener('click', () => {
         alert('Cancel');
     });
-    
+
     return btn;
 }
 
 function renderOverview(panel, entries) {
-    const div = document.createElement('<div>');
+    const div = document.createElement('div');
 
     entries.forEach((el, index) => {
         div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
@@ -83,11 +83,13 @@ export default function decorate(panel, field, container) {
 
     const entries = panel.querySelectorAll('[data-repeatable]');
 
-    renderOverview(entries);
+    if (entries.length>0) {
+        renderOverview(panel, entries);
 
-    if (entries.length == 1) {
-        // entry edit mode
-        toggleEditMode(entries[0], true);
+        if (entries.length == 1) {
+            // entry edit mode
+            toggleEditMode(entries[0], true);
+        }
     }
 
     return panel;
