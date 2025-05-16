@@ -91,7 +91,7 @@ export default function decorate(el, field, container) {
                         });
 
                         // create overview
-                        document.createElement('div');
+                        const div = document.createElement('div');
                         div.classList.add('overview');
 
                         panel.prepend(div);
