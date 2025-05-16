@@ -15,7 +15,11 @@
     display: none;
 }
 
-.panel-repeatable-panel .edit-mode .btn-save,
-.panel-repeatable-panel .edit-mode .btn-cancel{
+.panel-repeatable-panel.edit-mode .btn-save,
+.panel-repeatable-panel.edit-mode .btn-cancel{
     display: block;
+}
+
+.panel-repeatable-panel.edit-mode .item-add{
+    display: none;
 }
