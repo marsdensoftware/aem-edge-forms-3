@@ -21,5 +21,9 @@
 }
 
 .panel-repeatable-panel.edit-mode .item-add{
-    display: none;
+    display: none !important;
+}
+
+.panel-repeatable-panel .item-remove{
+    display: none !important;
 }

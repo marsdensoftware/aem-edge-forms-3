@@ -16,10 +16,6 @@ function addButtonSave(panel) {
 
     panel.querySelector('.repeat-actions')?.append(btn);
 
-    btn.addEventListener('click', () => {
-        alert('Save');
-    });
-
     return btn;
 }
 
@@ -28,21 +24,24 @@ function addButtonCancel(panel) {
 
     panel.querySelector('.repeat-actions')?.append(btn);
 
-    btn.addEventListener('click', () => {
-        alert('Cancel');
-    });
-
     return btn;
 }
 
-function renderOverview(panel, entries) {
-    const div = document.createElement('div');
+function renderOverview(panel) {
+    const entries = panel.querySelectorAll('[data-repeatable]');
+                        
+    if (entries.length > 0) {
+        if (entries.length == 1) {
+            // entry edit mode
+            toggleEditMode(entries[0], true);
+        }
 
-    entries.forEach((el, index) => {
-        div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
-    });
+        const div = panel.querySelector('.overview');
 
-    panel.prepend(div);
+        entries.forEach((el, index) => {
+            div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
+        });
+    }
 }
 
 export default function decorate(el, field, container) {
@@ -76,6 +75,8 @@ export default function decorate(el, field, container) {
                             alert('Saving');
                             const entry = panel.querySelector('[data-repeatable].edit-mode');
                             toggleEditMode(entry, false);
+                            
+                            renderOverview(panel);
                         });
 
                         const cancelBtn = addButtonCancel(panel);
@@ -85,18 +86,17 @@ export default function decorate(el, field, container) {
                             toggleEditMode(entry, false);
                             // TODO: If new one then remove. If saved one then reset changes.
                             entry.remove();
+                            
+                            renderOverview(panel);
                         });
 
-                        const entries = panel.querySelectorAll('[data-repeatable]');
+                        // create overview
+                        document.createElement('div');
+                        div.classList.add('overview');
 
-                        if (entries.length > 0) {
-                            renderOverview(panel, entries);
+                        panel.prepend(div);
 
-                            if (entries.length == 1) {
-                                // entry edit mode
-                                toggleEditMode(entries[0], true);
-                            }
-                        }
+                        renderOverview(panel);
 
                         // Optional: Stop observing if only needed once
                         observer.disconnect();
