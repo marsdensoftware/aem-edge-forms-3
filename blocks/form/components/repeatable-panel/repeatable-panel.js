@@ -29,7 +29,7 @@ function addButtonCancel(panel) {
 
 function renderOverview(panel) {
     const entries = panel.querySelectorAll('[data-repeatable]');
-                        
+
     if (entries.length > 0) {
         if (entries.length == 1) {
             // entry edit mode
@@ -38,10 +38,22 @@ function renderOverview(panel) {
 
         const div = panel.querySelector('.overview');
         div.innerHTML = '';
-        
+
         entries.forEach((el, index) => {
             div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
         });
+    }
+}
+
+function toggleEditMode(entry, visible) {
+    const panel = entry.closest('.panel-repeatable-panel');
+    if (visible) {
+        panel.classList.add('edit-mode');
+        entry.classList.add('edit-mode');
+    }
+    else {
+        panel.classList.remove('edit-mode');
+        entry.classList.remove('edit-mode');
     }
 }
 
@@ -76,7 +88,7 @@ export default function decorate(el, field, container) {
                             alert('Saving');
                             const entry = panel.querySelector('[data-repeatable].edit-mode');
                             toggleEditMode(entry, false);
-                            
+
                             renderOverview(panel);
                         });
 
@@ -87,7 +99,7 @@ export default function decorate(el, field, container) {
                             toggleEditMode(entry, false);
                             // TODO: If new one then remove. If saved one then reset changes.
                             entry.remove();
-                            
+
                             renderOverview(panel);
                         });
 
@@ -111,18 +123,6 @@ export default function decorate(el, field, container) {
 
         // Start observing the target node
         observer.observe(targetNode, config);
-    }
-
-    function toggleEditMode(entry, visible) {
-        const panel = entry.closest('.panel-repeatable-panel');
-        if (visible) {
-            panel.classList.add('edit-mode');
-            entry.classList.add('edit-mode');
-        }
-        else {
-            panel.classList.remove('edit-mode');
-            entry.classList.remove('edit-mode');
-        }
     }
 
     return el;
