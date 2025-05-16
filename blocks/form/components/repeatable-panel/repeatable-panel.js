@@ -7,7 +7,7 @@ function createButton(label, icon) {
     const text = document.createElement('span');
     text.textContent = label;
     button.append(document.createElement('i'), text);
-    
+
     return button;
 }
 
@@ -66,7 +66,8 @@ export default function decorate(el, field, container) {
                         const form = panel.closest('form');
 
                         form.addEventListener('item:add', (event) => {
-                            const entry = panel.querySelector(event.detail.item.id);
+                            // Event does not carry information about the entry added, so select the last one from the list
+                            const entry = panel.querySelector(':scope [data-repeatable]:last-of-type');
                             toggleEditMode(entry, true);
                         });
 
