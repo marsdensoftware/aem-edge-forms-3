@@ -7,9 +7,7 @@ function createButton(label, icon) {
     const text = document.createElement('span');
     text.textContent = label;
     button.append(document.createElement('i'), text);
-
-    button.style.display = 'none';
-
+    
     return button;
 }
 
@@ -125,7 +123,5 @@ export default function decorate(el, field, container) {
         }
     }
 
-
-
-    return panel;
+    return el;
 }
