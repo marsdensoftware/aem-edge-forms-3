@@ -694,6 +694,24 @@
           }
         },
         {
+          "title": "Repeatable Panel",
+          "id": "repeatable-panel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Repeatable Panel",
+                  "fieldType": "panel",
+                  "fd:viewType": "repeatable-panel",
+                  "minOccur": 1,
+                  "repeatable": true
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {
