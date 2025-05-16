@@ -19,6 +19,8 @@ function addButtonSave(panel) {
     btn.addEventListener('click', () => {
         alert('Save');
     });
+    
+    return btn;
 }
 
 function addButtonCancel(panel) {
@@ -29,6 +31,8 @@ function addButtonCancel(panel) {
     btn.addEventListener('click', () => {
         alert('Cancel');
     });
+    
+    return btn;
 }
 
 function renderOverview(panel, entries) {
