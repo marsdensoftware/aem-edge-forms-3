@@ -27818,7 +27818,7 @@ function ReactTestHeader() {
     // TODO clamp?
   };
   var search = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(pager) {
       var newResults;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -27834,29 +27834,28 @@ function ReactTestHeader() {
             setResults(_toConsumableArray(results.concat(newResults.users)));
             console.log('new res', newResults, newResults.users);
             console.log('users', _toConsumableArray(results.concat(newResults.users)));
-            console.log('user ids', _toConsumableArray(results.concat(newResults.users)).map(function (row) {
-              return row;
-            }));
             setTotal(newResults.total);
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }
       }, _callee);
     }));
-    return function search() {
+    return function search(_x2) {
       return _ref.apply(this, arguments);
     };
   }();
 
   /*useEffect(async () => {
     console.log('useEffect fired', pager);
-    await search();
+    await search(pager);
   }, [pager]);*/
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button",
-    onClick: search
+    onClick: function onClick() {
+      return search(pager);
+    }
   }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
     next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -27872,7 +27871,7 @@ function ReactTestHeader() {
             }
             offset = next;
             _context2.next = 6;
-            return searchResults();
+            return search(pager);
           case 6:
           case "end":
             return _context2.stop();
@@ -27889,14 +27888,19 @@ function ReactTestHeader() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
     console.log('row', results, row);
-    var rid = row.id;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
-      key: rid
-    }, "JSON.stringify(row)");
+      key: row.id
+    }, Object.entries(row).map(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        name = _ref4[0],
+        value = _ref4[1];
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        key: name
+      }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
+    }));
   })))));
-} //Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-
-function decorate(_x2) {
+}
+function decorate(_x3) {
   return _decorate.apply(this, arguments);
 }
 function _decorate() {
@@ -27911,7 +27915,7 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on the next commit after ' + "50e64d5");
+          console.log('React running on the next commit after ' + "3178129");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));

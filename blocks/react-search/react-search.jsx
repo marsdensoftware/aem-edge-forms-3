@@ -49,19 +49,18 @@ function ReactTestHeader() {
     // TODO clamp?
   };
 
-  const search = async () => {
+  const search = async (pager) => {
     const newResults = await searchResults({...pager, total: total, offset: offset});
     //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
     console.log('new res', newResults, newResults.users);
     console.log('users', [...results.concat(newResults.users)]);
-    console.log('user ids', [...results.concat(newResults.users)].map((row) => row))
     setTotal(newResults.total);
   };
 
   /*useEffect(async () => {
     console.log('useEffect fired', pager);
-    await search();
+    await search(pager);
   }, [pager]);*/
 
   return (
@@ -69,7 +68,7 @@ function ReactTestHeader() {
       <h1>Hello from React!</h1>
       <label>Total</label>
       <p>{total}</p>
-      <button type="button" onClick={search}>React Search</button>
+      <button type="button" onClick={() => search(pager)}>React Search</button>
       {results &&
         <InfiniteScroll
         dataLength={total}
@@ -78,7 +77,7 @@ function ReactTestHeader() {
           console.log('more?:', next);
           if (next !== null) {
             offset = next;
-            await searchResults();
+            await search(pager);
           }
         }}
         hasMore={true}
@@ -94,8 +93,9 @@ function ReactTestHeader() {
             {
               results.map((row) => {
                 console.log('row', results, row);
-                let rid = row.id;
-                return (<tr key={rid}>JSON.stringify(row)</tr>);
+                return (<tr key={row.id}>{
+                  Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+                }</tr>);
               })
             }
           </tbody>
@@ -103,7 +103,7 @@ function ReactTestHeader() {
       </InfiniteScroll>}
     </div>
   );
-}//Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+}
 
 export default async function decorate(block) {
   const div0 = document.createElement('div');
