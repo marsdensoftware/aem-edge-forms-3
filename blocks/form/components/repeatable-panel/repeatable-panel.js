@@ -45,7 +45,7 @@ function ensureButtonBar(entry) {
 
     buttonBar = document.createElement('div');
     buttonBar.className = 'button-bar';
-    el.appendChild(buttonBar);
+    entry.appendChild(buttonBar);
 
     const saveBtn = createButton('Save', 'save');
     saveBtn.addEventListener('click', () => {
