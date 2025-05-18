@@ -20,7 +20,7 @@ async function searchResults(pager) {
 function ReactTestHeader() {
   const [results, setResults] = useState([]);
   const [total, setTotal] = useState(null);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(null);
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
@@ -58,15 +58,18 @@ function ReactTestHeader() {
     setTotal(newResults.total);
   };
 
-  useEffect(async () => {
-    await search({...pager, offset: offset});
+  useEffect(() => {
+    async function wrapper() {
+      await search({...pager, offset: offset});
+    };
+    wrapper();
   }, [offset]);
 
   return (
     <div>
       <h1>Hello from React!</h1>
       <label>Total available: ({total || 'unknown'})</label>
-      <button type='button' onClick={() => search(pager)}>React Search</button>
+      <button type='button' onClick={() => setOffset(0)}>React Search</button>
       {results &&
         <InfiniteScroll
         dataLength={total}
