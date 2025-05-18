@@ -27,15 +27,18 @@ function entryToReadableString(entry) {
 
         // Find associated label
         let label = '';
-        if (input.id) {
+        if (input.id && value) {
             const associated = entry.querySelector(`label[for="${input.id}"]`);
             if (associated) label = associated.textContent.trim();
-        }
 
-        return `<li>${label || input.name || input.id || 'unnamed'}: ${value}</li>`;
+            return `<li>${label || input.name || input.id || 'unnamed'}: ${value}</li>`;
+        }
+        else {
+            return '';
+        }
     }).filter(line => line.includes(': ') && line.split(': ')[1] !== '');
 
-    return '<ul>'+entries.join('')+'</ul>';
+    return '<ul>' + entries.join('') + '</ul>';
 }
 
 function renderOverview(panel) {
