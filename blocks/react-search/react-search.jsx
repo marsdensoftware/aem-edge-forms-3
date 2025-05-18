@@ -88,9 +88,9 @@ function ReactTestHeader() {
       >
         <table>
           <tbody>
-            {results.map((row) => <tr key={row.id}>{
+            results.map((row) => <tr key={row.id}>
               Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-            }</tr>)}
+            </tr>)
           </tbody>
         </table>
       </InfiniteScroll>}

@@ -27877,18 +27877,11 @@ function ReactTestHeader() {
         textAlign: 'center'
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
-      key: row.id
-    }, Object.entries(row).map(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 2),
-        name = _ref4[0],
-        value = _ref4[1];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-        key: name
-      }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
-    }));
-  })))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, "results.map((row) => ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    key: row.id
+  }, "Object.entries(row).map(([name, value]) => ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    key: name
+  }, (typeof value === "undefined" ? "undefined" : _typeof(value)) !== 'object' ? value : JSON.stringify(value)), ")"), ")"))));
 }
 function decorate(_x2) {
   return _decorate.apply(this, arguments);
