@@ -93,7 +93,8 @@ export default function decorate(el, field, container) {
                         cancelBtn.addEventListener('click', () => {
                             const entry = panel.querySelector('[data-repeatable].edit-mode');
                             toggleEditMode(entry, false);
-                            // TODO: If new one then remove. If saved one then reset changes.
+                            // TODO: If new one then remove. 
+                            // If saved one then reset changes.
                             entry.remove();
 
                             renderOverview(panel);
