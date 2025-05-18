@@ -28,21 +28,15 @@ function addButtonCancel(panel) {
 }
 
 function renderOverview(panel) {
-    const entries = panel.querySelectorAll('[data-repeatable]');
+    const entries = panel.querySelectorAll('[data-repeatable].saved');
 
-    if (entries.length > 0) {
-        if (entries.length == 1) {
-            // entry edit mode
-            toggleEditMode(entries[0], true);
-        }
+    const div = panel.querySelector('.overview');
+    // For now reset everything. Later implement a more efficient/targeted approach
+    div.innerHTML = '';
 
-        const div = panel.querySelector('.overview');
-        div.innerHTML = '';
-
-        entries.forEach((el, index) => {
-            div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
-        });
-    }
+    entries.forEach((el, index) => {
+        div.innerHTML += `<ol><li>${el.dataset.id}</li></ol>`;
+    });
 }
 
 function toggleEditMode(entry, visible) {
@@ -71,22 +65,25 @@ export default function decorate(el, field, container) {
                 ) {
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
-                        console.log('Form is available:');
+                        console.log('Form is loaded:');
                         const panel = el.closest('.repeat-wrapper');
                         panel.classList.add('panel-repeatable-panel');
 
                         const form = panel.closest('form');
 
+                        // TODO register on warpper repeatable panel. Change ootb repeat.js to trigger event on wrapper repeatable panel instead of form
                         form.addEventListener('item:add', (event) => {
                             // Event does not carry information about the entry added, so select the last one from the list
+                            // Todo update repeat.js ootb code to carry the element added in the event
                             const entry = panel.querySelector(':scope [data-repeatable]:last-of-type');
                             toggleEditMode(entry, true);
                         });
 
                         const saveBtn = addButtonSave(panel);
                         saveBtn.addEventListener('click', () => {
-                            alert('Saving');
                             const entry = panel.querySelector('[data-repeatable].edit-mode');
+                            // Mark as saved
+                            entry.classList.add('saved');
                             toggleEditMode(entry, false);
 
                             renderOverview(panel);
@@ -94,7 +91,6 @@ export default function decorate(el, field, container) {
 
                         const cancelBtn = addButtonCancel(panel);
                         cancelBtn.addEventListener('click', () => {
-                            alert('Cancelling');
                             const entry = panel.querySelector('[data-repeatable].edit-mode');
                             toggleEditMode(entry, false);
                             // TODO: If new one then remove. If saved one then reset changes.
@@ -111,7 +107,7 @@ export default function decorate(el, field, container) {
 
                         renderOverview(panel);
 
-                        // Optional: Stop observing if only needed once
+                        // Optional: Stop observing as only needed once
                         observer.disconnect();
                     }
                 }
