@@ -27827,13 +27827,14 @@ function ReactTestHeader() {
               total: total,
               offset: offset
             })); //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
-            setResults(_toConsumableArray(results.concat(newResults.users)));
-            console.log('users', _toConsumableArray(results.concat(newResults.users)));
-            console.log('user ids', _toConsumableArray(results.concat(newResults.users)).map(function (row) {
+            setResults(_toConsumableArray((results || []).concat(newResults.users)));
+            console.log('new res', newResults, newResults.users);
+            console.log('users', _toConsumableArray((results || []).concat(newResults.users)));
+            console.log('user ids', _toConsumableArray((results || []).concat(newResults.users)).map(function (row) {
               return row;
             }));
             setTotal(newResults.total);
-          case 5:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -27883,7 +27884,7 @@ function ReactTestHeader() {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, results.map(function (row) {
-    console.log('row', row);
+    console.log('row', results, row);
     var rid = row.id;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: rid
@@ -27906,7 +27907,7 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on the next commit after ' + "faa97d6");
+          console.log('React running on the next commit after ' + "db5bd96");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
