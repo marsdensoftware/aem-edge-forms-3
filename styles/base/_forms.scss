@@ -14,37 +14,19 @@ fieldset {
   border: 0;
 }
 
-// Not sure what is this
-.cmp-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--Spacing-Spacing-400);
-  font-family: var(--Font-Family-Base);
-  font-size: var(--Font-Size-Base);
-  color: var(--Text-Primary);
-
-  @include media('tablet') {
-    gap: var(--Spacing-Spacing-300);
-    font-size: 0.9375rem;
-  }
-}
-
-// Input field
-// Input fields (text and number wrappers)
-.text-wrapper,
+// Number
 .number-wrapper {
   display: flex;
   flex-direction: column;
 
   label {
-    font-size: 1.25rem;
+    font-size: 20px;
     line-height: 120%;
     font-weight: 500;
-    margin-bottom: 0.25rem;
+    margin-bottom: 4px;
     color: $text-secondary;
   }
 
-  input[type='text'],
   input[type='number'] {
     display: flex;
     padding: $spacing-400;
@@ -73,6 +55,43 @@ fieldset {
   }
 }
 
+// Input fields text
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: $text-secondary;
+  }
+
+  input[type='text'] {
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    padding: $spacing-400;
+    background: $bg-light-secondary;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+  }
+}
+
 %label-common-style {
   @extend %state-focus;
   color: $text-secondary;
@@ -80,27 +99,6 @@ fieldset {
   font-weight: 500;
   display: flex;
   align-items: center;
-
-  &::before {
-    content: '';
-    margin-right: $spacing-200;
-    display: block;
-    width: 26px;
-    height: 26px;
-    border: 2px solid $color-shade-navy-45;
-  }
-
-  &::before {
-    border-radius: $border-radius-mid;
-  }
-
-  &:hover {
-    color: $text-primary;
-
-    &::before {
-      border: 2px solid $stroke-accent;
-    }
-  }
 }
 
 /********************
@@ -114,8 +112,23 @@ fieldset {
     @extend %label-common-style;
 
     &::before {
+      content: '';
+      margin-right: $spacing-200;
+      display: block;
+      width: 26px;
+      height: 26px;
+      border: 2px solid $color-shade-navy-45;
+      border-radius: $border-radius-mid;
       background-image: none;
       transition: all 0.1s ease-in-out;
+    }
+
+    &:hover {
+      color: $text-primary;
+
+      &::before {
+        border: 2px solid $stroke-accent;
+      }
     }
   }
 
@@ -145,6 +158,10 @@ fieldset {
 
 .radio-group-wrapper {
   display: flex;
+
+  legend {
+    @extend %label-common-style;
+  }
 }
 
 .radio-wrapper {
@@ -158,6 +175,24 @@ fieldset {
     &::before,
     &::after {
       border-radius: $border-radius-round;
+    }
+
+    &::before {
+      content: '';
+      margin-right: $spacing-200;
+      display: block;
+      width: 26px;
+      height: 26px;
+      border: 2px solid $color-shade-navy-45;
+      border-radius: $border-radius-round;
+    }
+
+    &:hover {
+      color: $text-primary;
+
+      &::before {
+        border: 2px solid $stroke-accent;
+      }
     }
   }
 
@@ -193,5 +228,24 @@ fieldset {
 .drop-down-wrapper {
   label {
     @extend %label-common-style;
+  }
+
+  select {
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    padding: $spacing-400;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    appearance: base-select;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover,
+    &:active {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
   }
 }
