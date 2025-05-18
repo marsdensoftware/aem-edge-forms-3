@@ -20,7 +20,7 @@ async function searchResults(pager) {
 function ReactTestHeader() {
   const [results, setResults] = useState([]);
   const [total, setTotal] = useState(null);
-  let offset = 0;
+  const [offset, setOffset] = useState(0);
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
@@ -50,7 +50,7 @@ function ReactTestHeader() {
   };
 
   const search = async (pager) => {
-    const newResults = await searchResults({...pager, total: total, offset: offset});
+    const newResults = await searchResults({...pager, offset: offset});
     //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
     console.log('new res', newResults, newResults.users);
@@ -58,17 +58,15 @@ function ReactTestHeader() {
     setTotal(newResults.total);
   };
 
-  /*useEffect(async () => {
-    console.log('useEffect fired', pager);
-    await search(pager);
-  }, [pager]);*/
+  useEffect(async () => {
+    await search({...pager, offset: offset});
+  }, [offset]);
 
   return (
     <div>
       <h1>Hello from React!</h1>
-      <label>Total</label>
-      <p>{total}</p>
-      <button type="button" onClick={() => search(pager)}>React Search</button>
+      <label>Total available: ({total || 'unknown'})</label>
+      <button type='button' onClick={() => search(pager)}>React Search</button>
       {results &&
         <InfiniteScroll
         dataLength={total}
@@ -76,8 +74,7 @@ function ReactTestHeader() {
           const next = nextPage(total, offset, pager.pageSize);
           console.log('more?:', next);
           if (next !== null) {
-            offset = next;
-            await search(pager);
+            setOffset(next);
           }
         }}
         hasMore={true}

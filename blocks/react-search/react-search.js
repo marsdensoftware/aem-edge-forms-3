@@ -27763,11 +27763,11 @@ function searchResults(_x) {
   return _searchResults.apply(this, arguments);
 } // eslint-disable-next-line no-unused-vars
 function _searchResults() {
-  _searchResults = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(pager) {
-    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+  _searchResults = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(pager) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return fetch("https://dummyjson.com/users?".concat(pager.pageSizeArg, "=").concat(pager.pageSize, "&").concat(pager.offsetArg, "=").concat(pager.offset, "&select=id,firstName,lastName,age,gender,birthDate,company")).then(function (r) {
             if (!r.ok) {
               throw new Error("Received: ".concat(r.status));
@@ -27777,12 +27777,12 @@ function _searchResults() {
             return console.log("Error: ".concat(e.message));
           });
         case 2:
-          return _context3.abrupt("return", _context3.sent);
+          return _context4.abrupt("return", _context4.sent);
         case 3:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _searchResults.apply(this, arguments);
 }
@@ -27795,7 +27795,10 @@ function ReactTestHeader() {
     _useState4 = _slicedToArray(_useState3, 2),
     total = _useState4[0],
     setTotal = _useState4[1];
-  var offset = 0;
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    offset = _useState6[0],
+    setOffset = _useState6[1];
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
@@ -27825,7 +27828,6 @@ function ReactTestHeader() {
           case 0:
             _context.next = 2;
             return searchResults(_objectSpread(_objectSpread({}, pager), {}, {
-              total: total,
               offset: offset
             }));
           case 2:
@@ -27845,38 +27847,42 @@ function ReactTestHeader() {
       return _ref.apply(this, arguments);
     };
   }();
-
-  /*useEffect(async () => {
-    console.log('useEffect fired', pager);
-    await search(pager);
-  }, [pager]);*/
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return search(_objectSpread(_objectSpread({}, pager), {}, {
+            offset: offset
+          }));
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  })), [offset]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello from React!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Total available: (", total || 'unknown', ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button",
     onClick: function onClick() {
       return search(pager);
     }
   }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
-    next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var next;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
           case 0:
             next = nextPage(total, offset, pager.pageSize);
             console.log('more?:', next);
-            if (!(next !== null)) {
-              _context2.next = 6;
-              break;
+            if (next !== null) {
+              setOffset(next);
             }
-            offset = next;
-            _context2.next = 6;
-            return search(pager);
-          case 6:
+          case 3:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
-      }, _callee2);
+      }, _callee3);
     })),
     hasMore: true
     //loader={<h4>Loading...</h4>}
@@ -27890,10 +27896,10 @@ function ReactTestHeader() {
     console.log('row', results, row);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: row.id
-    }, Object.entries(row).map(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 2),
-        name = _ref4[0],
-        value = _ref4[1];
+    }, Object.entries(row).map(function (_ref4) {
+      var _ref5 = _slicedToArray(_ref4, 2),
+        name = _ref5[0],
+        value = _ref5[1];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
         key: name
       }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
@@ -27904,10 +27910,10 @@ function decorate(_x3) {
   return _decorate.apply(this, arguments);
 }
 function _decorate() {
-  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(block) {
+  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(block) {
     var div0, div1, domNode, root;
-    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
         case 0:
           div0 = document.createElement('div');
           div0.id = 'div0';
@@ -27915,15 +27921,15 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on the next commit after ' + "3178129");
+          console.log('React running on the next commit after ' + "73626a2");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
         case 10:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _decorate.apply(this, arguments);
 }
