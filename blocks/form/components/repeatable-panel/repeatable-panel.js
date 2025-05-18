@@ -11,40 +11,10 @@ function createButton(label, icon) {
     return button;
 }
 
-function entryToReadableString(entry) {
-    const inputs = entry.querySelectorAll('input, select, textarea');
-    const entries = Array.from(inputs).map(input => {
-        let value;
-
-        if (input.tagName === 'SELECT') {
-            value = input.options[input.selectedIndex]?.text.trim() || '';
-        }
-        else if (input.type === 'checkbox' || input.type === 'radio') {
-            value = input.checked ? input.value : '';
-        } else {
-            value = input.value;
-        }
-
-        // Find associated label
-        let label = '';
-        if (input.id && value) {
-            const associated = entry.querySelector(`label[for="${input.id}"]`);
-            if (associated) label = associated.textContent.trim();
-
-            return `<li>${label || input.name || input.id || 'unnamed'}: ${value}</li>`;
-        }
-        else {
-            return '';
-        }
-    }).filter(line => line.includes(': ') && line.split(': ')[1] !== '');
-
-    return '<ul>' + entries.join('') + '</ul>';
-}
-
 async function renderOverview(panel) {
-    const renderer = panel.closest('.panel-repeatable-panel').dataset.renderer;
+    let renderer = panel.closest('.panel-repeatable-panel').dataset.renderer;
     if (renderer) {
-        await import(`./renderers/${renderer}.js`)
+        renderer = await import(`./renderers/${renderer}.js`)
     }
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
@@ -55,8 +25,7 @@ async function renderOverview(panel) {
         div.innerHTML = '<ol>';
 
         savedEntries.forEach((entry, index) => {
-            const readable = entryToReadableString(entry);
-            div.innerHTML += `<li><p>${entry.dataset.id}</p>${readable}</li>`;
+            div.innerHTML += renderer.default(entry);
         });
 
         div.innerHTML += '</ol>';
