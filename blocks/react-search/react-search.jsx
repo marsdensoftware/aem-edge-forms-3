@@ -59,6 +59,9 @@ function ReactTestHeader() {
   };
 
   useEffect(() => {
+    if (offset === null) {
+      return;
+    }
     async function wrapper() {
       await search({...pager, offset: offset});
     };
@@ -68,7 +71,7 @@ function ReactTestHeader() {
   return (
     <div>
       <h1>Hello from React!</h1>
-      <label>Total available: ({total || 'unknown'})</label>
+      <label>Total available: {total || 'unknown'}</label>
       <button type='button' onClick={() => setOffset(0)}>React Search</button>
       {results &&
         <InfiniteScroll
