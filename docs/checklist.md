@@ -6,6 +6,8 @@ Checklist for front end development to keep track of front end milestone. List o
 
 ✅ Done
 
+❗️ Partly done
+
 ❌ Todo
 
 ❌❌ Depends on AEM (Needs to build in AEM)
@@ -16,14 +18,15 @@ Checklist for front end development to keep track of front end milestone. List o
 
 Base elements styling when it is build within AEM Universal Editor
 
-| Type                      | Status | Reason                    | Link to check                                                                                                           |
-| ------------------------- | ------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Font family               | ✅     |                           | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/typography.html) |
-| Responsive                | ✅     |                           |
-| Brand colour              | ✅     |                           |
-| [Typography](#typography) | ❌     | Not all variant available | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/typography.html) |
-| [Button](#button)         | ❌     | Not all variant available | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html)     |
-| [Form](#form)             | ❌     | Not all variant available | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html)      |
+| Type                      | Status | Reason                         | Link to check                                                                                                           |
+| ------------------------- | ------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Font family               | ✅     |                                | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/typography.html) |
+| Responsive                | ✅     |                                |
+| Brand colour              | ✅     |                                |
+| Spacing                   | ❗️    | Only generic spacing variables |
+| [Typography](#typography) | ❌     | Not all variant available      | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/typography.html) |
+| [Button](#button)         | ❌     | Not all variant available      | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/button.html)     |
+| [Form](#form)             | ❌     | Not all variant available      | [🔗](https://author-p137277-e1382426.adobeaemcloud.com/content/edge-forms-rebecca/index/user-interface/forms.html)      |
 
 ### Typography
 
