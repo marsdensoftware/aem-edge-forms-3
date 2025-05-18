@@ -50,12 +50,12 @@ function ReactTestHeader() {
   };
 
   const search = async () => {
-    const newResults = searchResults({...pager, total: total, offset: offset});
+    const newResults = await searchResults({...pager, total: total, offset: offset});
     //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
-    setResults([...(results || []).concat(newResults.users)]);
+    setResults([...results.concat(newResults.users)]);
     console.log('new res', newResults, newResults.users);
-    console.log('users', [...(results || []).concat(newResults.users)]);
-    console.log('user ids', [...(results || []).concat(newResults.users)].map((row) => row))
+    console.log('users', [...results.concat(newResults.users)]);
+    console.log('user ids', [...results.concat(newResults.users)].map((row) => row))
     setTotal(newResults.total);
   };
 

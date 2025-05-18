@@ -27823,18 +27823,22 @@ function ReactTestHeader() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            newResults = searchResults(_objectSpread(_objectSpread({}, pager), {}, {
+            _context.next = 2;
+            return searchResults(_objectSpread(_objectSpread({}, pager), {}, {
               total: total,
               offset: offset
-            })); //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
-            setResults(_toConsumableArray((results || []).concat(newResults.users)));
+            }));
+          case 2:
+            newResults = _context.sent;
+            //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
+            setResults(_toConsumableArray(results.concat(newResults.users)));
             console.log('new res', newResults, newResults.users);
-            console.log('users', _toConsumableArray((results || []).concat(newResults.users)));
-            console.log('user ids', _toConsumableArray((results || []).concat(newResults.users)).map(function (row) {
+            console.log('users', _toConsumableArray(results.concat(newResults.users)));
+            console.log('user ids', _toConsumableArray(results.concat(newResults.users)).map(function (row) {
               return row;
             }));
             setTotal(newResults.total);
-          case 6:
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -27907,7 +27911,7 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on the next commit after ' + "db5bd96");
+          console.log('React running on the next commit after ' + "50e64d5");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
