@@ -2,11 +2,11 @@
     background-color:aquamarine;
 }
 
-.panel-repeatable-panel [data-repeatable]{
+.panel-repeatable-panel [data-repeatable].saved{
     display: none;
 }
 
-.panel-repeatable-panel [data-repeatable].edit-mode{
+.panel-repeatable-panel [data-repeatable]:not(.saved){
     display: block;
 }
 

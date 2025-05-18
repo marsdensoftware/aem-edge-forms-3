@@ -28,15 +28,27 @@ function addButtonCancel(panel) {
 }
 
 function renderOverview(panel) {
-    const entries = panel.querySelectorAll('[data-repeatable].saved');
+    const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
     const div = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach
     div.innerHTML = '';
+    if (savedEntries.length > 0) {
+        div.innerHTML = '<ol>';
 
-    entries.forEach((el, index) => {
-        div.innerHTML += `<ol><li>${el.dataset.id}</li></ol>`;
+        savedEntries.forEach((el, index) => {
+            div.innerHTML += `<li>${el.dataset.id}</li>`;
+        });
+
+        div.innerHTML += '</ol>';
+    }
+
+    // unsaved
+    const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
+    unsavedEntries.forEach(el => {
+        el.classList.add('edit-mode');
     });
+
 }
 
 function toggleEditMode(entry, visible) {
@@ -81,7 +93,7 @@ export default function decorate(el, field, container) {
 
                         const saveBtn = addButtonSave(panel);
                         saveBtn.addEventListener('click', () => {
-                            const entry = panel.querySelector('[data-repeatable].edit-mode');
+                            const entry = panel.querySelector('[data-repeatable].current');
                             // Mark as saved
                             entry.classList.add('saved');
                             toggleEditMode(entry, false);
@@ -91,7 +103,7 @@ export default function decorate(el, field, container) {
 
                         const cancelBtn = addButtonCancel(panel);
                         cancelBtn.addEventListener('click', () => {
-                            const entry = panel.querySelector('[data-repeatable].edit-mode');
+                            const entry = panel.querySelector('[data-repeatable].current');
                             toggleEditMode(entry, false);
                             // TODO: If new one then remove. 
                             // If saved one then reset changes.
