@@ -41,7 +41,11 @@ function entryToReadableString(entry) {
     return '<ul>' + entries.join('') + '</ul>';
 }
 
-function renderOverview(panel) {
+async function renderOverview(panel) {
+    const renderer = panel.closest('.panel-repeatable-panel').dataset.renderer;
+    if (renderer) {
+        await import(`./renderers/${renderer}.js`)
+    }
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
     const div = panel.querySelector('.overview');
@@ -115,7 +119,7 @@ function toggleEditMode(entry, visible) {
     ensureButtonBar(entry);
 }
 
-export default function decorate(el, field, container) {
+export default async function decorate(el, field, container) {
 
     const targetNode = document.querySelector('.form.block');
 
