@@ -32,10 +32,10 @@ function entryToReadableString(entry) {
             if (associated) label = associated.textContent.trim();
         }
 
-        return `${label || input.name || input.id || 'unnamed'}: ${value}`;
+        return `<li>${label || input.name || input.id || 'unnamed'}: ${value}</li>`;
     }).filter(line => line.includes(': ') && line.split(': ')[1] !== '');
 
-    return entries.join('\n');
+    return '<ul>'+entries.join('')+'</ul>';
 }
 
 function renderOverview(panel) {
@@ -49,7 +49,7 @@ function renderOverview(panel) {
 
         savedEntries.forEach((entry, index) => {
             const readable = entryToReadableString(entry);
-            div.innerHTML += `<li><div>${entry.dataset.id}: ${readable}</div></li>`;
+            div.innerHTML += `<li><p>${entry.dataset.id}</p>${readable}</li>`;
         });
 
         div.innerHTML += '</ol>';
