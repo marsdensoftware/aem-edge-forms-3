@@ -16,7 +16,10 @@ function entryToReadableString(entry) {
     const entries = Array.from(inputs).map(input => {
         let value;
 
-        if (input.type === 'checkbox' || input.type === 'radio') {
+        if (input.tagName === 'SELECT') {
+            value = input.options[input.selectedIndex]?.text.trim() || '';
+        }
+        else if (input.type === 'checkbox' || input.type === 'radio') {
             value = input.checked ? input.value : '';
         } else {
             value = input.value;
@@ -25,7 +28,7 @@ function entryToReadableString(entry) {
         // Find associated label
         let label = '';
         if (input.id) {
-            const associated = el.querySelector(`label[for="${input.id}"]`);
+            const associated = entry.querySelector(`label[for="${input.id}"]`);
             if (associated) label = associated.textContent.trim();
         }
 
@@ -46,7 +49,7 @@ function renderOverview(panel) {
 
         savedEntries.forEach((entry, index) => {
             const readable = entryToReadableString(entry);
-            div.innerHTML += `<li><div>${el.dataset.id}: ${readable}</div></li>`;
+            div.innerHTML += `<li><div>${entry.dataset.id}: ${readable}</div></li>`;
         });
 
         div.innerHTML += '</ol>';
