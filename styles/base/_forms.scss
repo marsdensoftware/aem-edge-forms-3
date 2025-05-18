@@ -2,13 +2,13 @@
 // TODO: as this grew bigger, could potentially break up into it's own file
 // IE: _checkboxes.scss, _radios.scss
 
-// Default style
-label,
-input[type='text'],
-input[type='radio'],
-input[type='checkbox'] {
-  cursor: pointer;
-}
+  // Default style
+  label,
+  input[type='text'],
+  input[type='radio'],
+  input[type='checkbox'] {
+    cursor: pointer;
+  }
 
 fieldset {
   border: 0;
