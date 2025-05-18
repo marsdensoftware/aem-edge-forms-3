@@ -81,7 +81,7 @@ function ReactTestHeader() {
           }
         }}
         hasMore={true}
-        loader={<h4>Loading...</h4>}
+        //loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>
@@ -90,15 +90,13 @@ function ReactTestHeader() {
       >
         <table>
           <tbody>
-                   results.map((row) => (<tr key={row.id}>
-                                                            Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-                                         </tr>))
+            results.map((row) => (row && <tr key={row.id}>JSON.stringify(row)</tr>))
           </tbody>
         </table>
       </InfiniteScroll>}
     </div>
   );
-}
+}//Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
 
 export default async function decorate(block) {
   const div0 = document.createElement('div');

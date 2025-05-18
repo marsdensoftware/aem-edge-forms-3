@@ -27874,19 +27874,19 @@ function ReactTestHeader() {
         }
       }, _callee2);
     })),
-    hasMore: true,
-    loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Loading..."),
+    hasMore: true
+    //loader={<h4>Loading...</h4>}
+    ,
     endMessage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       style: {
         textAlign: 'center'
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, "results.map((row) => (", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, "results.map((row) => (row && ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
     key: row.id
-  }, "Object.entries(row).map(([name, value]) => ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-    key: name
-  }, (typeof value === "undefined" ? "undefined" : _typeof(value)) !== 'object' ? value : JSON.stringify(value)), ")"), "))"))));
-}
+  }, "JSON.stringify(row)"), "))"))));
+} //Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+
 function decorate(_x2) {
   return _decorate.apply(this, arguments);
 }
@@ -27902,7 +27902,7 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on ' + "926becd");
+          console.log('React running on ' + "0e44654");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
