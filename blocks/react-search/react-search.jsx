@@ -76,7 +76,7 @@ function ReactTestHeader() {
       {results &&
         <InfiniteScroll
         dataLength={total}
-        next={async () => {
+        next={() => {
           const next = nextPage(total, offset, pager.pageSize);
           console.log('more?:', next);
           if (next !== null) {

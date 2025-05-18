@@ -27763,11 +27763,11 @@ function searchResults(_x) {
   return _searchResults.apply(this, arguments);
 } // eslint-disable-next-line no-unused-vars
 function _searchResults() {
-  _searchResults = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(pager) {
-    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+  _searchResults = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(pager) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _context4.next = 2;
+          _context3.next = 2;
           return fetch("https://dummyjson.com/users?".concat(pager.pageSizeArg, "=").concat(pager.pageSize, "&").concat(pager.offsetArg, "=").concat(pager.offset, "&select=id,firstName,lastName,age,gender,birthDate,company")).then(function (r) {
             if (!r.ok) {
               throw new Error("Received: ".concat(r.status));
@@ -27777,12 +27777,12 @@ function _searchResults() {
             return console.log("Error: ".concat(e.message));
           });
         case 2:
-          return _context4.abrupt("return", _context4.sent);
+          return _context3.abrupt("return", _context3.sent);
         case 3:
         case "end":
-          return _context4.stop();
+          return _context3.stop();
       }
-    }, _callee4);
+    }, _callee3);
   }));
   return _searchResults.apply(this, arguments);
 }
@@ -27881,22 +27881,13 @@ function ReactTestHeader() {
     }
   }, "React Search"), results && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_infinite_scroll_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataLength: total,
-    next: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-      var next;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) switch (_context3.prev = _context3.next) {
-          case 0:
-            next = nextPage(total, offset, pager.pageSize);
-            console.log('more?:', next);
-            if (next !== null) {
-              setOffset(next);
-            }
-          case 3:
-          case "end":
-            return _context3.stop();
-        }
-      }, _callee3);
-    })),
+    next: function next() {
+      var next = nextPage(total, offset, pager.pageSize);
+      console.log('more?:', next);
+      if (next !== null) {
+        setOffset(next);
+      }
+    },
     hasMore: true
     //loader={<h4>Loading...</h4>}
     ,
@@ -27909,10 +27900,10 @@ function ReactTestHeader() {
     console.log('row', results, row);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: row.id
-    }, Object.entries(row).map(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 2),
-        name = _ref4[0],
-        value = _ref4[1];
+    }, Object.entries(row).map(function (_ref2) {
+      var _ref3 = _slicedToArray(_ref2, 2),
+        name = _ref3[0],
+        value = _ref3[1];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
         key: name
       }, _typeof(value) !== 'object' ? value : JSON.stringify(value));
@@ -27923,10 +27914,10 @@ function decorate(_x3) {
   return _decorate.apply(this, arguments);
 }
 function _decorate() {
-  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(block) {
+  _decorate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(block) {
     var div0, div1, domNode, root;
-    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           div0 = document.createElement('div');
           div0.id = 'div0';
@@ -27934,15 +27925,15 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
-          console.log('React running on the next commit after ' + "6b7739b");
+          console.log('React running on the next commit after ' + "4b91872");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
         case 10:
         case "end":
-          return _context5.stop();
+          return _context4.stop();
       }
-    }, _callee5);
+    }, _callee4);
   }));
   return _decorate.apply(this, arguments);
 }
