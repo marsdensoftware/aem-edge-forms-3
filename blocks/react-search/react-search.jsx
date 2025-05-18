@@ -70,7 +70,7 @@ function ReactTestHeader() {
       <p>{total}</p>
       <button type="button" onClick={search}>React Search</button>
       {results &&
-      <InfiniteScroll
+        <InfiniteScroll
         dataLength={total}
         next={async () => {
           const next = nextPage(total, offset, pager.pageSize);
@@ -90,7 +90,13 @@ function ReactTestHeader() {
       >
         <table>
           <tbody>
-            results.map((row) => (row && <tr key={row.id}>JSON.stringify(row)</tr>))
+            {
+              results.map((row) => {
+                console.log('row', row);
+                let rid = row.id;
+                return (<tr key={rid}>JSON.stringify(row)</tr>);
+              })
+            }
           </tbody>
         </table>
       </InfiniteScroll>}
@@ -108,7 +114,7 @@ export default async function decorate(block) {
   div0.append(div1);
   block.append(div0);
 
-  console.log('React running on ' + __COMMIT_HASH__);
+  console.log('React running on the next commit after ' + __COMMIT_HASH__);
   const domNode = document.getElementById('test-root');
   const root = createRoot(domNode);
   root.render(<ReactTestHeader />);
