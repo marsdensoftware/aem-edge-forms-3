@@ -105,6 +105,7 @@ export default async function decorate(el, field, container) {
                         console.log('Form is loaded:');
                         const panel = el.closest('.repeat-wrapper');
                         panel.classList.add('panel-repeatable-panel');
+                        panel.dataset.renderer = field.properties.renderer;
 
                         const form = panel.closest('form');
 
