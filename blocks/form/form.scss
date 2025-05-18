@@ -160,14 +160,14 @@ main .form form .field-invalid .field-description {
 //   flex-wrap: wrap;
 // }
 
-main .form select {
-  padding-top: 0;
-  padding-bottom: 0;
-}
+// main .form select {
+//   padding-top: 0;
+//   padding-bottom: 0;
+// }
 
 // main .form input,
-main .form textarea,
-main .form select {
+// main .form select
+main .form textarea {
   background-color: var(--form-input-background-color);
   border: var(--form-input-border-size) solid var(--form-input-border-color);
   width: 100%;
@@ -472,8 +472,8 @@ main .submit-wrapper {
   }
 }
 
+// main .form select:disabled,
 main .form textarea:disabled,
-main .form select:disabled,
 main .form button:disabled {
   background-color: var(--form-input-disable-color);
 }
