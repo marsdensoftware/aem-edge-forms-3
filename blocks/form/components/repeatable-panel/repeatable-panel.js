@@ -11,6 +11,30 @@ function createButton(label, icon) {
     return button;
 }
 
+function entryToReadableString(entry) {
+    const inputs = entry.querySelectorAll('input, select, textarea');
+    const entries = Array.from(inputs).map(input => {
+        let value;
+
+        if (input.type === 'checkbox' || input.type === 'radio') {
+            value = input.checked ? input.value : '';
+        } else {
+            value = input.value;
+        }
+
+        // Find associated label
+        let label = '';
+        if (input.id) {
+            const associated = el.querySelector(`label[for="${input.id}"]`);
+            if (associated) label = associated.textContent.trim();
+        }
+
+        return `${label || input.name || input.id || 'unnamed'}: ${value}`;
+    }).filter(line => line.includes(': ') && line.split(': ')[1] !== '');
+
+    return entries.join('\n');
+}
+
 function renderOverview(panel) {
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
@@ -20,8 +44,9 @@ function renderOverview(panel) {
     if (savedEntries.length > 0) {
         div.innerHTML = '<ol>';
 
-        savedEntries.forEach((el, index) => {
-            div.innerHTML += `<li>${el.dataset.id}</li>`;
+        savedEntries.forEach((entry, index) => {
+            const readable = entryToReadableString(entry);
+            div.innerHTML += `<li><div>${el.dataset.id}: ${readable}</div></li>`;
         });
 
         div.innerHTML += '</ol>';
