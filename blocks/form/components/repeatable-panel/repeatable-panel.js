@@ -19,16 +19,17 @@ async function renderOverview(panel) {
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
     const div = panel.querySelector('.overview');
-    // For now reset everything. Later implement a more efficient/targeted approach
-    div.innerHTML = '';
+    // For now reset everything. Later implement a more efficient/targeted approach;
     if (savedEntries.length > 0) {
-        div.innerHTML = '<ol>';
+        let content = '<ol>';
 
         savedEntries.forEach((entry, index) => {
-            div.innerHTML += renderer.default(entry);
+            content += renderer.default(entry);
         });
 
-        div.innerHTML += '</ol>';
+        content += '</ol>';
+        
+        div.innerHTML = content;
     }
 
     // unsaved
