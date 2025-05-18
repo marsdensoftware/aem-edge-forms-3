@@ -11,22 +11,6 @@ function createButton(label, icon) {
     return button;
 }
 
-function addButtonSave(panel) {
-    const btn = createButton('Save', 'save');
-
-    panel.querySelector('.repeat-actions')?.append(btn);
-
-    return btn;
-}
-
-function addButtonCancel(panel) {
-    const btn = createButton('Cancel', 'cancel');
-
-    panel.querySelector('.repeat-actions')?.append(btn);
-
-    return btn;
-}
-
 function renderOverview(panel) {
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
@@ -46,21 +30,58 @@ function renderOverview(panel) {
     // unsaved
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
     unsavedEntries.forEach(el => {
-        el.classList.add('edit-mode');
+        toggleEditMode(el, true);
     });
 
+}
+
+function ensureButtonBar(entry) {
+    let buttonBar = entry.querySelector('.button-bar');
+    if (buttonBar) {
+        return;
+    }
+
+    const panel = entry.closest('.panel-repeatable-panel');
+
+    buttonBar = document.createElement('div');
+    buttonBar.className = 'button-bar';
+    el.appendChild(buttonBar);
+
+    const saveBtn = createButton('Save', 'save');
+    saveBtn.addEventListener('click', () => {
+        // Mark as saved
+        entry.classList.add('saved');
+        toggleEditMode(entry, false);
+
+        renderOverview(panel);
+    });
+
+    const cancelBtn = createButton('Cancel', 'cancel');
+    cancelBtn.addEventListener('click', () => {
+        toggleEditMode(entry, false);
+        // TODO: If new one then remove. 
+        // If saved one then reset changes.
+        entry.remove();
+
+        renderOverview(panel);
+    });
+
+    buttonBar.appendChild(saveBtn);
+    buttonBar.appendChild(cancelBtn);
 }
 
 function toggleEditMode(entry, visible) {
     const panel = entry.closest('.panel-repeatable-panel');
     if (visible) {
-        panel.classList.add('edit-mode');
-        entry.classList.add('edit-mode');
+        entry.classList.add('current');
+        panel.classList.add('editing');
     }
     else {
-        panel.classList.remove('edit-mode');
-        entry.classList.remove('edit-mode');
+        entry.classList.remove('current');
+        panel.classList.remove('editing');
     }
+
+    ensureButtonBar(entry);
 }
 
 export default function decorate(el, field, container) {
@@ -88,28 +109,8 @@ export default function decorate(el, field, container) {
                             // Event does not carry information about the entry added, so select the last one from the list
                             // Todo update repeat.js ootb code to carry the element added in the event
                             const entry = panel.querySelector(':scope [data-repeatable]:last-of-type');
+
                             toggleEditMode(entry, true);
-                        });
-
-                        const saveBtn = addButtonSave(panel);
-                        saveBtn.addEventListener('click', () => {
-                            const entry = panel.querySelector('[data-repeatable].current');
-                            // Mark as saved
-                            entry.classList.add('saved');
-                            toggleEditMode(entry, false);
-
-                            renderOverview(panel);
-                        });
-
-                        const cancelBtn = addButtonCancel(panel);
-                        cancelBtn.addEventListener('click', () => {
-                            const entry = panel.querySelector('[data-repeatable].current');
-                            toggleEditMode(entry, false);
-                            // TODO: If new one then remove. 
-                            // If saved one then reset changes.
-                            entry.remove();
-
-                            renderOverview(panel);
                         });
 
                         // create overview
