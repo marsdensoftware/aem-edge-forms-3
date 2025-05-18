@@ -53,6 +53,8 @@ function ReactTestHeader() {
     const newResults = searchResults({...pager, total: total, offset: offset});
     //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
+    console.log('users', [...results.concat(newResults.users)]);
+    console.log('user ids', [...results.concat(newResults.users)].map((row) => row))
     setTotal(newResults.total);
   };
 
@@ -88,9 +90,9 @@ function ReactTestHeader() {
       >
         <table>
           <tbody>
-            results.map((row) => <tr key={row.id}>
-              Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
-            </tr>)
+                   results.map((row) => (<tr key={row.id}>
+                                                            Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
+                                         </tr>))
           </tbody>
         </table>
       </InfiniteScroll>}
@@ -108,6 +110,7 @@ export default async function decorate(block) {
   div0.append(div1);
   block.append(div0);
 
+  console.log('React running on ' + __COMMIT_HASH__);
   const domNode = document.getElementById('test-root');
   const root = createRoot(domNode);
   root.render(<ReactTestHeader />);

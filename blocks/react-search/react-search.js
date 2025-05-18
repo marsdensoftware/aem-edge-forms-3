@@ -27828,8 +27828,12 @@ function ReactTestHeader() {
               offset: offset
             })); //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
             setResults(_toConsumableArray(results.concat(newResults.users)));
+            console.log('users', _toConsumableArray(results.concat(newResults.users)));
+            console.log('user ids', _toConsumableArray(results.concat(newResults.users)).map(function (row) {
+              return row;
+            }));
             setTotal(newResults.total);
-          case 3:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -27877,11 +27881,11 @@ function ReactTestHeader() {
         textAlign: 'center'
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Yay! You have seen it all"))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, "results.map((row) => ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, "results.map((row) => (", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
     key: row.id
   }, "Object.entries(row).map(([name, value]) => ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
     key: name
-  }, (typeof value === "undefined" ? "undefined" : _typeof(value)) !== 'object' ? value : JSON.stringify(value)), ")"), ")"))));
+  }, (typeof value === "undefined" ? "undefined" : _typeof(value)) !== 'object' ? value : JSON.stringify(value)), ")"), "))"))));
 }
 function decorate(_x2) {
   return _decorate.apply(this, arguments);
@@ -27898,10 +27902,11 @@ function _decorate() {
           div1.id = 'test-root';
           div0.append(div1);
           block.append(div0);
+          console.log('React running on ' + "926becd");
           domNode = document.getElementById('test-root');
           root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
           root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ReactTestHeader, null));
-        case 9:
+        case 10:
         case "end":
           return _context4.stop();
       }
