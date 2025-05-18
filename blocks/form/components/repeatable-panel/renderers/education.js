@@ -28,7 +28,7 @@ function entryToReadableString(entry) {
     return '<ul>' + entries.join('') + '</ul>';
 }
 
-export default async function render(entry) {
+export default function render(entry) {
     const readable = entryToReadableString(entry);
 
     return `<li><p>${entry.dataset.id}</p>${readable}</li>`;
