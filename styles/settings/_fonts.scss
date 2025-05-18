@@ -87,3 +87,13 @@ $size-font-body-large: 18px;
   line-height: 160%;
   text-decoration: underline;
 }
+
+p {
+  margin: 0 0 40px 0; // standard bottom margin for spacing below the paragraph RW
+
+  // Add top spacing *between* stacked paragraphs
+  & + p {
+    margin-top: $spacing-400;
+  }
+}
+
