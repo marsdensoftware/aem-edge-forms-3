@@ -64,6 +64,7 @@
       "formoutputfield",
       "formwelcome",
       "formcontextualhelp",
+      "formtabs",
       "number-input",
       "panel",
       "password",

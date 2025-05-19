@@ -1,0 +1,17 @@
+/* Tabs styling */
+main .form fieldset.formtabs legend {
+    display: none;
+}
+
+main .form fieldset.formtabs>fieldset.formtab {
+    display: none;
+}
+
+main .form fieldset.formtabs>.navitems>li {
+    display: none;
+}
+
+main .form fieldset.formtabs>.navitems>li.navitem-current,
+main .form fieldset.formtabs>fieldset.formtab.formtab-current {
+    display: block;
+}
