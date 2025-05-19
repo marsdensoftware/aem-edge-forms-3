@@ -7,11 +7,11 @@ main .form:not(.edit-mode) fieldset.formtabs>fieldset.formtab {
     display: none;
 }
 
-main .form.edit-mode fieldset.formtabs>.navitems{
+main .form.edit-mode fieldset.formtabs>.navitems {
     display: none;
 }
 
-main .form:not(.edit-mode) fieldset.formtabs>.navitems{
+main .form:not(.edit-mode) fieldset.formtabs>.navitems {
     display: block;
 }
 
@@ -19,7 +19,11 @@ main .form:not(.edit-mode) fieldset.formtabs>.navitems>li {
     background-color: aqua;
 }
 
-main .form:not(.edit-mode) fieldset.formtabs>.navitems>li.navitem-current,
-main .form:not(.edit-mode) fieldset.formtabs>fieldset.formtab.formtab-current {
+main .form:not(.edit-mode) fieldset.formtabs>.navitems>li.navitem-current {
     background-color: blue;
+}
+
+
+main .form:not(.edit-mode) fieldset.formtabs>fieldset.formtab.formtab-current {
+    display: block;
 }
