@@ -2,7 +2,7 @@
     "definitions": [
         {
             "title": "Tabs",
-            "id": "tabs",
+            "id": "formtabs",
             "plugins": {
                 "xwalk": {
                     "page": {
@@ -10,7 +10,7 @@
                         "template": {
                             "jcr:title": "Tabs",
                             "fieldType": "panel",
-                            "fd:viewType": "tabs",
+                            "fd:viewType": "formtabs",
                             "minOccur": 1,
                             "panel1": {
                                 "jcr:title": "Item 1",
@@ -30,7 +30,7 @@
     ],
     "models": [
         {
-            "id": "tabs",
+            "id": "formtabs",
             "fields": [
                 {
                     "component": "container",

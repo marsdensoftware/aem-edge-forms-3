@@ -16,14 +16,15 @@ export function handleTabNavigation(panel, tab, index) {
 }
 
 export default function decorate(panel) {
-    panel.classList.add('tabs');
+    panel.classList.add('formtabs');
     const tabs = panel?.querySelectorAll(':scope > fieldset');
     const tabHeader = document.createElement('ul');
     tabHeader.classList.add('navitems');
+    panel.prepend(tabHeader);
 
     tabs?.forEach((tab, index) => {
         tab.dataset.index = index;
-        tab.classList.add('tab');
+        tab.classList.add('formtab');
         const legend = tab.querySelector(':scope > legend');
         const li = document.createElement('li');
         li.textContent = legend.textContent;
