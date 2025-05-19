@@ -101,6 +101,51 @@ fieldset {
   align-items: center;
 }
 
+
+// email input RW
+.email-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .field-label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: $text-secondary;
+    font-family: $font-family;
+  }
+
+  input[type='email'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    align-self: stretch;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    background: $bg-light-secondary;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+    color: $text-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+  }
+}
+
+
 /********************
         CHECKBOX
 ********************/
