@@ -66,7 +66,7 @@ function ReactTestHeader() {
     type: "button",
     onClick: () => setOffset(0)
   }, "React Search"), results && /*#__PURE__*/React.createElement(InfiniteScroll, {
-    dataLength: total,
+    dataLength: offset,
     next: () => {
       const next = nextPage(total, offset, pager.pageSize);
       console.log('more?:', next);

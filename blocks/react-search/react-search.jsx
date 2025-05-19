@@ -75,7 +75,7 @@ function ReactTestHeader() {
       <button type='button' onClick={() => setOffset(0)}>React Search</button>
       {results &&
         <InfiniteScroll
-        dataLength={total}
+        dataLength={offset}
         next={() => {
           const next = nextPage(total, offset, pager.pageSize);
           console.log('more?:', next);
@@ -90,7 +90,7 @@ function ReactTestHeader() {
             <b>Yay! You have seen it all</b>
           </p>
         }
-      >
+        >
         <table>
           <tbody>
             {
