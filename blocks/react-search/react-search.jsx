@@ -83,7 +83,7 @@ function ReactTestHeader() {
               setOffset(next);
             }
           }}
-          hasMore={total === null || total > results.length}
+          hasMore={total !== null && total > results.length}
           loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>

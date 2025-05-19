@@ -74,7 +74,7 @@ function ReactTestHeader() {
         setOffset(next);
       }
     },
-    hasMore: total === null || total > results.length,
+    hasMore: total !== null && total > results.length,
     loader: /*#__PURE__*/React.createElement("h4", null, "Loading..."),
     endMessage: /*#__PURE__*/React.createElement("p", {
       style: {
