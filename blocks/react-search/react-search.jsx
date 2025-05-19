@@ -1,9 +1,9 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
-//import React from 'react';
+import * as React from 'react';
 //import React, { useState, useEffect } from 'react';
 //import { createRoot } from 'react-dom/client';
-//import * as ReactDOM from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -20,9 +20,9 @@ async function searchResults(pager) {
 
 // eslint-disable-next-line no-unused-vars
 function ReactTestHeader() {
-  const [results, setResults] = useState([]);
-  const [total, setTotal] = useState(null);
-  const [offset, setOffset] = useState(null);
+  const [results, setResults] = React.useState([]);
+  const [total, setTotal] = React.useState(null);
+  const [offset, setOffset] = React.useState(null);
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
@@ -60,7 +60,7 @@ function ReactTestHeader() {
     setTotal(newResults.total);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (offset === null) {
       return;
     }
@@ -122,6 +122,6 @@ export default async function decorate(block) {
 
   console.log('React running on the next commit after ' + __COMMIT_HASH__);
   const domNode = document.getElementById('test-root');
-  const root = createRoot(domNode);
+  const root = ReactDOM.createRoot(domNode);
   root.render(<ReactTestHeader />);
 }
