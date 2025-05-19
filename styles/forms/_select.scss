@@ -1,0 +1,58 @@
+@use '../settings' as *;
+@use '../base/forms' as *;
+
+.drop-down-wrapper {
+  label {
+    @extend %label-common-style;
+  }
+
+  select {
+    cursor: pointer;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    padding: $spacing-400;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    appearance: base-select;
+    width: 100%;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover,
+    &:active {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+
+    &::picker(select) {
+      appearance: base-select;
+      border: none;
+    }
+
+    &::picker-icon {
+      transition: 0.4s rotate;
+    }
+
+    &:open::picker-icon {
+      rotate: 180deg;
+    }
+
+    option {
+      cursor: pointer;
+      padding: $spacing-200;
+      color: $text-secondary;
+
+      &:hover {
+        color: $text-primary;
+        background-color: $color-shade-blue-10;
+      }
+
+      &[selected] {
+        background-color: $color-white;
+        color: $text-accent;
+      }
+    }
+  }
+}

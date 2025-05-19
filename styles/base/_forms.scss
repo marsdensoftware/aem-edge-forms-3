@@ -59,46 +59,6 @@ fieldset {
   }
 }
 
-/********************
-   INPUT TEXT
-********************/
-
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: 4px;
-    color: $text-secondary;
-  }
-
-  input[type='text'] {
-    border-radius: $border-radius-mid;
-    border: 2px solid $stroke-tertiary;
-    padding: $spacing-400;
-    background: $bg-light-secondary;
-    font-family: $font-family;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-
-    &::placeholder {
-      color: $text-secondary;
-    }
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      border-color: $stroke-accent;
-      outline: $stroke-accent;
-    }
-  }
-}
-
 %label-common-style {
   @extend %state-focus;
   color: $text-secondary;
@@ -107,7 +67,6 @@ fieldset {
   display: flex;
   align-items: center;
 }
-
 
 /********************
    INPUT EMAIL
@@ -155,187 +114,6 @@ fieldset {
   }
 }
 
-
-/********************
-        CHECKBOX
-********************/
-.checkbox-wrapper {
-  display: flex;
-  align-items: center;
-
-  label {
-    @extend %label-common-style;
-
-    &::before {
-      content: '';
-      margin-right: $spacing-200;
-      display: block;
-      width: 26px;
-      height: 26px;
-      border: 2px solid $color-shade-navy-45;
-      border-radius: $border-radius-mid;
-      background-image: none;
-      transition: all 0.1s ease-in-out;
-    }
-
-    &:hover {
-      color: $text-primary;
-
-      &::before {
-        border: 2px solid $stroke-accent;
-      }
-    }
-  }
-
-  input[type='checkbox'] {
-    @extend %visually-hidden;
-
-    &:checked {
-      + label {
-        color: $text-primary;
-
-        &::before {
-          border: 2px solid $stroke-accent;
-          background-color: $color-primary;
-          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIzSURBVHgBvZYxaBNhFMffe+ldqlMKghZBbyoGBFO36GLqpkOKq4JQdBMqTiJC7sDBrRZXBxc3LengaOwiVYR6iyg45BAqDkKDU9uY7/m9Lyam6V1yae76H5Lvu+9xP957/7t7CH2aePjxkmIoM6t5vXXgQEIfEXxltTxwi8Gek+7K/ZSjZrPCzHchQSHiE2VZGjzb+A/UMNxtvgXgAqQi9Nm2SgIl2Upm6cFEXGgzJEN33cFdqsMhiEmViJqZCiQsJ2eHXieVmSdOuJTOlA2123moXD6570yzyqR/EwXWbuV1hlm4OXss7NghSFBLV08ZWLC1A3PPvobGJAaUEi5eOGHWC6/qEDR2IDVgYfoIVObaPfPebMJa/Xdk7NhAMcnKjRmzXn73E7za5sD4SGBuMgNxtHJ9pts3r/ZjaHwoUPqxceds5PPUkZikMH20a5LG9h8YGSiZlfNTulTZfxYPhy5ePN41yb3X3yNNMhTY2G7BtRffzA2ioNK3pSunzVpMUv2yBXEVWtJOicKg5k2i96LnG7+GmiQWcBC01yRSylGF+OADDwpow84YiJgiNzlh/s8//Ry7b70a+hz2Ziow0cLL+oFgsYD90FFN0i9d0vf644tOnGApr8DHkE96qFmNGz0mTI8X6JMirsIhSamWR/CouIbAy5CyWBiPi4ExjbKzrs7Xh9SEPggDOi7V8yJbdimNTCWzzkxq0Psi7q87hOQywbkx5p1AG2RVUasqLes9+Avpc/A3WvIBkQAAAABJRU5ErkJggg==');
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: contain;
-        }
-      }
-    }
-  }
-}
-
-/********************
-        RADIO
-********************/
-
-.radio-group-wrapper {
-  display: flex;
-
-  legend {
-    @extend %label-common-style;
-  }
-}
-
-.radio-wrapper {
-  display: flex;
-
-  label {
-    @extend %label-common-style;
-    position: relative;
-
-    &:focus,
-    &::before,
-    &::after {
-      border-radius: $border-radius-round;
-    }
-
-    &::before {
-      content: '';
-      margin-right: $spacing-200;
-      display: block;
-      width: 26px;
-      height: 26px;
-      border: 2px solid $color-shade-navy-45;
-      border-radius: $border-radius-round;
-    }
-
-    &:hover {
-      color: $text-primary;
-
-      &::before {
-        border: 2px solid $stroke-accent;
-      }
-    }
-  }
-
-  input {
-    @extend %visually-hidden;
-
-    &:checked {
-      + label {
-        color: $text-primary;
-
-        &::before {
-          border-color: $stroke-accent;
-        }
-
-        &::after {
-          display: block;
-          content: '';
-          position: absolute;
-          left: 1px;
-          top: 1px;
-          width: 12px;
-          height: 12px;
-          border: 8px solid $stroke-accent;
-        }
-      }
-    }
-  }
-}
-
-/********************
-        SELECT
-********************/
-.drop-down-wrapper {
-  label {
-    @extend %label-common-style;
-  }
-
-  select {
-    cursor: pointer;
-    border-radius: $border-radius-mid;
-    border: 2px solid $stroke-tertiary;
-    padding: $spacing-400;
-    font-family: $font-family;
-    font-size: 20px;
-    line-height: 120%;
-    appearance: base-select;
-    width: 100%;
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover,
-    &:active {
-      border-color: $stroke-accent;
-      outline: $stroke-accent;
-    }
-
-    &::picker(select) {
-      appearance: base-select;
-      border: none;
-    }
-
-    &::picker-icon {
-      transition: 0.4s rotate;
-    }
-
-    &:open::picker-icon {
-      rotate: 180deg;
-    }
-
-    option {
-      cursor: pointer;
-      padding: $spacing-200;
-      color: $text-secondary;
-
-      &:hover {
-        color: $text-primary;
-        background-color: $color-shade-blue-10;
-      }
-
-      &[selected] {
-        background-color: $color-white;
-        color: $text-accent;
-      }
-    }
-  }
-}
-
 /********************
  FORM ERROR MESSAGE
 ********************/
@@ -357,8 +135,10 @@ fieldset {
     left: 0;
     width: 20px;
     height: 20px;
-    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg') no-repeat center / contain;
-    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg') no-repeat center / contain;
+    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
+      no-repeat center / contain;
+    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
+      no-repeat center / contain;
     background-color: $color-feedback-red;
   }
 }
