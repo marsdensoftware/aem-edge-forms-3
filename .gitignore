@@ -23,3 +23,6 @@ test/e2e/reports/
 LoginAuth.json
 .history/
 assets/
+
+# map
+*.map
