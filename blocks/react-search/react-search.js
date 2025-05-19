@@ -1,10 +1,9 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
-//import * as React from 'react';
-import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-//import * as ReactDOM from 'react-dom/client';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import * as React from 'react';
+//import React, { useState, useEffect } from 'react';
+//import { createRoot } from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 async function searchResults(pager) {
   return await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`).then(r => {
     if (!r.ok) {
