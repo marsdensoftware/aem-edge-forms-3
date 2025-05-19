@@ -1,8 +1,10 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
-import React, { useState, useEffect } from 'react';
+//import React from 'react';
+//import React, { useState, useEffect } from 'react';
 //import { createRoot } from 'react-dom/client';
-import * as ReactDOM from 'react-dom/client';
+//import * as ReactDOM from 'react-dom/client';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
 async function searchResults(pager) {
   return await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`).then(r => {
@@ -101,6 +103,6 @@ export default async function decorate(block) {
   block.append(div0);
   console.log('React running on the next commit after ' + __COMMIT_HASH__);
   const domNode = document.getElementById('test-root');
-  const root = ReactDOM.createRoot(domNode);
+  const root = createRoot(domNode);
   root.render(/*#__PURE__*/React.createElement(ReactTestHeader, null));
 }
