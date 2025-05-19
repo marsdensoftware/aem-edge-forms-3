@@ -1,6 +1,6 @@
-@use '../settings' as *;
-
-
+@use '../settings/spacings' as *;
+@use '../settings/fonts' as *;
+@use '../settings/colors' as *;
 
 // Temporary styles so the form is not full width - need to fix RW
 .form-wrapper {
@@ -13,6 +13,6 @@
 .form-wrapper {
   padding: $spacing-600 $spacing-400;
   font-family: $font-family;
-  font-size: $font-size-base;
+  font-size: $size-font-base;
   color: $text-primary;
 }
