@@ -8,10 +8,10 @@ main .form fieldset.formtabs>fieldset.formtab {
 }
 
 main .form fieldset.formtabs>.navitems>li {
-    display: none;
+    background-color: aqua;
 }
 
 main .form fieldset.formtabs>.navitems>li.navitem-current,
 main .form fieldset.formtabs>fieldset.formtab.formtab-current {
-    display: block;
+    background-color: blue;
 }
