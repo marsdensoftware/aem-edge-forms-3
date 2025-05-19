@@ -3,6 +3,7 @@
 */
 
 @use '../settings' as *;
+
 /* ------------------------------
    Headings
 ------------------------------ */
@@ -18,18 +19,23 @@ h6 {
 h1 {
   @include heading-level-1;
 }
+
 h2 {
   @include heading-level-2;
 }
+
 h3 {
   @include heading-level-3;
 }
+
 h4 {
   @include heading-level-4;
 }
+
 h5 {
   @include heading-level-5;
 }
+
 h6 {
   @include heading-level-6;
 }
@@ -46,6 +52,7 @@ p {
     margin-bottom: 0;
   }
 }
+
 /*Rebecca added this*/
 h1,
 h2,
@@ -59,6 +66,7 @@ h6 {
     margin-bottom: 0;
   }
 }
+
 /*Rebecca added this*/
 .subtitle {
   font-family: $font-family;
@@ -99,6 +107,7 @@ h6 {
 .p-large {
   @include font-body-large;
 }
+
 .p-small {
   @include font-body-small;
 }
