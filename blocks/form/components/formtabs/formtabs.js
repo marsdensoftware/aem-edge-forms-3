@@ -5,11 +5,11 @@ export function handleTabNavigation(panel, index) {
     tabs.forEach((otherTab, i) => {
         // new selection
         if (i == index) {
-            otherTab.classList.add('tab-current');
+            otherTab.classList.add('formtab-current');
             navItems[i].classList.add('navitem-current');
         }
         else {
-            otherTab.classList.remove('tab-current');
+            otherTab.classList.remove('formtab-current');
             navItems[i].classList.remove('navitem-current');
         }
     });
