@@ -5,8 +5,6 @@ import * as React from 'react';
 //import { createRoot } from 'react-dom/client';
 import * as ReactDOM from 'react-dom/client';
 
-import 'react-infinite-scroll-component';
-
 async function searchResults(pager) {
   return await fetch(`https://dummyjson.com/users?${pager.pageSizeArg}=${pager.pageSize}&${pager.offsetArg}=${pager.offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
     .then((r) => {
