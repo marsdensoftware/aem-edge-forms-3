@@ -45,10 +45,8 @@ function ReactTestHeader() {
       ...pager,
       offset: offset
     });
-    //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
-    console.log('new res', newResults, newResults.users);
-    console.log('users', [...results.concat(newResults.users)]);
+    console.log('new results', newResults, newResults.users);
     setTotal(newResults.total);
   };
   useEffect(() => {
@@ -85,7 +83,6 @@ function ReactTestHeader() {
       }
     }, /*#__PURE__*/React.createElement("b", null, "Yay! You have seen it all"))
   }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, results.map(row => {
-    console.log('row', results, row);
     return /*#__PURE__*/React.createElement("tr", {
       key: row.id
     }, Object.entries(row).map(([name, value]) => /*#__PURE__*/React.createElement("td", {
@@ -102,8 +99,6 @@ export default async function decorate(block) {
   block.append(div0);
   const prev = typeof __COMMIT_HASH__ === 'undefined' ? 'unknown' : __COMMIT_HASH__;
   console.log('React running on the next commit after ' + prev);
-  console.log('React object: ', React);
-  console.log('React DOM Client object: ', ReactDOMClient);
   const domNode = document.getElementById('test-root');
   const root = createRoot(domNode);
   root.render(/*#__PURE__*/React.createElement(ReactTestHeader, null));

@@ -53,10 +53,8 @@ function ReactTestHeader() {
 
   const search = async (pager) => {
     const newResults = await searchResults({...pager, offset: offset});
-    //setPager({...pager, total: newResults.total}); //  TODO this will retrigger useffect?
     setResults([...results.concat(newResults.users)]);
-    console.log('new res', newResults, newResults.users);
-    console.log('users', [...results.concat(newResults.users)]);
+    console.log('new results', newResults, newResults.users);
     setTotal(newResults.total);
   };
 
@@ -97,7 +95,6 @@ function ReactTestHeader() {
           <tbody>
             {
               results.map((row) => {
-                console.log('row', results, row);
                 return (<tr key={row.id}>{
                   Object.entries(row).map(([name, value]) => <td key={name}>{typeof value !== 'object' ? value : JSON.stringify(value)}</td>)
                 }</tr>);
@@ -122,8 +119,6 @@ export default async function decorate(block) {
 
   const prev = typeof __COMMIT_HASH__ === 'undefined' ? 'unknown' : __COMMIT_HASH__;
   console.log('React running on the next commit after ' + prev);
-  console.log('React object: ', React);
-  console.log('React DOM Client object: ', ReactDOMClient);
   const domNode = document.getElementById('test-root');
   const root = createRoot(domNode);
   root.render(<ReactTestHeader />);
