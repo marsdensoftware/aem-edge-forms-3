@@ -5,6 +5,7 @@
     Pre-defined mixins
 */
 @use './breakpoints' as *;
+@use './spacings' as *;
 
 $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 $size-font-base: 16px;
@@ -96,4 +97,3 @@ p {
     margin-top: $spacing-400;
   }
 }
-
