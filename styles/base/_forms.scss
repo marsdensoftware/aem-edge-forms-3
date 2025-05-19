@@ -2,7 +2,9 @@
 // TODO: as this grew bigger, could potentially break up into it's own file
 // IE: _checkboxes.scss, _radios.scss
 
-// Default style
+/********************
+   INPUT DEFAULT
+********************/
 label,
 input[type='text'],
 input[type='radio'],
@@ -14,7 +16,9 @@ fieldset {
   border: 0;
 }
 
-// Number
+/********************
+   INPUT NUMBER
+********************/
 .number-wrapper {
   display: flex;
   flex-direction: column;
@@ -55,7 +59,10 @@ fieldset {
   }
 }
 
-// Input fields text
+/********************
+   INPUT TEXT
+********************/
+
 .text-wrapper {
   display: flex;
   flex-direction: column;
@@ -102,7 +109,10 @@ fieldset {
 }
 
 
-// email input RW
+/********************
+   INPUT EMAIL
+********************/
+
 .email-wrapper {
   display: flex;
   flex-direction: column;
@@ -323,5 +333,32 @@ fieldset {
         color: $text-accent;
       }
     }
+  }
+}
+
+/********************
+ FORM ERROR MESSAGE
+********************/
+
+.field-wrapper.field-invalid .field-description {
+  position: relative;
+  padding-left: 28px;
+  margin-top: $spacing-200;
+  color: $color-feedback-red;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: $font-family;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg') no-repeat center / contain;
+    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg') no-repeat center / contain;
+    background-color: $color-feedback-red;
   }
 }
