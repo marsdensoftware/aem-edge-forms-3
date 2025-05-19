@@ -1,7 +1,8 @@
 /* eslint-disable */
 // eslint-disable-next-line import/extensions
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
+//import { createRoot } from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -120,6 +121,6 @@ export default async function decorate(block) {
 
   console.log('React running on the next commit after ' + __COMMIT_HASH__);
   const domNode = document.getElementById('test-root');
-  const root = createRoot(domNode);
+  const root = ReactDOM.createRoot(domNode);
   root.render(<ReactTestHeader />);
 }
