@@ -75,21 +75,21 @@ function ReactTestHeader() {
       <button type='button' onClick={() => setOffset(0)}>React Search</button>
       {results &&
         <InfiniteScroll
-        dataLength={results.length}
-        next={() => {
-          const next = nextPage(total, offset, pager.pageSize);
-          console.log('more?:', next);
-          if (next !== null) {
-            setOffset(next);
+          dataLength={results.length}
+          next={() => {
+            const next = nextPage(total, offset, pager.pageSize);
+            console.log('more?:', next);
+            if (next !== null) {
+              setOffset(next);
+            }
+          }}
+          hasMore={total === null || total > results.length}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>You have reached the end of the data.</b>
+            </p>
           }
-        }}
-        hasMore={true}
-        //loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
         >
         <table>
           <tbody>

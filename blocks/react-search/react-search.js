@@ -74,14 +74,13 @@ function ReactTestHeader() {
         setOffset(next);
       }
     },
-    hasMore: true
-    //loader={<h4>Loading...</h4>}
-    ,
+    hasMore: total === null || total > results.length,
+    loader: /*#__PURE__*/React.createElement("h4", null, "Loading..."),
     endMessage: /*#__PURE__*/React.createElement("p", {
       style: {
         textAlign: 'center'
       }
-    }, /*#__PURE__*/React.createElement("b", null, "Yay! You have seen it all"))
+    }, /*#__PURE__*/React.createElement("b", null, "You have reached the end of the data."))
   }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, results.map(row => {
     return /*#__PURE__*/React.createElement("tr", {
       key: row.id
