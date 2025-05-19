@@ -54,6 +54,12 @@
         border-radius: $border-radius-low;
       }
 
+      &:focus,
+      &:focus-visible {
+        @extend %state-focus;
+        border-radius: $border-radius-low;
+      }
+
       &[selected] {
         background-color: $color-white;
         color: $text-accent;
