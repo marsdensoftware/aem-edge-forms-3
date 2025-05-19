@@ -1,10 +1,10 @@
-export function handleTabNavigation(panel, tab, index) {
+export function handleTabNavigation(panel, index) {
     const tabs = panel.querySelectorAll(':scope > fieldset');
     const navItems = panel.querySelectorAll(':scope > .navitems > li');
 
     tabs.forEach((otherTab, i) => {
         // new selection
-        if (otherTab.dataset.index == index) {
+        if (i == index) {
             otherTab.classList.add('tab-current');
             navItems[i].classList.add('navitem-current');
         }
@@ -29,12 +29,13 @@ export default function decorate(panel) {
         const navItem = document.createElement('li');
         navItem.textContent = legend.textContent;
 
-        if (index == 0) handleTabNavigation(panel, tab, 0); // first tab visible
         navItem.addEventListener('click', () => {
-            handleTabNavigation(panel, tab, index);
+            handleTabNavigation(panel, index);
         });
 
         navItems.append(navItem);
     });
+
+    handleTabNavigation(panel, 0); // first tab visible
     return panel;
 }
