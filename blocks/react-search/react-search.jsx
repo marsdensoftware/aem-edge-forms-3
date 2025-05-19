@@ -3,7 +3,7 @@
 //import * as React from 'react';
 //import * as ReactDOM from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOMClient, { createRoot } from 'react-dom/client';
 
 import * as InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -20,9 +20,9 @@ async function searchResults(pager) {
 
 // eslint-disable-next-line no-unused-vars
 function ReactTestHeader() {
-  const [results, setResults] = React.useState([]);
-  const [total, setTotal] = React.useState(null);
-  const [offset, setOffset] = React.useState(null);
+  const [results, setResults] = useState([]);
+  const [total, setTotal] = useState(null);
+  const [offset, setOffset] = useState(null);
 
   //  prev() {
   //  return this.offset > 0 ? this.offset - this.pageSize : null;
@@ -60,7 +60,7 @@ function ReactTestHeader() {
     setTotal(newResults.total);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (offset === null) {
       return;
     }
@@ -123,8 +123,8 @@ export default async function decorate(block) {
   const prev = typeof __COMMIT_HASH__ === 'undefined' ? 'unknown' : __COMMIT_HASH__;
   console.log('React running on the next commit after ' + prev);
   console.log('React object: ', React);
-  console.log('React DOM object: ', ReactDOM);
+  console.log('React DOM Client object: ', ReactDOMClient);
   const domNode = document.getElementById('test-root');
-  const root = ReactDOM.createRoot(domNode);
+  const root = createRoot(domNode);
   root.render(<ReactTestHeader />);
 }
