@@ -99,7 +99,8 @@ export default async function decorate(block) {
   div1.id = 'test-root';
   div0.append(div1);
   block.append(div0);
-  console.log('React running on the next commit after ' + __COMMIT_HASH__);
+  const prev = typeof __COMMIT_HASH__ === 'undefined' ? 'unknown' : __COMMIT_HASH__;
+  console.log('React running on the next commit after ' + prev);
   const domNode = document.getElementById('test-root');
   const root = ReactDOM.createRoot(domNode);
   root.render(/*#__PURE__*/React.createElement(ReactTestHeader, null));
