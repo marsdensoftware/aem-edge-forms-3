@@ -6,6 +6,21 @@ let commitHash = require('child_process')
   .toString()
   .trim(); // N.B. this will be the hash of the previous commit
 
+const nodeExternals = require('webpack-node-externals');
+/*
+const node_modules = fs.readdirSync('node_modules');
+
+const checkedExternals  = function(context, request, callback/*(err, result)/) {
+  const hasDir = function(dir) {
+    return request.indexOf(dir + "/") === 0 || request === dir;
+  };
+  if (node_modules.some(hasDir)) {
+    callback(null, "commonjs " + request);
+  } else {
+    callback();
+  }
+};*/
+
 module.exports = {
   experiments: {
     outputModule: true,
@@ -17,10 +32,15 @@ module.exports = {
     filename: 'react-search.js',
     path: path.resolve(__dirname, 'blocks', 'react-search'),
     clean: false,
-    library: {
-      type: 'module',
-    },
+    //library: {
+      //  type: 'module',
+      //},
   },
+  externals: [nodeExternals()]/*{
+    'react': 'react',
+    'react-dom': 'reactDOM',
+    'react-infinite-scroll-component': 'React Infinite Scroll Component',
+  }*/,
   devtool: 'source-map',
   module: {
     rules: [
