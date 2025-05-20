@@ -3951,6 +3951,39 @@
         "required": true
       },
       {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Class Name",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Strap title",
+            "value": "strap-title"
+          },
+          {
+            "name": "Strap title small",
+            "value": "strap-title-small"
+          },
+          {
+            "name": "Subtitle",
+            "value": "subtitle"
+          },
+          {
+            "name": "Large paragraph",
+            "value": "p-large"
+          },
+          {
+            "name": "Small paragraph",
+            "value": "p-small"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "dataRef",
         "label": "Bind reference",
