@@ -9,7 +9,18 @@
     "id": "section",
     "components": [
       "text",
-      "typography"
+      "typography",
+      "image",
+      "button",
+      "title",
+      "hero",
+      "cards",
+      "columns",
+      "fragment",
+      "form",
+      "embed-adaptive-form",
+      "jobseekerintro",
+      "iconwithtext"
     ]
   },
   {
