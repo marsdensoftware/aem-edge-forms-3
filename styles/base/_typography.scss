@@ -54,7 +54,6 @@ p {
 }
 
 
-
 /*Rebecca added this*/
 h1,
 h2,
@@ -69,17 +68,7 @@ h6 {
   }
 }
 
-p {
-  font-size: $size-font-base;
-  margin-bottom: 40px;
-  color: $text-secondary;
-  // margin: 0 0 40px 0; // standard bottom margin for spacing below the paragraph RW
 
-  // Add top spacing *between* stacked paragraphs
-  & + p {
-    margin-top: $spacing-400;
-  }
-}
 
 /*Rebecca added this*/
 .subtitle {
