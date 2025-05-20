@@ -44,14 +44,6 @@ h6 {
    Body text
 ------------------------------ */
 
-/*Rebecca added this*/
-p {
-  margin: 0 0 $spacing-500 0;
-
-  &:last-child {
-    margin-bottom: 2.5rem;
-  }
-}
 
 
 /*Rebecca added this*/
@@ -106,6 +98,14 @@ h6 {
 /* ------------------------------
    Paragraph Variants
 ------------------------------ */
+
+p {
+  margin: 0 0 $spacing-500 0;
+
+  &:last-child {
+    margin-bottom: 2.5rem;
+  }
+}
 
 .p-large {
   @include font-body-large;
