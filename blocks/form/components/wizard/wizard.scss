@@ -19,8 +19,6 @@
 }
 
 .wizard {
-  @extend %common-panel-spacing;
-
   .current-wizard-step {
     padding: 32px 16px 45px;
 

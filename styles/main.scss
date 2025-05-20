@@ -22,13 +22,14 @@
 // TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
 // Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
 @use './settings';
-// Components
 @use './base';
+@use './forms';
+// Components
 @use './components';
 
 /*added this for a quick demo, can remove thanks, Rebecca*/
 .default-content-wrapper {
   padding: 120px 80px;
-  width:980px;
+  width: 980px;
   margin: 0 auto;
 }

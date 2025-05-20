@@ -1,0 +1,38 @@
+@use '../settings' as *;
+@use '../base/forms' as *;
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: $text-secondary;
+  }
+
+  input[type='text'] {
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    padding: $spacing-400;
+    background: $bg-light-secondary;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+  }
+}

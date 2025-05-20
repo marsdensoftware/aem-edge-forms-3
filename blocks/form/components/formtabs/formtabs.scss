@@ -1,0 +1,67 @@
+@use '../../../../styles/settings' as *;
+
+/* Tabs styling */
+main .form {
+    >fieldset.formtab {
+        .plain-text-wrapper {
+            p {
+                color: $color-grey-black-80;
+            }
+
+            li {
+                &::marker {
+                    color: $color-grey-black-80;
+                }
+            }
+        }
+    }
+}
+
+main .form:not(.edit-mode) {
+    fieldset.formtabs {
+        legend {
+            display: none;
+        }
+
+        >fieldset.formtab {
+            display: none;
+        }
+
+        >.navitems {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            height: $spacing-700;
+        }
+
+        >.navitems>li {
+            padding: 0 $spacing-400;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        >.navitems>li.navitem-current {
+            background-color: $color-grey-black-05;
+            border-top-right-radius: $border-radius-mid;
+            border-top-left-radius: $border-radius-mid;
+        }
+
+        >fieldset.formtab.formtab-current {
+            display: block;
+            background-color: $color-grey-black-05;
+            border-top-right-radius: $border-radius-mid;
+            border-bottom-right-radius: $border-radius-mid;
+            border-bottom-left-radius: $border-radius-mid;
+            padding: $spacing-500 $spacing-400;
+        }
+    }
+}
+
+main .form.edit-mode {
+    fieldset.formtabs>.navitems {
+        display: none;
+    }
+}
