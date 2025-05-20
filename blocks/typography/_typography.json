@@ -23,10 +23,14 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "textClass",
+          "name": "classes",
           "label": "Class Name",
           "value": "",
           "options": [
+            {
+              "name": "None",
+              "value": ""
+            },
             {
               "name": "Strap title",
               "value": "strap-title"
