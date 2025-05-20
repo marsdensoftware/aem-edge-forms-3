@@ -241,7 +241,7 @@ function createPlainText(fd) {
   } else {
     paragraph.textContent = fd.value;
   }
-  
+  //###SEF-NJ Added option to render a class
   if (fd.properties?.classes) {
     paragraph.classList.add(fd.properties.classes);
   }
