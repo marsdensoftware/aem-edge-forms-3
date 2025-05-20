@@ -46,12 +46,14 @@ h6 {
 
 /*Rebecca added this*/
 p {
-  font-size: $size-font-base;
+  margin: 0 0 $spacing-500 0;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-bottom: 2.5rem;
   }
 }
+
+
 
 /*Rebecca added this*/
 h1,
