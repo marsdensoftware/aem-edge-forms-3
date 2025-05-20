@@ -90,6 +90,10 @@ function ReactTestHeader() {
   })))));
 }
 export default async function decorate(block) {
+  window.onbeforeunload = function () {
+    // or run this in scripts.js?
+    sessionStorage.clear(); // or remove only the prefix?
+  };
   // TODO check if this is async safe
   const prefix = parseInt(sessionStorage.getItem('react-block-prefix') || 0, 10) + 1;
   console.log('fetched and incremented prefix', prefix);
