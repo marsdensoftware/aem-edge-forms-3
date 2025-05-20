@@ -119,8 +119,25 @@ main .form form fieldset {
   width: 100%;
 }
 
-main .form form fieldset fieldset {
-  padding: 0;
+// main .form form fieldset fieldset {
+//   padding: 0;
+// }
+
+.panel-wrapper {
+  &.field-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 24px;
+
+    .image-wrapper picture {
+      max-width: 150px;
+
+      @include media('desktop') {
+        max-width: 300px;
+      }
+    }
+  }
 }
 
 main .form .field-description {
