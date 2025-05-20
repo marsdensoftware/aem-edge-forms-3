@@ -14,6 +14,36 @@ fieldset {
   border: 0;
 }
 
+.multiline-wrapper {
+  label {
+    margin-bottom: 8px;
+    display: block;
+  }
+}
+
+textarea {
+  width: 100%;
+  display: block;
+  border: 2px solid $stroke-tertiary;
+  border-radius: $border-radius-mid;
+  padding: $spacing-400;
+  font-family: inherit;
+  font-size: 20px;
+  color: $text-primary;
+  margin-bottom: 32px;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &:focus,
+  &:active,
+  &:focus-visible,
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
 /********************
    INPUT NUMBER
 ********************/

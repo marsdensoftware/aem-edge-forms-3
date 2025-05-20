@@ -14,6 +14,11 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
+  margin-bottom: 32px; // Temporarily
+
+  &:last-child:not(:first-child) {
+    margin-bottom: 0;
+  }
 }
 
 h1 {
@@ -44,39 +49,8 @@ h6 {
    Body text
 ------------------------------ */
 
-/*Rebecca added this*/
 p {
-  font-size: $size-font-base;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-/*Rebecca added this*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 24px 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-p {
-  font-size: $size-font-base;
-  margin-bottom: 40px;
-  color: $text-secondary;
-  // margin: 0 0 40px 0; // standard bottom margin for spacing below the paragraph RW
-
-  // Add top spacing *between* stacked paragraphs
-  & + p {
-    margin-top: $spacing-400;
-  }
+  margin-bottom: $spacing-500;
 }
 
 /*Rebecca added this*/
@@ -93,7 +67,6 @@ p {
 
 /*Rebecca added this*/
 .strap-title {
-  font-family: $font-family;
   font-size: 20px;
   line-height: 100%;
   text-transform: uppercase;
@@ -106,15 +79,10 @@ p {
 
 /*Rebecca added this*/
 .strap-title-small {
-  font-family: $font-family;
   font-size: 16px;
   line-height: 100%;
   text-transform: uppercase;
 }
-
-/* ------------------------------
-   Paragraph Variants
------------------------------- */
 
 .p-large {
   @include font-body-large;

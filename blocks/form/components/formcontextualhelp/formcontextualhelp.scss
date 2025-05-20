@@ -8,6 +8,7 @@
   background-color: #f2f2f2;
   display: block;
   border-radius: $border-radius-mid;
+  margin-bottom: 32px;
 
   > legend {
     margin-bottom: 0;
@@ -38,6 +39,10 @@
 
   .panel-formcontextualhelp__footer__link-text {
     margin-right: 12px;
+  }
+
+  .panel-formcontextualhelp__footer {
+    display: inline-block;
   }
 
   .panel-formcontextualhelp__footer__link {
