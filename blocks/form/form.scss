@@ -577,9 +577,9 @@
 // padding: 20px var(--form-wizard-padding);
 // }
 
-// main .form form .wizard > fieldset > legend {
-//   display: none;
-// }
+main .form form .wizard > fieldset > legend {
+  display: none;
+}
 
 // main .form form .wizard > fieldset:not(.current-wizard-step) {
 //   display: none;
