@@ -217,15 +217,15 @@ main .form textarea {
   min-height: 100px;
 }
 
-main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
-  font-weight: var(--form-fieldset-legend-font-weight);
-  font-size: var(--form-fieldset-legend-font-size);
-  color: var(--form-fieldset-legend-color);
-  border-bottom: var(--form-fieldset-legend-border);
-  width: 100%;
-  padding: var(--form-fieldset-legend-padding);
-  margin-bottom: 10px;
-}
+// main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
+//   font-weight: var(--form-fieldset-legend-font-weight);
+//   font-size: var(--form-fieldset-legend-font-size);
+//   color: var(--form-fieldset-legend-color);
+//   border-bottom: var(--form-fieldset-legend-border);
+//   width: 100%;
+//   padding: var(--form-fieldset-legend-padding);
+//   margin-bottom: 10px;
+// }
 
 // main .form label,
 // main .form fieldset.checkbox-group-wrapper legend,
@@ -580,13 +580,13 @@ main .form .button-wrapper button[disabled]:hover {
 // padding: 20px var(--form-wizard-padding);
 // }
 
-main .form form .wizard > fieldset > legend {
-  display: none;
-}
+// main .form form .wizard > fieldset > legend {
+//   display: none;
+// }
 
-main .form form .wizard > fieldset:not(.current-wizard-step) {
-  display: none;
-}
+// main .form form .wizard > fieldset:not(.current-wizard-step) {
+//   display: none;
+// }
 
 // main .form form .wizard .wizard-button-wrapper {
 // display: flex;

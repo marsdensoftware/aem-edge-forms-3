@@ -1,0 +1,48 @@
+/// This all fixed value at some point
+/// Needs to be replaced by variables value
+/// Once UI Design is ready to developed
+@use '../../../../styles/settings' as *;
+
+.panel-formcontextualhelp {
+  padding: 20px 14px;
+  background-color: #f2f2f2;
+  display: block;
+  border-radius: $border-radius-mid;
+
+  > legend {
+    margin-bottom: 0;
+    display: flex;
+  }
+
+  .panel-formcontextualhelp__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .panel-formcontextualhelp__icon {
+    margin-right: 12px;
+  }
+}
+
+.panel-formcontextualhelp--info {
+  .panel-formcontextualhelp__icon {
+    content: url('info-icon.png');
+    width: 24px;
+  }
+
+  .panel-formcontextualhelp__footer__link-icon {
+    content: url('external-icon.png');
+    width: 22px;
+  }
+
+  .panel-formcontextualhelp__footer__link-text {
+    margin-right: 12px;
+  }
+
+  .panel-formcontextualhelp__footer__link {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+}
