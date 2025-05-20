@@ -91,7 +91,8 @@ function ReactTestHeader() {
 }
 export default async function decorate(block) {
   // TODO check if this is async safe
-  const prefix = (sessionStorage.getItem('react-block-prefix') || 0) + 1;
+  const prefix = parseInt(sessionStorage.getItem('react-block-prefix') || 0, 10) + 1;
+  console.log('fetched and incremented prefix', prefix);
   sessionStorage.setItem('react-block-prefix', prefix);
   const div0 = document.createElement('div');
   div0.id = `${prefix}-div0`;
