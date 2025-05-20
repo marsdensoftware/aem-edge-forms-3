@@ -242,9 +242,10 @@ function createPlainText(fd) {
     paragraph.textContent = fd.value;
   }
   
-    if (fd.properties?.classes) {
-        paragraph.classList.add(fd.properties.classes);
-    }
+  if (fd.properties?.classes) {
+    paragraph.classList.add(fd.properties.classes);
+  }
+  
   const wrapper = createFieldWrapper(fd);
   wrapper.id = fd.id;
   wrapper.replaceChildren(paragraph);
