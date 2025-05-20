@@ -5749,5 +5749,46 @@
         "required": true
       }
     ]
+  },
+  {
+    "id": "typography",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "textClass",
+        "label": "Class Name",
+        "value": "",
+        "options": [
+          {
+            "name": "Strap title",
+            "value": "strap-title"
+          },
+          {
+            "name": "Strap title small",
+            "value": "strap-title-small"
+          },
+          {
+            "name": "Subtitle",
+            "value": "subtitle"
+          },
+          {
+            "name": "Large paragraph",
+            "value": "p-large"
+          },
+          {
+            "name": "Small paragraph",
+            "value": "p-small"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
   }
 ]
