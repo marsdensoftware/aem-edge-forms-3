@@ -5,6 +5,7 @@
 main .form:not(.edit-mode) {
   fieldset.formtabs {
     padding: 0;
+    margin-bottom: 32px;
 
     legend {
       display: none;
