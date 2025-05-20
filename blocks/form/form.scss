@@ -393,28 +393,6 @@
 //   box-shadow: 0 0 0 1px var(--button-primary-color);
 // }
 
-// main .form .form-image-wrapper img {
-//   max-width: 100%;
-//   height: auto;
-// }
-
-.panel-wrapper {
-  &.field-top-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 32px 24px;
-
-    .image-wrapper picture {
-      max-width: 150px;
-
-      @include media('desktop') {
-        max-width: 300px;
-      }
-    }
-  }
-}
-
 /* For cards with icons or images */
 // main .form form fieldset.cards > .checkbox-wrapper > label > img
 // main .form form fieldset.cards > .radio-wrapper > label > img {
@@ -576,10 +554,6 @@
 // gap: unset;
 // padding: 20px var(--form-wizard-padding);
 // }
-
-main .form form .wizard > fieldset > legend {
-  display: none;
-}
 
 // main .form form .wizard > fieldset:not(.current-wizard-step) {
 //   display: none;
