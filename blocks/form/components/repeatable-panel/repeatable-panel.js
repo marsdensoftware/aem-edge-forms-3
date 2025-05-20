@@ -1,5 +1,3 @@
-
-
 function createButton(label, icon) {
     const button = document.createElement('button');
     button.className = `btn-${icon}`;
@@ -8,138 +6,91 @@ function createButton(label, icon) {
     text.textContent = label;
     button.append(document.createElement('i'), text);
 
+    button.style.display = 'none';
+
     return button;
 }
 
-async function renderOverview(panel) {
-    let renderer = panel.closest('.panel-repeatable-panel').dataset.renderer;
-    if (renderer) {
-        renderer = await import(`./renderers/${renderer}.js`)
-    }
-    const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
+function addButtonSave(panel) {
+    const btn = createButton('Save', 'save');
 
-    const div = panel.querySelector('.overview');
-    // For now reset everything. Later implement a more efficient/targeted approach;
-    if (savedEntries.length > 0) {
-        let content = '<ol>';
+    panel.querySelector('.repeat-actions')?.append(btn);
 
-        savedEntries.forEach((entry, index) => {
-            content += renderer.default(entry);
-        });
-
-        content += '</ol>';
-        
-        div.innerHTML = content;
-    }
-
-    // unsaved
-    const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
-    unsavedEntries.forEach(el => {
-        toggleEditMode(el, true);
+    btn.addEventListener('click', () => {
+        alert('Save');
     });
 
+    return btn;
 }
 
-function ensureButtonBar(entry) {
-    let buttonBar = entry.querySelector('.button-bar');
-    if (buttonBar) {
-        return;
+function addButtonCancel(panel) {
+    const btn = createButton('Cancel', 'cancel');
+
+    panel.querySelector('.repeat-actions')?.append(btn);
+
+    btn.addEventListener('click', () => {
+        alert('Cancel');
+    });
+
+    return btn;
+}
+
+function renderOverview(panel, entries) {
+    const div = document.createElement('div');
+
+    entries.forEach((el, index) => {
+        div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
+    });
+
+    panel.prepend(div);
+}
+
+export default function decorate(panel, field, container) {
+
+    function toggleEditMode(entry, visible) {
+        if (visible) {
+            panel.classList.add('edit-mode');
+            entry.classList.add('edit-mode');
+        }
+        else {
+            panel.classList.remove('edit-mode');
+            entry.classList.remove('edit-mode');
+        }
     }
 
-    const panel = entry.closest('.panel-repeatable-panel');
+    panel.closest('form')?.addEventListener('item:add', (event) => {
+        const entry = panel.querySelector(event.detail.item.id);
+        toggleEditMode(entry, true);
+    });
 
-    buttonBar = document.createElement('div');
-    buttonBar.className = 'button-bar';
-    entry.appendChild(buttonBar);
+    panel.classList.add('panel-repeatable-panel');
 
-    const saveBtn = createButton('Save', 'save');
+    const saveBtn = addButtonSave(panel);
     saveBtn.addEventListener('click', () => {
-        // Mark as saved
-        entry.classList.add('saved');
+        alert('Saving');
+        const entry = panel.querySelector('[data-repeatable].edit-mode');
         toggleEditMode(entry, false);
-
-        renderOverview(panel);
     });
 
-    const cancelBtn = createButton('Cancel', 'cancel');
+    const cancelBtn = addButtonCancel(panel);
     cancelBtn.addEventListener('click', () => {
+        alert('Cancelling');
+        const entry = panel.querySelector('[data-repeatable].edit-mode');
         toggleEditMode(entry, false);
-        // TODO: If new one then remove. 
-        // If saved one then reset changes.
+        // TODO: If new one then remove. If saved one then reset changes.
         entry.remove();
-
-        renderOverview(panel);
     });
 
-    buttonBar.appendChild(saveBtn);
-    buttonBar.appendChild(cancelBtn);
-}
+    const entries = panel.querySelectorAll('[data-repeatable]');
 
-function toggleEditMode(entry, visible) {
-    const panel = entry.closest('.panel-repeatable-panel');
-    if (visible) {
-        entry.classList.add('current');
-        panel.classList.add('editing');
-    }
-    else {
-        entry.classList.remove('current');
-        panel.classList.remove('editing');
+    if (entries.length>0) {
+        renderOverview(panel, entries);
+
+        if (entries.length == 1) {
+            // entry edit mode
+            toggleEditMode(entries[0], true);
+        }
     }
 
-    ensureButtonBar(entry);
-}
-
-export default async function decorate(el, field, container) {
-
-    const targetNode = document.querySelector('.form.block');
-
-    if (targetNode) {
-        // Create a MutationObserver instance
-        const observer = new MutationObserver((mutationsList) => {
-            for (const mutation of mutationsList) {
-                if (
-                    mutation.type === 'attributes' &&
-                    mutation.attributeName === 'data-block-status'
-                ) {
-                    const newValue = targetNode.getAttribute('data-block-status');
-                    if (newValue === 'loaded') {
-                        console.log('Form is loaded:');
-                        const panel = el.closest('.repeat-wrapper');
-                        panel.classList.add('panel-repeatable-panel');
-                        panel.dataset.renderer = field.properties.renderer;
-
-                        const form = panel.closest('form');
-
-                        // TODO register on warpper repeatable panel. Change ootb repeat.js to trigger event on wrapper repeatable panel instead of form
-                        form.addEventListener('item:add', (event) => {
-                            // Event does not carry information about the entry added, so select the last one from the list
-                            // Todo update repeat.js ootb code to carry the element added in the event
-                            const entry = panel.querySelector(':scope [data-repeatable]:last-of-type');
-
-                            toggleEditMode(entry, true);
-                        });
-
-                        // create overview
-                        const div = document.createElement('div');
-                        div.classList.add('overview');
-
-                        panel.prepend(div);
-
-                        renderOverview(panel);
-
-                        // Optional: Stop observing as only needed once
-                        observer.disconnect();
-                    }
-                }
-            }
-        });
-
-        // Configuration of the observer:
-        const config = { attributes: true, attributeFilter: ['data-block-status'] };
-
-        // Start observing the target node
-        observer.observe(targetNode, config);
-    }
-
-    return el;
+    return panel;
 }
