@@ -14,6 +14,11 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
+  margin-bottom: 32px; // Temporarily
+
+  &:last-child:not(:first-child) {
+    margin-bottom: 0;
+  }
 }
 
 h1 {
@@ -44,23 +49,9 @@ h6 {
    Body text
 ------------------------------ */
 
-
-
-/*Rebecca added this*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 24px 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+p {
+  margin: $spacing-500;
 }
-
-
 
 /*Rebecca added this*/
 .subtitle {
@@ -76,7 +67,6 @@ h6 {
 
 /*Rebecca added this*/
 .strap-title {
-  font-family: $font-family;
   font-size: 20px;
   line-height: 100%;
   text-transform: uppercase;
@@ -89,22 +79,9 @@ h6 {
 
 /*Rebecca added this*/
 .strap-title-small {
-  font-family: $font-family;
   font-size: 16px;
   line-height: 100%;
   text-transform: uppercase;
-}
-
-/* ------------------------------
-   Paragraph Variants
------------------------------- */
-
-p {
-  margin: 0 0 $spacing-500 0;
-
-  &:last-child {
-    margin-bottom: 2.5rem;
-  }
 }
 
 .p-large {

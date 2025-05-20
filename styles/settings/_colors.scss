@@ -109,7 +109,7 @@ $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
 
 /* Token-based background */
-$bg-light-secondary: var(--Background-Light-Secondary, #F5FAFD); // RW
+$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd); // RW
 
 /* UI Icons */
 $icon-accent: $color-primary;
@@ -126,5 +126,6 @@ $stroke-accent: $color-primary;
 $stroke-primary: $color-grey-black-80;
 $stroke-secondary: $color-grey-black-60;
 $stroke-tertiary: $color-shade-navy-40;
+$stroke-dark: $color-primary-navy;
 $stroke-error: $color-feedback-red;
 $stroke-focus: $color-feedback-pink;
