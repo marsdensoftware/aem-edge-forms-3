@@ -36,6 +36,7 @@ main .form:not(.edit-mode) {
             display: flex;
             align-items: center;
             list-style: none;
+            cursor: pointer;
         }
 
         >.navitems>li.navitem-current {
