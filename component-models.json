@@ -5789,7 +5789,7 @@
       {
         "component": "richtext",
         "name": "text",
-        "value": "",
+        "value": "Typography",
         "label": "Text",
         "valueType": "string"
       }
