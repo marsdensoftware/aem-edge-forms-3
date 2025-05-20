@@ -112,6 +112,7 @@ export default async function decorate(block) {
   const prefix = (sessionStorage.getItem('react-block-prefix') || 0) + 1;
   sessionStorage.setItem('react-block-prefix', prefix);
 
+
   const div0 = document.createElement('div');
   div0.id = `${prefix}-div0`;
 
@@ -123,7 +124,7 @@ export default async function decorate(block) {
 
   const prev = typeof __COMMIT_HASH__ === 'undefined' ? 'unknown' : __COMMIT_HASH__;
   console.log('React running on the next commit after ' + prev);
-  const domNode = document.getElementById('test-root');
+  const domNode = document.getElementById(`${prefix}-test-root`);
   const root = createRoot(domNode);
   root.render(<ReactTestHeader />);
 }
