@@ -9,6 +9,18 @@ main .form:not(.edit-mode) {
 
         >fieldset.formtab {
             display: none;
+            
+            .plain-text-wrapper {
+                p {
+                    color: $color-grey-black-80;
+                }
+
+                li {
+                    &::marker {
+                        color: $color-grey-black-80;
+                    }
+                }
+            }
         }
 
         >.navitems {
