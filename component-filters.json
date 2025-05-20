@@ -9,6 +9,7 @@
     "id": "section",
     "components": [
       "text",
+      "typography",
       "image",
       "button",
       "title",
@@ -17,9 +18,7 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form",
-      "jobseekerintro",
-      "iconwithtext"
+      "embed-adaptive-form"
     ]
   },
   {
