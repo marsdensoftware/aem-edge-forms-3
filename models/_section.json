@@ -43,7 +43,8 @@
     {
       "id": "section",
       "components": [
-        
+        "text",
+        "typography"
       ]
     }
   ]
