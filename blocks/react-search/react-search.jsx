@@ -108,11 +108,15 @@ function ReactTestHeader() {
 }
 
 export default async function decorate(block) {
+  // TODO check if this is async safe
+  const prefix = (sessionStorage.getItem('react-block-prefix') || 0) + 1;
+  sessionStorage.setItem('react-block-prefix', prefix);
+
   const div0 = document.createElement('div');
-  div0.id = 'div0';
+  div0.id = `${prefix}-div0`;
 
   const div1 = document.createElement('div');
-  div1.id = 'test-root';
+  div1.id = `${prefix}-test-root`;
 
   div0.append(div1);
   block.append(div0);
