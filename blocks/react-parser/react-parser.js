@@ -14,7 +14,7 @@ function reactify(elem, fn) {
           break;
         case Node.TEXT_NODE:
         case Node.COMMENT_NODE:
-          acc.push(node.textContent); // N.B. newlines
+          acc.push(child.textContent); // N.B. newlines
           break;
         default:
           console.log('Uh oh, unexpected node type', child);
