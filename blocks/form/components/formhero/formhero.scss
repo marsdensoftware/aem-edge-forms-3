@@ -1,7 +1,6 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  // Specificity
   .panel-formhero {
     display: flex;
     flex-direction: column;
@@ -12,9 +11,6 @@
       flex-direction: row;
       text-align: left;
       justify-content: space-between;
-      width: 100%;
-      max-width: 930px;
-      margin: 32px auto;
     }
   }
 

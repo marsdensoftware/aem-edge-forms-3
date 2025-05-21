@@ -1,78 +1,78 @@
 @use '../../styles/settings' as *;
 @use '../../styles/components/buttons' as *;
 
-:root {
-  --background-color-primary: #fff;
-  --label-color: #666;
-  --border-color: #818a91;
-  --form-error-color: #ff5f3f;
-  --button-primary-color: #5f8dda;
-  --button-secondary-color: #666;
-  --button-primary-hover-color: #035fe6;
-  --form-font-size-m: 22px;
-  --form-font-size-s: 18px;
-  --form-font-size-xs: 16px;
-  --form-background-color: var(--background-color-primary);
-  --form-padding: 0 10px;
-  --form-columns: 12;
-  --form-field-horz-gap: 40px;
-  --form-field-vert-gap: 20px;
-  --form-invalid-border-color: #ff5f3f;
-  --form-input-padding: 0.75rem 0.6rem;
-  --form-input-font-size: 1rem;
-  --form-input-disable-color: #ebebe4;
-  --form-input-border-size: 1px;
-  --form-input-border-color: var(--border-color);
-  --form-input-background-color: var(--background-color-primary);
-  --form-paragraph-color: var(--label-color);
-  --form-paragraph-margin: 0 0 0.9rem;
-  --form-paragraph-font-style: none;
-  --form-paragraph-font-size: var(--form-font-size-s);
-  --form-label-color: var(--label-color);
-  --form-label-font-size: var(--form-font-size-s);
-  --form-label-font-weight: 400;
-  --form-title-font-weight: 600;
-  --form-fieldset-border: 0;
-  --form-fieldset-marign: 0;
-  --form-fieldset-columns: 1;
-  --form-fieldset-legend-color: var(--form-label-color);
-  --form-fieldset-legend-font-size: var(--form-label-font-size);
-  --form-fieldset-legend-font-weight: var(--form-title-font-weight);
-  --form-fieldset-legend-border: none;
-  --form-fieldset-legend-padding: 0;
-  --form-button-color: var(--background-color-primary);
-  --form-button-font-size: var(--form-font-size-s);
-  --form-button-background-color: var(--button-primary-color);
-  --form-button-background-hover-color: var(--button-primary-hover-color);
-  --form-button-border: 2px solid transparent;
-  --form-button-padding: 15px 50px;
-  --form-upload-color: var(--form-label-color);
-  --form-upload-font-size: var(--form-font-size-xs);
-  --form-upload-background-color: var(--background-color-primary);
-  --form-submit-width: 100%;
-  --form-width: 100%;
-  --form-wizard-border: 0;
-  --form-wizard-background-color: var(--background-color-primary);
-  --form-wizard-border-color: #757575;
-  --form-wizard-number-color: var(--button-primary-color);
-  --form-wizard-padding: 0px;
-  --form-wizard-padding-bottom: 160px;
-  --form-wizard-step-legend-padding: 10px;
-  --form-wizard-step-legend-font-size: 1.1rem;
-  --form-field-gap: 5px;
+// :root {
+//   --background-color-primary: #fff;
+//   --label-color: #666;
+//   --border-color: #818a91;
+//   --form-error-color: #ff5f3f;
+//   --button-primary-color: #5f8dda;
+//   --button-secondary-color: #666;
+//   --button-primary-hover-color: #035fe6;
+//   --form-font-size-m: 22px;
+//   --form-font-size-s: 18px;
+//   --form-font-size-xs: 16px;
+//   --form-background-color: var(--background-color-primary);
+//   --form-padding: 0 10px;
+//   --form-columns: 12;
+//   --form-field-horz-gap: 40px;
+//   --form-field-vert-gap: 20px;
+//   --form-invalid-border-color: #ff5f3f;
+//   --form-input-padding: 0.75rem 0.6rem;
+//   --form-input-font-size: 1rem;
+//   --form-input-disable-color: #ebebe4;
+//   --form-input-border-size: 1px;
+//   --form-input-border-color: var(--border-color);
+//   --form-input-background-color: var(--background-color-primary);
+//   --form-paragraph-color: var(--label-color);
+//   --form-paragraph-margin: 0 0 0.9rem;
+//   --form-paragraph-font-style: none;
+//   --form-paragraph-font-size: var(--form-font-size-s);
+//   --form-label-color: var(--label-color);
+//   --form-label-font-size: var(--form-font-size-s);
+//   --form-label-font-weight: 400;
+//   --form-title-font-weight: 600;
+//   --form-fieldset-border: 0;
+//   --form-fieldset-marign: 0;
+//   --form-fieldset-columns: 1;
+//   --form-fieldset-legend-color: var(--form-label-color);
+//   --form-fieldset-legend-font-size: var(--form-label-font-size);
+//   --form-fieldset-legend-font-weight: var(--form-title-font-weight);
+//   --form-fieldset-legend-border: none;
+//   --form-fieldset-legend-padding: 0;
+//   --form-button-color: var(--background-color-primary);
+//   --form-button-font-size: var(--form-font-size-s);
+//   --form-button-background-color: var(--button-primary-color);
+//   --form-button-background-hover-color: var(--button-primary-hover-color);
+//   --form-button-border: 2px solid transparent;
+//   --form-button-padding: 15px 50px;
+//   --form-upload-color: var(--form-label-color);
+//   --form-upload-font-size: var(--form-font-size-xs);
+//   --form-upload-background-color: var(--background-color-primary);
+//   --form-submit-width: 100%;
+//   --form-width: 100%;
+//   --form-wizard-border: 0;
+//   --form-wizard-background-color: var(--background-color-primary);
+//   --form-wizard-border-color: #757575;
+//   --form-wizard-number-color: var(--button-primary-color);
+//   --form-wizard-padding: 0px;
+//   --form-wizard-padding-bottom: 160px;
+//   --form-wizard-step-legend-padding: 10px;
+//   --form-wizard-step-legend-font-size: 1.1rem;
+//   --form-field-gap: 5px;
 
-  /* Card styling variables */
-  --form-card-border-color: #e0e0e0;
-  --form-card-border-radius: 4px;
-  --form-card-padding: 0.6rem 0.8rem;
-  --form-card-background: var(--background-color-primary);
-  --form-card-shadow: 0 1px 2px rgb(0 0 0 / 3%);
-  --form-card-hover-shadow: 0 2px 4px rgb(0 0 0 / 6%);
-  --form-card-selected-border-color: var(--button-primary-color);
-  --form-card-selected-background: #f5f9ff;
-  --form-card-selected-shadow: 0 0 0 1px var(--button-primary-color);
-  --form-card-transition: all 0.15s ease-in-out;
-}
+//   /* Card styling variables */
+//   --form-card-border-color: #e0e0e0;
+//   --form-card-border-radius: 4px;
+//   --form-card-padding: 0.6rem 0.8rem;
+//   --form-card-background: var(--background-color-primary);
+//   --form-card-shadow: 0 1px 2px rgb(0 0 0 / 3%);
+//   --form-card-hover-shadow: 0 2px 4px rgb(0 0 0 / 6%);
+//   --form-card-selected-border-color: var(--button-primary-color);
+//   --form-card-selected-background: #f5f9ff;
+//   --form-card-selected-shadow: 0 0 0 1px var(--button-primary-color);
+//   --form-card-transition: all 0.15s ease-in-out;
+// }
 
 fieldset {
   padding: 0;
@@ -454,9 +454,6 @@ main form .file-wrapper > button {
 // }
 
 main .submit-wrapper {
-  // width: var(--form-submit-width);
-  padding: 32px 24px;
-
   button {
     @extend %button--hollow;
     display: block;
