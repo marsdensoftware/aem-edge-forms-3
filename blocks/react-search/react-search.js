@@ -89,7 +89,13 @@ function ReactTestHeader() {
     }, typeof value !== 'object' ? value : JSON.stringify(value))));
   })))));
 }
+
+// N.B. the infinite scroll library uses viewport triggers so multiple elements will both
+// trigger on scrolling the bottom
+// Using the observer api would avoid this
 export default async function decorate(block) {
+  console.log('decorate called on block', block);
+  console.log('block parent?', block.querySelector('.section:has(> .react-search)'));
   window.onbeforeunload = function () {
     // or run this in scripts.js?
     sessionStorage.clear(); // or remove only the prefix?
@@ -98,6 +104,10 @@ export default async function decorate(block) {
   const prefix = parseInt(sessionStorage.getItem('react-block-prefix') || 0, 10) + 1;
   console.log('fetched and incremented prefix', prefix);
   sessionStorage.setItem('react-block-prefix', prefix);
+
+  // TODO we could avoid prefixing by simply appending to the block
+  //      but either way, we must maintain strict hygiene about the use
+  //      of id in our block scripts
   const div0 = document.createElement('div');
   div0.id = `${prefix}-div0`;
   const div1 = document.createElement('div');
