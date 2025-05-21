@@ -5,7 +5,7 @@ import ReactDOMClient, { createRoot } from 'react-dom/client';
 const REACT_KEY = 'gh-react'
 
 function reactify(elem, fn) {
-  const children = elem.children
+  const children = Array.from(elem.children)
     .filter(fn ? fn : () => true)
     .map((child) => reactify(child, fn));
   // TODO probably need to mimick id, className/classList, attributes, and handlers (how to get handlers?)
