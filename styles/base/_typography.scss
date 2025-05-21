@@ -93,6 +93,23 @@ p {
   @include font-body-small;
 }
 
+
+
+// Rebecca: Remove all margins from headings and add padding-bottom
+.form-wrapper [class*='field-wrapper'] {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding-bottom: $spacing-600;
+  }
+}
+
+
+
 /********************************************************************************************/
 // Font family is set from the HTML root, it will be applied for all of the HTML elements
 // All Form related like input style, select style, etc should live in the _forms.scss file
