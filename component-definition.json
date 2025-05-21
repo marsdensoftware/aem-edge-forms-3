@@ -500,6 +500,22 @@
           }
         },
         {
+          "title": "Course",
+          "id": "course",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Course, qualification or certification",
+                  "fieldType": "text-input",
+                  "fd:viewType": "course"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Contextual Help",
           "id": "formcontextualhelp",
           "plugins": {
