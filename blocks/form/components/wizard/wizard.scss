@@ -1,5 +1,4 @@
 @use '../../../../styles/settings' as *;
-@use '../../../../styles/components/buttons' as *;
 
 %common-panel-spacing {
   margin: 32px 0;
@@ -24,6 +23,9 @@
 
     @include media('desktop') {
       padding: 60px 0;
+      margin: 32px auto;
+      width: 100%;
+      max-width: 930px;
     }
   }
 

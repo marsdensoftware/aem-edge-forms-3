@@ -1,16 +1,7 @@
 @use '../../../../styles/settings' as *;
-@use '../formhero/formhero' as *;
 
 .wizard {
   .panel-formwelcome {
-    max-width: 500px;
-    width: 100%;
-    margin: 32px auto;
-
-    @include media('desktop') {
-      max-width: 1100px;
-    }
-
     legend {
       display: none;
     }
