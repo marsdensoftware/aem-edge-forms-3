@@ -34,6 +34,7 @@
     h2 {
       @include heading-level-1;
       margin-bottom: $spacing-500;
+      margin-top: 0;
     }
 
     p {
