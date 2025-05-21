@@ -110,13 +110,10 @@ export default async function decorate(el, field, container) {
 
                         const form = panel.closest('form');
 
-                        // TODO register on warpper repeatable panel. Change ootb repeat.js to trigger event on wrapper repeatable panel instead of form
                         form.addEventListener('item:add', (event) => {
-                            // Event does not carry information about the entry added, so select the last one from the list
-                            // Todo update repeat.js ootb code to carry the element added in the event
-                            const entry = panel.querySelector(':scope [data-repeatable]:last-of-type');
+                            const added = event.item.el;
 
-                            toggleEditMode(entry, true);
+                            toggleEditMode(added, true);
                         });
 
                         // create overview

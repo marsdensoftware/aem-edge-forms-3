@@ -72,7 +72,8 @@ export const add = (wrapper, form, actions) => (e) => {
   }
   actions.insertAdjacentElement('beforebegin', newFieldset);
   const event = new CustomEvent('item:add', {
-    detail: { item: { name: newFieldset.name, id: newFieldset.id } },
+    //### SEP-NJ Added new element as payload
+    detail: { item: { el: newFieldset, name: newFieldset.name, id: newFieldset.id } },
     bubbles: false,
   });
   form.dispatchEvent(event);
