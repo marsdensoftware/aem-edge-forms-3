@@ -33,7 +33,10 @@
   "filters": [
     {
       "id": "reactparser",
-      "components": null
+      "components": [
+        "text",
+        "text-input"
+      ]
     }
   ]
 }
