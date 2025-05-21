@@ -18,8 +18,13 @@
 }
 
 .wizard {
+  > fieldset{
+      padding-top: 0;
+      margin: 0 auto;
+  }
+  
   .current-wizard-step {
-    padding: 32px 16px 45px;
+    padding: 0px 16px 45px;
 
     @include media('desktop') {
       padding: 60px 0;
