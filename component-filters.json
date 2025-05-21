@@ -17,9 +17,7 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form",
-      "customsearch",
-      "reactsearch"
+      "embed-adaptive-form"
     ]
   },
   {
@@ -74,6 +72,13 @@
       "text-input",
       "tnc",
       "wizard"
+    ]
+  },
+  {
+    "id": "reactparser",
+    "components": [
+      "text-input",
+      "text"
     ]
   },
   {

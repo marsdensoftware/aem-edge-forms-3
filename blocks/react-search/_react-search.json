@@ -33,7 +33,10 @@
   "filters": [
     {
       "id": "reactsearch",
-      "components": null
+      "components": [
+        "text-input",
+        "text"
+      ]
     }
   ]
 }

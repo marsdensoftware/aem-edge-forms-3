@@ -109,6 +109,28 @@ function ReactTestHeader() {
 
 /*
 It would be good if we could make a custom block that can accept child blocks, or failing that a form with a custom decorate(), but if we can't then we try to find the parent section and take over it? be careful hydrating the react block... (circular ref)
+
+1. get parent seection (or just use block itself if custom block nesting is available?)
+2. hydrateRoot on section; this means reverse engineering the AEM div soup layout correctly and preserving attributes
+3. how to model behaviour? need custom fields and attributes?
+how can we know this at hydrate?
+register some info in sessionstorage or a library var through custom decorate() for fields
+e.g. text field X lists its states?
+input field Y lists that it uses X by name (and has an AEM content thingy for that)
+at hydrate we somehow hook these up?
+
+N.B. we don't technically need to hydrate, we could parse the html and createRoot
+
+dynamically build the JSX to hydrate
+
+
+ * work out how to do dynamic JSX
+ -- need to bundle possible options and switch between them??
+ -- some workarounds with string interpol as vars or React.createClass
+ -- see https://stackoverflow.com/questions/33471880/dynamic-tag-name-in-react-jsx
+
+ * get a static hydrate working first
+ * then get something interactive working with hard-coded classes/ids
  */
 
 // N.B. the infinite scroll library uses viewport triggers so multiple elements will both
@@ -117,6 +139,8 @@ It would be good if we could make a custom block that can accept child blocks, o
 export default async function decorate(block) {
   console.log('decorate called on block', block);
   console.log('block parent?', block.closest('.section'));
+  // Or document.querySelector('.section:has(.block.react-search)') will also work
+  // Could also select children of block in that case (block.children?)
   window.onbeforeunload = function() { // or run this in scripts.js?
     sessionStorage.clear(); // or remove only the prefix?
   }

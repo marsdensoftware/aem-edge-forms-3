@@ -5034,6 +5034,18 @@
     ]
   },
   {
+    "id": "reactparser",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Title",
+        "label": "Title",
+        "required": true
+      }
+    ]
+  },
+  {
     "id": "reactsearch",
     "fields": [
       {
