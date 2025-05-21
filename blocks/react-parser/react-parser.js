@@ -42,6 +42,6 @@ export default async function decorate(block) {
   const div = document.createElement('div');
   div.id = 'react-dynamic-root';
   container.append(div)
-  const root = react.createRoot(div);
+  const root = createRoot(div);
   root.render(app);
 }
