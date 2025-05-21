@@ -61,12 +61,8 @@
         max-width: 390px;
       }
 
-      h3 {
-        @include font-body-large;
-
-        @include media('desktop') {
-          @include heading-level-6;
-        }
+      h6 {
+        @include heading-level-6;
       }
 
       p {
