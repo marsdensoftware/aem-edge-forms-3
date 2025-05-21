@@ -1,7 +1,8 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  .panel-formhero {
+  fieldset.panel-wrapper.panel-formhero {
+    max-width: 903px;
     display: flex;
     flex-direction: column;
     align-items: center;

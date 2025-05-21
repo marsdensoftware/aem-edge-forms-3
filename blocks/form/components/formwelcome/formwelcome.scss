@@ -1,7 +1,9 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  .panel-formwelcome {
+  fieldset.panel-wrapper.panel-formwelcome {
+    max-width: 1038px;
+    
     legend {
       display: none;
     }
@@ -63,10 +65,12 @@
 
       h6 {
         @include heading-level-6;
+        margin: 0;
       }
 
       p {
         @include font-body-large;
+        margin: 0;
       }
     }
   }
