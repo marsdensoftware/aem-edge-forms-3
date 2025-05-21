@@ -14,7 +14,7 @@ function reactify(elem, fn) {
   // localName or tagName?
 
   console.log('reactifying', elem, 'have desc', children);
-  return createElement(elem.tagName, null, ...children)
+  return createElement(elem.tagName, {className: elem.className}, ...children)
 }
 
 export default async function decorate(block) {
