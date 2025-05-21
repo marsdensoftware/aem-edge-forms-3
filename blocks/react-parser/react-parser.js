@@ -5,13 +5,24 @@ import ReactDOMClient, { createRoot } from 'react-dom/client';
 const REACT_KEY = 'gh-react'
 
 function reactify(elem, fn) {
-  const children = Array.from(elem.children)
+  const children = Array.from(elem.childNodes)
     .filter(fn ? fn : () => true)
-    .map((child) => reactify(child, fn));
+    .reduce((acc, child) => {
+      switch (child.nodeType) {
+        case Node.ELEMENT_NODE:
+          acc.push(reactify(child, fn));
+          break;
+        case Node.TEXT_NODE:
+        case Node.COMMENT_NODE:
+          acc.push(node.textContent); // N.B. newlines
+          break;
+        default:
+          console.log('Uh oh, unexpected node type', child);
+          break; // TODO throw an error here?
+      }
+      return acc;
+    });
   // TODO probably need to mimick id, className/classList, attributes, and handlers (how to get handlers?)
-  // what about AEM comments?
-
-  // localName or tagName?
 
   console.log('reactifying', elem, 'have desc', children);
   return createElement(elem.tagName, {className: elem.className}, ...children)
