@@ -111,7 +111,7 @@ export default async function decorate(el, field, container) {
                         const form = panel.closest('form');
 
                         form.addEventListener('item:add', (event) => {
-                            const added = event.item.el;
+                            const added = event.detail.item.el;
 
                             toggleEditMode(added, true);
                         });
