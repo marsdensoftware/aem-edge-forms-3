@@ -610,7 +610,7 @@
                   "fieldType": "panel",
                   "fd:viewType": "formwelcome",
                   "minOccur": 1,
-                  "panel": {
+                  "panel-headline": {
                     "jcr:title": "Panel",
                     "fieldType": "panel",
                     "colspan": 6,
@@ -622,7 +622,13 @@
                       "value": "Adaptive Form Text Component",
                       "colspan": 6,
                       "sling:resourceType": "core/fd/components/form/text/v1/text"
-                    },
+                    }
+                  },
+                  "panel-items": {
+                    "jcr:title": "Panel",
+                    "fieldType": "panel",
+                    "colspan": 6,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "item-1": {
                       "fieldType": "panel",
                       "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",

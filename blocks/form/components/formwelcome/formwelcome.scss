@@ -6,12 +6,10 @@
       display: none;
     }
 
-    .panel-formwelcome__container {
-      @include media('desktop') {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+    @include media('desktop') {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .panel-formwelcome__item {
