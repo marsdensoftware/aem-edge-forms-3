@@ -90,12 +90,16 @@ function ReactTestHeader() {
   })))));
 }
 
+/*
+It would be good if we could make a custom block that can accept child blocks, or failing that a form with a custom decorate(), but if we can't then we try to find the parent section and take over it? be careful hydrating the react block... (circular ref)
+ */
+
 // N.B. the infinite scroll library uses viewport triggers so multiple elements will both
 // trigger on scrolling the bottom
 // Using the observer api would avoid this
 export default async function decorate(block) {
   console.log('decorate called on block', block);
-  console.log('block parent?', block.querySelector('.section:has(> .react-search)'));
+  console.log('block parent?', document.querySelector('.section:has(> .react-search)'));
   window.onbeforeunload = function () {
     // or run this in scripts.js?
     sessionStorage.clear(); // or remove only the prefix?
