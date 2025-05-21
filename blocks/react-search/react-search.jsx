@@ -116,7 +116,7 @@ It would be good if we could make a custom block that can accept child blocks, o
 // Using the observer api would avoid this
 export default async function decorate(block) {
   console.log('decorate called on block', block);
-  console.log('block parent?', document.querySelector('.section:has(> .react-search)'));
+  console.log('block parent?', block.closest('.section'));
   window.onbeforeunload = function() { // or run this in scripts.js?
     sessionStorage.clear(); // or remove only the prefix?
   }
