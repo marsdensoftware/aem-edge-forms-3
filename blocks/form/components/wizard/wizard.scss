@@ -55,8 +55,8 @@
     }
 
     .button[name='next'] {
-      @extend %button;
-      @extend %button--primary;
+      @extend %button !optional;
+      @extend %button--primary !optional;
       display: flex;
       align-items: center;
 
@@ -71,8 +71,8 @@
     }
 
     .button[name='back'] {
-      @extend %button;
-      @extend %button--hollow;
+      @extend %button !optional;
+      @extend %button--hollow !optional;
       display: flex;
       align-items: center;
 
