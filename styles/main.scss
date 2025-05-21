@@ -27,9 +27,21 @@
 // Components
 @use './components';
 
-/*added this for a quick demo, can remove thanks, Rebecca*/
+
+/*added this for responsive testing, Rebecca*/
+.typography-wrapper,
 .default-content-wrapper {
-  padding: 120px 80px;
-  width: 980px;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1200px; // $max-width-content
+
+  // Fluid side padding: scales between 16px and 64px from mobile to desktop
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
 }
+
+// Testing only - can be deleted
+/*.typography-wrapper {background-color: aquamarine}
+.default-content-wrapper {background-color: #f8d7da}*/
+
+
