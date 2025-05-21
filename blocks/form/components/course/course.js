@@ -22,6 +22,7 @@ export default function decorate(element, field, container) {
 
     // add suggestion div
     const suggestionsDiv = addSuggestionDiv();
+    element.append(suggestionsDiv);
     const searchInput = element.querySelector('input[type="text"]');
 
     searchInput.addEventListener('input', () => {

@@ -1,13 +1,17 @@
 .course {
+    position: relative;
+
     .suggestions {
         border: 1px solid #ccc;
         border-top: none;
-        max-height: 150px;
+        max-height: 9.375rem;
         overflow-y: auto;
         background-color: #fff;
         position: absolute;
         width: 100%;
         z-index: 1000;
+        bottom: -18px;
+        left: 0;
     }
 
     .suggestion {
