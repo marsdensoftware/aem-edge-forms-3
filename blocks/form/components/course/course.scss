@@ -1,0 +1,21 @@
+.course {
+    .suggestions {
+        border: 1px solid #ccc;
+        border-top: none;
+        max-height: 150px;
+        overflow-y: auto;
+        background-color: #fff;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .suggestion {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion:hover {
+        background-color: #f0f0f0;
+    }
+}
