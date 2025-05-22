@@ -37,10 +37,10 @@ export default function renderEntry(entry) {
 export function init(repeatablePanel) {
     repeatablePanel.addEventListener('updated', () => {
         // Add custom logic here
-        const educationRadioGroup = this.closest('fieldset')?.querySelector('.field-education-selection');
+        const educationRadioGroup = repeatablePanel.closest('fieldset')?.querySelector('.field-education-selection');
 
         if (educationRadioGroup) {
-            const savedEntries = this.querySelectorAll('[data-repeatable].saved');
+            const savedEntries = repeatablePanel.querySelectorAll('[data-repeatable].saved');
             if (savedEntries.length > 0) {
                 // Hide question
                 educationRadioGroup.hide();
