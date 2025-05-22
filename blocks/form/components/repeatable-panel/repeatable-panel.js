@@ -84,14 +84,14 @@ function ensureButtonBar(renderer, entry) {
 }
 
 function toggleWizardButtons(el, visible) {
-    const wizardButtons = el.closest('.wizard')?.querySelectorAll('.wizard-button-wrapper>.button-wrapper');
+    const wizardButtonWrapper = el.closest('.wizard')?.querySelector('.wizard-button-wrapper');
     if (visible) {
         // show wizard buttons
-        wizardButtons.style.display = 'block';
+        wizardButtonWrapper.style.display = 'block';
     }
     else {
         // hide wizard buttons
-        wizardButtons.style.display = 'none';
+        wizardButtonWrapper.style.display = 'none';
     }
 }
 
