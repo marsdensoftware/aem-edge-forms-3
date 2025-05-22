@@ -63,7 +63,12 @@ export default async function decorate(block) {
   window.addEventListener('onbeforeunload', () => {
     //sessionStorage.removeItem(REACT_KEY);
     sessionStorage.clear();
-  });
+  }); //turns out this is unreliable and especially so when added this way???
+
+  window.onbeforeunload = () => { // this unfortunately nukes other handlers
+    //sessionStorage.removeItem(REACT_KEY);
+    sessionStorage.clear();
+  };
 
   const poll = setInterval(() => {
     console.log('checking!');
