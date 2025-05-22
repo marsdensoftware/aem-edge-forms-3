@@ -35,11 +35,10 @@ function setup() {
   console.log('running setup!')
   // TODO check this is async safe
   if (sessionStorage.getItem(REACT_KEY)) {
+    console.log('react key already set, returning');
     return
   }
   sessionStorage.setItem(REACT_KEY, true);
-
-  const ready = sessionStorage.getItem('sections-loaded');
 
   const container = block.closest('.section');
   //section
@@ -62,7 +61,8 @@ export default async function decorate(block) {
   // with sibling blocks, find parent, parse blocks except this one, do the same, also need to ensure only one of these runs
 
   window.addEventListener('onbeforeunload', () => {
-    sessionStorage.removeItem(REACT_KEY);
+    //sessionStorage.removeItem(REACT_KEY);
+    sessionStorage.clear();
   });
 
   const poll = setInterval(() => {
@@ -72,7 +72,7 @@ export default async function decorate(block) {
     clearInterval(poll);
     setup();
   }, 10);
-  setTimeout(() => {
+  const timeout = setTimeout(() => {
     console.log('timeout');
     clearInterval(poll);
   }, 3000);
