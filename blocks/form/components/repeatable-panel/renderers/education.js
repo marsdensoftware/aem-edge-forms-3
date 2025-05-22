@@ -37,9 +37,25 @@ export default function renderEntry(entry) {
 export function init(repeatablePanel) {
     const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
     if (educationRadioGroup) {
+        const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
+
+        // regsiter click on radios
+        radios?.forEach(radio => {
+            radio.addEventListener('click', () => {
+                if (radio.checked && radio.value == 'yes') {
+                    // show repeatable panel
+                    repeatablePanel.setAttribute('data-visible', true)
+                }
+                if (radio.checked && radio.value == 'no') {
+                    // hide repeatable panel
+                    repeatablePanel.setAttribute('data-visible', false)
+                }
+            });
+
+        });
+
         repeatablePanel.addEventListener('updated', () => {
             // Add custom logic here
-
             const savedEntries = repeatablePanel.querySelectorAll('[data-repeatable].saved');
             if (savedEntries.length > 0) {
                 // Hide question
@@ -47,8 +63,8 @@ export function init(repeatablePanel) {
             }
             else {
                 // reset selection & show question
-                const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
-                radios.forEach(radio => radio.checked = false);
+                radios?.forEach(radio => { radio.checked = false; });
+                radios[1]?.click();
                 educationRadioGroup.setAttribute('data-visible', true);
             }
         });

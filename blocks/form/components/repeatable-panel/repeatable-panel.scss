@@ -2,6 +2,10 @@
 
 main .form form .panel-repeatable-panel {
 
+    >[data-repeatable] {
+        display: none;
+    }
+
     .repeat-actions {
         display: none;
     }
@@ -42,7 +46,7 @@ main .form form .panel-repeatable-panel {
     }
 
     .repeatable-entry {
-        border: solid $color-secondary 1px ;
+        border: solid $color-secondary 1px;
         border-radius: $border-radius-large;
     }
 }
