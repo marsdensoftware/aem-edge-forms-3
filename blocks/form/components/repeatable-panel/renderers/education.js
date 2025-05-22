@@ -35,6 +35,8 @@ export default function renderEntry(entry) {
 }
 
 export function init(repeatablePanel) {
+    // Add class for education
+    repeatablePanel.classList.add('panel-repeatable-panel__education');
     const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
     if (educationRadioGroup) {
         const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
@@ -64,7 +66,8 @@ export function init(repeatablePanel) {
             else {
                 // reset selection & show question
                 radios?.forEach(radio => { radio.checked = false; });
-                radios[1]?.click();
+                // show first entry
+                repeatablePanel.querySelector('[data-repeatable]').style.display = 'block'
                 educationRadioGroup.setAttribute('data-visible', true);
             }
         });
