@@ -17,7 +17,7 @@ async function renderOverview(renderer, panel) {
 
     const div = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach;
-    if (savedEntries.length > 0 && renderer && renderer.renderEntry) {
+    if (savedEntries.length > 0 && renderer && renderer.default) {
         let content = '<ol>';
 
         savedEntries.forEach((entry) => {
