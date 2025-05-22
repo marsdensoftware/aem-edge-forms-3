@@ -117,6 +117,7 @@ export default async function decorate(el, field, container) {
                         const renderer = import(`./renderers/${rendererName}.js`)
 
                         renderer.then((r) => {
+                            r.hook && r.hook(panel);
                             renderOverview(r, panel);
                         })
 

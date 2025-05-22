@@ -34,8 +34,6 @@ export default function renderEntry(entry) {
     return `<li><p>${entry.dataset.id}</p>${readable}</li>`;
 }
 
-export default function render(entry) {
-    const readable = entryToReadableString(entry);
-
-    return `<li><p>${entry.dataset.id}</p>${readable}</li>`;
+export function hook(repeatablePanel) {
+    // Add custom logic here
 }
