@@ -100,29 +100,22 @@ p {
 }
 
 // Default paragraph block (no size class)
-.typography.block {
-  a,
-  ol,
-  ul {
-    @include font-body-default;
+.default-content-wrapper a {
+  color: $color-primary;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: $color-primary-navy;
   }
 
-  a {
-    color: $color-primary;
-    font-weight: 500;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $color-primary-navy;
-    }
-
-    &:visited {
-      color: $color-primary-dark-navy;
-    }
+  &:visited {
+    color: $color-primary-dark-navy;
   }
+}
 
   ol li,
   ul li {
@@ -130,7 +123,7 @@ p {
     margin-bottom: 0.5rem;
     color: $text-primary;
   }
-}
+
 
 // Large paragraph block
 .typography.p-large.block {
