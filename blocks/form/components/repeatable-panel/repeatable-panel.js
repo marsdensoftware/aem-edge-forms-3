@@ -69,10 +69,12 @@ function ensureButtonBar(renderer, entry) {
 
     const cancelBtn = createButton('Cancel', 'cancel');
     cancelBtn.addEventListener('click', () => {
-        toggleEditMode(renderer, entry, false);
-        // TODO: If new one then remove. 
-        // If saved one then reset changes.
-        entry.remove();
+        // TODO: If new added one then remove. 
+        // TODO: If saved one then reset changes.
+        // if first one hide
+        if (entry.dataset.index == 0) {
+            toggleEditMode(renderer, entry, false);
+        }
 
         renderOverview(renderer, panel);
     });
