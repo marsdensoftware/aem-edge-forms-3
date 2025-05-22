@@ -16,6 +16,10 @@ function reactify(elem, fn) {
           acc.push(child.textContent); // N.B. newlines
           break;
         case Node.COMMENT_NODE:
+          // TODO FIXME
+          // there is not a good way to support HTML comments in react
+          // https://stackoverflow.com/questions/40015336/how-to-render-a-html-comment-in-react
+          // requires special hackery and still may not be the same
           acc.push(`<!--\n${child.textContent}\n-->`);
           break;
         default:
@@ -45,13 +49,13 @@ function setup(block) {
   // > div.name-wrapper (inc default-content-wrapper?)
   // > > div.name.block
   console.log('have container', container);
-  // TODO need this to run AFTER all siblings have decorate()ed
+  //
   const app = reactify(container, (elem) => elem.className != block.className); // TODO not sure if className is ordered
 
   // try rendering it along side to compare?
   const div = document.createElement('div');
   div.id = 'react-dynamic-root';
-  container.append(div)
+  container.insertAdjacentElement('afterend', div); // for testing
   const root = createRoot(div);
   root.render(app);
 }
