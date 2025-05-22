@@ -1,0 +1,121 @@
+/// Temporarily solution to extract placeholder
+/// To be used by external file
+
+@use '../settings/elevations' as *;
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
+@use '../settings/utils' as *;
+@use '../settings/borders' as *;
+
+%button {
+  @include elevation-2;
+  border-radius: $border-radius-round;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+  padding: $spacing-400 $spacing-600;
+  font-style: normal;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-focus-state;
+    outline: 3px solid transparent;
+  }
+
+  &.small {
+    padding: $spacing-300 $spacing-500;
+    font-size: 16px;
+  }
+
+  /*
+    PRIMARY
+  */
+  &.primary {
+    @extend %button--primary;
+  }
+
+  /*
+    HOLLOW
+  */
+  &.hollow,
+  &.secondary {
+    @extend %button--hollow;
+  }
+}
+
+%button--primary {
+  @extend %state-focus;
+  background-image: $color-primary-animated;
+  border: 2px solid $stroke-accent;
+  color: $color-white;
+  z-index: 1;
+
+  &::after {
+    transition: opacity 0.2s ease-in-out;
+    border-radius: $border-radius-round;
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: $color-gradient-blue;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &:visited {
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    background: $color-primary-navy;
+    color: $color-white;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
+  }
+}
+
+%button--hollow {
+  @extend %state-focus;
+  background: none;
+  color: $color-primary-dark-navy;
+  border: 2px solid $stroke-secondary;
+
+  &::after {
+    content: '';
+    display: none;
+  }
+
+  &:hover,
+  &:active {
+    color: $color-primary-dark-navy;
+    background: none;
+  }
+
+  &:hover {
+    border-color: $stroke-primary;
+  }
+
+  &:active {
+    border-color: $stroke-accent;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
+  }
+}

@@ -1,0 +1,46 @@
+@use '../../../../styles/settings' as *;
+
+.radio-group--with-icon {
+  gap: 0 16px;
+
+  .radio-group--with-icon__label {
+    padding: $spacing-400;
+    border: 1px solid $stroke-primary;
+    border-radius: $border-radius-large;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .radio-group--with-icon__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px 0;
+
+    &::before {
+      order: 1;
+      margin-right: 0;
+    }
+  }
+
+  input[type='radio'] {
+    &:checked {
+      + label {
+        background-color: $color-grey-black-05;
+
+        &:after {
+          left: auto;
+          top: auto;
+          bottom: $spacing-400 + 1px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
