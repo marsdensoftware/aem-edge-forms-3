@@ -30,18 +30,9 @@ function reactify(elem, fn) {
   return createElement(elem.tagName, {className: elem.className}, ...children)
 }
 
-export default async function decorate(block) {
-  // with child blocks; parse children (need to run after all decorate()s?), replace block with react root (create or hydrate)
-  // with sibling blocks, find parent, parse blocks except this one, do the same, also need to ensure only one of these runs
 
-  window.onbeforeunload = function() {
-    sessionStorage.removeItem(REACT_KEY);
-  }
-  // TODO check this is async safe
-  if (sessionStorage.getItem(REACT_KEY)) {
-    return
-  }
-  sessionStorage.setItem(REACT_KEY, true);
+async function setup() {
+  const ready = sessionStorage.getItem('sections-loaded');
 
   const container = block.closest('.section');
   //section
@@ -57,4 +48,25 @@ export default async function decorate(block) {
   container.append(div)
   const root = createRoot(div);
   root.render(app);
+}
+
+export default async function decorate(block) {
+  // with child blocks; parse children (need to run after all decorate()s?), replace block with react root (create or hydrate)
+  // with sibling blocks, find parent, parse blocks except this one, do the same, also need to ensure only one of these runs
+
+  window.onbeforeunload = function() {
+    sessionStorage.removeItem(REACT_KEY);
+  }
+  // TODO check this is async safe
+  if (sessionStorage.getItem(REACT_KEY)) {
+    return
+  }
+  sessionStorage.setItem(REACT_KEY, true);
+  const poll = setInterval(async () => {
+    if (!sessionStorage.getItem('sections-loaded'))
+      return;
+    clearInterval(poll);
+    await setup();
+  }, 10);
+  setTimeout(() => clearInterval(poll), 3000);
 }
