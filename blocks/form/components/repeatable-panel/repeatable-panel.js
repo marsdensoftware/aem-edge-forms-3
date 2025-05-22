@@ -142,7 +142,9 @@ export default async function decorate(el, field, container) {
                         const form = panel.closest('form');
 
                         const rendererName = field.properties.renderer || 'default';
+                        // load js & css
                         const renderer = import(`./renderers/${rendererName}.js`)
+                        import(`./renderers/${rendererName}.css`)
 
                         renderer.then((r) => {
                             r.init && r.init(panel);

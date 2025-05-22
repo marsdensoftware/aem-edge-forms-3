@@ -37,18 +37,19 @@ export default function renderEntry(entry) {
 export function init(repeatablePanel) {
     // Add class for education
     repeatablePanel.classList.add('panel-repeatable-panel__education');
+
     const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
     if (educationRadioGroup) {
         const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
 
         // regsiter click on radios
         radios?.forEach(radio => {
-            radio.addEventListener('click', () => {
-                if (radio.checked && radio.value == 'yes') {
+            radio.addEventListener('change', () => {
+                if (radio.value == 'yes') {
                     // show repeatable panel
                     repeatablePanel.setAttribute('data-visible', true)
                 }
-                if (radio.checked && radio.value == 'no') {
+                if (radio.value == 'no') {
                     // hide repeatable panel
                     repeatablePanel.setAttribute('data-visible', false)
                 }
@@ -66,9 +67,10 @@ export function init(repeatablePanel) {
             else {
                 // reset selection & show question
                 radios?.forEach(radio => { radio.checked = false; });
-                // show first entry
-                repeatablePanel.querySelector('[data-repeatable]').style.display = 'block'
+                // Show question
                 educationRadioGroup.setAttribute('data-visible', true);
+                // hide repeatable panel
+                repeatablePanel.setAttribute('data-visible', false)
             }
         });
 

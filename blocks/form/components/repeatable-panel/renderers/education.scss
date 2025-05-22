@@ -1,7 +1,5 @@
 main .form form .panel-repeatable-panel {
     &__education {
-        >[data-repeatable] {
-            display: none;
-        }
+        display: none;
     }
 }
