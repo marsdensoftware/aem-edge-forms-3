@@ -13,8 +13,10 @@ function reactify(elem, fn) {
           acc.push(reactify(child, fn));
           break;
         case Node.TEXT_NODE:
-        case Node.COMMENT_NODE:
           acc.push(child.textContent); // N.B. newlines
+          break;
+        case Node.COMMENT_NODE:
+          acc.push(`<!--${child.textContent$}-->`);
           break;
         default:
           console.log('Uh oh, unexpected node type', child);
