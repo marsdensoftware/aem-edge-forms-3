@@ -37,19 +37,19 @@ export default function renderEntry(entry) {
 export function init(repeatablePanel) {
     repeatablePanel.addEventListener('updated', () => {
         // Add custom logic here
-        const educationRadioGroup = repeatablePanel.closest('fieldset')?.querySelector('.field-education-selection');
+        const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
 
         if (educationRadioGroup) {
             const savedEntries = repeatablePanel.querySelectorAll('[data-repeatable].saved');
             if (savedEntries.length > 0) {
                 // Hide question
-                educationRadioGroup.hide();
+                educationRadioGroup.setAttribute('data-visible', false);
             }
             else {
                 // reset selection & show question
                 const radios = educationRadioGroup.querySelectorAll('input[name="radio"]');
                 radios.forEach(radio => radio.checked = false);
-                educationRadioGroup.show();
+                educationRadioGroup.setAttribute('data-visible', true);
             }
         }
 
