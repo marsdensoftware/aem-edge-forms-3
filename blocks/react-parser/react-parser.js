@@ -32,6 +32,7 @@ function reactify(elem, fn) {
 
 
 async function setup() {
+  console.log('running setup!')
   // TODO check this is async safe
   if (sessionStorage.getItem(REACT_KEY)) {
     return
@@ -74,6 +75,5 @@ export default async function decorate(block) {
   setTimeout(async () => {
     console.log('timeout');
     clearInterval(poll);
-    await setup(); // run anyway for now, because changes to scripts.js are not working
   }, 3000);
 }
