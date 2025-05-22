@@ -36,7 +36,7 @@ function setup() {
   // TODO check this is async safe
   if (sessionStorage.getItem(REACT_KEY)) {
     console.log('react key already set, returning');
-    return
+    //return
   }
   sessionStorage.setItem(REACT_KEY, true);
 
@@ -64,6 +64,7 @@ export default async function decorate(block) {
     //sessionStorage.removeItem(REACT_KEY);
     sessionStorage.clear();
   }); //turns out this is unreliable and especially so when added this way???
+  // onbeforeunload is also not supported on Safari or WebView on iOS
 
   window.onbeforeunload = () => { // this unfortunately nukes other handlers
     //sessionStorage.removeItem(REACT_KEY);
