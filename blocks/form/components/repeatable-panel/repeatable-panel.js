@@ -87,11 +87,11 @@ function toggleWizardButtons(el, visible) {
     const wizardButtons = el.closest('.wizard')?.querySelectorAll('.wizard-button-wrapper>.button-wrapper');
     if (visible) {
         // show wizard buttons
-        wizardButtons.forEach(btn => btn.style.display = 'block');
+        wizardButtons.style.display = 'block';
     }
     else {
         // hide wizard buttons
-        wizardButtons.forEach(btn => btn.style.display = 'none');
+        wizardButtons.style.display = 'none';
     }
 }
 
