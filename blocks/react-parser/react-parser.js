@@ -21,7 +21,7 @@ function reactify(elem, fn) {
           break; // TODO throw an error here?
       }
       return acc;
-    });
+    }, []);
   // TODO probably need to mimick id, className/classList, attributes, and handlers (how to get handlers?)
 
   console.log('reactifying', elem, 'have desc', children);
