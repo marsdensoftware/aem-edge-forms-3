@@ -4,8 +4,8 @@ import ReactDOMClient, { createRoot } from 'react-dom/client';
 
 const REACT_KEY = 'gh-react'
 
-function reactify(elem, fn) {
-  const children = Array.from(elem.childNodes)
+function reactifyChildren(elem, fn) {
+  return Array.from(elem.childNodes)
     .filter(fn ? fn : () => true)
     .reduce((acc, child) => {
       switch (child.nodeType) {
@@ -28,6 +28,10 @@ function reactify(elem, fn) {
       }
       return acc;
     }, []);
+}
+
+function reactify(elem, fn) {
+  const children = reactifyChildren(elem, fn)
   // TODO probably need to mimick id, className/classList, attributes, and handlers (how to get handlers?)
 
   console.log('reactifying', elem, 'have desc', children);
@@ -50,10 +54,12 @@ function setup(block) {
   // > > div.name.block
   console.log('have container', container);
   //
-  const app = reactify(container, (elem) => elem.className != block.className); // TODO not sure if className is ordered
+  //const app = reactify(container, (elem) => elem.className != block.className); // TODO not sure if className is ordered
+  const app = reactifyChildren(container, (elem) => elem.className != block.className); // TODO not sure if className is ordered
 
   // try rendering it along side to compare?
   const div = document.createElement('div');
+  div.className = container.className;
   div.id = 'react-dynamic-root';
   container.insertAdjacentElement('afterend', div); // for testing
   const root = createRoot(div);
