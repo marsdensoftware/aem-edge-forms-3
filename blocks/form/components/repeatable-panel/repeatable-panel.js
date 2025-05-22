@@ -1,4 +1,4 @@
-
+import { loadCSS } from '../../../../scripts/aem.js'
 
 function createButton(label, icon) {
     const button = document.createElement('button');
@@ -144,7 +144,7 @@ export default async function decorate(el, field, container) {
                         const rendererName = field.properties.renderer || 'default';
                         // load js & css
                         const renderer = import(`./renderers/${rendererName}.js`)
-                        import(`./renderers/${rendererName}.css`)
+                        loadCSS(`./renderers/${rendererName}.css`)
 
                         renderer.then((r) => {
                             r.init && r.init(panel);
