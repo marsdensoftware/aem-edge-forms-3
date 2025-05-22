@@ -1,3 +1,5 @@
+@use '../../../../styles/settings' as *;
+
 main .form form .panel-repeatable-panel {
 
     .repeat-actions {
@@ -37,5 +39,10 @@ main .form form .panel-repeatable-panel {
         .btn-cancel {
             display: block;
         }
+    }
+
+    .repeatable-entry {
+        border: solid $color-secondary 1px ;
+        border-radius: $border-radius-large;
     }
 }

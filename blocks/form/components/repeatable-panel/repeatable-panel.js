@@ -21,7 +21,7 @@ async function renderOverview(renderer, panel) {
         let content = '<div class="repeatable-entries">';
 
         savedEntries.forEach((entry) => {
-            content += `<div class="repeatable-entry">${renderer.default(entry)}</div>`;
+            content += `${renderer.default(entry)}`;
         });
 
         content += '</div>';
@@ -87,7 +87,7 @@ function toggleWizardButtons(el, visible) {
     }
     else {
         // hide wizard buttons
-        wizardButtons.forEach(btn => btn.style.display = 'none');
+        wizardButtons.forEach(btn => btn.style.display = 'block');
     }
 }
 

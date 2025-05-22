@@ -31,15 +31,15 @@ function entryToReadableString(entry) {
 export default function renderEntry(entry) {
     const readable = entryToReadableString(entry);
 
-    return `<div class="education-entry" data-id="${entry.dataset.id}">${readable}</div>`;
+    return `<div class="education-entry repeatable-entry" data-id="${entry.dataset.id}">${readable}</div>`;
 }
 
 export function init(repeatablePanel) {
-    repeatablePanel.addEventListener('updated', () => {
-        // Add custom logic here
-        const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
+    const educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
+    if (educationRadioGroup) {
+        repeatablePanel.addEventListener('updated', () => {
+            // Add custom logic here
 
-        if (educationRadioGroup) {
             const savedEntries = repeatablePanel.querySelectorAll('[data-repeatable].saved');
             if (savedEntries.length > 0) {
                 // Hide question
@@ -51,9 +51,6 @@ export function init(repeatablePanel) {
                 radios.forEach(radio => radio.checked = false);
                 educationRadioGroup.setAttribute('data-visible', true);
             }
-        }
+        });
 
-
-    });
-
-}
+    }
