@@ -141,9 +141,9 @@ export default async function decorate(block) {
   console.log('block parent?', block.closest('.section'));
   // Or document.querySelector('.section:has(.block.react-search)') will also work
   // Could also select children of block in that case (block.children?)
-  window.onbeforeunload = function() { // or run this in scripts.js?
+  window.addEventListener('onbeforeunload', () => { // or run this in scripts.js?
     sessionStorage.clear(); // or remove only the prefix?
-  }
+  });
   // TODO check if this is async safe
   const prefix = parseInt(sessionStorage.getItem('react-block-prefix') || 0, 10) + 1;
   console.log('fetched and incremented prefix', prefix);

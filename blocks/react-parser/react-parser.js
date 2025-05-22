@@ -60,9 +60,9 @@ export default async function decorate(block) {
   // with child blocks; parse children (need to run after all decorate()s?), replace block with react root (create or hydrate)
   // with sibling blocks, find parent, parse blocks except this one, do the same, also need to ensure only one of these runs
 
-  window.onbeforeunload = function() {
+  window.addEventListener('onbeforeunload', () => {
     sessionStorage.removeItem(REACT_KEY);
-  }
+  });
 
   const poll = setInterval(async () => {
     console.log('checking!');
