@@ -153,7 +153,7 @@ export default async function decorate(el, field, container) {
 
                         panel.addEventListener('rp:edit', (event) => {
                             renderer.then((r) => {
-                                const el = event.detail.item.el;
+                                const el = event.detail.item;
                                 toggleEditMode(r, el, true);
                             })
 
