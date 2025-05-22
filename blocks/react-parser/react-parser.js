@@ -31,12 +31,12 @@ function reactify(elem, fn) {
 }
 
 
-function setup() {
+function setup(block) {
   console.log('running setup!')
   // TODO check this is async safe
   if (sessionStorage.getItem(REACT_KEY)) {
     console.log('react key already set, returning');
-    //return
+    return
   }
   sessionStorage.setItem(REACT_KEY, true);
 
@@ -76,7 +76,7 @@ export default async function decorate(block) {
     if (!sessionStorage.getItem('sections-loaded'))
       return;
     clearInterval(poll);
-    setup();
+    setup(block);
   }, 10);
   const timeout = setTimeout(() => {
     console.log('timeout');
