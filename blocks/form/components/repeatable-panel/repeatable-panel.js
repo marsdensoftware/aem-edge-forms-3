@@ -119,9 +119,14 @@ export default async function decorate(el, field, container) {
                     mutation.type === 'attributes' &&
                     mutation.attributeName === 'data-block-status'
                 ) {
+                    if (targetNode.classList.contains('edit-mode')) {
+                        // Do nothing
+                        return;
+                    }
+
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
-                        console.log('Form is loaded:');
+                        // Implement repeatable panel customisations
 
                         const panel = el.closest('.repeat-wrapper');
                         panel.classList.add('panel-repeatable-panel');
