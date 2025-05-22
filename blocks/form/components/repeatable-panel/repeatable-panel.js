@@ -89,7 +89,7 @@ function toggleWizardButtons(el, visible) {
     }
     else {
         // hide wizard buttons
-        wizardButtons.forEach(btn => btn.style.display = 'block');
+        wizardButtons.forEach(btn => btn.style.display = 'none');
     }
 }
 
