@@ -28,12 +28,24 @@ function entryToReadableString(entry) {
     return '<ul>' + entries.join('') + '</ul>';
 }
 
-export default function renderEntry(entry) {
-    const readable = entryToReadableString(entry);
+// Custom redering logic
+export default function renderEntry(entries) {
+    let result = '';
 
-    return `<li><p>${entry.dataset.id}</p>${readable}</li>`;
+    if (entries.length > 0) {
+        result = '<ol>';
+
+        entries.forEach((entry) => {
+            const readable = entryToReadableString(entry);
+            result += `<li><p>${entry.dataset.id}</p>${readable}</li>`;
+        });
+
+        result += '</ol>';
+    }
+
+    return result;
 }
 
-export function hook(repeatablePanel) {
+export function init(repeatablePanel) {
     // Add custom logic here
 }

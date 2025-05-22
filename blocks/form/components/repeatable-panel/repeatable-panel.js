@@ -17,17 +17,12 @@ async function renderOverview(renderer, panel) {
 
     const div = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach;
-    if (savedEntries.length > 0 && renderer && renderer.default) {
-        let content = '<ol>';
-
-        savedEntries.forEach((entry) => {
-            content += renderer.default(entry);
-        });
-
-        content += '</ol>';
-
-        div.innerHTML = content;
+    let newContent = '';
+    if (renderer && renderer.default) {
+        newContent = renderer.default(savedEntries);
     }
+    
+    div.innerHTML = newContent;
 
     // unsaved
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
@@ -117,7 +112,7 @@ export default async function decorate(el, field, container) {
                         const renderer = import(`./renderers/${rendererName}.js`)
 
                         renderer.then((r) => {
-                            r.hook && r.hook(panel);
+                            r.init && r.init(panel);
                             renderOverview(r, panel);
                         })
 
