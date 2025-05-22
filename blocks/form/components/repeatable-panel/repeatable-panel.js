@@ -12,7 +12,7 @@ function createButton(label, icon) {
 }
 
 async function renderOverview(renderer, panel) {
-    
+
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
     const div = panel.querySelector('.overview');
@@ -104,21 +104,6 @@ export default async function decorate(el, field, container) {
 
                         const panel = el.closest('.repeat-wrapper');
                         panel.classList.add('panel-repeatable-panel');
-                        
-                        const rendererName = field.properties.renderer;
-                        
-                        let renderer;
-                        if(rendererName){
-                            renderer = import(`./renderers/${renderer}.js`)
-                        }
-
-                        const form = panel.closest('form');
-
-                        form.addEventListener('item:add', (event) => {
-                            const added = event.detail.item.el;
-
-                            toggleEditMode(renderer, added, true);
-                        });
 
                         // create overview
                         const div = document.createElement('div');
@@ -126,7 +111,22 @@ export default async function decorate(el, field, container) {
 
                         panel.prepend(div);
 
-                        renderOverview(renderer, panel);
+                        const form = panel.closest('form');
+
+                        const rendererName = field.properties.renderer || 'default';
+                        const renderer = import(`./renderers/${rendererName}.js`)
+
+                        renderer.then((r) => {
+                            renderOverview(r, panel);
+                        })
+
+                        form.addEventListener('item:add', (event) => {
+                            renderer.then((r) => {
+                                const added = event.detail.item.el;
+                                toggleEditMode(r, added, true);
+                            })
+
+                        });
 
                         // Optional: Stop observing as only needed once
                         observer.disconnect();
