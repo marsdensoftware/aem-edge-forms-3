@@ -30,12 +30,10 @@ async function renderOverview(renderer, panel) {
     }
 
     // unsaved
-    /*
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
     unsavedEntries.forEach(el => {
         toggleEditMode(renderer, el, true);
     });
-    */
 
     // trigger event that rendering updated
     const event = new CustomEvent('updated', {

@@ -42,7 +42,7 @@ export function init(repeatablePanel) {
     if (educationRadioGroup) {
         const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
 
-        // regsiter click on radios
+        // register click on radios
         radios?.forEach(radio => {
             radio.addEventListener('change', () => {
                 if (radio.value == 'yes') {
@@ -54,7 +54,6 @@ export function init(repeatablePanel) {
                     repeatablePanel.style.display = 'none';
                 }
             });
-
         });
 
         repeatablePanel.addEventListener('updated', () => {
