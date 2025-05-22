@@ -1,0 +1,35 @@
+main .form form .panel-repeatable-panel {
+
+    .repeat-actions {
+        display: none;
+    }
+
+    .item-remove {
+        display: none !important;
+    }
+
+    .editing .item-add {
+        display: none !important;
+    }
+
+    [data-repeatable].saved {
+        display: none;
+    }
+
+    [data-repeatable]:not(.saved) {
+        display: block;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        display: none;
+    }
+
+    [data-repeatable].current {
+
+        .btn-save,
+        .btn-cancel {
+            display: block;
+        }
+    }
+}

@@ -28,6 +28,12 @@ function entryToReadableString(entry) {
     return '<ul>' + entries.join('') + '</ul>';
 }
 
+export default function renderEntry(entry) {
+    const readable = entryToReadableString(entry);
+
+    return `<li><p>${entry.dataset.id}</p>${readable}</li>`;
+}
+
 export default function render(entry) {
     const readable = entryToReadableString(entry);
 

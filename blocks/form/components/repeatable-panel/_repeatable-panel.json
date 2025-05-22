@@ -43,6 +43,21 @@
                             "valueType": "boolean"
                         },
                         {
+                            "component": "select",
+                            "name": "renderer",
+                            "label": "Renderer",
+                            "options": [
+                                {
+                                    "name": "Default",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "Education",
+                                    "value": "education"
+                                }
+                            ]
+                        },
+                        {
                             "component": "number",
                             "name": "minOccur",
                             "label": "Minimum repetitions",

@@ -11,36 +11,33 @@ function createButton(label, icon) {
     return button;
 }
 
-async function renderOverview(panel) {
-    let renderer = panel.closest('.panel-repeatable-panel').dataset.renderer;
-    if (renderer) {
-        renderer = await import(`./renderers/${renderer}.js`)
-    }
+async function renderOverview(renderer, panel) {
+    
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
     const div = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach;
-    if (savedEntries.length > 0) {
+    if (savedEntries.length > 0 && renderer && renderer.renderEntry) {
         let content = '<ol>';
 
-        savedEntries.forEach((entry, index) => {
-            content += renderer.default(entry);
+        savedEntries.forEach((entry) => {
+            content += renderer.renderEntry(entry);
         });
 
         content += '</ol>';
-        
+
         div.innerHTML = content;
     }
 
     // unsaved
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
     unsavedEntries.forEach(el => {
-        toggleEditMode(el, true);
+        toggleEditMode(renderer, el, true);
     });
 
 }
 
-function ensureButtonBar(entry) {
+function ensureButtonBar(renderer, entry) {
     let buttonBar = entry.querySelector('.button-bar');
     if (buttonBar) {
         return;
@@ -58,7 +55,7 @@ function ensureButtonBar(entry) {
         entry.classList.add('saved');
         toggleEditMode(entry, false);
 
-        renderOverview(panel);
+        renderOverview(renderer, panel);
     });
 
     const cancelBtn = createButton('Cancel', 'cancel');
@@ -68,14 +65,14 @@ function ensureButtonBar(entry) {
         // If saved one then reset changes.
         entry.remove();
 
-        renderOverview(panel);
+        renderOverview(renderer, panel);
     });
 
     buttonBar.appendChild(saveBtn);
     buttonBar.appendChild(cancelBtn);
 }
 
-function toggleEditMode(entry, visible) {
+function toggleEditMode(renderer, entry, visible) {
     const panel = entry.closest('.panel-repeatable-panel');
     if (visible) {
         entry.classList.add('current');
@@ -86,7 +83,7 @@ function toggleEditMode(entry, visible) {
         panel.classList.remove('editing');
     }
 
-    ensureButtonBar(entry);
+    ensureButtonBar(renderer, entry);
 }
 
 export default async function decorate(el, field, container) {
@@ -104,17 +101,23 @@ export default async function decorate(el, field, container) {
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
                         console.log('Form is loaded:');
-                        
+
                         const panel = el.closest('.repeat-wrapper');
                         panel.classList.add('panel-repeatable-panel');
-                        panel.dataset.renderer = field.properties.renderer;
+                        
+                        const rendererName = field.properties.renderer;
+                        
+                        let renderer;
+                        if(rendererName){
+                            renderer = import(`./renderers/${renderer}.js`)
+                        }
 
                         const form = panel.closest('form');
 
                         form.addEventListener('item:add', (event) => {
                             const added = event.detail.item.el;
 
-                            toggleEditMode(added, true);
+                            toggleEditMode(renderer, added, true);
                         });
 
                         // create overview
@@ -123,7 +126,7 @@ export default async function decorate(el, field, container) {
 
                         panel.prepend(div);
 
-                        renderOverview(panel);
+                        renderOverview(renderer, panel);
 
                         // Optional: Stop observing as only needed once
                         observer.disconnect();
