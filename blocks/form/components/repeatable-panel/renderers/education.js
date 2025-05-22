@@ -47,11 +47,11 @@ export function init(repeatablePanel) {
             radio.addEventListener('change', () => {
                 if (radio.value == 'yes') {
                     // show repeatable panel
-                    repeatablePanel.setAttribute('data-visible', true)
+                    repeatablePanel.style.display = 'block';
                 }
                 if (radio.value == 'no') {
                     // hide repeatable panel
-                    repeatablePanel.setAttribute('data-visible', false)
+                    repeatablePanel.style.display = 'none';
                 }
             });
 
@@ -70,7 +70,7 @@ export function init(repeatablePanel) {
                 // Show question
                 educationRadioGroup.setAttribute('data-visible', true);
                 // hide repeatable panel
-                repeatablePanel.setAttribute('data-visible', false)
+                repeatablePanel.style.display = 'none';
             }
         });
 
