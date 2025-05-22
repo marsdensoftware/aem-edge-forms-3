@@ -47,7 +47,7 @@ export function init(repeatablePanel) {
             }
             else {
                 // reset selection & show question
-                const radios = educationRadioGroup.querySelectorAll('input[name="radio"]');
+                const radios = educationRadioGroup.querySelectorAll('input[type="radio"]');
                 radios.forEach(radio => radio.checked = false);
                 educationRadioGroup.setAttribute('data-visible', true);
             }
