@@ -46,7 +46,7 @@ function setup(block) {
   // > > div.name.block
   console.log('have container', container);
   // TODO need this to run AFTER all siblings have decorate()ed
-  const app = reactify(container);
+  const app = reactify(container, (elem) => elem.className != block.className); // TODO not sure if className is ordered
 
   // try rendering it along side to compare?
   const div = document.createElement('div');
