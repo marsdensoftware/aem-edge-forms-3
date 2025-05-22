@@ -32,6 +32,12 @@ function reactify(elem, fn) {
 
 
 async function setup() {
+  // TODO check this is async safe
+  if (sessionStorage.getItem(REACT_KEY)) {
+    return
+  }
+  sessionStorage.setItem(REACT_KEY, true);
+
   const ready = sessionStorage.getItem('sections-loaded');
 
   const container = block.closest('.section');
@@ -57,16 +63,16 @@ export default async function decorate(block) {
   window.onbeforeunload = function() {
     sessionStorage.removeItem(REACT_KEY);
   }
-  // TODO check this is async safe
-  if (sessionStorage.getItem(REACT_KEY)) {
-    return
-  }
-  sessionStorage.setItem(REACT_KEY, true);
+
   const poll = setInterval(async () => {
+    console.log('checking!');
     if (!sessionStorage.getItem('sections-loaded'))
       return;
     clearInterval(poll);
     await setup();
   }, 10);
-  setTimeout(() => clearInterval(poll), 3000);
+  setTimeout(async () => {
+    console.log('timeout');
+    clearInterval(poll);
+  }, 3000);
 }
