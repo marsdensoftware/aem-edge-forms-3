@@ -34,7 +34,9 @@ function reactify(elem, fn) {
   const children = reactifyChildren(elem, fn)
   // TODO attributes, and handlers (how to get handlers? can that ever be robust? would hydration help?)
   // TODO id if we are replacing the original
-  const props = {className: elem.className};
+  const props = {};
+  if (elem.className)
+    props.className = elem.className;
 
   for (const attr of elem.attributes) {
     if (attr.name == 'id' || attr.name == 'class' || attr.name == 'key' || attr.name == 'ref') {
