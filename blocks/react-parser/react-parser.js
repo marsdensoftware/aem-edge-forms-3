@@ -32,12 +32,20 @@ function reactifyChildren(elem, fn) {
 
 function reactify(elem, fn) {
   const children = reactifyChildren(elem, fn)
-  // TODO probably need to mimick id, className/classList, attributes, and handlers (how to get handlers?)
+  // TODO attributes, and handlers (how to get handlers? can that ever be robust? would hydration help?)
+  // TODO id if we are replacing the original
+  const props = {className: elem.className};
+
+  for (const attr of elem.attributes) {
+    if (attr.name == 'id' || attr.name == 'class' || attr.name == 'key' || attr.name == 'ref') {
+      continue
+    }
+    props[attr.name] = attr.value;
+  }
 
   console.log('reactifying', elem, 'have desc', children);
-  return createElement(elem.tagName, {className: elem.className}, ...children)
+  return createElement(elem.tagName, props, ...children)
 }
-
 
 function setup(block) {
   console.log('running setup!')
