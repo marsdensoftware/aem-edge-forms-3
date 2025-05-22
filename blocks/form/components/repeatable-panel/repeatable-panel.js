@@ -144,7 +144,7 @@ export default async function decorate(el, field, container) {
                         const rendererName = field.properties.renderer || 'default';
                         // load js & css
                         const renderer = import(`./renderers/${rendererName}.js`)
-                        loadCSS(`./renderers/${rendererName}.css`)
+                        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/renderers/${rendererName}.css`)
 
                         renderer.then((r) => {
                             r.init && r.init(panel);
