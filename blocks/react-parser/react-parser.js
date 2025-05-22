@@ -74,5 +74,6 @@ export default async function decorate(block) {
   setTimeout(async () => {
     console.log('timeout');
     clearInterval(poll);
+    await setup(); // run anyway for now, because changes to scripts.js are not working
   }, 3000);
 }

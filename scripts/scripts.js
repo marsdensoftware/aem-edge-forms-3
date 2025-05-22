@@ -140,6 +140,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  console.log('loadPage()!');
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
