@@ -21,7 +21,7 @@ async function renderOverview(renderer, panel) {
         let content = '<ol>';
 
         savedEntries.forEach((entry) => {
-            content += renderer.renderEntry(entry);
+            content += renderer.default(entry);
         });
 
         content += '</ol>';
