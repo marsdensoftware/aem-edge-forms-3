@@ -30,13 +30,15 @@ async function renderOverview(renderer, panel) {
     }
 
     // unsaved
+    /*
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
     unsavedEntries.forEach(el => {
         toggleEditMode(renderer, el, true);
     });
+    */
 
     // trigger event that rendering updated
-    const event = new CustomEvent('updated', {
+    const event = new CustomEvent('rp:updated', {
         detail: {},
         bubbles: false,
     });
@@ -149,12 +151,19 @@ export default async function decorate(el, field, container) {
                             renderOverview(r, panel);
                         })
 
+                        panel.addEventListener('rp:edit', (event) => {
+                            renderer.then((r) => {
+                                const el = event.detail.item.el;
+                                toggleEditMode(r, el, true);
+                            })
+
+                        });
+
                         form.addEventListener('item:add', (event) => {
                             renderer.then((r) => {
                                 const added = event.detail.item.el;
                                 toggleEditMode(r, added, true);
                             })
-
                         });
 
                         // Optional: Stop observing as only needed once

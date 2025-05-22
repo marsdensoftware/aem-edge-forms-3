@@ -48,6 +48,14 @@ export function init(repeatablePanel) {
                 if (radio.value == 'yes') {
                     // show repeatable panel
                     repeatablePanel.style.display = 'block';
+                    const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
+
+                    // Edit first entry
+                    const event = new CustomEvent('rp:edit', {
+                        detail: { item: el },
+                        bubbles: false,
+                    });
+                    repeatablePanel.dispatchEvent(event);
                 }
                 if (radio.value == 'no') {
                     // hide repeatable panel
@@ -56,7 +64,7 @@ export function init(repeatablePanel) {
             });
         });
 
-        repeatablePanel.addEventListener('updated', () => {
+        repeatablePanel.addEventListener('rp:updated', () => {
             // Add custom logic here
             const savedEntries = repeatablePanel.querySelectorAll('[data-repeatable].saved');
             if (savedEntries.length > 0) {
