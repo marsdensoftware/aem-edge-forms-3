@@ -17,18 +17,30 @@ async function renderOverview(renderer, panel) {
 
     const div = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach;
-    let newContent = '';
-    if (renderer && renderer.default) {
-        newContent = renderer.default(savedEntries);
+    if (savedEntries.length > 0 && renderer && renderer.default) {
+        let content = '<div class="repeatable-entries">';
+
+        savedEntries.forEach((entry) => {
+            content += `<div class="repeatable-entry">${renderer.default(entry)}</div>`;
+        });
+
+        content += '</div>';
+
+        div.innerHTML = content;
     }
-    
-    div.innerHTML = newContent;
 
     // unsaved
     const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
     unsavedEntries.forEach(el => {
         toggleEditMode(renderer, el, true);
     });
+
+    // trigger event that rendering updated
+    const event = new CustomEvent('updated', {
+        detail: {},
+        bubbles: false,
+    });
+    panel.dispatchEvent(event);
 
 }
 
@@ -67,6 +79,18 @@ function ensureButtonBar(renderer, entry) {
     buttonBar.appendChild(cancelBtn);
 }
 
+function toggleWizardButtons(el, visible) {
+    const wizardButtons = el.closest('.wizard')?.querySelectorAll('.wizard-button-wrapper>.button-wrapper');
+    if (visible) {
+        // show wizard buttons
+        wizardButtons.forEach(btn => btn.style.display = 'block');
+    }
+    else {
+        // hide wizard buttons
+        wizardButtons.forEach(btn => btn.style.display = 'none');
+    }
+}
+
 function toggleEditMode(renderer, entry, visible) {
     const panel = entry.closest('.panel-repeatable-panel');
     if (visible) {
@@ -77,6 +101,8 @@ function toggleEditMode(renderer, entry, visible) {
         entry.classList.remove('current');
         panel.classList.remove('editing');
     }
+
+    toggleWizardButtons(entry, !visible);
 
     ensureButtonBar(renderer, entry);
 }

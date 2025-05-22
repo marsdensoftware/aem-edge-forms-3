@@ -28,24 +28,32 @@ function entryToReadableString(entry) {
     return '<ul>' + entries.join('') + '</ul>';
 }
 
-// Custom redering logic
-export default function renderEntry(entries) {
-    let result = '';
+export default function renderEntry(entry) {
+    const readable = entryToReadableString(entry);
 
-    if (entries.length > 0) {
-        result = '<ol>';
-
-        entries.forEach((entry) => {
-            const readable = entryToReadableString(entry);
-            result += `<li><p>${entry.dataset.id}</p>${readable}</li>`;
-        });
-
-        result += '</ol>';
-    }
-
-    return result;
+    return `<div class="education-entry" data-id="${entry.dataset.id}">${readable}</div>`;
 }
 
 export function init(repeatablePanel) {
-    // Add custom logic here
+    repeatablePanel.addEventListener('updated', () => {
+        // Add custom logic here
+        const educationRadioGroup = this.closest('fieldset')?.querySelector('.field-education-selection');
+
+        if (educationRadioGroup) {
+            const savedEntries = this.querySelectorAll('[data-repeatable].saved');
+            if (savedEntries.length > 0) {
+                // Hide question
+                educationRadioGroup.hide();
+            }
+            else {
+                // reset selection & show question
+                const radios = educationRadioGroup.querySelectorAll('input[name="radio"]');
+                radios.forEach(radio => radio.checked = false);
+                educationRadioGroup.show();
+            }
+        }
+
+
+    });
+
 }
