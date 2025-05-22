@@ -25,6 +25,12 @@ main .form form .panel-repeatable-panel {
         display: none;
     }
 
+    [data-repeatable] .button-bar {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
     [data-repeatable].current {
 
         .btn-save,
