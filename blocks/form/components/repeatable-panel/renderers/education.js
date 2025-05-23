@@ -47,6 +47,7 @@ export default function renderEntry(entry) {
     const editLink = document.createElement('a');
     editLink.classList.add('repeatable-entry__edit');
     editLink.textContent = 'Edit';
+    editLink.href = '#';
     result.append(editLink);
 
     editLink.addEventListener('click', () => {
