@@ -86,6 +86,14 @@ $color-gradient-grey-dark: linear-gradient(
   $color-grey-black-80 100%
 );
 
+// H1-h3 Gradient
+
+$color-gradient-blue: linear-gradient(
+                135deg,
+                $color-primary 25%,
+                $color-primary-navy 100%
+);
+
 /************************
       Semantic use
 *************************/

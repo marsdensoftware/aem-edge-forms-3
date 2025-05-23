@@ -17,12 +17,29 @@ h6 {
   }
 }
 
-h1 { @include heading-level-1; }
+h1,
+h2,
+h3 {
+  @include heading-level-1; // Assuming level-1, -2, -3 include font sizes respectively
+  background: $color-gradient-blue;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 h2 { @include heading-level-2; }
 h3 { @include heading-level-3; }
+
+h4,
+h5,
+h6 {
+  color: $text-dark;
+}
+
 h4 { @include heading-level-4; }
 h5 { @include heading-level-5; }
 h6 { @include heading-level-6; }
+
 
 /* ------------------------------
    Paragraph Default
@@ -30,6 +47,7 @@ h6 { @include heading-level-6; }
 p {
   margin-bottom: $spacing-500;
   line-height: 160%;
+  color: $text-primary;
 }
 
 .form-wrapper p {
@@ -75,7 +93,7 @@ p {
   }
 
   a {
-    color: $color-primary;
+    color: $text-accent;
     font-weight: 500;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -83,11 +101,11 @@ p {
 
     &:hover,
     &:focus {
-      color: $color-primary-navy;
+      color: $text-dark;
     }
 
     &:visited {
-      color: $color-primary-dark-navy;
+      color: $text-dark;
     }
   }
 
@@ -101,7 +119,7 @@ p {
 
 // Default paragraph block (no size class)
 .default-content-wrapper a {
-  color: $color-primary;
+  color: $text-accent;
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -109,21 +127,20 @@ p {
 
   &:hover,
   &:focus {
-    color: $color-primary-navy;
+    color: $text-dark;
   }
 
   &:visited {
-    color: $color-primary-dark-navy;
+    color: $text-dark;
   }
 }
 
-  ol li,
-  ul li {
-    @include font-body-default;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
-
+ol li,
+ul li {
+  @include font-body-default;
+  margin-bottom: 0.5rem;
+  color: $text-primary;
+}
 
 // Large paragraph block
 .typography.p-large.block {
@@ -134,7 +151,7 @@ p {
   }
 
   a {
-    color: $color-primary;
+    color: $text-accent;
     font-weight: 500;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -142,11 +159,11 @@ p {
 
     &:hover,
     &:focus {
-      color: $color-primary-navy;
+      color: $text-dark;
     }
 
     &:visited {
-      color: $color-primary-dark-navy;
+      color: $text-dark;
     }
   }
 
@@ -176,24 +193,35 @@ p {
 /* ------------------------------
    Subtitle
 ------------------------------ */
-.subtitle {
+.typography.subtitle.block p {
   font-family: $font-family;
   font-size: 28px;
   line-height: 130%;
   margin: 0 0 40px 0;
+  color: $text-dark;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
+
 /* ------------------------------
-   Strap Title Default
+   Strap Title Default & Small
 ------------------------------ */
+.strap-title,
+.strap-title-small {
+  text-transform: uppercase;
+  line-height: 100%;
+
+  // Move color into nested p selector
+  p {
+    color: $text-dark;
+  }
+}
+
 .strap-title {
   font-size: 20px;
-  line-height: 100%;
-  text-transform: uppercase;
   margin: 0 0 8px 0;
 
   &:last-child {
@@ -201,13 +229,32 @@ p {
   }
 }
 
-/* ------------------------------
-   Strap Title Small
------------------------------- */
 .strap-title-small {
   font-size: 16px;
-  line-height: 100%;
-  text-transform: uppercase;
+}
+
+
+/* ------------------------------
+   Form Contextual Help Anchors
+------------------------------ */
+.panel-formcontextualhelp--info .panel-formcontextualhelp__footer__link-text {
+  margin-right: 0.75rem;
+  color: $text-accent;
+  font-weight: 500;
+  text-decoration: none;
+  text-underline-offset: auto;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: $text-dark;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  &:visited {
+    color: $text-dark;
+  }
 }
 
 
