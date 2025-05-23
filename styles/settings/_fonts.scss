@@ -9,18 +9,30 @@
 $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 $size-font-base: 16px;
 
-/* Headings */
+/* Headings
 $size-font-h1: clamp(48px, 5.2vw, 61px);
 $size-font-h2: 38px;
 $size-font-h3: 32px;
 $size-font-h4: 24px;
 $size-font-h5: 22px;
-$size-font-h6: 20px;
+$size-font-h6: 20px;*/
+
+// Headings
+$size-font-h1: clamp(2.5rem, 6vw, 3rem);      // 40px → 48px
+$size-font-h2: clamp(2.25rem, 5vw, 2.5rem);   // 36px → 40px
+$size-font-h3: clamp(2rem, 4.5vw, 2.25rem);   // 32px → 36px
+$size-font-h4: clamp(1.5rem, 3.5vw, 1.75rem); // 24px → 28px
+$size-font-h5: clamp(1.25rem, 3vw, 1.375rem); // 20px → 22px
+$size-font-h6: clamp(1.125rem, 2.5vw, 1.188rem); // 18px → 19px
+
+// subtitle
+$size-font-subtitle: clamp(1.5rem, 3.5vw, 1.75rem); // 24px → 28px
+
+//strap titles
+$size-font-strap-title: clamp(1.25rem, 2.5vw, 1.375rem); // 20px → 22px
+$size-font-strap-title-small: clamp(0.875rem, 2vw, 0.938rem); // 14px → 15px
 
 /* Text */
-$size-font-subtitle: 28px;
-$size-font-strap-title-small: 16px; /* new */
-$size-font-strap-title: 20px;
 $size-font-body-default: $size-font-base;
 $size-font-body-small: 12px;
 $size-font-body-large: 18px;
