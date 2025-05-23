@@ -2,12 +2,13 @@ function entryToReadableString(entry) {
     const inputs = entry.querySelectorAll('input, select, textarea');
     const entries = Array.from(inputs).map(input => {
         let value;
+        let name = input.name;
 
         if (input.tagName === 'SELECT') {
             value = input.options[input.selectedIndex]?.text.trim() || '';
         }
         else if (input.type === 'checkbox' || input.type === 'radio') {
-            value = input.checked ? input.value : '';
+            value = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
         } else {
             value = input.value;
         }
@@ -18,20 +19,41 @@ function entryToReadableString(entry) {
             const associated = entry.querySelector(`label[for="${input.id}"]`);
             if (associated) label = associated.textContent.trim();
 
-            return `<li>${label || input.name || input.id || 'unnamed'}: ${value}</li>`;
+            const result = document.createElement('div');
+            result.classList.add(`repeatable-entry__${name}`);
+            result.innerHTML = `${label || input.name || input.id || 'unnamed'}: ${value}`;
+
+            return result;
         }
         else {
-            return '';
+            return undefined;
         }
-    }).filter(line => line.includes(': ') && line.split(': ')[1] !== '');
+    }).filter(e => e != undefined);
 
-    return '<ul>' + entries.join('') + '</ul>';
+    return entries;
 }
 
 export default function renderEntry(entry) {
     const readable = entryToReadableString(entry);
 
-    return `<div class="education-entry repeatable-entry" data-id="${entry.dataset.id}">${readable}</div>`;
+    const result = document.createElement('div');
+    result.classList.add('education-entry', 'repeatable-entry');
+    result.dataset.id = entry.dataset.id;
+
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('repeatable-entry__edit');
+    editBtn.textContent = 'Edit';
+    readable.append(editBtn);
+
+    editBtn.addEventListener('click', () => {
+        alert('Edit entry: ' + result.dataset.id);
+    });
+
+    readable.forEach(r => {
+        result.append(r);
+    });
+
+    return result;
 }
 
 export function init(repeatablePanel) {

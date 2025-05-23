@@ -15,18 +15,17 @@ async function renderOverview(renderer, panel) {
 
     const savedEntries = panel.querySelectorAll('[data-repeatable].saved');
 
-    const div = panel.querySelector('.overview');
+    const overview = panel.querySelector('.overview');
     // For now reset everything. Later implement a more efficient/targeted approach;
     if (savedEntries.length > 0 && renderer && renderer.default) {
-        let content = '<div class="repeatable-entries">';
+        const content = document.createElement('div');
+        content.classList.add('repeatable-entries')
 
         savedEntries.forEach((entry) => {
-            content += `${renderer.default(entry)}`;
+            content.append(renderer.default(entry));
         });
 
-        content += '</div>';
-
-        div.innerHTML = content;
+        overview.replaceWith(content);
     }
 
     // unsaved
@@ -144,6 +143,9 @@ export default async function decorate(el, field, container) {
                         const form = panel.closest('form');
 
                         const rendererName = field.properties.renderer || 'default';
+                        // TODO Turn this into classes extending 
+                        // DefaultRenderer being the base class
+                        // EducationRenderer will extend fro DefaultRenderer
                         // load js & css
                         const renderer = import(`./renderers/${rendererName}.js`)
                         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/renderers/${rendererName}.css`)
