@@ -20,12 +20,11 @@ h6 {
 h1,
 h2,
 h3 {
-  @include heading-level-1; // Assuming level-1, -2, -3 include font sizes respectively
   background: $color-gradient-blue;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+}/*
 
 h2 { @include heading-level-2; }
 h3 { @include heading-level-3; }
@@ -38,7 +37,41 @@ h6 {
 
 h4 { @include heading-level-4; }
 h5 { @include heading-level-5; }
-h6 { @include heading-level-6; }
+h6 { @include heading-level-6; }*/
+
+h1 {
+  @include heading-level-1;
+  font-size: $size-font-h1;
+}
+
+h2 {
+  @include heading-level-2;
+  font-size: $size-font-h2;
+}
+
+h3 {
+  @include heading-level-3;
+  font-size: $size-font-h3;
+}
+
+h4 {
+  @include heading-level-4;
+  font-size: $size-font-h4;
+  color: $text-dark;
+}
+
+h5 {
+  @include heading-level-5;
+  font-size: $size-font-h5;
+  color: $text-dark;
+}
+
+h6 {
+  @include heading-level-6;
+  font-size: $size-font-h6;
+  color: $text-dark;
+}
+
 
 
 /* ------------------------------
@@ -195,7 +228,7 @@ ul li {
 ------------------------------ */
 .typography.subtitle.block p {
   font-family: $font-family;
-  font-size: 28px;
+  font-size: $size-font-subtitle;
   line-height: 130%;
   margin: 0 0 40px 0;
   color: $text-dark;
@@ -213,15 +246,11 @@ ul li {
 .strap-title-small {
   text-transform: uppercase;
   line-height: 100%;
-
-  // Move color into nested p selector
-  p {
-    color: $text-dark;
-  }
+  color: $text-dark;
 }
 
 .strap-title {
-  font-size: 20px;
+  font-size: $size-font-strap-title;
   margin: 0 0 8px 0;
 
   &:last-child {
@@ -230,7 +259,7 @@ ul li {
 }
 
 .strap-title-small {
-  font-size: 16px;
+  font-size: $size-font-strap-title-small;
 }
 
 
