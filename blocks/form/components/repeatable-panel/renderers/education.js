@@ -22,7 +22,7 @@ function entryToReadableString(entry) {
                 const associated = entry.querySelector(`label[for="${input.id}"]`);
                 if (associated) label = associated.textContent.trim();
             }
-            
+
             const result = document.createElement('div');
             result.classList.add(`repeatable-entry__${name}`);
             result.innerHTML = `${label || input.name || input.id || 'unnamed'}: ${value}`;
@@ -51,6 +51,7 @@ export default function renderEntry(entry) {
 
     editLink.addEventListener('click', () => {
         alert('Edit entry: ' + result.dataset.id);
+        e.preventDefault();
     });
 
     readable.forEach(r => {
