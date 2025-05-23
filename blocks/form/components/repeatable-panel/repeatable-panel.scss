@@ -10,6 +10,8 @@ main .form form .panel-repeatable-panel {
 
             &__edit {
                 position: absolute;
+                top: $spacing-400;
+                right: $spacing-400;
                 width: 56px;
                 height: 26px;
                 background-image: url(./images/edit-icon.png);
