@@ -1,3 +1,38 @@
-.radio-group--with-icon{gap:0 1rem}.radio-group--with-icon .radio-group--with-icon__label{padding:1rem;border:1px solid #333333;border-radius:16px;display:flex;flex-direction:column;align-items:center}.radio-group--with-icon .radio-group--with-icon__icon{width:2.5rem;height:2.5rem;display:block;content:url("./icon-streamline.svg")}.radio-group--with-icon label{display:flex;flex-direction:column;align-items:center;gap:1.25rem 0}.radio-group--with-icon label::before{order:1;margin-right:0}.radio-group--with-icon input[type=radio]:checked + label{background-color:#f2f2f2}.radio-group--with-icon input[type=radio]:checked + label:after{left:auto;top:auto;bottom:1.0625rem;margin:0 auto}
+.radio-group--with-icon {
+  gap: 0 1rem;
+}
+.radio-group--with-icon .radio-group--with-icon__label {
+  padding: 1rem;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.radio-group--with-icon .radio-group--with-icon__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: block;
+  content: url('./icon-streamline.svg');
+}
+.radio-group--with-icon label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem 0;
+}
+.radio-group--with-icon label::before {
+  order: 1;
+  margin-right: 0;
+}
+.radio-group--with-icon input[type='radio']:checked + label {
+  background-color: #f2f2f2;
+}
+.radio-group--with-icon input[type='radio']:checked + label:after {
+  left: auto;
+  top: auto;
+  bottom: 1.0625rem;
+  margin: 0 auto;
+}
 
 /*# sourceMappingURL=radio-group.css.map */
