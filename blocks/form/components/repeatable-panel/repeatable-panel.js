@@ -2,7 +2,7 @@ import { loadCSS } from '../../../../scripts/aem.js'
 
 function createButton(label, icon) {
     const button = document.createElement('button');
-    button.className = `btn-${icon}`;
+    button.classList.add('button', `btn-${icon}`);
     button.type = 'button';
     const text = document.createElement('span');
     text.textContent = label;
