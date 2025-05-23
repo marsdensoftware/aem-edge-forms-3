@@ -17,12 +17,62 @@ h6 {
   }
 }
 
-h1 { @include heading-level-1; }
+h1,
+h2,
+h3 {
+  background: $color-gradient-blue;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}/*
+
 h2 { @include heading-level-2; }
 h3 { @include heading-level-3; }
+
+h4,
+h5,
+h6 {
+  color: $text-dark;
+}
+
 h4 { @include heading-level-4; }
 h5 { @include heading-level-5; }
-h6 { @include heading-level-6; }
+h6 { @include heading-level-6; }*/
+
+h1 {
+  @include heading-level-1;
+  font-size: $size-font-h1;
+}
+
+h2 {
+  @include heading-level-2;
+  font-size: $size-font-h2;
+}
+
+h3 {
+  @include heading-level-3;
+  font-size: $size-font-h3;
+}
+
+h4 {
+  @include heading-level-4;
+  font-size: $size-font-h4;
+  color: $text-dark;
+}
+
+h5 {
+  @include heading-level-5;
+  font-size: $size-font-h5;
+  color: $text-dark;
+}
+
+h6 {
+  @include heading-level-6;
+  font-size: $size-font-h6;
+  color: $text-dark;
+}
+
+
 
 /* ------------------------------
    Paragraph Default
@@ -30,6 +80,7 @@ h6 { @include heading-level-6; }
 p {
   margin-bottom: $spacing-500;
   line-height: 160%;
+  color: $text-primary;
 }
 
 .form-wrapper p {
@@ -75,7 +126,7 @@ p {
   }
 
   a {
-    color: $color-primary;
+    color: $text-accent;
     font-weight: 500;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -83,11 +134,11 @@ p {
 
     &:hover,
     &:focus {
-      color: $color-primary-navy;
+      color: $text-dark;
     }
 
     &:visited {
-      color: $color-primary-dark-navy;
+      color: $text-dark;
     }
   }
 
@@ -100,36 +151,28 @@ p {
 }
 
 // Default paragraph block (no size class)
-.typography.block {
-  a,
-  ol,
-  ul {
-    @include font-body-default;
+.default-content-wrapper a {
+  color: $text-accent;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: $text-dark;
   }
 
-  a {
-    color: $color-primary;
-    font-weight: 500;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $color-primary-navy;
-    }
-
-    &:visited {
-      color: $color-primary-dark-navy;
-    }
+  &:visited {
+    color: $text-dark;
   }
+}
 
-  ol li,
-  ul li {
-    @include font-body-default;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
+ol li,
+ul li {
+  @include font-body-default;
+  margin-bottom: 0.5rem;
+  color: $text-primary;
 }
 
 // Large paragraph block
@@ -141,7 +184,7 @@ p {
   }
 
   a {
-    color: $color-primary;
+    color: $text-accent;
     font-weight: 500;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -149,11 +192,11 @@ p {
 
     &:hover,
     &:focus {
-      color: $color-primary-navy;
+      color: $text-dark;
     }
 
     &:visited {
-      color: $color-primary-dark-navy;
+      color: $text-dark;
     }
   }
 
@@ -183,24 +226,31 @@ p {
 /* ------------------------------
    Subtitle
 ------------------------------ */
-.subtitle {
+.typography.subtitle.block p {
   font-family: $font-family;
-  font-size: 28px;
+  font-size: $size-font-subtitle;
   line-height: 130%;
   margin: 0 0 40px 0;
+  color: $text-dark;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
+
 /* ------------------------------
-   Strap Title Default
+   Strap Title Default & Small
 ------------------------------ */
-.strap-title {
-  font-size: 20px;
-  line-height: 100%;
+.strap-title,
+.strap-title-small {
   text-transform: uppercase;
+  line-height: 100%;
+  color: $text-dark;
+}
+
+.strap-title {
+  font-size: $size-font-strap-title;
   margin: 0 0 8px 0;
 
   &:last-child {
@@ -208,13 +258,32 @@ p {
   }
 }
 
-/* ------------------------------
-   Strap Title Small
------------------------------- */
 .strap-title-small {
-  font-size: 16px;
-  line-height: 100%;
-  text-transform: uppercase;
+  font-size: $size-font-strap-title-small;
+}
+
+
+/* ------------------------------
+   Form Contextual Help Anchors
+------------------------------ */
+.panel-formcontextualhelp--info .panel-formcontextualhelp__footer__link-text {
+  margin-right: 0.75rem;
+  color: $text-accent;
+  font-weight: 500;
+  text-decoration: none;
+  text-underline-offset: auto;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: $text-dark;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  &:visited {
+    color: $text-dark;
+  }
 }
 
 
