@@ -1,8 +1,8 @@
 import { loadCSS } from '../../../../scripts/aem.js'
 
-function createButton(label, icon) {
+function createButton(label) {
     const button = document.createElement('button');
-    button.classList.add('button', `btn-${icon}`);
+    button.classList.add('button');
     button.type = 'button';
     const text = document.createElement('span');
     text.textContent = label;
@@ -57,7 +57,9 @@ function ensureButtonBar(renderer, entry) {
     buttonBar.className = 'button-bar';
     entry.appendChild(buttonBar);
 
-    const saveBtn = createButton('Save', 'save');
+    const saveBtn = createButton('Save');
+    saveBtn.classList.add('btn-save')
+    
     saveBtn.addEventListener('click', () => {
         // Mark as saved
         entry.classList.add('saved');
@@ -66,7 +68,9 @@ function ensureButtonBar(renderer, entry) {
         renderOverview(renderer, panel);
     });
 
-    const cancelBtn = createButton('Cancel', 'cancel');
+    const cancelBtn = createButton('Cancel', 'link');
+    cancelBtn.classList.add('btn-cancel', 'link');
+    
     cancelBtn.addEventListener('click', () => {
         // TODO: If new added one then remove. 
         // TODO: If saved one then reset changes.
