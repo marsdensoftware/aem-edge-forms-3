@@ -68,7 +68,7 @@ function ensureButtonBar(renderer, entry) {
         renderOverview(renderer, panel);
     });
 
-    const cancelBtn = createButton('Cancel', 'link');
+    const cancelBtn = createButton('Cancel');
     cancelBtn.classList.add('btn-cancel', 'link');
     
     cancelBtn.addEventListener('click', () => {
