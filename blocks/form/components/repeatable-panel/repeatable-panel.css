@@ -1,3 +1,3 @@
-.panel-repeatable-panel .field-label{color:#333333;margin-top:1.5rem;margin-bottom:1.5rem}.panel-repeatable-panel [data-repeatable]{display:none}.panel-repeatable-panel [data-repeatable].edit-mode{display:block}.panel-repeatable-panel .btn-save, .panel-repeatable-panel .btn-cancel{display:none}.panel-repeatable-panel .edit-mode .btn-save, .panel-repeatable-panel .edit-mode .btn-cancel{display:block}
+.panel-repeatable-panel .field-wrapper{color:#333333;margin-top:1.5rem;margin-bottom:1.5rem}.panel-repeatable-panel [data-repeatable]{display:none}.panel-repeatable-panel [data-repeatable].edit-mode{display:block}.panel-repeatable-panel .btn-save, .panel-repeatable-panel .btn-cancel{display:none}.panel-repeatable-panel .edit-mode .btn-save, .panel-repeatable-panel .edit-mode .btn-cancel{display:block}
 
 /*# sourceMappingURL=repeatable-panel.css.map */

@@ -46,3 +46,37 @@
     }
   }
 }
+
+.radio-group-wrapper {
+  &.cards {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      padding: 16px;
+      border-radius: $border-radius-mid;
+      border: 2px solid $stroke-secondary;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 8px;
+      justify-content: space-between;
+
+      &::before {
+        order: 1;
+        margin-right: 0;
+      }
+    }
+
+    input {
+      &:checked {
+        + label {
+          &::after {
+            right: 17px;
+            top: 17px;
+            left: auto;
+          }
+        }
+      }
+    }
+  }
+}

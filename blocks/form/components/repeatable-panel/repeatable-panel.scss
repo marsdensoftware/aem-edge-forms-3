@@ -1,7 +1,7 @@
 @use '../../../../styles/settings' as *;
 
 .panel-repeatable-panel {
-  .field-label {
+  .field-wrapper {
     color: $text-primary;
     margin-top: 24px;
     margin-bottom: 24px;
