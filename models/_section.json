@@ -54,7 +54,8 @@
         "form",
         "embed-adaptive-form",
         "reactsearch",
-        "reactparser"
+        "reactparser",
+        "reactinput"
       ]
     }
   ]

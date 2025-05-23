@@ -19,7 +19,8 @@
       "form",
       "embed-adaptive-form",
       "reactsearch",
-      "reactparser"
+      "reactparser",
+      "reactinput"
     ]
   },
   {
@@ -75,6 +76,10 @@
       "tnc",
       "wizard"
     ]
+  },
+  {
+    "id": "reactinput",
+    "components": null
   },
   {
     "id": "reactparser",

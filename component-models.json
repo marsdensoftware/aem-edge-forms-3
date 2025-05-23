@@ -5034,6 +5034,25 @@
     ]
   },
   {
+    "id": "reactinput",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "required": true
+      },
+      {
+        "component": "text-input",
+        "name": "target",
+        "label": "Target",
+        "valueType": "string",
+        "description": "The name of the element to update"
+      }
+    ]
+  },
+  {
     "id": "reactparser",
     "fields": [
       {
