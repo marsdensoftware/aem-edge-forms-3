@@ -43,7 +43,7 @@ export default function renderEntry(entry) {
     const editBtn = document.createElement('button');
     editBtn.classList.add('repeatable-entry__edit');
     editBtn.textContent = 'Edit';
-    readable.append(editBtn);
+    result.append(editBtn);
 
     editBtn.addEventListener('click', () => {
         alert('Edit entry: ' + result.dataset.id);
