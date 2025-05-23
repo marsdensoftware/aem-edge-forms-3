@@ -50,7 +50,7 @@ export default function renderEntry(entry) {
     editLink.href = '#';
     result.append(editLink);
 
-    editLink.addEventListener('click', () => {
+    editLink.addEventListener('click', (e) => {
         alert('Edit entry: ' + result.dataset.id);
         e.preventDefault();
     });
