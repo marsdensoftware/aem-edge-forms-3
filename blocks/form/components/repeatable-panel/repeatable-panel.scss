@@ -13,7 +13,7 @@ main .form form .panel-repeatable-panel {
 
   .repeatable-entries {
     .repeatable-entry {
-      padding: $spacing-400;
+      padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
       border: solid 1px $color-secondary;
       position: relative;
 
