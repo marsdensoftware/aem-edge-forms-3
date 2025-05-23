@@ -2,6 +2,23 @@
 
 main .form form .panel-repeatable-panel {
 
+    .repeatable-entries {
+        .repeatable-entry {
+            padding: $spacing-400;
+            border: solid 1px $color-secondary;
+
+            &__edit {
+                width: 56px;
+                height: 26px;
+                background-image: url(./images/edit-icon.png);
+                background-position: 0 center;
+                display: block;
+                text-decoration: underline;
+                padding-left: 28px;
+            }
+        }
+    }
+
     .repeat-actions {
         display: none;
     }

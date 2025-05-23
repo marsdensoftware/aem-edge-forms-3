@@ -3,22 +3,26 @@ function entryToReadableString(entry) {
     const entries = Array.from(inputs).map(input => {
         let value;
         let name = input.name;
+        let label = '';
+        const type = input.type;
 
         if (input.tagName === 'SELECT') {
             value = input.options[input.selectedIndex]?.text.trim() || '';
         }
-        else if (input.type === 'checkbox' || input.type === 'radio') {
+        else if (type === 'checkbox' || type === 'radio') {
             value = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
+            label = input.closest('fieldset')?.querySelector('legend').textContent.trim();
         } else {
             value = input.value;
         }
 
         // Find associated label
-        let label = '';
         if (input.id && value) {
-            const associated = entry.querySelector(`label[for="${input.id}"]`);
-            if (associated) label = associated.textContent.trim();
-
+            if (type != 'radio' && type != 'checkbox') {
+                const associated = entry.querySelector(`label[for="${input.id}"]`);
+                if (associated) label = associated.textContent.trim();
+            }
+            
             const result = document.createElement('div');
             result.classList.add(`repeatable-entry__${name}`);
             result.innerHTML = `${label || input.name || input.id || 'unnamed'}: ${value}`;
@@ -40,12 +44,12 @@ export default function renderEntry(entry) {
     result.classList.add('education-entry', 'repeatable-entry');
     result.dataset.id = entry.dataset.id;
 
-    const editBtn = document.createElement('button');
-    editBtn.classList.add('repeatable-entry__edit');
-    editBtn.textContent = 'Edit';
-    result.append(editBtn);
+    const editLink = document.createElement('a');
+    editLink.classList.add('repeatable-entry__edit');
+    editLink.textContent = 'Edit';
+    result.append(editLink);
 
-    editBtn.addEventListener('click', () => {
+    editLink.addEventListener('click', () => {
         alert('Edit entry: ' + result.dataset.id);
     });
 
