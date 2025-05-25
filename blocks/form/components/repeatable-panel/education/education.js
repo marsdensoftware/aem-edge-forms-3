@@ -35,6 +35,9 @@ export class Education extends RepeatablePanel {
                     }
                 });
             });
+            
+            // Hide wizard buttons
+            super._toggleWizardButtons(false);
         }
     }
 
@@ -46,8 +49,6 @@ export class Education extends RepeatablePanel {
         if (savedEntries.length > 0) {
             // Hide question
             this.#educationRadioGroup.setAttribute('data-visible', false);
-            // Show wizard buttons
-            super._toggleWizardButtons(true);
         }
         else {
             // reset selection & show question

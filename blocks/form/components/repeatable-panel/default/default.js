@@ -39,7 +39,7 @@ export class RepeatablePanel {
         }
         if (visible) {
             // show wizard buttons
-            wizardButtonWrapper.style.display = 'block';
+            wizardButtonWrapper.style.display = 'flex';
         }
         else {
             // hide wizard buttons
