@@ -63,9 +63,9 @@ export class RepeatablePanel {
         saveBtn.addEventListener('click', () => {
             // Mark as saved
             entry.classList.add('saved');
-            this._toggleEditMode(renderer, entry, false);
+            this._toggleEditMode(entry, false);
 
-            this._renderOverview(renderer, panel);
+            this._renderOverview();
         });
 
         const cancelBtn = this.#createButton('Cancel');
@@ -79,7 +79,7 @@ export class RepeatablePanel {
                 this._toggleEditMode(entry, false);
             }
 
-            this._renderOverview(panel);
+            this._renderOverview();
         });
 
         buttonBar.appendChild(saveBtn);
