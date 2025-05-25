@@ -25,7 +25,7 @@ export class Education extends RepeatablePanel {
                         const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
 
                         // Edit first entry
-                        this._toggleEditMode(el, true);
+                        super._toggleEditMode(el, true);
                     }
                     if (radio.value == 'no') {
                         // hide repeatable panel
