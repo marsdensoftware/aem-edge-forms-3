@@ -12,7 +12,7 @@ export class Education extends RepeatablePanel {
         // Add class for education
         repeatablePanel.classList.add('panel-repeatable-panel__education');
 
-        this.#educationRadioGroup = repeatablePanel.closest('form')?.querySelector('.field-education-selection');
+        this.#educationRadioGroup = repeatablePanel.closest('.field-education')?.querySelector('.field-education-selection');
         if (this.#educationRadioGroup) {
             const radios = this.#educationRadioGroup.querySelectorAll('input[type="radio"]');
 
