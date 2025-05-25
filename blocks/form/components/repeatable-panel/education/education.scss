@@ -1,5 +1,13 @@
+@use '../../../../../styles/settings' as *;
+
 main .form form .panel-repeatable-panel {
     &__education {
         display: none;
+        
+        .repeatable-entry{
+            &__course{
+                @include font-body-large;
+            }
+        }
     }
 }
