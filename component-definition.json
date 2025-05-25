@@ -528,6 +528,18 @@
                   "name": "education",
                   "hideTitle": true,
                   "radiogroup": {
+                    "enum": [
+                      "yes",
+                      "no"
+                    ],
+                    "enumNames": [
+                      "Yes – I’ve done some education or training",
+                      "No - I haven’t done any formal training yet"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
                     "fd:viewType": "radio-group",
                     "fieldType": "radio-group",
                     "hideTitle": true,
@@ -545,7 +557,7 @@
                     "renderer": "education",
                     "repeatAddButtonLabel": "Add another",
                     "repeatDeleteButtonLabel": "Delete",
-                    "repeateble": true,
+                    "repeatable": true,
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "course": {
                       "fd:viewType": "course",
@@ -577,7 +589,7 @@
                         "2021",
                         "2020"
                       ],
-                      "fieldType": "dropdown",
+                      "fieldType": "drop-down",
                       "hideTitle": false,
                       "jcr:title": "When did you start?",
                       "name": "start-year",
