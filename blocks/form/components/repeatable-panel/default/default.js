@@ -149,6 +149,10 @@ export class RepeatablePanel {
 
         return result;
     }
+    
+    init(){
+        this._renderOverview();
+    }
 
     _renderOverview() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
