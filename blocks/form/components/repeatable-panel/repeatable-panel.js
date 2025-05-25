@@ -1,4 +1,4 @@
-import { RepeatablePanelFactory } from './factory'
+import { RepeatablePanelFactory } from `${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/factory.js`
 
 export default async function decorate(el, field) {
 
