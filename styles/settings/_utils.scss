@@ -3,7 +3,7 @@
 
 %state-focus {
   &:focus {
-    box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-focus-state;
+    box-shadow: 0 0 0 2px $color-white;
     outline: 3px solid transparent;
   }
 
