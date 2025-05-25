@@ -106,11 +106,6 @@ export class RepeatablePanel {
 
             // Find associated label
             if (input.id && value) {
-                if (type != 'radio' && type != 'checkbox') {
-                    const associated = entry.querySelector(`label[for="${input.id}"]`);
-                    if (associated) label = associated.textContent.trim();
-                }
-
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
                 result.innerHTML = value;
@@ -149,8 +144,8 @@ export class RepeatablePanel {
 
         return result;
     }
-    
-    init(){
+
+    init() {
         this._renderOverview();
     }
 
