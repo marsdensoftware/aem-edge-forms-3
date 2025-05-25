@@ -1,4 +1,4 @@
-import { RepeatablePanel } from "../default/default";
+import { RepeatablePanel } from "../default/default.js";
 import { loadCSS } from '../../../../../scripts/aem.js'
 
 export class Education extends RepeatablePanel {

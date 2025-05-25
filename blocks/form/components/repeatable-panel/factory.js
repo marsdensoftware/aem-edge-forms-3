@@ -1,5 +1,5 @@
-import { Education } from './education/education';
-import { RepeatablePanel } from './default/default'
+import { Education } from './education/education.js';
+import { RepeatablePanel } from './default/default.js'
 
 // Factory class
 export class RepeatablePanelFactory {
