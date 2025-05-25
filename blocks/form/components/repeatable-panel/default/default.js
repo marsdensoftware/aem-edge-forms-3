@@ -35,13 +35,16 @@ export class RepeatablePanel {
 
     _toggleWizardButtons(el, visible) {
         const wizardButtonWrapper = el.closest('.wizard')?.querySelector('.wizard-button-wrapper');
+        if (!wizardButtonWrapper) {
+            return;
+        }
         if (visible) {
             // show wizard buttons
-            wizardButtonWrapper?.style.display = 'block';
+            wizardButtonWrapper.style.display = 'block';
         }
         else {
             // hide wizard buttons
-            wizardButtonWrapper?.style.display = 'none';
+            wizardButtonWrapper.style.display = 'none';
         }
     }
 
