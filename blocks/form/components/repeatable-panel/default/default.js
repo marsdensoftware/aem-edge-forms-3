@@ -66,7 +66,7 @@ export class RepeatablePanel {
             this._renderOverview(renderer, panel);
         });
 
-        const cancelBtn = createButton('Cancel');
+        const cancelBtn = this.#createButton('Cancel');
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
@@ -171,13 +171,6 @@ export class RepeatablePanel {
             toggleEditMode(renderer, el, true);
         });
         */
-
-        // trigger event that rendering updated
-        const event = new CustomEvent('rp:updated', {
-            detail: {},
-            bubbles: false,
-        });
-        panel.dispatchEvent(event);
 
     }
 
