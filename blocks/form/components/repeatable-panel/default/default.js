@@ -65,7 +65,7 @@ export class RepeatablePanel {
             entry.classList.add('saved');
             this._toggleEditMode(renderer, entry, false);
 
-            this.renderOverview(renderer, panel);
+            this._renderOverview(renderer, panel);
         });
 
         const cancelBtn = this.#createButton('Cancel');
@@ -79,7 +79,7 @@ export class RepeatablePanel {
                 this._toggleEditMode(entry, false);
             }
 
-            this.renderOverview(panel);
+            this._renderOverview(panel);
         });
 
         buttonBar.appendChild(saveBtn);
@@ -150,7 +150,7 @@ export class RepeatablePanel {
         return result;
     }
 
-    renderOverview() {
+    _renderOverview() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
         const overview = this._repeatablePanel.querySelector('.overview');

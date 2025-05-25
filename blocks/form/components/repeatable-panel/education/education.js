@@ -36,8 +36,8 @@ export class Education extends RepeatablePanel {
         }
     }
 
-    renderOverview() {
-        super.renderOverview();
+    _renderOverview() {
+        super._renderOverview();
         
         // Add custom logic here
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');

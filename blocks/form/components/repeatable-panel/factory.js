@@ -10,8 +10,10 @@ export class RepeatablePanelFactory {
         switch (renderer.toLowerCase()) {
             case 'education':
                 obj = new Education(panel);
+                break;
             default:
                 obj = new RepeatablePanel(panel);
+                break;
         }
 
         obj.renderOverview();
