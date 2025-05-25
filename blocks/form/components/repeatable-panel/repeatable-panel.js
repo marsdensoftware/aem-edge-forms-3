@@ -1,10 +1,13 @@
-import { RepeatablePanelFactory } from `${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/factory.js`
 
 export default async function decorate(el, field) {
 
     const targetNode = document.querySelector('.form.block');
 
     if (targetNode) {
+        const RepeatablePanelFactory = await import(
+            `${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/factory.js`
+        )
+
         // Create a MutationObserver instance
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
@@ -20,6 +23,7 @@ export default async function decorate(el, field) {
                     const newValue = targetNode.getAttribute('data-block-status');
                     if (newValue === 'loaded') {
                         // Implement repeatable panel customisations
+
                         RepeatablePanelFactory.createRepeatablePanel(el, field);
 
                         // Stop observing as only needed once
