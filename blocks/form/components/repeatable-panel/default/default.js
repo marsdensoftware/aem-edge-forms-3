@@ -91,7 +91,7 @@ export class RepeatablePanel {
         const entries = Array.from(inputs).map(input => {
             let value;
             let name = input.name;
-            let label = '';
+
             const type = input.type;
 
             if (input.tagName === 'SELECT') {
@@ -113,7 +113,7 @@ export class RepeatablePanel {
 
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
-                result.innerHTML = `${label || input.name || input.id || 'unnamed'}: ${value}`;
+                result.innerHTML = value;
 
                 return result;
             }
