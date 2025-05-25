@@ -99,7 +99,6 @@ export class RepeatablePanel {
             }
             else if (type === 'checkbox' || type === 'radio') {
                 value = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-                label = input.closest('fieldset')?.querySelector('legend').textContent.trim();
             } else {
                 value = input.value;
             }
