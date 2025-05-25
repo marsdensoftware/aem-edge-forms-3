@@ -28,12 +28,12 @@ export class RepeatablePanel {
             panel.classList.remove('editing');
         }
 
-        this._toggleWizardButtons(entry, !visible);
+        this._toggleWizardButtons(!visible);
         this._ensureButtonBar(entry);
     }
 
-    _toggleWizardButtons(el, visible) {
-        const wizardButtonWrapper = el.closest('.wizard')?.querySelector('.wizard-button-wrapper');
+    _toggleWizardButtons(visible) {
+        const wizardButtonWrapper = this._repeatablePanel.closest('.wizard')?.querySelector('.wizard-button-wrapper');
         if (!wizardButtonWrapper) {
             return;
         }

@@ -30,6 +30,8 @@ export class Education extends RepeatablePanel {
                     if (radio.value == 'no') {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
+                        // Show wizard buttons
+                        super._toggleWizardButtons(true);
                     }
                 });
             });
@@ -38,12 +40,14 @@ export class Education extends RepeatablePanel {
 
     _renderOverview() {
         super._renderOverview();
-        
+
         // Add custom logic here
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
         if (savedEntries.length > 0) {
             // Hide question
             this.#educationRadioGroup.setAttribute('data-visible', false);
+            // Show wizard buttons
+            super._toggleWizardButtons(true);
         }
         else {
             // reset selection & show question
