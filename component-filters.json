@@ -79,7 +79,10 @@
   },
   {
     "id": "reactinput",
-    "components": null
+    "components": [
+      "text",
+      "text-input"
+    ]
   },
   {
     "id": "reactparser",
