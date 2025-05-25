@@ -6,12 +6,14 @@ export class RepeatablePanelFactory {
     static createRepeatablePanel(el, field) {
         const renderer = field.properties.renderer || '';
         const panel = el.closest('.repeat-wrapper');
-
+        let obj;
         switch (renderer.toLowerCase()) {
             case 'education':
-                return new Education(panel);
+                obj = new Education(panel);
             default:
-                return new RepeatablePanel(panel);
+                obj = new RepeatablePanel(panel);
         }
+
+        obj.renderOverview();
     }
 }
