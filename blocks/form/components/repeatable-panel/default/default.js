@@ -29,11 +29,11 @@ export class RepeatablePanel {
             panel.classList.remove('editing');
         }
 
-        this.#toggleWizardButtons(entry, !visible);
-        this.#ensureButtonBar(entry);
+        this._toggleWizardButtons(entry, !visible);
+        this._ensureButtonBar(entry);
     }
 
-    #toggleWizardButtons(el, visible) {
+    _toggleWizardButtons(el, visible) {
         const wizardButtonWrapper = el.closest('.wizard')?.querySelector('.wizard-button-wrapper');
         if (visible) {
             // show wizard buttons
@@ -45,7 +45,7 @@ export class RepeatablePanel {
         }
     }
 
-    #ensureButtonBar(entry) {
+    _ensureButtonBar(entry) {
         let buttonBar = entry.querySelector('.button-bar');
         if (buttonBar) {
             return;
