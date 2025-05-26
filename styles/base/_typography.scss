@@ -212,16 +212,37 @@ ul li {
    Form Heading Adjustments
 ------------------------------ */
 .form-wrapper [class*='field-wrapper'] {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1 {
     margin: 0;
     padding-bottom: $spacing-600;
   }
+
+  h2 {
+    margin: 0;
+    padding-bottom: $spacing-500;
+  }
+
+  h3 {
+    margin: 0;
+    padding-bottom: $spacing-200; // as per figma
+  }
+
+  h4 {
+    margin: 0;
+    padding-bottom: $spacing-200;
+  }
+
+  h5 {
+    margin: 0;
+    padding-bottom: $spacing-100;
+  }
+
+  h6 {
+    margin: 0;
+    padding-bottom: $spacing-100;
+  }
 }
+
 
 /* ------------------------------
    Subtitle
