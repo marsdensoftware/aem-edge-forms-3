@@ -24,18 +24,25 @@ export class Education extends RepeatablePanel {
                         repeatablePanel.style.display = 'block';
                         const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
 
+                        // prevent validation
+                        repeatablePanel.closest('.field-education-options-content').disabled = false;
+
                         // Edit first entry
                         super._toggleEditMode(el, true);
+
                     }
                     if (radio.value == 'no') {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
                         super._toggleWizardButtons(true);
+
+                        // prevent validation
+                        repeatablePanel.closest('.field-education-options-content').disabled = true;
                     }
                 });
             });
-            
+
             // Hide wizard buttons
             super._toggleWizardButtons(false);
         }
