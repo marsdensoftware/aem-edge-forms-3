@@ -19,10 +19,10 @@
 
 .wizard {
   .current-wizard-step {
-    padding: 32px 16px 45px;
+    /*padding: 32px 16px 45px;*/  // removed padding RW
 
     @include media('desktop') {
-      /*padding: 60px 0;*/ //removed for spacing reasons RW
+      /*padding: 60px 0;*/ // removed padding RW
       margin: 32px auto;
       width: 100%;
       max-width: 930px;
@@ -35,7 +35,7 @@
   }
 
   .wizard-button-wrapper {
-    padding: $spacing-400; // spacing correct
+    padding: $spacing-400;
     border-top: 1px solid $stroke-secondary;
     display: flex;
     justify-content: space-between;
