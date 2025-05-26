@@ -1,5 +1,6 @@
 @use '../settings' as *;
 
+
 /* ------------------------------
    Headings
 ------------------------------ */
@@ -10,7 +11,7 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
-  margin-bottom: 32px;
+ margin-bottom: $spacing-600;
 
   &:last-child:not(:first-child) {
     margin-bottom: 0;
@@ -211,17 +212,44 @@ ul li {
 /* ------------------------------
    Form Heading Adjustments
 ------------------------------ */
+.wizard .panel-formwelcome .panel-formwelcome__item-content p h6 {
+  margin: 0;
+  padding-bottom: $spacing-200;
+}
+
 .form-wrapper [class*='field-wrapper'] {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1 {
     margin: 0;
     padding-bottom: $spacing-600;
   }
+
+  h2 {
+    margin: 0;
+    padding-bottom: $spacing-500;
+  }
+
+  h3 {
+    margin: 0;
+    padding-bottom: $spacing-200;
+  }
+
+  h4 {
+    margin: 0;
+    padding-bottom: $spacing-200;
+  }
+
+  h5 {
+    margin: 0;
+    padding-bottom: $spacing-100;
+  }
+
+  h6 {
+    margin: 0;
+    /*padding-bottom: $spacing-200;*/
+    padding-bottom: 100px; // testing
+  }
 }
+
 
 /* ------------------------------
    Subtitle

@@ -19,10 +19,10 @@
 
 .wizard {
   .current-wizard-step {
-    padding: 32px 16px 45px;
+    /*padding: 32px 16px 45px;*/  // removed padding RW
 
     @include media('desktop') {
-      padding: 60px 0;
+      padding: $spacing-600 0;
       margin: 32px auto;
       width: 100%;
       max-width: 930px;
@@ -42,7 +42,7 @@
     width: 100%;
 
     @include media('desktop') {
-      margin-top: 32px;
+      /*margin-top: 32px;*/  // removing and adding to wrapper instead RW
     }
 
     .wizard-button-next {
