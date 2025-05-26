@@ -59,7 +59,7 @@ export class RepeatablePanel {
         buttonBar.className = 'button-bar';
         entry.appendChild(buttonBar);
 
-        const saveBtn = this.#createButton('Save');
+        const saveBtn = this._createButton('Save');
         saveBtn.classList.add('btn-save')
 
         saveBtn.addEventListener('click', () => {
@@ -75,7 +75,7 @@ export class RepeatablePanel {
             }
         });
 
-        const cancelBtn = this.#createButton('Cancel');
+        const cancelBtn = this._createButton('Cancel');
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
@@ -196,7 +196,7 @@ export class RepeatablePanel {
 
     }
 
-    #createButton(label) {
+    _createButton(label) {
         const button = document.createElement('button');
         button.classList.add('button');
         button.type = 'button';
