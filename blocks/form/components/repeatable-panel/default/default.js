@@ -93,9 +93,10 @@ export class RepeatablePanel {
         buttonBar.appendChild(cancelBtn);
     }
 
-    #entryToReadableString(entry) {
+    _fieldToNameValues() {
         const inputs = entry.querySelectorAll('input, select, textarea');
-        const entries = Array.from(inputs).map(input => {
+        const result = [];
+        inputs.forEach(input => {
             let value;
             let name = input.name;
 
@@ -110,8 +111,22 @@ export class RepeatablePanel {
                 value = input.value;
             }
 
-            // Find associated label
-            if (input.id && value) {
+            if (value) {
+                result.push({ 'name': name, 'value': value });
+            }
+        });
+
+        return result;
+    }
+
+    #entryToReadableString(entry) {
+        const nameValues = this._fieldToNameValues
+
+        const entries = nameValues.map(input => {
+            const value = input.value;
+            const name = input.name;
+
+            if (value) {
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
                 result.innerHTML = value;
