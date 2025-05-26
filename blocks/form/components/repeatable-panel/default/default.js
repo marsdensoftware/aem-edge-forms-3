@@ -93,7 +93,7 @@ export class RepeatablePanel {
         buttonBar.appendChild(cancelBtn);
     }
 
-    _fieldToNameValues() {
+    _fieldToNameValues(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
         const result = [];
         inputs.forEach(input => {
@@ -120,7 +120,7 @@ export class RepeatablePanel {
     }
 
     #entryToReadableString(entry) {
-        const nameValues = this._fieldToNameValues
+        const nameValues = this._fieldToNameValues(entry)
 
         const entries = nameValues.map(input => {
             const value = input.value;
