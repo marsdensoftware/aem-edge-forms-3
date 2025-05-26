@@ -31,7 +31,8 @@
                                 "jcr:title": "Education Selection",
                                 "name": "education-selection",
                                 "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
-                                "withIcon": true
+                                "withIcon": true,
+                                "required": true
                             },
                             "repeatable-panel": {
                                 "jcr:title": "Education Options Content",
@@ -49,13 +50,15 @@
                                     "fieldType": "text-input",
                                     "name": "course",
                                     "jcr:title": "Course, qualification or certification",
-                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                                    "required": true
                                 },
                                 "place-of-learning": {
                                     "fieldType": "text-input",
                                     "jcr:title": "Place of learning (Optional)",
                                     "name": "place-of-learning",
-                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                                    "required": true
                                 },
                                 "start-year": {
                                     "enum": [
@@ -96,7 +99,8 @@
                                     "fieldType": "radio-group",
                                     "jcr:title": "Did you complete this qualification?",
                                     "name": "completion-status",
-                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton"
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "required": true
                                 }
                             }
                         }
