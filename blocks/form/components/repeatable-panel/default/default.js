@@ -97,22 +97,21 @@ export class RepeatablePanel {
         const inputs = entry.querySelectorAll('input, select, textarea');
         const result = [];
         inputs.forEach(input => {
-            let value;
-            let name = input.name;
+            const value = input.value;;
+            let displayValue = value;
+            const name = input.name;
 
             const type = input.type;
 
             if (input.tagName === 'SELECT') {
-                value = input.options[input.selectedIndex]?.text.trim() || '';
+                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
             }
             else if (type === 'checkbox' || type === 'radio') {
-                value = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-            } else {
-                value = input.value;
+                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
             }
 
             if (value) {
-                result.push({ 'name': name, 'value': value });
+                result.push({ 'name': name, 'value': value, 'displayValue': displayValue });
             }
         });
 

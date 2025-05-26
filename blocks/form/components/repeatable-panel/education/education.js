@@ -4,6 +4,13 @@ import { loadCSS } from '../../../../../scripts/aem.js'
 export class Education extends RepeatablePanel {
     #educationRadioGroup;
 
+    static FIELD_NAMES = {
+        'COMPLETION_STATUS': 'completion-status',
+        'START_YEAR': 'start-year',
+        'FINISH_YEAR': 'finish-year',
+        'EDUCATION_SELECTION': 'education-selection'
+    };
+
     constructor(repeatablePanel) {
         super(repeatablePanel);
 
@@ -12,12 +19,29 @@ export class Education extends RepeatablePanel {
         // Add class for education
         repeatablePanel.classList.add('panel-repeatable-panel__education');
 
+        // Register listener on completion status
+        const completionStatusRadios = repeatablePanel.querySelectorAll(`input[name="${Education.FIELD_NAMES.COMPLETION_STATUS}"]`);
+        const finishYear = repeatablePanel.querySelector(`.field-${Education.FIELD_NAMES.FINISH_YEAR}`);
+
+        completionStatusRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value == '0') {
+                    // Completed, show finish year
+                    finishYear.setAttribute('data-visible', true);
+                }
+                else {
+                    // Not completed, hide finish year
+                    finishYear.setAttribute('data-visible', false);
+                }
+            });
+        });
+
         this.#educationRadioGroup = repeatablePanel.closest('.field-education')?.querySelector('.field-education-selection');
         if (this.#educationRadioGroup) {
-            const radios = this.#educationRadioGroup.querySelectorAll('input[type="radio"]');
+            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${Education.FIELD_NAMES.EDUCATION_SELECTION}"]`);
 
             // register click on radios
-            radios?.forEach(radio => {
+            radios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     if (radio.value == 'yes') {
                         // show repeatable panel
@@ -45,6 +69,24 @@ export class Education extends RepeatablePanel {
             // prevent validation
             repeatablePanel.closest('.field-education-options-content').disabled = true;
         }
+    }
+
+    _fieldToNameValues(entry) {
+        const result = super._fieldToNameValues(entry);
+
+        // Customize rendering for completion-year, completion status
+        const completionStatus = result[Education.FIELD_NAMES.COMPLETION_STATUS];
+        if (completionStatus.value == '0') {
+            // Completed
+            const year = result[Education.FIELD_NAMES.FINISH_YEAR];
+            completionStatus.displayValue += ` ${year.displayValue}`;
+        }
+
+        // Delete start and finish
+        delete result[Education.FIELD_NAMES.FINISH_YEAR];
+        delete result[Education.FIELD_NAMES.START_YEAR];
+
+        return result;
     }
 
     _renderOverview() {

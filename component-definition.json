@@ -616,6 +616,32 @@
                       "name": "completion-status",
                       "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                       "required": true
+                    },
+                    "finish-year": {
+                      "enum": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "enumNames": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "fieldType": "drop-down",
+                      "hideTitle": false,
+                      "visible": false,
+                      "jcr:title": "When did you finish?",
+                      "name": "finish-year",
+                      "required": true,
+                      "type": "string",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
                     }
                   }
                 }
