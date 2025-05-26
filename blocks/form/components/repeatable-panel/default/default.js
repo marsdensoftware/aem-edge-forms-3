@@ -4,7 +4,7 @@ import { loadCSS } from '../../../../../scripts/aem.js'
 export class RepeatablePanel {
     constructor(repeatablePanel) {
         // Load css
-        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/education/education.css`)
+        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/default/default.css`)
 
         this._repeatablePanel = repeatablePanel;
         this._repeatablePanel.classList.add('panel-repeatable-panel');
