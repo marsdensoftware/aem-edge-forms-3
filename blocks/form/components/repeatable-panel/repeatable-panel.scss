@@ -33,21 +33,6 @@ main .form form .panel-repeatable-panel {
     }
   }
 
-  .repeatable-entry__nc-search--box {
-    @include font-body-large;
-    color: $text-primary;
-    font-weight: 700;
-  }
-
-  .repeatable-entry__completion-status,
-  .repeatable-entry__start-year {
-    line-height: 160%;
-  }
-
-  .repeatable-entry__completion-status {
-    color: $text-secondary;
-  }
-
   .repeatable-entry__edit {
     color: $text-primary;
 
