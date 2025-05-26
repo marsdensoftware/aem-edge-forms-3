@@ -1,7 +1,11 @@
 import { validateContainer } from '../../wizard/wizard.js'
+import { loadCSS } from '../../../../../scripts/aem.js'
 
 export class RepeatablePanel {
     constructor(repeatablePanel) {
+        // Load css
+        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
+
         this._repeatablePanel = repeatablePanel;
         this._repeatablePanel.classList.add('panel-repeatable-panel');
 

@@ -10,6 +10,7 @@
                         "template": {
                             "jcr:title": "Education",
                             "fieldType": "panel",
+                            "fd:viewType": "education",
                             "name": "education",
                             "hideTitle": true,
                             "radiogroup": {
@@ -37,7 +38,6 @@
                             "repeatable-panel": {
                                 "jcr:title": "Education Options Content",
                                 "fieldType": "panel",
-                                "fd:viewType": "repeatable-panel",
                                 "hideTitle": true,
                                 "name": "education-options-content",
                                 "renderer": "education",

@@ -525,6 +525,7 @@
                 "template": {
                   "jcr:title": "Education",
                   "fieldType": "panel",
+                  "fd:viewType": "education",
                   "name": "education",
                   "hideTitle": true,
                   "radiogroup": {
@@ -552,7 +553,6 @@
                   "repeatable-panel": {
                     "jcr:title": "Education Options Content",
                     "fieldType": "panel",
-                    "fd:viewType": "repeatable-panel",
                     "hideTitle": true,
                     "name": "education-options-content",
                     "renderer": "education",
@@ -877,24 +877,6 @@
                   "jcr:title": "Rating",
                   "fieldType": "number-input",
                   "fd:viewType": "rating"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Repeatable Panel",
-          "id": "repeatable-panel",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                "template": {
-                  "jcr:title": "Repeatable Panel",
-                  "fieldType": "panel",
-                  "fd:viewType": "repeatable-panel",
-                  "minOccur": 1,
-                  "repeatable": true
                 }
               }
             }
