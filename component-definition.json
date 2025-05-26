@@ -564,7 +564,8 @@
                       "fieldType": "plain-text",
                       "jcr:title": "Intro",
                       "textIsRich": true,
-                      "value": "<h6>Add education, qualification or certification</h6>"
+                      "value": "<h6>Add education, qualification or certification</h6>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
                     },
                     "course": {
                       "fd:viewType": "course",
