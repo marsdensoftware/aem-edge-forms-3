@@ -45,6 +45,12 @@
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatable": true,
                                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                "intro": {
+                                    "fieldType": "plain-text",
+                                    "jcr:title": "Intro",
+                                    "textIsRich": true,
+                                    "value": "<h6>Add education, qualification or certification</h6>"
+                                },
                                 "course": {
                                     "fd:viewType": "course",
                                     "fieldType": "text-input",
@@ -57,8 +63,7 @@
                                     "fieldType": "text-input",
                                     "jcr:title": "Place of learning (Optional)",
                                     "name": "place-of-learning",
-                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                                    "required": true
+                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
                                 },
                                 "start-year": {
                                     "enum": [
