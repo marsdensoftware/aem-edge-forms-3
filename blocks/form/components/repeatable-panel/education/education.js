@@ -24,7 +24,7 @@ export class Education extends RepeatablePanel {
                         repeatablePanel.style.display = 'block';
                         const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
 
-                        // prevent validation
+                        // enable validation
                         repeatablePanel.closest('.field-education-options-content').disabled = false;
 
                         // Edit first entry
@@ -42,6 +42,8 @@ export class Education extends RepeatablePanel {
                     }
                 });
             });
+            // prevent validation
+            repeatablePanel.closest('.field-education-options-content').disabled = true;
         }
     }
 
