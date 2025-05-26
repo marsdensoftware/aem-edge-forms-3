@@ -42,9 +42,6 @@ export class Education extends RepeatablePanel {
                     }
                 });
             });
-
-            // Hide wizard buttons
-            super._toggleWizardButtons(false);
         }
     }
 
