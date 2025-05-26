@@ -17,8 +17,8 @@ export class EducationRepeatable extends RepeatablePanel {
         repeatablePanel.classList.add('panel-repeatable-panel__education');
 
         // Register listener on completion status
-        const completionStatusRadios = repeatablePanel.querySelectorAll(`input[name="${Education.FIELD_NAMES.COMPLETION_STATUS}"]`);
-        const finishYear = repeatablePanel.querySelector(`.field-${Education.FIELD_NAMES.FINISH_YEAR}`);
+        const completionStatusRadios = repeatablePanel.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS}"]`);
+        const finishYear = repeatablePanel.querySelector(`.field-${EducationRepeatable.FIELD_NAMES.FINISH_YEAR}`);
 
         completionStatusRadios.forEach(radio => {
             radio.addEventListener('change', () => {
@@ -35,7 +35,7 @@ export class EducationRepeatable extends RepeatablePanel {
 
         this.#educationRadioGroup = repeatablePanel.querySelector('.field-education-selection');
         if (this.#educationRadioGroup) {
-            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${Education.FIELD_NAMES.EDUCATION_SELECTION}"]`);
+            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.EDUCATION_SELECTION}"]`);
 
             // register click on radios
             radios.forEach(radio => {
@@ -72,16 +72,16 @@ export class EducationRepeatable extends RepeatablePanel {
         const result = super._fieldToNameValues(entry);
 
         // Customize rendering for completion-year, completion status
-        const completionStatus = result[Education.FIELD_NAMES.COMPLETION_STATUS];
+        const completionStatus = result[EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS];
         if (completionStatus.value == '0') {
             // Completed
-            const year = result[Education.FIELD_NAMES.FINISH_YEAR];
+            const year = result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
             completionStatus.displayValue += ` ${year.displayValue}`;
         }
 
         // Delete start and finish
-        delete result[Education.FIELD_NAMES.FINISH_YEAR];
-        delete result[Education.FIELD_NAMES.START_YEAR];
+        delete result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
+        delete result[EducationRepeatable.FIELD_NAMES.START_YEAR];
 
         return result;
     }
