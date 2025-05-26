@@ -111,7 +111,7 @@ export class RepeatablePanel {
             }
 
             if (value) {
-                result.push({ 'name': name, 'value': value, 'displayValue': displayValue });
+                result[name] = { 'value': value, 'displayValue': displayValue };
             }
         });
 
@@ -120,22 +120,22 @@ export class RepeatablePanel {
 
     #entryToReadableString(entry) {
         const nameValues = this._fieldToNameValues(entry)
+        const entries = [];
 
-        const entries = nameValues.map(input => {
-            const value = input.value;
+        Object.entries(nameValues).forEach(([name, data]) => {
+            const value = data.value;
+            const displayValue = data.displayValue;
             const name = input.name;
 
             if (value) {
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
-                result.innerHTML = value;
+                result.dataset.value = value;
+                result.innerHTML = displayValue;
 
-                return result;
+                entries.push(result);
             }
-            else {
-                return undefined;
-            }
-        }).filter(e => e != undefined);
+        });
 
         return entries;
     }
