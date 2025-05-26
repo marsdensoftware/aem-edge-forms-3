@@ -1,5 +1,6 @@
 @use '../settings' as *;
 
+
 /* ------------------------------
    Headings
 ------------------------------ */
@@ -10,7 +11,7 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
- /* margin-bottom: 32px; */  // removing testing RW
+ margin-bottom: $spacing-600;
 
   &:last-child:not(:first-child) {
     margin-bottom: 0;
@@ -211,7 +212,8 @@ ul li {
 /* ------------------------------
    Form Heading Adjustments
 ------------------------------ */
-.wizard .panel-formwelcome .panel-formwelcome__item-content p h6 {margin: 0;
+.wizard .panel-formwelcome .panel-formwelcome__item-content p h6 {
+  margin: 0;
   padding-bottom: $spacing-200;
   border: 2px solid deeppink; // testing RW
 }
@@ -244,7 +246,8 @@ ul li {
 
   h6 {
     margin: 0;
-    padding-bottom: $spacing-200;
+    /*padding-bottom: $spacing-200;*/
+    padding-bottom: 100px; // testing
   }
 }
 
