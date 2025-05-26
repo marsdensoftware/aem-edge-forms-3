@@ -35,7 +35,7 @@
   }
 
   .wizard-button-wrapper {
-    padding: $spacing-400;
+    padding: $spacing-400; // spacing correct
     border-top: 1px solid $stroke-secondary;
     display: flex;
     justify-content: space-between;
