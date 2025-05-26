@@ -126,7 +126,6 @@ export class RepeatablePanel {
         Object.entries(nameValues).forEach(([name, data]) => {
             const value = data.value;
             const displayValue = data.displayValue;
-            const name = input.name;
 
             if (value) {
                 const result = document.createElement('div');
