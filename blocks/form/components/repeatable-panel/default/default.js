@@ -1,3 +1,5 @@
+import { validateContainer } from '../../wizard/wizard.js'
+
 export class RepeatablePanel {
     constructor(repeatablePanel) {
         this._repeatablePanel = repeatablePanel;
@@ -61,11 +63,16 @@ export class RepeatablePanel {
         saveBtn.classList.add('btn-save')
 
         saveBtn.addEventListener('click', () => {
-            // Mark as saved
-            entry.classList.add('saved');
-            this._toggleEditMode(entry, false);
+            // Validate
+            const valid = validateContainer(entry);
 
-            this._renderOverview();
+            if (valid) {
+                // Mark as saved
+                entry.classList.add('saved');
+                this._toggleEditMode(entry, false);
+
+                this._renderOverview();
+            }
         });
 
         const cancelBtn = this.#createButton('Cancel');
