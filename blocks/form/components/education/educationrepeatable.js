@@ -1,7 +1,6 @@
-import { RepeatablePanel } from "../default/default.js";
-import { loadCSS } from '../../../../../scripts/aem.js'
+import { RepeatablePanel } from "../repeatable-panel/default/default.js";
 
-export class Education extends RepeatablePanel {
+export class EducationRepeatable extends RepeatablePanel {
     #educationRadioGroup;
 
     static FIELD_NAMES = {
@@ -13,8 +12,6 @@ export class Education extends RepeatablePanel {
 
     constructor(repeatablePanel) {
         super(repeatablePanel);
-
-        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/education/education.css`)
 
         // Add class for education
         repeatablePanel.classList.add('panel-repeatable-panel__education');
