@@ -95,7 +95,8 @@ export class RepeatablePanel {
 
     _fieldToNameValues(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
-        const result = [];
+        const result = {};
+        
         inputs.forEach(input => {
             const value = input.value;;
             let displayValue = value;
