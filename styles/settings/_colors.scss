@@ -1,12 +1,9 @@
 /*************************
-      Main colour
+      Main Colours
 *************************/
-// Brand Colours
 
 // Primary Colours
 $color-primary: #017ac9; // MSD Blue
-
-// Primary Supporting
 $color-primary-navy: #134276; // MSD Navy
 $color-primary-dark-navy: #162c45; // MSD Dark Navy
 
@@ -17,12 +14,9 @@ $color-secondary-salmon: #f75c58; // MSD Salmon
 $color-secondary-purple: #3a54a1; // MSD Purple
 
 // Tertiary Colours
-$color-tertiary-green: #06b271; // MSD Green
-$color-tertiary-green-light: #e0f0de; // MSD Green light
-$color-tertiary-grey: #696969; // MSD Grey
-
-// Focus State
-/* $color-focus-state: #b53cde;**/  //Removed for now RW
+$color-tertiary-green: #06b271;
+$color-tertiary-green-light: #e0f0de;
+$color-tertiary-grey: #696969;
 
 // Neutral Colours
 $color-grey-black-05: #f2f2f2;
@@ -40,6 +34,10 @@ $color-feedback-orange: #fa7f14;
 $color-feedback-red: #d03633;
 $color-feedback-pink: #b53cde;
 
+/*************************
+      Shades
+*************************/
+
 // Shades Navy
 $color-shade-navy-60: #718ead;
 $color-shade-navy-45: #95aac1;
@@ -51,42 +49,12 @@ $color-shade-navy-20: #d0d9e4;
 $color-shade-blue-60: #67afdf;
 $color-shade-blue-40: #99cae9;
 $color-shade-blue-25: #bfdef1;
-$color-shade-blue-10: #e6f2fa;
-$color-shade-blue-04: #f5fafd;
+$color-shade-blue-10: #e6f2fa; // Secondary panel background
+$color-shade-blue-04: #f5fafd; // Lightest background
 
-// To animate button background colour
-$color-primary-animated: linear-gradient(
-  0,
-  $color-primary 25%,
-  $color-primary 100%
-);
-
-// Gradient
-$color-gradient-blue: linear-gradient(
-  135deg,
-  $color-primary 25%,
-  $color-primary-navy 100%
-);
-
-$color-gradient-green: linear-gradient(
-  135deg,
-  $color-secondary-teal 25%,
-  $color-secondary-accessible-teal 100%
-);
-
-$color-gradient-light: linear-gradient(
-  135deg,
-  $color-grey-black-20 25%,
-  $color-grey-black-40 100%
-);
-
-$color-gradient-grey-dark: linear-gradient(
-  135deg,
-  $color-grey-black-60 25%,
-  $color-grey-black-80 100%
-);
-
-// H1-h3 Gradient
+/*************************
+      Gradients
+*************************/
 
 $color-gradient-blue: linear-gradient(
                 135deg,
@@ -94,9 +62,35 @@ $color-gradient-blue: linear-gradient(
                 $color-primary-navy 100%
 );
 
+$color-gradient-green: linear-gradient(
+                135deg,
+                $color-secondary-teal 25%,
+                $color-secondary-accessible-teal 100%
+);
+
+$color-gradient-light: linear-gradient(
+                135deg,
+                $color-grey-black-20 25%,
+                $color-grey-black-40 100%
+);
+
+$color-gradient-grey-dark: linear-gradient(
+                135deg,
+                $color-grey-black-60 25%,
+                $color-grey-black-80 100%
+);
+
+// For animated buttons (if needed)
+$color-primary-animated: linear-gradient(
+                0,
+                $color-primary 25%,
+                $color-primary 100%
+);
+
 /************************
-      Semantic use
+      Semantic Use
 *************************/
+
 /* UI Text */
 $text-accent: $color-primary;
 $text-dark: $color-primary-navy;
@@ -116,7 +110,12 @@ $bg-error: $color-feedback-red;
 $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
 
-/* Token-based background */
+// Contextual Help Backgrounds (semantic)
+$bg-contextual-help-primary: $bg-primary;
+$bg-contextual-help-secondary: $color-shade-blue-10;
+$bg-contextual-help-tertiary: $color-primary-dark-navy;
+
+// Token-based fallback for AEM CSS vars (if needed)
 $bg-light-secondary: var(--Background-Light-Secondary, #f5fafd); // RW
 
 /* UI Icons */

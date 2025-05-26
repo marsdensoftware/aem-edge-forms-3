@@ -119,3 +119,19 @@
     border-radius: $border-radius-round;
   }
 }
+
+
+// contextual help panel colourways
+
+.panel-formcontextualhelp--primary {
+  @include panel-help-base($color-white, $text-primary, $text-accent);
+}
+
+.panel-formcontextualhelp--secondary {
+  @include panel-help-base($bg-light-secondary, $text-primary, $text-accent);
+}
+
+.panel-formcontextualhelp--tertiary {
+  @include panel-help-base($color-primary-dark-navy, $text-white, $text-white);
+  @include panel-help-icon-invert;
+}
