@@ -1,21 +1,3 @@
-.panel-repeatable-panel{
-    background-color:aquamarine;
-}
+main .form form .panel-repeatable-panel .field-wrapper{color:#333333;margin-top:1.5rem;margin-bottom:1.5rem}main .form form .panel-repeatable-panel .field-label{margin-bottom:0.75rem}main .form form .panel-repeatable-panel .repeatable-entries .repeatable-entry{padding:1rem 5rem 1rem 1rem;border:solid 1px #666666;position:relative;border-radius:16px}main .form form .panel-repeatable-panel .repeatable-entries .repeatable-entry__edit{position:absolute;top:1rem;right:1rem;width:3.5rem;height:1.625rem;background-image:url(./images/edit-icon.png);background-repeat:no-repeat;display:block;text-decoration:underline;padding-left:1.75rem}main .form form .panel-repeatable-panel .repeatable-entry__edit{color:#333333}main .form form .panel-repeatable-panel .repeatable-entry__edit:visited{color:inherit}main .form form .panel-repeatable-panel .repeat-actions{display:none}main .form form .panel-repeatable-panel .item-remove{display:none!important}main .form form .panel-repeatable-panel .editing .item-add{display:none!important}main .form form .panel-repeatable-panel [data-repeatable].saved{display:none}main .form form .panel-repeatable-panel [data-repeatable]:not(.saved){display:block}main .form form .panel-repeatable-panel .btn-save, main .form form .panel-repeatable-panel .btn-cancel{display:none}main .form form .panel-repeatable-panel [data-repeatable] .button-bar{display:flex;gap:1.25rem;margin-top:1.25rem}main .form form .panel-repeatable-panel [data-repeatable].current .btn-save, main .form form .panel-repeatable-panel [data-repeatable].current .btn-cancel{display:block}main .form form .panel-repeatable-panel .repeatable-entry{border:solid #9BA5B7 1px;border-radius:16px}
 
-.panel-repeatable-panel [data-repeatable]{
-    display: none;
-}
-
-.panel-repeatable-panel [data-repeatable].edit-mode{
-    display: block;
-}
-
-.panel-repeatable-panel .btn-save,
-.panel-repeatable-panel .btn-cancel{
-    display: none;
-}
-
-.panel-repeatable-panel .edit-mode .btn-save,
-.panel-repeatable-panel .edit-mode .btn-cancel{
-    display: block;
-}
+/*# sourceMappingURL=repeatable-panel.css.map */

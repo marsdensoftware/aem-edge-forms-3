@@ -1,96 +1,40 @@
-function createButton(label, icon) {
-    const button = document.createElement('button');
-    button.className = `btn-${icon}`;
-    button.type = 'button';
-    const text = document.createElement('span');
-    text.textContent = label;
-    button.append(document.createElement('i'), text);
+import { RepeatablePanelFactory } from './factory.js'
 
-    button.style.display = 'none';
+export default async function decorate(el, field) {
 
-    return button;
-}
+    const targetNode = document.querySelector('.form.block');
 
-function addButtonSave(panel) {
-    const btn = createButton('Save', 'save');
+    if (targetNode) {
+        // Create a MutationObserver instance
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (
+                    mutation.type === 'attributes' &&
+                    mutation.attributeName === 'data-block-status'
+                ) {
+                    if (targetNode.classList.contains('edit-mode')) {
+                        // Do nothing
+                        return;
+                    }
 
-    panel.querySelector('.repeat-actions')?.append(btn);
+                    const newValue = targetNode.getAttribute('data-block-status');
+                    if (newValue === 'loaded') {
+                        // Implement repeatable panel customisations
+                        RepeatablePanelFactory.createRepeatablePanel(el, field);
 
-    btn.addEventListener('click', () => {
-        alert('Save');
-    });
+                        // Stop observing as only needed once
+                        observer.disconnect();
+                    }
+                }
+            }
+        });
 
-    return btn;
-}
+        // Configuration of the observer:
+        const config = { attributes: true, attributeFilter: ['data-block-status'] };
 
-function addButtonCancel(panel) {
-    const btn = createButton('Cancel', 'cancel');
-
-    panel.querySelector('.repeat-actions')?.append(btn);
-
-    btn.addEventListener('click', () => {
-        alert('Cancel');
-    });
-
-    return btn;
-}
-
-function renderOverview(panel, entries) {
-    const div = document.createElement('div');
-
-    entries.forEach((el, index) => {
-        div.innerHTML += `<p>${el.dataset.id}-${index}</p>`;
-    });
-
-    panel.prepend(div);
-}
-
-export default function decorate(panel, field, container) {
-
-    function toggleEditMode(entry, visible) {
-        if (visible) {
-            panel.classList.add('edit-mode');
-            entry.classList.add('edit-mode');
-        }
-        else {
-            panel.classList.remove('edit-mode');
-            entry.classList.remove('edit-mode');
-        }
+        // Start observing the target node
+        observer.observe(targetNode, config);
     }
 
-    panel.closest('form')?.addEventListener('item:add', (event) => {
-        const entry = panel.querySelector(event.detail.item.id);
-        toggleEditMode(entry, true);
-    });
-
-    panel.classList.add('panel-repeatable-panel');
-
-    const saveBtn = addButtonSave(panel);
-    saveBtn.addEventListener('click', () => {
-        alert('Saving');
-        const entry = panel.querySelector('[data-repeatable].edit-mode');
-        toggleEditMode(entry, false);
-    });
-
-    const cancelBtn = addButtonCancel(panel);
-    cancelBtn.addEventListener('click', () => {
-        alert('Cancelling');
-        const entry = panel.querySelector('[data-repeatable].edit-mode');
-        toggleEditMode(entry, false);
-        // TODO: If new one then remove. If saved one then reset changes.
-        entry.remove();
-    });
-
-    const entries = panel.querySelectorAll('[data-repeatable]');
-
-    if (entries.length>0) {
-        renderOverview(panel, entries);
-
-        if (entries.length == 1) {
-            // entry edit mode
-            toggleEditMode(entries[0], true);
-        }
-    }
-
-    return panel;
+    return el;
 }

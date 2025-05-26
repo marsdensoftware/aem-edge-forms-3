@@ -500,6 +500,156 @@
           }
         },
         {
+          "title": "Course",
+          "id": "course",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Course, qualification or certification",
+                  "fieldType": "text-input",
+                  "fd:viewType": "course"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Education",
+          "id": "education",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Education",
+                  "fieldType": "panel",
+                  "name": "education",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "enum": [
+                      "yes",
+                      "no"
+                    ],
+                    "enumNames": [
+                      "Yes – I’ve done some education or training",
+                      "No - I haven’t done any formal training yet"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "fieldType": "radio-group",
+                    "hideTitle": true,
+                    "jcr:title": "Education Selection",
+                    "name": "education-selection",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "withIcon": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "jcr:title": "Education Options Content",
+                    "fieldType": "panel",
+                    "fd:viewType": "repeatable-panel",
+                    "hideTitle": true,
+                    "name": "education-options-content",
+                    "renderer": "education",
+                    "repeatAddButtonLabel": "Add another",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatable": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "course": {
+                      "fd:viewType": "course",
+                      "fieldType": "text-input",
+                      "name": "course",
+                      "jcr:title": "Course, qualification or certification",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "required": true
+                    },
+                    "place-of-learning": {
+                      "fieldType": "text-input",
+                      "jcr:title": "Place of learning (Optional)",
+                      "name": "place-of-learning",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "required": true
+                    },
+                    "start-year": {
+                      "enum": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "enumNames": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "fieldType": "drop-down",
+                      "hideTitle": false,
+                      "jcr:title": "When did you start?",
+                      "name": "start-year",
+                      "required": true,
+                      "type": "string",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
+                    },
+                    "completion-status": {
+                      "enum": [
+                        "0",
+                        "1",
+                        "2"
+                      ],
+                      "enumNames": [
+                        "I completed",
+                        "It's in progress",
+                        "I didn't complete"
+                      ],
+                      "fieldType": "radio-group",
+                      "jcr:title": "Did you complete this qualification?",
+                      "name": "completion-status",
+                      "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                      "required": true
+                    },
+                    "finish-year": {
+                      "enum": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "enumNames": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "fieldType": "drop-down",
+                      "hideTitle": false,
+                      "visible": false,
+                      "jcr:title": "When did you finish?",
+                      "name": "finish-year",
+                      "required": true,
+                      "type": "string",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Contextual Help",
           "id": "formcontextualhelp",
           "plugins": {
@@ -561,10 +711,10 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
                 "template": {
                   "jcr:title": "Form Output Field",
-                  "fieldType": "panel",
+                  "fieldType": "text-input",
                   "fd:viewType": "formoutputfield"
                 }
               }
