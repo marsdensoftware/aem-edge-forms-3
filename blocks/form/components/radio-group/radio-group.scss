@@ -16,7 +16,14 @@
     width: 40px;
     height: 40px;
     display: block;
+  }
+
+  .radio-group--with-icon--list-search-1 {
     content: url('./icon-streamline.svg');
+  }
+
+  .radio-group--with-icon--smiley-face {
+    content: url('../../../../icons/smiley-face.svg');
   }
 
   label {
