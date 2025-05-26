@@ -22,7 +22,7 @@
     /*padding: 32px 16px 45px;*/  // removed padding RW
 
     @include media('desktop') {
-      /*padding: 60px 0;*/ // removed padding RW
+      padding: $spacing-600 0;
       margin: 32px auto;
       width: 100%;
       max-width: 930px;
