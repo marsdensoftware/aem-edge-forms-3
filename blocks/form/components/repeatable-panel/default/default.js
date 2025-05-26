@@ -96,7 +96,7 @@ export class RepeatablePanel {
     _fieldToNameValues(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
         const result = {};
-        
+
         inputs.forEach(input => {
             const value = input.value;;
             let displayValue = value;
@@ -108,6 +108,11 @@ export class RepeatablePanel {
                 displayValue = input.options[input.selectedIndex]?.text.trim() || '';
             }
             else if (type === 'checkbox' || type === 'radio') {
+                // Ignore not checked
+                if (!input.checked) {
+                    return;
+                }
+
                 displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
             }
 
