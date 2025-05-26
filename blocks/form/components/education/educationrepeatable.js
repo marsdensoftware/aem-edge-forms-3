@@ -33,7 +33,7 @@ export class EducationRepeatable extends RepeatablePanel {
             });
         });
 
-        this.#educationRadioGroup = repeatablePanel.querySelector('.field-education-selection');
+        this.#educationRadioGroup = repeatablePanel.closest('.field-education').querySelector('.field-education-selection');
         if (this.#educationRadioGroup) {
             const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.EDUCATION_SELECTION}"]`);
 
