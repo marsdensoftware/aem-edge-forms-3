@@ -22,7 +22,7 @@
     padding: 32px 16px 45px;
 
     @include media('desktop') {
-      /*padding: 60px 0;*/ removed for spacing reasions RW
+      /*padding: 60px 0;*/ //removed for spacing reasons RW
       margin: 32px auto;
       width: 100%;
       max-width: 930px;
