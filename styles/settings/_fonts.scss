@@ -32,10 +32,17 @@ $size-font-subtitle: clamp(1.5rem, 3.5vw, 1.75rem); // 24px → 28px
 $size-font-strap-title: clamp(1.25rem, 2.5vw, 1.375rem); // 20px → 22px
 $size-font-strap-title-small: clamp(0.875rem, 2vw, 0.938rem); // 14px → 15px
 
-/* Text */
+/* Text
 $size-font-body-default: $size-font-base;
 $size-font-body-small: 12px;
-$size-font-body-large: 18px;
+$size-font-body-large: 18px;*/
+
+/* Text */
+$size-font-body-small: clamp(0.75rem, 1.3vw, 0.875rem);    // 12 → 14px
+$size-font-body-default: clamp(0.9375rem, 1.4vw, 1.0625rem); // 15 → 17px
+$size-font-body-large: clamp(1.0625rem, 1.5vw, 1.25rem);   // 17 → 20px
+
+
 
 @mixin heading-level-1 {
   font-size: $size-font-h1;
