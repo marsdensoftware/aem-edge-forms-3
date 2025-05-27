@@ -3,6 +3,21 @@
 .course {
   position: relative;
 
+  &::after {
+    content: url('../../../../icons/search.svg');
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  input[type='text'] {
+    padding-right: 48px; // Extra padding so text not overlapping with icon
+  }
+
   .suggestions {
     @include elevation-2;
     border-radius: $border-radius-mid;
@@ -12,7 +27,7 @@
     position: absolute;
     width: 100%;
     z-index: 1;
-    bottom: -16px;
+    top: 90px;
     left: 0;
   }
 
