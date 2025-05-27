@@ -3,19 +3,24 @@
 .course {
   position: relative;
 
-  &::after {
-    content: url('../../../../icons/search.svg');
-    display: block;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+  .course__container {
+    position: relative;
+
+    &::after {
+      content: url('../../../../icons/search.svg');
+      display: block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   input[type='text'] {
     padding-right: 48px; // Extra padding so text not overlapping with icon
+    width: 100%;
   }
 
   .suggestions {
