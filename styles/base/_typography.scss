@@ -125,17 +125,19 @@ p {
    Typography Blocks – Explicit Link & List Styling
 ------------------------------ */
 
-// Small paragraph block
 .typography.p-small.block {
-  a,
-  ol,
-  ul {
-    @include font-body-small;
+  // Paragraphs
+  p {
+    font-size: $size-font-body-small;
+    line-height: 160%;
+    color: $text-primary;
   }
 
+  // Links
   a {
-    color: $text-accent;
+    font-size: $size-font-body-small;
     font-weight: 500;
+    color: $text-accent;
     text-decoration: underline;
     text-underline-offset: 4px;
     transition: color 0.2s ease;
@@ -150,9 +152,11 @@ p {
     }
   }
 
+  // Lists
   ol li,
   ul li {
-    @include font-body-small;
+    font-size: $size-font-body-small;
+    line-height: 160%;
     margin-bottom: 0.5rem;
     color: $text-primary;
   }
@@ -185,15 +189,18 @@ ul li {
 
 // Large paragraph block
 .typography.p-large.block {
-  a,
-  ol,
-  ul {
-    @include font-body-large;
+  // Paragraphs
+  p {
+    font-size: $size-font-body-large;
+    line-height: 160%;
+    color: $text-primary;
   }
 
+  // Links
   a {
-    color: $text-accent;
+    font-size: $size-font-body-large;
     font-weight: 500;
+    color: $text-accent;
     text-decoration: underline;
     text-underline-offset: 4px;
     transition: color 0.2s ease;
@@ -208,13 +215,16 @@ ul li {
     }
   }
 
+  // Lists
   ol li,
   ul li {
-    @include font-body-large;
+    font-size: $size-font-body-large;
+    line-height: 160%;
     margin-bottom: 0.5rem;
     color: $text-primary;
   }
 }
+
 
 /* ------------------------------
    Form Heading Adjustments
