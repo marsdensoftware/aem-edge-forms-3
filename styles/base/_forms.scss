@@ -163,10 +163,8 @@ textarea {
     left: 0;
     width: 20px;
     height: 20px;
-    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
-      no-repeat center / contain;
-    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
-      no-repeat center / contain;
+    mask: url('data:image/svg+xml,%3Csvg%20width%3D%2241%22%20height%3D%2240%22%20viewBox%3D%220%200%2041%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%20%3Cpath%20d%3D%22M0.5%2020C0.5%208.95431%209.45431%200%2020.5%200C31.5457%200%2040.5%208.95431%2040.5%2020C40.5%2031.0457%2031.5457') no-repeat center / contain;
+    -webkit-mask: url('data:image/svg+xml,%3Csvg%20width%3D%2241%22%20height%3D%2240%22%20viewBox%3D%220%200%2041%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%20%3Cpath%20d%3D%22M0.5%2020C0.5%208.95431%209.45431%200%2020.5%200C31.5457%200%2040.5%208.95431%2040.5%2020C40.5%2031.0457%2031.5457') no-repeat center / contain;
     background-color: $color-feedback-red;
   }
 }

@@ -168,7 +168,7 @@
 // _spacing.scss
 // Spacing mixins for margin and padding using spacing scale
 
-@use '../settings/spacings' as *;
+
 
 // Single-direction spacing
 @mixin padding-top($space) {
