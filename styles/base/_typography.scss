@@ -101,17 +101,24 @@ p {
 }
 
 /* ------------------------------
+   Paragraph Default
+------------------------------ */
+p {
+  font-size: $size-font-body-default;
+}
+
+/* ------------------------------
    Paragraph Small
 ------------------------------ */
 .p-small {
-  @include font-body-small;
+  font-size: $size-font-body-small;
 }
 
 /* ------------------------------
    Paragraph Large
 ------------------------------ */
 .p-large {
-  @include font-body-large;
+  font-size: $size-font-body-large;
 }
 
 /* ------------------------------
