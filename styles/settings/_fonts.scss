@@ -18,24 +18,25 @@ $size-font-h5: 22px;
 $size-font-h6: 20px;*/
 
 // Headings
-$size-font-h1: clamp(2.5rem, 5.5vw, 3.75rem);   // 40 → 48 → 60
-$size-font-h2: clamp(2.25rem, 5vw, 3rem);       // 36 → 40 → 48
-$size-font-h3: clamp(2rem, 4.5vw, 2.5rem);      // 32 → 36 → 40
-$size-font-h4: clamp(1.5rem, 3.5vw, 2rem);      // 24 → 28 → 32
-$size-font-h5: clamp(1.25rem, 2.75vw, 1.5rem);  // 20 → 22 → 24
-$size-font-h6: clamp(1.125rem, 2.25vw, 1.25rem); // 18 → 19 → 20
+$size-font-h1: clamp(40px, 5.5vw, 60px);   // 40 → 48 → 60
+$size-font-h2: clamp(36px, 5vw, 48px);     // 36 → 40 → 48
+$size-font-h3: clamp(32px, 4.5vw, 40px);   // 32 → 36 → 40
+$size-font-h4: clamp(24px, 3.5vw, 32px);   // 24 → 28 → 32
+$size-font-h5: clamp(20px, 2.75vw, 24px);  // 20 → 22 → 24
+$size-font-h6: clamp(18px, 2.25vw, 20px);  // 18 → 19 → 20
 
-// subtitle
-$size-font-subtitle: clamp(1.5rem, 4vw, 2rem); // 24px → 28px → 32px
+// Subtitle
+$size-font-subtitle: clamp(24px, 4vw, 32px); // 24 → 28 → 32
 
-//strap titles
-$size-font-strap-title: clamp(1.25rem, 2.8vw, 1.5rem);       // 20px → 22px → 24px
-$size-font-strap-title-small: clamp(0.875rem, 2.2vw, 1rem);  // 14px → 15px → 16px
+// Strap Titles
+$size-font-strap-title: clamp(20px, 2.8vw, 24px);      // 20 → 22 → 24
+$size-font-strap-title-small: clamp(14px, 2.2vw, 16px); // 14 → 15 → 16
 
-/* Text */
-$size-font-body-large:   clamp(1.0625rem, 1.5vw, 1.25rem);    // 17 → 18 → 20px
-$size-font-body-default: clamp(0.9375rem, 1.25vw, 1.0625rem); // 15 → 16 → 17px
-$size-font-body-small:   clamp(0.75rem, 1.1vw, 0.875rem);     // 12 → 13 → 14px
+// Body Text
+$size-font-body-large:   clamp(17px, 1.5vw, 20px); // 17 → 18 → 20
+$size-font-body-default: clamp(15px, 1.25vw, 17px); // 15 → 16 → 17
+$size-font-body-small:   clamp(12px, 1.1vw, 14px); // 12 → 13 → 14
+
 
 @mixin heading-level-1 {
   font-size: $size-font-h1;
