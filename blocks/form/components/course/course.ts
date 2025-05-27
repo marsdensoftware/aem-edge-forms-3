@@ -30,7 +30,7 @@ export default function decorate(element: Element) {
   if (searchInput) {
     container.append(searchInput)
 
-    searchInput?.addEventListener('input', () => {
+    searchInput.addEventListener('input', () => {
       const query = searchInput.value.toLowerCase()
 
       suggestionsDiv.innerHTML = ''
@@ -64,7 +64,7 @@ export default function decorate(element: Element) {
 
   // Optional: Close suggestions when clicking outside
   document.addEventListener('click', (e) => {
-    if (!searchInput?.contains(e.target)) {
+    if (!searchInput?.contains(e.target as Node)) {
       suggestionsDiv.innerHTML = ''
       suggestionsDiv.style.display = 'none'
     }

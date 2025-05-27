@@ -25,7 +25,7 @@ export default function decorate(element) {
     element.append(suggestionsDiv, container);
     if (searchInput) {
         container.append(searchInput);
-        searchInput === null || searchInput === void 0 ? void 0 : searchInput.addEventListener('input', () => {
+        searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase();
             suggestionsDiv.innerHTML = '';
             // Minimum 4 chars
