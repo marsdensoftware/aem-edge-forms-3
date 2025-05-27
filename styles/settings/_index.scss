@@ -1,0 +1,16 @@
+// --- !!!!!!!!!! ---
+/// Settings is for extract-able value, things like
+/// $ Variables, % Placeholder, @include mixin
+/// Not a class name ".something", because this will be
+/// Added into all of the SCSS file that included setting file
+// --- !!!!!!!!!! ---
+
+@forward './colors';
+@forward './fonts';
+@forward './tokens';
+@forward './utils';
+@forward './breakpoints';
+@forward './spacings';
+@forward './borders';
+@forward './elevations';
+@forward './mixins';

@@ -1,0 +1,105 @@
+{
+  "definitions": [
+    {
+      "title": "Form Contextual Help",
+      "id": "formcontextualhelp",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Form Contextual Help",
+              "fieldType": "panel",
+              "fd:viewType": "formcontextualhelp",
+              "helpType": "info",
+              "minOccur": 1,
+              "text": {
+                "jcr:title": "Text",
+                "fieldType": "plain-text",
+                "textIsRich": true,
+                "value": "Please enter your contextual help content",
+                "sling:resourceType": "core/fd/components/form/text/v1/text"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "formcontextualhelp",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "select",
+              "name": "helpType",
+              "label": "Type",
+              "valueType": "string",
+              "value": "text",
+              "options": [
+                {
+                  "name": "Info",
+                  "value": "info"
+                },
+                {
+                  "name": "Warning",
+                  "value": "warning"
+                },
+                {
+                  "name": "Error",
+                  "value": "error"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "name": "name",
+              "label": "Name",
+              "valueType": "string",
+              "required": true,
+              "valueFormat": "regexp",
+              "validation": {
+                "regExp": "^[^$].*",
+                "customErrorMsg": "Name cannot start with $"
+              }
+            },
+            {
+              "component": "text",
+              "name": "jcr:title",
+              "label": "Title",
+              "valueType": "string"
+            },
+            {
+              "component": "aem-content",
+              "name": "link",
+              "label": "Link"
+            },
+            {
+              "component": "text",
+              "name": "linkText",
+              "label": "Link Text"
+            },
+            {
+              "component": "boolean",
+              "name": "linkOpenInNewTab",
+              "label": "Open link in new tab",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "formcontextualhelp",
+      "components": null
+    }
+  ]
+}

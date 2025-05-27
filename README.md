@@ -1,5 +1,9 @@
 # AEM EDGE DELIVERY SERVICES
 
+## Front End development checklist
+
+[Front end checklist milestone](/docs/checklist.md)
+
 ## Environments
 
 - Live: https://main--aem-edge-forms-3--marsdensoftware.aem.page/
@@ -49,8 +53,9 @@ When developing Block keep this thing in mind:
 ### Updating content source
 
 1. Add a mountpoint in the `fstab.yaml`
-2. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
-3. Open the `{repo}` directory in your favorite IDE and start coding
+2. Update `paths.json` to AEM site name
+3. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
+4. Open the `{repo}` directory in your favorite IDE and start coding
 
 ## Useful resources
 

@@ -1,0 +1,130 @@
+/// This all fixed value at some point
+/// Needs to be replaced by variables value
+/// Once UI Design is ready to developed
+
+@use '../../../../styles/settings' as *;
+
+/******************************
+    Base Panel Styling
+*******************************/
+.panel-formcontextualhelp {
+  padding: 20px 14px;
+  background-color: $bg-secondary; // fallback grey panel
+  display: block;
+  border-radius: $border-radius-mid;
+  margin-bottom: 32px;
+
+  > legend {
+    margin-bottom: 0;
+    display: flex;
+  }
+
+  .panel-formcontextualhelp__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-200;
+  }
+
+  .panel-formcontextualhelp__icon {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .panel-formcontextualhelp__title {
+    font-weight: 500;
+  }
+
+  .plain-text-wrapper {
+    p {
+      margin-top: 0;
+      padding: $spacing-100 0; // Avoid top/bottom doubling in wizard layout
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/******************************
+    Info Variant (shared)
+*******************************/
+.panel-formcontextualhelp--info {
+  .panel-formcontextualhelp__icon {
+    content: url('info-icon.png');
+  }
+
+  .panel-formcontextualhelp__footer {
+    display: inline-block;
+
+    &__link {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    &__link-icon {
+      content: url('external-icon.png');
+      width: 22px;
+    }
+
+    &__link-text {
+      margin-right: 12px;
+    }
+  }
+}
+
+/******************************
+    Panel Colour Variants
+*******************************/
+
+.panel-formcontextualhelp--primary {
+  background-color: $bg-primary; // $color-white
+  color: $text-primary;
+
+  .panel-formcontextualhelp__title {
+    color: $text-dark;
+  }
+
+  .panel-formcontextualhelp__footer__link-text {
+    color: $text-accent;
+  }
+}
+
+.panel-formcontextualhelp--secondary {
+  background-color: $bg-contextual-help-secondary; // $color-shade-blue-10
+  color: $text-primary;
+
+  .panel-formcontextualhelp__title {
+    color: $text-dark;
+  }
+
+  .panel-formcontextualhelp__footer__link-text {
+    color: $text-accent;
+  }
+}
+
+.panel-formcontextualhelp--tertiary {
+  background-color: $bg-contextual-help-tertiary; // $color-primary-dark-navy
+  color: $text-white;
+
+  .panel-formcontextualhelp__title,
+  .plain-text-wrapper,
+  .plain-text-wrapper p {
+    color: $text-white;
+  }
+
+  .panel-formcontextualhelp__footer__link-text {
+    color: $text-white;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  .panel-formcontextualhelp__icon {
+    filter: brightness(0) invert(1); // Invert icon for dark background
+  }
+}

@@ -1,0 +1,83 @@
+@use '../../../../styles/settings' as *;
+
+%common-panel-spacing {
+  margin: 32px 0;
+
+  @include media('desktop') {
+    padding: 60px 0;
+  }
+}
+
+%common-wizard-button {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.wizard {
+  .current-wizard-step {
+    /*padding: 32px 16px 45px;*/  // removed padding RW
+
+    @include media('desktop') {
+      padding: $spacing-600 0;
+      margin: 32px auto;
+      width: 100%;
+     /* max-width: 930px; */ // Figma is 1038px
+      max-width: 1038px;
+    }
+  }
+
+  > legend.field-label,
+  .wizard-menu-items {
+    display: none;
+  }
+
+  .wizard-button-wrapper {
+    padding: $spacing-400;
+    border-top: 1px solid $stroke-secondary;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @include media('desktop') {
+      /*margin-top: 32px;*/  // removing and adding to wrapper instead RW
+    }
+
+    .wizard-button-next {
+      margin-left: auto;
+    }
+
+    .button[name='next'] {
+      @extend %button;
+      @extend %button--primary;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        @extend %common-wizard-button;
+        content: '';
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=');
+
+        order: 1;
+        margin-left: 8px;
+      }
+    }
+
+    .button[name='back'] {
+      @extend %button;
+      @extend %button--hollow;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        @extend %common-wizard-button;
+        content: '';
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADFSURBVHgB7ZPNDcIgFIAf2AE6Qkdo0gk6TIGbbmAdwRvh4gps4AQkevPICC5A8BFJozX+UPFi+iUvJBC+9+ABwMzPYIytOec7SGTxTIZDj1E3TXM0xpzgQ+gLWWCjlNKQAHkj6yERklM2CEeyg/d+C4kQQs7hegqUrW5kgRoXk7uLWAxdUEo1VrTEqGImGxenCK9HFkJUKNxHqcUkrZTSwgSGpuSS3j2bHFIynvhW+vBTwmZsTBubUzrnSshBqLTruhr+jgvneGvZqN/uwAAAAABJRU5ErkJggg==');
+        margin-right: 8px;
+      }
+    }
+  }
+}

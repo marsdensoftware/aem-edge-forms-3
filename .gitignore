@@ -1,7 +1,10 @@
-.hlx/*
-coverage/*
-logs/*
-node_modules/*
+.hlx/
+coverage/
+logs/
+node_modules/
+
+.project
+.settings/
 
 helix-importer-ui
 .DS_Store
@@ -10,6 +13,7 @@ helix-importer-ui
 .nyc_output
 
 .env*
+!.env.example
 .vscode
 /test-results/
 /playwright-report/
@@ -18,3 +22,7 @@ helix-importer-ui
 test/e2e/reports/
 LoginAuth.json
 .history/
+assets/
+
+# map
+*.map

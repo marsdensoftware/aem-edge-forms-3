@@ -1,0 +1,45 @@
+{
+    "definitions": [
+        {
+            "title": "Tabs",
+            "id": "formtabs",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "jcr:title": "Tabs",
+                            "fieldType": "panel",
+                            "fd:viewType": "formtabs",
+                            "minOccur": 1,
+                            "panel1": {
+                                "jcr:title": "Item 1",
+                                "fieldType": "panel",
+                                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                            },
+                            "panel2": {
+                                "jcr:title": "Item 2",
+                                "fieldType": "panel",
+                                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "formtabs",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "...": "../../models/form-common/_basic-input-fields.json"
+                }
+            ]
+        }
+    ]
+}

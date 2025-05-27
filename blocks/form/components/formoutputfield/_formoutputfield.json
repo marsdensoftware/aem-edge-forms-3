@@ -1,0 +1,71 @@
+{
+  "definitions": [
+    {
+      "title": "Form Output Field",
+      "id": "formoutputfield",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Form Output Field",
+              "fieldType": "panel",
+              "fd:viewType": "formoutputfield"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "formoutputfield",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "text",
+              "name": "jcr:title",
+              "label": "Title",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "dataRef",
+              "label": "Bind reference",
+              "valueType": "string"
+            },
+            {
+              "component": "select",
+              "name": "type",
+              "label": "Type",
+              "valueType": "string",
+              "value": "text",
+              "options": [
+                {
+                  "name": "text",
+                  "value": "Text"
+                },
+                {
+                  "name": "number",
+                  "value": "Number"
+                },
+                {
+                  "name": "date",
+                  "value": "Date"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+
+  ]
+}

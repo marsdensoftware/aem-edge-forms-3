@@ -85,7 +85,7 @@
               "component": "text",
               "name": "spreadsheetUrl",
               "label": "Spreadsheet Url",
-              "valueType": "string" 
+              "valueType": "string"
           },
           {
               "component": "container",
@@ -183,6 +183,11 @@
         "form-modal",
         "form-reset-button",
         "form-submit-button",
+        "formhero",
+        "formoutputfield",
+        "formwelcome",
+        "formcontextualhelp",
+        "formtabs",
         "number-input",
         "panel",
         "password",

@@ -1,0 +1,164 @@
+@use '../settings/elevations' as *;
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
+@use '../settings/utils' as *;
+@use '../settings/borders' as *;
+
+/******************************
+      Contextual Help Mixins
+*******************************/
+@mixin panel-help-base($bg-color, $text-color, $link-color) {
+  background-color: $bg-color;
+  color: $text-color;
+
+  .panel-formcontextualhelp__title {
+    color: $text-color;
+  }
+
+  .plain-text-wrapper,
+  .plain-text-wrapper p {
+    color: $text-color;
+  }
+
+  .panel-formcontextualhelp__footer__link-text {
+    color: $link-color;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+@mixin panel-help-icon-invert {
+  .panel-formcontextualhelp__icon {
+    filter: brightness(0) invert(1); // white icon for dark backgrounds
+  }
+}
+
+/******************************
+      Button Placeholder Styles
+*******************************/
+%button {
+  @include elevation-2;
+  border-radius: $border-radius-round;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+  padding: $spacing-400 $spacing-600;
+  font-style: normal;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-white; /* focus ring */
+    outline: 3px solid transparent;
+  }
+
+  &.small {
+    padding: $spacing-300 $spacing-500;
+    font-size: 16px;
+  }
+
+  &.primary {
+    @extend %button--primary;
+  }
+
+  &.hollow,
+  &.secondary {
+    @extend %button--hollow;
+  }
+}
+
+%button--primary {
+  @extend %state-focus;
+  background-image: $color-primary-animated;
+  border: 2px solid $stroke-accent;
+  color: $color-white;
+  z-index: 1;
+
+  &::after {
+    transition: opacity 0.2s ease-in-out;
+    border-radius: $border-radius-round;
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: $color-gradient-blue;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &:visited {
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    background: $color-primary-navy;
+    color: $color-white;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
+  }
+}
+
+%button--hollow {
+  @extend %state-focus;
+  background: none;
+  color: $color-primary-dark-navy;
+  border: 2px solid $stroke-secondary;
+
+  &::after {
+    content: '';
+    display: none;
+  }
+
+  &:hover,
+  &:active {
+    color: $color-primary-dark-navy;
+    background: none;
+  }
+
+  &:hover {
+    border-color: $stroke-primary;
+  }
+
+  &:active {
+    border-color: $stroke-accent;
+  }
+
+  &:focus {
+    border-radius: $border-radius-round;
+  }
+}
+
+/******************************
+      Contextual Help Colourways
+*******************************/
+.panel-formcontextualhelp--primary {
+  @include panel-help-base($color-white, $text-primary, $text-accent);
+}
+
+.panel-formcontextualhelp--secondary {
+  @include panel-help-base($bg-light-secondary, $text-primary, $text-accent);
+}
+
+.panel-formcontextualhelp--tertiary {
+  @include panel-help-base($color-primary-dark-navy, $text-white, $text-white);
+  @include panel-help-icon-invert;
+}
+

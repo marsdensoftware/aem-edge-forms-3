@@ -1,0 +1,172 @@
+@use '../settings' as *;
+
+/********************
+   INPUT DEFAULT
+********************/
+label,
+input[type='text'],
+input[type='radio'],
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 0;
+}
+
+.multiline-wrapper {
+  label {
+    margin-bottom: 8px;
+    display: block;
+  }
+}
+
+textarea {
+  width: 100%;
+  display: block;
+  border: 2px solid $stroke-tertiary;
+  border-radius: $border-radius-mid;
+  padding: $spacing-400;
+  font-family: inherit;
+  font-size: 20px;
+  color: $text-primary;
+  margin-bottom: 32px;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &:focus,
+  &:active,
+  &:focus-visible,
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+/********************
+   INPUT NUMBER
+********************/
+.number-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: $text-secondary;
+  }
+
+  input[type='number'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    align-self: stretch;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    background: $bg-light-secondary;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+  }
+}
+
+%label-common-style {
+  @extend %state-focus;
+  color: $text-secondary;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/********************
+   INPUT EMAIL
+********************/
+
+.email-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .field-label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: $text-secondary;
+    font-family: $font-family;
+  }
+
+  input[type='email'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    align-self: stretch;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    background: $bg-light-secondary;
+    font-family: $font-family;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+    color: $text-primary;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $stroke-accent;
+      outline: $stroke-accent;
+    }
+  }
+}
+
+/********************
+ FORM ERROR MESSAGE
+********************/
+
+.field-wrapper.field-invalid .field-description {
+  position: relative;
+  padding-left: 28px;
+  margin-top: $spacing-200;
+  color: $color-feedback-red;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: $font-family;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
+      no-repeat center / contain;
+    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
+      no-repeat center / contain;
+    background-color: $color-feedback-red;
+  }
+}

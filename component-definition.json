@@ -363,6 +363,7 @@
                 "template": {
                   "jcr:title": "Radio Group",
                   "fieldType": "radio-group",
+                  "fd:viewType": "radio-group",
                   "enum": [
                     "0",
                     "1"
@@ -499,6 +500,184 @@
           }
         },
         {
+          "title": "Form Contextual Help",
+          "id": "formcontextualhelp",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Contextual Help",
+                  "fieldType": "panel",
+                  "fd:viewType": "formcontextualhelp",
+                  "helpType": "info",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "value": "Please enter your contextual help content",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form Hero",
+          "id": "formhero",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Hero",
+                  "fieldType": "panel",
+                  "fd:viewType": "formhero",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "colspan": 6,
+                    "value": "Adaptive Form Text Component",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                  },
+                  "image": {
+                    "jcr:title": "Image",
+                    "fieldType": "image",
+                    "colspan": 6,
+                    "sling:resourceType": "core/fd/components/form/image/v1/image"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form Output Field",
+          "id": "formoutputfield",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Output Field",
+                  "fieldType": "panel",
+                  "fd:viewType": "formoutputfield"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Tabs",
+          "id": "formtabs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Tabs",
+                  "fieldType": "panel",
+                  "fd:viewType": "formtabs",
+                  "minOccur": 1,
+                  "panel1": {
+                    "jcr:title": "Item 1",
+                    "fieldType": "panel",
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                  },
+                  "panel2": {
+                    "jcr:title": "Item 2",
+                    "fieldType": "panel",
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form Welcome",
+          "id": "formwelcome",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Form Welcome",
+                  "fieldType": "panel",
+                  "fd:viewType": "formwelcome",
+                  "minOccur": 1,
+                  "panel-headline": {
+                    "jcr:title": "Panel",
+                    "fieldType": "panel",
+                    "colspan": 6,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "jcr:title": "Text",
+                      "fieldType": "plain-text",
+                      "textIsRich": true,
+                      "value": "Adaptive Form Text Component",
+                      "colspan": 6,
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    }
+                  },
+                  "panel-items": {
+                    "jcr:title": "Panel",
+                    "fieldType": "panel",
+                    "colspan": 6,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "item-1": {
+                      "fieldType": "panel",
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "text": {
+                        "fieldType": "plain-text",
+                        "textIsRich": true,
+                        "value": "Adaptive Form Text Component",
+                        "sling:resourceType": "core/fd/components/form/text/v1/text"
+                      },
+                      "image": {
+                        "fieldType": "image",
+                        "sling:resourceType": "core/fd/components/form/image/v1/image"
+                      }
+                    },
+                    "item-2": {
+                      "fieldType": "panel",
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "text": {
+                        "fieldType": "plain-text",
+                        "textIsRich": true,
+                        "value": "Adaptive Form Text Component",
+                        "sling:resourceType": "core/fd/components/form/text/v1/text"
+                      },
+                      "image": {
+                        "fieldType": "image",
+                        "sling:resourceType": "core/fd/components/form/image/v1/image"
+                      }
+                    },
+                    "item-3": {
+                      "fieldType": "panel",
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "text": {
+                        "fieldType": "plain-text",
+                        "textIsRich": true,
+                        "value": "Adaptive Form Text Component",
+                        "sling:resourceType": "core/fd/components/form/text/v1/text"
+                      },
+                      "image": {
+                        "fieldType": "image",
+                        "sling:resourceType": "core/fd/components/form/image/v1/image"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Modal",
           "id": "form-modal",
           "plugins": {
@@ -542,6 +721,24 @@
                   "jcr:title": "Rating",
                   "fieldType": "number-input",
                   "fd:viewType": "rating"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Repeatable Panel",
+          "id": "repeatable-panel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Repeatable Panel",
+                  "fieldType": "panel",
+                  "fd:viewType": "repeatable-panel",
+                  "minOccur": 1,
+                  "repeatable": true
                 }
               }
             }
@@ -655,6 +852,58 @@
                 "template": {
                   "name": "Hero",
                   "model": "hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Icon with text",
+          "id": "iconwithtext",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Icon with text",
+                  "model": "iconwithtext",
+                  "iconwithtextText_titleType": "h2",
+                  "iconwithtextText_title": "<h2>Heading level 2</h2>",
+                  "iconwithtextText_description": "<p>Paragraph one</p>",
+                  "iconwithtextText2_description": "<p>Paragraph two</p>"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Job Seeker Intro",
+          "id": "jobseekerintro",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Job Seeker Intro",
+                  "model": "jobseekerintro",
+                  "jobseekerintroText_titleType": "h2",
+                  "jobseekerintroText_title": "<h2>Let's set up your jobseeker profile!</h2>",
+                  "jobseekerintroText_description": "<p>Tell us what kind of work you're after, and any skills or experience you have. You can save and exit anytime — or come back and update your profile later.</p>"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Typography",
+          "id": "typography",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Typography",
+                  "model": "typography"
                 }
               }
             }

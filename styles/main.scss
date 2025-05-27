@@ -1,0 +1,47 @@
+/*
+  The latest file included in this file
+  Will have the highest specificity
+  Overiding the previous style
+
+
+  Class naming is using BEM https://getbem.com/introduction/
+  IE:
+
+  BASE
+  .button (base style. Padding, margin, etc)
+
+  MODIFIER
+  .button--[modifier] (expanding on base style and add it's own style. IE colour, extra padding, etc)
+  IE .button--primary
+
+  STATE
+  .button--is-[state] (for specific style related state NOT hover, focus, etc)
+  IE .button--is-hidden, .button--primary-is-visible
+*/
+
+// TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
+// Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
+@use './settings';
+@use './base';
+@use './forms';
+// Components
+@use './components';
+
+
+/*added this for responsive testing, Rebecca*/
+.typography-wrapper,
+.default-content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px; // $max-width-content
+
+  // Fluid side padding: scales between 16px and 64px from mobile to desktop
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
+}
+
+// Testing only - can be deleted
+/*.typography-wrapper {background-color: aquamarine}
+.default-content-wrapper {background-color: #f8d7da}*/
+
+

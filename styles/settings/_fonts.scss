@@ -1,0 +1,101 @@
+/*
+    Typography settings and mixin
+    Refer to this file from your component
+    To leverage typography properties and
+    Pre-defined mixins
+*/
+@use './breakpoints' as *;
+
+$font-family: 'Atkinson Hyperlegible Next', sans-serif;
+$size-font-base: 16px;
+
+/* Headings
+$size-font-h1: clamp(48px, 5.2vw, 61px);
+$size-font-h2: 38px;
+$size-font-h3: 32px;
+$size-font-h4: 24px;
+$size-font-h5: 22px;
+$size-font-h6: 20px;*/
+
+// Headings
+$size-font-h1: clamp(2.5rem, 5.5vw, 3.75rem);   // 40 → 48 → 60
+$size-font-h2: clamp(2.25rem, 5vw, 3rem);       // 36 → 40 → 48
+$size-font-h3: clamp(2rem, 4.5vw, 2.5rem);      // 32 → 36 → 40
+$size-font-h4: clamp(1.5rem, 3.5vw, 2rem);      // 24 → 28 → 32
+$size-font-h5: clamp(1.25rem, 2.75vw, 1.5rem);  // 20 → 22 → 24
+$size-font-h6: clamp(1.125rem, 2.25vw, 1.25rem); // 18 → 19 → 20
+
+// subtitle
+$size-font-subtitle: clamp(1.5rem, 4vw, 2rem); // 24px → 28px → 32px
+
+//strap titles
+$size-font-strap-title: clamp(1.25rem, 2.8vw, 1.5rem);       // 20px → 22px → 24px
+$size-font-strap-title-small: clamp(0.875rem, 2.2vw, 1rem);  // 14px → 15px → 16px
+
+/* Text */
+$size-font-body-large:   clamp(1.0625rem, 1.5vw, 1.25rem);    // 17 → 18 → 20px
+$size-font-body-default: clamp(0.9375rem, 1.25vw, 1.0625rem); // 15 → 16 → 17px
+$size-font-body-small:   clamp(0.75rem, 1.1vw, 0.875rem);     // 12 → 13 → 14px
+
+@mixin heading-level-1 {
+  font-size: $size-font-h1;
+  line-height: 105%;
+}
+
+@mixin heading-level-2 {
+  font-size: $size-font-h2;
+  line-height: 110%;
+}
+
+@mixin heading-level-3 {
+  font-size: $size-font-h3;
+  line-height: 115%;
+}
+
+@mixin heading-level-4 {
+  font-size: $size-font-h4;
+  line-height: 120%;
+}
+
+@mixin heading-level-5 {
+  font-size: $size-font-h5;
+  line-height: 125%;
+}
+
+@mixin heading-level-6 {
+  font-size: $size-font-h6;
+  line-height: 130%;
+}
+
+@mixin font-body-default {
+  font-size: $size-font-body-default;
+  line-height: 160%;
+}
+
+@mixin font-body-small {
+  font-size: $size-font-body-small;
+  line-height: 160%;
+}
+
+@mixin font-body-large {
+  font-size: $size-font-body-large;
+  line-height: 160%;
+}
+
+@mixin font-link-small {
+  font-size: $size-font-body-small;
+  line-height: 160%;
+  text-decoration: underline;
+}
+
+@mixin font-link-default {
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  text-decoration: underline;
+}
+
+@mixin font-link-large {
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  text-decoration: underline;
+}
