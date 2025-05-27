@@ -38,9 +38,9 @@ $size-font-body-small: 12px;
 $size-font-body-large: 18px;*/
 
 /* Text */
-$size-font-body-small: clamp(0.75rem, 1.3vw, 0.875rem);    // 12–14px
-$size-font-body-default: clamp(0.9375rem, 1.4vw, 1.0625rem); // 15–17px
-$size-font-body-large: clamp(1.0625rem, 1.5vw, 1.25rem);   // 17–20px
+$size-font-body-small: clamp(0.75rem, 1.3vw, 0.875rem);    // 12 → 14px
+$size-font-body-default: clamp(0.9375rem, 1.4vw, 1.0625rem); // 15 → 17px
+$size-font-body-large: clamp(1.0625rem, 1.5vw, 1.25rem);   // 17 → 20px
 
 
 
