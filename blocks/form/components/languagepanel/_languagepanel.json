@@ -1,0 +1,123 @@
+{
+    "definitions": [
+        {
+            "title": "Language Panel",
+            "id": "languagepanel",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "jcr:title": "Language Panel",
+                            "fieldType": "panel",
+                            "fd:viewType": "languagepanel",
+                            "name": "languagepanel",
+                            "hideTitle": true,
+                            "radiogroup": {
+                                "enum": [
+                                    "no",
+                                    "yes"
+                                ],
+                                "enumNames": [
+                                    "No - I only know English",
+                                    "Yes – I know other language(s)"
+                                ],
+                                "enumIconNames": [
+                                    "list-search-1",
+                                    "list-search-1"
+                                ],
+                                "fd:viewType": "radio-group",
+                                "fieldType": "radio-group",
+                                "hideTitle": true,
+                                "jcr:title": "Language Selection",
+                                "name": "language-selection",
+                                "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                "withIcon": true,
+                                "required": true
+                            },
+                            "repeatable-panel": {
+                                "jcr:title": "Language Options Content",
+                                "fieldType": "panel",
+                                "hideTitle": true,
+                                "name": "language-options-content",
+                                "repeatAddButtonLabel": "Add another",
+                                "repeatDeleteButtonLabel": "Delete",
+                                "repeatable": true,
+                                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                "intro": {
+                                    "fieldType": "plain-text",
+                                    "jcr:title": "Intro",
+                                    "textIsRich": true,
+                                    "value": "<h6>Add language</h6>",
+                                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                                },
+                                "course": {
+                                    "fd:viewType": "typeahead",
+                                    "datasources": "languages",
+                                    "fieldType": "text-input",
+                                    "name": "language",
+                                    "jcr:title": "Language",
+                                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                                    "required": true
+                                },
+                                "proficiency": {
+                                    "enum": [
+                                        "0",
+                                        "1",
+                                        "2",
+                                        "4"
+                                    ],
+                                    "enumNames": [
+                                        "Able to read",
+                                        "Able to write",
+                                        "Can understand when spoken",
+                                        "Can have a conversation"
+                                    ],
+                                    "fieldType": "checkbox-group",
+                                    "description": "<p>Select all that apply</p>",
+                                    "name": "proficiency",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "required": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "languagepanel",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "valueType": "string",
+                            "required": true,
+                            "valueFormat": "regexp",
+                            "validation": {
+                                "regExp": "^[^$].*",
+                                "customErrorMsg": "Name cannot start with $"
+                            }
+                        },
+                        {
+                            "component": "text",
+                            "name": "jcr:title",
+                            "label": "Title",
+                            "valueType": "string"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "filters": []
+}

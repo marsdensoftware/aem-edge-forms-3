@@ -40,7 +40,6 @@
                                 "fieldType": "panel",
                                 "hideTitle": true,
                                 "name": "education-options-content",
-                                "renderer": "education",
                                 "repeatAddButtonLabel": "Add another",
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatable": true,

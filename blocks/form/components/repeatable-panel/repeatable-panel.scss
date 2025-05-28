@@ -1,86 +1,91 @@
 @use '../../../../styles/settings' as *;
 
 main .form form .panel-repeatable-panel {
-  .field-wrapper {
-    color: $text-primary;
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
+    &__conditional {
+        display: none;
+    }
 
-  .field-label {
-    margin-bottom: 12px;
-  }
+    .field-wrapper {
+        color: $text-primary;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
 
-  .repeatable-entries {
-    .repeatable-entry {
-      padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
-      border: solid 1px $stroke-secondary;
-      position: relative;
-      border-radius: $border-radius-large;
+    .field-label {
+        margin-bottom: 12px;
+    }
 
-      &__edit {
-        position: absolute;
-        top: $spacing-400;
-        right: $spacing-400;
-        width: 56px;
-        height: 26px;
-        background-image: url(./images/edit-icon.png);
-        background-repeat: no-repeat;
+    .repeatable-entries {
+        .repeatable-entry {
+            padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
+            border: solid 1px $stroke-secondary;
+            position: relative;
+            border-radius: $border-radius-large;
+
+            &__edit {
+                position: absolute;
+                top: $spacing-400;
+                right: $spacing-400;
+                width: 56px;
+                height: 26px;
+                background-image: url(./images/edit-icon.png);
+                background-repeat: no-repeat;
+                display: block;
+                text-decoration: underline;
+                padding-left: 28px;
+            }
+        }
+    }
+
+    .repeatable-entry__edit {
+        color: $text-primary;
+
+        &:visited {
+            color: inherit;
+        }
+    }
+
+    .repeat-actions {
+        display: none;
+    }
+
+    .item-remove {
+        display: none !important;
+    }
+
+    .editing .item-add {
+        display: none !important;
+    }
+
+    [data-repeatable].saved {
+        display: none;
+    }
+
+    [data-repeatable]:not(.saved) {
         display: block;
-        text-decoration: underline;
-        padding-left: 28px;
-      }
     }
-  }
 
-  .repeatable-entry__edit {
-    color: $text-primary;
-
-    &:visited {
-      color: inherit;
-    }
-  }
-
-  .repeat-actions {
-    display: none;
-  }
-
-  .item-remove {
-    display: none !important;
-  }
-
-  .editing .item-add {
-    display: none !important;
-  }
-
-  [data-repeatable].saved {
-    display: none;
-  }
-
-  [data-repeatable]:not(.saved) {
-    display: block;
-  }
-
-  .btn-save,
-  .btn-cancel {
-    display: none;
-  }
-
-  [data-repeatable] .button-bar {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-  }
-
-  [data-repeatable].current {
     .btn-save,
     .btn-cancel {
-      display: block;
+        display: none;
     }
-  }
 
-  .repeatable-entry {
-    border: solid $color-secondary 1px;
-    border-radius: $border-radius-large;
-  }
+    [data-repeatable] .button-bar {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    [data-repeatable].current {
+
+        .btn-save,
+        .btn-cancel {
+            display: block;
+        }
+    }
+
+    .repeatable-entry {
+        border: solid $color-secondary 1px;
+        border-radius: $border-radius-large;
+    }
 }

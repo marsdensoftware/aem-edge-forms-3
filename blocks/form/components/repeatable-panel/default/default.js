@@ -259,6 +259,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
+        
+        // Add class
+        repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
 
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
