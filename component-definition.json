@@ -568,11 +568,12 @@
                       "sling:resourceType": "core/fd/components/form/text/v1/text"
                     },
                     "course": {
-                      "fd:viewType": "course",
+                      "fd:viewType": "typeahead",
                       "fieldType": "text-input",
                       "name": "course",
                       "jcr:title": "Course, qualification or certification",
                       "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "datasource": "courses",
                       "required": true
                     },
                     "place-of-learning": {
