@@ -51,9 +51,9 @@
                                     "value": "<h6>Add language</h6>",
                                     "sling:resourceType": "core/fd/components/form/text/v1/text"
                                 },
-                                "course": {
+                                "language": {
                                     "fd:viewType": "typeahead",
-                                    "datasources": "languages",
+                                    "datasource": "languages",
                                     "fieldType": "text-input",
                                     "name": "language",
                                     "jcr:title": "Language",
