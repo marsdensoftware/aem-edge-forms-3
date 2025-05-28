@@ -16,11 +16,17 @@
     width: 40px;
     height: 40px;
     display: block;
-   /* content: url('./icon-streamline.svg'); **/  // testing RW
-    background-image: url('./icon-streamline.svg');
     background-size: contain;
     background-repeat: no-repeat;
 
+  }
+
+  .radio-group--with-icon--list-search-1 {
+    content: url('../../../../icons/icon-streamline.svg');
+  }
+
+  .radio-group--with-icon--smiley-face {
+    content: url('../../../../icons/smiley-face.svg');
   }
 
   label {
@@ -43,9 +49,42 @@
         &:after {
           left: auto;
           top: auto;
-          /* bottom: $spacing-400 + 1px; */ // testing RW
-          bottom: calc(#{$spacing-400} + 1px);
+          bottom: $spacing-400 + 1px;
           margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+.radio-group-wrapper {
+  &.horizontal {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      padding: 16px;
+      border-radius: $border-radius-mid;
+      border: 2px solid $stroke-secondary;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 8px;
+      justify-content: space-between;
+
+      &::before {
+        order: 1;
+        margin-right: 0;
+      }
+    }
+
+    input {
+      &:checked {
+        + label {
+          &::after {
+            right: 17px;
+            top: 17px;
+            left: auto;
+          }
         }
       }
     }
