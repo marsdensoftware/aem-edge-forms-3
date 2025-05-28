@@ -121,7 +121,21 @@ export class RepeatablePanel {
             }
 
             if (value) {
-                result[name] = { 'value': value, 'displayValue': displayValue };
+                if (result[name]) {
+                    // multi values
+                    const e = result[name];
+                    if (!e.values) {
+                        e.values = [];
+                        e.values.push(e.value);
+                        e.displayValues = [];
+                        e.displayValues.push(e.displayValue);
+                    }
+                    e.values.push(value);
+                    e.displayValues.push(displayValue);
+                }
+                else {
+                    result[name] = { 'value': value, 'displayValue': displayValue };
+                }
             }
         });
 
@@ -141,6 +155,17 @@ export class RepeatablePanel {
                 result.classList.add(`repeatable-entry__${name}`);
                 result.dataset.value = value;
                 result.innerHTML = displayValue;
+
+                entries.push(result);
+            }
+
+            const values = data.values;
+            const displayValues = data.displayValues;
+            if (values) {
+                const result = document.createElement('div');
+                result.classList.add(`repeatable-entry__${name}`);
+                result.dataset.values = values;
+                result.innerHTML = displayValues.join(', ');
 
                 entries.push(result);
             }
