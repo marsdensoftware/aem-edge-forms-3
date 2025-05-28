@@ -509,7 +509,8 @@
                 "template": {
                   "jcr:title": "Course, qualification or certification",
                   "fieldType": "text-input",
-                  "fd:viewType": "course"
+                  "fd:viewType": "typeahead",
+                  "datasource": "courses"
                 }
               }
             }
@@ -828,6 +829,23 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Language",
+          "id": "language",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Language",
+                  "fieldType": "text-input",
+                  "fd:viewType": "typeahead",
+                  "datasource": "languages"
                 }
               }
             }

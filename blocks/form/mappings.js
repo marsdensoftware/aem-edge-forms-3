@@ -5,7 +5,7 @@ let customComponents = [
   'formhero', 
   'formwelcome', 
   'formcontextualhelp', 
-  'course', 
+  'typeahead', 
   'repeatable-panel', 
   'formtabs', 
   'education']
