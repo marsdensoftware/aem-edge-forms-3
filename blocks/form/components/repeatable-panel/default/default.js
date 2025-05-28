@@ -259,13 +259,16 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
+        
+        // Add class
+        repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
 
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
 
         this.#conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
         if (this.#conditionField) {
-            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${name}-selection"]`);
+            const radios = this.#conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
             // register click on radios
             radios.forEach(radio => {
