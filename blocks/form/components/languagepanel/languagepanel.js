@@ -1,4 +1,4 @@
-import { LanguageRepeatable } from './languagerepeatable.js';
+import { LanguageRepeatable } from './languagepanelrepeatable.js';
 import { onElementAdded } from '../utils.js'
 
 export default async function decorate(el) {
