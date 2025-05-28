@@ -218,7 +218,13 @@ export class RepeatablePanel {
                 content.append(this._renderEntry(entry));
             });
 
-            overview.replaceWith(content);
+            // Clear without repaint
+            while (overview.firstChild) {
+                overview.removeChild(overview.firstChild);
+            }
+
+            // Append new content
+            overview.appendChild(content);
         }
 
         // unsaved
@@ -259,7 +265,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
-        
+
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
 
