@@ -265,7 +265,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
         this.#conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
         if (this.#conditionField) {
-            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${name}-selection"]`);
+            const radios = this.#conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
             // register click on radios
             radios.forEach(radio => {
