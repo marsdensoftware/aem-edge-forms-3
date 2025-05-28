@@ -141,18 +141,17 @@ textarea {
     }
   }
 }
-
 /********************
  FORM ERROR MESSAGE
 ********************/
 
-.field-wrapper.field-invalid .field-description {
+main .form form .field-wrapper.field-invalid .field-description {
   position: relative;
   padding-left: 28px;
   margin-top: $spacing-200;
   color: $color-feedback-red;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.4;
   font-family: $font-family;
 
@@ -163,8 +162,7 @@ textarea {
     left: 0;
     width: 20px;
     height: 20px;
-    mask: url('data:image/svg+xml,%3Csvg%20width%3D%2241%22%20height%3D%2240%22%20viewBox%3D%220%200%2041%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%20%3Cpath%20d%3D%22M0.5%2020C0.5%208.95431%209.45431%200%2020.5%200C31.5457%200%2040.5%208.95431%2040.5%2020C40.5%2031.0457%2031.5457') no-repeat center / contain;
-    -webkit-mask: url('data:image/svg+xml,%3Csvg%20width%3D%2241%22%20height%3D%2240%22%20viewBox%3D%220%200%2041%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%20%3Cpath%20d%3D%22M0.5%2020C0.5%208.95431%209.45431%200%2020.5%200C31.5457%200%2040.5%208.95431%2040.5%2020C40.5%2031.0457%2031.5457') no-repeat center / contain;
-    background-color: $color-feedback-red;
+    background: $color-feedback-red url("data:image/svg+xml,%3Csvg width='41' height='40' viewBox='0 0 41 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20.5' cy='20' r='20' fill='%23D7373F'/%3E%3Cpath d='M20.5 27C21.6046 27 22.5 26.1046 22.5 25C22.5 23.8954 21.6046 23 20.5 23C19.3954 23 18.5 23.8954 18.5 25C18.5 26.1046 19.3954 27 20.5 27Z' fill='white'/%3E%3Cpath d='M20.5 21C21.0523 21 21.5 20.5523 21.5 20V13C21.5 12.4477 21.0523 12 20.5 12C19.9477 12 19.5 12.4477 19.5 13V20C19.5 20.5523 19.9477 21 20.5 21Z' fill='white'/%3E%3C/svg%3E" ) no-repeat center / contain;
+    border-radius: 50%;
   }
 }
