@@ -11,7 +11,7 @@
                             "jcr:title": "Language Panel",
                             "fieldType": "panel",
                             "fd:viewType": "languagepanel",
-                            "name": "language",
+                            "name": "languagepanel",
                             "hideTitle": true,
                             "radiogroup": {
                                 "enum": [
@@ -30,7 +30,7 @@
                                 "fieldType": "radio-group",
                                 "hideTitle": true,
                                 "jcr:title": "Language Selection",
-                                "name": "language-selection",
+                                "name": "languagepanel-selection",
                                 "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                 "withIcon": true,
                                 "required": true
@@ -39,7 +39,7 @@
                                 "jcr:title": "Language Options Content",
                                 "fieldType": "panel",
                                 "hideTitle": true,
-                                "name": "language-options-content",
+                                "name": "languagepanel-options-content",
                                 "repeatAddButtonLabel": "Add another",
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatable": true,
