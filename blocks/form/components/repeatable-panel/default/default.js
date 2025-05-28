@@ -127,8 +127,10 @@ export class RepeatablePanel {
                     if (!e.values) {
                         e.values = [];
                         e.values.push(e.value);
+                        delete e.value;
                         e.displayValues = [];
                         e.displayValues.push(e.displayValue);
+                        delete e.displayValue;
                     }
                     e.values.push(value);
                     e.displayValues.push(displayValue);
