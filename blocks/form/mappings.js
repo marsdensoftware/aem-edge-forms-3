@@ -8,7 +8,8 @@ let customComponents = [
   'typeahead', 
   'repeatable-panel', 
   'formtabs', 
-  'education']
+  'education',
+  'languagepanel']
   
 const OOTBComponentDecorators = [
   'file-input',
