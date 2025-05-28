@@ -45,16 +45,14 @@ main .form form .panel-repeatable-panel {
         }
     }
 
-    .repeat-actions {
-        display: none;
-    }
-
     .item-remove {
         display: none !important;
     }
 
-    .editing .item-add {
-        display: none !important;
+    &.editing {
+        .item-add {
+            display: none !important;
+        }
     }
 
     [data-repeatable].saved {
