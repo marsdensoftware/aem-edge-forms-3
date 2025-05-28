@@ -73,7 +73,7 @@ export class EducationRepeatable extends RepeatablePanel {
 
         // Customize rendering for completion-year, completion status
         const completionStatus = result[EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS];
-        if (completionStatus.value == '0') {
+        if (completionStatus?.value == '0') {
             // Completed
             const year = result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
             completionStatus.displayValue += ` ${year.displayValue}`;
