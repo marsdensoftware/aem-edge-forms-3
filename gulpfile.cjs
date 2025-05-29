@@ -1,4 +1,4 @@
-const { series, src, dest, watch } = require('gulp');
+const { series, src, dest, watch, task } = require('gulp');
 const dartSass = require('sass');
 const gulpSass = require('gulp-sass');
 const postcss = require('gulp-postcss');
@@ -25,6 +25,12 @@ const plugin = [
 ];
 
 const styleFolders = ['blocks/**/*.scss', 'styles/**/*.scss'];
+
+task('scss', function (){
+  return src(styleFolders) 
+    .pipe(sass().on('error', sass.logError))
+    .pipe(dest('./')); 
+});
 
 const style = () =>
   src(styleFolders, { base: './' })
