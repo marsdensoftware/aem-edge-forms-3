@@ -21,7 +21,7 @@ export class RepeatablePanel {
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
             // make unique
-            this.#makeUnique(added);
+            //this.#makeUnique(added);
             this._toggleEditMode(added, true);
         });
     }
