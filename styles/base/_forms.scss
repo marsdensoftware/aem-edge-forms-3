@@ -146,27 +146,27 @@ textarea {
  FORM ERROR MESSAGE
 ********************/
 
-.field-wrapper.field-invalid .field-description {
+main .form form .field-wrapper.field-invalid .field-description {
   position: relative;
-  padding-left: 28px;
+  padding-left: 24px; // Adjusted for 16px icon
   margin-top: $spacing-200;
-  color: $color-feedback-red;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.4;
+  color: $text-dark;
   font-family: $font-family;
+  font-size: $size-font-body-small;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6; // 160%
 
   &::before {
     content: '';
     position: absolute;
-    top: 2px;
+    top: 3px; /* Adjusted for vertical alignment */
     left: 0;
-    width: 20px;
-    height: 20px;
-    mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
-      no-repeat center / contain;
-    -webkit-mask: url('/content/dam/edge-forms-rebecca/icons/grey-icons/icon-grey-information.svg')
-      no-repeat center / contain;
-    background-color: $color-feedback-red;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E" );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 }

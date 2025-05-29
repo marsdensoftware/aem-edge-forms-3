@@ -509,7 +509,8 @@
                 "template": {
                   "jcr:title": "Course, qualification or certification",
                   "fieldType": "text-input",
-                  "fd:viewType": "course"
+                  "fd:viewType": "typeahead",
+                  "datasource": "courses"
                 }
               }
             }
@@ -555,7 +556,6 @@
                     "fieldType": "panel",
                     "hideTitle": true,
                     "name": "education-options-content",
-                    "renderer": "education",
                     "repeatAddButtonLabel": "Add another",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatable": true,
@@ -568,11 +568,12 @@
                       "sling:resourceType": "core/fd/components/form/text/v1/text"
                     },
                     "course": {
-                      "fd:viewType": "course",
+                      "fd:viewType": "typeahead",
                       "fieldType": "text-input",
                       "name": "course",
                       "jcr:title": "Course, qualification or certification",
                       "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "datasource": "courses",
                       "required": true
                     },
                     "place-of-learning": {
@@ -826,6 +827,109 @@
                         "fieldType": "image",
                         "sling:resourceType": "core/fd/components/form/image/v1/image"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Language",
+          "id": "language",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Language",
+                  "fieldType": "text-input",
+                  "fd:viewType": "typeahead",
+                  "datasource": "languages"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Language Panel",
+          "id": "languagepanel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Language Panel",
+                  "fieldType": "panel",
+                  "fd:viewType": "languagepanel",
+                  "name": "languagepanel",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "enum": [
+                      "no",
+                      "yes"
+                    ],
+                    "enumNames": [
+                      "No - I only know English",
+                      "Yes – I know other language(s)"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "fieldType": "radio-group",
+                    "hideTitle": true,
+                    "jcr:title": "Language Selection",
+                    "name": "languagepanel-selection",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "withIcon": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "jcr:title": "Language Options Content",
+                    "fieldType": "panel",
+                    "hideTitle": true,
+                    "name": "languagepanel-options-content",
+                    "repeatAddButtonLabel": "Add another",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatable": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "intro": {
+                      "fieldType": "plain-text",
+                      "jcr:title": "Intro",
+                      "textIsRich": true,
+                      "value": "<h6>Add language</h6>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "language": {
+                      "fd:viewType": "typeahead",
+                      "datasource": "languages",
+                      "fieldType": "text-input",
+                      "name": "language",
+                      "jcr:title": "Language",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "required": true
+                    },
+                    "proficiency": {
+                      "enum": [
+                        "0",
+                        "1",
+                        "2",
+                        "4"
+                      ],
+                      "enumNames": [
+                        "Able to read",
+                        "Able to write",
+                        "Can understand when spoken",
+                        "Can have a conversation"
+                      ],
+                      "fieldType": "checkbox-group",
+                      "description": "<p>Select all that apply</p>",
+                      "name": "proficiency",
+                      "type": "string[]",
+                      "sling:resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                      "required": true
                     }
                   }
                 }

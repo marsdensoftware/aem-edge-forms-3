@@ -4,21 +4,29 @@ function addSuggestionDiv() {
 
     return el;
 }
-export default function decorate(element, field, container) {
-    const entries = [
-        "Marketing management",
-        "Financial management",
-        "Financial statements",
-        "Business process modelling",
-        "Company policies",
-        "Develop company strategies",
-        "Plan medium to long term objectives",
-        "Define organisational standards",
-        "Assume responsibility for the management of a business",
-        "Build trust"
-    ];
+const courses = [
+    "Marketing management",
+    "Financial management",
+    "Financial statements",
+    "Business process modelling",
+    "Company policies",
+    "Develop company strategies",
+    "Plan medium to long term objectives",
+    "Define organisational standards",
+    "Assume responsibility for the management of a business",
+    "Build trust"
+];
+const languages = ['Te Reo', 'French', 'German', 'Portuguese'];
 
-    element.classList.add('course', 'text-wrapper__icon-search');
+const datasources = {
+    'courses': courses,
+    'languages': languages
+}
+export default function decorate(element, field, container) {
+    const datasource = field.properties.datasource;
+    const entries = datasources[datasource];
+
+    element.classList.add('typeahead', 'text-wrapper__icon-search');
 
     // add suggestion div
     const suggestionsDiv = addSuggestionDiv();
