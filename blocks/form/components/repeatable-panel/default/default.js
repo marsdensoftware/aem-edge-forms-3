@@ -2,6 +2,7 @@ import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 
 export class RepeatablePanel {
+    #overview;
     constructor(repeatablePanel) {
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
@@ -10,10 +11,10 @@ export class RepeatablePanel {
         this._repeatablePanel.classList.add('panel-repeatable-panel');
 
         // create overview
-        const div = document.createElement('div');
+        this.#overview = document.createElement('div');
         div.classList.add('overview');
 
-        this._repeatablePanel.prepend(div);
+        this._repeatablePanel.parentElement.prepend(div);
 
         const form = this._repeatablePanel.closest('form');
 
@@ -30,6 +31,12 @@ export class RepeatablePanel {
         const inputs = el.querySelectorAll('input, select, textarea');
         // Use timestamp to generate a unique suffix
         const uniqueSuffix = Date.now();
+        el.dataset.id = 'panelcontainer-'+uniqueSuffix;
+        el.querySelectorAll('.field-wrapper').forEach(fw=>{
+            const type = fw.id.split('-')[0];
+            fw.id = `${type}-${uniqueSuffix}`;
+            fw.dataset.id = fd.if;
+        });
 
         inputs.forEach((input, index) => {
             const oldId = input.id;
@@ -233,7 +240,6 @@ export class RepeatablePanel {
     _renderOverview() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
-        const overview = this._repeatablePanel.querySelector('.overview');
         // For now reset everything. Later implement a more efficient/targeted approach;
         if (savedEntries.length > 0) {
             const content = document.createElement('div');
@@ -244,12 +250,12 @@ export class RepeatablePanel {
             });
 
             // Clear without repaint
-            while (overview.firstChild) {
-                overview.removeChild(overview.firstChild);
+            while (this.#overview.firstChild) {
+                this.#overview.removeChild(this.#overview.firstChild);
             }
 
             // Append new content
-            overview.appendChild(content);
+            this.#overview.appendChild(content);
         }
 
         // unsaved
