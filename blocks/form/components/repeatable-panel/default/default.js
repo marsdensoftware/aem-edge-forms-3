@@ -40,7 +40,7 @@ export class RepeatablePanel {
 
             // Update corresponding label "for"
             if (oldId) {
-                const label = clone.querySelector(`label[for="${oldId}"]`);
+                const label = el.querySelector(`label[for="${oldId}"]`);
                 if (label) {
                     label.setAttribute('for', newId);
                 }
