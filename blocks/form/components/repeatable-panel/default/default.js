@@ -19,7 +19,32 @@ export class RepeatablePanel {
 
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
+            // make unique
+            this.#makeUnique(added);
             this._toggleEditMode(added, true);
+        });
+    }
+
+    #makeUnique(el) {
+        // Update IDs and labels
+        const inputs = el.querySelectorAll('input, select, textarea');
+        // Use timestamp to generate a unique suffix
+        const uniqueSuffix = Date.now();
+
+        inputs.forEach((input) => {
+            const oldId = input.id;
+            const newId = `${input.name}-${uniqueSuffix}`;
+
+            // Update input ID
+            input.id = newId;
+
+            // Update corresponding label "for"
+            if (oldId) {
+                const label = clone.querySelector(`label[for="${oldId}"]`);
+                if (label) {
+                    label.setAttribute('for', newId);
+                }
+            }
         });
     }
 
