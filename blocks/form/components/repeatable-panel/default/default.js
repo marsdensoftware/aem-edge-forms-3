@@ -35,7 +35,7 @@ export class RepeatablePanel {
         el.querySelectorAll('.field-wrapper').forEach(fw=>{
             const type = fw.id.split('-')[0];
             fw.id = `${type}-${uniqueSuffix}`;
-            fw.dataset.id = fd.if;
+            fw.dataset.id = fw.id;
         });
 
         inputs.forEach((input, index) => {
