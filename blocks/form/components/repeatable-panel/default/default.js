@@ -12,9 +12,9 @@ export class RepeatablePanel {
 
         // create overview
         this.#overview = document.createElement('div');
-        div.classList.add('overview');
+        this.#overview.classList.add('overview');
 
-        this._repeatablePanel.parentElement.prepend(div);
+        this._repeatablePanel.parentElement.prepend(this.#overview);
 
         const form = this._repeatablePanel.closest('form');
 
