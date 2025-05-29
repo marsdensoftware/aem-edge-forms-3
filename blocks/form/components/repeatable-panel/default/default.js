@@ -31,9 +31,9 @@ export class RepeatablePanel {
         // Use timestamp to generate a unique suffix
         const uniqueSuffix = Date.now();
 
-        inputs.forEach((input) => {
+        inputs.forEach((input, index) => {
             const oldId = input.id;
-            const newId = `${input.name}-${uniqueSuffix}`;
+            const newId = `${input.name}-${index}-${uniqueSuffix}`;
 
             // Update input ID
             input.id = newId;
