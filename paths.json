@@ -4,5 +4,9 @@
     "/content/edge-forms-rebecca/configuration:/.helix/config.json",
     "/content/edge-forms-rebecca/metadata:/metadata.json"
   ],
-  "includes": ["/content/", "/content/dam/"]
+  "includes": [
+    "/content/",
+    "/content/dam/",
+    "content/forms/"
+  ]
 }
