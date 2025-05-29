@@ -5,10 +5,11 @@ let customComponents = [
   'formhero', 
   'formwelcome', 
   'formcontextualhelp', 
-  'course', 
+  'typeahead', 
   'repeatable-panel', 
   'formtabs', 
-  'education']
+  'education',
+  'languagepanel']
   
 const OOTBComponentDecorators = [
   'file-input',

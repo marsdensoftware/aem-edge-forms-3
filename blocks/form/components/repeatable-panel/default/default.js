@@ -121,7 +121,23 @@ export class RepeatablePanel {
             }
 
             if (value) {
-                result[name] = { 'value': value, 'displayValue': displayValue };
+                if (result[name]) {
+                    // multi values
+                    const e = result[name];
+                    if (!e.values) {
+                        e.values = [];
+                        e.values.push(e.value);
+                        delete e.value;
+                        e.displayValues = [];
+                        e.displayValues.push(e.displayValue);
+                        delete e.displayValue;
+                    }
+                    e.values.push(value);
+                    e.displayValues.push(displayValue);
+                }
+                else {
+                    result[name] = { 'value': value, 'displayValue': displayValue };
+                }
             }
         });
 
@@ -141,6 +157,17 @@ export class RepeatablePanel {
                 result.classList.add(`repeatable-entry__${name}`);
                 result.dataset.value = value;
                 result.innerHTML = displayValue;
+
+                entries.push(result);
+            }
+
+            const values = data.values;
+            const displayValues = data.displayValues;
+            if (values) {
+                const result = document.createElement('div');
+                result.classList.add(`repeatable-entry__${name}`);
+                result.dataset.values = values;
+                result.innerHTML = displayValues.join(', ');
 
                 entries.push(result);
             }
@@ -213,5 +240,85 @@ export class RepeatablePanel {
         button.append(document.createElement('i'), text);
 
         return button;
+    }
+}
+
+/**
+ * Repeatable that is displayed when a condition is fullfiled, based on a radio group
+ */
+export class ConditionalRepeatable extends RepeatablePanel {
+    // Radio group
+    #conditionField;
+
+    static FIELD_NAMES = {
+        'COMPLETION_STATUS': 'completion-status',
+        'START_YEAR': 'start-year',
+        'FINISH_YEAR': 'finish-year',
+        'EDUCATION_SELECTION': 'education-selection'
+    };
+
+    constructor(repeatablePanel, name) {
+        super(repeatablePanel);
+        
+        // Add class
+        repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
+
+        // Add class
+        repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
+
+        this.#conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
+        if (this.#conditionField) {
+            const radios = this.#conditionField.querySelectorAll(`input[name="${name}-selection"]`);
+
+            // register click on radios
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (radio.value == 'yes') {
+                        // show repeatable panel
+                        repeatablePanel.style.display = 'block';
+                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
+
+                        // enable validation
+                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
+
+                        // Edit first entry
+                        super._toggleEditMode(el, true);
+
+                    }
+                    if (radio.value == 'no') {
+                        // hide repeatable panel
+                        repeatablePanel.style.display = 'none';
+                        // Show wizard buttons
+                        super._toggleWizardButtons(true);
+
+                        // prevent validation
+                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+                    }
+                });
+            });
+            // prevent validation
+            repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+        }
+    }
+
+    _renderOverview() {
+        super._renderOverview();
+
+        // Add custom logic here
+        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+        if (savedEntries.length > 0) {
+            // Hide question
+            this.#conditionField.setAttribute('data-visible', false);
+        }
+        else {
+            // reset selection & condition field
+            const radios = this.#conditionField.querySelectorAll('input[type="radio"]');
+
+            radios?.forEach(radio => { radio.checked = false; });
+            // Show condition field
+            this.#conditionField.setAttribute('data-visible', true);
+            // hide repeatable panel
+            this._repeatablePanel.style.display = 'none';
+        }
     }
 }

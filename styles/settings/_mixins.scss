@@ -37,7 +37,7 @@
 }
 
 /******************************
-      Button Placeholder Styles
+   Button Placeholder Styles
 *******************************/
 %button {
   @include elevation-2;
@@ -147,8 +147,9 @@
 }
 
 /******************************
-      Contextual Help Colourways
+  Contextual Help Colourways
 *******************************/
+
 .panel-formcontextualhelp--primary {
   @include panel-help-base($color-white, $text-primary, $text-accent);
 }
@@ -162,3 +163,72 @@
   @include panel-help-icon-invert;
 }
 
+
+
+// _spacing.scss
+// Spacing mixins for margin and padding using spacing scale
+
+
+
+// Single-direction spacing
+@mixin padding-top($space) {
+  padding-top: $space;
+}
+
+@mixin padding-bottom($space) {
+  padding-bottom: $space;
+}
+
+@mixin padding-left($space) {
+  padding-left: $space;
+}
+
+@mixin padding-right($space) {
+  padding-right: $space;
+}
+
+@mixin margin-top($space) {
+  margin-top: $space;
+}
+
+@mixin margin-bottom($space) {
+  margin-bottom: $space;
+}
+
+@mixin margin-left($space) {
+  margin-left: $space;
+}
+
+@mixin margin-right($space) {
+  margin-right: $space;
+}
+
+// Uniform spacing
+@mixin padding($space) {
+  padding: $space;
+}
+
+@mixin margin($space) {
+  margin: $space;
+}
+
+// Axis-based spacing
+@mixin padding-x($space) {
+  padding-left: $space;
+  padding-right: $space;
+}
+
+@mixin padding-y($space) {
+  padding-top: $space;
+  padding-bottom: $space;
+}
+
+@mixin margin-x($space) {
+  margin-left: $space;
+  margin-right: $space;
+}
+
+@mixin margin-y($space) {
+  margin-top: $space;
+  margin-bottom: $space;
+}

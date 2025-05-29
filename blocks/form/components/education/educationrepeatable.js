@@ -1,8 +1,7 @@
-import { RepeatablePanel } from "../repeatable-panel/default/default.js";
+import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
 
-export class EducationRepeatable extends RepeatablePanel {
-    #educationRadioGroup;
-
+export class EducationRepeatable extends ConditionalRepeatable {
+    
     static FIELD_NAMES = {
         'COMPLETION_STATUS': 'completion-status',
         'START_YEAR': 'start-year',
@@ -11,10 +10,7 @@ export class EducationRepeatable extends RepeatablePanel {
     };
 
     constructor(repeatablePanel) {
-        super(repeatablePanel);
-
-        // Add class for education
-        repeatablePanel.classList.add('panel-repeatable-panel__education');
+        super(repeatablePanel, 'education');
 
         // Register listener on completion status
         const completionStatusRadios = repeatablePanel.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS}"]`);
@@ -32,40 +28,6 @@ export class EducationRepeatable extends RepeatablePanel {
                 }
             });
         });
-
-        this.#educationRadioGroup = repeatablePanel.closest('.field-education').querySelector('.field-education-selection');
-        if (this.#educationRadioGroup) {
-            const radios = this.#educationRadioGroup.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.EDUCATION_SELECTION}"]`);
-
-            // register click on radios
-            radios.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    if (radio.value == 'yes') {
-                        // show repeatable panel
-                        repeatablePanel.style.display = 'block';
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
-
-                        // enable validation
-                        repeatablePanel.closest('.field-education-options-content').disabled = false;
-
-                        // Edit first entry
-                        super._toggleEditMode(el, true);
-
-                    }
-                    if (radio.value == 'no') {
-                        // hide repeatable panel
-                        repeatablePanel.style.display = 'none';
-                        // Show wizard buttons
-                        super._toggleWizardButtons(true);
-
-                        // prevent validation
-                        repeatablePanel.closest('.field-education-options-content').disabled = true;
-                    }
-                });
-            });
-            // prevent validation
-            repeatablePanel.closest('.field-education-options-content').disabled = true;
-        }
     }
 
     _fieldToNameValues(entry) {
@@ -73,7 +35,7 @@ export class EducationRepeatable extends RepeatablePanel {
 
         // Customize rendering for completion-year, completion status
         const completionStatus = result[EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS];
-        if (completionStatus.value == '0') {
+        if (completionStatus?.value == '0') {
             // Completed
             const year = result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
             completionStatus.displayValue += ` ${year.displayValue}`;
@@ -84,26 +46,5 @@ export class EducationRepeatable extends RepeatablePanel {
         delete result[EducationRepeatable.FIELD_NAMES.START_YEAR];
 
         return result;
-    }
-
-    _renderOverview() {
-        super._renderOverview();
-
-        // Add custom logic here
-        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
-        if (savedEntries.length > 0) {
-            // Hide question
-            this.#educationRadioGroup.setAttribute('data-visible', false);
-        }
-        else {
-            // reset selection & show question
-            const radios = this.#educationRadioGroup.querySelectorAll('input[type="radio"]');
-
-            radios?.forEach(radio => { radio.checked = false; });
-            // Show question
-            this.#educationRadioGroup.setAttribute('data-visible', true);
-            // hide repeatable panel
-            this._repeatablePanel.style.display = 'none';
-        }
     }
 }

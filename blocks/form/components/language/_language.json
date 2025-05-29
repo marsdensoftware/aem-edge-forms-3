@@ -1,17 +1,17 @@
 {
     "definitions": [
         {
-            "title": "Course",
-            "id": "course",
+            "title": "Language",
+            "id": "language",
             "plugins": {
                 "xwalk": {
                     "page": {
                         "resourceType": "core/fd/components/form/textinput/v1/textinput",
                         "template": {
-                            "jcr:title": "Course, qualification or certification",
+                            "jcr:title": "Language",
                             "fieldType": "text-input",
                             "fd:viewType": "typeahead",
-                            "datasource": "courses"
+                            "datasource": "languages"
                         }
                     }
                 }
@@ -20,7 +20,7 @@
     ],
     "models": [
         {
-            "id": "course",
+            "id": "language",
             "fields": [
                 {
                     "component": "container",

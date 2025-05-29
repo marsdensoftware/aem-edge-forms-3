@@ -5,7 +5,7 @@
 
   .radio-group--with-icon__label {
     padding: $spacing-400;
-    border: 1px solid $stroke-primary;
+    border: 1px solid $stroke-tertiary;
     border-radius: $border-radius-large;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,9 @@
     width: 40px;
     height: 40px;
     display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+
   }
 
   .radio-group--with-icon--list-search-1 {
