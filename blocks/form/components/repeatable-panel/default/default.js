@@ -34,8 +34,12 @@ export class RepeatablePanel {
 
         inputs.forEach((input) => {
             input.dataset.id = input.dataset.id + '-' + index;
-            input.querySelector('input')?.id = input.dataset.id;
-            input.querySelector('label')?.htmlFor = input.dataset.id;
+            if (input.querySelector('input')) {
+                input.querySelector('input').id = input.dataset.id;
+            }
+            if (input.querySelector('label')) {
+                input.querySelector('label').htmlFor = input.dataset.id;
+            }
 
         });
     }
