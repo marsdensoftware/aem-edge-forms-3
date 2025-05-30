@@ -21,12 +21,12 @@ export class RepeatablePanel {
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
             // make unique
-            this.#makeUnique(added);
+            this._makeUnique(added);
             this._toggleEditMode(added, true);
         });
     }
 
-    #makeUnique(el) {
+    _makeUnique(el) {
         const index = Array.from(el.parentNode.children).indexOf(el);
         el.dataset.id = el.dataset.id + '-' + index;
         // Update IDs and labels
