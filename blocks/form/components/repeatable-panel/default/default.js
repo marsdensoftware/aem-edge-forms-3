@@ -21,37 +21,19 @@ export class RepeatablePanel {
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
             // make unique
-            //this.#makeUnique(added);
+            this.#makeUnique(added);
             this._toggleEditMode(added, true);
         });
     }
 
     #makeUnique(el) {
+        const index = Array.from(el.parentNode.children).indexOf(el);
+        el.dataset.id = el.dataset.id + '-' + index;
         // Update IDs and labels
-        const inputs = el.querySelectorAll('input, select, textarea');
-        // Use timestamp to generate a unique suffix
-        const uniqueSuffix = Date.now();
-        el.dataset.id = 'panelcontainer-'+uniqueSuffix;
-        el.querySelectorAll('.field-wrapper').forEach(fw=>{
-            const type = fw.id.split('-')[0];
-            fw.id = `${type}-${uniqueSuffix}`;
-            fw.dataset.id = fw.id;
-        });
+        const inputs = el.querySelectorAll('[data-id]');
 
-        inputs.forEach((input, index) => {
-            const oldId = input.id;
-            const newId = `${input.name}-${index}-${uniqueSuffix}`;
-
-            // Update input ID
-            input.id = newId;
-
-            // Update corresponding label "for"
-            if (oldId) {
-                const label = el.querySelector(`label[for="${oldId}"]`);
-                if (label) {
-                    label.setAttribute('for', newId);
-                }
-            }
+        inputs.forEach((input) => {
+            input.dataset.id = input.dataset.id + '-' + index;
         });
     }
 
