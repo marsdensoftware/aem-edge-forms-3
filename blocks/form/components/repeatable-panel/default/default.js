@@ -34,6 +34,9 @@ export class RepeatablePanel {
 
         inputs.forEach((input) => {
             input.dataset.id = input.dataset.id + '-' + index;
+            input.querySelector('input')?.id = input.dataset.id;
+            input.querySelector('label')?.htmlFor = input.dataset.id;
+
         });
     }
 
