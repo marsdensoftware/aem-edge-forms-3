@@ -14,6 +14,10 @@ export class RepeatablePanel {
         this.#overview = document.createElement('div');
         this.#overview.classList.add('overview');
 
+        const content = document.createElement('div');
+        content.classList.add('repeatable-entries');
+        this.#overview.append(content);
+
         this._repeatablePanel.parentElement.prepend(this.#overview);
 
         const form = this._repeatablePanel.closest('form');
@@ -228,18 +232,18 @@ export class RepeatablePanel {
     init() {
         this._renderOverview();
     }
-    
-    _addOrUpdateEntry(entry){
+
+    _addOrUpdateEntry(entry) {
         // Find existing rendered entry
         const dataId = entry.dataset.id;
         const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
         const content = this._renderEntry(entry);
-        
-        if(!e){
+
+        if (!e) {
             // Create
             this.#overview.firstElementChild.append(content);
         }
-        else{
+        else {
             // Update
             e.replaceWith(content);
         }
@@ -248,10 +252,8 @@ export class RepeatablePanel {
     _renderOverview() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
-        // For now reset everything. Later implement a more efficient/targeted approach;
         if (savedEntries.length > 0) {
-            const content = document.createElement('div');
-            content.classList.add('repeatable-entries')
+            const content = this.#overview.firstChild;
 
             savedEntries.forEach((entry) => {
                 content.append(this._renderEntry(entry));
