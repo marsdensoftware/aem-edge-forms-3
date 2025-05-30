@@ -19,13 +19,13 @@
 
 .wizard {
   .current-wizard-step {
-    /*padding: 32px 16px 45px;*/  // removed padding RW
+    /*padding: 32px 16px 45px;*/ // removed padding RW
 
     @include media('desktop') {
       padding: $spacing-600 0;
       margin: 32px auto;
       width: 100%;
-     /* max-width: 930px; */ // Figma is 1038px
+      /* max-width: 930px; */ // Figma is 1038px
       max-width: 1038px;
     }
   }
@@ -35,15 +35,23 @@
     display: none;
   }
 
+  // NEW sticky button wrapper
   .wizard-button-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: $spacing-400;
-    border-top: 1px solid $stroke-secondary;
+    background-color: $color-white;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    gap: $spacing-300;
+    border-top: 1px solid $stroke-secondary;
 
     @include media('desktop') {
-      /*margin-top: 32px;*/  // removing and adding to wrapper instead RW
+      /*margin-top: 32px;*/ // removing and adding to wrapper instead RW
     }
 
     .wizard-button-next {
@@ -60,7 +68,6 @@
         @extend %common-wizard-button;
         content: '';
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=');
-
         order: 1;
         margin-left: 8px;
       }
@@ -80,4 +87,22 @@
       }
     }
   }
+
+  /* ORIGINAL non-sticky version (commented out)
+  .wizard-button-wrapper {
+    padding: $spacing-400;
+    border-top: 1px solid $stroke-secondary;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @include media('desktop') {
+      margin-top: 32px;
+    }
+
+    .wizard-button-next {
+      margin-left: auto;
+    }
+  }
+  */
 }
