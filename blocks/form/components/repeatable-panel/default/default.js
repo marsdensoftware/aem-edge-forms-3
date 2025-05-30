@@ -20,9 +20,12 @@ export class RepeatablePanel {
 
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
-            // make unique
-            this._makeUnique(added);
-            this._toggleEditMode(added, true);
+            // Check that addeb belongs to the current repeatable
+            if (this._repeatablePanel.contains(added)) {
+                // make unique
+                this._makeUnique(added);
+                this._toggleEditMode(added, true);
+            }
         });
     }
 
