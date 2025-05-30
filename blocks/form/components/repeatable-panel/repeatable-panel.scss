@@ -7,6 +7,7 @@ main .form form {
             border: solid $color-secondary 1px;
             border-radius: $border-radius-large;
             position: relative;
+            margin-bottom: $spacing-600;
 
             &__edit {
                 position: absolute;
@@ -30,8 +31,6 @@ main .form form {
             color: inherit;
         }
     }
-
-    .repeatable-entry {}
 }
 
 main .form form .panel-repeatable-panel {
