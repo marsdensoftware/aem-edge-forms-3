@@ -231,7 +231,7 @@ export class RepeatablePanel {
     
     _addOrUpdateEntry(entry){
         // Find existing rendered entry
-        const dataId = entry.data.id;
+        const dataId = entry.dataset.id;
         const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
         const content = this._renderEntry(entry);
         
