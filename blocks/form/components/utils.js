@@ -1,18 +1,20 @@
-export function onElementAdded(el, callback) {
-    if (el.isConnected) {
-        callback(el);
-        return;
-    }
-
-    const observer = new MutationObserver(() => {
+export function onElementAdded(el) {
+    return new Promise((resolve) => {
         if (el.isConnected) {
-            observer.disconnect();
-            callback(el);
+            resolve(el);
+            return;
         }
-    });
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
+        const observer = new MutationObserver(() => {
+            if (el.isConnected) {
+                observer.disconnect();
+                resolve(el);
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
     });
 }
