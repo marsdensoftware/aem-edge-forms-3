@@ -99,7 +99,7 @@ export class RepeatablePanel {
                 entry.classList.add('saved');
                 this._toggleEditMode(entry, false);
 
-                this._renderOverview();
+                this._addOrUpdateEntry(entry);
             }
         });
 
@@ -227,6 +227,22 @@ export class RepeatablePanel {
 
     init() {
         this._renderOverview();
+    }
+    
+    _addOrUpdateEntry(entry){
+        // Find existing rendered entry
+        const dataId = entry.data.id;
+        const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
+        const content = this._renderEntry(entry);
+        
+        if(!e){
+            // Create
+            this.#overview.firstElementChild.append(content);
+        }
+        else{
+            // Update
+            e.replaceWith(content);
+        }
     }
 
     _renderOverview() {

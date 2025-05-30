@@ -1,26 +1,12 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel {
-    &__conditional {
-        display: none;
-    }
-
-    .field-wrapper {
-        color: $text-primary;
-        margin-top: 24px;
-        margin-bottom: 24px;
-    }
-
-    .field-label {
-        margin-bottom: 12px;
-    }
-
+main .form form {
     .repeatable-entries {
         .repeatable-entry {
             padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
-            border: solid 1px $stroke-secondary;
-            position: relative;
+            border: solid $color-secondary 1px;
             border-radius: $border-radius-large;
+            position: relative;
 
             &__edit {
                 position: absolute;
@@ -43,6 +29,24 @@ main .form form .panel-repeatable-panel {
         &:visited {
             color: inherit;
         }
+    }
+
+    .repeatable-entry {}
+}
+
+main .form form .panel-repeatable-panel {
+    &__conditional {
+        display: none;
+    }
+
+    .field-wrapper {
+        color: $text-primary;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .field-label {
+        margin-bottom: 12px;
     }
 
     .item-remove {
@@ -80,10 +84,5 @@ main .form form .panel-repeatable-panel {
         .btn-cancel {
             display: block;
         }
-    }
-
-    .repeatable-entry {
-        border: solid $color-secondary 1px;
-        border-radius: $border-radius-large;
     }
 }
