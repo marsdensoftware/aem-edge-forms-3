@@ -35,7 +35,7 @@ export class RepeatablePanel {
         form.addEventListener('item:remove', (event) => {
             const removed = event.detail.item.el;
             // At this point the element is no longer in the dom
-            const id = removed.data.id;
+            const id = removed.dataset.id;
             // Find matching overview entry and remove
             this._repeatablePanel.querySelector(`repeatable-entry[data-id="${id}"]`)?.remove();
         });
@@ -120,14 +120,10 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
-            // TODO: If new added one then delete. 
-            // TODO: If saved one then reset changes.
-            // if first one hide
-            if (entry.dataset.index == 0) {
-                // First one
-                this._toggleEditMode(entry, false);
-            }
-            else if (!entry.classList.contains('saved')) {
+            // TODO implement cancel for now just hide
+            this._toggleEditMode(entry, false);
+            /*
+            if (!entry.classList.contains('saved')) {
                 // Unsaved one
                 this._triggerDeletion(entry);
             }
@@ -135,6 +131,7 @@ export class RepeatablePanel {
                 // Saved one --> Reset changes
                 alert('Todo: Reset changes');
             }
+            */
         });
 
         buttonBar.appendChild(saveBtn);
