@@ -34,11 +34,10 @@ export class RepeatablePanel {
 
         form.addEventListener('item:remove', (event) => {
             const removed = event.detail.item.el;
-            // Check that removed belongs to the current repeatable
-            if (this._repeatablePanel.contains(removed)) {
-                // remove from overview
-                removed.remove();
-            }
+            // At this point the element is no longer in the dom
+            const id = removed.data.id;
+            // Find matching overview entry and remove
+            this._repeatablePanel.querySelector(`repeatable-entry[data-id="${id}"]`)?.remove();
         });
     }
 
@@ -246,9 +245,14 @@ export class RepeatablePanel {
         result.append(deleteLink);
 
         deleteLink.addEventListener('click', (e) => {
-            const id = result.dataset.id;
-            const entry = this._repeatablePanel.querySelector(`fieldset[data-id="${id}"]`);
-            this._triggerDeletion(entry);
+            if (entry.dataset.index == 0) {
+                // First one
+                result.remove();
+                this._toggleEditMode(entry, false);
+            }
+            else {
+                this._triggerDeletion(entry);
+            }
 
             e.preventDefault();
         });
