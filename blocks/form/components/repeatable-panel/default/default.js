@@ -34,7 +34,8 @@ export class RepeatablePanel {
     }
 
     _makeUnique(el) {
-        const index = Array.from(el.parentNode.children).indexOf(el);
+        // TODO NJ: Remove after bug fixed by Adobe
+        const index = new Date().getTime();//Array.from(el.parentNode.children).indexOf(el);
         el.dataset.id = el.dataset.id + '-' + index;
         // Update IDs and labels
         const inputs = el.querySelectorAll('[data-id]');
