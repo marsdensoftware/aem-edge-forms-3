@@ -74,6 +74,10 @@ main .form form .panel-repeatable-panel {
         display: none;
     }
 
+    [data-repeatable]:first-of-type .btn-cancel {
+        display: none;
+    }
+
     [data-repeatable]:not(.saved) {
         display: block;
     }
