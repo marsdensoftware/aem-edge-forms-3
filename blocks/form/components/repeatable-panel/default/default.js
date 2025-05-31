@@ -242,8 +242,9 @@ export class RepeatablePanel {
         deleteLink.classList.add('repeatable-entry__delete');
         deleteLink.textContent = 'Delete';
         deleteLink.href = '#';
-        result.append(deleteLink);
+        //result.append(deleteLink);
 
+        // TODO Implement deletion
         deleteLink.addEventListener('click', (e) => {
             if (entry.dataset.index == 0) {
                 // First one
