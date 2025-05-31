@@ -24,11 +24,20 @@ export class RepeatablePanel {
 
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
-            // Check that addeb belongs to the current repeatable
+            // Check that added belongs to the current repeatable
             if (this._repeatablePanel.contains(added)) {
                 // make unique
                 this._makeUnique(added);
                 this._toggleEditMode(added, true);
+            }
+        });
+
+        form.addEventListener('item:remove', (event) => {
+            const removed = event.detail.item.el;
+            // Check that removed belongs to the current repeatable
+            if (this._repeatablePanel.contains(removed)) {
+                // remove from overview
+                removed.remove();
             }
         });
     }
@@ -104,7 +113,7 @@ export class RepeatablePanel {
                 entry.classList.add('saved');
                 this._toggleEditMode(entry, false);
 
-                this._addOrUpdateEntry(entry);
+                this._entryModified(entry);
             }
         });
 
@@ -112,11 +121,20 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
-            // TODO: If new added one then remove. 
+            // TODO: If new added one then delete. 
             // TODO: If saved one then reset changes.
             // if first one hide
             if (entry.dataset.index == 0) {
+                // First one
                 this._toggleEditMode(entry, false);
+            }
+            else if (!entry.classList.contains('saved')) {
+                // Unsaved one
+                this._triggerDeletion(entry);
+            }
+            else if (entry.classList.contains('saved')) {
+                // Saved one --> Reset changes
+                alert('Todo: Reset changes');
             }
         });
 
@@ -221,6 +239,20 @@ export class RepeatablePanel {
             e.preventDefault();
         });
 
+        const deleteLink = document.createElement('a');
+        deleteLink.classList.add('repeatable-entry__delete');
+        deleteLink.textContent = 'Delete';
+        deleteLink.href = '#';
+        result.append(deleteLink);
+
+        deleteLink.addEventListener('click', (e) => {
+            const id = result.dataset.id;
+            const entry = this._repeatablePanel.querySelector(`fieldset[data-id="${id}"]`);
+            this._triggerDeletion(entry);
+
+            e.preventDefault();
+        });
+
         readable.forEach(r => {
             result.append(r);
         });
@@ -228,14 +260,20 @@ export class RepeatablePanel {
         return result;
     }
 
+    _triggerDeletion(entry) {
+        // Trigger click on framework item remove button
+        entry?.querySelector('.item-remove')?.click();
+    }
+
     init() {
         this._renderOverview();
     }
 
-    _addOrUpdateEntry(entry) {
+    _entryModified(entry) {
         // Find existing rendered entry
         const dataId = entry.dataset.id;
         const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
+
         const content = this._renderEntry(entry);
 
         if (!e) {

@@ -21,6 +21,18 @@ main .form form {
                 text-decoration: underline;
                 padding-left: 28px;
             }
+
+            &__delete {
+                position: absolute;
+                top: ($spacing-400*2 + 26px);
+                right: $spacing-400;
+                width: 56px;
+                height: 26px;
+                background-repeat: no-repeat;
+                display: block;
+                text-decoration: underline;
+                padding-left: 28px;
+            }
         }
     }
 
