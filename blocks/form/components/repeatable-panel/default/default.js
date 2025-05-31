@@ -18,7 +18,7 @@ export class RepeatablePanel {
         content.classList.add('repeatable-entries');
         this.#overview.append(content);
 
-        this._repeatablePanel.parentElement.prepend(this.#overview);
+        this._repeatablePanel.prepend(this.#overview);
 
         const form = this._repeatablePanel.closest('form');
 
@@ -118,8 +118,6 @@ export class RepeatablePanel {
             if (entry.dataset.index == 0) {
                 this._toggleEditMode(entry, false);
             }
-
-            this._renderOverview();
         });
 
         buttonBar.appendChild(saveBtn);
@@ -295,7 +293,7 @@ export class RepeatablePanel {
  * Repeatable that is displayed when a condition is fullfiled, based on a radio group
  */
 export class ConditionalRepeatable extends RepeatablePanel {
-    // Radio group
+    // A field that yields yes,1,true or no,0,false as value
     #conditionField;
 
     static FIELD_NAMES = {
@@ -321,19 +319,21 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (radio.value == 'yes') {
+                    if (this.#isYes(radio)) {
                         // show repeatable panel
                         repeatablePanel.style.display = 'block';
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
-
                         // enable validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        // Edit first entry
-                        super._toggleEditMode(el, true);
+                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
+
+                        if (el) {
+                            // Edit first entry if any
+                            super._toggleEditMode(el, true);
+                        }
 
                     }
-                    if (radio.value == 'no') {
+                    else {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
@@ -346,6 +346,15 @@ export class ConditionalRepeatable extends RepeatablePanel {
             });
             // prevent validation
             repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+        }
+    }
+
+    #isYes(field) {
+        const value = field.value || '';
+        if (value === true || value === 1) return true;
+        if (typeof value === 'string') {
+            const normalized = value.trim().toLowerCase();
+            return normalized === 'yes' || normalized === 'true' || normalized === '1';
         }
     }
 
