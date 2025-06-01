@@ -240,7 +240,7 @@ export class RepeatablePanel {
         result.append(editLink);
 
         editLink.addEventListener('click', (e) => {
-            alert('Edit entry: ' + result.dataset.id);
+            this._toggleEditMode(entry, true);
             e.preventDefault();
         });
 
@@ -372,7 +372,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
                         if (el) {
                             // Edit first entry if any
-                            super._toggleEditMode(el, true);
+                            this._toggleEditMode(el, true);
                         }
                     }
                     else {
