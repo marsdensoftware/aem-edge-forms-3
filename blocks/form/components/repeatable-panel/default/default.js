@@ -92,7 +92,7 @@ export class RepeatablePanel {
     }
 
     #isFirstEntry(entry) {
-        return Array.from(this._repeatablePanel.querySelector('[data-repeatable]')).indexOf(entry) == 0;
+        return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
     }
 
     _ensureButtonBar(entry) {
