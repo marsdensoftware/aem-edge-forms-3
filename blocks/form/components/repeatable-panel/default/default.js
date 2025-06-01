@@ -128,6 +128,8 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
+            alert('Coming soon...');
+            /*
             this._toggleEditMode(entry, false);
             this.#resetChanges();
 
@@ -136,6 +138,7 @@ export class RepeatablePanel {
                 this.#triggerDeletion(entry);
             }
             this._renderOverview();
+            */
 
         });
 
@@ -240,7 +243,11 @@ export class RepeatablePanel {
         result.append(editLink);
 
         editLink.addEventListener('click', (e) => {
+            alert('Coming soon...');
+            /*
             this._toggleEditMode(entry, true);
+            */
+
             e.preventDefault();
         });
 
@@ -252,6 +259,8 @@ export class RepeatablePanel {
 
         // TODO Implement deletion
         deleteLink.addEventListener('click', (e) => {
+            alert('Coming soon...');
+            /*
             if (this.#isFirstEntry(entry)) {
                 // First one --> Remove from overview
                 result.remove();
@@ -264,6 +273,7 @@ export class RepeatablePanel {
             else {
                 this.#triggerDeletion(entry);
             }
+            */
 
             e.preventDefault();
         });
@@ -310,7 +320,7 @@ export class RepeatablePanel {
 
         if (savedEntries.length > 0) {
             const content = this.#overview.firstChild;
-            
+
             // Clear content
             content.innerHTML = '';
 
