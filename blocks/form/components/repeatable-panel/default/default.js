@@ -368,19 +368,20 @@ export class ConditionalRepeatable extends RepeatablePanel {
                         // enable validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
+                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
 
                         if (el) {
                             // Edit first entry if any
                             super._toggleEditMode(el, true);
                         }
-
                     }
                     else {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
                         super._toggleWizardButtons(true);
+                        
+                        // TODO Clear all edits?
 
                         // prevent validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
