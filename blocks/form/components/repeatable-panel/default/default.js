@@ -370,7 +370,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
                         // enable validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
+                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
 
                         if (el) {
                             // Edit first entry if any
