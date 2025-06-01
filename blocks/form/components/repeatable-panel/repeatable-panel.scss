@@ -74,14 +74,6 @@ main .form form .panel-repeatable-panel {
         display: none;
     }
 
-    [data-repeatable]:first-of-type .btn-cancel {
-        display: none;
-    }
-
-    [data-repeatable]:not(.saved) {
-        display: block;
-    }
-
     .btn-save,
     .btn-cancel {
         display: none;
@@ -94,6 +86,7 @@ main .form form .panel-repeatable-panel {
     }
 
     [data-repeatable].current {
+        display: block;
 
         .btn-save,
         .btn-cancel {
