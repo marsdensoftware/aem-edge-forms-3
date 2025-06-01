@@ -38,6 +38,7 @@ export class RepeatablePanel {
             const id = removed.dataset.id;
             // Find matching overview entry and remove
             this._repeatablePanel.querySelector(`repeatable-entry[data-id="${id}"]`)?.remove();
+            this._renderOverview();
         });
     }
 
@@ -124,24 +125,23 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
-            // TODO implement cancel for now just hide
             this._toggleEditMode(entry, false);
+            this.#resetChanges();
 
+            if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
+                // Unsaved and not first one --> Delete
+                this.#triggerDeletion(entry);
+            }
             this._renderOverview();
-            /*
-            if (!entry.classList.contains('saved')) {
-                // Unsaved one
-                this._triggerDeletion(entry);
-            }
-            else if (entry.classList.contains('saved')) {
-                // Saved one --> Reset changes
-                alert('Todo: Reset changes');
-            }
-            */
+
         });
 
         buttonBar.appendChild(saveBtn);
         buttonBar.appendChild(cancelBtn);
+    }
+
+    #resetChanges(entry) {
+        alert('Todo: Reset changes');
     }
 
     _fieldToNameValues(entry) {
@@ -245,17 +245,19 @@ export class RepeatablePanel {
         deleteLink.classList.add('repeatable-entry__delete');
         deleteLink.textContent = 'Delete';
         deleteLink.href = '#';
-        //result.append(deleteLink);
+        result.append(deleteLink);
 
         // TODO Implement deletion
         deleteLink.addEventListener('click', (e) => {
-            if (entry.dataset.index == 0) {
-                // First one
+            if (this.#isFirstEntry(entry)) {
+                // First one --> Remove from overview
                 result.remove();
-                this._toggleEditMode(entry, false);
+                // Clear changes
+                this.#clearChanges(entry);
+                this._renderOverview();
             }
             else {
-                this._triggerDeletion(entry);
+                this.#triggerDeletion(entry);
             }
 
             e.preventDefault();
@@ -268,7 +270,11 @@ export class RepeatablePanel {
         return result;
     }
 
-    _triggerDeletion(entry) {
+    #clearChanges(entry) {
+        alert('Clearing changes');
+    }
+
+    #triggerDeletion(entry) {
         // Trigger click on framework item remove button
         entry?.querySelector('.item-remove')?.click();
     }
@@ -312,15 +318,6 @@ export class RepeatablePanel {
             // Append new content
             this.#overview.appendChild(content);
         }
-
-        // unsaved
-        /*
-        const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
-        unsavedEntries.forEach(el => {
-            toggleEditMode(renderer, el, true);
-        });
-        */
-
     }
 
     _createButton(label) {
