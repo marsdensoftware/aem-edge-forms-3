@@ -70,27 +70,18 @@ main .form form .panel-repeatable-panel {
         }
     }
 
-    [data-repeatable].saved {
+    [data-repeatable] {
         display: none;
-    }
 
-    .btn-save,
-    .btn-cancel {
-        display: none;
-    }
+        .button-bar {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-    [data-repeatable] .button-bar {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    [data-repeatable].current {
-        display: block;
-
-        .btn-save,
-        .btn-cancel {
+        &.current {
             display: block;
         }
     }
+
 }
