@@ -310,18 +310,13 @@ export class RepeatablePanel {
 
         if (savedEntries.length > 0) {
             const content = this.#overview.firstChild;
+            
+            // Clear content
+            content.innerHTML = '';
 
             savedEntries.forEach((entry) => {
                 content.append(this._renderEntry(entry));
             });
-
-            // Clear without repaint
-            while (this.#overview.firstChild) {
-                this.#overview.removeChild(this.#overview.firstChild);
-            }
-
-            // Append new content
-            this.#overview.appendChild(content);
         }
     }
 
