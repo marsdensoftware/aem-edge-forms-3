@@ -36,9 +36,12 @@ export class RepeatablePanel {
             const removed = event.detail.item.el;
             // At this point the element is no longer in the dom
             const id = removed.dataset.id;
-            // Find matching overview entry and remove
-            this._repeatablePanel.querySelector(`repeatable-entry[data-id="${id}"]`)?.remove();
-            this._renderOverview();
+            const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
+            if (repeatableEntry) {
+                // Find matching overview entry and remove
+                repeatableEntry.remove();
+                this._renderOverview();
+            }
         });
     }
 
