@@ -254,6 +254,8 @@ export class RepeatablePanel {
                 result.remove();
                 // Clear changes
                 this.#clearChanges(entry);
+                // Remove saved flag
+                entry.classList.remove('saved');
                 this._renderOverview();
             }
             else {
@@ -380,7 +382,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
                         super._toggleWizardButtons(true);
-                        
+
                         // TODO Clear all edits?
 
                         // prevent validation
