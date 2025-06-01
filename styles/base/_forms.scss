@@ -141,28 +141,32 @@ textarea {
     }
   }
 }
+
 /********************
  FORM ERROR MESSAGE
 ********************/
 
 main .form form .field-wrapper.field-invalid .field-description {
   position: relative;
-  padding-left: 28px;
+  padding-left: 24px; // Adjusted for 16px icon
   margin-top: $spacing-200;
-  color: $color-feedback-red;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
+  color: $text-dark;
   font-family: $font-family;
+  font-size: $size-font-body-small;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6; // 160%
 
   &::before {
     content: '';
     position: absolute;
-    top: 2px;
+    top: 3px; /* Adjusted for vertical alignment */
     left: 0;
-    width: 20px;
-    height: 20px;
-    background: $color-feedback-red url("data:image/svg+xml,%3Csvg width='41' height='40' viewBox='0 0 41 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20.5' cy='20' r='20' fill='%23D7373F'/%3E%3Cpath d='M20.5 27C21.6046 27 22.5 26.1046 22.5 25C22.5 23.8954 21.6046 23 20.5 23C19.3954 23 18.5 23.8954 18.5 25C18.5 26.1046 19.3954 27 20.5 27Z' fill='white'/%3E%3Cpath d='M20.5 21C21.0523 21 21.5 20.5523 21.5 20V13C21.5 12.4477 21.0523 12 20.5 12C19.9477 12 19.5 12.4477 19.5 13V20C19.5 20.5523 19.9477 21 20.5 21Z' fill='white'/%3E%3C/svg%3E" ) no-repeat center / contain;
-    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E" );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 }
