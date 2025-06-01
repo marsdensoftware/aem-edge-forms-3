@@ -65,7 +65,10 @@ main .form form .panel-repeatable-panel {
     }
 
     &.editing {
-        .item-add {
+
+        .item-add,
+        .repeatable-entry__edit,
+        .repeatable-entry__delete {
             display: none !important;
         }
     }
