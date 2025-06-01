@@ -127,14 +127,7 @@ export class RepeatablePanel {
             // TODO implement cancel for now just hide
             this._toggleEditMode(entry, false);
 
-            if (this.#overview.querySelectorAll('repeatable-entry').length == 0) {
-                // Cancel on the last element --> trigger event
-                const event = new CustomEvent('last-cancelled', {
-                    detail: {},
-                    bubbles: false,
-                });
-                this._repeatablePanel.dispatchEvent(event);
-            }
+            this._renderOverview();
             /*
             if (!entry.classList.contains('saved')) {
                 // Unsaved one
@@ -400,16 +393,6 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // prevent validation
             repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
         }
-
-        repeatablePanel.addEventListener('last-cancelled', () => {
-            // hide repeatable panel
-            repeatablePanel.style.display = 'none';
-            // Show wizard buttons
-            super._toggleWizardButtons(true);
-
-            // prevent validation
-            repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-        });
     }
 
     #isYes(field) {
