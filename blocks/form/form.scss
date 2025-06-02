@@ -89,7 +89,7 @@ form output {
 }
 
 form:not(.edit-mode) [data-visible='false'] {
-  display: none;
+  display: none !important;
 }
 
 // main .form-container {
