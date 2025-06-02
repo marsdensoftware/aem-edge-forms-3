@@ -58,8 +58,19 @@ main .form form .panel-repeatable-panel {
         display: none !important;
     }
 
-    &.editing {
+    .item-add i {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url('./images/add-icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 8px;
+        /* Space between icon and text */
+        vertical-align: middle;
+    }
 
+    &.editing {
         .item-add,
         .repeatable-entry__edit,
         .repeatable-entry__delete {
