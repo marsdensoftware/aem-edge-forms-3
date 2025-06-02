@@ -130,7 +130,7 @@ export class RepeatablePanel {
         cancelBtn.addEventListener('click', () => {
 
             this._toggleEditMode(entry, false);
-            this.#resetChanges();
+            this.#resetChanges(entry);
 
             if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
