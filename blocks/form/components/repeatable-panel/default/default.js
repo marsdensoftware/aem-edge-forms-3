@@ -128,17 +128,15 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
-            alert('Coming soon...');
-            /*
+
             this._toggleEditMode(entry, false);
-            this.#resetChanges();
+            this.#resetChanges(entry);
 
             if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
                 this.#triggerDeletion(entry);
             }
             this._renderOverview();
-            */
 
         });
 
@@ -147,7 +145,47 @@ export class RepeatablePanel {
     }
 
     #resetChanges(entry) {
-        alert('Todo: Reset changes');
+        const inputs = entry.querySelectorAll('input, select, textarea');
+
+        if (entry.classList.contains('saved')) {
+            // Save entry, reset to previous values from repeatable-entry
+            const id = entry.dataset.id;
+            const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
+            if (!repeatableEntry) {
+                // Clear fields
+                this.#clearFields(inputs);
+                return;
+            }
+
+            inputs.forEach(input => {
+                const el = repeatableEntry.querySelector(`[data-name="${input.name}"]`);
+                const value = el ? el.data.value : undefined;
+
+                switch (input.type) {
+                    case 'checkbox':
+                    case 'radio':
+                        input.checked = input.value === value;
+                        break;
+                    default:
+                        input.value = value;
+                        break;
+                }
+            });
+        }
+        else {
+            // Unsaved --> Clear all fields
+            this.#clearFields(inputs);
+        }
+    }
+
+    #clearFields(inputs) {
+        inputs.forEach(input => {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+                input.checked = false;
+            } else {
+                input.value = '';
+            }
+        });
     }
 
     _fieldToNameValues(entry) {
@@ -209,6 +247,7 @@ export class RepeatablePanel {
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
                 result.dataset.value = value;
+                result.dataset.name = name;
                 result.innerHTML = displayValue;
 
                 entries.push(result);
@@ -255,7 +294,7 @@ export class RepeatablePanel {
         deleteLink.classList.add('repeatable-entry__delete');
         deleteLink.textContent = 'Delete';
         deleteLink.href = '#';
-        result.append(deleteLink);
+        //result.append(deleteLink);
 
         // TODO Implement deletion
         deleteLink.addEventListener('click', (e) => {
@@ -265,7 +304,7 @@ export class RepeatablePanel {
                 // First one --> Remove from overview
                 result.remove();
                 // Clear changes
-                this.#clearChanges(entry);
+                this.#clearFields(entry);
                 // Remove saved flag
                 entry.classList.remove('saved');
                 this._renderOverview();
@@ -283,10 +322,6 @@ export class RepeatablePanel {
         });
 
         return result;
-    }
-
-    #clearChanges(entry) {
-        alert('Clearing changes');
     }
 
     #triggerDeletion(entry) {
