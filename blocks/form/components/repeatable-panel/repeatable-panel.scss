@@ -1,26 +1,13 @@
 @use '../../../../styles/settings' as *;
 
 main .form form .panel-repeatable-panel {
-    &__conditional {
-        display: none;
-    }
-
-    .field-wrapper {
-        color: $text-primary;
-        margin-top: 24px;
-        margin-bottom: 24px;
-    }
-
-    .field-label {
-        margin-bottom: 12px;
-    }
-
     .repeatable-entries {
         .repeatable-entry {
             padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
-            border: solid 1px $stroke-secondary;
-            position: relative;
+            border: solid $color-secondary 1px;
             border-radius: $border-radius-large;
+            position: relative;
+            margin-bottom: $spacing-600;
 
             &__edit {
                 position: absolute;
@@ -33,59 +20,76 @@ main .form form .panel-repeatable-panel {
                 display: block;
                 text-decoration: underline;
                 padding-left: 28px;
+                color: $text-primary;
+
+                &:visited {
+                    color: inherit;
+                }
+            }
+
+            &__delete {
+                position: absolute;
+                top: ($spacing-400*2 + 26px);
+                right: $spacing-400;
+                width: 56px;
+                height: 26px;
+                background-repeat: no-repeat;
+                display: block;
+                text-decoration: underline;
+                padding-left: 28px;
             }
         }
     }
 
-    .repeatable-entry__edit {
-        color: $text-primary;
-
-        &:visited {
-            color: inherit;
-        }
+    &__conditional {
+        display: none;
     }
 
-    .repeat-actions {
-        display: none;
+    .field-wrapper {
+        color: $text-primary;
+        margin-bottom: $spacing-500;
+    }
+
+    .field-label {
+        margin-bottom: $spacing-300;
     }
 
     .item-remove {
         display: none !important;
     }
 
-    .editing .item-add {
-        display: none !important;
+    .item-add i {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url('./images/add-icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 8px;
+        /* Space between icon and text */
+        vertical-align: middle;
     }
 
-    [data-repeatable].saved {
+    &.editing {
+        .item-add,
+        .repeatable-entry__edit,
+        .repeatable-entry__delete {
+            display: none !important;
+        }
+    }
+
+    [data-repeatable] {
         display: none;
-    }
 
-    [data-repeatable]:not(.saved) {
-        display: block;
-    }
+        .button-bar {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-    .btn-save,
-    .btn-cancel {
-        display: none;
-    }
-
-    [data-repeatable] .button-bar {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    [data-repeatable].current {
-
-        .btn-save,
-        .btn-cancel {
+        &.current {
             display: block;
         }
     }
 
-    .repeatable-entry {
-        border: solid $color-secondary 1px;
-        border-radius: $border-radius-large;
-    }
 }
