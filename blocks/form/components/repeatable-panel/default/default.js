@@ -381,15 +381,8 @@ export class RepeatablePanel {
  * Repeatable that is displayed when a condition is fullfiled, based on a radio group
  */
 export class ConditionalRepeatable extends RepeatablePanel {
-    // A field that yields yes,1,true or no,0,false as value
+    // A field with many options with one that yields no,0,false as value
     #conditionField;
-
-    static FIELD_NAMES = {
-        'COMPLETION_STATUS': 'completion-status',
-        'START_YEAR': 'start-year',
-        'FINISH_YEAR': 'finish-year',
-        'EDUCATION_SELECTION': 'education-selection'
-    };
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
@@ -407,7 +400,18 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (this.#isYes(radio)) {
+                    if (this.#isNo(radio)) {
+                        // hide repeatable panel
+                        repeatablePanel.style.display = 'none';
+                        // Show wizard buttons
+                        super._toggleWizardButtons(true);
+
+                        // TODO Clear all edits?
+
+                        // prevent validation
+                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+                    }
+                    else {
                         // show repeatable panel
                         repeatablePanel.style.display = 'block';
                         // enable validation
@@ -420,17 +424,6 @@ export class ConditionalRepeatable extends RepeatablePanel {
                             this._toggleEditMode(el, true);
                         }
                     }
-                    else {
-                        // hide repeatable panel
-                        repeatablePanel.style.display = 'none';
-                        // Show wizard buttons
-                        super._toggleWizardButtons(true);
-
-                        // TODO Clear all edits?
-
-                        // prevent validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-                    }
                 });
             });
             // prevent validation
@@ -438,12 +431,12 @@ export class ConditionalRepeatable extends RepeatablePanel {
         }
     }
 
-    #isYes(field) {
-        const value = field.value || '';
-        if (value === true || value === 1) return true;
+    #isNo(field) {
+        const value = field.value;
+        if (!value) return true;
         if (typeof value === 'string') {
             const normalized = value.trim().toLowerCase();
-            return normalized === 'yes' || normalized === 'true' || normalized === '1';
+            return normalized === 'no' || normalized === 'false' || normalized === '0';
         }
     }
 

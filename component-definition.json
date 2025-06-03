@@ -1070,6 +1070,63 @@
           }
         },
         {
+          "title": "Work Experience",
+          "id": "workexperience",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Work Experience",
+                  "fieldType": "panel",
+                  "fd:viewType": "workexperience",
+                  "name": "workexperience",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "enum": [
+                      "yes",
+                      "no"
+                    ],
+                    "enumNames": [
+                      "Yes – I’ve done some education or training",
+                      "No - I haven’t done any formal training yet"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "fieldType": "radio-group",
+                    "hideTitle": true,
+                    "jcr:title": "Work Experience Type Selection",
+                    "name": "workexperience-selection",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "withIcon": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "jcr:title": "Work Experience Options Content",
+                    "fieldType": "panel",
+                    "hideTitle": true,
+                    "name": "workexperience-options-content",
+                    "repeatAddButtonLabel": "Add another",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatable": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "intro": {
+                      "fieldType": "plain-text",
+                      "jcr:title": "Intro",
+                      "textIsRich": true,
+                      "value": "<h6>Add work experience</h6>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Fragment",
           "id": "fragment",
           "plugins": {
