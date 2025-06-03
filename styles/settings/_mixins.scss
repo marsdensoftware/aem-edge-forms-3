@@ -232,3 +232,205 @@
   margin-top: $space;
   margin-bottom: $space;
 }
+
+/********************
+   MIXINS FOR INPUT STATES
+********************/
+@mixin input-default {
+  border-radius: $border-radius-mid;
+  border: $stroke-input-stroke solid $stroke-tertiary;
+  background: $bg-light-primary;
+  color: $text-primary;
+  font-family: $font-family;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+@mixin input-hover-focus-active {
+  border: $stroke-input-stroke solid $stroke-accent;
+  background: $color-shade-blue-10;
+  outline: none;
+}
+
+@mixin input-disabled {
+  border: $stroke-input-stroke solid $color-grey-black-20;
+  background: $color-grey-black-05;
+  color: $text-secondary;
+  cursor: not-allowed;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+@mixin input-error {
+  border: $stroke-input-stroke solid $color-feedback-red;
+  background: $bg-light-primary;
+  color: $color-feedback-red;
+
+  &::placeholder {
+    color: $color-feedback-red;
+  }
+}
+
+/********************
+   DEFAULT LABEL + INPUT
+********************/
+label,
+input[type='text'],
+input[type='radio'],
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 0;
+}
+
+/********************
+   TEXT INPUT
+********************/
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+  }
+
+  input[type='text'] {
+    @include input-default;
+    padding: $spacing-400;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+/********************
+   TEXTAREA
+********************/
+textarea {
+  width: 100%;
+  display: block;
+  @include input-default;
+  padding: $spacing-400;
+  font-size: 20px;
+  line-height: 120%;
+  margin-bottom: $spacing-600;
+
+  &:focus-visible,
+  &:focus,
+  &:active,
+  &:hover {
+    @include input-hover-focus-active;
+  }
+
+  &:disabled {
+    @include input-disabled;
+  }
+}
+
+/********************
+   NUMBER INPUT
+********************/
+.number-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+  }
+
+  input[type='number'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    @include input-default;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+/********************
+   EMAIL INPUT
+********************/
+.email-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .field-label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+    font-family: $font-family;
+  }
+
+  input[type='email'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    @include input-default;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+/********************
+   ERROR STATE
+********************/
+.field-wrapper.field-invalid input,
+.field-wrapper.field-invalid textarea,
+.field-wrapper.field-invalid input[type='email'],
+.field-wrapper.field-invalid input[type='number'] {
+  @include input-error;
+}
