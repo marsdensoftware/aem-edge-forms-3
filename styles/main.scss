@@ -40,8 +40,11 @@
   padding-right: clamp(1rem, 5vw, 4rem);
 }
 
-// Testing only - can be deleted
-/*.typography-wrapper {background-color: aquamarine}
-.default-content-wrapper {background-color: #f8d7da}*/
 
-
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   // vertically center content
+  min-height: calc(100vh - 160px); // adjust to subtract header + footer height
+  padding: 2rem 1rem;         // optional spacing
+}
