@@ -21,7 +21,7 @@
 
 // TODO: can Block styles moved here too? Will it work in AEM? 🤷🏾
 // Settings contain variables, helpers, utilities that can be used by other files. colour, typography, mixin, etc.
-@use './settings';
+@use './settings' as *;
 @use './base';
 @use './forms';
 // Components
@@ -46,7 +46,8 @@ main {
   flex-direction: column;
   justify-content: center;   // vertically center content
   min-height: calc(100vh - 160px); // adjust to subtract header + footer height
-  padding: 2rem 1rem;         // optional spacing
+  padding: 2rem 1rem 3rem 1rem;
+  background-color: $bg-light-secondary;
 }
 
 main > * {

@@ -4,11 +4,14 @@
     Base Panel Styling
 *******************************/
 .panel-formcontextualhelp {
-  padding: 20px 14px;
-  background-color: $bg-secondary; // fallback grey panel
+  padding: $spacing-400 $spacing-300; // 20px 14px
+  background: $bg-light-primary; // usually $color-white
   display: block;
-  border-radius: $border-radius-mid;
-  margin-bottom: 32px;
+  border-radius: $border-radius-mid; // typically 8px
+  margin-bottom: $spacing-600; // 32px
+
+  // Elevation-1
+  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
 
   > legend {
     margin-bottom: 0;
@@ -22,12 +25,12 @@
   }
 
   .panel-formcontextualhelp__icon {
-    margin-right: 12px;
+    margin-right: $spacing-200; // 12px
     width: 24px;
     height: 24px;
   }
 
-  .panel-formcontextualhelp__title { // H5 override
+  .panel-formcontextualhelp__title {
     color: $color-primary;
     font-feature-settings: 'liga' off, 'clig' off;
     font-family: $font-family;
@@ -50,6 +53,7 @@
   }
 }
 
+
 /******************************
     Info Variant (shared)
 *******************************/
@@ -64,7 +68,7 @@
     &__link {
       display: flex;
       align-items: center;
-      margin-top: 8px;
+      margin-top: $spacing-200;
     }
 
     &__link-icon {
@@ -130,3 +134,5 @@
     filter: brightness(0) invert(1);
   }
 }
+
+
