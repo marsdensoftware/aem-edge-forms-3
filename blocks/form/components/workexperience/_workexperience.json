@@ -60,7 +60,7 @@
     ],
     "models": [
         {
-            "id": "education",
+            "id": "workexperience",
             "fields": [
                 {
                     "component": "container",
