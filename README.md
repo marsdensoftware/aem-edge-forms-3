@@ -50,6 +50,11 @@ When developing Block keep this thing in mind:
 - In Block's `.json` file, definitions id, models id and filters id needs to be the same name and lowercase. The exception of definitions title and definition plugins name
 - Block needs to be added to one or more `models` inside the models folder that will use the newly created Block
 
+### Form component development
+
+- Form component needs to be in it's own folder and live under `blocks/form/components` folder
+- New component needs to be registered in two places, in `blocks/form/_form.json` and `blocks/form/mappings.js`
+
 ### Updating content source
 
 1. Add a mountpoint in the `fstab.yaml`
