@@ -999,14 +999,16 @@
                   "fd:viewType": "formtags",
                   "minOccur": 1,
                   "panel1": {
-                    "jcr:title": "Item 1",
-                    "fieldType": "panel",
-                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": false,
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
                   },
                   "panel2": {
-                    "jcr:title": "Item 2",
-                    "fieldType": "panel",
-                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": false,
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
                   }
                 }
               }
