@@ -40,11 +40,16 @@
   padding-right: clamp(1rem, 5vw, 4rem);
 }
 
-
+// vertically center content within the Wizard
 main {
   display: flex;
   flex-direction: column;
   justify-content: center;   // vertically center content
   min-height: calc(100vh - 160px); // adjust to subtract header + footer height
   padding: 2rem 1rem;         // optional spacing
+}
+
+main > * {
+  margin-top: auto;
+  margin-bottom: auto;
 }
