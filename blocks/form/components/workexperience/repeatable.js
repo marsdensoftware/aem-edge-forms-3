@@ -4,6 +4,6 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
 
     constructor(repeatablePanel) {
-        super(repeatablePanel, 'education');
+        super(repeatablePanel, 'workexperience');
     }
 }

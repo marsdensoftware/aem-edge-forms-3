@@ -1,24 +1,5 @@
 @use '../../../../styles/settings' as *;
 
 main .form form {
-    .repeatable-entry {
-        &__course {
-            @include font-body-large;
-        }
-    }
-
-    .repeatable-entry__nc-search--box {
-        @include font-body-large;
-        color: $text-primary;
-        font-weight: 700;
-    }
-
-    .repeatable-entry__completion-status,
-    .repeatable-entry__start-year {
-        line-height: 160%;
-    }
-
-    .repeatable-entry__completion-status {
-        color: $text-secondary;
-    }
+    
 }
