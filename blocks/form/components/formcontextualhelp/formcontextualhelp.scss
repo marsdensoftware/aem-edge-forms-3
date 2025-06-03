@@ -5,10 +5,11 @@
 *******************************/
 .panel-formcontextualhelp {
   padding: $spacing-400 $spacing-300; // 20px 14px
-  background: $bg-light-primary; // usually $color-white
+  background: $bg-light-primary; 
   display: block;
-  border-radius: $border-radius-mid; // typically 8px
+  border-radius: $border-radius-mid;
   margin-bottom: $spacing-600; // 32px
+  width: 70%;
 
   // Elevation-1
   box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
@@ -34,7 +35,7 @@
     color: $color-primary;
     font-feature-settings: 'liga' off, 'clig' off;
     font-family: $font-family;
-    font-size: $size-font-h5;
+    font-size: $size-font-h6;
     font-style: normal;
     font-weight: $font-weight-bold;
     line-height: 125%;
@@ -52,7 +53,6 @@
     }
   }
 }
-
 
 /******************************
     Info Variant (shared)
@@ -131,8 +131,6 @@
   }
 
   .panel-formcontextualhelp__icon {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1); // Invert icon for dark background
   }
 }
-
-
