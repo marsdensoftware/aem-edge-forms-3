@@ -1,0 +1,45 @@
+{
+  "definitions": [
+    {
+      "title": "Tags",
+      "id": "formtags",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Tags",
+              "fieldType": "panel",
+              "fd:viewType": "formtags",
+              "minOccur": 1,
+              "panel1": {
+                "jcr:title": "Item 1",
+                "fieldType": "panel",
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+              },
+              "panel2": {
+                "jcr:title": "Item 2",
+                "fieldType": "panel",
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "formtags",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "...": "../../models/form-common/_basic-input-fields.json"
+        }
+      ]
+    }
+  ]
+}
