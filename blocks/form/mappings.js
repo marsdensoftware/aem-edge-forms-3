@@ -8,6 +8,7 @@ let customComponents = [
   'typeahead', 
   'repeatable-panel', 
   'formtabs', 
+  'formtags', 
   'education',
   'languagepanel']
   
