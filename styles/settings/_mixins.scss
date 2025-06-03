@@ -3,7 +3,6 @@
 @use '../settings/spacings' as *;
 @use '../settings/utils' as *;
 @use '../settings/borders' as *;
-@use '../settings/mixins' as *;
 
 /******************************
       Contextual Help Mixins
@@ -251,7 +250,8 @@
   border: $stroke-input-stroke solid $stroke-tertiary;
   background: $bg-light-primary;
   color: $text-primary;
-  font-family: $font-family;
+  /*font-family: $font-family;*/
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 
   &::placeholder {
     color: $text-secondary;
@@ -464,7 +464,8 @@ textarea {
     font-weight: 500;
     margin-bottom: $spacing-100;
     color: $text-secondary;
-    font-family: $font-family;
+    /*font-family: $font-family;*/
+    $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   }
 
   input[type='email'] {
