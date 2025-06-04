@@ -14,7 +14,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             // Check if the change happens on language field within this repeatable
             const target = event.target;
             if (this._repeatablePanel.contains(target)) {
-                const proficiency = target.closest('fieldset').querySelector(`[name="${proficiency}"]`);
+                const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
                 if (proficiency) {
                     proficiency.display = 'block';
                 }
@@ -26,7 +26,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             // Check if the change happens on language field within this repeatable
             const target = event.target;
             if (this._repeatablePanel.contains(target)) {
-                const proficiency = target.closest('fieldset').querySelector(`[name="${proficiency}"]`);
+                const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
                 if (proficiency) {
                     proficiency.display = 'none';
                 }
