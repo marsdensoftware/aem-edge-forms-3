@@ -1,26 +1,9 @@
 {
     "definitions": [
-        {
-            "title": "Language Typeahead",
-            "id": "language",
-            "plugins": {
-                "xwalk": {
-                    "page": {
-                        "resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "template": {
-                            "jcr:title": "Language",
-                            "fieldType": "text-input",
-                            "fd:viewType": "typeahead",
-                            "datasource": "languages"
-                        }
-                    }
-                }
-            }
-        }
     ],
     "models": [
         {
-            "id": "language",
+            "id": "typeahead",
             "fields": [
                 {
                     "component": "container",
