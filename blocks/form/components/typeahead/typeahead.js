@@ -52,7 +52,7 @@ document.addEventListener('change', (event) => {
             });
             searchInput.dispatchEvent(event);
 
-            e.preventDefault();
+            event.preventDefault();
         }
         else {
             // Mark as valid
