@@ -1,139 +1,115 @@
-class Typeahead {
-    static datasources = {
-        courses: [
-            "Marketing management",
-            "Financial management",
-            "Financial statements",
-            "Business process modelling",
-            "Company policies",
-            "Develop company strategies",
-            "Plan medium to long term objectives",
-            "Define organisational standards",
-            "Assume responsibility for the management of a business",
-            "Build trust"
-        ],
-        languages: ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew']
-    };
+function addSuggestionDiv() {
+    const el = document.createElement('div');
+    el.classList.add('suggestions');
 
-    constructor(element, datasourceKey) {
-        this.element = element;
-        this.input = this.element.querySelector('input[type="text"]');
-        this.suggestionsDiv = this._createSuggestionsDiv();
-        this.datasource = Typeahead.datasources[datasourceKey] || [];
+    return el;
+}
+const courses = [
+    "Marketing management",
+    "Financial management",
+    "Financial statements",
+    "Business process modelling",
+    "Company policies",
+    "Develop company strategies",
+    "Plan medium to long term objectives",
+    "Define organisational standards",
+    "Assume responsibility for the management of a business",
+    "Build trust"
+];
+const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 
-        this._init();
-    }
-
-    _init() {
-        this.element.classList.add('typeahead', 'text-wrapper__icon-search');
-        this.element.data.datasource = this.datasource;
-        this.element.appendChild(this.suggestionsDiv);
-        this._bindEvents();
-    }
-
-    _createSuggestionsDiv() {
-        const div = document.createElement('div');
-        div.classList.add('suggestions');
-        return div;
-    }
-
-    _bindEvents() {
-        this.input.addEventListener('input', () => this._onInput());
-        this.input.addEventListener('change', () => this._onChange());
-
-        document.addEventListener('click', (e) => {
-            if (!this.element.contains(e.target)) {
-                this._clearSuggestions();
-            }
-        });
-    }
-
-    _onInput() {
-        const query = this.input.value.trim().toLowerCase();
-
-        if (query.length < 4) {
-            this._clearSuggestions();
-            return;
-        }
-
-        const matches = this.datasource.filter(item =>
-            item.toLowerCase().includes(query)
-        );
-
-        this._renderSuggestions(matches);
-    }
-
-    _onChange() {
-        const value = this.input.value;
-        const isValid = this.datasource.includes(value);
-
-        const event = new CustomEvent(`typeahead:${isValid ? 'valid' : 'invalid'}`, {
-            bubbles: true
-        });
-        this.input.dispatchEvent(event);
-    }
-
-    _renderSuggestions(matches) {
-        this.suggestionsDiv.innerHTML = '';
-
-        if (matches.length === 0) {
-            this._clearSuggestions();
-            return;
-        }
-
-        matches.forEach(item => {
-            const div = document.createElement('div');
-            div.classList.add('suggestion');
-            div.textContent = item;
-            div.addEventListener('click', () => this._selectSuggestion(item));
-            this.suggestionsDiv.appendChild(div);
-        });
-
-        this.suggestionsDiv.style.display = 'block';
-    }
-
-    _selectSuggestion(item) {
-        this.input.value = item;
-        this._clearSuggestions();
-        this.input.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-
-    _clearSuggestions() {
-        this.suggestionsDiv.innerHTML = '';
-        this.suggestionsDiv.style.display = 'none';
-    }
-
-    static autoInit(el) {
-        const datasource = el.dataset.datasource;
-        new Typeahead(el, datasource);
-    }
-
-    // MutationObserver for dynamic insertion
-    static observeMutations() {
-        const observer = new MutationObserver(mutations => {
-            for (const { addedNodes } of mutations) {
-                for (const node of addedNodes) {
-                    if (!(node instanceof HTMLElement)) continue;
-                    if (node.matches?.('.typeahead')) {
-                        Typeahead.autoInit(node);
-                    }
-                }
-            }
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    }
+const datasources = {
+    'courses': courses,
+    'languages': languages
 }
 
-// Enable dynamic support
-Typeahead.observeMutations();
+// Optional: Close suggestions when clicking outside
+document.addEventListener('click', (e) => {
+    if (window.searchInput && !window.searchInput.contains(e.target)) {
+        window.suggestionsDiv.innerHTML = '';
+        window.suggestionsDiv.style.display = 'none';
+    }
+});
 
+document.addEventListener('change', (event) => {
+    const element = event.target.closest('.typeahead');
+    if (element) {
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+        const searchInput = element.querySelector('input[type="text"]');
+        const value = searchInput.value;
 
-// Example usage:
-export default function decorate(element, field) {
-    const datasourceKey = field.properties.datasource;
-    return new Typeahead(element, datasourceKey);
+        if (!entries.includes(value)) {
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:invalid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+
+            event.preventDefault();
+        }
+        else {
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:valid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+        }
+    }
+});
+
+document.addEventListener('input', (event) => {
+    const element = event.target.closest('.typeahead');
+    if (element) {
+        const searchInput = element.querySelector('input[type="text"]');
+        window.searchInput = searchInput;
+        const query = searchInput.value.toLowerCase();
+
+        // Minimum 4 chars
+        if (query.length < 4) {
+            return;
+        }
+
+        const suggestionsDiv = element.querySelector('.suggestions');
+        window.suggestionsDiv = suggestionsDiv;
+        suggestionsDiv.innerHTML = "";
+
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+
+        const filtered = entries.filter(entry => entry.toLowerCase().includes(query));
+
+        filtered.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("suggestion");
+            div.textContent = item;
+            div.addEventListener('click', () => {
+                searchInput.value = item;
+                suggestionsDiv.innerHTML = '';
+                suggestionsDiv.style.display = 'none';
+                const event = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(event);
+            });
+            suggestionsDiv.appendChild(div);
+        });
+
+        if (filtered.length > 0) {
+            suggestionsDiv.style.display = 'block';
+        }
+    }
+});
+
+export default function decorate(element, field, container) {
+    const datasource = field.properties.datasource;
+
+    element.classList.add('typeahead', 'text-wrapper__icon-search');
+    element.dataset.datasource = datasource;
+
+    // Add suggestion div
+    const suggestionsDiv = addSuggestionDiv();
+    element.append(suggestionsDiv);
+
+    return element;
 }
