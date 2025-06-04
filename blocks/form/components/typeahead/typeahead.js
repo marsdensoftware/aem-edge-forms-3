@@ -16,8 +16,6 @@ class Typeahead {
     };
 
     constructor(element, datasourceKey) {
-        if (Typeahead.initializedElements.has(element)) return;
-
         this.element = element;
         this.input = this.element.querySelector('input[type="text"]');
         this.suggestionsDiv = this._createSuggestionsDiv();
