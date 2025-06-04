@@ -16,7 +16,7 @@ const courses = [
     "Assume responsibility for the management of a business",
     "Build trust"
 ];
-const languages = ['Te Reo', 'French', 'German', 'Portuguese'];
+const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 
 const datasources = {
     'courses': courses,
@@ -28,6 +28,35 @@ document.addEventListener('click', (e) => {
     if (window.searchInput && !window.searchInput.contains(e.target)) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
+    }
+});
+
+document.addEventListener('change', (event) => {
+    const element = event.target.closest('.typeahead');
+    if (element) {
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+        const searchInput = element.querySelector('input[type="text"]');
+        const value = searchInput.value;
+
+        if (!entries.includes(value)) {
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:invalid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+
+            event.preventDefault();
+        }
+        else {
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:valid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+        }
     }
 });
 
@@ -56,10 +85,12 @@ document.addEventListener('input', (event) => {
             const div = document.createElement("div");
             div.classList.add("suggestion");
             div.textContent = item;
-            div.addEventListener("click", () => {
+            div.addEventListener('click', () => {
                 searchInput.value = item;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
+                const event = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(event);
             });
             suggestionsDiv.appendChild(div);
         });
@@ -82,3 +113,4 @@ export default function decorate(element, field, container) {
 
     return element;
 }
+
