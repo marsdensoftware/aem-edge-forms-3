@@ -1,16 +1,15 @@
 @use '../../../../styles/settings' as *;
 @use '../../../../styles/settings/breakpoints' as *;
 
-
 /******************************
     Base Panel Styling
 *******************************/
 .panel-formcontextualhelp {
-  padding: $spacing-400 $spacing-300; // 20px 14px
+  padding: $spacing-400 $spacing-300;
   background: $bg-light-primary; // usually $color-white
   display: block;
-  border-radius: $border-radius-mid; // typically 8px
-  margin-bottom: $spacing-600; // 32px
+  border-radius: $border-radius-mid;
+  margin-bottom: $spacing-600;
 
   // Elevation-1
   box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
@@ -37,7 +36,7 @@
   }
 
   .panel-formcontextualhelp__icon {
-    margin-right: $spacing-200; // 12px
+    margin-right: $spacing-200;
     width: 24px;
     height: 24px;
   }
@@ -61,6 +60,12 @@
       &:last-child {
         margin-bottom: 0;
       }
+    }
+  }
+
+  &--info {
+    .panel-formcontextualhelp__icon {
+      content: url('info-icon.png');
     }
   }
 }
