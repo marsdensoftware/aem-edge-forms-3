@@ -114,8 +114,8 @@ class Typeahead {
             for (const { addedNodes } of mutations) {
                 for (const node of addedNodes) {
                     if (!(node instanceof HTMLElement)) continue;
-                    if (node.matches?.('.typeahead')) {
-                        Typeahead.autoInit(node);
+                    if (node.querySelector('.typeahead')) {
+                        Typeahead.autoInit(node.querySelector('.typeahead'));
                     }
                 }
             }
