@@ -14,7 +14,10 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             // Check if the change happens on language field within this repeatable
             const target = event.target;
             if (this._repeatablePanel.contains(target)) {
-                target.closest('fieldset').querySelector(`[name="${proficiency}"]`)?.display = 'block';
+                const proficiency = target.closest('fieldset').querySelector(`[name="${proficiency}"]`);
+                if (proficiency) {
+                    proficiency?.display = 'block';
+                }
             }
         });
 
@@ -23,7 +26,10 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             // Check if the change happens on language field within this repeatable
             const target = event.target;
             if (this._repeatablePanel.contains(target)) {
-                target.closest('fieldset').querySelector(`[name="${proficiency}"]`)?.display = 'none';
+                const proficiency = target.closest('fieldset').querySelector(`[name="${proficiency}"]`);
+                if (proficiency) {
+                    proficiency?.display = 'none';
+                }
             }
         });
     }
