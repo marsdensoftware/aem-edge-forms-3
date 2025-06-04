@@ -19,7 +19,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
         });
 
         // Register typeahead invalid listener
-        document.addEventListener('typeahead:valid', (event) => {
+        document.addEventListener('typeahead:invalid', (event) => {
             // Check if the change happens on language field within this repeatable
             const target = event.target;
             if (this._repeatablePanel.contains(target)) {

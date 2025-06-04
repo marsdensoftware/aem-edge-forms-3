@@ -39,30 +39,30 @@ document.addEventListener('change', (event) => {
         const searchInput = element.querySelector('input[type="text"]');
         const value = searchInput.value;
 
-        if (!entries.contains(value)) {
+        if (!entries.includes(value)) {
             // Mark as invalid
             // TODO Read from dialog field configuration for required
-            input.setCustomValidity('Invalid input'); // Mark as invalid with a blank space
-            input.reportValidity();       // This shows the message (but blank space)
+            searchInput.setCustomValidity('Invalid input'); // Mark as invalid with a blank space
+            searchInput.reportValidity();       // This shows the message (but blank space)
 
             // Dispatch custom event
             const event = new CustomEvent('typeahead:invalid', {
                 detail: {},
                 bubbles: true,
             });
-            input.dispatchEvent(event);
+            searchInput.dispatchEvent(event);
 
             e.preventDefault();
         }
         else {
             // Mark as valid
-            input.setCustomValidity('');
+            searchInput.setCustomValidity('');
             // Dispatch custom event
             const event = new CustomEvent('typeahead:valid', {
                 detail: {},
                 bubbles: true,
             });
-            input.dispatchEvent(event);
+            searchInput.dispatchEvent(event);
         }
     }
 });
@@ -96,6 +96,8 @@ document.addEventListener('input', (event) => {
                 searchInput.value = item;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
             });
             suggestionsDiv.appendChild(div);
         });
