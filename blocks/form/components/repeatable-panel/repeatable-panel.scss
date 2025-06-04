@@ -4,32 +4,44 @@ main .form form .panel-repeatable-panel {
     .repeatable-entries {
         .repeatable-entry {
             padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
-            border: solid $color-secondary 1px;
-            border-radius: $border-radius-large;
+            border-radius: 8px;
+
+            // Borders and background
+            border-top: 8px solid $color-shade-blue-40;
+            border-right: 2px solid $color-shade-blue-40;
+            border-bottom: 2px solid $color-shade-blue-40;
+            border-left: 2px solid $color-shade-blue-40;
+            background: $bg-light-primary;
+
+            // Shadow
+            box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
             position: relative;
             margin-bottom: $spacing-600;
 
-            &__edit {
-                position: absolute;
-                top: $spacing-400;
-                right: $spacing-400;
-                width: 56px;
-                height: 26px;
-                background-image: url(./images/edit-icon.png);
-                background-repeat: no-repeat;
-                display: block;
-                text-decoration: underline;
-                padding-left: 28px;
-                color: $text-primary;
+            &__language {
+                color: $color-primary-navy;
+                font-feature-settings: 'liga' off, 'clig' off;
+                font-family: $font-family;
+                font-size: $size-font-h6;
+                font-style: normal;
+                font-weight: $font-weight-bold;
+                line-height: 130%;
+                letter-spacing: $letter-spacing-default;
+            }
 
-                &:visited {
-                    color: inherit;
-                }
+            &__proficiency {
+                color: $text-primary;
+                font-family: $font-family;
+                font-size: $size-font-body-default;
+                font-style: normal;
+                font-weight: $font-weight-regular;
+                line-height: 160%;
+                letter-spacing: $letter-spacing-default;
             }
 
             &__delete {
                 position: absolute;
-                top: ($spacing-400*2 + 26px);
+                top: ($spacing-400 * 2 + 26px);
                 right: $spacing-400;
                 width: 56px;
                 height: 26px;
@@ -37,7 +49,49 @@ main .form form .panel-repeatable-panel {
                 display: block;
                 text-decoration: underline;
                 padding-left: 28px;
+
+                font-family: $font-family;
+                font-size: $size-font-body-default;
+                font-style: normal;
+                font-weight: $font-weight-medium;
+                line-height: 133%;
+                letter-spacing: $letter-spacing-default;
+                color: $text-accent;
+
+                &:hover,
+                &:focus,
+                &:visited {
+                    color: $text-dark;
+                }
             }
+        }
+    }
+
+    .repeatable-entry__edit {
+        position: absolute;
+        top: $spacing-400;
+        right: $spacing-400;
+        width: 56px;
+        height: 26px;
+        background-image: url('./images/edit-icon.png');
+        background-repeat: no-repeat;
+        display: block;
+        text-align: center;
+        padding-left: 28px;
+        text-decoration: underline;
+
+        font-family: $font-family;
+        font-size: $size-font-body-default;
+        font-style: normal;
+        font-weight: $font-weight-medium;
+        line-height: 133%;
+        letter-spacing: $letter-spacing-default;
+        color: $text-accent;
+
+        &:hover,
+        &:focus,
+        &:visited {
+            color: $text-dark;
         }
     }
 
@@ -66,7 +120,6 @@ main .form form .panel-repeatable-panel {
         background-size: contain;
         background-repeat: no-repeat;
         margin-right: 8px;
-        /* Space between icon and text */
         vertical-align: middle;
     }
 
@@ -91,5 +144,4 @@ main .form form .panel-repeatable-panel {
             display: block;
         }
     }
-
 }

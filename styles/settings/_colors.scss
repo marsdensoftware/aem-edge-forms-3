@@ -92,7 +92,7 @@ $color-primary-animated: linear-gradient(
       Semantic Use
 *************************/
 
-/* UI Text */
+// UI Text
 $text-accent: $color-primary;
 $text-dark: $color-primary-navy;
 $text-primary: $color-grey-black-80;
@@ -101,7 +101,7 @@ $text-white: $color-white;
 $text-error: $color-feedback-red;
 $text-success: $color-feedback-green;
 
-/* UI Background */
+// UI Background
 $bg-accent: $color-primary;
 $bg-dark: $color-primary-navy;
 $bg-primary: $color-white;
@@ -119,7 +119,7 @@ $bg-contextual-help-tertiary: $color-primary-dark-navy;
 // Token-based fallback for AEM CSS vars (if needed)
 $bg-light-secondary: var(--Background-Light-Secondary, #f5fafd); // RW
 
-/* UI Icons */
+// UI Icons
 $icon-accent: $color-primary;
 $icon-dark: $color-primary-navy;
 $icon-primary: $color-grey-black-80;
@@ -129,7 +129,7 @@ $icon-error: $color-feedback-red;
 $icon-success: $color-feedback-green;
 $icon-warning: $color-feedback-orange;
 
-/* UI Stroke */
+// UI Stroke
 $stroke-accent: $color-primary;
 $stroke-primary: $color-grey-black-80;
 $stroke-secondary: $color-grey-black-60;
@@ -142,5 +142,7 @@ $stroke-focus: $color-feedback-pink;
 $stroke-input-stroke: 2px;
 $stroke-hover-stroke: 2px;
 
-/* input field background colour */
-$bg-light-primary: $color-white; // white (#ffffff)
+// input field background colour
+$bg-light-primary: $color-white;
+$bg-light-secondary: $color-shade-blue-04;
+

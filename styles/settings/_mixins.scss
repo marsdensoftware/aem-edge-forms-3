@@ -7,6 +7,7 @@
 /******************************
       Contextual Help Mixins
 *******************************/
+
 @mixin panel-help-base($bg-color, $text-color, $link-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -150,6 +151,15 @@
   Contextual Help Colourways
 *******************************/
 
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
 .panel-formcontextualhelp--primary {
   @include panel-help-base($color-white, $text-primary, $text-accent);
 }
@@ -241,7 +251,8 @@
   border: $stroke-input-stroke solid $stroke-tertiary;
   background: $bg-light-primary;
   color: $text-primary;
-  font-family: $font-family;
+  /*font-family: $font-family;*/
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 
   &::placeholder {
     color: $text-secondary;
@@ -275,6 +286,16 @@
   }
 }
 
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have default form file in the base/forms
+
 /********************
    DEFAULT LABEL + INPUT
 ********************/
@@ -288,6 +309,18 @@ input[type='checkbox'] {
 fieldset {
   border: 0;
 }
+
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
 
 /********************
    TEXT INPUT
@@ -324,6 +357,17 @@ fieldset {
   }
 }
 
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
 /********************
    TEXTAREA
 ********************/
@@ -347,6 +391,17 @@ textarea {
     @include input-disabled;
   }
 }
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
 
 /********************
    NUMBER INPUT
@@ -386,6 +441,17 @@ textarea {
   }
 }
 
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
 /********************
    EMAIL INPUT
 ********************/
@@ -399,7 +465,8 @@ textarea {
     font-weight: 500;
     margin-bottom: $spacing-100;
     color: $text-secondary;
-    font-family: $font-family;
+    /*font-family: $font-family;*/
+    $font-family: 'Atkinson Hyperlegible Next', sans-serif;
   }
 
   input[type='email'] {
@@ -424,6 +491,17 @@ textarea {
     }
   }
 }
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
 
 /********************
    ERROR STATE
