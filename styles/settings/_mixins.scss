@@ -7,6 +7,7 @@
 /******************************
       Contextual Help Mixins
 *******************************/
+
 @mixin panel-help-base($bg-color, $text-color, $link-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -150,6 +151,15 @@
   Contextual Help Colourways
 *******************************/
 
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
 .panel-formcontextualhelp--primary {
   @include panel-help-base($color-white, $text-primary, $text-accent);
 }
@@ -231,4 +241,274 @@
 @mixin margin-y($space) {
   margin-top: $space;
   margin-bottom: $space;
+}
+
+/********************
+   MIXINS FOR INPUT STATES
+********************/
+@mixin input-default {
+  border-radius: $border-radius-mid;
+  border: $stroke-input-stroke solid $stroke-tertiary;
+  background: $bg-light-primary;
+  color: $text-primary;
+  /*font-family: $font-family;*/
+  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+@mixin input-hover-focus-active {
+  border: $stroke-input-stroke solid $stroke-accent;
+  background: $color-shade-blue-10;
+  outline: none;
+}
+
+@mixin input-disabled {
+  border: $stroke-input-stroke solid $color-grey-black-20;
+  background: $color-grey-black-05;
+  color: $text-secondary;
+  cursor: not-allowed;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+@mixin input-error {
+  border: $stroke-input-stroke solid $color-feedback-red;
+  background: $bg-light-primary;
+  color: $color-feedback-red;
+
+  &::placeholder {
+    color: $color-feedback-red;
+  }
+}
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have default form file in the base/forms
+
+/********************
+   DEFAULT LABEL + INPUT
+********************/
+label,
+input[type='text'],
+input[type='radio'],
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 0;
+}
+
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
+/********************
+   TEXT INPUT
+********************/
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+  }
+
+  input[type='text'] {
+    @include input-default;
+    padding: $spacing-400;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
+/********************
+   TEXTAREA
+********************/
+textarea {
+  width: 100%;
+  display: block;
+  @include input-default;
+  padding: $spacing-400;
+  font-size: 20px;
+  line-height: 120%;
+  margin-bottom: $spacing-600;
+
+  &:focus-visible,
+  &:focus,
+  &:active,
+  &:hover {
+    @include input-hover-focus-active;
+  }
+
+  &:disabled {
+    @include input-disabled;
+  }
+}
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
+/********************
+   NUMBER INPUT
+********************/
+.number-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+  }
+
+  input[type='number'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    @include input-default;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
+/********************
+   EMAIL INPUT
+********************/
+.email-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .field-label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    margin-bottom: $spacing-100;
+    color: $text-secondary;
+    /*font-family: $font-family;*/
+    $font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  }
+
+  input[type='email'] {
+    display: flex;
+    padding: $spacing-400;
+    align-items: center;
+    gap: $spacing-200;
+    @include input-default;
+    font-size: 20px;
+    line-height: 120%;
+    caret-color: $color-primary;
+
+    &:focus-visible,
+    &:focus,
+    &:active,
+    &:hover {
+      @include input-hover-focus-active;
+    }
+
+    &:disabled {
+      @include input-disabled;
+    }
+  }
+}
+
+
+// Mixin can not contain a class name ".something"
+// This file is included on all files that using the main settings
+// If you add a class in within any of the setting file
+// All file include the settings will get compile although nothing is changed from that file
+
+// Below class name get compiled everytime unnecessarily
+
+// We already have a text input file specifically in forms/_input.scss
+// Create mixin here but then imported the settings file to that file and use the mixins within that file
+
+/********************
+   ERROR STATE
+********************/
+.field-wrapper.field-invalid input,
+.field-wrapper.field-invalid textarea,
+.field-wrapper.field-invalid input[type='email'],
+.field-wrapper.field-invalid input[type='number'] {
+  @include input-error;
 }

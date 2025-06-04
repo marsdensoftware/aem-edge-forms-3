@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-main .form form {
+main .form form .panel-repeatable-panel {
     .repeatable-entries {
         .repeatable-entry {
             padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
@@ -20,6 +20,11 @@ main .form form {
                 display: block;
                 text-decoration: underline;
                 padding-left: 28px;
+                color: $text-primary;
+
+                &:visited {
+                    color: inherit;
+                }
             }
 
             &__delete {
@@ -36,32 +41,33 @@ main .form form {
         }
     }
 
-    .repeatable-entry__edit {
-        color: $text-primary;
-
-        &:visited {
-            color: inherit;
-        }
-    }
-}
-
-main .form form .panel-repeatable-panel {
     &__conditional {
         display: none;
     }
 
     .field-wrapper {
         color: $text-primary;
-        margin-top: 24px;
-        margin-bottom: 24px;
+        margin-bottom: $spacing-500;
     }
 
     .field-label {
-        margin-bottom: 12px;
+        margin-bottom: $spacing-300;
     }
 
     .item-remove {
         display: none !important;
+    }
+
+    .item-add i {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url('./images/add-icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 8px;
+        /* Space between icon and text */
+        vertical-align: middle;
     }
 
     &.editing {

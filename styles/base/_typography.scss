@@ -216,7 +216,7 @@ ul li {
 /* ------------------------------
    Form Heading Adjustments
 ------------------------------ */
-.wizard .panel-formwelcome .panel-formwelcome__item-content p h6 {
+.wizard .panel-formwelcome .panel-formwelcome__item-content p {
   margin: 0;
   padding-bottom: $spacing-200;
 }
@@ -234,7 +234,7 @@ ul li {
 
   h3 {
     margin: 0;
-    padding-bottom: $spacing-200;
+    padding-bottom: $spacing-600; // was 200 but updated from UI
   }
 
   h4 {

@@ -143,6 +143,19 @@ textarea {
 }
 
 /********************
+FORM required asterisk for radio and checkbox group
+********************/
+
+.radio-group-wrapper[data-required=true],
+.checkbox-group-wrapper[data-required=true] {
+    >legend.field-label::after {
+        content: "*";
+        color: var(--form-error-color);
+        padding-inline-start: 0.3125rem;
+    }
+}
+
+/********************
  FORM ERROR MESSAGE
 ********************/
 

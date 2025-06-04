@@ -2,11 +2,13 @@
 
 .radio-group--with-icon {
   gap: 0 16px;
+  padding-bottom: $spacing-600;
 
   .radio-group--with-icon__label {
     padding: $spacing-400;
-    border: 1px solid $stroke-tertiary;
-    border-radius: $border-radius-large;
+    border-radius: var(--Spacing-200, 8px);
+    border: var(--Stroke-weight-Input-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
+    background: var(--Background-Light-Primary, #FFF);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +20,6 @@
     display: block;
     background-size: contain;
     background-repeat: no-repeat;
-
   }
 
   .radio-group--with-icon--list-search-1 {
@@ -56,6 +57,7 @@
     }
   }
 }
+
 
 .radio-group-wrapper {
   &.horizontal {
