@@ -48,3 +48,28 @@
     }
   }
 }
+
+.checkbox-group-wrapper {
+  // HORIZONTAL
+  &.horizontal {
+    .checkbox-wrapper {
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+      label {
+        width: 100%;
+        border: 2px solid $stroke-secondary;
+        padding: 16px;
+        border-radius: $border-radius-mid;
+        position: relative;
+
+        &::before {
+          position: absolute;
+          right: 16px;
+          top: 16px;
+        }
+      }
+    }
+  }
+}
