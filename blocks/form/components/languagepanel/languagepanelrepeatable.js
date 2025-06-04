@@ -16,7 +16,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             if (this._repeatablePanel.contains(target)) {
                 const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
                 if (proficiency) {
-                    proficiency.display = 'block';
+                    proficiency.style.display = 'block';
                 }
             }
         });
@@ -28,7 +28,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
             if (this._repeatablePanel.contains(target)) {
                 const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
                 if (proficiency) {
-                    proficiency.display = 'none';
+                    proficiency.style.display = 'none';
                 }
             }
         });
