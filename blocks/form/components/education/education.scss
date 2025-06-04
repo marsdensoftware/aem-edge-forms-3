@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel__education {
+main .form form {
     .repeatable-entry {
         &__course {
             @include font-body-large;

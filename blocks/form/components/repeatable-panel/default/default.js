@@ -2,6 +2,7 @@ import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 
 export class RepeatablePanel {
+    #overview;
     constructor(repeatablePanel) {
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
@@ -10,16 +11,56 @@ export class RepeatablePanel {
         this._repeatablePanel.classList.add('panel-repeatable-panel');
 
         // create overview
-        const div = document.createElement('div');
-        div.classList.add('overview');
+        this.#overview = document.createElement('div');
+        this.#overview.classList.add('overview');
 
-        this._repeatablePanel.prepend(div);
+        const content = document.createElement('div');
+        content.classList.add('repeatable-entries');
+        this.#overview.append(content);
+
+        this._repeatablePanel.prepend(this.#overview);
 
         const form = this._repeatablePanel.closest('form');
 
         form.addEventListener('item:add', (event) => {
             const added = event.detail.item.el;
-            this._toggleEditMode(added, true);
+            // Check that added belongs to the current repeatable
+            if (this._repeatablePanel.contains(added)) {
+                // make unique
+                this._makeUnique(added);
+                this._toggleEditMode(added, true);
+            }
+        });
+
+        form.addEventListener('item:remove', (event) => {
+            const removed = event.detail.item.el;
+            // At this point the element is no longer in the dom
+            const id = removed.dataset.id;
+            const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
+            if (repeatableEntry) {
+                // Find matching overview entry and remove
+                repeatableEntry.remove();
+                this._renderOverview();
+            }
+        });
+    }
+
+    _makeUnique(el) {
+        // TODO NJ: Remove after bug fixed by Adobe
+        const index = new Date().getTime();//Array.from(el.parentNode.children).indexOf(el);
+        el.dataset.id = el.dataset.id + '-' + index;
+        // Update IDs and labels
+        const inputs = el.querySelectorAll('[data-id]');
+
+        inputs.forEach((input) => {
+            input.dataset.id = input.dataset.id + '-' + index;
+            if (input.querySelector('input')) {
+                input.querySelector('input').id = input.dataset.id;
+            }
+            if (input.querySelector('label')) {
+                input.querySelector('label').htmlFor = input.dataset.id;
+            }
+
         });
     }
 
@@ -53,6 +94,10 @@ export class RepeatablePanel {
         }
     }
 
+    #isFirstEntry(entry) {
+        return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
+    }
+
     _ensureButtonBar(entry) {
         let buttonBar = entry.querySelector('.button-bar');
         if (buttonBar) {
@@ -75,7 +120,7 @@ export class RepeatablePanel {
                 entry.classList.add('saved');
                 this._toggleEditMode(entry, false);
 
-                this._renderOverview();
+                this._entryModified(entry);
             }
         });
 
@@ -83,18 +128,64 @@ export class RepeatablePanel {
         cancelBtn.classList.add('btn-cancel', 'link');
 
         cancelBtn.addEventListener('click', () => {
-            // TODO: If new added one then remove. 
-            // TODO: If saved one then reset changes.
-            // if first one hide
-            if (entry.dataset.index == 0) {
-                this._toggleEditMode(entry, false);
-            }
 
+            this._toggleEditMode(entry, false);
+            this.#resetChanges(entry);
+
+            if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
+                // Unsaved and not first one --> Delete
+                this.#triggerDeletion(entry);
+            }
             this._renderOverview();
+
         });
 
         buttonBar.appendChild(saveBtn);
         buttonBar.appendChild(cancelBtn);
+    }
+
+    #resetChanges(entry) {
+        const inputs = entry.querySelectorAll('input, select, textarea');
+
+        if (entry.classList.contains('saved')) {
+            // Save entry, reset to previous values from repeatable-entry
+            const id = entry.dataset.id;
+            const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
+            if (!repeatableEntry) {
+                // Clear fields
+                this.#clearFields(inputs);
+                return;
+            }
+
+            inputs.forEach(input => {
+                const el = repeatableEntry.querySelector(`[data-name="${input.name}"]`);
+                const value = el ? el.data.value : undefined;
+
+                switch (input.type) {
+                    case 'checkbox':
+                    case 'radio':
+                        input.checked = input.value === value;
+                        break;
+                    default:
+                        input.value = value;
+                        break;
+                }
+            });
+        }
+        else {
+            // Unsaved --> Clear all fields
+            this.#clearFields(inputs);
+        }
+    }
+
+    #clearFields(inputs) {
+        inputs.forEach(input => {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+                input.checked = false;
+            } else {
+                input.value = '';
+            }
+        });
     }
 
     _fieldToNameValues(entry) {
@@ -156,6 +247,7 @@ export class RepeatablePanel {
                 const result = document.createElement('div');
                 result.classList.add(`repeatable-entry__${name}`);
                 result.dataset.value = value;
+                result.dataset.name = name;
                 result.innerHTML = displayValue;
 
                 entries.push(result);
@@ -190,7 +282,38 @@ export class RepeatablePanel {
         result.append(editLink);
 
         editLink.addEventListener('click', (e) => {
-            alert('Edit entry: ' + result.dataset.id);
+            alert('Coming soon...');
+            /*
+            this._toggleEditMode(entry, true);
+            */
+
+            e.preventDefault();
+        });
+
+        const deleteLink = document.createElement('a');
+        deleteLink.classList.add('repeatable-entry__delete');
+        deleteLink.textContent = 'Delete';
+        deleteLink.href = '#';
+        //result.append(deleteLink);
+
+        // TODO Implement deletion
+        deleteLink.addEventListener('click', (e) => {
+            alert('Coming soon...');
+            /*
+            if (this.#isFirstEntry(entry)) {
+                // First one --> Remove from overview
+                result.remove();
+                // Clear changes
+                this.#clearFields(entry);
+                // Remove saved flag
+                entry.classList.remove('saved');
+                this._renderOverview();
+            }
+            else {
+                this.#triggerDeletion(entry);
+            }
+            */
+
             e.preventDefault();
         });
 
@@ -201,34 +324,45 @@ export class RepeatablePanel {
         return result;
     }
 
+    #triggerDeletion(entry) {
+        // Trigger click on framework item remove button
+        entry?.querySelector('.item-remove')?.click();
+    }
+
     init() {
         this._renderOverview();
+    }
+
+    _entryModified(entry) {
+        // Find existing rendered entry
+        const dataId = entry.dataset.id;
+        const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
+
+        const content = this._renderEntry(entry);
+
+        if (!e) {
+            // Create
+            this.#overview.firstElementChild.append(content);
+        }
+        else {
+            // Update
+            e.replaceWith(content);
+        }
     }
 
     _renderOverview() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
-        const overview = this._repeatablePanel.querySelector('.overview');
-        // For now reset everything. Later implement a more efficient/targeted approach;
         if (savedEntries.length > 0) {
-            const content = document.createElement('div');
-            content.classList.add('repeatable-entries')
+            const content = this.#overview.firstChild;
+
+            // Clear content
+            content.innerHTML = '';
 
             savedEntries.forEach((entry) => {
                 content.append(this._renderEntry(entry));
             });
-
-            overview.replaceWith(content);
         }
-
-        // unsaved
-        /*
-        const unsavedEntries = panel.querySelectorAll('[data-repeatable]:not(.saved)');
-        unsavedEntries.forEach(el => {
-            toggleEditMode(renderer, el, true);
-        });
-        */
-
     }
 
     _createButton(label) {
@@ -247,7 +381,7 @@ export class RepeatablePanel {
  * Repeatable that is displayed when a condition is fullfiled, based on a radio group
  */
 export class ConditionalRepeatable extends RepeatablePanel {
-    // Radio group
+    // A field that yields yes,1,true or no,0,false as value
     #conditionField;
 
     static FIELD_NAMES = {
@@ -259,7 +393,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
-        
+
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
 
@@ -273,23 +407,26 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (radio.value == 'yes') {
+                    if (this.#isYes(radio)) {
                         // show repeatable panel
                         repeatablePanel.style.display = 'block';
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]')
-
                         // enable validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        // Edit first entry
-                        super._toggleEditMode(el, true);
+                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
 
+                        if (el) {
+                            // Edit first entry if any
+                            this._toggleEditMode(el, true);
+                        }
                     }
-                    if (radio.value == 'no') {
+                    else {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
                         super._toggleWizardButtons(true);
+
+                        // TODO Clear all edits?
 
                         // prevent validation
                         repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
@@ -298,6 +435,15 @@ export class ConditionalRepeatable extends RepeatablePanel {
             });
             // prevent validation
             repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+        }
+    }
+
+    #isYes(field) {
+        const value = field.value || '';
+        if (value === true || value === 1) return true;
+        if (typeof value === 'string') {
+            const normalized = value.trim().toLowerCase();
+            return normalized === 'yes' || normalized === 'true' || normalized === '1';
         }
     }
 

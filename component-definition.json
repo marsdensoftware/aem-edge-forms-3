@@ -500,23 +500,6 @@
           }
         },
         {
-          "title": "Course",
-          "id": "course",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/fd/components/form/textinput/v1/textinput",
-                "template": {
-                  "jcr:title": "Course, qualification or certification",
-                  "fieldType": "text-input",
-                  "fd:viewType": "typeahead",
-                  "datasource": "courses"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Education",
           "id": "education",
           "plugins": {
@@ -829,23 +812,6 @@
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Language",
-          "id": "language",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/fd/components/form/textinput/v1/textinput",
-                "template": {
-                  "jcr:title": "Language",
-                  "fieldType": "text-input",
-                  "fd:viewType": "typeahead",
-                  "datasource": "languages"
                 }
               }
             }
