@@ -5,7 +5,6 @@ node_modules/
 
 .project
 .settings/
-*.css
 .project
 .settings/*
 
@@ -29,3 +28,8 @@ assets/
 
 # map
 *.map
+
+# css
+
+# Build within pipeline
+/styles/main.css
