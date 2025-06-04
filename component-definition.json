@@ -739,6 +739,33 @@
           }
         },
         {
+          "title": "Tags",
+          "id": "formtags",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Tags",
+                  "fieldType": "panel",
+                  "fd:viewType": "formtags",
+                  "minOccur": 1,
+                  "panel1": {
+                    "jcr:title": "Tags title 1",
+                    "type": "h3",
+                    "sling:resourceType": "core/fd/components/form/title/v1/title"
+                  },
+                  "panel2": {
+                    "jcr:title": "Tags title 2",
+                    "type": "h3",
+                    "sling:resourceType": "core/fd/components/form/title/v1/title"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Welcome",
           "id": "formwelcome",
           "plugins": {
@@ -947,35 +974,6 @@
                   "jcr:title": "Rating",
                   "fieldType": "number-input",
                   "fd:viewType": "rating"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Tags",
-          "id": "formtags",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                "template": {
-                  "jcr:title": "Tags",
-                  "fieldType": "panel",
-                  "fd:viewType": "formtags",
-                  "minOccur": 1,
-                  "panel1": {
-                    "jcr:title": "Text",
-                    "fieldType": "plain-text",
-                    "textIsRich": false,
-                    "sling:resourceType": "core/fd/components/form/text/v1/text"
-                  },
-                  "panel2": {
-                    "jcr:title": "Text",
-                    "fieldType": "plain-text",
-                    "textIsRich": false,
-                    "sling:resourceType": "core/fd/components/form/text/v1/text"
-                  }
                 }
               }
             }

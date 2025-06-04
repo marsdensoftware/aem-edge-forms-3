@@ -13,16 +13,14 @@
               "fd:viewType": "formtags",
               "minOccur": 1,
               "panel1": {
-                "jcr:title": "Text",
-                "fieldType": "plain-text",
-                "textIsRich": false,
-                "sling:resourceType": "core/fd/components/form/text/v1/text"
+                "jcr:title": "Tags title 1",
+                "type": "h3",
+                "sling:resourceType": "core/fd/components/form/title/v1/title"
               },
               "panel2": {
-                "jcr:title": "Text",
-                "fieldType": "plain-text",
-                "textIsRich": false,
-                "sling:resourceType": "core/fd/components/form/text/v1/text"
+                "jcr:title": "Tags title 2",
+                "type": "h3",
+                "sling:resourceType": "core/fd/components/form/title/v1/title"
               }
             }
           }
