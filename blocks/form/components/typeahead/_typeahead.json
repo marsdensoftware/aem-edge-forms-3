@@ -1,26 +1,9 @@
 {
     "definitions": [
-        {
-            "title": "Course",
-            "id": "course",
-            "plugins": {
-                "xwalk": {
-                    "page": {
-                        "resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "template": {
-                            "jcr:title": "Course, qualification or certification",
-                            "fieldType": "text-input",
-                            "fd:viewType": "typeahead",
-                            "datasource": "courses"
-                        }
-                    }
-                }
-            }
-        }
     ],
     "models": [
         {
-            "id": "course",
+            "id": "typeahead",
             "fields": [
                 {
                     "component": "container",
