@@ -26,7 +26,7 @@ class Typeahead {
 
     _init() {
         this.element.classList.add('typeahead', 'text-wrapper__icon-search');
-        this.element.data.datasource = this.datasource;
+        this.element.dataset.datasource = this.datasource;
         this.element.appendChild(this.suggestionsDiv);
         this._bindEvents();
     }
