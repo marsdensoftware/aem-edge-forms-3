@@ -16,7 +16,7 @@ const courses = [
     "Assume responsibility for the management of a business",
     "Build trust"
 ];
-const languages = ['Te Reo', 'French', 'German', 'Portuguese'];
+const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 
 const datasources = {
     'courses': courses,
@@ -28,6 +28,42 @@ document.addEventListener('click', (e) => {
     if (window.searchInput && !window.searchInput.contains(e.target)) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
+    }
+});
+
+document.addEventListener('change', (event) => {
+    const element = event.target.closest('.typeahead');
+    if (element) {
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+        const searchInput = element.querySelector('input[type="text"]');
+        const value = searchInput.value;
+
+        if (!entries.contains(value)) {
+            // Mark as invalid
+            // TODO Read from dialog field configuration for required
+            input.setCustomValidity('Invalid input'); // Mark as invalid with a blank space
+            input.reportValidity();       // This shows the message (but blank space)
+
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:invalid', {
+                detail: {},
+                bubbles: true,
+            });
+            input.dispatchEvent(event);
+
+            e.preventDefault();
+        }
+        else {
+            // Mark as valid
+            input.setCustomValidity('');
+            // Dispatch custom event
+            const event = new CustomEvent('typeahead:valid', {
+                detail: {},
+                bubbles: true,
+            });
+            input.dispatchEvent(event);
+        }
     }
 });
 
@@ -56,7 +92,7 @@ document.addEventListener('input', (event) => {
             const div = document.createElement("div");
             div.classList.add("suggestion");
             div.textContent = item;
-            div.addEventListener("click", () => {
+            div.addEventListener('click', () => {
                 searchInput.value = item;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';

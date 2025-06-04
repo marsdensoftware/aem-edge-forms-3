@@ -1,3 +1,7 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel__languagepanel {}
+main .form form .panel-repeatable-panel__languagepanel {
+    [name='proficiency'] {
+        display: none;
+    }
+}
