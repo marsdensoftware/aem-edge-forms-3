@@ -97,7 +97,7 @@ document.addEventListener('input', (event) => {
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
                 const event = new Event('change', { bubbles: true });
-                input.dispatchEvent(event);
+                searchInput.dispatchEvent(event);
             });
             suggestionsDiv.appendChild(div);
         });
