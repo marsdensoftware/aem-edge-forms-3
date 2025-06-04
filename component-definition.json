@@ -500,7 +500,7 @@
           }
         },
         {
-          "title": "Course",
+          "title": "Course Typeahead",
           "id": "course",
           "plugins": {
             "xwalk": {
@@ -835,7 +835,7 @@
           }
         },
         {
-          "title": "Language",
+          "title": "Language Typeahead",
           "id": "language",
           "plugins": {
             "xwalk": {

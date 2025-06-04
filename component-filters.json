@@ -68,6 +68,8 @@
       "number-input",
       "panel",
       "password",
+      "language",
+      "course",
       "plain-text",
       "radio-group",
       "rating",

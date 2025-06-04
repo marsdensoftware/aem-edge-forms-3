@@ -1,7 +1,7 @@
 {
     "definitions": [
         {
-            "title": "Language",
+            "title": "Language Typeahead",
             "id": "language",
             "plugins": {
                 "xwalk": {
