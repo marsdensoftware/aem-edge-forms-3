@@ -40,11 +40,6 @@ document.addEventListener('change', (event) => {
         const value = searchInput.value;
 
         if (!entries.includes(value)) {
-            // Mark as invalid
-            // TODO Read from dialog field configuration for required
-            searchInput.setCustomValidity('Invalid input'); // Mark as invalid with a blank space
-            searchInput.reportValidity();       // This shows the message (but blank space)
-
             // Dispatch custom event
             const event = new CustomEvent('typeahead:invalid', {
                 detail: {},
@@ -55,8 +50,6 @@ document.addEventListener('change', (event) => {
             event.preventDefault();
         }
         else {
-            // Mark as valid
-            searchInput.setCustomValidity('');
             // Dispatch custom event
             const event = new CustomEvent('typeahead:valid', {
                 detail: {},
