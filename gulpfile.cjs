@@ -1,13 +1,13 @@
-const { series, src, dest, watch, task } = require('gulp');
-const dartSass = require('sass');
-const gulpSass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const pxtorem = require('postcss-pxtorem');
-const postcssMinify = require('@csstools/postcss-minify');
-const sourcemaps = require('gulp-sourcemaps'); //RW added
+const { series, src, dest, watch } = require('gulp')
+const dartSass = require('sass')
+const gulpSass = require('gulp-sass')
+const postcss = require('gulp-postcss')
+const autoprefixer = require('autoprefixer')
+const pxtorem = require('postcss-pxtorem')
+const postcssMinify = require('@csstools/postcss-minify')
+const sourcemaps = require('gulp-sourcemaps') // RW added
 
-const sass = gulpSass(dartSass);
+const sass = gulpSass(dartSass)
 
 const plugin = [
   autoprefixer({}),
@@ -22,15 +22,11 @@ const plugin = [
     exclude: /node_modules/i,
   }),
   postcssMinify(),
-];
+]
 
-const styleFolders = ['blocks/**/*.scss', 'styles/**/*.scss'];
-
-task('scss', function (){
-  return src(styleFolders) 
-    .pipe(sass().on('error', sass.logError))
-    .pipe(dest('./')); 
-});
+const styleFolder = 'styles/**/*.scss'
+const blocksStyleFolder = 'blocks/**/*.scss'
+const styleFolders = [blocksStyleFolder, styleFolder]
 
 const style = () =>
   src(styleFolders, { base: './' })
@@ -38,10 +34,20 @@ const style = () =>
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
     .pipe(sourcemaps.write('.')) // ✅ Write .map file next to .css
-    .pipe(dest('./'));
+    .pipe(dest('./'))
 
 const watching = () => {
-  watch(styleFolders, series(style));
-};
+  watch(styleFolders, series(style))
+}
 
-exports.default = watching;
+const build = (done) => {
+  src(styleFolder, { base: './' })
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss(plugin))
+    .pipe(dest('./'))
+
+  done()
+}
+
+exports.default = watching
+exports.build = series(build)
