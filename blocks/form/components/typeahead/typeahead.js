@@ -16,18 +16,20 @@ class Typeahead {
     };
 
     constructor(element, datasourceKey) {
+        if (Typeahead.initializedElements.has(element)) return;
+
         this.element = element;
-        this.datasource = Typeahead.datasources[datasourceKey] || [];
         this.input = this.element.querySelector('input[type="text"]');
         this.suggestionsDiv = this._createSuggestionsDiv();
+        this.datasource = Typeahead.datasources[datasourceKey] || [];
 
         this._init();
     }
 
     _init() {
         this.element.classList.add('typeahead', 'text-wrapper__icon-search');
+        this.element.data.datasource = this.datasource;
         this.element.appendChild(this.suggestionsDiv);
-
         this._bindEvents();
     }
 
@@ -67,11 +69,10 @@ class Typeahead {
         const value = this.input.value;
         const isValid = this.datasource.includes(value);
 
-        const validationEvent = new CustomEvent(`typeahead:${isValid ? 'valid' : 'invalid'}`, {
+        const event = new CustomEvent(`typeahead:${isValid ? 'valid' : 'invalid'}`, {
             bubbles: true
         });
-
-        this.input.dispatchEvent(validationEvent);
+        this.input.dispatchEvent(event);
     }
 
     _renderSuggestions(matches) {
@@ -103,7 +104,35 @@ class Typeahead {
         this.suggestionsDiv.innerHTML = '';
         this.suggestionsDiv.style.display = 'none';
     }
+
+    static autoInit(el) {
+        const datasource = el.dataset.datasource;
+        new Typeahead(el, datasource);
+    }
+
+    // MutationObserver for dynamic insertion
+    static observeMutations() {
+        const observer = new MutationObserver(mutations => {
+            for (const { addedNodes } of mutations) {
+                for (const node of addedNodes) {
+                    if (!(node instanceof HTMLElement)) continue;
+                    if (node.matches?.('.typeahead')) {
+                        Typeahead.autoInit(node);
+                    }
+                }
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
 }
+
+// Enable dynamic support
+Typeahead.observeMutations();
+
 
 // Example usage:
 export default function decorate(element, field) {
