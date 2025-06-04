@@ -32,4 +32,4 @@ assets/
 # css
 
 # Build within pipeline
-/styles/main.css
+#/styles/main.css
