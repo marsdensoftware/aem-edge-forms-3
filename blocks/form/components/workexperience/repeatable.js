@@ -35,7 +35,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
     _bindEvents(el) {
         // Register change on still-working field to show hide endofwork
-        const stillWorkingRadios = el.querySelectorAll(`[name="${WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING}"]`);
+        const stillWorkingRadios = el.querySelectorAll(`input[name="${WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING}"]`);
 
         stillWorkingRadios.forEach(radio => {
             radio.addEventListener('change', (event) => {
