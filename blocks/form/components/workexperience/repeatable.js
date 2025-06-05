@@ -1,5 +1,5 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
-import { isNo } from '../../utils.js'
+import { isNo } from '../utils.js'
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static FIELD_NAMES = {
