@@ -5,13 +5,42 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static FIELD_NAMES = {
         'TYPE_OF_WE': 'type-of-work-experience',
         'FIELDS_CONTAINER': 'fields-container',
-        'STILL_WORKING': 'still-working'
+        'START_OF_WORK_MONTH': 'startofwork-month',
+        'START_OF_WORK_YEAR': 'startofwork-year',
+        'END_OF_WORK_MONTH': 'endofwork-month',
+        'END_OF_WORK_YEAR': 'endofwork-year',
+        'STILL_WORKING': 'still-working',
+        'TYPE_OF_WORK_EXPERIENCE': 'type-of-work-experience',
+        'JOB_TITLE': 'title',
+        'EMPLOYER_NAME': 'employer'
     };
 
     constructor(repeatablePanel) {
         super(repeatablePanel, 'workexperience');
 
         this._bindEvents(repeatablePanel);
+    }
+
+    _fieldToNameValues(entry) {
+        const result = super._fieldToNameValues(entry);
+
+        // Customize rendering for completion-year, completion status
+        const stillWorking = result[WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING];
+        let workperiod = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].displayValue + ' ' + result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].displayValue;
+
+        if (stillWorking.value == '0') {
+            // No longer working
+            const endofwork = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].displayValue + ' ' + result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].displayValue;
+
+            workperiod += ` - ${endofwork}`;
+        }
+
+        const newResult = {};
+        newResult[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE] = result[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE];
+        newResult[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME] = result[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME];
+        newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+
+        return newResult;
     }
 
     _onItemAdded(entry) {
