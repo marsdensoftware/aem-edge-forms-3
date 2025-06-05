@@ -5,8 +5,11 @@ export default async function decorate(el) {
 
     onElementAdded(el).then((connectedEl) => {
         const repeatablePanel = connectedEl.querySelector('.repeat-wrapper');
-        const obj = new LanguagePanelRepeatable(repeatablePanel);
-        obj.init();
+
+        if (repeatablePanel) {
+            const obj = new LanguagePanelRepeatable(repeatablePanel);
+            obj.init();
+        }
     });
 
     return el;

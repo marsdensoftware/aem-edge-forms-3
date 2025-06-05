@@ -4,20 +4,21 @@
   .panel-formhero {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start; // Mobile: left-align block layout
+    text-align: left;        // Mobile: left-align text
 
     @include media('desktop') {
       flex-direction: row;
-      text-align: left;
+      align-items: center;   // Optional: vertical centering if needed
       justify-content: space-between;
+      text-align: left;
     }
   }
 
   .panel-formhero__picture {
     width: 100%;
     max-width: 160px;
-    margin-bottom: 32px;
+    margin-bottom: $spacing-600;
 
     @include media('desktop') {
       max-width: 240px;
@@ -26,16 +27,19 @@
 
   .panel-formhero__content {
     order: 1;
+    text-align: left; // Mobile: left-align text
 
     h2 {
       @include heading-level-1;
-      margin-bottom: $spacing-500;
       margin-top: 0;
+      margin-bottom: $spacing-500;
+      text-align: left; // Explicit
     }
 
     p {
       @include font-body-large;
       margin-bottom: 12px;
+      text-align: left; // Explicit
     }
 
     @include media('desktop') {

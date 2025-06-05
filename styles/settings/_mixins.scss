@@ -358,16 +358,6 @@ fieldset {
 }
 
 
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have a text input file specifically in forms/_input.scss
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
 /********************
    TEXTAREA
 ********************/
@@ -512,3 +502,28 @@ textarea {
 .field-wrapper.field-invalid input[type='number'] {
   @include input-error;
 }
+
+
+/*****************************
+   FORM INPUT LABELS, BUTTONS etc
+*****************************/
+
+@mixin font-label {
+  font-size: $size-font-label;
+  font-weight: $font-weight-medium;
+  line-height: 133%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-button-default {
+  font-size: $size-font-button-default;
+  font-weight: $font-weight-medium;
+  line-height: 133%;
+}
+
+@mixin font-error-message {
+  font-size: $size-font-error-message;
+  font-weight: $font-weight-regular;
+  line-height: 160%;
+}
+

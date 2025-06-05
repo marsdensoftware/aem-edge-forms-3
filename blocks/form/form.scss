@@ -226,6 +226,8 @@ main .form input[type='file'] {
 
 main .form textarea {
   min-height: 100px;
+  font-family: $font-family;
+  font-size: $size-font-body-default;
 }
 
 // main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
