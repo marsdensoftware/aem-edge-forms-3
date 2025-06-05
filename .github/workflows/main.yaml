@@ -11,5 +11,5 @@ jobs:
         with:
           node-version: 20
       - run: npm ci # Install dependencies
-      - run: npm run build:css # Build main.css from main.scss
+      #- run: npm run build:css # Build main.css from main.scss
       - run: npm run lint # Check code
