@@ -607,8 +607,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
@@ -1347,8 +1346,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
@@ -3092,8 +3090,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
