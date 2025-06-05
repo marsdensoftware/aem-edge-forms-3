@@ -33,22 +33,7 @@
           "collapsible": false,
           "fields": [
             {
-              "component": "text",
-              "name": "name",
-              "label": "Name",
-              "valueType": "string",
-              "required": true,
-              "valueFormat": "regexp",
-              "validation": {
-                "regExp": "^[^$].*",
-                "customErrorMsg": "Name cannot start with $"
-              }
-            },
-            {
-              "component": "text",
-              "name": "jcr:title",
-              "label": "Title",
-              "valueType": "string"
+              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
             },
             {
               "component": "select",
@@ -65,28 +50,18 @@
                   "value": "languages"
                 }
               ]
-            },
-            {
-              "component": "text",
-              "name": "placeholder",
-              "label": "Placeholder Text",
-              "valueType": "string"
             }
           ]
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
         },
         {
           "component": "container",
           "name": "validation",
           "label": "Validation",
           "collapsible": true,
-          "fields": [
-            {
-              "component": "checkbox",
-              "name": "required",
-              "label": "Required field",
-              "valueType": "boolean"
-            }
-          ]
+          "...": "../../models/form-common/_string-validation-fields.json"
         }
       ]
     }
