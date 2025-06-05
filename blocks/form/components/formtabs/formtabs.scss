@@ -21,6 +21,7 @@ main .form:not(.edit-mode) {
       margin: 0;
       display: flex;
       height: $spacing-700;
+      list-style: none;
     }
 
     > .navitems > li {
@@ -30,20 +31,39 @@ main .form:not(.edit-mode) {
       align-items: center;
       list-style: none;
       cursor: pointer;
+      border: 1px solid $stroke-tertiary;
+      background: $bg-primary;
+      border-radius: $border-radius-mid $border-radius-mid 0 0;
+      color: $text-secondary;
+      font-family: $font-family;
+      font-size: $size-font-label;
+      font-style: normal;
+      font-weight: $font-weight-medium;
+      line-height: 133%;
+      letter-spacing: $letter-spacing-default;
+      transition: all 0.2s ease;
+
+      &:not(:last-child) {
+        margin-right: $spacing-200;
+      }
     }
 
     > .navitems > li.navitem-current {
-      background-color: $color-grey-black-05;
-      border-top-right-radius: $border-radius-mid;
+      background: $color-gradient-blue;
+      border: 1px solid $color-shade-blue-25;
+      border-bottom: none;
       border-top-left-radius: $border-radius-mid;
+      border-top-right-radius: $border-radius-mid;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
     }
 
     > fieldset.formtab.formtab-current {
       display: block;
-      background-color: $color-grey-black-05;
-      border-top-right-radius: $border-radius-mid;
-      border-bottom-right-radius: $border-radius-mid;
-      border-bottom-left-radius: $border-radius-mid;
+      background: $color-shade-blue-10;
+      border: 1px solid $color-shade-blue-25;
+      border-top: none;
+      border-radius: 0 $border-radius-mid $border-radius-mid $border-radius-mid;
       padding: $spacing-500 $spacing-400;
     }
   }
@@ -54,3 +74,11 @@ main .form.edit-mode {
     display: none;
   }
 }
+
+/* Textarea styling */
+.multiline-wrapper textarea {
+  font-family: $font-family;
+}
+
+/* Typography token fallback */
+$size-font-label: var(--Typography-Sizes-Components-Label, 18px);
