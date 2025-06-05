@@ -18,7 +18,10 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     constructor(repeatablePanel) {
         super(repeatablePanel, 'workexperience');
 
-        this._bindEvents(repeatablePanel);
+        const entries = repeatablePanel.querySelectorAll('[data-repeatable]');
+        entries.forEach(entry => {
+            init(entry);
+        });
     }
 
     _fieldToNameValues(entry) {
@@ -43,7 +46,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         return newResult;
     }
 
-    _onItemAdded(entry) {
+    _init(entry) {
         const typeOfWorkExperience = entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WE}"]`);
 
         // Make type of work experience visible if not first entry
@@ -57,7 +60,17 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = true;
         });
 
+        // Disable/Hide endofwork to prevent validation
+        const endofwork = entry.querySelector('.field-endofwork');
+        const visible = false;
+        endofwork.disabled = !visible;
+        endofwork.dataset.visible = visible;
+
         this._bindEvents(entry);
+    }
+
+    _onItemAdded(entry) {
+        init(entry);
 
         super._onItemAdded(entry);
     }
@@ -70,8 +83,9 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             radio.addEventListener('change', (event) => {
                 // endofwork visibility
                 const endofwork = radio.closest(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).querySelector('.field-endofwork');
-
-                endofwork.dataset.visible = isNo(event.target);
+                const visible = isNo(event.target);
+                endofwork.dataset.visible = visible;
+                endofwork.disabled = !visible;
             });
         });
     }
