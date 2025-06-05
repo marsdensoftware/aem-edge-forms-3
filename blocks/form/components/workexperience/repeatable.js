@@ -40,7 +40,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         stillWorkingRadios.forEach(radio => {
             radio.addEventListener('change', (event) => {
                 // endofwork visibility
-                const endofwork = radio.closest(`.${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}`).querySelector('.field-endofwork');
+                const endofwork = radio.closest(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).querySelector('.field-endofwork');
 
                 endofwork.dataset.visible = isNo(event.target);
             });
