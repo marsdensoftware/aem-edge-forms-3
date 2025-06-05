@@ -18,22 +18,26 @@ export default function decorate(panel, model) {
         const num = Number(str);
         return isNaN(num) ? defaultValue : num;
     }
-    
+
+    function plusMinus(n) {
+        return n && (n.charAt(0) == '+' || '' + yearMinS.charAt(0) == '-');
+    }
+
     const currentYear = new Date().getFullYear();
     const defaultYearMin = currentYear - 45;
     const defaultYearMax = currentYear;
-    
-    let yearMax = parseNumber(model.properties.yearMax,defaultYearMax);
-    let yearMin = parseNumber(model.properties.yearMin,defaultYearMin);
-    
+
+    let yearMax = parseNumber(model.properties.yearMax, defaultYearMax);
+    let yearMin = parseNumber(model.properties.yearMin, defaultYearMin);
+
     let yearMinS = model.properties.yearMin;
     let yearMaxS = model.properties.yearMax;
 
-    if (yearMinS.charAt(0) == '+' || '' + yearMinS.charAt(0) == '-') {
+    if (plusMinus(yearMinS)) {
         yearMin = currentYear + parseInt(yearMinS)
     }
 
-    if (yearMaxS.charAt(0) == '+' || yearMaxS.charAt(0) == '-') {
+    if (plusMinus(yearMaxS)) {
         yearMax = currentYear + parseInt(yearMaxS)
     }
 
