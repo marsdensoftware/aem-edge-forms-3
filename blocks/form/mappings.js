@@ -1,16 +1,17 @@
 import { loadCSS } from '../../scripts/aem.js'
 
 let customComponents = [
-  'radio-group', 
-  'formhero', 
-  'formwelcome', 
-  'formcontextualhelp', 
-  'typeahead', 
-  'repeatable-panel', 
-  'formtabs', 
+  'radio-group',
+  'formhero',
+  'formwelcome',
+  'formcontextualhelp',
+  'typeahead',
+  'repeatable-panel',
+  'formtabs',
   'education',
-  'languagepanel']
-  
+  'languagepanel',
+  'search-box']
+
 const OOTBComponentDecorators = [
   'file-input',
   'wizard',
