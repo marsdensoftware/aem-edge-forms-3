@@ -5183,42 +5183,6 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
-          },
-          {
-            "component": "select",
-            "name": "datasource",
-            "label": "Data Source",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Courses",
-                "value": "courses"
-              },
-              {
-                "name": "Languages",
-                "value": "languages"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "name": "placeholder",
-            "label": "Placeholder Text",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "container",
-        "name": "validation",
-        "label": "Validation",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "checkbox",
-            "name": "required",
-            "label": "Required field",
-            "valueType": "boolean"
           }
         ]
       }
