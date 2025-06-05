@@ -10,7 +10,8 @@ let customComponents = [
   'formtabs', 
   'education',
   'languagepanel',
-  'workexperience']
+  'workexperience',
+  'datepicker']
   
 const OOTBComponentDecorators = [
   'file-input',

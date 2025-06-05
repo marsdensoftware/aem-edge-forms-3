@@ -500,6 +500,43 @@
           }
         },
         {
+          "title": "Date Picker",
+          "id": "datepicker",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Date Picker",
+                  "fieldType": "panel",
+                  "fd:viewType": "datepicker",
+                  "name": "datepicker",
+                  "month": {
+                    "name": "month",
+                    "type": "string",
+                    "placeholder": "Month",
+                    "enumNames": [],
+                    "fieldType": "drop-down",
+                    "enum": [],
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "required": true
+                  },
+                  "year": {
+                    "required": true,
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "fieldType": "drop-down",
+                    "enumNames": [],
+                    "placeholder": "Year",
+                    "enum": [],
+                    "type": "string",
+                    "name": "year"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Education",
           "id": "education",
           "plugins": {

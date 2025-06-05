@@ -1,0 +1,69 @@
+{
+    "definitions": [
+        {
+            "title": "Date Picker",
+            "id": "datepicker",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "jcr:title": "Date Picker",
+                            "fieldType": "panel",
+                            "fd:viewType": "datepicker",
+                            "name": "datepicker",
+                            "month": {
+                                "name": "month",
+                                "type": "string",
+                                "placeholder": "Month",
+                                "enumNames": [],
+                                "fieldType": "drop-down",
+                                "enum": [],
+                                "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                "required": true
+                            },
+                            "year": {
+                                "required": true,
+                                "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                "fieldType": "drop-down",
+                                "enumNames": [],
+                                "placeholder": "Year",
+                                "enum": [],
+                                "type": "string",
+                                "name": "year"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "datepicker",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "...": "../../models/form-common/_basic-input-fields.json"
+                },
+                {
+                    "component": "string",
+                    "name": "yearMin",
+                    "label": "Year lower boundary",
+                    "valueType": "string",
+                    "description": "Lower boundary for year. Could be 1980, or -+45. Default is 20y in the past."
+                },
+                {
+                    "component": "string",
+                    "name": "yearMax",
+                    "label": "Year upper boundary",
+                    "valueType": "string",
+                    "description": "Upper boundary for year. Could be 2030, or -+45. Default is current year."
+                }
+            ]
+        }
+    ]
+}
