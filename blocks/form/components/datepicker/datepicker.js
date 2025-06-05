@@ -23,8 +23,28 @@ export default function decorate(panel, model) {
         return n && (n.charAt(0) == '+' || '' + yearMinS.charAt(0) == '-');
     }
 
+    function setDDRequired(dd, required) {
+        dd.parentElement.dataset.required = required;
+        if (required) {
+            dd.setAttribute('required', 'required');
+        }
+        else {
+            dd.removeAttribute('required');
+        }
+    }
+
+    panel.querySelector('legend')?.classList.add('p-large');
+
+    const yearDD = panel.querySelector('[name="year"]');
+    const monthDD = panel.querySelector('[name="month"]');
+    const required = model.properties.fieldRequired;
+
+    panel.dataset.required = required;
+    setDDRequired(yearDD, required);
+    setDDRequired(monthDD, required);
+
     const currentYear = new Date().getFullYear();
-    const defaultYearMin = currentYear - 45;
+    const defaultYearMin = currentYear - 20;
     const defaultYearMax = currentYear;
 
     let yearMax = parseNumber(model.properties.yearMax, defaultYearMax);
@@ -42,7 +62,7 @@ export default function decorate(panel, model) {
     }
 
     // Populate year if empty
-    const yearDD = panel.querySelector('[name="year"]');
+
     let options = yearDD.querySelectorAll('option:not([disabled])');
     if (options.length === 0) {
         for (let year = yearMin; year <= yearMax; year++) {
@@ -54,7 +74,7 @@ export default function decorate(panel, model) {
     }
 
     // Populate months if empty
-    const monthDD = panel.querySelector('[name="month"]');
+
     options = monthDD.querySelectorAll('option:not([disabled])');
     if (options.length === 0) {
         for (let month = 1; month <= 12; month++) {

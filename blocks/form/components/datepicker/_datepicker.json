@@ -13,6 +13,7 @@
                             "fd:viewType": "datepicker",
                             "name": "datepicker",
                             "month": {
+                                "jcr:title": "Month",
                                 "name": "month",
                                 "type": "string",
                                 "placeholder": "Month",
@@ -23,6 +24,7 @@
                                 "required": true
                             },
                             "year": {
+                                "jcr:title": "Year",
                                 "required": true,
                                 "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                                 "fieldType": "drop-down",
@@ -50,11 +52,17 @@
                     "...": "../../models/form-common/_basic-input-fields.json"
                 },
                 {
+                    "component": "boolean",
+                    "name": "fieldRequired",
+                    "label": "Required",
+                    "valueType": "boolean"
+                },
+                {
                     "component": "text",
                     "name": "yearMin",
                     "label": "Year lower boundary",
                     "valueType": "string",
-                    "description": "Lower boundary for year. Could be 1980, or -+45. Default is 20y in the past."
+                    "description": "Lower boundary for year. Could be 1980, or -+45. Default is 20 years in the past."
                 },
                 {
                     "component": "text",
