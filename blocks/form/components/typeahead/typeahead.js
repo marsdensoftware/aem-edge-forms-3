@@ -4,24 +4,51 @@ function addSuggestionDiv() {
 
     return el;
 }
-const courses = [
-    "Marketing management",
-    "Financial management",
-    "Financial statements",
-    "Business process modelling",
-    "Company policies",
-    "Develop company strategies",
-    "Plan medium to long term objectives",
-    "Define organisational standards",
-    "Assume responsibility for the management of a business",
-    "Build trust"
-];
-const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
-
 const datasources = {
-    'courses': courses,
-    'languages': languages
-}
+    courses: [
+        'Marketing management',
+        'Financial management',
+        'Financial statements',
+        'Business process modelling',
+        'Company policies',
+        'Develop company strategies',
+        'Plan medium to long term objectives',
+        'Define organisational standards',
+        'Assume responsibility for the management of a business',
+        'Build trust'
+    ],
+    languages: [
+        'Te Reo',
+        'French',
+        'German',
+        'Portuguese',
+        'Hebrew'
+    ],
+    occupations: [
+        'Software Developer',
+        'Primary School Teacher',
+        'Registered Nurse',
+        'Electrician',
+        'Construction Project Manager',
+        'Chef',
+        'General Practitioner (GP)',
+        'Mechanical Engineer',
+        'Retail Sales Assistant',
+        'Truck Driver (General)'
+    ],
+    skills: [
+        'Communicate effectively in English',
+        'Apply health and safety standards',
+        'Work in a team',
+        'Use digital collaboration tools',
+        'Operate machinery safely',
+        'Provide customer service',
+        'Interpret technical drawings',
+        'Manage time effectively',
+        'Use accounting software',
+        'Adapt to changing work environments'
+    ]
+};
 
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {

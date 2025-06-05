@@ -9,7 +9,8 @@ let customComponents = [
   'repeatable-panel', 
   'formtabs', 
   'education',
-  'languagepanel']
+  'languagepanel',
+  'workexperience']
   
 const OOTBComponentDecorators = [
   'file-input',
