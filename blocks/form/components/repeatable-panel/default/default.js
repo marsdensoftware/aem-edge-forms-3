@@ -440,10 +440,13 @@ export class ConditionalRepeatable extends RepeatablePanel {
         }
     }
 
-    _renderOverview() {
-        super._renderOverview();
+    _entryModified(entry) {
+        super._entryModified(entry);
 
-        // Add custom logic here
+        this._updateCondition();
+    }
+
+    _updateCondition() {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
         if (savedEntries.length > 0) {
             // Hide question
@@ -459,5 +462,11 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // hide repeatable panel
             this._repeatablePanel.style.display = 'none';
         }
+    }
+
+    _renderOverview() {
+        super._renderOverview();
+
+        this._updateCondition();
     }
 }
