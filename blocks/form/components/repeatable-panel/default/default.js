@@ -134,7 +134,7 @@ export class RepeatablePanel {
             this._toggleEditMode(entry, false);
             this.#resetChanges(entry);
 
-            if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
+            if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
                 this.#triggerDeletion(entry);
             }
@@ -309,7 +309,7 @@ export class RepeatablePanel {
         deleteLink.addEventListener('click', (e) => {
             alert('Coming soon...');
             /*
-            if (this.#isFirstEntry(entry)) {
+            if (this._isFirstEntry(entry)) {
                 // First one --> Remove from overview
                 result.remove();
                 // Clear changes
