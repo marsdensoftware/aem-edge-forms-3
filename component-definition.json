@@ -1049,42 +1049,164 @@
                   "name": "workexperience",
                   "hideTitle": true,
                   "radiogroup": {
-                    "enum": [
-                      "yes",
-                      "no"
-                    ],
-                    "enumNames": [
-                      "Yes – I’ve done some education or training",
-                      "No - I haven’t done any formal training yet"
-                    ],
+                    "withIcon": true,
+                    "jcr:title": "Work Experience Type Selection",
                     "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1",
                       "list-search-1",
                       "list-search-1"
                     ],
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "0"
+                    ],
+                    "enumNames": [
+                      "Paid work",
+                      "Non-paid work",
+                      "Volunteer work",
+                      "No, I have nothing to add"
+                    ],
                     "fd:viewType": "radio-group",
-                    "fieldType": "radio-group",
-                    "hideTitle": true,
-                    "jcr:title": "Work Experience Type Selection",
                     "name": "workexperience-selection",
+                    "fieldType": "radio-group",
                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
-                    "withIcon": true,
+                    "hideTitle": true,
                     "required": true
                   },
                   "repeatable-panel": {
-                    "jcr:title": "Work Experience Options Content",
-                    "fieldType": "panel",
                     "hideTitle": true,
-                    "name": "workexperience-options-content",
-                    "repeatAddButtonLabel": "Add another",
-                    "repeatDeleteButtonLabel": "Delete",
+                    "fieldType": "panel",
                     "repeatable": true,
+                    "name": "workexperience-options-content",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatAddButtonLabel": "Add another",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "jcr:title": "Work Experience Options Content",
                     "intro": {
-                      "fieldType": "plain-text",
-                      "jcr:title": "Intro",
-                      "textIsRich": true,
                       "value": "<h6>Add work experience</h6>",
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "jcr:title": "Add work experience",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text",
+                      "name": "intro1749081013822"
+                    },
+                    "textinput": {
+                      "jcr:title": "Job title",
+                      "required": true,
+                      "name": "title",
+                      "fieldType": "text-input",
+                      "description": "<p>What was your job called?</p>",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                    },
+                    "textinput_646953332": {
+                      "jcr:title": "Work type",
+                      "name": "type",
+                      "fieldType": "text-input",
+                      "placeholder": "Start typing",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "description": "<p>Match your job title to one from our standard list.</p>",
+                      "required": true
+                    },
+                    "textinput_2036598869": {
+                      "jcr:title": "Employer name",
+                      "fieldType": "text-input",
+                      "required": true,
+                      "name": "employer",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                    },
+                    "text": {
+                      "jcr:title": "Text",
+                      "name": "month-year-label",
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "value": "<p>When you started doing this work</p>",
+                      "classes": "p-large",
                       "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "dropdown": {
+                      "name": "month",
+                      "type": "string",
+                      "placeholder": "Month",
+                      "enumNames": [
+                        "Item 1",
+                        "Item 2"
+                      ],
+                      "fieldType": "drop-down",
+                      "enum": [
+                        "0",
+                        "1"
+                      ],
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                      "required": true
+                    },
+                    "dropdown_2069191326": {
+                      "required": true,
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                      "fieldType": "drop-down",
+                      "enumNames": [
+                        "Item 1",
+                        "Item 2"
+                      ],
+                      "placeholder": "Year",
+                      "enum": [
+                        "0",
+                        "1"
+                      ],
+                      "type": "string",
+                      "name": "year"
+                    },
+                    "radiobutton": {
+                      "name": "still-working",
+                      "jcr:title": "Are you still doing this work?",
+                      "orientation": "horizontal",
+                      "enumNames": [
+                        "Yes",
+                        "No"
+                      ],
+                      "fieldType": "radio-group",
+                      "fd:viewType": "radio-group",
+                      "enum": [
+                        "1",
+                        "0"
+                      ],
+                      "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                      "required": true
+                    },
+                    "textinput_2045777875": {
+                      "jcr:title": "Add skills you used in this work",
+                      "name": "skills",
+                      "fieldType": "text-input",
+                      "placeholder": "Start typing",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "description": "<p>Sharing your skills helps match you with the right jobs.</p>",
+                      "required": true
+                    },
+                    "textinput_1370121706": {
+                      "multiLine": true,
+                      "jcr:title": "Description",
+                      "name": "description",
+                      "fieldType": "text-input",
+                      "description": "<p>Describe the work you did &mdash; include tasks, skills you used or learned, and any achievements you're proud of.</p>",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                    },
+                    "radiobutton_1772763572": {
+                      "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                      "fieldType": "radio-group",
+                      "enumNames": [
+                        "Yes",
+                        "No"
+                      ],
+                      "enum": [
+                        "1",
+                        "0"
+                      ],
+                      "jcr:title": "Are you still able to do this type of work?",
+                      "orientation": "horizontal",
+                      "fd:viewType": "radio-group",
+                      "name": "still-able"
                     }
                   }
                 }
