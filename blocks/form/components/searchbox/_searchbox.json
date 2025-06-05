@@ -6,7 +6,7 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+            "resourceType": "core/fd/components/form/textinput/v1/textinput",
             "template": {
               "jcr:title": "Search Box",
               "fieldType": "text-input",
@@ -15,56 +15,81 @@
               "placeholder": "Start typing to search...",
               "datasource": "courses",
               "required": false,
-              "description": "Search box with typeahead functionality",
-              "fd:rules": {
-                "jcr:primaryType": "nt:unstructured",
-                "validationStatus": "valid"
-              },
-              "fd:events": {
-                "jcr:primaryType": "nt:unstructured",
-                "typeahead:valid": [""],
-                "typeahead:invalid": [""]
-              }
+              "description": "Search box with typeahead functionality"
             }
           }
-        }
-      },
-      "properties": {
-        "jcr:title": {
-          "type": "string",
-          "title": "Field Label",
-          "description": "Label for the search box"
-        },
-        "name": {
-          "type": "string",
-          "title": "Field Name",
-          "description": "Technical name for the field"
-        },
-        "datasource": {
-          "type": "string",
-          "title": "Data Source",
-          "description": "Select the data source for typeahead suggestions",
-          "enum": ["courses", "languages"],
-          "default": "courses"
-        },
-        "placeholder": {
-          "type": "string",
-          "title": "Placeholder Text",
-          "description": "Text shown when the field is empty"
-        },
-        "required": {
-          "type": "boolean",
-          "title": "Required",
-          "description": "Make this field mandatory"
-        },
-        "description": {
-          "type": "string",
-          "title": "Help Text",
-          "description": "Additional information for users"
         }
       }
     }
   ],
-  "models": [],
+  "models": [
+    {
+      "id": "search-box",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "text",
+              "name": "name",
+              "label": "Name",
+              "valueType": "string",
+              "required": true,
+              "valueFormat": "regexp",
+              "validation": {
+                "regExp": "^[^$].*",
+                "customErrorMsg": "Name cannot start with $"
+              }
+            },
+            {
+              "component": "text",
+              "name": "jcr:title",
+              "label": "Title",
+              "valueType": "string"
+            },
+            {
+              "component": "select",
+              "name": "datasource",
+              "label": "Data Source",
+              "valueType": "string",
+              "options": [
+                {
+                  "name": "Courses",
+                  "value": "courses"
+                },
+                {
+                  "name": "Languages",
+                  "value": "languages"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "name": "placeholder",
+              "label": "Placeholder Text",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "validation",
+          "label": "Validation",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "checkbox",
+              "name": "required",
+              "label": "Required field",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "filters": []
 }
