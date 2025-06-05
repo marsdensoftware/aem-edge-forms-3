@@ -167,7 +167,15 @@ export function updateOrCreateInvalidMsg(fieldElement, msg) {
   let element = container.querySelector(':scope > .field-description');
   if (!element) {
     element = createHelpText({ id: fieldElement.id });
-    container.append(element);
+    
+    //###SEP-NJ START: add help text below label
+    const labelEl = container.querySelector('label');
+    if (labelEl && labelEl.nextSibling) {
+      container.insertBefore(element, labelEl.nextSibling);
+    } else {
+      container.append(element);
+    }
+    //###SEP-NJ END: add help text below label
   }
   if (msg) {
     container.classList.add('field-invalid');
