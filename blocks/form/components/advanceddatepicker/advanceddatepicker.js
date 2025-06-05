@@ -6,8 +6,9 @@ class AdvancedDatepickerField {
         this.defaultYearMin = this.currentYear - 20;
         this.defaultYearMax = this.currentYear;
 
-        this.yearDD = panel.querySelector('[name="year"]');
-        this.monthDD = panel.querySelector('[name="month"]');
+        const dds = panel.querySelectorAll(':scope>.drop-down-wrapper');
+        this.monthDD = dds[0];
+        this.yearDD = dds[1];
 
         this.init();
     }
