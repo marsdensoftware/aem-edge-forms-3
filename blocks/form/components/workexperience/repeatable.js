@@ -10,6 +10,8 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
     constructor(repeatablePanel) {
         super(repeatablePanel, 'workexperience');
+
+        this._bindEvents(repeatablePanel);
     }
 
     _onItemAdded(entry) {
@@ -26,18 +28,23 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = true;
         });
 
+        this._bindEvents(entry);
+
+        super._onItemAdded(entry);
+    }
+
+    _bindEvents(el) {
         // Register change on still-working field to show hide endofwork
-        const stillWorkingRadios = entry.querySelectorAll(`[name="${WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING}"]`);
-        const endofwork = entry.querySelector('.field-endofwork');
+        const stillWorkingRadios = el.querySelectorAll(`[name="${WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING}"]`);
 
         stillWorkingRadios.forEach(radio => {
             radio.addEventListener('change', (event) => {
                 // endofwork visibility
+                const endofwork = radio.closest(`.${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}`).querySelector('.field-endofwork');
+
                 endofwork.dataset.visible = isNo(event.target);
             });
         });
-
-        super._onItemAdded(entry);
     }
 
     _save(entry) {
