@@ -58,7 +58,7 @@
                                     "sling:resourceType": "core/fd/components/form/text/v1/text",
                                     "name": "intro1749081013822"
                                 },
-                                "textinput": {
+                                "job_title": {
                                     "jcr:title": "Job title",
                                     "required": true,
                                     "name": "title",
@@ -66,17 +66,19 @@
                                     "description": "\u003Cp\u003EWhat was your job called?\u003C/p\u003E",
                                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
                                 },
-                                "textinput_646953332": {
+                                "work_type": {
                                     "jcr:title": "Work type",
                                     "name": "type",
                                     "fieldType": "text-input",
+                                    "fd:viewTpe": "typeahead",
+                                    "datasource": "occupations",
                                     "placeholder": "Start typing",
                                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
                                     "description": "\u003Cp\u003EMatch your job title to one from our standard list.\u003C/p\u003E",
                                     "required": true
                                 },
-                                "textinput_2036598869": {
-                                    "jcr:title": "Employer name",
+                                "employer": {
+                                    "jcr:title": "Employer name/Who you did this work for",
                                     "fieldType": "text-input",
                                     "required": true,
                                     "name": "employer",
@@ -91,7 +93,7 @@
                                     "classes": "p-large",
                                     "sling:resourceType": "core/fd/components/form/text/v1/text"
                                 },
-                                "dropdown": {
+                                "month": {
                                     "name": "month",
                                     "type": "string",
                                     "placeholder": "Month",
@@ -107,7 +109,7 @@
                                     "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                                     "required": true
                                 },
-                                "dropdown_2069191326": {
+                                "year": {
                                     "required": true,
                                     "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                                     "fieldType": "drop-down",
@@ -123,7 +125,7 @@
                                     "type": "string",
                                     "name": "year"
                                 },
-                                "radiobutton": {
+                                "still_working": {
                                     "name": "still-working",
                                     "jcr:title": "Are you still doing this work?",
                                     "orientation": "horizontal",
@@ -140,16 +142,18 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "required": true
                                 },
-                                "textinput_2045777875": {
+                                "skills": {
                                     "jcr:title": "Add skills you used in this work",
                                     "name": "skills",
                                     "fieldType": "text-input",
+                                    "fd:viewTpe": "typeahead",
+                                    "datasource": "skills",
                                     "placeholder": "Start typing",
                                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
                                     "description": "\u003Cp\u003ESharing your skills helps match you with the right jobs.\u003C/p\u003E",
                                     "required": true
                                 },
-                                "textinput_1370121706": {
+                                "description": {
                                     "multiLine": true,
                                     "jcr:title": "Description",
                                     "name": "description",
@@ -157,7 +161,7 @@
                                     "description": "\u003Cp\u003EDescribe the work you did &mdash; include tasks, skills you used or learned, and any achievements you're proud of.\u003C/p\u003E",
                                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
                                 },
-                                "radiobutton_1772763572": {
+                                "still_able": {
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "fieldType": "radio-group",
                                     "enumNames": [
