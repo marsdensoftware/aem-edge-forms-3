@@ -10,10 +10,9 @@
             "template": {
               "jcr:title": "Search Box",
               "fieldType": "text-input",
-              "fd:viewType": "searchbox",
+              "fd:viewType": "search-box",
               "type": "string",
               "placeholder": "Start typing to search...",
-              "datasource": "courses",
               "required": false,
               "description": "Search box with typeahead functionality"
             }
