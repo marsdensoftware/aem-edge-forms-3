@@ -4227,7 +4227,7 @@
     ]
   },
   {
-    "id": "datepicker",
+    "id": "advanceddatepicker",
     "fields": [
       {
         "component": "container",

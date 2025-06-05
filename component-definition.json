@@ -500,17 +500,17 @@
           }
         },
         {
-          "title": "Date Picker",
-          "id": "datepicker",
+          "title": "Advanced Date Picker",
+          "id": "advanceddatepicker",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "template": {
-                  "jcr:title": "Date Picker",
+                  "jcr:title": "Advanced Date Picker",
                   "fieldType": "panel",
-                  "fd:viewType": "datepicker",
-                  "name": "datepicker",
+                  "fd:viewType": "advanceddatepicker",
+                  "name": "advanceddatepicker",
                   "month": {
                     "jcr:title": "Month",
                     "name": "month",
