@@ -181,15 +181,7 @@ async function fieldChanged(payload, form, generateFormRendition) {
               id,
               description: currentValue,
             });
-            
-            //###SEP-NJ START: add help text below label
-            const labelEl = fieldWrapper.querySelector('label');
-            if (labelEl && labelEl.nextSibling) {
-              fieldWrapper.insertBefore(descriptionEl, labelEl.nextSibling);
-            } else {
-              fieldWrapper.append(descriptionEl);
-            }
-            //###SEP-NJ END: add help text below label
+            fieldWrapper.append(descriptionEl);
           }
         }
         break;

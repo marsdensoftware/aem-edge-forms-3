@@ -364,7 +364,16 @@ function renderField(fd) {
     field.append(createInput(fd));
   }
   if (fd.description) {
-    field.append(createHelpText(fd));
+    const helpEl = createHelpText(fd);
+    
+    //###SEP-NJ START: add help text below label
+    const labelEl = field.querySelector('label');
+    if (labelEl && labelEl.nextSibling) {
+      field.insertBefore(helpEl, labelEl.nextSibling);
+    } else {
+      field.append(helpEl);
+    }
+    //###SEP-NJ END: add help text below label
     field.dataset.description = fd.description; // In case overriden by error message
   }
   if (fd.fieldType !== 'radio-group' && fd.fieldType !== 'checkbox-group' && fd.fieldType !== 'captcha') {
