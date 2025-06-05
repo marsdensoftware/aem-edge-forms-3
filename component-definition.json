@@ -553,9 +553,7 @@
                     "required": true,
                     "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                     "fieldType": "drop-down",
-                    "enumNames": [],
                     "placeholder": "Year",
-                    "enum": [],
                     "type": "string",
                     "name": "year"
                   }
