@@ -50,26 +50,18 @@
                     "...": "../../models/form-common/_basic-input-fields.json"
                 },
                 {
-                    "component": "container",
-                    "name": "advanced",
-                    "label": "Advanced",
-                    "collapsible": false,
-                    "fields": [
-                        {
-                            "component": "string",
-                            "name": "yearMin",
-                            "label": "Year lower boundary",
-                            "valueType": "string",
-                            "description": "Lower boundary for year. Could be 1980, or -+45. Default is 20y in the past."
-                        },
-                        {
-                            "component": "string",
-                            "name": "yearMax",
-                            "label": "Year upper boundary",
-                            "valueType": "string",
-                            "description": "Upper boundary for year. Could be 2030, or -+45. Default is current year."
-                        }
-                    ]
+                    "component": "text",
+                    "name": "yearMin",
+                    "label": "Year lower boundary",
+                    "valueType": "string",
+                    "description": "Lower boundary for year. Could be 1980, or -+45. Default is 20y in the past."
+                },
+                {
+                    "component": "text",
+                    "name": "yearMax",
+                    "label": "Year upper boundary",
+                    "valueType": "string",
+                    "description": "Upper boundary for year. Could be 2030, or -+45. Default is current year."
                 }
             ]
         }
