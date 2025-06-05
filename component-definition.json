@@ -512,7 +512,6 @@
                   "fd:viewType": "advanceddatepicker",
                   "name": "advanceddatepicker",
                   "month": {
-                    "jcr:title": "Month",
                     "name": "month",
                     "type": "string",
                     "placeholder": "Month",
@@ -549,7 +548,6 @@
                     "required": true
                   },
                   "year": {
-                    "jcr:title": "Year",
                     "required": true,
                     "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                     "fieldType": "drop-down",

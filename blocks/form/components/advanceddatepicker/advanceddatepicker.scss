@@ -1,7 +1,7 @@
 @use '../../../../styles/settings' as *;
 
 
-fieldset.field-advanceddatepicker {
+fieldset.advanceddatepicker {
     display: flex;
 
     &[data-required=true]>legend::after {
