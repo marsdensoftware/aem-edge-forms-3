@@ -4,6 +4,10 @@
 fieldset.advanceddatepicker {
     display: flex;
 
+    >legend {
+        @include font-body-large;
+    }
+
     &[data-required=true]>legend::after {
         content: "*";
         color: var(--form-error-color);

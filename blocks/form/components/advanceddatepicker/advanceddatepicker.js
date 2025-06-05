@@ -24,7 +24,6 @@ class AdvancedDatepickerField {
 
     init() {
         this.panel.classList.add('advanceddatepicker');
-        this.panel.querySelector('legend')?.classList.add('p-large');
         this.panel.dataset.yearMax = this.model.properties.yearMax;
         this.panel.dataset.yearMin = this.model.properties.yearMin;
         this.panel.dataset.required = this.yearDD.required || this.monthDD.required;
