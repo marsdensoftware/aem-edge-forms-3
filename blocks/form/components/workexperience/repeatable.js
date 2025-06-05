@@ -13,7 +13,14 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         const typeOfWorkExperience = entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WE}"]`);
 
         // Make type of work experience visible if not first entry
-        typeOfWorkExperience.dataset.visible = !this._isFirstEntry(entry);
+        typeOfWorkExperience.parentElement.dataset.visible = !this._isFirstEntry(entry);
+
+        // Hide below fields until a type of work experience has been added
+        entry.querySelector('[name="fields-container"]').dataset.visible = false;
+
+        typeOfWorkExperience.addEventListener('change', () => {
+            entry.querySelector('.fields-container').dataset.visible = true;
+        });
 
         super._onItemAdded(entry);
     }
