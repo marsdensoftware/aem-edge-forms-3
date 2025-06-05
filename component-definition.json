@@ -965,6 +965,7 @@
                   "fd:viewType": "search-box",
                   "type": "string",
                   "placeholder": "Start typing to search...",
+                  "datasource": "courses",
                   "required": false,
                   "description": "Search box with typeahead functionality"
                 }
