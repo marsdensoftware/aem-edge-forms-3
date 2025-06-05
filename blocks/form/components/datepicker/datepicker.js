@@ -40,7 +40,8 @@ export default function decorate(panel, model) {
 
     // Populate year if empty
     const yearDD = panel.querySelector('[name="year"]');
-    if (yearDD.options.length === 0) {
+    let options = yearDD.querySelectorAll('option:not([disabled])');
+    if (options.length === 0) {
         for (let year = yearMin; year <= yearMax; year++) {
             const option = document.createElement('option');
             option.value = year;
@@ -51,7 +52,8 @@ export default function decorate(panel, model) {
 
     // Populate months if empty
     const monthDD = panel.querySelector('[name="month"]');
-    if (monthDD.options.length === 0) {
+    options = monthDD.querySelectorAll('option:not([disabled])');
+    if (options.length === 0) {
         for (let month = 1; month <= 12; month++) {
             const option = document.createElement('option');
             option.value = month;
