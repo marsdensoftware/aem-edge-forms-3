@@ -1210,7 +1210,8 @@
                       "jcr:title": "Are you still able to do this type of work?",
                       "orientation": "horizontal",
                       "fd:viewType": "radio-group",
-                      "name": "still-able"
+                      "name": "still-able",
+                      "required": true
                     }
                   }
                 }
