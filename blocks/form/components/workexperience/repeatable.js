@@ -2,7 +2,8 @@ import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static FIELD_NAMES = {
-        'TYPE_OF_WE': 'type-of-work-experience'
+        'TYPE_OF_WE': 'type-of-work-experience',
+        'FIELDS_CONTAINER': 'fields-container'
     };
 
     constructor(repeatablePanel) {
@@ -16,10 +17,10 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         typeOfWorkExperience.parentElement.dataset.visible = !this._isFirstEntry(entry);
 
         // Hide below fields until a type of work experience has been added
-        entry.querySelector('[name="fields-container"]').dataset.visible = false;
+        entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = false;
 
         typeOfWorkExperience.addEventListener('change', () => {
-            entry.querySelector('.fields-container').dataset.visible = true;
+            entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = true;
         });
 
         super._onItemAdded(entry);
