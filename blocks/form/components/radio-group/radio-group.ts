@@ -11,6 +11,7 @@ export default function decorate(element: Element, field: Field) {
   if (withIcon) {
     element.classList.add('radio-group--with-icon')
     element.classList.remove('horizontal', 'vertical')
+    
     const divs = element.querySelectorAll('div')
 
     if (divs.length) {
