@@ -19,6 +19,8 @@ export default function decorate(panel, model) {
     const defaultYearMax = currentYear;
     let yearMax = defaultYearMax;
     let yearMin = defaultYearMin;
+    let yearMinS = '' + yearMin;
+    let yearMaxS = '' + yearMax;
 
     try {
         yearMin = parseInt(model.properties.yearMin);
@@ -30,12 +32,12 @@ export default function decorate(panel, model) {
     }
     catch (e) { }
 
-    if ('' + yearMin.charAt(0) == '+' || '' + yearMin.charAt(0) == '-') {
-        yearMin = currentYear + parseInt(yearMin)
+    if (yearMinS.charAt(0) == '+' || '' + yearMinS.charAt(0) == '-') {
+        yearMin = currentYear + parseInt(yearMinS)
     }
 
-    if ('' + yearMax.charAt(0) == '+' || '' + yearMax.charAt(0) == '-') {
-        yearMax = currentYear + parseInt(yearMax)
+    if (yearMaxS.charAt(0) == '+' || yearMaxS.charAt(0) == '-') {
+        yearMax = currentYear + parseInt(yearMaxS)
     }
 
     // Populate year if empty
