@@ -1195,8 +1195,7 @@
                         "datasource": "occupations",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Match your job title to one from our standard list.</p>",
-                        "required": true
+                        "description": "<p>Match your job title to one from our standard list.</p>"
                       },
                       "employer": {
                         "jcr:title": "Employer name/Who you did this work for",
@@ -1271,8 +1270,7 @@
                         "datasource": "skills",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>",
-                        "required": true
+                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>"
                       },
                       "description": {
                         "multiLine": true,

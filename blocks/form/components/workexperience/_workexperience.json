@@ -99,8 +99,7 @@
                                         "datasource": "occupations",
                                         "placeholder": "Start typing",
                                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                                        "description": "\u003Cp\u003EMatch your job title to one from our standard list.\u003C/p\u003E",
-                                        "required": true
+                                        "description": "\u003Cp\u003EMatch your job title to one from our standard list.\u003C/p\u003E"
                                     },
                                     "employer": {
                                         "jcr:title": "Employer name/Who you did this work for",
@@ -175,8 +174,7 @@
                                         "datasource": "skills",
                                         "placeholder": "Start typing",
                                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                                        "description": "\u003Cp\u003ESharing your skills helps match you with the right jobs.\u003C/p\u003E",
-                                        "required": true
+                                        "description": "\u003Cp\u003ESharing your skills helps match you with the right jobs.\u003C/p\u003E"
                                     },
                                     "description": {
                                         "multiLine": true,
