@@ -14,23 +14,20 @@ export function handleTabNavigation(panel, index) {
     });
 }
 export default function decorate(panel, model) {
+    function parseNumber(str, defaultValue = 0) {
+        const num = Number(str);
+        return isNaN(num) ? defaultValue : num;
+    }
+    
     const currentYear = new Date().getFullYear();
     const defaultYearMin = currentYear - 45;
     const defaultYearMax = currentYear;
-    let yearMax = defaultYearMax;
-    let yearMin = defaultYearMin;
-    let yearMinS = '' + yearMin;
-    let yearMaxS = '' + yearMax;
-
-    try {
-        yearMin = parseInt(model.properties.yearMin);
-    }
-    catch (e) { }
-
-    try {
-        yearMax = parseInt(model.properties.yearMax);
-    }
-    catch (e) { }
+    
+    let yearMax = parseNumber(model.properties.yearMax,defaultYearMax);
+    let yearMin = parseNumber(model.properties.yearMin,defaultYearMin);
+    
+    let yearMinS = model.properties.yearMin;
+    let yearMaxS = model.properties.yearMax;
 
     if (yearMinS.charAt(0) == '+' || '' + yearMinS.charAt(0) == '-') {
         yearMin = currentYear + parseInt(yearMinS)
