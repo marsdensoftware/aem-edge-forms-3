@@ -1,0 +1,33 @@
+main .form label,
+main .form fieldset.checkbox-group-wrapper legend,
+main .form fieldset.radio-group-wrapper legend {
+  font-family: $font-family;
+  font-size: $size-font-label;
+  color: $text-primary;
+  font-style: normal;
+  font-weight: $font-weight-medium;
+  line-height: 133%;
+  letter-spacing: $letter-spacing-default;
+}
+
+[data-required='true'] > label::after,
+main .form label.required::after {
+  content: '*';
+  color: var(--form-error-color);
+  padding-inline-start: 5px;
+}
+
+.radio-wrapper > label::after,
+.checkbox-wrapper > label::after {
+  content: none;
+}
+
+main .form .field-description {
+  color: var(--form-label-color);
+  font-size: var(--form-font-size-xs);
+}
+
+main .form form .field-invalid .field-description {
+  color: var(--form-error-color);
+  font-weight: 700;
+}
