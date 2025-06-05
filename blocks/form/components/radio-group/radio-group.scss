@@ -1,10 +1,23 @@
 @use '../../../../styles/settings' as *;
 
 .radio-group--with-icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0 16px;
   padding-bottom: $spacing-600;
 
+  .radio-wrapper {
+    flex: 1 1 100%;
+    display: flex;
+
+    @include media('tablet') {
+      flex: 1 1 45%;
+    }
+  }
+
   .radio-group--with-icon__label {
+    width: 100%;
     padding: $spacing-400;
     border-radius: var(--Spacing-200, 8px);
     border: var(--Stroke-weight-Input-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
@@ -12,6 +25,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    min-height: 140px;
+    gap: 20px 0;
+
+    &::before {
+      order: 1;
+      margin-right: 0;
+    }
   }
 
   .radio-group--with-icon__icon {
@@ -30,18 +51,6 @@
     content: url('../../../../icons/smiley-face.svg');
   }
 
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px 0;
-
-    &::before {
-      order: 1;
-      margin-right: 0;
-    }
-  }
-
   input[type='radio'] {
     &:checked {
       + label {
@@ -57,7 +66,6 @@
     }
   }
 }
-
 
 .radio-group-wrapper {
   &.horizontal {
