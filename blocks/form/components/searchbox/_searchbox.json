@@ -10,12 +10,13 @@
             "template": {
               "jcr:title": "Search Box",
               "fieldType": "text-input",
-              "fd:viewType": "search-box",
+              "fd:viewType": "typeahead",
               "type": "string",
               "placeholder": "Start typing to search...",
               "datasource": "courses",
               "required": false,
-              "description": "Search box with typeahead functionality"
+              "description": "Search box with typeahead functionality",
+              "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
             }
           }
         }
