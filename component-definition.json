@@ -953,6 +953,23 @@
           }
         },
         {
+          "title": "Search Box",
+          "id": "search-box",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                "template": {
+                  "jcr:title": "Search Box",
+                  "fieldType": "text-input",
+                  "fd:viewType": "searchbox",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {
