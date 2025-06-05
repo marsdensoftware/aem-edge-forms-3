@@ -71,7 +71,7 @@ class DatepickerField {
 }
 
 // Public method to decorate a single panel
-export function decorate(panel, model) {
+export default function decorate(panel, model) {
     new DatepickerField(panel, model);
     return panel;
 }
