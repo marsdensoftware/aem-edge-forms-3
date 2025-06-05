@@ -1093,6 +1093,25 @@
                       "sling:resourceType": "core/fd/components/form/text/v1/text",
                       "name": "intro1749081013822"
                     },
+                    "type_of_work_experience": {
+                      "name": "type-of-work-experience",
+                      "type": "string",
+                      "placeholder": "Choose work type",
+                      "enumNames": [
+                        "Paid work",
+                        "Non-paid work",
+                        "Volunteer work"
+                      ],
+                      "enum": [
+                        "0",
+                        "1",
+                        "2"
+                      ],
+                      "fieldType": "drop-down",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                      "required": true,
+                      "visible": false
+                    },
                     "job_title": {
                       "jcr:title": "Job title",
                       "required": true,
