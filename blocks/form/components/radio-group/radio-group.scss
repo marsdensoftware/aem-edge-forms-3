@@ -8,12 +8,8 @@
   padding-bottom: $spacing-600;
 
   .radio-wrapper {
-    flex: 1 1 100%;
+    flex: 1 1 45%; // Ensures equal width tiles, and stays side by side on mobile RW
     display: flex;
-
-    @include media('tablet') {
-      flex: 1 1 45%;
-    }
   }
 
   .radio-group--with-icon__label {
