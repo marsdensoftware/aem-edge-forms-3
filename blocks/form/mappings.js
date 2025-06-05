@@ -11,7 +11,7 @@ let customComponents = [
   'education',
   'languagepanel',
   'workexperience',
-  'datepicker']
+  'advanceddatepicker']
   
 const OOTBComponentDecorators = [
   'file-input',
