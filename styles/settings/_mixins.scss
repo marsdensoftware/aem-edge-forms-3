@@ -1,16 +1,15 @@
-// _mixins.scss
-
-@use './breakpoints' as *;
+@use '../settings/breakpoints' as *;
 @use '../settings/elevations' as *;
 @use '../settings/colors' as *;
 @use '../settings/spacings' as *;
 @use '../settings/utils' as *;
 @use '../settings/borders' as *;
+@use '../base/typography' as *; //
+
 
 /******************************
       Contextual Help Mixins
 *******************************/
-
 @mixin panel-help-base($bg-color, $text-color, $link-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -36,7 +35,7 @@
 
 @mixin panel-help-icon-invert {
   .panel-formcontextualhelp__icon {
-    filter: brightness(0) invert(1); // white icon for dark backgrounds
+    filter: brightness(0) invert(1);
   }
 }
 
@@ -148,9 +147,9 @@
   }
 }
 
-/*****************************
-   FORM PLACEHOLDERS
-*****************************/
+/******************************
+   Common Utilities
+*******************************/
 %common-panel-spacing {
   margin: 32px 0;
 
@@ -168,4 +167,9 @@
   height: 20px;
 }
 
-
+/******************************
+   Hide Wizard Menu
+*******************************/
+.wizard-menu-items {
+  display: none !important;
+}

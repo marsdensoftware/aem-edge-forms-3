@@ -1,6 +1,7 @@
 main .form label,
 main .form fieldset.checkbox-group-wrapper legend,
-main .form fieldset.radio-group-wrapper legend {
+main .form fieldset.radio-group-wrapper legend,
+main .form legend.field-label {
   font-family: $font-family;
   font-size: $size-font-label;
   color: $text-primary;
@@ -8,6 +9,7 @@ main .form fieldset.radio-group-wrapper legend {
   font-weight: $font-weight-medium;
   line-height: 133%;
   letter-spacing: $letter-spacing-default;
+  margin-bottom: $spacing-100;
 }
 
 [data-required='true'] > label::after,
