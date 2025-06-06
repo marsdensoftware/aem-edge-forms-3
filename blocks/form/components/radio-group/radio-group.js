@@ -1,8 +1,8 @@
 export default function decorate(element, field) {
     const { withIcon, enumIconNames } = field.properties;
     if (withIcon) {
-        element.classList.add('radio-group--with-icon');
         element.classList.remove('horizontal', 'vertical');
+        element.classList.add('radio-group--with-icon');
         const divs = element.querySelectorAll('div');
         if (divs.length) {
             enumIconNames.forEach((iconName, index) => {

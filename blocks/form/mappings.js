@@ -10,7 +10,8 @@ let customComponents = [
   'formtabs', 
   'formtags', 
   'education',
-  'languagepanel']
+  'languagepanel',
+  'workexperience']
   
 const OOTBComponentDecorators = [
   'file-input',

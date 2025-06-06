@@ -14,7 +14,7 @@
       display: block;
       width: 26px;
       height: 26px;
-      border: 2px solid $color-shade-navy-45;
+      border: 2px solid $stroke-tertiary; // default unselected state
       border-radius: $border-radius-mid;
       background-image: none;
       transition: all 0.1s ease-in-out;
@@ -24,7 +24,13 @@
       color: $text-primary;
 
       &::before {
-        border: 2px solid $stroke-accent;
+        border: 2px solid $stroke-accent; // hover state
+      }
+    }
+
+    &:active {
+      &::before {
+        border: 2px solid $stroke-accent; // active state
       }
     }
   }
@@ -37,7 +43,7 @@
         color: $text-primary;
 
         &::before {
-          border: 2px solid $stroke-accent;
+          border: 2px solid $stroke-dark; // selected state
           background-color: $color-primary;
           background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIzSURBVHgBvZYxaBNhFMffe+ldqlMKghZBbyoGBFO36GLqpkOKq4JQdBMqTiJC7sDBrRZXBxc3LengaOwiVYR6iyg45BAqDkKDU9uY7/m9Lyam6V1yae76H5Lvu+9xP957/7t7CH2aePjxkmIoM6t5vXXgQEIfEXxltTxwi8Gek+7K/ZSjZrPCzHchQSHiE2VZGjzb+A/UMNxtvgXgAqQi9Nm2SgIl2Upm6cFEXGgzJEN33cFdqsMhiEmViJqZCiQsJ2eHXieVmSdOuJTOlA2123moXD6570yzyqR/EwXWbuV1hlm4OXss7NghSFBLV08ZWLC1A3PPvobGJAaUEi5eOGHWC6/qEDR2IDVgYfoIVObaPfPebMJa/Xdk7NhAMcnKjRmzXn73E7za5sD4SGBuMgNxtHJ9pts3r/ZjaHwoUPqxceds5PPUkZikMH20a5LG9h8YGSiZlfNTulTZfxYPhy5ePN41yb3X3yNNMhTY2G7BtRffzA2ioNK3pSunzVpMUv2yBXEVWtJOicKg5k2i96LnG7+GmiQWcBC01yRSylGF+OADDwpow84YiJgiNzlh/s8//Ry7b70a+hz2Ziow0cLL+oFgsYD90FFN0i9d0vf644tOnGApr8DHkE96qFmNGz0mTI8X6JMirsIhSamWR/CouIbAy5CyWBiPi4ExjbKzrs7Xh9SEPggDOi7V8yJbdimNTCWzzkxq0Psi7q87hOQywbkx5p1AG2RVUasqLes9+Avpc/A3WvIBkQAAAABJRU5ErkJggg==');
           background-position: center;
@@ -50,7 +56,6 @@
 }
 
 .checkbox-group-wrapper {
-  // HORIZONTAL
   &.horizontal {
     .checkbox-wrapper {
       &:not(:last-child) {
@@ -59,16 +64,34 @@
 
       label {
         width: 100%;
-        border: 2px solid $stroke-secondary;
+        border: 2px solid $stroke-tertiary; // unselected state
         padding: 16px;
         border-radius: $border-radius-mid;
         position: relative;
+        background-color: $color-white;
+        transition: all 0.2s ease;
 
         &::before {
           position: absolute;
           right: 16px;
           top: 16px;
         }
+
+        &:hover {
+          border: 2px solid $stroke-accent; // hover state
+          background-color: $bg-light-primary;
+          box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
+        }
+
+        &:active {
+          border: 2px solid $stroke-accent; // active state
+        }
+      }
+
+      input[type='checkbox']:checked + label {
+        border: 2px solid $stroke-dark; // selected border
+        background-color: $color-shade-blue-10;
+        border-radius: $border-radius-mid;
       }
     }
   }

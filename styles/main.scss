@@ -27,8 +27,8 @@
 // Components
 @use './components';
 
-
 /*added this for responsive testing, Rebecca*/
+
 .typography-wrapper,
 .default-content-wrapper {
   width: 100%;
@@ -46,7 +46,7 @@ main {
   flex-direction: column;
   justify-content: center;   // vertically center content
   min-height: calc(100vh - 160px); // adjust to subtract header + footer height
-  padding: 2rem 1rem 3rem 1rem;
+  padding: 0 1rem 9rem 1rem;
   background-color: $bg-light-secondary;
 }
 
