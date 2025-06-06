@@ -69,20 +69,14 @@
             },
             {
               "component": "richtext",
-              "name": "selection-text",
-              "label": "Short description",
-              "valueType": "string"
-            },
-            {
-              "component": "richtext",
               "name": "none-selected-message",
-              "label": "None selected.",
+              "label": "No selection text",
               "valueType": "string"
             },
             {
               "component": "boolean",
               "name": "hide-empty",
-              "label": "Hide when empty",
+              "label": "Hide empty results",
               "valueType": "boolean"
             }
           ]
