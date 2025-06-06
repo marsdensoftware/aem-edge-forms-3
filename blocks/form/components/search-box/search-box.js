@@ -8,7 +8,7 @@ function addSelectedCardsDiv() {
   const wrapper = document.createElement('div');
   wrapper.classList.add('selected-cards-wrapper');
 
-  const heading = document.createElement('h3');
+  const heading = document.createElement('div');
   heading.classList.add('selected-cards-heading');
   heading.textContent = 'Selected locations';
   wrapper.appendChild(heading);
