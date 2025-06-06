@@ -964,7 +964,7 @@
                   "fieldType": "text-input",
                   "fd:viewType": "search-box",
                   "type": "string",
-                  "resultsLabel": "Search results label",
+                  "selection-label": "Search results label",
                   "placeholder": "Start typing to search...",
                   "datasource": "courses",
                   "required": false,
