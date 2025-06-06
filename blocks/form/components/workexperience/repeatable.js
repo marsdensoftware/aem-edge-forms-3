@@ -20,7 +20,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
         const entries = repeatablePanel.querySelectorAll('[data-repeatable]');
         entries.forEach(entry => {
-            _init(entry);
+            this._init(entry);
         });
     }
 
@@ -70,7 +70,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     }
 
     _onItemAdded(entry) {
-        _init(entry);
+        this._init(entry);
 
         super._onItemAdded(entry);
     }
