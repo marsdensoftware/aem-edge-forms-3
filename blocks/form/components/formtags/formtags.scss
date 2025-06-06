@@ -1,0 +1,30 @@
+@use '../../../../styles/settings' as *;
+
+.field-wrapper {
+  &.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    .tags__item {
+      padding: 6px 12px;
+      background-color: $color-grey-black-60;
+      border-radius: $border-radius-large;
+      color: $color-white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tags-item__title {
+      margin-right: 4px;
+    }
+
+    .tags-item__close {
+      content: url('../../../../icons/icon-close.svg');
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+  }
+}
