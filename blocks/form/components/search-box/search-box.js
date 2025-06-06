@@ -5,9 +5,20 @@ function addSuggestionDiv() {
 }
 
 function addSelectedCardsDiv() {
-    const el = document.createElement('div');
-    el.classList.add('selected-cards');
-    return el;
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('selected-cards-wrapper');
+
+  const heading = document.createElement('h3');
+  heading.classList.add('selected-cards-heading');
+  heading.textContent = 'Selected locations';
+  wrapper.appendChild(heading);
+
+  const cardsDiv = document.createElement('div');
+  cardsDiv.classList.add('selected-cards');
+  wrapper.appendChild(cardsDiv);
+
+  return wrapper;
+
 }
 
 function createSelectedCard(item, selectedCardsDiv, searchInput) {
