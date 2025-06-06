@@ -5320,6 +5320,18 @@
             "name": "selection-text",
             "label": "Short description",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "none-selected-message",
+            "label": "None selected.",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hide-empty",
+            "label": "Hide when empty",
+            "valueType": "boolean"
           }
         ]
       },
