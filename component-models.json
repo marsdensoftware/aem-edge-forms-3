@@ -5316,9 +5316,9 @@
             "valueType": "string"
           },
           {
-            "component": "richtext",
-            "name": "none-selected-message",
-            "label": "No selection text",
+            "component": "text",
+            "name": "empty-selection-message",
+            "label": "Empty selection message",
             "valueType": "string"
           },
           {

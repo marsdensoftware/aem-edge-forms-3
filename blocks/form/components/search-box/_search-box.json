@@ -13,6 +13,7 @@
               "fd:viewType": "search-box",
               "type": "string",
               "selection-label": "Search results label",
+              "empty-selection-message": "None selected.",
               "placeholder": "Start typing to search...",
               "datasource": "courses",
               "required": false,
@@ -68,9 +69,9 @@
               "valueType": "string"
             },
             {
-              "component": "richtext",
-              "name": "none-selected-message",
-              "label": "No selection text",
+              "component": "text",
+              "name": "empty-selection-message",
+              "label": "Empty selection message",
               "valueType": "string"
             },
             {

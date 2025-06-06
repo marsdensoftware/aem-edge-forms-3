@@ -4,7 +4,7 @@ function addSuggestionDiv() {
     return el;
 }
 
-function addSelectedCardsDiv(headingText) {
+function addSelectedCardsDiv(headingText, emptySelectionMessage) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('selected-cards-wrapper');
 
@@ -15,6 +15,7 @@ function addSelectedCardsDiv(headingText) {
 
   const cardsDiv = document.createElement('div');
   cardsDiv.classList.add('selected-cards');
+  cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
   wrapper.appendChild(cardsDiv);
 
   return wrapper;
@@ -120,6 +121,7 @@ document.addEventListener('input', (event) => {
 export default function decorate(element, field, container) {
     const datasource = field.properties.datasource;
     const selectionLabel = field.properties['selection-label'];
+    const emptySelectionMessage = field.properties['empty-selection-message'];
 
     element.classList.add('search-box', 'text-wrapper__icon-search');
     element.dataset.datasource = datasource;
@@ -129,7 +131,7 @@ export default function decorate(element, field, container) {
     element.appendChild(suggestionsDiv);
 
     // Add selected cards container
-    const selectedCardsDiv = addSelectedCardsDiv(selectionLabel);
+    const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage);
     element.appendChild(selectedCardsDiv);
 
     return element;
