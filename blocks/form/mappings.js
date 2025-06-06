@@ -10,7 +10,7 @@ let customComponents = [
   'formtabs',
   'education',
   'languagepanel',
-  'searchbox']
+  'search-box']
 
 const OOTBComponentDecorators = [
   'file-input',
