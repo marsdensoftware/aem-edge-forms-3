@@ -1,13 +1,114 @@
-import typeaheadDecorator from '../typeahead/typeahead.js';
+function addSuggestionDiv() {
+    const el = document.createElement('div');
+    el.classList.add('suggestions');
+    return el;
+}
+
+const courses = [
+    "Marketing management",
+    "Financial management",
+    "Financial statements",
+    "Business process modelling",
+    "Company policies",
+    "Develop company strategies",
+    "Plan medium to long term objectives",
+    "Define organisational standards",
+    "Assume responsibility for the management of a business",
+    "Build trust"
+];
+
+const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
+
+const datasources = {
+    'courses': courses,
+    'languages': languages
+}
+
+// Close suggestions when clicking outside
+document.addEventListener('click', (e) => {
+    if (window.searchInput && !window.searchInput.contains(e.target)) {
+        window.suggestionsDiv.innerHTML = '';
+        window.suggestionsDiv.style.display = 'none';
+    }
+});
+
+document.addEventListener('change', (event) => {
+    const element = event.target.closest('.search-box');
+    if (element) {
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+        const searchInput = element.querySelector('input[type="text"]');
+        const value = searchInput.value;
+
+        if (!entries.includes(value)) {
+            // Dispatch custom event
+            const event = new CustomEvent('search-box:invalid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+        }
+        else {
+            // Dispatch custom event
+            const event = new CustomEvent('search-box:valid', {
+                detail: {},
+                bubbles: true,
+            });
+            searchInput.dispatchEvent(event);
+        }
+    }
+});
+
+document.addEventListener('input', (event) => {
+    const element = event.target.closest('.search-box');
+    if (element) {
+        const searchInput = element.querySelector('input[type="text"]');
+        window.searchInput = searchInput;
+        const query = searchInput.value.toLowerCase();
+
+        // Minimum 4 chars
+        if (query.length < 4) {
+            return;
+        }
+
+        const suggestionsDiv = element.querySelector('.suggestions');
+        window.suggestionsDiv = suggestionsDiv;
+        suggestionsDiv.innerHTML = "";
+
+        const datasource = element.dataset.datasource;
+        const entries = datasources[datasource];
+
+        const filtered = entries.filter(entry => entry.toLowerCase().includes(query));
+
+        filtered.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("suggestion");
+            div.textContent = item;
+            div.addEventListener('click', () => {
+                searchInput.value = item;
+                suggestionsDiv.innerHTML = '';
+                suggestionsDiv.style.display = 'none';
+                const event = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(event);
+            });
+            suggestionsDiv.appendChild(div);
+        });
+
+        if (filtered.length > 0) {
+            suggestionsDiv.style.display = 'block';
+        }
+    }
+});
 
 export default function decorate(element, field) {
-    // Add search-box specific class
-    element.classList.add('search-box');
+    const datasource = field.properties.datasource;
 
-    // Use typeahead decorator for rendering if specified
-    if (field.properties['fd:render'] === 'typeahead') {
-        typeaheadDecorator(element, field);
-    }
+    element.classList.add('search-box', 'text-wrapper__icon-search');
+    element.dataset.datasource = datasource;
+
+    // Add suggestion div
+    const suggestionsDiv = addSuggestionDiv();
+    element.append(suggestionsDiv);
 
     return element;
 }
