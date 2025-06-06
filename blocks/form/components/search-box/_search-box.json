@@ -51,27 +51,27 @@
               ]
             },
             {
-              "component": "container",
-              "name": "search-box-results",
-              "label": "Search Results",
-              "collapsible": true,
-              "fields": [
-                {
-                  "component": "text",
-                  "name": "selection-label",
-                  "label": "Selected results label",
-                  "valueType": "string"
-                },
-                {
-                  "component": "richtext",
-                  "name": "selection-text",
-                  "label": "Short description",
-                  "valueType": "string"
-                }
-              ]
+              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "search-results",
+          "label": "Search Results",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "name": "selection-label",
+              "label": "Selected results label",
+              "valueType": "string"
             },
             {
-              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
+              "component": "richtext",
+              "name": "selection-text",
+              "label": "Short description",
+              "valueType": "string"
             }
           ]
         },

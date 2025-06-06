@@ -5183,26 +5183,6 @@
             ]
           },
           {
-            "component": "container",
-            "name": "search-box-results",
-            "label": "Search Results",
-            "collapsible": true,
-            "fields": [
-              {
-                "component": "text",
-                "name": "selection-label",
-                "label": "Selected results label",
-                "valueType": "string"
-              },
-              {
-                "component": "richtext",
-                "name": "selection-text",
-                "label": "Short description",
-                "valueType": "string"
-              }
-            ]
-          },
-          {
             "component": "text",
             "name": "name",
             "label": "Name",
@@ -5319,6 +5299,26 @@
             "component": "text",
             "name": "placeholder",
             "label": "Placeholder text",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "search-results",
+        "label": "Search Results",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "selection-label",
+            "label": "Selected results label",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "selection-text",
+            "label": "Short description",
             "valueType": "string"
           }
         ]
