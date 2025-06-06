@@ -1,3 +1,5 @@
+import { t } from '../../../../i18n/index.js';
+
 class AdvancedDatepickerField {
     constructor(panel, model) {
         this.panel = panel;
@@ -49,6 +51,12 @@ class AdvancedDatepickerField {
     populateYears(yearMin, yearMax) {
         const options = this.yearDD.querySelectorAll('option:not([disabled])');
         if (options.length === 0) {
+            // Add present
+            const present = document.createElement('option');
+            present.value = 'present';
+            present.textContent = t('present');
+
+            this.yearDD.appendChild(present);
             for (let year = yearMin; year <= yearMax; year++) {
                 const option = document.createElement('option');
                 option.value = year;
