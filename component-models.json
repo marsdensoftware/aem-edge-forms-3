@@ -5167,6 +5167,42 @@
         "collapsible": false,
         "fields": [
           {
+            "component": "select",
+            "name": "datasource",
+            "label": "Data Source",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Courses",
+                "value": "courses"
+              },
+              {
+                "name": "Languages",
+                "value": "languages"
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "name": "help",
+            "label": "Search Results",
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "text",
+                "name": "selection-label",
+                "label": "Selected results label",
+                "valueType": "string"
+              },
+              {
+                "component": "richtext",
+                "name": "selection-text",
+                "label": "Short description",
+                "valueType": "string"
+              }
+            ]
+          },
+          {
             "component": "text",
             "name": "name",
             "label": "Name",
@@ -5284,22 +5320,6 @@
             "name": "placeholder",
             "label": "Placeholder text",
             "valueType": "string"
-          },
-          {
-            "component": "select",
-            "name": "datasource",
-            "label": "Data Source",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Courses",
-                "value": "courses"
-              },
-              {
-                "name": "Languages",
-                "value": "languages"
-              }
-            ]
           }
         ]
       },

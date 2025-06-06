@@ -83,3 +83,21 @@
 .selected-card .remove-btn:hover {
     color: #d03633;
 }
+
+.selected-results-wrapper {
+    margin-top: 1rem;
+}
+
+.selected-results-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.selected-results {
+    min-height: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+}

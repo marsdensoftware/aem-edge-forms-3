@@ -12,6 +12,7 @@
               "fieldType": "text-input",
               "fd:viewType": "search-box",
               "type": "string",
+              "resultsLabel": "Search results label",
               "placeholder": "Start typing to search...",
               "datasource": "courses",
               "required": false,
@@ -34,9 +35,6 @@
           "collapsible": false,
           "fields": [
             {
-              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
-            },
-            {
               "component": "select",
               "name": "datasource",
               "label": "Data Source",
@@ -51,6 +49,29 @@
                   "value": "languages"
                 }
               ]
+            },
+            {
+              "component": "container",
+              "name": "help",
+              "label": "Search Results",
+              "collapsible": true,
+              "fields": [
+                {
+                  "component": "text",
+                  "name": "selection-label",
+                  "label": "Selected results label",
+                  "valueType": "string"
+                },
+                {
+                  "component": "richtext",
+                  "name": "selection-text",
+                  "label": "Short description",
+                  "valueType": "string"
+                }
+              ]
+            },
+            {
+              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
             }
           ]
         },

@@ -106,6 +106,25 @@ document.addEventListener('input', (event) => {
     }
 });
 
+function addSelectedResultsDiv(field) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('selected-results-wrapper');
+
+    // Add the label if it's specified in the properties
+    if (field.properties.resultsLabel) {
+        const label = document.createElement('div');
+        label.classList.add('selected-results-label');
+        label.textContent = field.properties.resultsLabel;
+        wrapper.appendChild(label);
+    }
+
+    const resultsDiv = document.createElement('div');
+    resultsDiv.classList.add('selected-results');
+    wrapper.appendChild(resultsDiv);
+
+    return wrapper;
+}
+
 export default function decorate(element, field, container) {
     const datasource = field.properties.datasource;
 
@@ -114,11 +133,11 @@ export default function decorate(element, field, container) {
 
     // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
-    element.appendChild(suggestionsDiv);
+    element.append(suggestionsDiv);
 
-    // Add selected cards container
-    const selectedCardsDiv = addSelectedCardsDiv();
-    element.appendChild(selectedCardsDiv);
+    // Add selected results div with label
+    const selectedResultsDiv = addSelectedResultsDiv(field);
+    element.append(selectedResultsDiv);
 
     return element;
 }
