@@ -4,6 +4,36 @@ function addSuggestionDiv() {
     return el;
 }
 
+function addSelectedCardsDiv() {
+    const el = document.createElement('div');
+    el.classList.add('selected-cards');
+    return el;
+}
+
+function createSelectedCard(item, selectedCardsDiv, searchInput) {
+    const card = document.createElement('div');
+    card.classList.add('selected-card');
+
+    const text = document.createElement('div');
+    text.textContent = item;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('remove-btn');
+    removeBtn.setAttribute('aria-label', `Remove ${item}`);
+    removeBtn.textContent = '×';
+
+    removeBtn.addEventListener('click', () => {
+        card.remove();
+        // Trigger a change event to update any validation
+        const event = new Event('change', { bubbles: true });
+        searchInput.dispatchEvent(event);
+    });
+
+    card.appendChild(text);
+    card.appendChild(removeBtn);
+    selectedCardsDiv.appendChild(card);
+}
+
 const courses = [
     "Marketing management",
     "Financial management",
@@ -22,40 +52,13 @@ const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 const datasources = {
     'courses': courses,
     'languages': languages
-}
+};
 
 // Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
     if (window.searchInput && !window.searchInput.contains(e.target)) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
-    }
-});
-
-document.addEventListener('change', (event) => {
-    const element = event.target.closest('.search-box');
-    if (element) {
-        const datasource = element.dataset.datasource;
-        const entries = datasources[datasource];
-        const searchInput = element.querySelector('input[type="text"]');
-        const value = searchInput.value;
-
-        if (!entries.includes(value)) {
-            // Dispatch custom event
-            const event = new CustomEvent('search-box:invalid', {
-                detail: {},
-                bubbles: true,
-            });
-            searchInput.dispatchEvent(event);
-        }
-        else {
-            // Dispatch custom event
-            const event = new CustomEvent('search-box:valid', {
-                detail: {},
-                bubbles: true,
-            });
-            searchInput.dispatchEvent(event);
-        }
     }
 });
 
@@ -66,30 +69,33 @@ document.addEventListener('input', (event) => {
         window.searchInput = searchInput;
         const query = searchInput.value.toLowerCase();
 
-        // Minimum 4 chars
-        if (query.length < 4) {
+        if (query.length < 3) {
             return;
         }
 
         const suggestionsDiv = element.querySelector('.suggestions');
         window.suggestionsDiv = suggestionsDiv;
-        suggestionsDiv.innerHTML = "";
+        suggestionsDiv.innerHTML = '';
 
         const datasource = element.dataset.datasource;
         const entries = datasources[datasource];
+        const selectedCardsDiv = element.querySelector('.selected-cards');
 
-        const filtered = entries.filter(entry => entry.toLowerCase().includes(query));
+        const filtered = entries.filter(entry =>
+            entry.toLowerCase().includes(query) &&
+            !Array.from(selectedCardsDiv.children)
+                .some(card => card.firstChild.textContent === entry)
+        );
 
         filtered.forEach(item => {
-            const div = document.createElement("div");
-            div.classList.add("suggestion");
+            const div = document.createElement('div');
+            div.classList.add('suggestion');
             div.textContent = item;
             div.addEventListener('click', () => {
-                searchInput.value = item;
+                searchInput.value = '';
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
-                const event = new Event('change', { bubbles: true });
-                searchInput.dispatchEvent(event);
+                createSelectedCard(item, selectedCardsDiv, searchInput);
             });
             suggestionsDiv.appendChild(div);
         });
@@ -100,7 +106,7 @@ document.addEventListener('input', (event) => {
     }
 });
 
-export default function decorate(element, field) {
+export default function decorate(element, field, container) {
     const datasource = field.properties.datasource;
 
     element.classList.add('search-box', 'text-wrapper__icon-search');
@@ -108,7 +114,11 @@ export default function decorate(element, field) {
 
     // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
-    element.append(suggestionsDiv);
+    element.appendChild(suggestionsDiv);
+
+    // Add selected cards container
+    const selectedCardsDiv = addSelectedCardsDiv();
+    element.appendChild(selectedCardsDiv);
 
     return element;
 }
