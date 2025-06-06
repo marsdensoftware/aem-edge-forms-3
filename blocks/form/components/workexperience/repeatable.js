@@ -15,6 +15,8 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         'EMPLOYER_NAME': 'employer'
     };
 
+    static PAID_WORK = '1';
+
     constructor(repeatablePanel) {
         super(repeatablePanel, 'workexperience');
 
@@ -41,6 +43,10 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         const newResult = {};
         newResult[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE] = result[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE];
         newResult[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME] = result[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME];
+        if (result[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value != WorkExperienceRepeatable.PAID_WORK) {
+            // Not paid work
+            newResult[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
+        }
         newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
 
         return newResult;
