@@ -4,9 +4,11 @@
     WIZARD STEPS
 *****************************/
 
-.wizard .wizard-menu-items {
+.wizard-menu-items {
   display: none !important;
 }
+
+.wizard .wizard-menu-items {
 
 %common-panel-spacing {
   margin: 32px 0;
@@ -20,10 +22,9 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  vertical-align: middle;
+  display: block;
+  width: 20px;
+  height: 20px;
 }
 
 .wizard {
@@ -67,9 +68,9 @@
       &::before {
         @extend %common-wizard-button;
         content: '';
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='currentColor' d='M7.05 3.536L8.464 4.95 4.414 9H17v2H4.414l4.05 4.05-1.414 1.414L0.586 10z'/></svg>");
-        margin-left: 8px;
+        background-image: url('...'); // truncated for brevity
         order: 1;
+        margin-left: 8px;
       }
     }
 
@@ -82,7 +83,7 @@
       &::before {
         @extend %common-wizard-button;
         content: '';
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='currentColor' d='M12.95 3.536L11.536 4.95 15.586 9H3v2h12.586l-4.05 4.05 1.414 1.414L19.414 10z'/></svg>");
+        background-image: url('...'); // truncated for brevity
         margin-right: 8px;
       }
     }
