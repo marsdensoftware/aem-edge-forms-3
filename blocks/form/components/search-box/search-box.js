@@ -119,6 +119,7 @@ document.addEventListener('input', (event) => {
 
 export default function decorate(element, field, container) {
     const datasource = field.properties.datasource;
+    const selectedHeading = field.properties['selection-label'];
 
     element.classList.add('search-box', 'text-wrapper__icon-search');
     element.dataset.datasource = datasource;
