@@ -18,10 +18,7 @@
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
 
-  font-family: var(
-                  --Typography-Font-family-Primary-font,
-                  'Atkinson Hyperlegible Next'
-  );
+  font-family: var(--Typography-Font-family-Primary-font, 'Atkinson Hyperlegible Next');
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -32,25 +29,17 @@
   color: #fff;
 
   border-radius: var(--Corner-radius-Round, 999px);
-  //background: var(--Background-Dark-Accent, #017ac9);
   background: red;
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-  var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-  var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px)
+  var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
 
   border: none;
   cursor: pointer;
   transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
 }
+
 .wizard-button:hover {
-  background: var(
-                  --Gradient-Blue,
-                  linear-gradient(
-                                  135deg,
-                                  var(--Brand-MSD-Blue, #017ac9) 25%,
-                                  var(--Brand-MSD-Navy, #134276) 100%
-                  )
-  );
+  background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017ac9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
@@ -66,10 +55,7 @@ main .form button {
   gap: var(--Spacing-Spacing-200, 8px);
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
 
-  font-family: var(
-                  --Typography-Font-family-Primary-font,
-                  'Atkinson Hyperlegible Next'
-  );
+  font-family: var(--Typography-Font-family-Primary-font, 'Atkinson Hyperlegible Next');
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
   font-weight: var(--Typography-Font-weight-Regular, 400);
@@ -81,9 +67,8 @@ main .form button {
 
   border-radius: var(--Corner-radius-Round, 999px);
   background: var(--Background-Dark-Accent, #017ac9);
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-  var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-  var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  box-shadow: var(--Elevation-Position-X-Level-2, 0px) var(--Elevation-Position-Y-Level-2, 4px)
+  var(--Elevation-Blur-Level-2, 8px) var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
 
   border: none;
   cursor: pointer;
@@ -98,3 +83,32 @@ main .form button:hover {
   background: var(--form-button-background-hover-color);
 }
 
+/* Fix wizard arrow icons */
+.button[name='next']::before {
+  content: '';
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'><path d='M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z'/></svg>");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 20px;
+  height: 20px;
+  order: 1;
+  margin-left: 8px;
+  z-index: 1;
+  position: relative;
+}
+
+.button[name='back']::before {
+  content: '';
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'><path d='M10.828 12l4.95-4.95-1.414-1.414L8 12l6.364 6.364 1.414-1.414z'/></svg>");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  z-index: 1;
+  position: relative;
+}
