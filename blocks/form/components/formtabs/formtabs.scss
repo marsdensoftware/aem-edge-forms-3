@@ -31,16 +31,9 @@ main .form:not(.edit-mode) {
       align-items: center;
       list-style: none;
       cursor: pointer;
-      border: 1px solid $stroke-tertiary;
-      background: $bg-primary;
-      border-radius: $border-radius-mid $border-radius-mid 0 0;
-      color: $text-secondary;
-      font-family: $font-family;
-      font-size: $size-font-label;
-      font-style: normal;
-      font-weight: $font-weight-medium;
-      line-height: 133%;
-      letter-spacing: $letter-spacing-default;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 8px 8px 0 0;
       transition: all 0.2s ease;
 
       &:not(:last-child) {
@@ -49,21 +42,24 @@ main .form:not(.edit-mode) {
     }
 
     > .navitems > li.navitem-current {
-      background: $color-gradient-blue;
-      border: 1px solid $color-shade-blue-25;
+      background: linear-gradient(
+                      180deg,
+                      var(--Shades-Blues-Blue-25, #BFDEF1) 0%,
+                      var(--Shades-Blues-Blue-10, #E6F2FA) 100%
+      );
+      border: 1px solid var(--Shades-Blues-Blue-25, #BFDEF1);
       border-bottom: none;
-      border-top-left-radius: $border-radius-mid;
-      border-top-right-radius: $border-radius-mid;
-      font-weight: $font-weight-bold;
-      color: $text-primary;
+      border-top-left-radius: var(--Mid, 8px);
+      border-top-right-radius: var(--Mid, 8px);
+      font-weight: bold;
     }
 
     > fieldset.formtab.formtab-current {
       display: block;
-      background: $color-shade-blue-10;
-      border: 1px solid $color-shade-blue-25;
+      background: var(--Shades-Blues-Blue-10, #E6F2FA);
+      border: 1px solid var(--Shades-Blues-Blue-25, #BFDEF1);
       border-top: none;
-      border-radius: 0 $border-radius-mid $border-radius-mid $border-radius-mid;
+      border-radius: 0 var(--Mid, 8px) var(--Mid, 8px) var(--Mid, 8px);
       padding: $spacing-500 $spacing-400;
     }
   }
@@ -74,11 +70,3 @@ main .form.edit-mode {
     display: none;
   }
 }
-
-/* Textarea styling */
-.multiline-wrapper textarea {
-  font-family: $font-family;
-}
-
-/* Typography token fallback */
-$size-font-label: var(--Typography-Sizes-Components-Label, 18px);

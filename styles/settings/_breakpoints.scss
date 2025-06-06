@@ -8,15 +8,15 @@
 /// Small devices first and make changes as the
 /// Screen get larger
 $breakpoints: (
-  'tablet': (
-    min-width: 744px,
-  ),
-  'desktop': (
-    min-width: 1280px,
-  ),
-  'desktop-large': (
-    min-width: 1920px,
-  ),
+        'tablet': (
+                min-width: 744px,
+        ),
+        'desktop': (
+                min-width: 1280px,
+        ),
+        'desktop-large': (
+                min-width: 1920px,
+        ),
 ) !default;
 
 @mixin media($breakpoint) {

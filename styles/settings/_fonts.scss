@@ -100,3 +100,13 @@ $size-font-body-small:   clamp(12px, 1.1vw, 14px); // 12 → 13 → 14
   line-height: 160%;
   text-decoration: underline;
 }
+
+// Form Inputs and Buttons
+$size-font-button-default: clamp(18px, 1.25vw, 20px);
+$size-font-button-small: clamp(16px, 1.1vw, 18px); // need to check RW
+$size-font-error-link: clamp(15px, 1.1vw, 18px); // same as base font size
+$size-font-error-message: clamp(12px, 1vw, 14px); // small paragraph size
+$size-font-hint: clamp(15px, 1.1vw, 18px); // same as base font size
+$size-font-input-text: clamp(18px, 1.25vw, 20px);
+$size-font-label: clamp(18px, 1.25vw, 20px);
+
