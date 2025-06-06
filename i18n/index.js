@@ -11,7 +11,7 @@ export function setLang(lang) {
     }
 }
 
-export function t(key, vars = {}) {
+export function i18n(key, vars = {}) {
     const translation = translations[currentLang][key] || key;
     return translation.replace(/\{(\w+)\}/g, (_, v) => vars[v] || '');
 }

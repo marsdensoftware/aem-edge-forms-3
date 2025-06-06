@@ -1,5 +1,6 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
 import { isNo } from '../utils.js'
+import { i18n } from '../../../../i18n/index.js';
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static FIELD_NAMES = {
@@ -36,6 +37,12 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         if (stillWorking.value == '0') {
             // No longer working
             const endofwork = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].displayValue + ' ' + result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].displayValue;
+
+            workperiod += ` - ${endofwork}`;
+        }
+        else {
+            // Still working
+            const endofwork = i18n('present');
 
             workperiod += ` - ${endofwork}`;
         }

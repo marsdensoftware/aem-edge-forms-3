@@ -1,5 +1,3 @@
-import { t } from '../../../../i18n/index.js';
-
 class AdvancedDatepickerField {
     constructor(panel, model) {
         this.panel = panel;
