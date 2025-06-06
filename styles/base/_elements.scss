@@ -1,3 +1,7 @@
+@use '../settings/colors' as *;
+@use '../settings/fonts' as *;
+@use '../settings/spacings' as *;
+
 /*
     Based style applied directly to the elements
     Overide this element inside the component
@@ -105,3 +109,4 @@ button {
   border: 0;
   background: none;
 }
+

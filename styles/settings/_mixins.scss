@@ -1,13 +1,15 @@
+@use '../settings/breakpoints' as *;
 @use '../settings/elevations' as *;
 @use '../settings/colors' as *;
 @use '../settings/spacings' as *;
 @use '../settings/utils' as *;
 @use '../settings/borders' as *;
+@use '../base/typography' as *;
+
 
 /******************************
       Contextual Help Mixins
 *******************************/
-
 @mixin panel-help-base($bg-color, $text-color, $link-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -33,7 +35,7 @@
 
 @mixin panel-help-icon-invert {
   .panel-formcontextualhelp__icon {
-    filter: brightness(0) invert(1); // white icon for dark backgrounds
+    filter: brightness(0) invert(1);
   }
 }
 
@@ -52,7 +54,7 @@
   transition: all 0.2s ease-in-out;
 
   &:focus {
-    box-shadow: 0 0 0 2px $color-white; /* focus ring */
+    box-shadow: 0 0 0 2px $color-white;
     outline: 3px solid transparent;
   }
 
@@ -93,10 +95,8 @@
     opacity: 0;
   }
 
-  &:visited {
-    &:hover {
-      color: $color-white;
-    }
+  &:visited:hover {
+    color: $color-white;
   }
 
   &:hover {
@@ -148,382 +148,28 @@
 }
 
 /******************************
-  Contextual Help Colourways
+   Common Utilities
 *******************************/
+%common-panel-spacing {
+  margin: 32px 0;
 
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
-.panel-formcontextualhelp--primary {
-  @include panel-help-base($color-white, $text-primary, $text-accent);
-}
-
-.panel-formcontextualhelp--secondary {
-  @include panel-help-base($bg-light-secondary, $text-primary, $text-accent);
-}
-
-.panel-formcontextualhelp--tertiary {
-  @include panel-help-base($color-primary-dark-navy, $text-white, $text-white);
-  @include panel-help-icon-invert;
-}
-
-
-
-// _spacing.scss
-// Spacing mixins for margin and padding using spacing scale
-
-
-
-// Single-direction spacing
-@mixin padding-top($space) {
-  padding-top: $space;
-}
-
-@mixin padding-bottom($space) {
-  padding-bottom: $space;
-}
-
-@mixin padding-left($space) {
-  padding-left: $space;
-}
-
-@mixin padding-right($space) {
-  padding-right: $space;
-}
-
-@mixin margin-top($space) {
-  margin-top: $space;
-}
-
-@mixin margin-bottom($space) {
-  margin-bottom: $space;
-}
-
-@mixin margin-left($space) {
-  margin-left: $space;
-}
-
-@mixin margin-right($space) {
-  margin-right: $space;
-}
-
-// Uniform spacing
-@mixin padding($space) {
-  padding: $space;
-}
-
-@mixin margin($space) {
-  margin: $space;
-}
-
-// Axis-based spacing
-@mixin padding-x($space) {
-  padding-left: $space;
-  padding-right: $space;
-}
-
-@mixin padding-y($space) {
-  padding-top: $space;
-  padding-bottom: $space;
-}
-
-@mixin margin-x($space) {
-  margin-left: $space;
-  margin-right: $space;
-}
-
-@mixin margin-y($space) {
-  margin-top: $space;
-  margin-bottom: $space;
-}
-
-/********************
-   MIXINS FOR INPUT STATES
-********************/
-@mixin input-default {
-  border-radius: $border-radius-mid;
-  border: $stroke-input-stroke solid $stroke-tertiary;
-  background: $bg-light-primary;
-  color: $text-primary;
-  /*font-family: $font-family;*/
-  $font-family: 'Atkinson Hyperlegible Next', sans-serif;
-
-  &::placeholder {
-    color: $text-secondary;
+  @include media('desktop') {
+    padding: 60px 0;
   }
 }
 
-@mixin input-hover-focus-active {
-  border: $stroke-input-stroke solid $stroke-accent;
-  background: $color-shade-blue-10;
-  outline: none;
-}
-
-@mixin input-disabled {
-  border: $stroke-input-stroke solid $color-grey-black-20;
-  background: $color-grey-black-05;
-  color: $text-secondary;
-  cursor: not-allowed;
-
-  &::placeholder {
-    color: $text-secondary;
-  }
-}
-
-@mixin input-error {
-  border: $stroke-input-stroke solid $color-feedback-red;
-  background: $bg-light-primary;
-  color: $color-feedback-red;
-
-  &::placeholder {
-    color: $color-feedback-red;
-  }
-}
-
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have default form file in the base/forms
-
-/********************
-   DEFAULT LABEL + INPUT
-********************/
-label,
-input[type='text'],
-input[type='radio'],
-input[type='checkbox'] {
-  cursor: pointer;
-}
-
-fieldset {
-  border: 0;
-}
-
-
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have a text input file specifically in forms/_input.scss
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
-/********************
-   TEXT INPUT
-********************/
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: $spacing-100;
-    color: $text-secondary;
-  }
-
-  input[type='text'] {
-    @include input-default;
-    padding: $spacing-400;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      @include input-hover-focus-active;
-    }
-
-    &:disabled {
-      @include input-disabled;
-    }
-  }
-}
-
-
-/********************
-   TEXTAREA
-********************/
-textarea {
-  width: 100%;
+%common-wizard-button {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   display: block;
-  @include input-default;
-  padding: $spacing-400;
-  font-size: 20px;
-  line-height: 120%;
-  margin-bottom: $spacing-600;
-
-  &:focus-visible,
-  &:focus,
-  &:active,
-  &:hover {
-    @include input-hover-focus-active;
-  }
-
-  &:disabled {
-    @include input-disabled;
-  }
+  width: 20px;
+  height: 20px;
 }
 
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have a text input file specifically in forms/_input.scss
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
-/********************
-   NUMBER INPUT
-********************/
-.number-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: $spacing-100;
-    color: $text-secondary;
-  }
-
-  input[type='number'] {
-    display: flex;
-    padding: $spacing-400;
-    align-items: center;
-    gap: $spacing-200;
-    @include input-default;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      @include input-hover-focus-active;
-    }
-
-    &:disabled {
-      @include input-disabled;
-    }
-  }
+/******************************
+   Hide Wizard Menu
+*******************************/
+.wizard-menu-items {
+  display: none !important;
 }
-
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have a text input file specifically in forms/_input.scss
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
-/********************
-   EMAIL INPUT
-********************/
-.email-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  .field-label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: $spacing-100;
-    color: $text-secondary;
-    /*font-family: $font-family;*/
-    $font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  }
-
-  input[type='email'] {
-    display: flex;
-    padding: $spacing-400;
-    align-items: center;
-    gap: $spacing-200;
-    @include input-default;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      @include input-hover-focus-active;
-    }
-
-    &:disabled {
-      @include input-disabled;
-    }
-  }
-}
-
-
-// Mixin can not contain a class name ".something"
-// This file is included on all files that using the main settings
-// If you add a class in within any of the setting file
-// All file include the settings will get compile although nothing is changed from that file
-
-// Below class name get compiled everytime unnecessarily
-
-// We already have a text input file specifically in forms/_input.scss
-// Create mixin here but then imported the settings file to that file and use the mixins within that file
-
-/********************
-   ERROR STATE
-********************/
-.field-wrapper.field-invalid input,
-.field-wrapper.field-invalid textarea,
-.field-wrapper.field-invalid input[type='email'],
-.field-wrapper.field-invalid input[type='number'] {
-  @include input-error;
-}
-
-
-/*****************************
-   FORM INPUT LABELS, BUTTONS etc
-*****************************/
-
-@mixin font-label {
-  font-size: $size-font-label;
-  font-weight: $font-weight-medium;
-  line-height: 133%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-button-default {
-  font-size: $size-font-button-default;
-  font-weight: $font-weight-medium;
-  line-height: 133%;
-}
-
-@mixin font-error-message {
-  font-size: $size-font-error-message;
-  font-weight: $font-weight-regular;
-  line-height: 160%;
-}
-

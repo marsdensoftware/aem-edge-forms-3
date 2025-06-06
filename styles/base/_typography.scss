@@ -1,4 +1,6 @@
-@use '../settings' as *;
+@use '../settings/fonts' as *;
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
 
 
 /* ------------------------------
@@ -11,7 +13,7 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
- margin-bottom: $spacing-600;
+  margin-bottom: $spacing-600;
 
   &:last-child:not(:first-child) {
     margin-bottom: 0;
@@ -316,4 +318,5 @@ ul li {
     color: $text-dark;
   }
 }
+
 
