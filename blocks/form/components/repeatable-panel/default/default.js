@@ -103,6 +103,11 @@ export class RepeatablePanel {
         return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
     }
 
+    _validate(entry) {
+        // Can be used in subclasses to perform custom validations
+        return entry != undefined;
+    }
+
     _ensureButtonBar(entry) {
         let buttonBar = entry.querySelector('.button-bar');
         if (buttonBar) {
@@ -118,7 +123,7 @@ export class RepeatablePanel {
 
         saveBtn.addEventListener('click', () => {
             // Validate
-            const valid = validateContainer(entry);
+            const valid = validateContainer(entry) && this._validate(entry);
 
             if (valid) {
                 // Save
