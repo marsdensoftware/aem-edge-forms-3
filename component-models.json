@@ -5184,7 +5184,7 @@
           },
           {
             "component": "container",
-            "name": "help",
+            "name": "search-box-results",
             "label": "Search Results",
             "collapsible": true,
             "fields": [
