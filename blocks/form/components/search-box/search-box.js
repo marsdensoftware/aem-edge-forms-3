@@ -4,13 +4,13 @@ function addSuggestionDiv() {
     return el;
 }
 
-function addSelectedCardsDiv() {
+function addSelectedCardsDiv(headingText) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('selected-cards-wrapper');
 
   const heading = document.createElement('div');
   heading.classList.add('selected-cards-heading');
-  heading.textContent = 'Selected locations';
+  heading.textContent = headingText || 'Selected items';
   wrapper.appendChild(heading);
 
   const cardsDiv = document.createElement('div');
@@ -123,14 +123,13 @@ export default function decorate(element, field, container) {
 
     element.classList.add('search-box', 'text-wrapper__icon-search');
     element.dataset.datasource = datasource;
-    element.dataset.selectedHeading = selectionLabel;
 
     // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
     element.appendChild(suggestionsDiv);
 
     // Add selected cards container
-    const selectedCardsDiv = addSelectedCardsDiv();
+    const selectedCardsDiv = addSelectedCardsDiv(selectionLabel);
     element.appendChild(selectedCardsDiv);
 
     return element;
