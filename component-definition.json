@@ -500,6 +500,67 @@
           }
         },
         {
+          "title": "Advanced Date Picker",
+          "id": "advanceddatepicker",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Advanced Date Picker",
+                  "fieldType": "panel",
+                  "fd:viewType": "advanceddatepicker",
+                  "name": "advanceddatepicker",
+                  "month": {
+                    "name": "month",
+                    "type": "string",
+                    "placeholder": "Month",
+                    "fieldType": "drop-down",
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "6",
+                      "7",
+                      "8",
+                      "9",
+                      "10",
+                      "11",
+                      "12"
+                    ],
+                    "enumNames": [
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December"
+                    ],
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "required": true
+                  },
+                  "year": {
+                    "required": true,
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "fieldType": "drop-down",
+                    "placeholder": "Year",
+                    "type": "string",
+                    "name": "year"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Education",
           "id": "education",
           "plugins": {
@@ -1134,8 +1195,7 @@
                         "datasource": "occupations",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Match your job title to one from our standard list.</p>",
-                        "required": true
+                        "description": "<p>Match your job title to one from our standard list.</p>"
                       },
                       "employer": {
                         "jcr:title": "Employer name/Who you did this work for",
@@ -1210,8 +1270,7 @@
                         "datasource": "skills",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>",
-                        "required": true
+                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>"
                       },
                       "description": {
                         "multiLine": true,

@@ -18,3 +18,12 @@ export function onElementAdded(el) {
         });
     });
 }
+
+export function isNo(field) {
+    const value = field.value;
+    if (!value) return true;
+    if (typeof value === 'string') {
+        const normalized = value.trim().toLowerCase();
+        return normalized === 'no' || normalized === 'false' || normalized === '0';
+    }
+}

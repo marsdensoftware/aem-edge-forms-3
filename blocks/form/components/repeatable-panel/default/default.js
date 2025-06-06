@@ -1,5 +1,6 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
+import { isNo } from '../../utils.js'
 
 export class RepeatablePanel {
     #overview;
@@ -102,6 +103,11 @@ export class RepeatablePanel {
         return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
     }
 
+    _validate(entry) {
+        // Can be used in subclasses to perform custom validations
+        return entry != undefined;
+    }
+
     _ensureButtonBar(entry) {
         let buttonBar = entry.querySelector('.button-bar');
         if (buttonBar) {
@@ -117,7 +123,7 @@ export class RepeatablePanel {
 
         saveBtn.addEventListener('click', () => {
             // Validate
-            const valid = validateContainer(entry);
+            const valid = validateContainer(entry) && this._validate(entry);
 
             if (valid) {
                 // Save
@@ -409,7 +415,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (this.#isNo(radio)) {
+                    if (isNo(radio)) {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
@@ -437,15 +443,6 @@ export class ConditionalRepeatable extends RepeatablePanel {
             });
             // prevent validation
             repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-        }
-    }
-
-    #isNo(field) {
-        const value = field.value;
-        if (!value) return true;
-        if (typeof value === 'string') {
-            const normalized = value.trim().toLowerCase();
-            return normalized === 'no' || normalized === 'false' || normalized === '0';
         }
     }
 

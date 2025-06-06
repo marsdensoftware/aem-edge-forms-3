@@ -1,0 +1,20 @@
+@use '../../../../styles/settings' as *;
+
+
+fieldset.advanceddatepicker {
+    display: flex;
+
+    >legend {
+        @include font-body-large;
+    }
+
+    &[data-required=true]>legend::after {
+        content: "*";
+        color: var(--form-error-color);
+        padding-inline-start: 0.3125rem;
+    }
+
+    >.drop-down-wrapper {
+        flex: 1;
+    }
+}
