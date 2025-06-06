@@ -1,3 +1,10 @@
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
+@use '../settings/borders' as *;
+@use '../settings/elevations' as *;
+@use '../settings/utils' as *;
+@use '../settings/mixins' as *;
+
 @use '../settings' as *;
 
 .button {
@@ -32,3 +39,4 @@
     font-size: 20px;
   }
 }
+

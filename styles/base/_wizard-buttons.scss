@@ -1,3 +1,8 @@
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
+@use '../settings/borders' as *;
+@use '../settings/mixins' as *;
+
 /* Wizard Button Wrapper */
 .wizard-button-wrapper {
   display: flex;
@@ -14,8 +19,8 @@
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
 
   font-family: var(
-    --Typography-Font-family-Primary-font,
-    'Atkinson Hyperlegible Next'
+                  --Typography-Font-family-Primary-font,
+                  'Atkinson Hyperlegible Next'
   );
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
@@ -30,8 +35,8 @@
   //background: var(--Background-Dark-Accent, #017ac9);
   background: red;
   box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-    var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
+  var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
 
   border: none;
   cursor: pointer;
@@ -39,12 +44,12 @@
 }
 .wizard-button:hover {
   background: var(
-    --Gradient-Blue,
-    linear-gradient(
-      135deg,
-      var(--Brand-MSD-Blue, #017ac9) 25%,
-      var(--Brand-MSD-Navy, #134276) 100%
-    )
+                  --Gradient-Blue,
+                  linear-gradient(
+                                  135deg,
+                                  var(--Brand-MSD-Blue, #017ac9) 25%,
+                                  var(--Brand-MSD-Navy, #134276) 100%
+                  )
   );
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
@@ -62,8 +67,8 @@ main .form button {
   padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
 
   font-family: var(
-    --Typography-Font-family-Primary-font,
-    'Atkinson Hyperlegible Next'
+                  --Typography-Font-family-Primary-font,
+                  'Atkinson Hyperlegible Next'
   );
   font-size: var(--Typography-Sizes-Components-Button-default, 20px);
   font-style: normal;
@@ -77,8 +82,8 @@ main .form button {
   border-radius: var(--Corner-radius-Round, 999px);
   background: var(--Background-Dark-Accent, #017ac9);
   box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-    var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+  var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
+  var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
 
   border: none;
   cursor: pointer;
@@ -92,3 +97,4 @@ main form .file-wrapper > button {
 main .form button:hover {
   background: var(--form-button-background-hover-color);
 }
+

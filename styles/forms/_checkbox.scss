@@ -1,3 +1,7 @@
+@use '../settings/colors' as *;
+@use '../settings/mixins' as *;
+@use '../settings/spacings' as *;
+
 @use '../settings' as *;
 @use '../base/forms' as *;
 
@@ -96,3 +100,4 @@
     }
   }
 }
+
