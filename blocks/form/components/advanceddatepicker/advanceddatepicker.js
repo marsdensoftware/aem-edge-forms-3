@@ -1,3 +1,5 @@
+import { i18n } from '../../../../i18n/index.js';
+
 class AdvancedDatepickerField {
     constructor(panel, model) {
         this.panel = panel;
@@ -64,7 +66,7 @@ class AdvancedDatepickerField {
             for (let month = 1; month <= 12; month++) {
                 const option = document.createElement('option');
                 option.value = month;
-                option.textContent = month;
+                option.textContent = i18n(`month_${month}`);
                 this.monthDD.appendChild(option);
             }
         }

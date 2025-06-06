@@ -1195,6 +1195,7 @@
                         "datasource": "occupations",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                        "required": true,
                         "description": "<p>Match your job title to one from our standard list.</p>"
                       },
                       "employer": {
@@ -1204,46 +1205,28 @@
                         "name": "employer",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
                       },
-                      "text": {
-                        "jcr:title": "Text",
-                        "name": "month-year-label",
-                        "textIsRich": true,
-                        "fieldType": "plain-text",
-                        "value": "<p>When you started doing this work</p>",
-                        "classes": "p-large",
-                        "sling:resourceType": "core/fd/components/form/text/v1/text"
-                      },
-                      "month": {
-                        "name": "month",
-                        "type": "string",
-                        "placeholder": "Month",
-                        "enumNames": [
-                          "Item 1",
-                          "Item 2"
-                        ],
-                        "fieldType": "drop-down",
-                        "enum": [
-                          "0",
-                          "1"
-                        ],
-                        "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
-                        "required": true
-                      },
-                      "year": {
-                        "required": true,
-                        "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
-                        "fieldType": "drop-down",
-                        "enumNames": [
-                          "Item 1",
-                          "Item 2"
-                        ],
-                        "placeholder": "Year",
-                        "enum": [
-                          "0",
-                          "1"
-                        ],
-                        "type": "string",
-                        "name": "year"
+                      "startofwork": {
+                        "fd:viewType": "advanceddatepicker",
+                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "jcr:title": "When you started doing this work",
+                        "fieldType": "panel",
+                        "name": "startofwork",
+                        "month": {
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "type": "string",
+                          "placeholder": "Month",
+                          "required": true,
+                          "name": "startofwork-month",
+                          "fieldType": "drop-down"
+                        },
+                        "year": {
+                          "name": "startofwork-year",
+                          "type": "string",
+                          "placeholder": "Year",
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "fieldType": "drop-down",
+                          "required": true
+                        }
                       },
                       "still_working": {
                         "name": "still-working",
@@ -1262,11 +1245,36 @@
                         "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                         "required": true
                       },
+                      "endofwork": {
+                        "fd:viewType": "advanceddatepicker",
+                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "jcr:title": "When you finished this work",
+                        "fieldType": "panel",
+                        "name": "endofwork",
+                        "visible": false,
+                        "month": {
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "type": "string",
+                          "placeholder": "Month",
+                          "required": true,
+                          "name": "endofwork-month",
+                          "fieldType": "drop-down"
+                        },
+                        "year": {
+                          "name": "endofwork-year",
+                          "type": "string",
+                          "placeholder": "Year",
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "fieldType": "drop-down",
+                          "required": true
+                        }
+                      },
                       "skills": {
                         "jcr:title": "Add skills you used in this work",
                         "name": "skills",
                         "fieldType": "text-input",
                         "fd:viewType": "typeahead",
+                        "required": true,
                         "datasource": "skills",
                         "placeholder": "Start typing",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
