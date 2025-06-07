@@ -1,6 +1,9 @@
 export const en = {
     present: 'Present',
-    durationFormat: '{year} year {month} months',
+    month: 'month',
+    year: 'year',
+    months: 'months',
+    years: 'years',
     month_1: 'January',
     month_2: 'February',
     month_3: 'March',
