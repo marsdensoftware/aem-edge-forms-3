@@ -56,7 +56,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             endYear = currentYear;
         }
 
-        workperiod += ` - ${endofwork} ${getDurationString(startMonth, startYear, endMonth, endYear)}`;
+        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
 
         const newResult = {};
         newResult[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE] = result[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE];
