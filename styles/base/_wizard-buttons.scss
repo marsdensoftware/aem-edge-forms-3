@@ -1,17 +1,69 @@
+@use '../../styles/settings' as *;
 
-.wizard .wizard-button-wrapper .button[name='next']::before {
-  content: "";
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=);
-  order: 1;
-  margin-left: 0.5rem;
+/*****************************
+    WIZARD BUTTONS
+*****************************/
+
+%common-panel-spacing {
+  margin: 32px 0;
+
+  @include media('desktop') {
+    padding: 60px 0;
+  }
 }
 
-.wizard .wizard-button-wrapper .button[name='back']::before,
-.wizard .wizard-button-wrapper .button[name='next']::before {
+%common-wizard-button {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   display: block;
   width: 1.25rem;
   height: 1.25rem;
+}
+
+.wizard .wizard-button-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: $spacing-400;
+  background-color: $color-white;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-300;
+  border-top: 1px solid $stroke-secondary;
+
+  .wizard-button-next {
+    margin-left: auto;
+  }
+
+  .button[name='next'] {
+    @extend %button;
+    @extend %button--primary;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      @extend %common-wizard-button;
+      content: '';
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=);
+      order: 1;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .button[name='back'] {
+    @extend %button;
+    @extend %button--hollow;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      @extend %common-wizard-button;
+      content: '';
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAeUlEQVR4Ae3SsQ3CMBBF0bOAGGVgA+gdDBh9UHHk5jYJ6CH9FyDAglGfgIKtOEJqAzj+TVmmxUAEeKTb+/x7PKMEF8ALQZ7xGfM7Yr9xBXXn4aZrPEdEjWLmPc+9RRO+XkJBrMfyBuIkSJLCEri/AAAAAElFTkSuQmCC");
+      margin-right: 0.5rem;
+    }
+  }
 }

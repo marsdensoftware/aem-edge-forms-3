@@ -8,23 +8,6 @@
     display: none !important;
 }
 
-%common-panel-spacing {
-    margin: 32px 0;
-
-    @include media('desktop') {
-        padding: 60px 0;
-    }
-}
-
-%common-wizard-button {
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
-    width: 20px;
-    height: 20px;
-}
-
 .wizard {
     .current-wizard-step {
         @include media('desktop') {
@@ -38,53 +21,6 @@
     >legend.field-label,
     .wizard-menu-items {
         display: none;
-    }
-
-    .wizard-button-wrapper {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: $spacing-400;
-        background-color: $color-white;
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        gap: $spacing-300;
-        border-top: 1px solid $stroke-secondary;
-
-        .wizard-button-next {
-            margin-left: auto;
-        }
-
-        .button[name='next'] {
-            @extend %button;
-            @extend %button--primary;
-            display: flex;
-            align-items: center;
-
-            &::before {
-                @extend %common-wizard-button;
-                content: '';
-                background-image: url('...'); // truncated for brevity
-                order: 1;
-                margin-left: 8px;
-            }
-        }
-
-        .button[name='back'] {
-            @extend %button;
-            @extend %button--hollow;
-            display: flex;
-            align-items: center;
-
-            &::before {
-                @extend %common-wizard-button;
-                content: '';
-                background-image: url('...'); // truncated for brevity
-                margin-right: 8px;
-            }
-        }
     }
 
     .wizard-menu-items {
