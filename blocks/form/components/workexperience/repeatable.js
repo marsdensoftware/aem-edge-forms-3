@@ -1,5 +1,5 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
-import { isNo } from '../utils.js'
+import { isNo, getDurationString } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js';
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
@@ -27,20 +27,31 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
         // Customize rendering for completion-year, completion status
         const stillWorking = result[WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING];
-        let workperiod = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].displayValue + ' ' + result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].displayValue;
-
+        const startMonth = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].value;
+        const startYear = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].value;
+        let endMonth;
+        let endYear;
+        let workperiod = `${result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
+        let endofwork;
         if (stillWorking.value == '0') {
             // No longer working
-            const endofwork = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].displayValue + ' ' + result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].displayValue;
-
-            workperiod += ` - ${endofwork}`;
+            endofwork = `${result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
+            endMonth = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].value;
+            endYear = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].value;
         }
         else {
             // Still working
-            const endofwork = i18n('present');
+            const now = new Date();
 
-            workperiod += ` - ${endofwork}`;
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth() + 1;
+
+            endofwork = i18n('present');
+            endMonth = currentMonth;
+            endYear = currentYear;
         }
+
+        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
 
         const newResult = {};
         newResult[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE] = result[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE];
