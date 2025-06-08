@@ -20,11 +20,6 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
     constructor(repeatablePanel) {
         super(repeatablePanel, 'workexperience');
-
-        const entries = repeatablePanel.querySelectorAll('[data-repeatable]');
-        entries.forEach(entry => {
-            this._init(entry);
-        });
     }
 
     _fieldToNameValues(entry) {

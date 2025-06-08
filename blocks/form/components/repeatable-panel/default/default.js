@@ -42,6 +42,16 @@ export class RepeatablePanel {
                 this._renderOverview();
             }
         });
+
+        const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
+        entries.forEach(entry => {
+            this._init(entry);
+        });
+    }
+
+    _init(entry) {
+        // Can be overriden in sub classes to perform entry initialization, event bindings, etc...
+        console.log(`Initializing ${entry.id}`);
     }
 
     _onItemAdded(entry) {

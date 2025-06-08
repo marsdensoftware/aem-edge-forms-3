@@ -1,4 +1,4 @@
-import { EducationRepeatable } from "./educationrepeatable.js";
+import { EducationRepeatable } from "./repeatable.js";
 import { onElementAdded } from '../utils.js'
 
 export default async function decorate(el) {
