@@ -2,6 +2,10 @@
 
 .typeahead {
   position: relative;
+  
+  select{
+      display: none;
+  }
 
   /*&::after {
     content: url('../../../../icons/search.svg');

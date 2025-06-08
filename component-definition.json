@@ -930,12 +930,14 @@
                       "sling:resourceType": "core/fd/components/form/text/v1/text"
                     },
                     "language": {
+                      "name": "language",
+                      "type": "string",
+                      "placeholder": "Month",
+                      "fieldType": "drop-down",
                       "fd:viewType": "typeahead",
                       "datasource": "languages",
-                      "fieldType": "text-input",
-                      "name": "language",
                       "jcr:title": "Language",
-                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
                       "required": true
                     },
                     "proficiency": {
