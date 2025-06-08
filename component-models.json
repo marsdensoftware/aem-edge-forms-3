@@ -5179,6 +5179,14 @@
               {
                 "name": "Languages",
                 "value": "languages"
+              },
+              {
+                "name": "Locations",
+                "value": "userLocations"
+              },
+              {
+                "name": "Skills",
+                "value": "skills"
               }
             ]
           },

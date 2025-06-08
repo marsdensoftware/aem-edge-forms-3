@@ -61,9 +61,16 @@ const courses = [
 
 const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 
+const userLocations = ['Auckland', 'Wellington', 'Christchurch'];
+
+const skills = ['Skill 1', 'Skill 2', 'Skill 3'];
+
 const datasources = {
     'courses': courses,
-    'languages': languages
+    'languages': languages,
+    'userLocations': userLocations,
+    'skills': skills
+
 };
 
 // Close suggestions when clicking outside
