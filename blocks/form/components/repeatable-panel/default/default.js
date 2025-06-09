@@ -195,6 +195,10 @@ export class RepeatablePanel {
                         input.value = value;
                         break;
                 }
+
+                // Trigger change event
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
             });
         }
         else {
@@ -210,6 +214,10 @@ export class RepeatablePanel {
             } else {
                 input.value = '';
             }
+
+            // Trigger change event
+            const event = new Event('change', { bubbles: true });
+            input.dispatchEvent(event);
         });
     }
 
