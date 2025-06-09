@@ -2125,6 +2125,17 @@
         "value": true
       },
       {
+        "component": "aem-content",
+        "name": "url",
+        "label": "Image Url"
+      },
+      {
+        "component": "boolean",
+        "name": "urlOpenInNewTab",
+        "label": "Open Url in new tab",
+        "valueType": "boolean"
+      },
+      {
         "component": "select",
         "name": "colspan",
         "label": "Column Span",

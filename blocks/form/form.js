@@ -252,12 +252,33 @@ function createPlainText(fd) {
   return wrapper;
 }
 
+function addLinkSupport(field, fd) {
+    if (fd.properties.url) {
+        const picture = field.querySelector('picture');
+
+        if (picture) {
+            const link = document.createElement('a');
+            link.href = `${fd.properties.url}`;
+            link.className = 'image-link';
+            link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
+
+            // Move the picture inside the new anchor element
+            picture.parentNode.insertBefore(link, picture);
+            link.appendChild(picture);
+        }
+    }
+}
+
 function createImage(fd) {
   const field = createFieldWrapper(fd);
   field.id = fd?.id;
   const imagePath = fd.value || fd.properties['fd:repoPath'] || '';
   const altText = fd.altText || fd.name;
   field.append(createOptimizedPicture(imagePath, altText));
+  
+  //###SEP-NJ START Add support for link url
+  addLinkSupport(field, fd);
+  //###SEP-NJ END
   return field;
 }
 
