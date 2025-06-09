@@ -59,7 +59,6 @@
   font-weight: 500;
   margin-bottom: $spacing-100;
   color: $text-secondary;
-  display: none;
 }
 
 .selected-cards-wrapper {
@@ -83,13 +82,34 @@
   font-weight: 400;
   font-size: 12px;
 
-  .button-remove {
+  .selected-card__button-remove {
+    background-image: url('../../../../icons/icon-x.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     padding: 0;
     border: 0;
-    background: none;
-    content: url('../../../../icons/icon-x.svg');
     box-shadow: none;
     margin-left: 4px;
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    &:active,
+    &:hover {
+      background-color: transparent;
+      background-image: url('../../../../icons/icon-x.svg');
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    // For screen reader
+    span {
+      @extend %visually-hidden;
+    }
 
     &::after {
       display: none;

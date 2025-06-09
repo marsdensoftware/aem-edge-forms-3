@@ -22,8 +22,9 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
     const text = document.createElement('div');
     text.textContent = item;
     const removeBtn = document.createElement('button');
-    removeBtn.classList.add('button-remove');
+    removeBtn.classList.add('selected-card__button-remove');
     removeBtn.setAttribute('aria-label', `Remove ${item}`);
+    removeBtn.innerHTML = `<span>Remove ${item}</span>`;
     removeBtn.addEventListener('click', () => {
         card.remove();
         // Trigger a change event to update any validation
