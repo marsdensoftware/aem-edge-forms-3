@@ -60,6 +60,20 @@
                     "value": true
                 },
                 {
+                    "component": "reference",
+                    "valueType": "string",
+                    "name": "url",
+                    "label": "Image Url",
+                    "multi": false
+                },
+                {
+                    "component": "boolean",
+                    "name": "urlOpenInNewTab",
+                    "label": "Open Url in new tab",
+                    "valueType": "boolean",
+                    "value": true
+                },
+                {
                     "component": "select",
                     "name": "colspan",
                     "label": "Column Span",
