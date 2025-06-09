@@ -245,7 +245,7 @@ function createPlainText(fd) {
   if (fd.properties?.classes) {
     paragraph.classList.add(fd.properties.classes);
   }
-  
+
   const wrapper = createFieldWrapper(fd);
   wrapper.id = fd.id;
   wrapper.replaceChildren(paragraph);
@@ -275,7 +275,7 @@ function createImage(fd) {
   const imagePath = fd.value || fd.properties['fd:repoPath'] || '';
   const altText = fd.altText || fd.name;
   field.append(createOptimizedPicture(imagePath, altText));
-  
+
   //###SEP-NJ START Add support for link url
   addLinkSupport(field, fd);
   //###SEP-NJ END
@@ -386,15 +386,15 @@ function renderField(fd) {
   }
   if (fd.description) {
     const helpEl = createHelpText(fd);
-    
-    //###SEP-NJ START: add help text below label
-    const labelEl = field.querySelector('label');
+
+    //###SEP-NJ START: add help text below label / legend
+    const labelEl = field.querySelector('label, legend');
     if (labelEl && labelEl.nextSibling) {
       field.insertBefore(helpEl, labelEl.nextSibling);
     } else {
       field.append(helpEl);
     }
-    //###SEP-NJ END: add help text below label
+    //###SEP-NJ END: add help text below label / legend
     field.dataset.description = fd.description; // In case overriden by error message
   }
   if (fd.fieldType !== 'radio-group' && fd.fieldType !== 'checkbox-group' && fd.fieldType !== 'captcha') {

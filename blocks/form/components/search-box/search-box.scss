@@ -1,0 +1,122 @@
+@use '../../../../styles/settings' as *;
+
+.search-box {
+  position: relative;
+}
+
+// This is to combat badly class name being added to mixin
+#search-box__input {
+  input[type='text'] {
+    padding-right: 48px;
+  }
+}
+
+.search-box__input {
+  position: relative;
+
+  input[type='text'] {
+    width: 100%;
+  }
+
+  &::after {
+    content: url('../../../../icons/icon-search.svg');
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .suggestions {
+    @include elevation-2;
+    border-radius: $border-radius-mid;
+    background-color: $color-white;
+    max-height: 50px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 20px;
+    color: $color-grey-black-60;
+    display: none;
+
+    &:hover {
+      color: $color-grey-black-80;
+      background-color: $color-shade-blue-10;
+    }
+  }
+}
+
+.selected-cards-heading {
+  font-size: 20px;
+  line-height: 120%;
+  font-weight: 500;
+  margin-bottom: $spacing-100;
+  color: $text-secondary;
+}
+
+.selected-cards-wrapper {
+  margin-top: 1rem;
+}
+
+.selected-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 32px;
+
+  &:empty::after {
+    content: attr(data-empty-selection-message);
+  }
+}
+
+.selected-card {
+  display: flex;
+  align-items: center;
+  background-color: $color-grey-black-60;
+  color: $color-white;
+  border-radius: $border-radius-large;
+  padding: 6px 12px;
+  font-weight: 400;
+  font-size: 12px;
+
+  .selected-card__button-remove {
+    background-image: url('../../../../icons/icon-x.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    margin-left: 4px;
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    &:active,
+    &:hover {
+      background-color: transparent;
+      background-image: url('../../../../icons/icon-x.svg');
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    // For screen reader
+    span {
+      @extend %visually-hidden;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
