@@ -47,7 +47,7 @@
     &::before {
       @extend %common-wizard-button;
       content: '';
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=);
+      background-image: url('/icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
       margin-left: 0.5rem;
     }
@@ -62,7 +62,7 @@
     &::before {
       @extend %common-wizard-button;
       content: '';
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAeUlEQVR4Ae3SsQ3CMBBF0bOAGGVgA+gdDBh9UHHk5jYJ6CH9FyDAglGfgIKtOEJqAzj+TVmmxUAEeKTb+/x7PKMEF8ALQZ7xGfM7Yr9xBXXn4aZrPEdEjWLmPc+9RRO+XkJBrMfyBuIkSJLCEri/AAAAAElFTkSuQmCC");
+      background-image: url('/icons/icon-wizard-back-button-grey-arrow-left.svg');
       margin-right: 0.5rem;
     }
   }
