@@ -36,7 +36,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     }
 
     _clearFields(entry) {
-        super._clearFields();
+        super._clearFields(entry);
         const proficiency = entry.querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
         if (proficiency) {
             proficiency.style.display = 'none';
