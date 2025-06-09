@@ -75,7 +75,7 @@ const courses = [
 
 const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew']
 
-const userLocations = ['Auckland', 'Wellington', 'Christchurch']
+const userLocations = ['Auckland Central (en)', 'Blenheim (en)', 'Cambridge (en)', 'Dunedin (en)', 'Gore (en)', 'Greymouth (en)', 'Hastings (en)', 'Hāwera (en)', 'Invercargill (en)', 'Lower Hutt (en)', 'Manukau (en)', 'Napier (en)', 'New Plymouth (en)', 'North Shore (en)', 'Porirua (en)', 'Stratford (en)', 'Upper Hutt (en)', 'Waiheke Island (en)', 'Wellington (en)', 'Whangārei (en)', 'Picton (en)', 'Balclutha (en)', 'Wairoa (en)', 'Ōpunake (en)']
 
 const skills = [
   'Communicate effectively in English',
