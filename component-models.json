@@ -2121,7 +2121,8 @@
         "component": "boolean",
         "name": "visible",
         "label": "Show Component",
-        "valueType": "boolean"
+        "valueType": "boolean",
+        "value": true
       },
       {
         "component": "aem-content",
@@ -2132,8 +2133,7 @@
         "component": "boolean",
         "name": "urlOpenInNewTab",
         "label": "Open Url in new tab",
-        "valueType": "boolean",
-        "value": true
+        "valueType": "boolean"
       },
       {
         "component": "select",
