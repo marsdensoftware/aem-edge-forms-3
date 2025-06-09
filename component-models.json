@@ -2121,8 +2121,7 @@
         "component": "boolean",
         "name": "visible",
         "label": "Show Component",
-        "valueType": "boolean",
-        "value": true
+        "valueType": "boolean"
       },
       {
         "component": "aem-content",
