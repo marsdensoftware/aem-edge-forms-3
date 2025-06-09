@@ -1,3 +1,9 @@
+@use '../settings/colors' as *;
+@use '../settings/mixins' as *;
+@use '../settings/spacings' as *;
+@use '../settings/fonts' as *;
+@use '../settings/tokens' as *;
+
 @use '../settings' as *;
 
 /********************
@@ -148,11 +154,11 @@ FORM required asterisk for radio and checkbox group
 
 .radio-group-wrapper[data-required=true],
 .checkbox-group-wrapper[data-required=true] {
-    >legend.field-label::after {
-        content: "*";
-        color: var(--form-error-color);
-        padding-inline-start: 0.3125rem;
-    }
+  >legend.field-label::after {
+    content: "*";
+    color: var(--form-error-color);
+    padding-inline-start: 0.3125rem;
+  }
 }
 
 /********************
@@ -183,3 +189,4 @@ main .form form .field-wrapper.field-invalid .field-description {
     background-size: contain;
   }
 }
+

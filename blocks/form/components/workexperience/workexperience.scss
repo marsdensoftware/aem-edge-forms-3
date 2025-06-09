@@ -1,0 +1,15 @@
+@use '../../../../styles/settings' as *;
+
+main .form form .panel-repeatable-panel__workexperience {
+    .repeatable-entry {
+        &__title {
+            @include font-body-large;
+            font-weight: $font-weight-bold;
+        }
+
+        &__workperiod {
+            color: $color-grey-black-60;
+            margin-top: $spacing-200;
+        }
+    }
+}

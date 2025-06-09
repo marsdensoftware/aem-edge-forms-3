@@ -1,94 +1,17 @@
-/* Wizard Button Wrapper */
-.wizard-button-wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 32px;
+
+.wizard .wizard-button-wrapper .button[name='next']::before {
+  content: "";
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=);
+  order: 1;
+  margin-left: 0.5rem;
 }
 
-/* Primary Wizard Button: Large + icon */
-.wizard-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--Spacing-Spacing-200, 8px);
-  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
-
-  font-family: var(
-    --Typography-Font-family-Primary-font,
-    'Atkinson Hyperlegible Next'
-  );
-  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-
-  border-radius: var(--Corner-radius-Round, 999px);
-  //background: var(--Background-Dark-Accent, #017ac9);
-  background: red;
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-    var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
-
-  border: none;
-  cursor: pointer;
-  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
-}
-.wizard-button:hover {
-  background: var(
-    --Gradient-Blue,
-    linear-gradient(
-      135deg,
-      var(--Brand-MSD-Blue, #017ac9) 25%,
-      var(--Brand-MSD-Navy, #134276) 100%
-    )
-  );
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-
-.wizard-button:active {
-  background: var(--Background-Dark-Dark, #134276);
-  transform: scale(0.98);
-}
-
-main .form button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--Spacing-Spacing-200, 8px);
-  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
-
-  font-family: var(
-    --Typography-Font-family-Primary-font,
-    'Atkinson Hyperlegible Next'
-  );
-  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
-  font-style: normal;
-  font-weight: var(--Typography-Font-weight-Regular, 400);
-  line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-
-  border-radius: var(--Corner-radius-Round, 999px);
-  background: var(--Background-Dark-Accent, #017ac9);
-  box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-    var(--Elevation-Position-Y-Level-2, 4px) var(--Elevation-Blur-Level-2, 8px)
-    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
-
-  border: none;
-  cursor: pointer;
-  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
-}
-
-main form .file-wrapper > button {
-  display: flex;
-}
-
-main .form button:hover {
-  background: var(--form-button-background-hover-color);
+.wizard .wizard-button-wrapper .button[name='back']::before,
+.wizard .wizard-button-wrapper .button[name='next']::before {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
 }

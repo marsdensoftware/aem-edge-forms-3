@@ -1,5 +1,6 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
+import { isNo } from '../../utils.js'
 
 export class RepeatablePanel {
     #overview;
@@ -26,9 +27,7 @@ export class RepeatablePanel {
             const added = event.detail.item.el;
             // Check that added belongs to the current repeatable
             if (this._repeatablePanel.contains(added)) {
-                // make unique
-                this._makeUnique(added);
-                this._toggleEditMode(added, true);
+                this._onItemAdded(added);
             }
         });
 
@@ -43,6 +42,22 @@ export class RepeatablePanel {
                 this._renderOverview();
             }
         });
+
+        const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
+        entries.forEach(entry => {
+            this._init(entry);
+        });
+    }
+
+    _init(entry) {
+        // Can be overriden in sub classes to perform entry initialization, event bindings, etc...
+        console.log(`Initializing ${entry.id}`);
+    }
+
+    _onItemAdded(entry) {
+        // make unique
+        this._makeUnique(entry);
+        this._toggleEditMode(entry, true);
     }
 
     _makeUnique(el) {
@@ -94,8 +109,13 @@ export class RepeatablePanel {
         }
     }
 
-    #isFirstEntry(entry) {
+    _isFirstEntry(entry) {
         return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
+    }
+
+    _validate(entry) {
+        // Can be used in subclasses to perform custom validations
+        return entry != undefined;
     }
 
     _ensureButtonBar(entry) {
@@ -113,14 +133,12 @@ export class RepeatablePanel {
 
         saveBtn.addEventListener('click', () => {
             // Validate
-            const valid = validateContainer(entry);
+            const valid = validateContainer(entry) && this._validate(entry);
 
             if (valid) {
-                // Mark as saved
-                entry.classList.add('saved');
-                this._toggleEditMode(entry, false);
+                // Save
+                this._save(entry);
 
-                this._entryModified(entry);
             }
         });
 
@@ -130,9 +148,9 @@ export class RepeatablePanel {
         cancelBtn.addEventListener('click', () => {
 
             this._toggleEditMode(entry, false);
-            this.#resetChanges(entry);
+            this._resetChanges(entry);
 
-            if (!entry.classList.contains('saved') && !this.#isFirstEntry(entry)) {
+            if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
                 this.#triggerDeletion(entry);
             }
@@ -144,7 +162,14 @@ export class RepeatablePanel {
         buttonBar.appendChild(cancelBtn);
     }
 
-    #resetChanges(entry) {
+    _save(entry) {
+        entry.classList.add('saved');
+        this._toggleEditMode(entry, false);
+
+        this._entryModified(entry);
+    }
+
+    _resetChanges(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
 
         if (entry.classList.contains('saved')) {
@@ -153,7 +178,7 @@ export class RepeatablePanel {
             const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
             if (!repeatableEntry) {
                 // Clear fields
-                this.#clearFields(inputs);
+                this._clearFields(inputs);
                 return;
             }
 
@@ -174,11 +199,13 @@ export class RepeatablePanel {
         }
         else {
             // Unsaved --> Clear all fields
-            this.#clearFields(inputs);
+            this._clearFields(entry);
         }
     }
 
-    #clearFields(inputs) {
+    _clearFields(entry) {
+        const inputs = entry.querySelectorAll('input, select, textarea');
+
         inputs.forEach(input => {
             if (input.type === 'checkbox' || input.type === 'radio') {
                 input.checked = false;
@@ -300,7 +327,7 @@ export class RepeatablePanel {
         deleteLink.addEventListener('click', (e) => {
             alert('Coming soon...');
             /*
-            if (this.#isFirstEntry(entry)) {
+            if (this._isFirstEntry(entry)) {
                 // First one --> Remove from overview
                 result.remove();
                 // Clear changes
@@ -381,15 +408,8 @@ export class RepeatablePanel {
  * Repeatable that is displayed when a condition is fullfiled, based on a radio group
  */
 export class ConditionalRepeatable extends RepeatablePanel {
-    // A field that yields yes,1,true or no,0,false as value
-    #conditionField;
-
-    static FIELD_NAMES = {
-        'COMPLETION_STATUS': 'completion-status',
-        'START_YEAR': 'start-year',
-        'FINISH_YEAR': 'finish-year',
-        'EDUCATION_SELECTION': 'education-selection'
-    };
+    // A field with many options with one that yields no,0,false as value
+    _conditionField;
 
     constructor(repeatablePanel, name) {
         super(repeatablePanel);
@@ -400,14 +420,25 @@ export class ConditionalRepeatable extends RepeatablePanel {
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
 
-        this.#conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
-        if (this.#conditionField) {
-            const radios = this.#conditionField.querySelectorAll(`input[name="${name}-selection"]`);
+        this._conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
+        if (this._conditionField) {
+            const radios = this._conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (this.#isYes(radio)) {
+                    if (isNo(radio)) {
+                        // hide repeatable panel
+                        repeatablePanel.style.display = 'none';
+                        // Show wizard buttons
+                        super._toggleWizardButtons(true);
+
+                        // TODO Clear all edits?
+
+                        // prevent validation
+                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+                    }
+                    else {
                         // show repeatable panel
                         repeatablePanel.style.display = 'block';
                         // enable validation
@@ -420,17 +451,6 @@ export class ConditionalRepeatable extends RepeatablePanel {
                             this._toggleEditMode(el, true);
                         }
                     }
-                    else {
-                        // hide repeatable panel
-                        repeatablePanel.style.display = 'none';
-                        // Show wizard buttons
-                        super._toggleWizardButtons(true);
-
-                        // TODO Clear all edits?
-
-                        // prevent validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-                    }
                 });
             });
             // prevent validation
@@ -438,33 +458,33 @@ export class ConditionalRepeatable extends RepeatablePanel {
         }
     }
 
-    #isYes(field) {
-        const value = field.value || '';
-        if (value === true || value === 1) return true;
-        if (typeof value === 'string') {
-            const normalized = value.trim().toLowerCase();
-            return normalized === 'yes' || normalized === 'true' || normalized === '1';
+    _entryModified(entry) {
+        super._entryModified(entry);
+
+        this._updateCondition();
+    }
+
+    _updateCondition() {
+        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+        if (savedEntries.length > 0) {
+            // Hide question
+            this._conditionField.setAttribute('data-visible', false);
+        }
+        else {
+            // reset selection & condition field
+            const radios = this._conditionField.querySelectorAll('input[type="radio"]');
+
+            radios?.forEach(radio => { radio.checked = false; });
+            // Show condition field
+            this._conditionField.setAttribute('data-visible', true);
+            // hide repeatable panel
+            this._repeatablePanel.style.display = 'none';
         }
     }
 
     _renderOverview() {
         super._renderOverview();
 
-        // Add custom logic here
-        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
-        if (savedEntries.length > 0) {
-            // Hide question
-            this.#conditionField.setAttribute('data-visible', false);
-        }
-        else {
-            // reset selection & condition field
-            const radios = this.#conditionField.querySelectorAll('input[type="radio"]');
-
-            radios?.forEach(radio => { radio.checked = false; });
-            // Show condition field
-            this.#conditionField.setAttribute('data-visible', true);
-            // hide repeatable panel
-            this._repeatablePanel.style.display = 'none';
-        }
+        this._updateCondition();
     }
 }

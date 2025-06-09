@@ -252,12 +252,33 @@ function createPlainText(fd) {
   return wrapper;
 }
 
+function addLinkSupport(field, fd) {
+    if (fd.properties.url) {
+        const picture = field.querySelector('picture');
+
+        if (picture) {
+            const link = document.createElement('a');
+            link.href = `${fd.properties.url}`;
+            link.className = 'image-link';
+            link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
+
+            // Move the picture inside the new anchor element
+            picture.parentNode.insertBefore(link, picture);
+            link.appendChild(picture);
+        }
+    }
+}
+
 function createImage(fd) {
   const field = createFieldWrapper(fd);
   field.id = fd?.id;
   const imagePath = fd.value || fd.properties['fd:repoPath'] || '';
   const altText = fd.altText || fd.name;
   field.append(createOptimizedPicture(imagePath, altText));
+  
+  //###SEP-NJ START Add support for link url
+  addLinkSupport(field, fd);
+  //###SEP-NJ END
   return field;
 }
 
@@ -364,7 +385,16 @@ function renderField(fd) {
     field.append(createInput(fd));
   }
   if (fd.description) {
-    field.append(createHelpText(fd));
+    const helpEl = createHelpText(fd);
+    
+    //###SEP-NJ START: add help text below label
+    const labelEl = field.querySelector('label');
+    if (labelEl && labelEl.nextSibling) {
+      field.insertBefore(helpEl, labelEl.nextSibling);
+    } else {
+      field.append(helpEl);
+    }
+    //###SEP-NJ END: add help text below label
     field.dataset.description = fd.description; // In case overriden by error message
   }
   if (fd.fieldType !== 'radio-group' && fd.fieldType !== 'checkbox-group' && fd.fieldType !== 'captcha') {

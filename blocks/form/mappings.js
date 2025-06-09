@@ -10,6 +10,8 @@ let customComponents = [
   'formtabs',
   'education',
   'languagepanel',
+  'workexperience',
+  'advanceddatepicker',
   'search-box']
 
 const OOTBComponentDecorators = [

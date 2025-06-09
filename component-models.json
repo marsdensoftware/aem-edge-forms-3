@@ -607,8 +607,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
@@ -1347,8 +1346,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
@@ -2125,6 +2123,17 @@
         "label": "Show Component",
         "valueType": "boolean",
         "value": true
+      },
+      {
+        "component": "aem-content",
+        "name": "url",
+        "label": "Image Url"
+      },
+      {
+        "component": "boolean",
+        "name": "urlOpenInNewTab",
+        "label": "Open Url in new tab",
+        "valueType": "boolean"
       },
       {
         "component": "select",
@@ -3092,8 +3101,7 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true,
-            "required": true
+            "multi": true
           },
           {
             "component": "text",
@@ -4224,6 +4232,51 @@
             "name": "tooltip",
             "label": "Short description",
             "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "advanceddatepicker",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "yearMin",
+            "label": "Year lower boundary",
+            "valueType": "string",
+            "description": "Lower boundary for year. Could be 1980, or -/+45. Default is 20 years in the past."
+          },
+          {
+            "component": "text",
+            "name": "yearMax",
+            "label": "Year upper boundary",
+            "valueType": "string",
+            "description": "Upper boundary for year. Could be 2030, or -/+45. Default is current year."
           }
         ]
       }
@@ -5949,6 +6002,37 @@
             "component": "richtext",
             "name": "tooltip",
             "label": "Short description",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "workexperience",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
             "valueType": "string"
           }
         ]

@@ -24,7 +24,7 @@ export default function decorate(block) {
         // decorate footer DOM
         block.textContent = '';
         const footer = document.createElement('div');
-        while (fragment.firstElementChild)
+        while (fragment === null || fragment === void 0 ? void 0 : fragment.firstElementChild)
             footer.append(fragment.firstElementChild);
         // block.append(footer)
     });

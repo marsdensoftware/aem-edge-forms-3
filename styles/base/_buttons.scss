@@ -1,3 +1,9 @@
+@use '../settings/colors' as *;
+@use '../settings/spacings' as *;
+@use '../settings/borders' as *;
+@use '../settings/elevations' as *;
+@use '../settings/utils' as *;
+
 
 // buttons.scss
 
@@ -38,24 +44,24 @@
     border-radius: var(--Corner-radius-Round, 999px);
     background: var(--Background-Dark-Accent, #017ac9);
     box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-      var(--Elevation-Position-Y-Level-2, 4px)
-      var(--Elevation-Blur-Level-2, 8px)
-      var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+    var(--Elevation-Position-Y-Level-2, 4px)
+    var(--Elevation-Blur-Level-2, 8px)
+    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
     border: none;
 
     &:hover {
       background: var(
-        --Gradient-Blue,
-        linear-gradient(
-          135deg,
-          var(--Brand-MSD-Blue, #017ac9) 25%,
-          var(--Brand-MSD-Navy, #134276) 100%
-        )
+                      --Gradient-Blue,
+                      linear-gradient(
+                                      135deg,
+                                      var(--Brand-MSD-Blue, #017ac9) 25%,
+                                      var(--Brand-MSD-Navy, #134276) 100%
+                      )
       );
       box-shadow: var(--Elevation-Position-X-Level-3, 0px)
-        var(--Elevation-Position-Y-Level-3, 8px)
-        var(--Elevation-Blur-Level-3, 16px)
-        var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+      var(--Elevation-Position-Y-Level-3, 8px)
+      var(--Elevation-Blur-Level-3, 16px)
+      var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
     }
 
     &:active {
@@ -103,7 +109,7 @@
     &:focus {
       background: var(--Background-Light-Primary, #fff);
       box-shadow: 0px 0px 0px 2px #fff,
-        0px 0px 0px 4px var(--Stroke-Focus, #b53cde);
+      0px 0px 0px 4px var(--Stroke-Focus, #b53cde);
     }
 
     &.small {
@@ -146,24 +152,24 @@
     border-radius: var(--Corner-radius-Round, 999px);
     background: var(--Background-Dark-Accent, #017ac9);
     box-shadow: var(--Elevation-Position-X-Level-2, 0px)
-      var(--Elevation-Position-Y-Level-2, 4px)
-      var(--Elevation-Blur-Level-2, 8px)
-      var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
+    var(--Elevation-Position-Y-Level-2, 4px)
+    var(--Elevation-Blur-Level-2, 8px)
+    var(--Elevation-Spread-Level-2, 0px) rgba(0, 0, 0, 0.2);
     transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
 
     &:hover {
       background: var(
-        --Gradient-Blue,
-        linear-gradient(
-          135deg,
-          var(--Brand-MSD-Blue, #017ac9) 25%,
-          var(--Brand-MSD-Navy, #134276) 100%
-        )
+                      --Gradient-Blue,
+                      linear-gradient(
+                                      135deg,
+                                      var(--Brand-MSD-Blue, #017ac9) 25%,
+                                      var(--Brand-MSD-Navy, #134276) 100%
+                      )
       );
       box-shadow: var(--Elevation-Position-X-Level-3, 0px)
-        var(--Elevation-Position-Y-Level-3, 8px)
-        var(--Elevation-Blur-Level-3, 16px)
-        var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
+      var(--Elevation-Position-Y-Level-3, 8px)
+      var(--Elevation-Blur-Level-3, 16px)
+      var(--Elevation-Spread-Level-3, 0px) rgba(0, 0, 0, 0.2);
     }
 
     &:active {
@@ -172,3 +178,4 @@
     }
   }
 }
+

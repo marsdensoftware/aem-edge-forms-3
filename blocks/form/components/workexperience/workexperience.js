@@ -1,13 +1,12 @@
-import { LanguagePanelRepeatable } from './repeatable.js';
+import { WorkExperienceRepeatable } from "./repeatable.js";
 import { onElementAdded } from '../utils.js'
 
 export default async function decorate(el) {
-
+    el.classList.add();
     onElementAdded(el).then((connectedEl) => {
         const repeatablePanel = connectedEl.querySelector('.repeat-wrapper');
-
         if (repeatablePanel) {
-            const obj = new LanguagePanelRepeatable(repeatablePanel);
+            const obj = new WorkExperienceRepeatable(repeatablePanel);
             obj.init();
         }
     });

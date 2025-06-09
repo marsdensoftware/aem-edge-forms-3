@@ -1,108 +1,154 @@
 @use '../../../../styles/settings' as *;
 
-%common-panel-spacing {
-  margin: 32px 0;
+/*****************************
+    WIZARD STEPS
+*****************************/
 
-  @include media('desktop') {
-    padding: 60px 0;
-  }
+.wizard .wizard-menu-items {
+    display: none !important;
+}
+
+%common-panel-spacing {
+    margin: 32px 0;
+
+    @include media('desktop') {
+        padding: 60px 0;
+    }
 }
 
 %common-wizard-button {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: block;
-  width: 20px;
-  height: 20px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    width: 20px;
+    height: 20px;
 }
 
 .wizard {
-  .current-wizard-step {
-    /*padding: 32px 16px 45px;*/ // removed padding RW
-
-    @include media('desktop') {
-      padding: $spacing-600 0;
-      margin: 32px auto;
-      width: 100%;
-      /* max-width: 930px; */ // Figma is 1038px
-      max-width: 1038px;
+    .current-wizard-step {
+        @include media('desktop') {
+            padding: $spacing-600 0;
+            margin: 32px auto;
+            width: 100%;
+            max-width: 1038px;
+        }
     }
-  }
 
-  > legend.field-label,
-  .wizard-menu-items {
+    >legend.field-label,
+    .wizard-menu-items {
+        display: none;
+    }
+
+    .wizard-button-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: $spacing-400;
+        background-color: $color-white;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        gap: $spacing-300;
+        border-top: 1px solid $stroke-secondary;
+
+        .wizard-button-next {
+            margin-left: auto;
+        }
+
+        .button[name='next'] {
+            @extend %button;
+            @extend %button--primary;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                @extend %common-wizard-button;
+                content: '';
+                background-image: url('...'); // truncated for brevity
+                order: 1;
+                margin-left: 8px;
+            }
+        }
+
+        .button[name='back'] {
+            @extend %button;
+            @extend %button--hollow;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                @extend %common-wizard-button;
+                content: '';
+                background-image: url('...'); // truncated for brevity
+                margin-right: 8px;
+            }
+        }
+    }
+
+    .wizard-menu-items {
+        display: flex;
+        gap: 50px;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-weight: var(--form-fieldset-legend-font-weight);
+        font-size: var(--form-fieldset-legend-font-size);
+        color: var(--form-fieldset-legend-color);
+        padding-bottom: var(--form-wizard-padding);
+        grid-column: span 12;
+    }
+
+    .wizard-menu-item {
+        counter-increment: wizard-step-counter;
+
+        &::before {
+            content: counter(wizard-step-counter);
+            border: 2px solid var(--form-wizard-number-color);
+            color: var(--form-wizard-number-color);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 2;
+            display: inline-block;
+        }
+    }
+
+    .wizard-menu-active-item::before {
+        border: 2px solid var(--form-wizard-number-color);
+        background: var(--form-wizard-number-color);
+        color: var(--background-color-primary);
+        font-weight: 600;
+    }
+
+    &.left {
+        display: flex;
+
+        .wizard-menu-items {
+            flex-direction: column;
+            width: 300px;
+        }
+    }
+}
+
+// Utility/hiding logic
+main .form form .wizard>fieldset>legend {
     display: none;
-  }
+}
 
-  // NEW sticky button wrapper
-  .wizard-button-wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: $spacing-400;
-    background-color: $color-white;
-    z-index: 1000;
+main .form form .wizard>fieldset:not(.current-wizard-step) {
+    display: none;
+}
 
-    display: flex;
-    justify-content: space-between;
-    gap: $spacing-300;
-    border-top: 1px solid $stroke-secondary;
+main .form form .wizard .wizard-button-wrapper .field-wrapper {
+    flex: unset;
+}
 
-    @include media('desktop') {
-      /*margin-top: 32px;*/ // removing and adding to wrapper instead RW
-    }
-
-    .wizard-button-next {
-      margin-left: auto;
-    }
-
-    .button[name='next'] {
-      @extend %button;
-      @extend %button--primary;
-      display: flex;
-      align-items: center;
-
-      &::before {
-        @extend %common-wizard-button;
-        content: '';
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABOSURBVHgB7dLBCQAgCIXhV5O0Spu1gSPaJmYkdAsiD0H9IHj6DiKwmYiQToJHChUZsQvaEcM+OtFgC+O8qpMjbsn1jo9gBpLr7xlaVlgD2/i+xzXXzsEAAAAASUVORK5CYII=');
-        order: 1;
-        margin-left: 8px;
-      }
-    }
-
-    .button[name='back'] {
-      @extend %button;
-      @extend %button--hollow;
-      display: flex;
-      align-items: center;
-
-      &::before {
-        @extend %common-wizard-button;
-        content: '';
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADFSURBVHgB7ZPNDcIgFIAf2AE6Qkdo0gk6TIGbbmAdwRvh4gps4AQkevPICC5A8BFJozX+UPFi+iUvJBC+9+ABwMzPYIytOec7SGTxTIZDj1E3TXM0xpzgQ+gLWWCjlNKQAHkj6yERklM2CEeyg/d+C4kQQs7hegqUrW5kgRoXk7uLWAxdUEo1VrTEqGImGxenCK9HFkJUKNxHqcUkrZTSwgSGpuSS3j2bHFIynvhW+vBTwmZsTBubUzrnSshBqLTruhr+jgvneGvZqN/uwAAAAABJRU5ErkJggg==');
-        margin-right: 8px;
-      }
-    }
-  }
-
-  /* ORIGINAL non-sticky version (commented out)
-  .wizard-button-wrapper {
-    padding: $spacing-400;
-    border-top: 1px solid $stroke-secondary;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    @include media('desktop') {
-      margin-top: 32px;
-    }
-
-    .wizard-button-next {
-      margin-left: auto;
-    }
-  }
-  */
+main form .wizard>.current-wizard-step.panel-wrapper:first-of-type~.wizard-button-wrapper>.wizard-button-prev,
+main form .wizard>.current-wizard-step.panel-wrapper:last-of-type~.wizard-button-wrapper>.wizard-button-next {
+    display: none;
 }

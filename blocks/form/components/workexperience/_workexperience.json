@@ -1,0 +1,254 @@
+{
+    "definitions": [
+        {
+            "title": "Work Experience",
+            "id": "workexperience",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "jcr:title": "Work Experience",
+                            "fieldType": "panel",
+                            "fd:viewType": "workexperience",
+                            "name": "workexperience",
+                            "hideTitle": true,
+                            "radiogroup": {
+                                "withIcon": true,
+                                "jcr:title": "Work Experience Type Selection",
+                                "enumIconNames": [
+                                    "list-search-1",
+                                    "list-search-1",
+                                    "list-search-1",
+                                    "list-search-1"
+                                ],
+                                "enum": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "0"
+                                ],
+                                "enumNames": [
+                                    "Paid work",
+                                    "Non-paid work",
+                                    "Volunteer work",
+                                    "No, I have nothing to add"
+                                ],
+                                "fd:viewType": "radio-group",
+                                "name": "workexperience-selection",
+                                "fieldType": "radio-group",
+                                "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                "hideTitle": true,
+                                "required": true
+                            },
+                            "repeatable-panel": {
+                                "hideTitle": true,
+                                "fieldType": "panel",
+                                "repeatable": true,
+                                "name": "workexperience-options-content",
+                                "repeatDeleteButtonLabel": "Delete",
+                                "repeatAddButtonLabel": "Add another",
+                                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                "jcr:title": "Work Experience Options Content",
+                                "type_of_work_experience": {
+                                    "name": "type-of-work-experience",
+                                    "type": "string",
+                                    "placeholder": "Choose work type",
+                                    "enumNames": [
+                                        "Paid work",
+                                        "Non-paid work",
+                                        "Volunteer work"
+                                    ],
+                                    "enum": [
+                                        "1",
+                                        "2",
+                                        "3"
+                                    ],
+                                    "fieldType": "drop-down",
+                                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                    "required": true,
+                                    "visible": false
+                                },
+                                "fields_container": {
+                                    "hideTitle": true,
+                                    "fieldType": "panel",
+                                    "name": "fields-container",
+                                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                    "jcr:title": "Work Experience Fields Container",
+                                    "intro": {
+                                        "value": "\u003Ch6\u003EAdd work experience\u003C/h6\u003E",
+                                        "textIsRich": true,
+                                        "fieldType": "plain-text",
+                                        "jcr:title": "Add work experience",
+                                        "sling:resourceType": "core/fd/components/form/text/v1/text",
+                                        "name": "intro1749081013822"
+                                    },
+                                    "job_title": {
+                                        "jcr:title": "Job title",
+                                        "required": true,
+                                        "name": "title",
+                                        "fieldType": "text-input",
+                                        "description": "\u003Cp\u003EWhat was your job called?\u003C/p\u003E",
+                                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                                    },
+                                    "work_type": {
+                                        "jcr:title": "Work type",
+                                        "name": "type",
+                                        "fieldType": "text-input",
+                                        "fd:viewType": "typeahead",
+                                        "datasource": "occupations",
+                                        "placeholder": "Start typing",
+                                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                                        "required": true,
+                                        "description": "\u003Cp\u003EMatch your job title to one from our standard list.\u003C/p\u003E"
+                                    },
+                                    "employer": {
+                                        "jcr:title": "Employer name/Who you did this work for",
+                                        "fieldType": "text-input",
+                                        "required": true,
+                                        "name": "employer",
+                                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                                    },
+                                    "startofwork": {
+                                        "fd:viewType": "advanceddatepicker",
+                                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                        "jcr:title": "When you started doing this work",
+                                        "fieldType": "panel",
+                                        "name": "startofwork",
+                                        "month": {
+                                            "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                            "type": "string",
+                                            "placeholder": "Month",
+                                            "required": true,
+                                            "name": "startofwork-month",
+                                            "fieldType": "drop-down"
+                                        },
+                                        "year": {
+                                            "name": "startofwork-year",
+                                            "type": "string",
+                                            "placeholder": "Year",
+                                            "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                            "fieldType": "drop-down",
+                                            "required": true
+                                        }
+                                    },
+                                    "still_working": {
+                                        "name": "still-working",
+                                        "jcr:title": "Are you still doing this work?",
+                                        "orientation": "horizontal",
+                                        "enumNames": [
+                                            "Yes",
+                                            "No"
+                                        ],
+                                        "fieldType": "radio-group",
+                                        "fd:viewType": "radio-group",
+                                        "enum": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                        "required": true
+                                    },
+                                    "endofwork": {
+                                        "fd:viewType": "advanceddatepicker",
+                                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                        "jcr:title": "When you finished this work",
+                                        "fieldType": "panel",
+                                        "name": "endofwork",
+                                        "visible": false,
+                                        "month": {
+                                            "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                            "type": "string",
+                                            "placeholder": "Month",
+                                            "required": true,
+                                            "name": "endofwork-month",
+                                            "fieldType": "drop-down"
+                                        },
+                                        "year": {
+                                            "name": "endofwork-year",
+                                            "type": "string",
+                                            "placeholder": "Year",
+                                            "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                            "fieldType": "drop-down",
+                                            "required": true
+                                        }
+                                    },
+                                    "skills": {
+                                        "jcr:title": "Add skills you used in this work",
+                                        "name": "skills",
+                                        "fieldType": "text-input",
+                                        "fd:viewType": "typeahead",
+                                        "required": true,
+                                        "datasource": "skills",
+                                        "placeholder": "Start typing",
+                                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                                        "description": "\u003Cp\u003ESharing your skills helps match you with the right jobs.\u003C/p\u003E"
+                                    },
+                                    "description": {
+                                        "multiLine": true,
+                                        "jcr:title": "Description",
+                                        "name": "description",
+                                        "fieldType": "text-input",
+                                        "description": "\u003Cp\u003EDescribe the work you did &mdash; include tasks, skills you used or learned, and any achievements you're proud of.\u003C/p\u003E",
+                                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                                    },
+                                    "still_able": {
+                                        "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                        "fieldType": "radio-group",
+                                        "enumNames": [
+                                            "Yes",
+                                            "No"
+                                        ],
+                                        "enum": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "jcr:title": "Are you still able to do this type of work?",
+                                        "orientation": "horizontal",
+                                        "fd:viewType": "radio-group",
+                                        "name": "still-able",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "workexperience",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "valueType": "string",
+                            "required": true,
+                            "valueFormat": "regexp",
+                            "validation": {
+                                "regExp": "^[^$].*",
+                                "customErrorMsg": "Name cannot start with $"
+                            }
+                        },
+                        {
+                            "component": "text",
+                            "name": "jcr:title",
+                            "label": "Title",
+                            "valueType": "string"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "filters": []
+}
