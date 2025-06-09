@@ -148,7 +148,7 @@ export class RepeatablePanel {
         cancelBtn.addEventListener('click', () => {
 
             this._toggleEditMode(entry, false);
-            this.#resetChanges(entry);
+            this._resetChanges(entry);
 
             if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
@@ -169,7 +169,7 @@ export class RepeatablePanel {
         this._entryModified(entry);
     }
 
-    #resetChanges(entry) {
+    _resetChanges(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
 
         if (entry.classList.contains('saved')) {
@@ -178,7 +178,7 @@ export class RepeatablePanel {
             const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
             if (!repeatableEntry) {
                 // Clear fields
-                this.#clearFields(inputs);
+                this._clearFields(inputs);
                 return;
             }
 
@@ -195,29 +195,23 @@ export class RepeatablePanel {
                         input.value = value;
                         break;
                 }
-
-                // Trigger change event
-                const event = new Event('change', { bubbles: true });
-                input.dispatchEvent(event);
             });
         }
         else {
             // Unsaved --> Clear all fields
-            this.#clearFields(inputs);
+            this._clearFields(entry);
         }
     }
 
-    #clearFields(inputs) {
+    _clearFields(entry) {
+        const inputs = entry.querySelectorAll('input, select, textarea');
+
         inputs.forEach(input => {
             if (input.type === 'checkbox' || input.type === 'radio') {
                 input.checked = false;
             } else {
                 input.value = '';
             }
-
-            // Trigger change event
-            const event = new Event('change', { bubbles: true });
-            input.dispatchEvent(event);
         });
     }
 

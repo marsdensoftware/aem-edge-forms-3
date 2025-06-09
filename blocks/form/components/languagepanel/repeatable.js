@@ -35,6 +35,14 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
         });
     }
 
+    _clearFields(entry) {
+        super._clearFields();
+        const proficiency = entry.querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
+        if (proficiency) {
+            proficiency.style.display = 'none';
+        }
+    }
+
     _init(entry) {
         super._init(entry);
 
