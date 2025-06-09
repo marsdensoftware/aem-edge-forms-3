@@ -60,11 +60,9 @@
                     "value": true
                 },
                 {
-                    "component": "reference",
-                    "valueType": "string",
+                    "component": "aem-content",
                     "name": "url",
-                    "label": "Image Url",
-                    "multi": false
+                    "label": "Image Url"
                 },
                 {
                     "component": "boolean",
