@@ -57,7 +57,18 @@ const courses = [
 ];
 const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
 const userLocations = ['Auckland', 'Wellington', 'Christchurch'];
-const skills = ['Skill 1', 'Skill 2', 'Skill 3'];
+const skills = [
+    'Communicate effectively in English',
+    'Apply health and safety standards',
+    'Work in a team',
+    'Use digital collaboration tools',
+    'Operate machinery safely',
+    'Provide customer service',
+    'Interpret technical drawings',
+    'Manage time effectively',
+    'Use accounting software',
+    'Adapt to changing work environments'
+];
 const datasources = {
     courses,
     languages,
