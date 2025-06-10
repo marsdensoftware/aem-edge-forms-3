@@ -19,14 +19,24 @@ export default function decorate(element: Element, field: Field) {
                 const div = divs[index]
                 // LABEL
                 const label = div.querySelector('label')
-                label?.classList.add('radio-group--with-icon__label')
+                if (!label) {
+                    return;
+                }
+
+                const text = label.textContent?.trim();
+                label.textContent = ''; // clear existing text
+                label.classList.add('radio-group--with-icon__label')
 
                 // ICON
-                const icon = document.createElement('span')
+                const icon = document.createElement('i')
                 icon.className = `radio-group--with-icon__icon radio-group--with-icon--${iconName}`
 
                 // Add icon inside label
-                label?.prepend(icon)
+                label.append(icon)
+
+                const span = document.createElement('span');
+                span.textContent = text || '';
+                label.appendChild(span);
             })
         }
     }
