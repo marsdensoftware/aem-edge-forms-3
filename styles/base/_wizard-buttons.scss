@@ -85,10 +85,10 @@
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-600, 32px);
   border-radius: var(--Corner-radius-Round, 999px);
   border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
   background: var(--Background-Light-Primary, #FFF);
+  color: var(--Text-Dark-Primary, #333);
 
   /* Elevation-1 */
   box-shadow: var(--Elevation-Position-X-Level-1, 0px)
@@ -96,7 +96,13 @@
   var(--Elevation-Blur-Level-1, 4px)
   var(--Elevation-Spread-Level-1, 0px) rgba(22, 44, 69, 0.20);
 
-  color: var(--Text-Dark-Primary, #333);
+  &.default {
+    padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-500, 24px);
+  }
+
+  &.small {
+    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-450, 20px);
+  }
 
   &:hover {
     border-color: var(--Stroke-Primary, #333);
