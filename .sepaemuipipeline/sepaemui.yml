@@ -8,7 +8,7 @@ pool:
 
 stages:
   # Sync code with Github
-  - stage: Sync with Github
+  - stage: GithubSync
     jobs:
       - job:
         steps:
