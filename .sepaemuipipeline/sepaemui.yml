@@ -51,7 +51,12 @@ stages:
     jobs:
       - job:
         steps:
-          - script: npm ci
-            displayName: Installing dependencies
-          - script: npm run build:css
+          - script: |
+              npm ci
+              npm run build:css
             displayName: Build CSS
+          - publish: $(System.DefaultWorkingDirectory)/styles
+            artifact: CSSBuilt
+          - download: current
+            artifact: CSSBuilt
+            patterns: '**/styles/main.css'
