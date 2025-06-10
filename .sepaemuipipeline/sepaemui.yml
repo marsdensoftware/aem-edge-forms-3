@@ -51,5 +51,7 @@ stages:
     jobs:
       - job:
         steps:
+          - script: npm ci
+            displayName: Installing dependencies
           - script: npm run build:css
             displayName: Build CSS
