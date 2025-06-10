@@ -29,6 +29,18 @@
       order: 1;
       margin-right: 0;
     }
+
+    > span:not(.radio-group--with-icon__icon) {
+      height: 4.5rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .radio-group--with-icon__icon {
