@@ -1,5 +1,6 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
+import { isNo } from '../../utils.js'
 
 export class RepeatablePanel {
     #overview;
@@ -41,6 +42,16 @@ export class RepeatablePanel {
                 this._renderOverview();
             }
         });
+
+        const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
+        entries.forEach(entry => {
+            this._init(entry);
+        });
+    }
+
+    _init(entry) {
+        // Can be overriden in sub classes to perform entry initialization, event bindings, etc...
+        console.log(`Initializing ${entry.id}`);
     }
 
     _onItemAdded(entry) {
@@ -102,6 +113,11 @@ export class RepeatablePanel {
         return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
     }
 
+    _validate(entry) {
+        // Can be used in subclasses to perform custom validations
+        return entry != undefined;
+    }
+
     _ensureButtonBar(entry) {
         let buttonBar = entry.querySelector('.button-bar');
         if (buttonBar) {
@@ -117,7 +133,7 @@ export class RepeatablePanel {
 
         saveBtn.addEventListener('click', () => {
             // Validate
-            const valid = validateContainer(entry);
+            const valid = validateContainer(entry) && this._validate(entry);
 
             if (valid) {
                 // Save
@@ -132,7 +148,7 @@ export class RepeatablePanel {
         cancelBtn.addEventListener('click', () => {
 
             this._toggleEditMode(entry, false);
-            this.#resetChanges(entry);
+            this._resetChanges(entry);
 
             if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
                 // Unsaved and not first one --> Delete
@@ -153,7 +169,7 @@ export class RepeatablePanel {
         this._entryModified(entry);
     }
 
-    #resetChanges(entry) {
+    _resetChanges(entry) {
         const inputs = entry.querySelectorAll('input, select, textarea');
 
         if (entry.classList.contains('saved')) {
@@ -162,7 +178,7 @@ export class RepeatablePanel {
             const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
             if (!repeatableEntry) {
                 // Clear fields
-                this.#clearFields(inputs);
+                this._clearFields(inputs);
                 return;
             }
 
@@ -183,11 +199,13 @@ export class RepeatablePanel {
         }
         else {
             // Unsaved --> Clear all fields
-            this.#clearFields(inputs);
+            this._clearFields(entry);
         }
     }
 
-    #clearFields(inputs) {
+    _clearFields(entry) {
+        const inputs = entry.querySelectorAll('input, select, textarea');
+
         inputs.forEach(input => {
             if (input.type === 'checkbox' || input.type === 'radio') {
                 input.checked = false;
@@ -409,7 +427,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    if (this.#isNo(radio)) {
+                    if (isNo(radio)) {
                         // hide repeatable panel
                         repeatablePanel.style.display = 'none';
                         // Show wizard buttons
@@ -437,15 +455,6 @@ export class ConditionalRepeatable extends RepeatablePanel {
             });
             // prevent validation
             repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-        }
-    }
-
-    #isNo(field) {
-        const value = field.value;
-        if (!value) return true;
-        if (typeof value === 'string') {
-            const normalized = value.trim().toLowerCase();
-            return normalized === 'no' || normalized === 'false' || normalized === '0';
         }
     }
 

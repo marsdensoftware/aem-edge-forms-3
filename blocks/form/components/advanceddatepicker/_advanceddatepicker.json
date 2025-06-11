@@ -1,0 +1,112 @@
+{
+    "definitions": [
+        {
+            "title": "Advanced Date Picker",
+            "id": "advanceddatepicker",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "jcr:title": "Advanced Date Picker",
+                            "fieldType": "panel",
+                            "fd:viewType": "advanceddatepicker",
+                            "name": "advanceddatepicker",
+                            "month": {
+                                "name": "month",
+                                "type": "string",
+                                "placeholder": "Month",
+                                "fieldType": "drop-down",
+                                "enum": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10",
+                                    "11",
+                                    "12"
+                                ],
+                                "enumNames": [
+                                    "January",
+                                    "February",
+                                    "March",
+                                    "April",
+                                    "May",
+                                    "June",
+                                    "July",
+                                    "August",
+                                    "September",
+                                    "October",
+                                    "November",
+                                    "December"
+                                ],
+                                "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                "required": true
+                            },
+                            "year": {
+                                "required": true,
+                                "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                                "fieldType": "drop-down",
+                                "placeholder": "Year",
+                                "type": "string",
+                                "name": "year"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "advanceddatepicker",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "valueType": "string",
+                            "required": true,
+                            "valueFormat": "regexp",
+                            "validation": {
+                                "regExp": "^[^$].*",
+                                "customErrorMsg": "Name cannot start with $"
+                            }
+                        },
+                        {
+                            "component": "text",
+                            "name": "jcr:title",
+                            "label": "Title",
+                            "valueType": "string"
+                        },
+                        {
+                            "component": "text",
+                            "name": "yearMin",
+                            "label": "Year lower boundary",
+                            "valueType": "string",
+                            "description": "Lower boundary for year. Could be 1980, or -/+45. Default is 20 years in the past."
+                        },
+                        {
+                            "component": "text",
+                            "name": "yearMax",
+                            "label": "Year upper boundary",
+                            "valueType": "string",
+                            "description": "Upper boundary for year. Could be 2030, or -/+45. Default is current year."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

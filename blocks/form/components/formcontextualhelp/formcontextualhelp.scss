@@ -65,7 +65,8 @@
 
   &--info {
     .panel-formcontextualhelp__icon {
-      content: url('info-icon.png');
+      /*content: url('info-icon.png');*/
+      content: url('icon-contextual-help-info-blue-info.svg');
     }
   }
 }

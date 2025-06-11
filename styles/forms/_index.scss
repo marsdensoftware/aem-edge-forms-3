@@ -1,4 +1,5 @@
-@use '../forms/input';
-@use '../forms/checkbox';
-@use '../forms/radio';
-@use '../forms/select';
+@forward 'checkbox';
+@forward 'input';
+@forward 'labels';
+@forward 'radio';
+@forward 'select';
