@@ -1,1 +1,11 @@
-@use './bootstrap-grid';
+// Bootstrap dependencies
+@import 'functions';
+@import 'variables';
+@import 'variables-dark';
+@import 'maps';
+@import 'mixins';
+@import 'utilities';
+// Bootstrap component
+@import 'root';
+@import 'containers';
+@import 'grid';

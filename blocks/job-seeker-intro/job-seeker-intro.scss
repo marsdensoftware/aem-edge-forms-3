@@ -1,19 +1,40 @@
 @use '../../styles/settings' as *;
+// @use '../../styles/bootstrap/functions' as *;
+// @use '../../styles/bootstrap/variables' as *;
+// @use '../../styles/bootstrap/containers' as *;
 
 .block {
   &.job-seeker-intro {
-    min-height: 400px;
+    // min-height: 400px;
 
-    @include media('desktop') {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 120px 0;
-      max-width: 930px;
-      margin: 0 auto;
+    // @include media('desktop') {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: space-between;
+    //   padding: 120px 0;
+    //   max-width: 930px;
+    //   margin: 0 auto;
+    // }
+
+    .container {
+      // @include make-container();
+      background-color: pink;
+    }
+
+    .row {
+      background-color: greenyellow;
+
+      > * {
+        min-height: 80px;
+      }
+    }
+
+    .your-component {
+      background-color: blueviolet;
     }
 
     .job-seeker-intro__picture {
+      display: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -40,8 +61,13 @@
       }
     }
 
+    .job-seeker-intro__content {
+      display: none;
+    }
+
     .job-seeker-intro__content-inner {
       text-align: center;
+      display: none;
 
       h2 {
         @include heading-level-3;

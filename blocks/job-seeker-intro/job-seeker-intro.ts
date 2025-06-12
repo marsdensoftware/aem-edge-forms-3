@@ -3,12 +3,59 @@ function decorate(block: Element) {
   const [div1, div2] = block.children
 
   div1.className = 'job-seeker-intro__picture'
-  const innerDiv1 = div1.querySelector('div')
-  if (innerDiv1) innerDiv1.className = 'job-seeker-intro__inner'
 
   div2.className = 'job-seeker-intro__content'
-  const innerDiv2 = div2.querySelector('div')
-  if (innerDiv2) innerDiv2.className = 'job-seeker-intro__content-inner'
+
+  const container = document.createElement('div')
+
+  container.className = 'container'
+
+  const row = document.createElement('div')
+  row.className = 'row'
+  container.appendChild(row)
+
+  const cols = [0, 1, 2]
+
+  cols.forEach((_, idx) => {
+    const colEl = document.createElement('div')
+    colEl.className = 'col'
+    colEl.innerHTML = `This is col #${idx}`
+
+    row.appendChild(colEl)
+  })
+
+  const secondRow = document.createElement('div')
+  secondRow.className = 'row'
+  container.appendChild(secondRow)
+
+  cols.forEach((_, idx) => {
+    const colEl = document.createElement('div')
+    const component = document.createElement('div')
+    component.innerHTML = 'Your component lives here'
+    component.className = 'your-component'
+
+    switch (idx) {
+      case 0:
+        colEl.className = 'col-6 col-md-2'
+        colEl.innerHTML = 'This is 2 col'
+        colEl.style = 'background-color: green;'
+        break
+      case 1:
+        colEl.className = 'col-6 col-md-7'
+        colEl.innerHTML = 'This is 7 col'
+        colEl.style = 'background-color: red;'
+        break
+      default:
+        colEl.className = 'col-12 col-md-3'
+        colEl.innerHTML = 'This is 3 col'
+        break
+    }
+
+    colEl.appendChild(component)
+    secondRow.appendChild(colEl)
+  })
+
+  block.append(container)
 }
 
 export default decorate
