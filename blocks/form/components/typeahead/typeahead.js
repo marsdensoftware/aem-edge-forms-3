@@ -1,7 +1,6 @@
 function addSuggestionDiv() {
     const el = document.createElement('div');
     el.classList.add('suggestions');
-
     return el;
 }
 const datasources = {
@@ -15,15 +14,9 @@ const datasources = {
         'Plan medium to long term objectives',
         'Define organisational standards',
         'Assume responsibility for the management of a business',
-        'Build trust'
+        'Build trust',
     ],
-    languages: [
-        'Te Reo',
-        'French',
-        'German',
-        'Portuguese',
-        'Hebrew'
-    ],
+    languages: ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'],
     occupations: [
         'Software Developer',
         'Primary School Teacher',
@@ -34,7 +27,7 @@ const datasources = {
         'General Practitioner (GP)',
         'Mechanical Engineer',
         'Retail Sales Assistant',
-        'Truck Driver (General)'
+        'Truck Driver (General)',
     ],
     skills: [
         'Communicate effectively in English',
@@ -46,10 +39,9 @@ const datasources = {
         'Interpret technical drawings',
         'Manage time effectively',
         'Use accounting software',
-        'Adapt to changing work environments'
-    ]
+        'Adapt to changing work environments',
+    ],
 };
-
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
     if (window.searchInput && !window.searchInput.contains(e.target)) {
@@ -57,23 +49,20 @@ document.addEventListener('click', (e) => {
         window.suggestionsDiv.style.display = 'none';
     }
 });
-
 document.addEventListener('change', (event) => {
     const element = event.target.closest('.typeahead');
     if (element) {
-        const datasource = element.dataset.datasource;
+        const { datasource } = element.dataset;
         const entries = datasources[datasource];
         const searchInput = element.querySelector('input[type="text"]');
-        const value = searchInput.value;
-
+        const { value } = searchInput;
         if (!entries.includes(value)) {
-            // Dispatch custom event
+            // Dispatch custom event2
             const event = new CustomEvent('typeahead:invalid', {
                 detail: {},
                 bubbles: true,
             });
             searchInput.dispatchEvent(event);
-
             event.preventDefault();
         }
         else {
@@ -86,31 +75,25 @@ document.addEventListener('change', (event) => {
         }
     }
 });
-
 document.addEventListener('input', (event) => {
     const element = event.target.closest('.typeahead');
     if (element) {
         const searchInput = element.querySelector('input[type="text"]');
         window.searchInput = searchInput;
         const query = searchInput.value.toLowerCase();
-
         // Minimum 4 chars
         if (query.length < 4) {
             return;
         }
-
         const suggestionsDiv = element.querySelector('.suggestions');
         window.suggestionsDiv = suggestionsDiv;
-        suggestionsDiv.innerHTML = "";
-
-        const datasource = element.dataset.datasource;
+        suggestionsDiv.innerHTML = '';
+        const { datasource } = element.dataset;
         const entries = datasources[datasource];
-
-        const filtered = entries.filter(entry => entry.toLowerCase().includes(query));
-
-        filtered.forEach(item => {
-            const div = document.createElement("div");
-            div.classList.add("suggestion");
+        const filtered = entries.filter((entry) => entry.toLowerCase().includes(query));
+        filtered.forEach((item) => {
+            const div = document.createElement('div');
+            div.classList.add('suggestion');
             div.textContent = item;
             div.addEventListener('click', () => {
                 searchInput.value = item;
@@ -121,22 +104,26 @@ document.addEventListener('input', (event) => {
             });
             suggestionsDiv.appendChild(div);
         });
-
         if (filtered.length > 0) {
             suggestionsDiv.style.display = 'block';
         }
     }
 });
-
-export default function decorate(element, field, container) {
-    const datasource = field.properties.datasource;
-
-    element.classList.add('typeahead', 'text-wrapper__icon-search');
+export default function decorate(element, field) {
+    const { datasource } = field.properties;
+    element.classList.add('typeahead');
     element.dataset.datasource = datasource;
-
+    // Moved input into container so we can attached icon input
+    const inputEl = element.querySelector('input');
+    const container = document.createElement('div');
+    container.className = 'typeahead__input';
+    container.id = 'typeahead__input';
+    if (inputEl) {
+        container.appendChild(inputEl);
+    }
+    element.appendChild(container);
     // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
-    element.append(suggestionsDiv);
-
+    container.appendChild(suggestionsDiv);
     return element;
 }
