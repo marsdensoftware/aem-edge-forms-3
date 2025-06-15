@@ -1,17 +1,18 @@
-window.addEventListener('load', function () {
-  const stepEl = document.querySelector('[data-index].current-wizard-step');
-  const main = document.querySelector('main');
-  if (!stepEl || !main) return;
+import { onPageLoad } from '../utils.js';
 
-  const index = parseInt(stepEl.dataset.index, 10);
+onPageLoad(() => {
+    const main = document.querySelector('main');
+    main.classList.add('wizard--bg-dark');
 
-  if (!isNaN(index)) {
-    if (index === 0 || index === 1) {
-      main.classList.add('wizard--bg-dark');
-      main.classList.remove('wizard--bg-light');
-    } else {
-      main.classList.add('wizard--bg-light');
-      main.classList.remove('wizard--bg-dark');
-    }
-  }
+    window.addEventListener('wizard:navigate', (e) => {
+        const index = e.detail.currStep.index;
+
+        if (index == 0 || index == 1) {
+            main.classList.add('wizard--bg-dark');
+            main.classList.remove('wizard--bg-light');
+        } else {
+            main.classList.add('wizard--bg-light');
+            main.classList.remove('wizard--bg-dark');
+        }
+    });
 });

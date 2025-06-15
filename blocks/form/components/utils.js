@@ -21,6 +21,16 @@ export function onElementAdded(el) {
     });
 }
 
+export function onPageLoad(callback) {
+    if (document.readyState === 'complete') {
+        // Page is already fully loaded
+        callback();
+    } else {
+        // Wait for the full load event
+        window.addEventListener('load', callback);
+    }
+}
+
 export function getDurationString(startMonthStr, startYearStr, endMonthStr, endYearStr) {
     const startMonth = parseInt(startMonthStr, 10);
     const startYear = parseInt(startYearStr, 10);
