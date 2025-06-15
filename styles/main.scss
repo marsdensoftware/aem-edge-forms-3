@@ -29,10 +29,6 @@
 // Components
 @use './components';
 
-main {
-  border: 5px dashed hotpink; // Just for testing
-}
-
 main.wizard--bg-dark {
   background: linear-gradient(135deg, #017AC9 25%, #134276 100%) !important;
   color: #fff;
