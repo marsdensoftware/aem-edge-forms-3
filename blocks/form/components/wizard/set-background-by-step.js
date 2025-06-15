@@ -1,17 +1,18 @@
-window.addEventListener('load', function () {
-  const stepEl = document.querySelector('[data-index].current-wizard-step');
-  const main = document.querySelector('main');
-  if (!stepEl || !main) return;
+import { onElementsAddedByClassName } from '../utils.js';
 
-  const index = parseInt(stepEl.dataset.index, 10);
+onElementsAddedByClassName('wizard', (wizardEl) => {
+    const container = wizardEl.closest('main');
+    container.classList.add('wizard--bg-dark');
 
-  if (!isNaN(index)) {
-    if (index === 0 || index === 1) {
-      main.classList.add('wizard--bg-dark');
-      main.classList.remove('wizard--bg-light');
-    } else {
-      main.classList.add('wizard--bg-light');
-      main.classList.remove('wizard--bg-dark');
-    }
-  }
+    wizardEl.addEventListener('wizard:navigate', (e) => {
+        const index = e.detail.currStep.index;
+
+        if (index == 0 || index == 1) {
+            container.classList.add('wizard--bg-dark');
+            container.classList.remove('wizard--bg-light');
+        } else {
+            container.classList.add('wizard--bg-light');
+            container.classList.remove('wizard--bg-dark');
+        }
+    });
 });
