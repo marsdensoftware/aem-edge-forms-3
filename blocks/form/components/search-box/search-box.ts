@@ -52,14 +52,6 @@ function createSelectedCard(
   selectedCardsDiv.appendChild(card)
 }
 
-/*
-
-- Search icon missed align
-- Subtitle need to move up (add any location...)
-- Optional coming from data-require attr boolean
-- Heading needs to be above checkboxes
-
-*/
 const courses = [
   'Marketing management',
   'Financial management',
@@ -75,7 +67,32 @@ const courses = [
 
 const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew']
 
-const userLocations = ['Auckland Central (en)', 'Blenheim (en)', 'Cambridge (en)', 'Dunedin (en)', 'Gore (en)', 'Greymouth (en)', 'Hastings (en)', 'Hāwera (en)', 'Invercargill (en)', 'Lower Hutt (en)', 'Manukau (en)', 'Napier (en)', 'New Plymouth (en)', 'North Shore (en)', 'Porirua (en)', 'Stratford (en)', 'Upper Hutt (en)', 'Waiheke Island (en)', 'Wellington (en)', 'Whangārei (en)', 'Picton (en)', 'Balclutha (en)', 'Wairoa (en)', 'Ōpunake (en)']
+const userLocations = [
+  'Auckland Central (en)',
+  'Blenheim (en)',
+  'Cambridge (en)',
+  'Dunedin (en)',
+  'Gore (en)',
+  'Greymouth (en)',
+  'Hastings (en)',
+  'Hāwera (en)',
+  'Invercargill (en)',
+  'Lower Hutt (en)',
+  'Manukau (en)',
+  'Napier (en)',
+  'New Plymouth (en)',
+  'North Shore (en)',
+  'Porirua (en)',
+  'Stratford (en)',
+  'Upper Hutt (en)',
+  'Waiheke Island (en)',
+  'Wellington (en)',
+  'Whangārei (en)',
+  'Picton (en)',
+  'Balclutha (en)',
+  'Wairoa (en)',
+  'Ōpunake (en)',
+]
 
 const skills = [
   'Communicate effectively in English',
@@ -87,7 +104,7 @@ const skills = [
   'Interpret technical drawings',
   'Manage time effectively',
   'Use accounting software',
-  'Adapt to changing work environments'
+  'Adapt to changing work environments',
 ]
 
 const datasources = {
