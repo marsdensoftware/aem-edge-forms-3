@@ -2,13 +2,13 @@
 @use '../settings/mixins' as *;
 @use '../settings/fonts' as *;
 @use '../settings/spacings' as *;
-
-@use '../settings' as *;
 @use '../base/forms' as *;
+@use '../settings' as *;
 
-/********************
-   DEFAULT LABEL + INPUT
-********************/
+
+/******************************
+   Base Form Elements
+*******************************/
 label,
 input[type='text'],
 input[type='radio'],
@@ -20,161 +20,16 @@ fieldset {
   border: 0;
 }
 
-/********************
-   TEXT INPUT
-********************/
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: $spacing-100;
-    color: $text-secondary;
-  }
-
-  input[type='text'] {
-    border-radius: $border-radius-mid;
-    border: $stroke-input-stroke solid $stroke-tertiary;
-    padding: $spacing-400;
-    background: $bg-light-primary;
-    font-family: $font-family;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-    color: $text-primary;
-
-    &::placeholder {
-      color: $text-secondary;
-    }
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      border: $stroke-input-stroke solid $stroke-accent;
-      background: $color-shade-blue-10;
-      outline: none;
-    }
-
-    &:disabled {
-      border: $stroke-input-stroke solid $color-grey-black-20;
-      background: $color-grey-black-05;
-      color: $text-secondary;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $text-secondary;
-      }
-    }
-  }
-}
-
-/********************
-   TEXTAREA
-********************/
-textarea {
-  width: 100%;
-  display: block;
-  border-radius: $border-radius-mid;
-  border: $stroke-input-stroke solid $stroke-tertiary;
-  padding: $spacing-400;
-  background: $bg-light-primary;
-  font-family: $font-family;
-  font-size: 20px;
-  line-height: 120%;
-  color: $text-primary;
-  margin-bottom: $spacing-600;
-
-  &::placeholder {
-    color: $text-secondary;
-  }
-
-  &:focus-visible,
-  &:focus,
-  &:active,
-  &:hover {
-    border: $stroke-input-stroke solid $stroke-accent;
-    background: $color-shade-blue-10;
-    outline: none;
-  }
-
-  &:disabled {
-    border: $stroke-input-stroke solid $color-grey-black-20;
-    background: $color-grey-black-05;
-    color: $text-secondary;
-    cursor: not-allowed;
-
-    &::placeholder {
-      color: $text-secondary;
-    }
-  }
-}
-
-/********************
-   NUMBER INPUT
-********************/
-.number-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 20px;
-    line-height: 120%;
-    font-weight: 500;
-    margin-bottom: $spacing-100;
-    color: $text-secondary;
-  }
-
-  input[type='number'] {
-    display: flex;
-    padding: $spacing-400;
-    align-items: center;
-    gap: $spacing-200;
-    border-radius: $border-radius-mid;
-    border: $stroke-input-stroke solid $stroke-tertiary;
-    background: $bg-light-primary;
-    font-family: $font-family;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-    color: $text-primary;
-
-    &::placeholder {
-      color: $text-secondary;
-    }
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      border: $stroke-input-stroke solid $stroke-accent;
-      background: $color-shade-blue-10;
-      outline: none;
-    }
-
-    &:disabled {
-      border: $stroke-input-stroke solid $color-grey-black-20;
-      background: $color-grey-black-05;
-      color: $text-secondary;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $text-secondary;
-      }
-    }
-  }
-}
-
-/********************
-   EMAIL INPUT
-********************/
+/******************************
+   Wrapper Styles
+*******************************/
+.text-wrapper,
+.number-wrapper,
 .email-wrapper {
   display: flex;
   flex-direction: column;
 
+  label,
   .field-label {
     font-size: 20px;
     line-height: 120%;
@@ -183,60 +38,89 @@ textarea {
     color: $text-secondary;
     font-family: $font-family;
   }
-
-  input[type='email'] {
-    display: flex;
-    padding: $spacing-400;
-    align-items: center;
-    gap: $spacing-200;
-    border-radius: $border-radius-mid;
-    border: $stroke-input-stroke solid $stroke-tertiary;
-    background: $bg-light-primary;
-    font-family: $font-family;
-    font-size: 20px;
-    line-height: 120%;
-    caret-color: $color-primary;
-    color: $text-primary;
-
-    &::placeholder {
-      color: $text-secondary;
-    }
-
-    &:focus-visible,
-    &:focus,
-    &:active,
-    &:hover {
-      border: $stroke-input-stroke solid $stroke-accent;
-      background: $color-shade-blue-10;
-      outline: none;
-    }
-
-    &:disabled {
-      border: $stroke-input-stroke solid $color-grey-black-20;
-      background: $color-grey-black-05;
-      color: $text-secondary;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $text-secondary;
-      }
-    }
-  }
 }
 
-/********************
-   ERROR STATE
-********************/
+/******************************
+   Input Fields
+*******************************/
+input[type='text'],
+input[type='number'],
+input[type='email'],
+textarea {
+  @extend %input-base;
+}
+
+textarea {
+  width: 100%;
+  display: block;
+  margin-bottom: $spacing-600;
+}
+
+/******************************
+   Error State
+*******************************/
 .field-wrapper.field-invalid input,
 .field-wrapper.field-invalid textarea,
 .field-wrapper.field-invalid input[type='email'],
 .field-wrapper.field-invalid input[type='number'] {
-  border: $stroke-input-stroke solid $color-feedback-red;
-  background: $bg-light-primary;
-  color: $color-feedback-red;
-
-  &::placeholder {
-    color: $color-feedback-red;
-  }
+  @include input-error;
 }
 
+/******************************
+   Employment Type Radio Buttons
+*******************************/
+.radio-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-200;
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: $stroke-input-stroke solid $stroke-tertiary;
+    border-radius: $border-radius-mid;
+    background-color: $bg-light-primary;
+    padding: $spacing-400;
+    font-size: 20px;
+    font-weight: 500;
+    color: $text-primary;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+    position: relative;
+  }
+
+  input[type='radio'] {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 2px solid $stroke-tertiary;
+    background-color: $bg-light-primary;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+
+    &:checked {
+      background-color: $color-accent;
+      border-color: $stroke-accent;
+      box-shadow: 0 0 0 2px $bg-light-primary inset;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $stroke-accent;
+    }
+
+    &:disabled {
+      border-color: $color-grey-black-20;
+      background-color: $color-grey-black-05;
+      cursor: not-allowed;
+    }
+  }
+
+  label:has(input:checked) {
+    border-color: $stroke-accent;
+    background-color: $color-shade-blue-10;
+  }
+}

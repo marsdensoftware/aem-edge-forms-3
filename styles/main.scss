@@ -25,6 +25,8 @@
 @use './base';
 @use './forms';
 @use './settings/colors' as *;
+@use 'settings' as *;
+
 
 // Components
 @use './components';

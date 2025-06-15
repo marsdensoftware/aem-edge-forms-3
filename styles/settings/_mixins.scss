@@ -173,3 +173,20 @@
 .wizard-menu-items {
   display: none !important;
 }
+
+@mixin input-error {
+  border: $stroke-input-stroke solid $color-feedback-red;
+  background: $bg-light-primary;
+  color: $color-feedback-red;
+
+  &::placeholder {
+    color: $color-feedback-red;
+  }
+}
+
+%input-base {
+  border-radius: $border-radius-mid;
+  border: $stroke-input-stroke solid $stroke-tertiary;
+  ...
+}
+
