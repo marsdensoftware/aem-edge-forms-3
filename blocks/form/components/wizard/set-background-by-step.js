@@ -1,18 +1,18 @@
-import { onPageLoad } from '../utils.js';
+import { onElementsAddedByClassName } from '../utils.js';
 
-onPageLoad(() => {
-    const main = document.querySelector('main');
-    main.classList.add('wizard--bg-dark');
+onElementsAddedByClassName('wizard', (wizardEl) => {
+    const container = wizardEl.closest('main');
+    container.classList.add('wizard--bg-dark');
 
-    window.addEventListener('wizard:navigate', (e) => {
+    wizardEl.addEventListener('wizard:navigate', (e) => {
         const index = e.detail.currStep.index;
 
         if (index == 0 || index == 1) {
-            main.classList.add('wizard--bg-dark');
-            main.classList.remove('wizard--bg-light');
+            container.classList.add('wizard--bg-dark');
+            container.classList.remove('wizard--bg-light');
         } else {
-            main.classList.add('wizard--bg-light');
-            main.classList.remove('wizard--bg-dark');
+            container.classList.add('wizard--bg-light');
+            container.classList.remove('wizard--bg-dark');
         }
     });
 });
