@@ -93,7 +93,7 @@
 %button--hollow {
   @extend %button;
   background-color: transparent;
-  color: $text-primary;
+  color: $text-dark-primary;
   border: 2px solid $stroke-tertiary;
 
   &:hover {
