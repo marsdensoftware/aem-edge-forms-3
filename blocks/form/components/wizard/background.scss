@@ -1,6 +1,11 @@
 @use '../../../../styles/settings' as *;
 @use '../../../../styles/settings/colors' as *;
 
+
+/* ------------------------------
+   Dark Blue Gradient background
+------------------------------ */
+
 main.wizard--bg-dark {
   background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
   color: var(--Text-Light, #fff);
@@ -25,10 +30,6 @@ main.wizard--bg-dark {
   }
 }
 
-main.wizard--bg-light {
-  background: linear-gradient(135deg, var(--Shades-Blues-Blue-10, #E6F2FA) 25%, var(--Shades-Blues-Blue-25, #BFDEF1) 100%);
-  color: var(--Text-Dark, #333);
-}
 
 main.wizard--bg-dark {
   h1,
@@ -46,5 +47,49 @@ main.wizard--bg-dark {
     -webkit-text-fill-color: $color-white;
     background-clip: unset;
     -webkit-background-clip: unset;
+  }
+}
+
+/* ------------------------------
+   Light Blue Gradient background
+------------------------------ */
+
+main.wizard--bg-light {
+  background: linear-gradient(
+                  135deg,
+                  var(--Shades-Blues-Blue-10, #E6F2FA) 25%,
+                  var(--Shades-Blues-Blue-25, #BFDEF1) 100%
+  );
+  color: var(--Text-Dark, #333);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $text-primary;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+
+    // Optional: re-enable gradient if desired
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p,
+  .subtitle,
+  .straptitle {
+    color: $text-secondary;
+    /*color: $text-dark;*/
+    font-family: $font-family;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
