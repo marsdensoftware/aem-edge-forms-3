@@ -4,12 +4,12 @@
   .panel-formhero {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; // Mobile: left-align block layout
-    text-align: left;        // Mobile: left-align text
+    align-items: flex-start;
+    text-align: left;
 
     @include media('desktop') {
       flex-direction: row;
-      align-items: center;   // Optional: vertical centering if needed
+      align-items: center;
       justify-content: space-between;
       text-align: left;
     }
@@ -27,19 +27,31 @@
 
   .panel-formhero__content {
     order: 1;
-    text-align: left; // Mobile: left-align text
+    text-align: left;
+
+    // 👇 Universal color style for all headings + text
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    .strap-title,
+    .strap-title-small,
+    .subtitle {
+      /*color: #ffffff;*/
+    }
 
     h2 {
       @include heading-level-1;
       margin-top: 0;
       margin-bottom: $spacing-500;
-      text-align: left; // Explicit
     }
 
     p {
       @include font-body-large;
       margin-bottom: 12px;
-      text-align: left; // Explicit
     }
 
     @include media('desktop') {

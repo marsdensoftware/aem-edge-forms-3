@@ -1,38 +1,44 @@
+@use 'borders' as *;
+@use 'breakpoints' as *;
 @use 'colors' as *;
-@use 'spacings' as *;
+@use 'elevations' as *;
 @use 'fonts' as *;
-// Add other settings files here if needed
+@use 'spacings' as *;
+@use 'tokens' as *;
+@use 'utils' as *;
 
 /******************************
-   Input Base
+  Shared Placeholder Selectors
 *******************************/
+
+/* Base Input Styling (for text, number, email, textarea) */
 %input-base {
   border-radius: $border-radius-mid;
   border: $stroke-input-stroke solid $stroke-tertiary;
   padding: $spacing-400;
-  background: $bg-light-primary;
+  background-color: $bg-light-primary;
   font-family: $font-family;
   font-size: 20px;
   line-height: 120%;
-  caret-color: $color-primary;
   color: $text-primary;
+  caret-color: $color-primary;
 
   &::placeholder {
     color: $text-secondary;
   }
 
-  &:focus-visible,
+  &:hover,
   &:focus,
-  &:active,
-  &:hover {
+  &:focus-visible,
+  &:active {
     border-color: $stroke-accent;
-    background: $color-shade-blue-10;
+    background-color: $color-shade-blue-10;
     outline: none;
   }
 
   &:disabled {
     border-color: $color-grey-black-20;
-    background: $color-grey-black-05;
+    background-color: $color-grey-black-05;
     color: $text-secondary;
     cursor: not-allowed;
 
@@ -43,64 +49,79 @@
 }
 
 /******************************
-   Error Input State
+  Button Placeholders
 *******************************/
-@mixin input-error {
-  border: $stroke-input-stroke solid $color-feedback-red;
-  background: $bg-light-primary;
-  color: $color-feedback-red;
 
-  &::placeholder {
-    color: $color-feedback-red;
-  }
-}
-
-/******************************
-   Button Placeholders
-*******************************/
 %button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  border-radius: $border-radius-mid;
-  font-size: 16px;
   padding: $spacing-300 $spacing-500;
-  cursor: pointer;
-  font-weight: 600;
   font-family: $font-family;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
+  border-radius: $border-radius-round;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Primary Button */
 %button--primary {
   @extend %button;
-  background-color: $color-accent;
+  background-color: $color-primary;
   color: $color-white;
+  border: 2px solid $stroke-accent;
 
-  &:hover,
-  &:focus {
-    background-color: darken($color-accent, 10%);
+  &:hover {
+    background-color: $color-primary-dark;
+  }
+
+  &:active {
+    background-color: $color-primary-darker;
   }
 
   &:disabled {
-    background-color: $color-grey-black-20;
+    background-color: $color-grey-black-10;
+    color: $color-grey-black-40;
     cursor: not-allowed;
   }
 }
 
+/* Hollow (Outline) Button */
 %button--hollow {
   @extend %button;
   background-color: transparent;
-  border: 2px solid $color-accent;
-  color: $color-accent;
+  color: $color-primary;
+  border: 2px solid $stroke-accent;
 
-  &:hover,
-  &:focus {
-    background-color: rgba($color-accent, 0.1);
+  &:hover {
+    background-color: $color-shade-blue-10;
+  }
+
+  &:active {
+    background-color: $color-shade-blue-25;
   }
 
   &:disabled {
+    color: $color-grey-black-40;
     border-color: $color-grey-black-20;
-    color: $color-grey-black-20;
     cursor: not-allowed;
+  }
+}
+
+/******************************
+  Mixins
+*******************************/
+
+/* Input Error State */
+@mixin input-error {
+  border: $stroke-input-stroke solid $color-feedback-red;
+  background-color: $bg-light-primary;
+  color: $color-feedback-red;
+
+  &::placeholder {
+    color: $color-feedback-red;
   }
 }
