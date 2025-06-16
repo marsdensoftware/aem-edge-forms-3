@@ -1,6 +1,28 @@
+@use '../../styles/settings/colors' as *;
+@use '../../styles/settings' as *;
+
 main.wizard--bg-dark {
   background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
   color: var(--Text-Light, #fff);
+
+  .text-wrapper,
+  .number-wrapper,
+  .email-wrapper,
+  .radio-wrapper {
+    label,
+    .field-label {
+      color: $color-white;
+    }
+
+    input,
+    textarea {
+      color: $color-white;
+
+      &::placeholder {
+        color: rgba($color-white, 0.75);
+      }
+    }
+  }
 }
 
 main.wizard--bg-light {

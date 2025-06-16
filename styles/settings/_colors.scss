@@ -6,6 +6,8 @@
 $color-primary: #017ac9; // MSD Blue
 $color-primary-navy: #134276; // MSD Navy
 $color-primary-dark-navy: #162c45; // MSD Dark Navy
+$color-accent: #017AC9;  // Same as MSD Blue
+
 
 // Secondary Colours
 $color-secondary: #9BA5B7;
@@ -110,14 +112,15 @@ $bg-tertiary: $color-grey-black-10;
 $bg-error: $color-feedback-red;
 $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
+$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd);
 
 // Contextual Help Backgrounds (semantic)
 $bg-contextual-help-primary: $bg-primary;
 $bg-contextual-help-secondary: $color-shade-blue-10;
 $bg-contextual-help-tertiary: $color-primary-dark-navy;
 
-// Token-based fallback for AEM CSS vars (if needed)
-$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd); // RW
+
+ // RW
 
 // UI Icons
 $icon-accent: $color-primary;
