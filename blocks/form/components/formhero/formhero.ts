@@ -1,5 +1,4 @@
 export default function decorate(panel: Element) {
-
   panel.classList.add('panel-formhero')
 
   const divs = panel.querySelectorAll(':scope>fieldset,:scope>div')
