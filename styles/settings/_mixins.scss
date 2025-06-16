@@ -4,7 +4,6 @@
 @use '../settings/spacings' as *;
 @use '../settings/utils' as *;
 @use '../settings/borders' as *;
-@use '../base/typography' as *;
 
 
 /******************************
@@ -167,9 +166,3 @@
   height: 20px;
 }
 
-/******************************
-   Hide Wizard Menu
-*******************************/
-.wizard-menu-items {
-  display: none !important;
-}

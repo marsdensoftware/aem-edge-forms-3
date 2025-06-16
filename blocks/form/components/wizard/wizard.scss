@@ -1,21 +1,8 @@
 @use '../../../../styles/settings' as *;
 
-/*****************************
-    WIZARD STEPS
-*****************************/
-
-.wizard .wizard-menu-items {
-    display: none !important;
-}
-
 .wizard {
-    .current-wizard-step {
-        @include media('desktop') {
-            padding: $spacing-600 0;
-            margin: 32px auto;
-            width: 100%;
-            max-width: 1038px;
-        }
+    > fieldset {
+        padding-bottom: 120px;
     }
 
     >legend.field-label,
@@ -24,7 +11,8 @@
     }
 
     .wizard-menu-items {
-        display: flex;
+        display: none;
+        // display: flex;
         gap: 50px;
         flex-wrap: wrap;
         list-style: none;

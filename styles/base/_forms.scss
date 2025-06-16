@@ -190,3 +190,13 @@ main .form form .field-wrapper.field-invalid .field-description {
   }
 }
 
+.typography-wrapper,
+.default-content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px; // $max-width-content
+
+  // Fluid side padding: scales between 16px and 64px from mobile to desktop
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
+}
