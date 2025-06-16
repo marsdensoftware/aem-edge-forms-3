@@ -1,11 +1,9 @@
 @use '../../../../styles/settings' as *;
 @use '../../../../styles/settings/colors' as *;
 
-
 /* ------------------------------
    Dark Blue Gradient background
 ------------------------------ */
-
 main.wizard--bg-dark {
   background: var(--Gradient-Blue, linear-gradient(135deg, var(--Brand-MSD-Blue, #017AC9) 25%, var(--Brand-MSD-Navy, #134276) 100%));
   color: var(--Text-Light, #fff);
@@ -28,10 +26,7 @@ main.wizard--bg-dark {
       }
     }
   }
-}
 
-
-main.wizard--bg-dark {
   h1,
   h2,
   h3,
@@ -41,8 +36,6 @@ main.wizard--bg-dark {
   p,
   .subtitle {
     color: $color-white;
-
-    // Optional: remove gradient effect on h1–h3 in dark mode
     background: none;
     -webkit-text-fill-color: $color-white;
     background-clip: unset;
@@ -53,7 +46,6 @@ main.wizard--bg-dark {
 /* ------------------------------
    Light Blue Gradient background
 ------------------------------ */
-
 main.wizard--bg-light {
   background: linear-gradient(
                   135deg,
@@ -76,7 +68,6 @@ main.wizard--bg-light {
       margin-bottom: 0;
     }
 
-    // Optional: re-enable gradient if desired
     background: $color-gradient-blue;
     background-clip: text;
     -webkit-background-clip: text;
@@ -87,9 +78,39 @@ main.wizard--bg-light {
   .subtitle,
   .straptitle {
     color: $text-secondary;
-    /*color: $text-dark;*/
     font-family: $font-family;
     font-size: 1rem;
     line-height: 1.6;
+  }
+}
+
+/* ------------------------------
+   Shared Background Image Styles
+------------------------------ */
+main.wizard--bg-dark,
+main.wizard--bg-light {
+  background-image: url('/content/dam/edge-forms-rebecca/vectors/mymsd-unity-pattern.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+@include media('tablet') {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-position: top right;
+  }
+}
+
+@include media('desktop') {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-position: bottom left;
+  }
+}
+
+@media (max-width: 743px) {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-image: none;
   }
 }
