@@ -62,7 +62,8 @@
   input[type='radio'] {
     &:checked {
       + label {
-        background-color: $color-grey-black-05;
+        background-color: $color-shade-blue-10;
+        border: 2px solid $stroke-accent;
 
         &:after {
           left: auto;
