@@ -24,11 +24,26 @@
 @use './settings' as *;
 @use './base';
 @use './forms';
+@use './settings/colors' as *;
+@use 'settings' as *;
+
+
 // Components
 @use './components';
 
-/*added this for responsive testing, Rebecca*/
+main.wizard--bg-dark {
+  background: linear-gradient(135deg, #017AC9 25%, #134276 100%) !important;
+  color: #fff;
+}
 
+main.wizard--bg-light {
+  background: linear-gradient(135deg, #E6F2FA 25%, #BFDEF1 100%) !important;
+  color: #333;
+}
+
+
+
+/*added this for responsive testing, need to use grids then can remove Rebecca*/
 .typography-wrapper,
 .default-content-wrapper {
   width: 100%;
@@ -47,7 +62,7 @@ main {
   justify-content: center;   // vertically center content
   min-height: calc(100vh - 160px); // adjust to subtract header + footer height
   padding: 0 1rem 9rem 1rem;
-  background-color: $bg-light-secondary;
+ /* background-color: $bg-light-secondary;*/
 }
 
 main > * {
