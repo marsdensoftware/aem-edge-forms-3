@@ -21,6 +21,45 @@ export function onElementAdded(el) {
     });
 }
 
+export function onElementsAddedByClassName(className, callback) {
+  // Track elements already seen to avoid duplicates
+  const seen = new WeakSet();
+
+  // Call callback on any existing matching elements
+  document.querySelectorAll(`.${className}`).forEach(el => {
+    if (!seen.has(el)) {
+      seen.add(el);
+      callback(el);
+    }
+  });
+
+  // Set up the MutationObserver
+  const observer = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1) {
+            // Check if node matches or contains matching elements
+            if (node.classList.contains(className) && !seen.has(node)) {
+              seen.add(node);
+              callback(node);
+            }
+            node.querySelectorAll?.(`.${className}`)?.forEach(el => {
+              if (!seen.has(el)) {
+                seen.add(el);
+                callback(el);
+              }
+            });
+          }
+        });
+      }
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+
 export function getDurationString(startMonthStr, startYearStr, endMonthStr, endYearStr) {
     const startMonth = parseInt(startMonthStr, 10);
     const startYear = parseInt(startYearStr, 10);

@@ -3,6 +3,8 @@
 @use '../settings/borders' as *;
 @use '../settings/elevations' as *;
 @use '../settings/utils' as *;
+@use '../settings' as *;
+
 
 
 // buttons.scss
@@ -17,7 +19,6 @@
     font-family: var(--Typography-Font-family-Primary-font, 'Atkinson Hyperlegible Next');
     font-size: var(--Typography-Sizes-Components-Button-default, 20px);
     font-style: normal;
-    //font-weight: var(--Typography-Font-weight-Regular, 400);
     line-height: 24px;
     letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
     text-align: center;

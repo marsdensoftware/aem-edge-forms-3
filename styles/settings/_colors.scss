@@ -6,6 +6,8 @@
 $color-primary: #017ac9; // MSD Blue
 $color-primary-navy: #134276; // MSD Navy
 $color-primary-dark-navy: #162c45; // MSD Dark Navy
+$color-accent: #017AC9;  // Same as MSD Blue
+
 
 // Secondary Colours
 $color-secondary: #9BA5B7;
@@ -24,7 +26,7 @@ $color-grey-black-05: #f2f2f2;
 $color-grey-black-10: #dddddd;
 $color-grey-black-20: #cccccc;
 $color-grey-black-40: #999999;
-$color-grey-black-60: #666666;
+$color-grey-black-60: #706868;
 $color-grey-black-80: #2e2e2e;
 $color-grey-black-100: #000000;
 $color-white: #ffffff;
@@ -110,14 +112,15 @@ $bg-tertiary: $color-grey-black-10;
 $bg-error: $color-feedback-red;
 $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
+$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd);
 
 // Contextual Help Backgrounds (semantic)
 $bg-contextual-help-primary: $bg-primary;
 $bg-contextual-help-secondary: $color-shade-blue-10;
 $bg-contextual-help-tertiary: $color-primary-dark-navy;
 
-// Token-based fallback for AEM CSS vars (if needed)
-$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd); // RW
+
+ // RW
 
 // UI Icons
 $icon-accent: $color-primary;
@@ -145,4 +148,26 @@ $stroke-hover-stroke: 2px;
 // input field background colour
 $bg-light-primary: $color-white;
 $bg-light-secondary: $color-shade-blue-04;
+
+// Wizard background colours
+$color-gradient-wizard-dark: linear-gradient(
+                135deg,
+                $color-primary 25%,
+                $color-primary-navy 100%
+);
+
+$color-gradient-wizard-light: linear-gradient(
+                135deg,
+                $color-shade-blue-10 25%,
+                $color-shade-blue-25 100%
+);
+
+// Semantic tokens
+$bg-wizard-dark: $color-gradient-wizard-dark;
+$bg-wizard-light: $color-gradient-wizard-light;
+
+
+$bg-wizard-dark: linear-gradient(135deg, $color-primary 25%, $color-primary-navy 100%);
+$bg-wizard-light: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);
+
 

@@ -6,9 +6,10 @@
 *******************************/
 .panel-formcontextualhelp {
   padding: $spacing-400 $spacing-300;
-  background: $bg-light-primary; // usually $color-white
+  background: var(--Shades-Blues-Blue-10, #E6F2FA);
   display: block;
-  border-radius: $border-radius-mid;
+  border-radius: var(--Corner-radius-Mid, 8px);
+  border: 1px solid var(--Stroke-Tertiary, #A1B3C8);
   margin-bottom: $spacing-600;
 
   // Elevation-1
@@ -42,7 +43,7 @@
   }
 
   .panel-formcontextualhelp__title {
-    color: $color-primary;
+    color: $text-dark;
     font-feature-settings: 'liga' off, 'clig' off;
     font-family: $font-family;
     font-size: $size-font-h6;
@@ -65,8 +66,50 @@
 
   &--info {
     .panel-formcontextualhelp__icon {
-      /*content: url('info-icon.png');*/
-      content: url('icon-contextual-help-info-blue-info.svg');
+      content: url('images/icon-contextual-help-info-blue-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--Text-Dark-Primary, #333);
+      font-weight: 500;
+
+      &:hover,
+      &:focus {
+        color: var(--Text-Dark-Primary, #333);
+        text-decoration: none;
+      }
+
+      &::after {
+        content: url('images/icon-contextual-help-arrow-navy-right.svg');
+        /*content: '\2192'; // Unicode right arrow*/
+        margin-left: 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+    }
+
+    // Merged Anchor Link Text Styles
+    .panel-formcontextualhelp__footer__link-text {
+      margin-right: 0.75rem;
+      color: $text-dark;
+      font-weight: 500;
+      text-decoration: none;
+      text-underline: none;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus {
+        color: $text-accent;
+        text-decoration: none;
+        text-underline: none;
+      }
+
+      &:visited {
+        color: $text-dark;
+      }
     }
   }
 }

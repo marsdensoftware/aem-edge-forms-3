@@ -1,4 +1,6 @@
 import { createButton } from '../../util.js';
+import './set-background-by-step.js';
+
 
 export class WizardLayout {
   inputFields = 'input,textarea,select';
@@ -72,12 +74,13 @@ export class WizardLayout {
       const navigateToMenuItem = panel.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
       currentMenuItem.classList.remove('wizard-menu-active-item');
       navigateToMenuItem.classList.add('wizard-menu-active-item');
+      //###SEP-JN: Allow event bubbling
       const event = new CustomEvent('wizard:navigate', {
         detail: {
           prevStep: { id: current.id, index: +current.dataset.index },
           currStep: { id: navigateTo.id, index: +navigateTo.dataset.index },
         },
-        bubbles: false,
+        bubbles: true,
       });
       panel.dispatchEvent(event);
     }

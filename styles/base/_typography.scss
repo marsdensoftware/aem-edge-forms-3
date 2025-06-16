@@ -23,7 +23,7 @@ h6 {
 h1,
 h2,
 h3 {
-  background: $color-gradient-blue;
+  /*background: $color-gradient-blue;*/
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -295,28 +295,5 @@ ul li {
   font-size: $size-font-strap-title-small;
 }
 
-
-/* ------------------------------
-   Form Contextual Help Anchors
------------------------------- */
-.panel-formcontextualhelp--info .panel-formcontextualhelp__footer__link-text {
-  margin-right: 0.75rem;
-  color: $text-accent;
-  font-weight: 500;
-  text-decoration: none;
-  text-underline-offset: auto;
-  transition: color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    color: $text-dark;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  &:visited {
-    color: $text-dark;
-  }
-}
 
 

@@ -1,175 +1,106 @@
-@use '../settings/breakpoints' as *;
-@use '../settings/elevations' as *;
-@use '../settings/colors' as *;
-@use '../settings/spacings' as *;
-@use '../settings/utils' as *;
-@use '../settings/borders' as *;
-@use '../base/typography' as *;
-
+@use 'colors' as *;
+@use 'spacings' as *;
+@use 'fonts' as *;
+// Add other settings files here if needed
 
 /******************************
-      Contextual Help Mixins
+   Input Base
 *******************************/
-@mixin panel-help-base($bg-color, $text-color, $link-color) {
-  background-color: $bg-color;
-  color: $text-color;
+%input-base {
+  border-radius: $border-radius-mid;
+  border: $stroke-input-stroke solid $stroke-tertiary;
+  padding: $spacing-400;
+  background: $bg-light-primary;
+  font-family: $font-family;
+  font-size: 20px;
+  line-height: 120%;
+  caret-color: $color-primary;
+  color: $text-primary;
 
-  .panel-formcontextualhelp__title {
-    color: $text-color;
+  &::placeholder {
+    color: $text-secondary;
   }
 
-  .plain-text-wrapper,
-  .plain-text-wrapper p {
-    color: $text-color;
+  &:focus-visible,
+  &:focus,
+  &:active,
+  &:hover {
+    border-color: $stroke-accent;
+    background: $color-shade-blue-10;
+    outline: none;
   }
 
-  .panel-formcontextualhelp__footer__link-text {
-    color: $link-color;
+  &:disabled {
+    border-color: $color-grey-black-20;
+    background: $color-grey-black-05;
+    color: $text-secondary;
+    cursor: not-allowed;
 
-    &:hover,
-    &:focus {
-      text-decoration: underline;
+    &::placeholder {
+      color: $text-secondary;
     }
   }
 }
 
-@mixin panel-help-icon-invert {
-  .panel-formcontextualhelp__icon {
-    filter: brightness(0) invert(1);
+/******************************
+   Error Input State
+*******************************/
+@mixin input-error {
+  border: $stroke-input-stroke solid $color-feedback-red;
+  background: $bg-light-primary;
+  color: $color-feedback-red;
+
+  &::placeholder {
+    color: $color-feedback-red;
   }
 }
 
 /******************************
-   Button Placeholder Styles
+   Button Placeholders
 *******************************/
 %button {
-  @include elevation-2;
-  border-radius: $border-radius-round;
-  text-decoration: none;
-  text-align: center;
-  position: relative;
-  font-size: 20px;
-  padding: $spacing-400 $spacing-600;
-  font-style: normal;
-  transition: all 0.2s ease-in-out;
-
-  &:focus {
-    box-shadow: 0 0 0 2px $color-white;
-    outline: 3px solid transparent;
-  }
-
-  &.small {
-    padding: $spacing-300 $spacing-500;
-    font-size: 16px;
-  }
-
-  &.primary {
-    @extend %button--primary;
-  }
-
-  &.hollow,
-  &.secondary {
-    @extend %button--hollow;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: $border-radius-mid;
+  font-size: 16px;
+  padding: $spacing-300 $spacing-500;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: $font-family;
 }
 
 %button--primary {
-  @extend %state-focus;
-  background-image: $color-primary-animated;
-  border: 2px solid $stroke-accent;
+  @extend %button;
+  background-color: $color-accent;
   color: $color-white;
-  z-index: 1;
 
-  &::after {
-    transition: opacity 0.2s ease-in-out;
-    border-radius: $border-radius-round;
-    position: absolute;
-    content: '';
-    display: block;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: $color-gradient-blue;
-    z-index: -1;
-    opacity: 0;
-  }
-
-  &:visited:hover {
-    color: $color-white;
-  }
-
-  &:hover {
-    color: $color-white;
-
-    &::after {
-      opacity: 1;
-    }
-  }
-
-  &:active {
-    background: $color-primary-navy;
-    color: $color-white;
-  }
-
+  &:hover,
   &:focus {
-    border-radius: $border-radius-round;
+    background-color: darken($color-accent, 10%);
+  }
+
+  &:disabled {
+    background-color: $color-grey-black-20;
+    cursor: not-allowed;
   }
 }
 
 %button--hollow {
-  @extend %state-focus;
-  background: none;
-  color: $color-primary-dark-navy;
-  border: 2px solid $stroke-secondary;
-
-  &::after {
-    content: '';
-    display: none;
-  }
+  @extend %button;
+  background-color: transparent;
+  border: 2px solid $color-accent;
+  color: $color-accent;
 
   &:hover,
-  &:active {
-    color: $color-primary-dark-navy;
-    background: none;
-  }
-
-  &:hover {
-    border-color: $stroke-primary;
-  }
-
-  &:active {
-    border-color: $stroke-accent;
-  }
-
   &:focus {
-    border-radius: $border-radius-round;
+    background-color: rgba($color-accent, 0.1);
   }
-}
 
-/******************************
-   Common Utilities
-*******************************/
-%common-panel-spacing {
-  margin: 32px 0;
-
-  @include media('desktop') {
-    padding: 60px 0;
+  &:disabled {
+    border-color: $color-grey-black-20;
+    color: $color-grey-black-20;
+    cursor: not-allowed;
   }
-}
-
-%common-wizard-button {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: block;
-  width: 20px;
-  height: 20px;
-}
-
-/******************************
-   Hide Wizard Menu
-*******************************/
-.wizard-menu-items {
-  display: none !important;
 }
