@@ -3,10 +3,12 @@
 *************************/
 
 // Primary Colours
-$color-primary: #017ac9; // MSD Blue
-$color-primary-navy: #134276; // MSD Navy
-$color-primary-dark-navy: #162c45; // MSD Dark Navy
-$color-accent: #017AC9;  // Same as MSD Blue
+$color-primary: #017ac9;               // MSD Blue
+$color-primary-navy: #134276;          // MSD Navy
+$color-primary-dark-navy: #162c45;     // MSD Dark Navy
+$color-accent: #017AC9;                // Same as MSD Blue
+$color-primary-dark: #0160a6;          // Darker blue
+$color-primary-darker: #014f8a;        // Even darker blue
 
 
 // Secondary Colours
@@ -95,6 +97,7 @@ $color-primary-animated: linear-gradient(
 *************************/
 
 // UI Text
+$text-dark-primary: #333333;
 $text-accent: $color-primary;
 $text-dark: $color-primary-navy;
 $text-primary: $color-grey-black-80;
