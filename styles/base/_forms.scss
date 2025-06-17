@@ -1,9 +1,3 @@
-@use '../settings/colors' as *;
-@use '../settings/mixins' as *;
-@use '../settings/spacings' as *;
-@use '../settings/fonts' as *;
-@use '../settings/tokens' as *;
-
 @use '../settings' as *;
 
 /********************
@@ -210,19 +204,4 @@ main.wizard--bg-light {
   // Fluid side padding: scales between 16px and 64px from mobile to desktop
   padding-left: clamp(1rem, 5vw, 4rem);
   padding-right: clamp(1rem, 5vw, 4rem);
-}
-
-// vertically center content within the Wizard
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; // vertically center content
-  min-height: calc(100vh - 160px); // adjust to subtract header + footer height
-  padding: 0 1rem 9rem 1rem;
-  /* background-color: $bg-light-secondary;*/
-}
-
-main > * {
-  margin-top: auto;
-  margin-bottom: auto;
 }
