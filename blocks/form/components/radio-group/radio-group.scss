@@ -15,9 +15,10 @@
   .radio-group--with-icon__label {
     width: 100%;
     padding: $spacing-400;
-    border-radius: $spacing-200
-    border: var(--Stroke-weight-Input-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
-    background: var(--Background-Light-Primary, #FFF);
+    border-radius: $spacing-200;
+    border: $stroke-input-stroke solid $stroke-tertiary;
+    background: $bg-light-primary;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +65,7 @@
     &:checked {
       + .radio-group--with-icon__label {
         background-color: $color-shade-blue-10;
-        border: 2px solid $stroke-selected;
+        border: 2px solid $color-primary;
         color: $text-dark-primary;
 
         &:after {
