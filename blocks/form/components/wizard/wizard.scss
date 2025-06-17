@@ -1,7 +1,6 @@
 @use '../../../../styles/settings' as *;
 @use 'background' as *;
 
-
 /*****************************
     WIZARD STEPS
 *****************************/
@@ -12,8 +11,17 @@
 
 .wizard {
     .current-wizard-step {
+        min-height: calc(100vh - 94px - 82.59px);
+
         @include media('desktop') {
             padding: $spacing-600 0;
+        }
+    }
+
+    // Exclude current component being styled for Bootstrap
+    // data-index="0" = first screen
+    .current-wizard-step:not([data-index="0"]) {
+        @include media('desktop') {
             margin: 32px auto;
             width: 100%;
             max-width: 1038px;
