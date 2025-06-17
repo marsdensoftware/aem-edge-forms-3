@@ -103,7 +103,7 @@
     input {
       &:checked {
         + label {
-          border: 2px solid $stroke-dark;
+          border: 2px solid $stroke-accent;
           background-color: $color-white;
           color: $text-dark-primary;
 
