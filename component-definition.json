@@ -500,6 +500,207 @@
           }
         },
         {
+          "title": "Advanced Date Picker",
+          "id": "advanceddatepicker",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Advanced Date Picker",
+                  "fieldType": "panel",
+                  "fd:viewType": "advanceddatepicker",
+                  "name": "advanceddatepicker",
+                  "month": {
+                    "name": "month",
+                    "type": "string",
+                    "placeholder": "Month",
+                    "fieldType": "drop-down",
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "6",
+                      "7",
+                      "8",
+                      "9",
+                      "10",
+                      "11",
+                      "12"
+                    ],
+                    "enumNames": [
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December"
+                    ],
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "required": true
+                  },
+                  "year": {
+                    "required": true,
+                    "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                    "fieldType": "drop-down",
+                    "placeholder": "Year",
+                    "type": "string",
+                    "name": "year"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Education",
+          "id": "education",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Education",
+                  "fieldType": "panel",
+                  "fd:viewType": "education",
+                  "name": "education",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "enum": [
+                      "yes",
+                      "no"
+                    ],
+                    "enumNames": [
+                      "Yes – I’ve done some education or training",
+                      "No - I haven’t done any formal training yet"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "fieldType": "radio-group",
+                    "hideTitle": true,
+                    "jcr:title": "Education Selection",
+                    "name": "education-selection",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "withIcon": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "jcr:title": "Education Options Content",
+                    "fieldType": "panel",
+                    "hideTitle": true,
+                    "name": "education-options-content",
+                    "repeatAddButtonLabel": "Add another",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatable": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "intro": {
+                      "fieldType": "plain-text",
+                      "jcr:title": "Intro",
+                      "textIsRich": true,
+                      "value": "<h6>Add education, qualification or certification</h6>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "course": {
+                      "fd:viewType": "typeahead",
+                      "fieldType": "text-input",
+                      "name": "course",
+                      "jcr:title": "Course, qualification or certification",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "datasource": "courses",
+                      "required": true
+                    },
+                    "place-of-learning": {
+                      "fieldType": "text-input",
+                      "jcr:title": "Place of learning (Optional)",
+                      "name": "place-of-learning",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                    },
+                    "start-year": {
+                      "enum": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "enumNames": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "fieldType": "drop-down",
+                      "hideTitle": false,
+                      "jcr:title": "When did you start?",
+                      "name": "start-year",
+                      "required": true,
+                      "type": "string",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
+                    },
+                    "completion-status": {
+                      "enum": [
+                        "0",
+                        "1",
+                        "2"
+                      ],
+                      "enumNames": [
+                        "I completed",
+                        "It's in progress",
+                        "I didn't complete"
+                      ],
+                      "fieldType": "radio-group",
+                      "jcr:title": "Did you complete this qualification?",
+                      "name": "completion-status",
+                      "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                      "required": true
+                    },
+                    "finish-year": {
+                      "enum": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "enumNames": [
+                        "2025",
+                        "2024",
+                        "2023",
+                        "2022",
+                        "2021",
+                        "2020"
+                      ],
+                      "fieldType": "drop-down",
+                      "hideTitle": false,
+                      "visible": false,
+                      "jcr:title": "When did you finish?",
+                      "name": "finish-year",
+                      "required": true,
+                      "type": "string",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Contextual Help",
           "id": "formcontextualhelp",
           "plugins": {
@@ -536,13 +737,18 @@
                   "fieldType": "panel",
                   "fd:viewType": "formhero",
                   "minOccur": 1,
-                  "text": {
-                    "jcr:title": "Text",
-                    "fieldType": "plain-text",
-                    "textIsRich": true,
+                  "text-container": {
+                    "jcr:title": "Text Container",
+                    "fieldType": "panel",
                     "colspan": 6,
-                    "value": "Adaptive Form Text Component",
-                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "jcr:title": "Text",
+                      "fieldType": "plain-text",
+                      "textIsRich": true,
+                      "value": "Adaptive Form Text Component",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    }
                   },
                   "image": {
                     "jcr:title": "Image",
@@ -561,10 +767,10 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
                 "template": {
                   "jcr:title": "Form Output Field",
-                  "fieldType": "panel",
+                  "fieldType": "text-input",
                   "fd:viewType": "formoutputfield"
                 }
               }
@@ -678,6 +884,92 @@
           }
         },
         {
+          "title": "Language Panel",
+          "id": "languagepanel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Language Panel",
+                  "fieldType": "panel",
+                  "fd:viewType": "languagepanel",
+                  "name": "languagepanel",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "enum": [
+                      "no",
+                      "yes"
+                    ],
+                    "enumNames": [
+                      "No - I only know English",
+                      "Yes – I know other language(s)"
+                    ],
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "fieldType": "radio-group",
+                    "hideTitle": true,
+                    "jcr:title": "Language Selection",
+                    "name": "languagepanel-selection",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "withIcon": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "jcr:title": "Language Options Content",
+                    "fieldType": "panel",
+                    "hideTitle": true,
+                    "name": "languagepanel-options-content",
+                    "repeatAddButtonLabel": "Add another",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatable": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "intro": {
+                      "fieldType": "plain-text",
+                      "jcr:title": "Intro",
+                      "textIsRich": true,
+                      "value": "<h6>Add language</h6>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "language": {
+                      "fd:viewType": "typeahead",
+                      "datasource": "languages",
+                      "fieldType": "text-input",
+                      "name": "language",
+                      "jcr:title": "Language",
+                      "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                      "required": true
+                    },
+                    "proficiency": {
+                      "enum": [
+                        "0",
+                        "1",
+                        "2",
+                        "4"
+                      ],
+                      "enumNames": [
+                        "Able to read",
+                        "Able to write",
+                        "Can understand when spoken",
+                        "Can have a conversation"
+                      ],
+                      "fieldType": "checkbox-group",
+                      "description": "<p>Select all that apply</p>",
+                      "name": "proficiency",
+                      "type": "string[]",
+                      "sling:resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Modal",
           "id": "form-modal",
           "plugins": {
@@ -727,18 +1019,24 @@
           }
         },
         {
-          "title": "Repeatable Panel",
-          "id": "repeatable-panel",
+          "title": "Search Box",
+          "id": "search-box",
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
                 "template": {
-                  "jcr:title": "Repeatable Panel",
-                  "fieldType": "panel",
-                  "fd:viewType": "repeatable-panel",
-                  "minOccur": 1,
-                  "repeatable": true
+                  "jcr:title": "Search Box",
+                  "fieldType": "text-input",
+                  "fd:viewType": "search-box",
+                  "type": "string",
+                  "selection-label": "Search results label",
+                  "empty-selection-message": "None selected.",
+                  "placeholder": "Start typing to search...",
+                  "datasource": "courses",
+                  "required": false,
+                  "description": "Search box with typeahead functionality",
+                  "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
                 }
               }
             }
@@ -821,6 +1119,222 @@
                     "jcr:title": "Item 2",
                     "fieldType": "panel",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Work Experience",
+          "id": "workexperience",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Work Experience",
+                  "fieldType": "panel",
+                  "fd:viewType": "workexperience",
+                  "name": "workexperience",
+                  "hideTitle": true,
+                  "radiogroup": {
+                    "withIcon": true,
+                    "jcr:title": "Work Experience Type Selection",
+                    "enumIconNames": [
+                      "list-search-1",
+                      "list-search-1",
+                      "list-search-1",
+                      "list-search-1"
+                    ],
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "0"
+                    ],
+                    "enumNames": [
+                      "Paid work",
+                      "Non-paid work",
+                      "Volunteer work",
+                      "No, I have nothing to add"
+                    ],
+                    "fd:viewType": "radio-group",
+                    "name": "workexperience-selection",
+                    "fieldType": "radio-group",
+                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                    "hideTitle": true,
+                    "required": true
+                  },
+                  "repeatable-panel": {
+                    "hideTitle": true,
+                    "fieldType": "panel",
+                    "repeatable": true,
+                    "name": "workexperience-options-content",
+                    "repeatDeleteButtonLabel": "Delete",
+                    "repeatAddButtonLabel": "Add another",
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "jcr:title": "Work Experience Options Content",
+                    "type_of_work_experience": {
+                      "name": "type-of-work-experience",
+                      "type": "string",
+                      "placeholder": "Choose work type",
+                      "enumNames": [
+                        "Paid work",
+                        "Non-paid work",
+                        "Volunteer work"
+                      ],
+                      "enum": [
+                        "1",
+                        "2",
+                        "3"
+                      ],
+                      "fieldType": "drop-down",
+                      "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                      "required": true,
+                      "visible": false
+                    },
+                    "fields_container": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "fields-container",
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "jcr:title": "Work Experience Fields Container",
+                      "intro": {
+                        "value": "<h6>Add work experience</h6>",
+                        "textIsRich": true,
+                        "fieldType": "plain-text",
+                        "jcr:title": "Add work experience",
+                        "sling:resourceType": "core/fd/components/form/text/v1/text",
+                        "name": "intro1749081013822"
+                      },
+                      "job_title": {
+                        "jcr:title": "Job title",
+                        "required": true,
+                        "name": "title",
+                        "fieldType": "text-input",
+                        "description": "<p>What was your job called?</p>",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                      },
+                      "work_type": {
+                        "jcr:title": "Work type",
+                        "name": "type",
+                        "fieldType": "text-input",
+                        "fd:viewType": "typeahead",
+                        "datasource": "occupations",
+                        "placeholder": "Start typing",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                        "required": true,
+                        "description": "<p>Match your job title to one from our standard list.</p>"
+                      },
+                      "employer": {
+                        "jcr:title": "Employer name/Who you did this work for",
+                        "fieldType": "text-input",
+                        "required": true,
+                        "name": "employer",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                      },
+                      "startofwork": {
+                        "fd:viewType": "advanceddatepicker",
+                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "jcr:title": "When you started doing this work",
+                        "fieldType": "panel",
+                        "name": "startofwork",
+                        "month": {
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "type": "string",
+                          "placeholder": "Month",
+                          "required": true,
+                          "name": "startofwork-month",
+                          "fieldType": "drop-down"
+                        },
+                        "year": {
+                          "name": "startofwork-year",
+                          "type": "string",
+                          "placeholder": "Year",
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "fieldType": "drop-down",
+                          "required": true
+                        }
+                      },
+                      "still_working": {
+                        "name": "still-working",
+                        "jcr:title": "Are you still doing this work?",
+                        "orientation": "horizontal",
+                        "enumNames": [
+                          "Yes",
+                          "No"
+                        ],
+                        "fieldType": "radio-group",
+                        "fd:viewType": "radio-group",
+                        "enum": [
+                          "1",
+                          "0"
+                        ],
+                        "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                        "required": true
+                      },
+                      "endofwork": {
+                        "fd:viewType": "advanceddatepicker",
+                        "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "jcr:title": "When you finished this work",
+                        "fieldType": "panel",
+                        "name": "endofwork",
+                        "visible": false,
+                        "month": {
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "type": "string",
+                          "placeholder": "Month",
+                          "required": true,
+                          "name": "endofwork-month",
+                          "fieldType": "drop-down"
+                        },
+                        "year": {
+                          "name": "endofwork-year",
+                          "type": "string",
+                          "placeholder": "Year",
+                          "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown",
+                          "fieldType": "drop-down",
+                          "required": true
+                        }
+                      },
+                      "skills": {
+                        "jcr:title": "Add skills you used in this work",
+                        "name": "skills",
+                        "fieldType": "text-input",
+                        "fd:viewType": "typeahead",
+                        "required": true,
+                        "datasource": "skills",
+                        "placeholder": "Start typing",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
+                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>"
+                      },
+                      "description": {
+                        "multiLine": true,
+                        "jcr:title": "Description",
+                        "name": "description",
+                        "fieldType": "text-input",
+                        "description": "<p>Describe the work you did &mdash; include tasks, skills you used or learned, and any achievements you're proud of.</p>",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                      },
+                      "still_able": {
+                        "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                        "fieldType": "radio-group",
+                        "enumNames": [
+                          "Yes",
+                          "No"
+                        ],
+                        "enum": [
+                          "1",
+                          "0"
+                        ],
+                        "jcr:title": "Are you still able to do this type of work?",
+                        "orientation": "horizontal",
+                        "fd:viewType": "radio-group",
+                        "name": "still-able",
+                        "required": true
+                      }
+                    }
                   }
                 }
               }

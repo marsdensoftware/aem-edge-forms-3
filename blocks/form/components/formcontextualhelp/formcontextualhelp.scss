@@ -1,18 +1,29 @@
-/// This all fixed value at some point
-/// Needs to be replaced by variables value
-/// Once UI Design is ready to developed
-
 @use '../../../../styles/settings' as *;
+@use '../../../../styles/settings/breakpoints' as *;
 
 /******************************
     Base Panel Styling
 *******************************/
 .panel-formcontextualhelp {
-  padding: 20px 14px;
-  background-color: $bg-secondary; // fallback grey panel
+  padding: $spacing-400 $spacing-300;
+  background: var(--Shades-Blues-Blue-10, #E6F2FA);
   display: block;
-  border-radius: $border-radius-mid;
-  margin-bottom: 32px;
+  border-radius: var(--Corner-radius-Mid, 8px);
+  border: 1px solid var(--Stroke-Tertiary, #A1B3C8);
+  margin-bottom: $spacing-600;
+
+  // Elevation-1
+  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
+
+  width: 100%;
+
+  @include media('tablet') {
+    width: 70%;
+  }
+
+  @include media('desktop') {
+    width: 50%;
+  }
 
   > legend {
     margin-bottom: 0;
@@ -26,105 +37,79 @@
   }
 
   .panel-formcontextualhelp__icon {
-    margin-right: 12px;
+    margin-right: $spacing-200;
     width: 24px;
     height: 24px;
   }
 
   .panel-formcontextualhelp__title {
-    font-weight: 500;
+    color: $text-dark;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: $font-family;
+    font-size: $size-font-h6;
+    font-style: normal;
+    font-weight: $font-weight-bold;
+    line-height: 125%;
+    letter-spacing: $letter-spacing-default;
   }
 
   .plain-text-wrapper {
     p {
       margin-top: 0;
-      padding: $spacing-100 0; // Avoid top/bottom doubling in wizard layout
+      padding: $spacing-100 0;
 
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
-}
 
-/******************************
-    Info Variant (shared)
-*******************************/
-.panel-formcontextualhelp--info {
-  .panel-formcontextualhelp__icon {
-    content: url('info-icon.png');
-  }
+  &--info {
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-contextual-help-info-blue-info.svg');
+    }
 
-  .panel-formcontextualhelp__footer {
-    display: inline-block;
-
-    &__link {
-      display: flex;
+    .panel-formcontextualhelp__footer__link {
+      display: inline-flex;
       align-items: center;
-      margin-top: 8px;
+      text-decoration: none;
+      color: var(--Text-Dark-Primary, #333);
+      font-weight: 500;
+
+      &:hover,
+      &:focus {
+        color: var(--Text-Dark-Primary, #333);
+        text-decoration: none;
+      }
+
+      &::after {
+        content: url('images/icon-contextual-help-arrow-navy-right.svg');
+        /*content: '\2192'; // Unicode right arrow*/
+        margin-left: 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1;
+      }
     }
 
-    &__link-icon {
-      content: url('external-icon.png');
-      width: 22px;
+    // Merged Anchor Link Text Styles
+    .panel-formcontextualhelp__footer__link-text {
+      margin-right: 0.75rem;
+      color: $text-dark;
+      font-weight: 500;
+      text-decoration: none;
+      text-underline: none;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus {
+        color: $text-accent;
+        text-decoration: none;
+        text-underline: none;
+      }
+
+      &:visited {
+        color: $text-dark;
+      }
     }
-
-    &__link-text {
-      margin-right: 12px;
-    }
-  }
-}
-
-/******************************
-    Panel Colour Variants
-*******************************/
-
-.panel-formcontextualhelp--primary {
-  background-color: $bg-primary; // $color-white
-  color: $text-primary;
-
-  .panel-formcontextualhelp__title {
-    color: $text-dark;
-  }
-
-  .panel-formcontextualhelp__footer__link-text {
-    color: $text-accent;
-  }
-}
-
-.panel-formcontextualhelp--secondary {
-  background-color: $bg-contextual-help-secondary; // $color-shade-blue-10
-  color: $text-primary;
-
-  .panel-formcontextualhelp__title {
-    color: $text-dark;
-  }
-
-  .panel-formcontextualhelp__footer__link-text {
-    color: $text-accent;
-  }
-}
-
-.panel-formcontextualhelp--tertiary {
-  background-color: $bg-contextual-help-tertiary; // $color-primary-dark-navy
-  color: $text-white;
-
-  .panel-formcontextualhelp__title,
-  .plain-text-wrapper,
-  .plain-text-wrapper p {
-    color: $text-white;
-  }
-
-  .panel-formcontextualhelp__footer__link-text {
-    color: $text-white;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
-
-  .panel-formcontextualhelp__icon {
-    filter: brightness(0) invert(1); // Invert icon for dark background
   }
 }

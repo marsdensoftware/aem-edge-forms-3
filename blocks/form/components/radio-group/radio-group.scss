@@ -1,46 +1,109 @@
 @use '../../../../styles/settings' as *;
 
 .radio-group--with-icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0 16px;
+  padding-bottom: $spacing-600;
+
+  .radio-wrapper {
+    flex: 1 1 45%; // Ensures equal width tiles, and stays side by side on mobile RW
+    display: flex;
+  }
 
   .radio-group--with-icon__label {
+    width: 100%;
     padding: $spacing-400;
-    border: 1px solid $stroke-primary;
-    border-radius: $border-radius-large;
+    border-radius: var(--Spacing-200, 8px);
+    border: var(--Stroke-weight-Input-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
+    background: var(--Background-Light-Primary, #FFF);
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .radio-group--with-icon__icon {
-    width: 40px;
-    height: 40px;
-    display: block;
-    content: url('./icon-streamline.svg');
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+    min-height: 140px;
     gap: 20px 0;
 
     &::before {
       order: 1;
       margin-right: 0;
     }
+
+    > span:not(.radio-group--with-icon__icon) {
+      height: 4.5rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .radio-group--with-icon__icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .radio-group--with-icon--list-search-1 {
+    content: url('../../../../icons/icon-streamline.svg');
+  }
+
+  .radio-group--with-icon--smiley-face {
+    content: url('../../../../icons/smiley-face.svg');
   }
 
   input[type='radio'] {
     &:checked {
       + label {
-        background-color: $color-grey-black-05;
+        background-color: $color-shade-blue-10;
+        border: 2px solid $stroke-accent;
 
         &:after {
           left: auto;
           top: auto;
           bottom: $spacing-400 + 1px;
           margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+.radio-group-wrapper {
+  &.horizontal {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      padding: 16px;
+      border-radius: $border-radius-mid;
+      border: 2px solid $color-shade-navy-45;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 8px;
+      justify-content: space-between;
+
+      &::before {
+        order: 1;
+        margin-right: 0;
+      }
+    }
+
+    input {
+      &:checked {
+        + label {
+          &::after {
+            right: 17px;
+            top: 17px;
+            left: auto;
+          }
         }
       }
     }

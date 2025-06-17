@@ -12,13 +12,18 @@
               "fieldType": "panel",
               "fd:viewType": "formhero",
               "minOccur": 1,
-              "text": {
-                "jcr:title": "Text",
-                "fieldType": "plain-text",
-                "textIsRich": true,
+              "text-container": {
+                "jcr:title": "Text Container",
+                "fieldType": "panel",
                 "colspan": 6,
-                "value": "Adaptive Form Text Component",
-                "sling:resourceType": "core/fd/components/form/text/v1/text"
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "text": {
+                  "jcr:title": "Text",
+                  "fieldType": "plain-text",
+                  "textIsRich": true,
+                  "value": "Adaptive Form Text Component",
+                  "sling:resourceType": "core/fd/components/form/text/v1/text"
+                }
               },
               "image": {
                 "jcr:title": "Image",

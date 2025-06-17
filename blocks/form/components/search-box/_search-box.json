@@ -1,0 +1,107 @@
+{
+  "definitions": [
+    {
+      "title": "Search Box",
+      "id": "search-box",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/textinput/v1/textinput",
+            "template": {
+              "jcr:title": "Search Box",
+              "fieldType": "text-input",
+              "fd:viewType": "search-box",
+              "type": "string",
+              "selection-label": "Search results label",
+              "empty-selection-message": "None selected.",
+              "placeholder": "Start typing to search...",
+              "datasource": "courses",
+              "required": false,
+              "description": "Search box with typeahead functionality",
+              "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "search-box",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "select",
+              "name": "datasource",
+              "label": "Data Source",
+              "valueType": "string",
+              "options": [
+                {
+                  "name": "Courses",
+                  "value": "courses"
+                },
+                {
+                  "name": "Languages",
+                  "value": "languages"
+                },
+                {
+                  "name": "Locations",
+                  "value": "userLocations"
+                },
+                {
+                  "name": "Skills",
+                  "value": "skills"
+                }
+              ]
+            },
+            {
+              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "name": "search-results",
+          "label": "Search Results",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "name": "selection-label",
+              "label": "Selected results label",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "empty-selection-message",
+              "label": "Empty selection message",
+              "valueType": "string"
+            },
+            {
+              "component": "boolean",
+              "name": "hide-empty",
+              "label": "Hide empty results",
+              "valueType": "boolean"
+            }
+          ]
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
+        },
+        {
+          "component": "container",
+          "name": "validation",
+          "label": "Validation",
+          "collapsible": true,
+          "...": "../../models/form-common/_string-validation-fields.json"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

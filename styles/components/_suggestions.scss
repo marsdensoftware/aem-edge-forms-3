@@ -1,0 +1,30 @@
+@use '../settings' as *;
+
+%suggestions {
+  @include elevation-2;
+  cursor: pointer;
+  border-radius: $border-radius-mid;
+  background-color: $color-white;
+  max-height: 120px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  top: 60px;
+  left: 0;
+  font-size: 20px;
+  color: $color-grey-black-60;
+  display: none;
+}
+
+%suggestion {
+  padding: $spacing-200 $spacing-300;
+  cursor: pointer;
+  font-size: 20px;
+  color: $stroke-secondary;
+
+  &:hover {
+    color: $text-primary;
+    background-color: $color-shade-blue-10;
+  }
+}

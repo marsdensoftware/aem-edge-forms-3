@@ -1,0 +1,25 @@
+@use '../../../../styles/settings' as *;
+
+main .form form .panel-repeatable-panel__education {
+    .repeatable-entry {
+        &__course {
+            @include font-body-large;
+        }
+
+        &__nc-search--box {
+            @include font-body-large;
+            color: $text-primary;
+            font-weight: 700;
+        }
+
+        &__start-year,
+        &__completion-status {
+            line-height: 160%;
+        }
+
+        &__completion-status {
+            color: $text-secondary;
+        }
+    }
+
+}

@@ -5,6 +5,8 @@ node_modules/
 
 .project
 .settings/
+.project
+.settings/*
 
 helix-importer-ui
 .DS_Store
@@ -26,3 +28,8 @@ assets/
 
 # map
 *.map
+
+# css
+
+# Build within pipeline
+/styles/main.css
