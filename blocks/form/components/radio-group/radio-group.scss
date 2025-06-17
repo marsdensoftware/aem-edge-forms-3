@@ -1,8 +1,5 @@
 @use '../../../../styles/settings' as *;
 
-// Add this if not already in your color tokens
-$stroke-selected: #017ac9;
-
 .radio-group--with-icon {
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +15,7 @@ $stroke-selected: #017ac9;
   .radio-group--with-icon__label {
     width: 100%;
     padding: $spacing-400;
-    border-radius: var(--Spacing-200, 8px);
+    border-radius: $spacing-200
     border: var(--Stroke-weight-Input-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
     background: var(--Background-Light-Primary, #FFF);
     display: flex;
