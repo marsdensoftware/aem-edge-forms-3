@@ -50,6 +50,14 @@
     background-size: contain;
     background-repeat: no-repeat;
   }
+  
+  .radio-group--with-icon--car-off {
+    content: url('../../../../icons/icon-car-off.svg');
+  }
+
+  .radio-group--with-icon--car-on {
+    content: url('../../../../icons/icon-car-on.svg');
+  }
 
   .radio-group--with-icon--list-search-1 {
     content: url('../../../../icons/icon-streamline.svg');

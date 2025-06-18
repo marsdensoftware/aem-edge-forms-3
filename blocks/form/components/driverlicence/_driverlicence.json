@@ -1,0 +1,275 @@
+{
+    "definitions": [
+        {
+            "title": "Work Experience",
+            "id": "workexperience",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                        "template": {
+                            "fd:viewType": "driverlicence",
+                            "fieldType": "panel",
+                            "jcr:title": "Driver Licence",
+                            "hideTitle": true,
+                            "name": "driverlicence",
+                            "radiogroup": {
+                                "enum": [
+                                    "no",
+                                    "yes"
+                                ],
+                                "fd:viewType": "radio-group",
+                                "fieldType": "radio-group",
+                                "enumNames": [
+                                    "No",
+                                    "Yes"
+                                ],
+                                "hideTitle": true,
+                                "withIcon": true,
+                                "enumIconNames": [
+                                    "car-off",
+                                    "car-on"
+                                ],
+                                "jcr:title": "Driver Licence Selection",
+                                "name": "driverlicence-selection",
+                                "required": true,
+                                "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton"
+                            },
+                            "repeatable-panel": {
+                                "hideTitle": true,
+                                "repeatable": true,
+                                "fieldType": "panel",
+                                "repeatAddButtonLabel": "Add another",
+                                "name": "driverlicence-options-content",
+                                "repeatDeleteButtonLabel": "Delete",
+                                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                                "checkboxgroup": {
+                                    "fieldType": "checkbox-group",
+                                    "orientation": "horizontal",
+                                    "name": "licence-class",
+                                    "enumNames": [
+                                        "Class 1",
+                                        "Class 2",
+                                        "Class 3",
+                                        "Class 4",
+                                        "Class 5",
+                                        "Class 6"
+                                    ],
+                                    "enum": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6"
+                                    ],
+                                    "required": true,
+                                    "description": "\u003Cp\u003ESelect all that apply.\u003C/p\u003E",
+                                    "type": "string[]",
+                                    "sling:resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                                    "jcr:title": "What class(es) is your licence?"
+                                },
+                                "radiobutton": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class1-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Restricted",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1",
+                                        "3"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 1 - Car licence?"
+                                },
+                                "radiobutton_918383337": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class2-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 2 - Medium rigid vehicle licence?"
+                                },
+                                "radiobutton_91838333": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class3-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 3 - Medium combination vehicle licence?"
+                                },
+                                "radiobutton_91838333_1410534901": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class4-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 4 - Heavy rigid vehicle licence?"
+                                },
+                                "radiobutton_91838333_1312412146": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class5-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 5 - Heavy combination vehicle licence?"
+                                },
+                                "radiobutton_91838333_69317360": {
+                                    "fieldType": "radio-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "class6-stage",
+                                    "enumNames": [
+                                        "Learners",
+                                        "Restricted",
+                                        "Full"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1",
+                                        "2"
+                                    ],
+                                    "required": true,
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "What stage is your Class 6 - Motorcycle License?"
+                                },
+                                "radiobutton_2008350154": {
+                                    "fieldType": "radio-group",
+                                    "orientation": "horizontal",
+                                    "name": "endorsements-available",
+                                    "enumNames": [
+                                        "No",
+                                        "Yes"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1"
+                                    ],
+                                    "required": true,
+                                    "description": "\u003Cp\u003EThese are extra permissions for special driving jobs - e.g. Forklift, Passenger, Dangerous Goods\u003C/p\u003E",
+                                    "fd:viewType": "radio-group",
+                                    "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
+                                    "jcr:title": "Do you have any licence endorsements?"
+                                },
+                                "checkboxgroup_1291591176": {
+                                    "fieldType": "checkbox-group",
+                                    "visible": false,
+                                    "orientation": "horizontal",
+                                    "name": "endorsements",
+                                    "enumNames": [
+                                        "(P) - Passenger",
+                                        "(I) - Driving Instructor",
+                                        "(O) - Testing Officer",
+                                        "(V) - Vehicle Recovery",
+                                        "(D) - Dangerous Goods",
+                                        "(F) - Forklift",
+                                        "(T) - Tracks",
+                                        "(R) - Roller",
+                                        "(W) - Wheels (Special Type)"
+                                    ],
+                                    "enum": [
+                                        "0",
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6",
+                                        "7",
+                                        "8"
+                                    ],
+                                    "required": true,
+                                    "type": "string[]",
+                                    "sling:resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                                    "jcr:title": "Which endorsements do you hold? Select all that apply."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "workexperience",
+            "fields": [
+                {
+                    "component": "container",
+                    "name": "basic",
+                    "label": "Basic",
+                    "collapsible": false,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "valueType": "string",
+                            "required": true,
+                            "valueFormat": "regexp",
+                            "validation": {
+                                "regExp": "^[^$].*",
+                                "customErrorMsg": "Name cannot start with $"
+                            }
+                        },
+                        {
+                            "component": "text",
+                            "name": "jcr:title",
+                            "label": "Title",
+                            "valueType": "string"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "filters": []
+}
