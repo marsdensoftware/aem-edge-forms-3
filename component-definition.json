@@ -573,6 +573,8 @@
                   "jcr:title": "Driver Licence",
                   "hideTitle": true,
                   "name": "driverlicence",
+                  "cardTitle": "NZ driver licence",
+                  "addedTitle": "You added:",
                   "radiogroup": {
                     "enum": [
                       "no",
