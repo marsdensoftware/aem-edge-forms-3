@@ -22,6 +22,8 @@
 }
 
 .wizard .wizard-button-wrapper {
+  height: 100%;
+  max-height: 83px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -91,7 +93,7 @@
   color: $text-dark-primary;
 
   // Elevation-1 (manually translated from vars)
-  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
+  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.2);
 
   &.default {
     padding: $spacing-400 $spacing-500;
@@ -116,8 +118,6 @@
 
   &:focus {
     background: $bg-light-primary;
-    box-shadow:
-            0 0 0 2px $bg-light-primary,
-            0 0 0 4px $stroke-focus;
+    box-shadow: 0 0 0 2px $bg-light-primary, 0 0 0 4px $stroke-focus;
   }
 }

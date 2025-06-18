@@ -1,5 +1,5 @@
 export default function decorate(panel: Element) {
-  panel.classList.add('panel-formhero', 'container-xl')
+  panel.classList.add('panel-formhero', 'container-xxl')
 
   const childEls = panel.querySelectorAll(':scope > .field-wrapper')
 
