@@ -1,5 +1,5 @@
 export default function decorate(panel) {
-    panel.classList.add('panel-formhero', 'container-xl');
+    panel.classList.add('panel-formhero', 'container-xxl');
     const childEls = panel.querySelectorAll(':scope > .field-wrapper');
     childEls[0].classList.add('panel-formhero__content', 'col-12', 'col-lg-5', 'offset-lg-2');
     childEls[1].classList.add('panel-formhero__picture', 'col-12', 'col-md-4');

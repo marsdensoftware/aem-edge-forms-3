@@ -184,15 +184,15 @@ main .form form .field-wrapper.field-invalid .field-description {
   }
 }
 
-main.wizard--bg-dark {
-  background: linear-gradient(135deg, #017ac9 25%, #134276 100%) !important;
-  color: #fff;
-}
+// main.wizard--bg-dark {
+//   background: linear-gradient(135deg, #017ac9 25%, #134276 100%) !important;
+//   color: #fff;
+// }
 
-main.wizard--bg-light {
-  background: linear-gradient(135deg, #e6f2fa 25%, #bfdef1 100%) !important;
-  color: #333;
-}
+// main.wizard--bg-light {
+//   background: linear-gradient(135deg, #e6f2fa 25%, #bfdef1 100%) !important;
+//   color: #333;
+// }
 
 /*added this for responsive testing, need to use grids then can remove Rebecca*/
 .typography-wrapper,
@@ -204,4 +204,125 @@ main.wizard--bg-light {
   // Fluid side padding: scales between 16px and 64px from mobile to desktop
   padding-left: clamp(1rem, 5vw, 4rem);
   padding-right: clamp(1rem, 5vw, 4rem);
+}
+
+/* ------------------------------
+   Dark Blue Gradient background
+------------------------------ */
+main.wizard--bg-dark {
+  // background: var(
+  //   --Gradient-Blue,
+  //   linear-gradient(
+  //     135deg,
+  //     var(--Brand-MSD-Blue, #017ac9) 25%,
+  //     var(--Brand-MSD-Navy, #134276) 100%
+  //   )
+  // );
+  color: var(--Text-Light, #fff);
+
+  .text-wrapper,
+  .number-wrapper,
+  .email-wrapper,
+  .radio-wrapper {
+    label,
+    .field-label {
+      color: $color-white;
+    }
+
+    input,
+    textarea {
+      color: $color-white;
+
+      &::placeholder {
+        color: rgba($color-white, 0.75);
+      }
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  .subtitle {
+    color: $color-white;
+    background: none;
+    -webkit-text-fill-color: $color-white;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+  }
+}
+
+/* ------------------------------
+   Light Blue Gradient background
+------------------------------ */
+main.wizard--bg-light {
+  // background: linear-gradient(
+  //   135deg,
+  //   var(--Shades-Blues-Blue-10, #e6f2fa) 25%,
+  //   var(--Shades-Blues-Blue-25, #bfdef1) 100%
+  // );
+  color: var(--Text-Dark, #333);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $text-primary;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p,
+  .subtitle,
+  .straptitle {
+    color: $text-secondary;
+    font-family: $font-family;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+/* ------------------------------
+   Shared Background Image Styles
+------------------------------ */
+main.wizard--bg-dark,
+main.wizard--bg-light {
+  background-image: url('/content/dam/edge-forms-rebecca/vectors/mymsd-unity-pattern.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+@include media('tablet') {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-position: top right;
+  }
+}
+
+@include media('desktop') {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-position: bottom left;
+  }
+}
+
+@media (max-width: 743px) {
+  main.wizard--bg-dark,
+  main.wizard--bg-light {
+    background-image: none;
+  }
 }
