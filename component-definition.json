@@ -743,6 +743,7 @@
                     },
                     "radiobutton_2008350154": {
                       "fieldType": "radio-group",
+                      "visible": false,
                       "orientation": "horizontal",
                       "name": "endorsements-available",
                       "enumNames": [

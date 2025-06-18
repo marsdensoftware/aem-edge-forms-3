@@ -17,8 +17,11 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     }
 
     _bindEvents(entry) {
-        // Register change on licence class to show/hide the relevant class stage
+        // Register change on licence class to show/hide the relevant class stage and endorsements
         const licenceClass = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS}"]`);
+
+        const endorsementsAvailable = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
+        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
 
         licenceClass.forEach(cb => {
             cb.addEventListener('change', () => {
@@ -27,11 +30,13 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
                 const visible = cb.checked == true;
 
                 classStage.dataset.visible = visible;
+
+                const anyClassChecked = Array.from(licenceClass).some(checkbox => checkbox.checked);
+                endorsementsAvailableField.dataset.visible = anyClassChecked;
             });
         });
 
         // Register change on endorsement to change dependent field
-        const endorsementsAvailable = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
         const endorsements = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS}"]`);
 
         endorsementsAvailable.forEach(radio => {

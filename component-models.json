@@ -617,6 +617,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -1352,6 +1359,13 @@
             "component": "text",
             "name": "enumNames",
             "label": "Options (Display Value)",
+            "valueType": "string",
+            "multi": true
+          },
+          {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
             "valueType": "string",
             "multi": true
           },
@@ -3111,6 +3125,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -3151,6 +3172,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Bar",
+                "value": "bar"
               }
             ],
             "value": "default"
