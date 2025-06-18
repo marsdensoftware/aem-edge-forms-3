@@ -47,7 +47,8 @@
     &::before {
       @extend %common-wizard-button;
       content: '';
-      background-image: url('../../icons/icon-wizard-next-button-white-arrow-right.svg');
+      /*background-image: url('../../icons/icon-wizard-next-button-white-arrow-right.svg');*/
+      background-image: url('../icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
       margin-left: 0.5rem;
     }
