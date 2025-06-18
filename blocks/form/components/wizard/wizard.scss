@@ -6,27 +6,45 @@
 
 .wizard--bg-dark {
   .wizard {
-    background: linear-gradient(135deg, #017ac9 25%, #134276 100%);
+    background: linear-gradient(
+      135deg,
+      $color-accent 25%,
+      $color-primary-navy 100%
+    );
   }
 }
 
 .wizard--bg-light {
   .wizard {
-    background: linear-gradient(135deg, #e6f2fa 25%, #bfdef1 100%);
+    background: linear-gradient(
+      135deg,
+      $color-shade-blue-10 25%,
+      $color-shade-blue-25 100%
+    );
   }
 }
 
 .wizard {
-  background: linear-gradient(135deg, #017ac9 25%, #134276 100%);
+  background: linear-gradient(
+    135deg,
+    $color-accent 25%,
+    $color-primary-navy 100%
+  );
 
   .current-wizard-step {
-    height: calc(100vh - $nav-height - $footer-height);
+    @include media('tablet') {
+      @media (min-height: 921px) {
+        height: calc(100vh - $nav-height - $footer-height);
+      }
+    }
   }
 
   // First screen JSP
-  .current-wizard-step:is([data-index='0']) {
+  .current-wizard-step:is([data-index='0'], [data-index='1']) {
     padding-top: $spacing-600;
-    padding-bottom: $spacing-700;
+    // Extra space at the bottom
+    // Because of fix nav
+    padding-bottom: 120px;
 
     @include media('tablet') {
       @media (min-height: 921px) {
@@ -42,7 +60,7 @@
 
   // Exclude current component being styled for Bootstrap
   // data-index="0" = first screen
-  .current-wizard-step:not([data-index='0']) {
+  .current-wizard-step:not([data-index='0'], [data-index='1']) {
     @include media('desktop') {
       padding: $spacing-600 0;
       margin: 32px auto;
