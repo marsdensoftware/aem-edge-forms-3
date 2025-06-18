@@ -5,13 +5,12 @@
 /// Added into all of the SCSS file that included setting file
 // --- !!!!!!!!!! ---
 
-// styles/settings/_index.scss
 @forward 'borders';
 @forward 'breakpoints';
 @forward 'colors';
 @forward 'elevations';
+@forward 'elements';
 @forward 'fonts';
 @forward 'mixins';
 @forward 'spacings';
-@forward 'tokens';
 @forward 'utils';

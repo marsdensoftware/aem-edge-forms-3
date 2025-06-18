@@ -1,6 +1,4 @@
 @use '../../styles/settings' as *;
-@use '../../styles/forms' as *;
-
 
 // Fieldset reset
 fieldset {
@@ -33,7 +31,9 @@ main .form > div:not(:first-child) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $spacing-500 $spacing-400 $spacing-000 $spacing-400;
+  padding: $spacing-500 $spacing-400;
+  max-height: 98px;
+  height: 100%;
 
   .image-wrapper picture {
     max-width: 150px;

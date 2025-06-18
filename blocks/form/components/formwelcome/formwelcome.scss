@@ -6,10 +6,11 @@
       display: none;
     }
 
-    @include media('desktop') {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .panel-formwelcome__inner {
+      @include media('desktop') {
+        display: flex;
+        align-items: center;
+      }
     }
 
     .panel-formwelcome__item {
@@ -27,38 +28,23 @@
     }
 
     .panel-formwelcome__header {
-      @include media('desktop') {
-        max-width: 498px;
-      }
-
-      h2 {
+      * {
         @include heading-level-3;
         margin-bottom: $spacing-600;
 
         @include media('desktop') {
           @include heading-level-1;
+          padding-bottom: 0;
+          margin-bottom: 0;
         }
       }
     }
 
     .panel-formwelcome__item-image {
-      width: 100%;
-      max-width: 60px;
       order: 1;
     }
 
-    .panel-formwelcome__content-container {
-      @include media('desktop') {
-        width: 100%;
-        max-width: 511px;
-      }
-    }
-
     .panel-formwelcome__item-content {
-      @include media('desktop') {
-        max-width: 390px;
-      }
-
       h3 {
         @include font-body-large;
 
