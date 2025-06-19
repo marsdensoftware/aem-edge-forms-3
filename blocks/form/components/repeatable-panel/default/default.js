@@ -233,6 +233,17 @@ export class RepeatablePanel {
     }
 
     _fieldToNameValues(entry) {
+        function getLabelText(input) {
+            // First check text inside label
+            let label = input.parentElement.querySelector('label>.text');
+            if (!label) {
+                // Fallback to label
+                label = input.parentElement.querySelector('label');
+            }
+
+            return label.textContent.trim()
+        }
+
         const inputs = entry.querySelectorAll('input, select, textarea');
         const result = {};
 
@@ -252,7 +263,7 @@ export class RepeatablePanel {
                     return;
                 }
 
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
+                displayValue = input.checked ? getLabelText(input) : '';
             }
 
             if (value) {
