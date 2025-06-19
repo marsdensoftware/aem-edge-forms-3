@@ -142,9 +142,9 @@ textarea {
   }
 }
 
-/********************
+/********************************************************
 FORM required asterisk for radio and checkbox group
-********************/
+********************************************************/
 
 .radio-group-wrapper[data-required='true'],
 .checkbox-group-wrapper[data-required='true'] {
@@ -296,33 +296,45 @@ main.wizard--bg-light {
   }
 }
 
-/* ------------------------------
-   Shared Background Image Styles
------------------------------- */
+// Background pattern and gradients
+
+
 main.wizard--bg-dark,
 main.wizard--bg-light {
-  background-image: url('/content/dam/edge-forms-rebecca/vectors/mymsd-unity-pattern.svg');
+  position: relative;
+  z-index: 1;
+}
+
+main.wizard--bg-dark::before,
+main.wizard--bg-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
   background-repeat: no-repeat;
   background-size: auto;
+  background-position: bottom left;
+  pointer-events: none;
+}
+
+@media (max-width: 743px) {
+  main.wizard--bg-dark::before,
+  main.wizard--bg-light::before {
+    background-image: none;
+  }
 }
 
 @include media('tablet') {
-  main.wizard--bg-dark,
-  main.wizard--bg-light {
+  main.wizard--bg-dark::before,
+  main.wizard--bg-light::before {
     background-position: top right;
   }
 }
 
 @include media('desktop') {
-  main.wizard--bg-dark,
-  main.wizard--bg-light {
+  main.wizard--bg-dark::before,
+  main.wizard--bg-light::before {
     background-position: bottom left;
-  }
-}
-
-@media (max-width: 743px) {
-  main.wizard--bg-dark,
-  main.wizard--bg-light {
-    background-image: none;
   }
 }
