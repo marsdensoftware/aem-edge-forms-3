@@ -131,6 +131,11 @@ main .form form fieldset.cards > .checkbox-wrapper > label > img {
   object-fit: contain;
 }
 
+main .form form .field-label--with-description{
+    flex-direction: column;
+    align-items: start;
+}
+
 // Repeatable field actions
 main .form form .repeat-actions {
   grid-column: span 12;
@@ -246,7 +251,7 @@ main .form form:not(.edit-mode) .captcha-wrapper {
 main .form form .radio-group-wrapper.horizontal .field-description,
 main .form form .checkbox-group-wrapper.horizontal .field-description {
   width: 100%;
-  order: 1;
+  //order: 1;
   margin-top: 0.5rem;
 }
 

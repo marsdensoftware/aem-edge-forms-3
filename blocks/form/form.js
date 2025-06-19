@@ -214,7 +214,7 @@ function createRadioOrCheckboxGroup(fd) {
     textSpan.textContent = textContent;
     labelEl.appendChild(textSpan);
     
-    const description = fd?.enumDescriptions?.[index];
+    const description = fd.properties?.enumDescriptions?.[index];
     
     if(description){
       // Create and append the span.desc
@@ -222,6 +222,7 @@ function createRadioOrCheckboxGroup(fd) {
       descSpan.className = 'desc';
       descSpan.textContent = description;
       labelEl.appendChild(descSpan);
+      labelEl.classList.add('field-label--with-description');
     }
     //###SEP-NJ END Display description
     
@@ -251,6 +252,22 @@ function createRadioOrCheckboxGroup(fd) {
     }
     wrapper.appendChild(field);
   });
+  
+  //###SEP-NJ START Wrap radios in a container if bar display
+  if(wrapper.classList.contains('variant-bar')){
+    const wrappers = wrapper.querySelectorAll('.radio-wrapper');
+
+    const radiosWrapper = document.createElement('div');
+    radiosWrapper.className = 'radios-wrapper';
+    
+    // Insert before the first .radio-wrapper
+    wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
+    
+    // Move the all elements inside the new wrapper
+    wrappers.forEach(el => radiosWrapper.appendChild(el));
+  }
+  //###SEP-NJ END
+  
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
     wrapper.title = stripTags(fd.tooltip, '');
