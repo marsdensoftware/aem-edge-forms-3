@@ -297,8 +297,6 @@ main.wizard--bg-light {
 }
 
 // Background pattern and gradients
-
-
 main.wizard--bg-dark,
 main.wizard--bg-light {
   position: relative;
@@ -309,13 +307,14 @@ main.wizard--bg-dark::before,
 main.wizard--bg-light::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
   z-index: 0;
-  background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: bottom left;
   pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 @media (max-width: 743px) {
@@ -325,16 +324,31 @@ main.wizard--bg-light::before {
   }
 }
 
-@include media('tablet') {
+@media (min-width: 744px) and (max-width: 1279px) {
   main.wizard--bg-dark::before,
   main.wizard--bg-light::before {
+    background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
     background-position: top right;
+    transform: rotate(180deg);
+    transform-origin: center;
+    top: 100px; // pushes the pattern below the nav
+    right: 0;
+    width: 400px;
+    height: 400px;
   }
 }
 
-@include media('desktop') {
+@media (min-width: 1280px) {
   main.wizard--bg-dark::before,
   main.wizard--bg-light::before {
+    background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
     background-position: bottom left;
+    transform: none;
+    width: 400px;
+    height: 400px;
   }
 }
