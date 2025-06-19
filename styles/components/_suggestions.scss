@@ -1,5 +1,5 @@
 @use '../settings' as *;
-
+// Use by a few form components
 %suggestions {
   @include elevation-2;
   cursor: pointer;
