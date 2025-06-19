@@ -14,7 +14,7 @@
                             "hideTitle": true,
                             "name": "driverlicence",
                             "cardTitle": "NZ driver licence",
-                            "addedTitle": "You added:",
+                            "addedTitle": "\u003Ch4\u003EYou added:\u003C/h4\u003E",
                             "radiogroup": {
                                 "enum": [
                                     "no",
@@ -46,7 +46,7 @@
                                 "repeatDeleteButtonLabel": "Delete",
                                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                                 "maxOccur": 1,
-                                "checkboxgroup": {
+                                "licence_class": {
                                     "fieldType": "checkbox-group",
                                     "orientation": "horizontal",
                                     "name": "licence-class",
@@ -66,17 +66,26 @@
                                         "5",
                                         "6"
                                     ],
+                                    "enumDescriptions": [
+                                        "Car licence",
+                                        "Medium rigid vehicle licence",
+                                        "Medium combination vehicle licence",
+                                        "Heavy rigid vehicle licence",
+                                        "Heavy combination vehicle licence",
+                                        "Motorcycle License"
+                                    ],
                                     "required": true,
                                     "description": "\u003Cp\u003ESelect all that apply.\u003C/p\u003E",
                                     "type": "string[]",
                                     "sling:resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
                                     "jcr:title": "What class(es) is your licence?"
                                 },
-                                "radiobutton": {
+                                "class1_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class1-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Restricted",
@@ -92,11 +101,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 1 - Car licence?"
                                 },
-                                "radiobutton_918383337": {
+                                "class2_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class2-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Full"
@@ -110,11 +120,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 2 - Medium rigid vehicle licence?"
                                 },
-                                "radiobutton_91838333": {
+                                "class3_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class3-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Full"
@@ -128,11 +139,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 3 - Medium combination vehicle licence?"
                                 },
-                                "radiobutton_91838333_1410534901": {
+                                "class4_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class4-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Full"
@@ -146,11 +158,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 4 - Heavy rigid vehicle licence?"
                                 },
-                                "radiobutton_91838333_1312412146": {
+                                "class5_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class5-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Full"
@@ -164,11 +177,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 5 - Heavy combination vehicle licence?"
                                 },
-                                "radiobutton_91838333_69317360": {
+                                "class6_stage": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "class6-stage",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "Learners",
                                         "Restricted",
@@ -184,11 +198,12 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "What stage is your Class 6 - Motorcycle License?"
                                 },
-                                "radiobutton_2008350154": {
+                                "endorsements_available": {
                                     "fieldType": "radio-group",
                                     "visible": false,
                                     "orientation": "horizontal",
                                     "name": "endorsements-available",
+                                    "variant": "bar",
                                     "enumNames": [
                                         "No",
                                         "Yes"
@@ -203,7 +218,7 @@
                                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                                     "jcr:title": "Do you have any licence endorsements?"
                                 },
-                                "checkboxgroup_1291591176": {
+                                "endorsements": {
                                     "fieldType": "checkbox-group",
                                     "visible": false,
                                     "orientation": "horizontal",
