@@ -1,8 +1,8 @@
 {
     "definitions": [
         {
-            "title": "Work Experience",
-            "id": "workexperience",
+            "title": "NZ Driver Licence",
+            "id": "driverlicence",
             "plugins": {
                 "xwalk": {
                     "page": {
@@ -259,7 +259,7 @@
     ],
     "models": [
         {
-            "id": "workexperience",
+            "id": "driverlicence",
             "fields": [
                 {
                     "component": "container",
