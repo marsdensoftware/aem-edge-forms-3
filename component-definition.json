@@ -605,6 +605,7 @@
                     "name": "driverlicence-options-content",
                     "repeatDeleteButtonLabel": "Delete",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "maxOccur": 1,
                     "checkboxgroup": {
                       "fieldType": "checkbox-group",
                       "orientation": "horizontal",

@@ -4335,7 +4335,7 @@
             "valueType": "string"
           },
           {
-            "component": "text",
+            "component": "richtext",
             "name": "addedTitle",
             "label": "Added title",
             "valueType": "string"

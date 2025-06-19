@@ -7,8 +7,8 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
         LANGUAGE: 'language'
     };
 
-    constructor(repeatablePanel) {
-        super(repeatablePanel, 'languagepanel');
+    constructor(repeatablePanel, properties) {
+        super(repeatablePanel, properties, 'languagepanel');
 
         // Register typeahead valid listener
         document.addEventListener('typeahead:valid', (event) => {

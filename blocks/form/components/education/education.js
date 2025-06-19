@@ -1,14 +1,11 @@
 import { EducationRepeatable } from "./repeatable.js";
 import { onElementAdded } from '../utils.js'
 
-export default async function decorate(el) {
+export default async function decorate(el, fd) {
 
     onElementAdded(el).then((connectedEl) => {
-        const repeatablePanel = connectedEl.querySelector('.repeat-wrapper');
-        if (repeatablePanel) {
-            const obj = new EducationRepeatable(repeatablePanel);
-            obj.init();
-        }
+        const obj = new EducationRepeatable(connectedEl, fd.properties);
+        obj.init();
     });
 
     return el;

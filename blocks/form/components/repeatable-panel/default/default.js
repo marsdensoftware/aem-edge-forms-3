@@ -4,16 +4,33 @@ import { isNo } from '../../utils.js'
 
 export class RepeatablePanel {
     #overview;
-    constructor(repeatablePanel) {
+    constructor(el, properties, name) {
+        this._repeatablePanel = el.querySelector('.repeat-wrapper');
+        this._name = name;
+
+        if (!this._repeatablePanel) {
+            throw new Error('No repeatable panel found');
+        }
+
+        this._addedTitle = properties.addedTitle;
+        this._cardTitle = properties.cardTitle;
+
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
 
-        this._repeatablePanel = repeatablePanel;
         this._repeatablePanel.classList.add('panel-repeatable-panel');
 
         // create overview
         this.#overview = document.createElement('div');
+        this.#overview.dataset.visible = false;
         this.#overview.classList.add('overview');
+
+        if (this._addedTitle) {
+            const addedTitleContainer = document.createElement('div');
+            addedTitleContainer.classList.add('overview-title');
+            addedTitleContainer.innerHTML = this._addedTitle;
+            this.#overview.append(addedTitleContainer);
+        }
 
         const content = document.createElement('div');
         content.classList.add('repeatable-entries');
@@ -263,8 +280,19 @@ export class RepeatablePanel {
     }
 
     #entryToReadableString(entry) {
-        const nameValues = this._fieldToNameValues(entry)
+        let nameValues = this._fieldToNameValues(entry)
         const entries = [];
+
+        if (this._cardTitle) {
+            // Add card title as first entry
+            nameValues = {
+                cardTitle: {
+                    'value': this._cardTitle,
+                    'displayValue': this._cardTitle
+                },
+                ...nameValues
+            };
+        }
 
         Object.entries(nameValues).forEach(([name, data]) => {
             const value = data.value;
@@ -299,7 +327,7 @@ export class RepeatablePanel {
         const readable = this.#entryToReadableString(entry);
 
         const result = document.createElement('div');
-        result.classList.add('education-entry', 'repeatable-entry');
+        result.classList.add(`${this._name}-entry`, 'repeatable-entry');
         result.dataset.id = entry.dataset.id;
 
         const editLink = document.createElement('a');
@@ -369,7 +397,8 @@ export class RepeatablePanel {
 
         if (!e) {
             // Create
-            this.#overview.firstElementChild.append(content);
+            this.#overview.querySelector('.repeatable-entries').append(content);
+            this.#overview.dataset.visible = true;
         }
         else {
             // Update
@@ -381,7 +410,7 @@ export class RepeatablePanel {
         const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
         if (savedEntries.length > 0) {
-            const content = this.#overview.firstChild;
+            const content = this.#overview.querySelector('.repeatable-entries');
 
             // Clear content
             content.innerHTML = '';
@@ -389,6 +418,10 @@ export class RepeatablePanel {
             savedEntries.forEach((entry) => {
                 content.append(this._renderEntry(entry));
             });
+            this.#overview.dataset.visible = true;
+        }
+        else {
+            this.#overview.dataset.visible = false;
         }
     }
 
@@ -411,16 +444,16 @@ export class ConditionalRepeatable extends RepeatablePanel {
     // A field with many options with one that yields no,0,false as value
     _conditionField;
 
-    constructor(repeatablePanel, name) {
-        super(repeatablePanel);
+    constructor(el, properties, name) {
+        super(el, properties, name);
 
         // Add class
-        repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
+        this._repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
 
         // Add class
-        repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
+        this._repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
 
-        this._conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
+        this._conditionField = this._repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
         if (this._conditionField) {
             const radios = this._conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
@@ -429,22 +462,22 @@ export class ConditionalRepeatable extends RepeatablePanel {
                 radio.addEventListener('change', () => {
                     if (isNo(radio)) {
                         // hide repeatable panel
-                        repeatablePanel.style.display = 'none';
+                        this._repeatablePanel.style.display = 'none';
                         // Show wizard buttons
                         super._toggleWizardButtons(true);
 
                         // TODO Clear all edits?
 
                         // prevent validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+                        this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
                     }
                     else {
                         // show repeatable panel
-                        repeatablePanel.style.display = 'block';
+                        this._repeatablePanel.style.display = 'block';
                         // enable validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
+                        this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
+                        const el = this._repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
 
                         if (el) {
                             // Edit first entry if any
@@ -454,7 +487,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
                 });
             });
             // prevent validation
-            repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+            this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
         }
     }
 

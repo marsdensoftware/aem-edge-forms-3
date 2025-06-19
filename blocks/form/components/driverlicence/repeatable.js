@@ -8,8 +8,8 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         ENDORSEMENTS: 'endorsements'
     };
 
-    constructor(repeatablePanel) {
-        super(repeatablePanel, 'driverlicence');
+    constructor(el, properties) {
+        super(el, properties, 'driverlicence');
     }
 
     _init(entry) {
@@ -49,9 +49,31 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         });
     }
 
-    _onItemAdded(entry) {
-        this._init(entry);
+    _fieldToNameValues(entry) {
+        const result = super._fieldToNameValues(entry);
+        const newResult = {};
 
-        super._onItemAdded(entry);
+        // Customize rendering for licence class/stage
+        const licenceClass = result[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS];
+        if (licenceClass.value) {
+            licenceClass.values = [licenceClass.value];
+            licenceClass.displayValues = [licenceClass.displayValue];
+        }
+
+        newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS] = { values: [], displayValues: [] };
+        const hasEndorsements = !isNo(result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE].value);
+        if (hasEndorsements) {
+            newResult[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS] = result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS];
+        }
+
+        licenceClass.values.forEach((value, index) => {
+            const stage = result[`class${value}-stage`];
+            const displayValue = licenceClass.displayValues[index];
+
+            newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS].values.push(`${value}-${stage.value}`);
+            newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS].displayValues.push(`${displayValue} - ${stage.displayValue}`);
+        });
+
+        return newResult;
     }
 }

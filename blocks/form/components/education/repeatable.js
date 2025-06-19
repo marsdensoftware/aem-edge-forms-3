@@ -9,8 +9,8 @@ export class EducationRepeatable extends ConditionalRepeatable {
         'EDUCATION_SELECTION': 'education-selection'
     };
 
-    constructor(repeatablePanel) {
-        super(repeatablePanel, 'education');
+    constructor(repeatablePanel, properties) {
+        super(repeatablePanel, properties, 'education');
     }
 
     _init(entry) {
