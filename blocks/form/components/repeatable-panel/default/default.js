@@ -195,7 +195,7 @@ export class RepeatablePanel {
             const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
             if (!repeatableEntry) {
                 // Clear fields
-                this._clearFields(inputs);
+                this._clearFields(entry);
                 return;
             }
 
@@ -471,6 +471,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
             // register click on radios
             radios.forEach(radio => {
                 radio.addEventListener('change', () => {
+                    const entry = this._repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
+
                     if (isNo(radio)) {
                         // hide repeatable panel
                         this._repeatablePanel.style.display = 'none';
@@ -478,6 +480,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
                         super._toggleWizardButtons(true);
 
                         // TODO Clear all edits?
+                        if (entry) {
+                            this._clearFields(entry);
+                        }
 
                         // prevent validation
                         this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
@@ -488,11 +493,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
                         // enable validation
                         this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
 
-                        const el = this._repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
-
-                        if (el) {
+                        if (entry) {
                             // Edit first entry if any
-                            this._toggleEditMode(el, true);
+                            this._toggleEditMode(entry, true);
                         }
                     }
                 });
