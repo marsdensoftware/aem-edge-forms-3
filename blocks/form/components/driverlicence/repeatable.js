@@ -61,7 +61,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         }
 
         newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS] = { values: [], displayValues: [] };
-        const hasEndorsements = !isNo(result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE].value);
+        const hasEndorsements = !isNo(result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE]);
         if (hasEndorsements) {
             newResult[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS] = result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS];
         }

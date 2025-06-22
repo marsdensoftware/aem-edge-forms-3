@@ -175,8 +175,8 @@ export class RepeatablePanel {
 
         });
 
-        buttonBar.appendChild(saveBtn);
         buttonBar.appendChild(cancelBtn);
+        buttonBar.appendChild(saveBtn);
     }
 
     _save(entry) {
