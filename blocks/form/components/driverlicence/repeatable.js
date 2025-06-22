@@ -19,7 +19,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     _clearFields(entry) {
         super._clearFields(entry);
         
-        const endorsementsField = entry.querySelectorAll(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS}"]`);
+        const endorsementsField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS}"]`);
         endorsementsField.dataset.visible = false;
 
         const endorsementsAvailableField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
