@@ -16,6 +16,19 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         this._bindEvents(entry);
     }
 
+    _clearFields(entry) {
+        super._clearFields(entry);
+
+        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
+        endorsementsAvailableField.dataset.visible = false;
+
+        const classStages = entry.querySelectorAll('[name^="class"][name$="-stage"]');
+        classStages.forEach(classStage => {
+            classStage.dataset.visible = visible;
+        });
+
+    }
+
     _bindEvents(entry) {
         // Register change on licence class to show/hide the relevant class stage and endorsements
         const licenceClass = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS}"]`);
