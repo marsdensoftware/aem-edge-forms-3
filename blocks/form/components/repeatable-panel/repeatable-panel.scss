@@ -143,6 +143,12 @@ main .form form .panel-repeatable-panel {
             display: flex;
             gap: 20px;
             margin-top: 65px;
+            
+            .btn-cancel{
+                color: $text-dark-primary;
+                background-color: $color-white;
+                border-color: $color-shade-navy-40;
+            }
         }
 
         &.current {
