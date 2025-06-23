@@ -16,15 +16,15 @@ function addSelectedCardsDiv(headingText, emptySelectionMessage) {
     wrapper.appendChild(cardsDiv);
     return wrapper;
 }
-function addSuggestedSkillsCardsDiv(headingText, emptySelectionMessage) {
+function addRecommendationsCardsDiv(headingText, emptySelectionMessage) {
     const wrapper = document.createElement('div');
-    wrapper.classList.add('suggested-skills-cards-wrapper');
+    wrapper.classList.add('recommendations-cards-wrapper');
     const heading = document.createElement('div');
     heading.classList.add('selected-cards-heading');
-    heading.textContent = headingText || 'Suggested skills';
+    heading.textContent = headingText || 'Recommendations';
     wrapper.appendChild(heading);
     const cardsDiv = document.createElement('div');
-    cardsDiv.classList.add('suggested-skills-cards');
+    cardsDiv.classList.add('recommendations-cards');
     cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
     wrapper.appendChild(cardsDiv);
     return wrapper;
@@ -48,18 +48,18 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
     card.appendChild(removeBtn);
     selectedCardsDiv.appendChild(card);
 }
-function createSuggestedSkillCard(item, suggestedSkillsCardsDiv, selectedCardsDiv, searchInput) {
+function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDiv, searchInput) {
     const card = document.createElement('div');
     card.classList.add('selected-card');
     const text = document.createElement('div');
     text.textContent = item;
-    // Add click event to move the skill to the selectedCardsDiv
+    // Add click event to move the recommendation to the selectedCardsDiv
     card.addEventListener('click', () => {
         card.remove();
         createSelectedCard(item, selectedCardsDiv, searchInput);
     });
     card.appendChild(text);
-    suggestedSkillsCardsDiv.appendChild(card);
+    recommendationsCardsDiv.appendChild(card);
 }
 const courses = [
     'Marketing management',
@@ -152,21 +152,21 @@ document.addEventListener('input', (event) => {
         const suggestionsDiv = element.querySelector('.suggestions');
         window.suggestionsDiv = suggestionsDiv;
         suggestionsDiv.innerHTML = '';
-        const { datasource, suggestedSkillsDatasource } = element.dataset;
+        const { datasource, recommendationsDatasource } = element.dataset;
         // Get entries from the main datasource
         const entries = datasources[datasource];
         const selectedCardsDiv = element.querySelector('.selected-cards');
-        // Get entries from the suggested skills datasource
-        const suggestedSkillsEntries = suggestedSkillsDatasource ?
-            datasources[suggestedSkillsDatasource] :
+        // Get entries from the recommendations datasource
+        const recommendationsEntries = recommendationsDatasource ?
+            datasources[recommendationsDatasource] :
             [];
-        const suggestedSkillsCardsDiv = element.querySelector('.suggested-skills-cards');
+        const recommendationsCardsDiv = element.querySelector('.recommendations-cards');
         // Filter main datasource entries
         const filtered = entries.filter((entry) => entry.toLowerCase().includes(query) &&
             !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
-        // Filter suggested skills datasource entries
-        const filteredSuggestedSkills = suggestedSkillsEntries.filter((entry) => entry.toLowerCase().includes(query) &&
-            !Array.from(suggestedSkillsCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+        // Filter recommendations datasource entries
+        const filteredRecommendations = recommendationsEntries.filter((entry) => entry.toLowerCase().includes(query) &&
+            !Array.from(recommendationsCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
         // Add suggestions from main datasource
         filtered.forEach((item) => {
             const div = document.createElement('div');
@@ -181,12 +181,12 @@ document.addEventListener('input', (event) => {
             });
             suggestionsDiv.appendChild(div);
         });
-        // Add suggestions from suggested skills datasource
-        filteredSuggestedSkills.forEach((item) => {
+        // Add suggestions from recommendations datasource
+        filteredRecommendations.forEach((item) => {
             const div = document.createElement('div');
             div.classList.add('suggestion');
             div.textContent = item;
-            div.dataset.source = 'suggestedSkills';
+            div.dataset.source = 'recommendations';
             div.addEventListener('click', () => {
                 searchInput.value = '';
                 suggestionsDiv.innerHTML = '';
@@ -195,22 +195,22 @@ document.addEventListener('input', (event) => {
             });
             suggestionsDiv.appendChild(div);
         });
-        if (filtered.length > 0 || filteredSuggestedSkills.length > 0) {
+        if (filtered.length > 0 || filteredRecommendations.length > 0) {
             suggestionsDiv.style.display = 'block';
         }
     }
 });
 export default function decorate(element, field) {
     const { datasource } = field.properties;
-    const suggestedSkillsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
+    const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
-    const suggestedSkillsLabel = field.properties['recommendations-label'] || 'Recommendations';
+    const recommendationsLabel = field.properties['recommendations-label'] || 'Recommendations';
     const emptySelectionMessage = field.properties['empty-recommendations-message'];
-    const emptySkillsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.';
+    const emptyRecommendationsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.';
     const showRecommendations = field.properties['show-recommendations'] || false;
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
-    element.dataset.suggestedSkillsDatasource = suggestedSkillsDatasource;
+    element.dataset.recommendationsDatasource = recommendationsDatasource;
     // Moved input into container so we can attached icon input
     const inputEl = element.querySelector('input');
     const container = document.createElement('div');
@@ -224,21 +224,21 @@ export default function decorate(element, field) {
     const suggestionsDiv = addSuggestionDiv();
     // Add selected cards container
     const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage);
-    // Add suggested skills cards container
-    const suggestedSkillsCardsDiv = addSuggestedSkillsCardsDiv(suggestedSkillsLabel, emptySkillsMessage);
+    // Add recommendations cards container
+    const recommendationsCardsDiv = addRecommendationsCardsDiv(recommendationsLabel, emptyRecommendationsMessage);
     // Hide recommendations div by default, show only if show-recommendations is true
-    suggestedSkillsCardsDiv.style.display = showRecommendations ? 'block' : 'none';
+    recommendationsCardsDiv.style.display = showRecommendations ? 'block' : 'none';
     element.appendChild(selectedCardsDiv);
-    element.appendChild(suggestedSkillsCardsDiv);
+    element.appendChild(recommendationsCardsDiv);
     container.appendChild(suggestionsDiv);
-    // Get the suggested skills cards div element
-    const suggestedSkillsCards = suggestedSkillsCardsDiv.querySelector('.suggested-skills-cards');
+    // Get the recommendations cards div element
+    const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards');
     const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
-    // Get entries from the suggested skills datasource
-    const suggestedSkillsEntries = datasources[suggestedSkillsDatasource];
-    // Add 4 skills from the experiencedBasedJobs datasource to the suggestedSkillsCardsDiv
-    for (let i = 0; i < 4 && i < suggestedSkillsEntries.length; i++) {
-        createSuggestedSkillCard(suggestedSkillsEntries[i], suggestedSkillsCards, selectedCards, inputEl);
+    // Get entries from the recommendations datasource
+    const recommendationsEntries = datasources[recommendationsDatasource];
+    // Add 4 recommendations from the experiencedBasedJobs datasource to the recommendationsCardsDiv
+    for (let i = 0; i < 4 && i < recommendationsEntries.length; i++) {
+        createRecommendationCard(recommendationsEntries[i], recommendationsCards, selectedCards, inputEl);
     }
     return element;
 }

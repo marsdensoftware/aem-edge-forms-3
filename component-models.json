@@ -5431,7 +5431,7 @@
           {
             "component": "text",
             "name": "recommendations-label",
-            "label": "Suggested skills label",
+            "label": "Recommendations label",
             "valueType": "string"
           },
           {
