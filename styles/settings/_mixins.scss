@@ -124,3 +124,13 @@
     color: $color-feedback-red;
   }
 }
+
+/* Wizard Background Pattern Mixin */
+@mixin wizard-background-pattern($image-path) {
+  background-image: url($image-path);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top right;
+  transform: rotate(180deg);
+  transform-origin: center;
+}
