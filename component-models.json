@@ -5401,35 +5401,9 @@
         "collapsible": true,
         "fields": [
           {
-            "component": "text",
-            "name": "selection-label",
-            "label": "Selected results label",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "empty-recommendation-message",
-            "label": "Empty recommendation message",
-            "valueType": "string"
-          },
-          {
-            "component": "boolean",
-            "name": "hide-empty-recommendation",
-            "label": "Hide empty recommendation",
-            "valueType": "boolean"
-          }
-        ]
-      },
-      {
-        "component": "container",
-        "name": "suggested-skills",
-        "label": "Suggested Skills",
-        "collapsible": true,
-        "fields": [
-          {
             "component": "select",
-            "name": "suggested-skills-datasource",
-            "label": "Suggested Skills Data Source",
+            "name": "recommendations-datasource",
+            "label": "Recommendations Data Source",
             "valueType": "string",
             "options": [
               {
@@ -5456,15 +5430,27 @@
           },
           {
             "component": "text",
-            "name": "suggested-skills-label",
+            "name": "recommendations-label",
             "label": "Suggested skills label",
             "valueType": "string"
           },
           {
             "component": "text",
-            "name": "empty-skills-message",
-            "label": "Empty skills message",
+            "name": "empty-recommendations-message",
+            "label": "Empty recommendations message",
             "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hide-empty-recommendations",
+            "label": "Hide empty recommendations",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "show-recommendations",
+            "label": "show recommendations",
+            "valueType": "boolean"
           }
         ]
       },

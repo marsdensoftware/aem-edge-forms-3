@@ -279,11 +279,12 @@ interface Field {
 
 export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
-  const suggestedSkillsDatasource = field.properties['suggested-skills-datasource'] || 'experiencedBasedJobs'
+  const suggestedSkillsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
-  const suggestedSkillsLabel = field.properties['suggested-skills-label'] || 'Suggested skills'
-  const emptySelectionMessage = field.properties['empty-selection-message']
-  const emptySkillsMessage = field.properties['empty-skills-message'] || 'No suggested skills selected.'
+  const suggestedSkillsLabel = field.properties['recommendations-label'] || 'Recommendations'
+  const emptySelectionMessage = field.properties['empty-recommendations-message']
+  const emptySkillsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.'
+  const showRecommendations = field.properties['show-recommendations'] || false
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource
@@ -315,6 +316,9 @@ export default function decorate(element: El, field: Field) {
     suggestedSkillsLabel,
     emptySkillsMessage,
   )
+
+  // Hide recommendations div by default, show only if show-recommendations is true
+  suggestedSkillsCardsDiv.style.display = showRecommendations ? 'block' : 'none'
 
   element.appendChild(selectedCardsDiv)
   element.appendChild(suggestedSkillsCardsDiv)
