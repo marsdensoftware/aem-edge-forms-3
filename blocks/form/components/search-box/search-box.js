@@ -15,7 +15,10 @@ function addSelectedCardsDiv(headingText, emptySelectionMessage) {
     }
     const cardsDiv = document.createElement('div');
     cardsDiv.classList.add('selected-cards');
-    cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
+    // Only set the empty selection message if it's provided and not empty
+    if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
+        cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
+    }
     wrapper.appendChild(cardsDiv);
     return wrapper;
 }
@@ -31,7 +34,10 @@ function addRecommendationsCardsDiv(headingText, emptySelectionMessage) {
     }
     const cardsDiv = document.createElement('div');
     cardsDiv.classList.add('recommendations-cards');
-    cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
+    // Only set the empty selection message if it's provided and not empty
+    if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
+        cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
+    }
     wrapper.appendChild(cardsDiv);
     return wrapper;
 }
@@ -237,8 +243,8 @@ export default function decorate(element, field) {
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
     const recommendationsLabel = field.properties['recommendations-label'];
-    const emptySelectionMessage = field.properties['empty-selection-message'] || 'No selections.';
-    const emptyRecommendationsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.';
+    const emptySelectionMessage = field.properties['empty-selection-message'];
+    const emptyRecommendationsMessage = field.properties['empty-recommendations-message'];
     const showRecommendations = field.properties['show-recommendations'] || false;
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
