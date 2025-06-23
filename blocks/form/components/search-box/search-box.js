@@ -94,9 +94,11 @@ const datasources = {
 };
 // Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-    if (window.searchInput && !window.searchInput.contains(e.target)) {
-        window.suggestionsDiv.innerHTML = '';
-        window.suggestionsDiv.style.display = 'none';
+    const searchInput = window.searchInput;
+    const suggestionsDiv = window.suggestionsDiv;
+    if (searchInput && !searchInput.contains(e.target)) {
+        suggestionsDiv.innerHTML = '';
+        suggestionsDiv.style.display = 'none';
     }
 });
 document.addEventListener('input', (event) => {
@@ -115,7 +117,7 @@ document.addEventListener('input', (event) => {
         const entries = datasources[datasource];
         const selectedCardsDiv = element.querySelector('.selected-cards');
         const filtered = entries.filter((entry) => entry.toLowerCase().includes(query) &&
-            !Array.from(selectedCardsDiv.children).some((card) => card.firstChild.textContent === entry));
+            !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
         filtered.forEach((item) => {
             const div = document.createElement('div');
             div.classList.add('suggestion');
