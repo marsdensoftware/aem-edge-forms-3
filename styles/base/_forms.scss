@@ -289,14 +289,17 @@ main.wizard--bg-light {
   p,
   .subtitle,
   .straptitle {
-    color: $text-secondary;
+    /*color: $text-secondary;*/
+    color:$text-primary;
     font-family: $font-family;
     font-size: 1rem;
     line-height: 1.6;
   }
 }
 
-// Background pattern and gradients
+
+
+
 // Background pattern and gradients
 main.wizard--bg-dark,
 main.wizard--bg-light {
