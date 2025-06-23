@@ -59,34 +59,3 @@
     }
   }
 }
-
-// Form Welcome subtitle and paragraph sizing
-
-main.wizard--bg-dark .subtitle + p {
-  font-size: clamp(24px, 4vw, 32px);
-  font-weight: 500;
-  font-family: $font-family;
-  color: $color-white;
-  border: 2px solid pink;
-  line-height: 1.4;
-  margin-bottom: $spacing-400;
-  -webkit-text-fill-color: $color-white;
-  background: none;
-  background-clip: unset;
-  -webkit-background-clip: unset;
-}
-
-main.wizard--bg-dark .p-large + p {
-  font-size: clamp(15px, 1.25vw, 17px);
-  font-weight: 400;
-  font-family: $font-family;
-  color: $color-white;
-  line-height: 1.6;
-  margin-top: $spacing-300;
-  -webkit-text-fill-color: $color-white;
-  background: none;
-  background-clip: unset;
-  -webkit-background-clip: unset;
-}
-
-.wizard .panel-formhero__content p {font-size: 40px; border: 2px solid orange;}

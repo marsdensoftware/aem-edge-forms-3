@@ -5,7 +5,6 @@
     Pre-defined mixins
 */
 @use './breakpoints' as *;
-@use './mixins' as *;
 
 $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 $size-font-base: 16px;
@@ -112,11 +111,14 @@ $size-font-input-text: clamp(18px, 1.25vw, 20px);
 $size-font-label: clamp(18px, 1.25vw, 20px);
 
 // form hero
-/*main.wizard--bg-dark p.p-large {
+main.wizard--bg-dark .p-large {
   font-size: clamp(15px, 1.25vw, 17px); // 15 → 16 → 17
 }
 
-main.wizard--bg-dark p.subtitle {
+main.wizard--bg-dark .subtitle {
   font-size: clamp(24px, 4vw, 32px); // 24 → 28 → 32
   font-style: normal;
-}*/
+}
+
+
+
