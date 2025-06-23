@@ -664,6 +664,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Pills",
+                "value": "pills"
               }
             ],
             "value": "default"
