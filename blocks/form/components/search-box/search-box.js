@@ -205,7 +205,7 @@ export default function decorate(element, field) {
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
     const recommendationsLabel = field.properties['recommendations-label'] || 'Recommendations';
-    const emptySelectionMessage = field.properties['empty-selection-message'];
+    const emptySelectionMessage = field.properties['empty-selection-message'] || 'No selections.';
     const emptyRecommendationsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.';
     const showRecommendations = field.properties['show-recommendations'] || false;
     element.classList.add('search-box');
