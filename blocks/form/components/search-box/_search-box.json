@@ -99,6 +99,32 @@
         },
         {
           "component": "container",
+          "name": "recommendation-results",
+          "label": "Recommendation Results",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "name": "selection-label",
+              "label": "Selected results label",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "empty-recommendation-message",
+              "label": "Empty recommendation message",
+              "valueType": "string"
+            },
+            {
+              "component": "boolean",
+              "name": "hide-empty-recommendation",
+              "label": "Hide empty recommendation",
+              "valueType": "boolean"
+            }
+          ]
+        },
+        {
+          "component": "container",
           "name": "suggested-skills",
           "label": "Suggested Skills",
           "collapsible": true,
