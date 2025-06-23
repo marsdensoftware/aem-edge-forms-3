@@ -43,6 +43,15 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
         // Trigger a change event to update any validation
         const event = new Event('change', { bubbles: true });
         searchInput.dispatchEvent(event);
+        // Find the search-box element and the recommendations div
+        const searchBox = selectedCardsDiv.closest('.search-box');
+        if (searchBox) {
+            const recommendationsCardsDiv = searchBox.querySelector('.recommendations-cards-wrapper');
+            if (recommendationsCardsDiv && recommendationsCardsDiv.style.display !== 'none') {
+                // Recreate the recommendations div to include the removed item
+                populateRecommendationsDiv(searchBox, recommendationsCardsDiv, selectedCardsDiv, searchInput);
+            }
+        }
     });
     card.appendChild(text);
     card.appendChild(removeBtn);
@@ -200,6 +209,24 @@ document.addEventListener('input', (event) => {
         }
     }
 });
+// Function to populate the recommendations div with items from the recommendations datasource
+function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl) {
+    // Clear existing recommendations
+    const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards');
+    recommendationsCards.innerHTML = '';
+    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+    const { recommendationsDatasource } = element.dataset;
+    // Get entries from the recommendations datasource
+    const recommendationsEntries = recommendationsDatasource ?
+        datasources[recommendationsDatasource] :
+        [];
+    // Filter out items that are already in the selected cards div
+    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+    // Add up to 4 recommendations to the recommendations div
+    for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
+        createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCards, inputEl);
+    }
+}
 export default function decorate(element, field) {
     const { datasource } = field.properties;
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
@@ -231,14 +258,7 @@ export default function decorate(element, field) {
     element.appendChild(selectedCardsDiv);
     element.appendChild(recommendationsCardsDiv);
     container.appendChild(suggestionsDiv);
-    // Get the recommendations cards div element
-    const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards');
-    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
-    // Get entries from the recommendations datasource
-    const recommendationsEntries = datasources[recommendationsDatasource];
-    // Add 4 recommendations from the experiencedBasedJobs datasource to the recommendationsCardsDiv
-    for (let i = 0; i < 4 && i < recommendationsEntries.length; i++) {
-        createRecommendationCard(recommendationsEntries[i], recommendationsCards, selectedCards, inputEl);
-    }
+    // Populate the recommendations div
+    populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl);
     return element;
 }
