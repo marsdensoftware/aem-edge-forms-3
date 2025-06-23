@@ -315,7 +315,7 @@ function populateRecommendationsDiv(
 
   // Add up to 4 recommendations to the recommendations div
   for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
-    createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCards, inputEl)
+    createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl)
   }
 }
 

@@ -223,7 +223,7 @@ function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCa
     const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
     // Add up to 4 recommendations to the recommendations div
     for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
-        createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCards, inputEl);
+        createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
     }
 }
 export default function decorate(element, field) {
