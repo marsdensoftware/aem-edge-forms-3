@@ -298,7 +298,6 @@ function populateRecommendationsDiv(
   const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards') as HTMLDivElement
   recommendationsCards.innerHTML = ''
 
-  const selectedCards = selectedCardsDiv.querySelector('.selected-cards') as HTMLDivElement
   const { recommendationsDatasource } = element.dataset
 
   // Get entries from the recommendations datasource
@@ -309,7 +308,7 @@ function populateRecommendationsDiv(
   // Filter out items that are already in the selected cards div
   const availableRecommendations = recommendationsEntries.filter(
     (entry) =>
-      !Array.from(selectedCards.children).some(
+      !Array.from(selectedCardsDiv.children).some(
         (card) => card.firstChild?.textContent === entry,
       ),
   )

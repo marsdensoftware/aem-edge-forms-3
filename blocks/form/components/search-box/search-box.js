@@ -214,14 +214,13 @@ function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCa
     // Clear existing recommendations
     const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards');
     recommendationsCards.innerHTML = '';
-    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
     const { recommendationsDatasource } = element.dataset;
     // Get entries from the recommendations datasource
     const recommendationsEntries = recommendationsDatasource ?
         datasources[recommendationsDatasource] :
         [];
     // Filter out items that are already in the selected cards div
-    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
     // Add up to 4 recommendations to the recommendations div
     for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCards, inputEl);
