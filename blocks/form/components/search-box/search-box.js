@@ -48,6 +48,19 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
     card.appendChild(removeBtn);
     selectedCardsDiv.appendChild(card);
 }
+function createSuggestedSkillCard(item, suggestedSkillsCardsDiv, selectedCardsDiv, searchInput) {
+    const card = document.createElement('div');
+    card.classList.add('selected-card');
+    const text = document.createElement('div');
+    text.textContent = item;
+    // Add click event to move the skill to the selectedCardsDiv
+    card.addEventListener('click', () => {
+        card.remove();
+        createSelectedCard(item, selectedCardsDiv, searchInput);
+    });
+    card.appendChild(text);
+    suggestedSkillsCardsDiv.appendChild(card);
+}
 const courses = [
     'Marketing management',
     'Financial management',
@@ -178,7 +191,7 @@ document.addEventListener('input', (event) => {
                 searchInput.value = '';
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
-                createSelectedCard(item, suggestedSkillsCardsDiv, searchInput);
+                createSelectedCard(item, selectedCardsDiv, searchInput);
             });
             suggestionsDiv.appendChild(div);
         });
@@ -215,5 +228,14 @@ export default function decorate(element, field) {
     element.appendChild(selectedCardsDiv);
     element.appendChild(suggestedSkillsCardsDiv);
     container.appendChild(suggestionsDiv);
+    // Get the suggested skills cards div element
+    const suggestedSkillsCards = suggestedSkillsCardsDiv.querySelector('.suggested-skills-cards');
+    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+    // Get entries from the suggested skills datasource
+    const suggestedSkillsEntries = datasources[suggestedSkillsDatasource];
+    // Add 4 skills from the experiencedBasedJobs datasource to the suggestedSkillsCardsDiv
+    for (let i = 0; i < 4 && i < suggestedSkillsEntries.length; i++) {
+        createSuggestedSkillCard(suggestedSkillsEntries[i], suggestedSkillsCards, selectedCards, inputEl);
+    }
     return element;
 }
