@@ -11,10 +11,13 @@ function addSelectedCardsDiv(
   const wrapper = document.createElement('div')
   wrapper.classList.add('selected-cards-wrapper')
 
-  const heading = document.createElement('div')
-  heading.classList.add('selected-cards-heading')
-  heading.textContent = headingText || 'Selected items'
-  wrapper.appendChild(heading)
+  // Only add heading if headingText is provided and not empty
+  if (headingText && headingText.trim() !== '') {
+    const heading = document.createElement('div')
+    heading.classList.add('selected-cards-heading')
+    heading.textContent = headingText
+    wrapper.appendChild(heading)
+  }
 
   const cardsDiv = document.createElement('div')
   cardsDiv.classList.add('selected-cards')
@@ -31,10 +34,13 @@ function addRecommendationsCardsDiv(
   const wrapper = document.createElement('div')
   wrapper.classList.add('recommendations-cards-wrapper')
 
-  const heading = document.createElement('div')
-  heading.classList.add('selected-cards-heading')
-  heading.textContent = headingText || 'Recommendations'
-  wrapper.appendChild(heading)
+  // Only add heading if headingText is provided and not empty
+  if (headingText && headingText.trim() !== '') {
+    const heading = document.createElement('div')
+    heading.classList.add('selected-cards-heading')
+    heading.textContent = headingText
+    wrapper.appendChild(heading)
+  }
 
   const cardsDiv = document.createElement('div')
   cardsDiv.classList.add('recommendations-cards')
@@ -323,7 +329,7 @@ export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
-  const recommendationsLabel = field.properties['recommendations-label'] || 'Recommendations'
+  const recommendationsLabel = field.properties['recommendations-label']
   const emptySelectionMessage = field.properties['empty-selection-message'] || 'No selections.'
   const emptyRecommendationsMessage = field.properties['empty-recommendations-message'] || 'No recommendations.'
   const showRecommendations = field.properties['show-recommendations'] || false
