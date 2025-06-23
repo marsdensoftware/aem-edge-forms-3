@@ -77,7 +77,9 @@ function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDi
     // Add click event to move the recommendation to the selectedCardsDiv
     card.addEventListener('click', () => {
         card.remove();
-        createSelectedCard(item, selectedCardsDiv, searchInput);
+        // Get the inner div with class 'selected-cards'
+        const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+        createSelectedCard(item, selectedCards, searchInput);
     });
     card.appendChild(text);
     recommendationsCardsDiv.appendChild(card);
@@ -176,7 +178,8 @@ document.addEventListener('input', (event) => {
         const { datasource, recommendationsDatasource } = element.dataset;
         // Get entries from the main datasource
         const entries = datasources[datasource];
-        const selectedCardsDiv = element.querySelector('.selected-cards');
+        const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper');
+        const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards');
         // Get entries from the recommendations datasource
         const recommendationsEntries = recommendationsDatasource ?
             datasources[recommendationsDatasource] :
@@ -232,7 +235,8 @@ function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCa
         datasources[recommendationsDatasource] :
         [];
     // Filter out items that are already in the selected cards div
-    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
     // Add up to 4 recommendations to the recommendations div
     for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);

@@ -109,7 +109,9 @@ function createRecommendationCard(
   // Add click event to move the recommendation to the selectedCardsDiv
   card.addEventListener('click', () => {
     card.remove()
-    createSelectedCard(item, selectedCardsDiv, searchInput)
+    // Get the inner div with class 'selected-cards'
+    const selectedCards = selectedCardsDiv.querySelector('.selected-cards') as HTMLDivElement
+    createSelectedCard(item, selectedCards, searchInput)
   })
 
   card.appendChild(text)
@@ -229,7 +231,8 @@ document.addEventListener('input', (event) => {
 
     // Get entries from the main datasource
     const entries = datasources[datasource as unknown as keyof typeof datasources] as string[]
-    const selectedCardsDiv = element.querySelector('.selected-cards') as HTMLDivElement
+    const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper') as HTMLDivElement
+    const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards') as HTMLDivElement
 
     // Get entries from the recommendations datasource
     const recommendationsEntries = recommendationsDatasource ?
@@ -318,9 +321,10 @@ function populateRecommendationsDiv(
     []
 
   // Filter out items that are already in the selected cards div
+  const selectedCards = selectedCardsDiv.querySelector('.selected-cards') as HTMLDivElement
   const availableRecommendations = recommendationsEntries.filter(
     (entry) =>
-      !Array.from(selectedCardsDiv.children).some(
+      !Array.from(selectedCards.children).some(
         (card) => card.firstChild?.textContent === entry,
       ),
   )
