@@ -47,11 +47,13 @@
   color: $text-secondary;
 }
 
-.selected-cards-wrapper {
+.selected-cards-wrapper,
+.suggested-skills-cards-wrapper {
   margin-top: 1rem;
 }
 
-.selected-cards {
+.selected-cards,
+.suggested-skills-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;

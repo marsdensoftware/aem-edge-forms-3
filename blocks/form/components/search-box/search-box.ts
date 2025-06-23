@@ -24,6 +24,26 @@ function addSelectedCardsDiv(
   return wrapper
 }
 
+function addSuggestedSkillsCardsDiv(
+  headingText: string,
+  emptySelectionMessage: string,
+) {
+  const wrapper = document.createElement('div')
+  wrapper.classList.add('suggested-skills-cards-wrapper')
+
+  const heading = document.createElement('div')
+  heading.classList.add('selected-cards-heading')
+  heading.textContent = headingText || 'Suggested skills'
+  wrapper.appendChild(heading)
+
+  const cardsDiv = document.createElement('div')
+  cardsDiv.classList.add('suggested-skills-cards')
+  cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage
+  wrapper.appendChild(cardsDiv)
+
+  return wrapper
+}
+
 function createSelectedCard(
   item: string,
   selectedCardsDiv: HTMLDivElement,
@@ -107,16 +127,31 @@ const skills = [
   'Adapt to changing work environments',
 ]
 
+const experiencedBasedJobs = [
+  'Job Title 1',
+  'Job Title 2',
+  'Job Title 3',
+  'Job Title 4',
+  'Job Title 5',
+  'Job Title 6',
+  'Job Title 7',
+  'Job Title 8',
+  'Job Title 9',
+  'Job Title 10',
+]
+
 const datasources = {
   courses,
   languages,
   userLocations,
   skills,
+  experiencedBasedJobs,
 }
 
 interface El extends Element {
   dataset: {
     datasource: string[]
+    suggestedSkillsDatasource?: string[]
   }
 }
 
@@ -146,10 +181,19 @@ document.addEventListener('input', (event) => {
     (window as any).suggestionsDiv = suggestionsDiv
     suggestionsDiv.innerHTML = ''
 
-    const {datasource} = element.dataset
+    const {datasource, suggestedSkillsDatasource} = element.dataset
+
+    // Get entries from the main datasource
     const entries = datasources[datasource as unknown as keyof typeof datasources] as string[]
     const selectedCardsDiv = element.querySelector('.selected-cards') as HTMLDivElement
 
+    // Get entries from the suggested skills datasource
+    const suggestedSkillsEntries = suggestedSkillsDatasource ?
+      datasources[suggestedSkillsDatasource as unknown as keyof typeof datasources] as string[] :
+      []
+    const suggestedSkillsCardsDiv = element.querySelector('.suggested-skills-cards') as HTMLDivElement
+
+    // Filter main datasource entries
     const filtered = entries.filter(
       (entry) =>
         entry.toLowerCase().includes(query) &&
@@ -158,10 +202,21 @@ document.addEventListener('input', (event) => {
         ),
     )
 
+    // Filter suggested skills datasource entries
+    const filteredSuggestedSkills = suggestedSkillsEntries.filter(
+      (entry) =>
+        entry.toLowerCase().includes(query) &&
+          !Array.from(suggestedSkillsCardsDiv.children).some(
+              (card) => card.firstChild?.textContent === entry,
+        ),
+    )
+
+    // Add suggestions from main datasource
     filtered.forEach((item) => {
       const div = document.createElement('div')
       div.classList.add('suggestion')
       div.textContent = item
+      div.dataset.source = 'main'
       div.addEventListener('click', () => {
         searchInput.value = ''
         suggestionsDiv.innerHTML = ''
@@ -171,7 +226,22 @@ document.addEventListener('input', (event) => {
       suggestionsDiv.appendChild(div)
     })
 
-    if (filtered.length > 0) {
+    // Add suggestions from suggested skills datasource
+    filteredSuggestedSkills.forEach((item) => {
+      const div = document.createElement('div')
+      div.classList.add('suggestion')
+      div.textContent = item
+      div.dataset.source = 'suggestedSkills'
+      div.addEventListener('click', () => {
+        searchInput.value = ''
+        suggestionsDiv.innerHTML = ''
+        suggestionsDiv.style.display = 'none'
+        createSelectedCard(item, suggestedSkillsCardsDiv, searchInput)
+      })
+      suggestionsDiv.appendChild(div)
+    })
+
+    if (filtered.length > 0 || filteredSuggestedSkills.length > 0) {
       suggestionsDiv.style.display = 'block'
     }
   }
@@ -187,11 +257,15 @@ interface Field {
 
 export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
+  const suggestedSkillsDatasource = field.properties['suggested-skills-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
+  const suggestedSkillsLabel = field.properties['suggested-skills-label'] || 'Suggested skills'
   const emptySelectionMessage = field.properties['empty-selection-message']
+  const emptySkillsMessage = field.properties['empty-skills-message'] || 'No suggested skills selected.'
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource
+  element.dataset.suggestedSkillsDatasource = suggestedSkillsDatasource
 
   // Moved input into container so we can attached icon input
   const inputEl = element.querySelector('input')
@@ -214,7 +288,14 @@ export default function decorate(element: El, field: Field) {
     emptySelectionMessage,
   )
 
+  // Add suggested skills cards container
+  const suggestedSkillsCardsDiv = addSuggestedSkillsCardsDiv(
+    suggestedSkillsLabel,
+    emptySkillsMessage,
+  )
+
   element.appendChild(selectedCardsDiv)
+  element.appendChild(suggestedSkillsCardsDiv)
   container.appendChild(suggestionsDiv)
 
   return element

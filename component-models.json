@@ -5240,6 +5240,10 @@
               {
                 "name": "Skills",
                 "value": "skills"
+              },
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
               }
             ]
           },
@@ -5387,6 +5391,54 @@
             "name": "hide-empty",
             "label": "Hide empty results",
             "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "suggested-skills",
+        "label": "Suggested Skills",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "name": "suggested-skills-datasource",
+            "label": "Suggested Skills Data Source",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
+              },
+              {
+                "name": "Courses",
+                "value": "courses"
+              },
+              {
+                "name": "Languages",
+                "value": "languages"
+              },
+              {
+                "name": "Locations",
+                "value": "userLocations"
+              },
+              {
+                "name": "Skills",
+                "value": "skills"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "suggested-skills-label",
+            "label": "Suggested skills label",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "empty-skills-message",
+            "label": "Empty skills message",
+            "valueType": "string"
           }
         ]
       },
