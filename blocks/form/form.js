@@ -297,11 +297,33 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  const colSpan = field['Column Span'] || field.properties?.colspan;
-  if (colSpan && element) {
-    element.classList.add(`col-${colSpan}`);
+  // Get the default colspan
+  const defaultColSpan = field['Column Span'] || field.properties?.colspan;
+
+  // Get responsive colspans from properties
+  const responsiveColSpans = {
+    sm: field.properties?.['colspan-sm'],
+    md: field.properties?.['colspan-md'],
+    lg: field.properties?.['colspan-lg'],
+    xl: field.properties?.['colspan-xl'],
+    xxl: field.properties?.['colspan-xxl']
+  };
+
+  if (element) {
+    // Add default colspan class if defined
+    if (defaultColSpan) {
+      element.classList.add(`col-${defaultColSpan}`);
+    }
+
+    // Add responsive colspan classes if defined
+    Object.entries(responsiveColSpans).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`col-${size}-${value}`);
+      }
+    });
   }
 }
+
 
 const handleFocus = (input, field) => {
   const editValue = input.getAttribute('edit-value');
