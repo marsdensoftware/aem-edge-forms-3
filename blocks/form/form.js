@@ -310,6 +310,15 @@ function colSpanDecorator(field, element) {
     xxl: field.properties?.['colspan-xxl']
   };
 
+  // Get responsive offsets from properties
+  const responsiveOffsets = {
+    sm: field.properties?.['colspan-sm-offset'],
+    md: field.properties?.['colspan-md-offset'],
+    lg: field.properties?.['colspan-lg-offset'],
+    xl: field.properties?.['colspan-xl-offset'],
+    xxl: field.properties?.['colspan-xxl-offset']
+  };
+
   if (element) {
     // Add default colspan class if defined
     if (defaultColSpan) {
@@ -320,6 +329,13 @@ function colSpanDecorator(field, element) {
     Object.entries(responsiveColSpans).forEach(([size, value]) => {
       if (value) {
         element.classList.add(`col-${size}-${value}`);
+      }
+    });
+
+    // Add responsive offset classes if defined
+    Object.entries(responsiveOffsets).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`offset-${size}-${value}`);
       }
     });
   }
