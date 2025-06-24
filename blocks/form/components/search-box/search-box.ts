@@ -321,7 +321,8 @@ function populateRecommendationsDiv(
     []
 
   // Filter out items that are already in the selected cards div
-  const selectedCards = selectedCardsDiv.querySelector('.selected-cards') as HTMLDivElement
+  // Check if selectedCardsDiv is the wrapper div or the inner div
+  const selectedCards = selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv
   const availableRecommendations = recommendationsEntries.filter(
     (entry) =>
       !Array.from(selectedCards.children).some(

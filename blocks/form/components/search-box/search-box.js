@@ -235,7 +235,8 @@ function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCa
         datasources[recommendationsDatasource] :
         [];
     // Filter out items that are already in the selected cards div
-    const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+    // Check if selectedCardsDiv is the wrapper div or the inner div
+    const selectedCards = selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv;
     const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
     // Add up to 4 recommendations to the recommendations div
     for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
