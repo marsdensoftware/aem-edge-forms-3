@@ -22,6 +22,9 @@ body {
   font-weight: 400;
   color: $text-primary;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ol,
@@ -71,42 +74,7 @@ picture {
   width: 100%;
 }
 
-/*a,
-button {
-  @extend %state-focus;
-  display: inline-block;
-  cursor: pointer;
-  font-weight: 400;
-
-  &:focus {
-    border-radius: $border-radius-round;
-  }
-}
-
-a {
-  font-size: 1rem;
-  color: $color-grey-black-80;
-  box-shadow: none;
-  text-decoration: underline;
-  transition: all 0.2s ease-in-out;
-
-  &:hover,
-  &:active {
-    color: $color-primary-navy;
-  }
-
-  &:visited {
-    color: $color-grey-black-80;
-
-    &:hover,
-    &:active {
-      color: $color-primary-navy;
-    }
-  }
-}*/
-
 button {
   border: 0;
   background: none;
 }
-

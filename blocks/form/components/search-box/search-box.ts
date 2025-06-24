@@ -62,7 +62,7 @@ function createSelectedCard(
   searchInput: HTMLInputElement,
 ) {
   const card = document.createElement('div')
-  card.classList.add('selected-card')
+  card.classList.add('selected-card', 'selected-card--is-selected')
 
   const text = document.createElement('div')
   text.textContent = item
