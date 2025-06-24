@@ -78,7 +78,7 @@ function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDi
     card.addEventListener('click', () => {
         card.remove();
         // Get the inner div with class 'selected-cards'
-        const selectedCards = selectedCardsDiv.querySelector('.selected-cards');
+        const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv);
         createSelectedCard(item, selectedCards, searchInput);
     });
     card.appendChild(text);

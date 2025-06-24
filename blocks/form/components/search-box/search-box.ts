@@ -110,7 +110,7 @@ function createRecommendationCard(
   card.addEventListener('click', () => {
     card.remove()
     // Get the inner div with class 'selected-cards'
-    const selectedCards = selectedCardsDiv.querySelector('.selected-cards') as HTMLDivElement
+    const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv) as HTMLDivElement
     createSelectedCard(item, selectedCards, searchInput)
   })
 
