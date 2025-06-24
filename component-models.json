@@ -617,6 +617,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -657,6 +664,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Pills",
+                "value": "pills"
               }
             ],
             "value": "default"
@@ -1352,6 +1363,13 @@
             "component": "text",
             "name": "enumNames",
             "label": "Options (Display Value)",
+            "valueType": "string",
+            "multi": true
+          },
+          {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
             "valueType": "string",
             "multi": true
           },
@@ -3111,6 +3129,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -3151,6 +3176,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Bar",
+                "value": "bar"
               }
             ],
             "value": "default"
@@ -4277,6 +4306,49 @@
             "label": "Year upper boundary",
             "valueType": "string",
             "description": "Upper boundary for year. Could be 2030, or -/+45. Default is current year."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "driverlicence",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "cardTitle",
+            "label": "Card title",
+            "valueType": "string"
           }
         ]
       }
