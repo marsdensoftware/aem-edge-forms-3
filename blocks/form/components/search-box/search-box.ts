@@ -173,6 +173,29 @@ const skills = [
   'Adapt to changing work environments',
 ]
 
+const jobTitleIndustries = [
+  'Fruit Production Owner',
+  'Field Crop Grower',
+  'Grape Grower',
+  'Mixed Crop Farmer',
+  'Outdoor Crop Production Owner',
+  'Mixed Crop Farm Manager',
+  'Indoor Crop Production Owner',
+  'Fruit Production Manager',
+  'Indoor Crop Production Manager',
+  'Outdoor Crop Production Manager',
+  'Horticulture Post-Harvest Owner',
+  'Horticulture Post-Harvest Manager',
+  'Nursery Production Owner',
+  'Nursery Production Manager',
+  'Vineyard Manager',
+  'Apiarist',
+  'Beef Cattle Farmer',
+  'Dairy Farm Owner',
+  'Deer Farmer',
+  'Goat Farmer',
+]
+
 const experiencedBasedJobs = [
   'Job Title 1',
   'Job Title 2',
@@ -192,6 +215,7 @@ const datasources = {
   userLocations,
   skills,
   experiencedBasedJobs,
+  jobTitleIndustries,
 }
 
 interface El extends Element {

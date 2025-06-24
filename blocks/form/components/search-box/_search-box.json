@@ -61,6 +61,10 @@
                   "value": "skills"
                 },
                 {
+                  "name": "Job Titles and Industries",
+                  "value": "jobTitleIndustries"
+                },
+                {
                   "name": "Experience Based Jobs",
                   "value": "experiencedBasedJobs"
                 }
@@ -114,20 +118,8 @@
                   "value": "experiencedBasedJobs"
                 },
                 {
-                  "name": "Courses",
-                  "value": "courses"
-                },
-                {
-                  "name": "Languages",
-                  "value": "languages"
-                },
-                {
-                  "name": "Locations",
-                  "value": "userLocations"
-                },
-                {
-                  "name": "Skills",
-                  "value": "skills"
+                  "name": "Job Titles and Industries",
+                  "value": "jobTitleIndustries"
                 }
               ]
             },
