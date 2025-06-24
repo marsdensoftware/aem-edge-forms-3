@@ -297,6 +297,7 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
 
@@ -322,6 +323,7 @@ function colSpanDecorator(field, element) {
       }
     });
   }
+  // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
 
 
