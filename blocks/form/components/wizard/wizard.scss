@@ -14,8 +14,15 @@
   }
 }
 
+/*main.wizard--bg-light {
+  min-height: 100vh; // ensures it fills at least the full viewport
+  display: flex;
+  flex-direction: column;
+}*/
+
 .wizard--bg-light {
   .wizard {
+    min-height: 80vh;
     background: linear-gradient(
       135deg,
       $color-shade-blue-10 25%,

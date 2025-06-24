@@ -210,15 +210,7 @@ main .form form .field-wrapper.field-invalid .field-description {
    Dark Blue Gradient background
 ------------------------------ */
 main.wizard--bg-dark {
-  // background: var(
-  //   --Gradient-Blue,
-  //   linear-gradient(
-  //     135deg,
-  //     var(--Brand-MSD-Blue, #017ac9) 25%,
-  //     var(--Brand-MSD-Navy, #134276) 100%
-  //   )
-  // );
-  color: var(--Text-Light, #fff);
+  color: $color-white;
 
   .text-wrapper,
   .number-wrapper,
@@ -259,12 +251,7 @@ main.wizard--bg-dark {
    Light Blue Gradient background
 ------------------------------ */
 main.wizard--bg-light {
-  // background: linear-gradient(
-  //   135deg,
-  //   var(--Shades-Blues-Blue-10, #e6f2fa) 25%,
-  //   var(--Shades-Blues-Blue-25, #bfdef1) 100%
-  // );
-  color: var(--Text-Dark, #333);
+  color: $text-primary;
 
   h1,
   h2,
@@ -297,6 +284,9 @@ main.wizard--bg-light {
 }
 
 // Background pattern and gradients
+
+
+
 main.wizard--bg-dark,
 main.wizard--bg-light {
   position: relative;
@@ -307,14 +297,13 @@ main.wizard--bg-dark::before,
 main.wizard--bg-light::before {
   content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 400px;
+  inset: 0;
   z-index: 0;
-  pointer-events: none;
+  background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: auto;
+  background-position: bottom left;
+  pointer-events: none;
 }
 
 @media (max-width: 743px) {
@@ -324,31 +313,21 @@ main.wizard--bg-light::before {
   }
 }
 
-@media (min-width: 744px) and (max-width: 1279px) {
+@include media('tablet') {
   main.wizard--bg-dark::before,
   main.wizard--bg-light::before {
-    background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
+    top: 100px; // not sure about this just yet RW
+    background-image: url('../../images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
-    transform: rotate(180deg);
-    transform-origin: center;
-    top: 100px; // pushes the pattern below the nav
-    right: 0;
-    width: 400px;
-    height: 400px;
+    background-repeat: no-repeat;
+    background-size: auto;
   }
 }
 
-@media (min-width: 1280px) {
+@include media('desktop') {
   main.wizard--bg-dark::before,
   main.wizard--bg-light::before {
     background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
-    top: auto;
-    right: auto;
-    bottom: 0;
-    left: 0;
     background-position: bottom left;
-    transform: none;
-    width: 400px;
-    height: 400px;
   }
 }

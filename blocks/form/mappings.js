@@ -11,6 +11,7 @@ let customComponents = [
   'education',
   'languagepanel',
   'workexperience',
+  'driverlicence',
   'advanceddatepicker',
   'search-box']
 

@@ -1,6 +1,10 @@
 @use '../../../../styles/settings' as *;
 
 main .form form .panel-repeatable-panel {
+    &[data-max="1"] button.item-add {
+        display: none;
+    }
+
     .repeatable-entries {
         .repeatable-entry {
             padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
@@ -124,6 +128,7 @@ main .form form .panel-repeatable-panel {
     }
 
     &.editing {
+
         .item-add,
         .repeatable-entry__edit,
         .repeatable-entry__delete {
@@ -138,6 +143,12 @@ main .form form .panel-repeatable-panel {
             display: flex;
             gap: 20px;
             margin-top: 65px;
+            
+            .btn-cancel{
+                color: $text-dark-primary;
+                background-color: $color-white;
+                border-color: $color-shade-navy-40;
+            }
         }
 
         &.current {

@@ -51,6 +51,10 @@
                                 {
                                     "name": "Cards",
                                     "value": "cards"
+                                },
+                                {
+                                    "name": "Bar",
+                                    "value": "bar"
                                 }
                             ],
                             "value": "default"
