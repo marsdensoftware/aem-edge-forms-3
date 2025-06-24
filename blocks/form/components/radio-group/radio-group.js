@@ -1,6 +1,5 @@
 export default function decorate(element, field) {
-    const { withIcon, enumIconNames, variant } = field.properties;
-    element.classList.add(`radio-group--${variant}`);
+    const { withIcon, enumIconNames } = field.properties;
     if (withIcon) {
         element.classList.remove('horizontal', 'vertical');
         element.classList.add('radio-group--with-icon');
