@@ -4,7 +4,6 @@
 @use 'elevations' as *;
 @use 'fonts' as *;
 @use 'spacings' as *;
-@use 'tokens' as *;
 @use 'utils' as *;
 
 /******************************
@@ -112,7 +111,7 @@
 }
 
 /******************************
-  Mixins
+  Error State
 *******************************/
 
 /* Input Error State */
@@ -123,5 +122,21 @@
 
   &::placeholder {
     color: $color-feedback-red;
+  }
+}
+
+/******************************
+  Wizard Hero Welcome
+*******************************/
+
+@mixin responsive-padding-bottom($mobile, $tablet, $desktop) {
+  padding-bottom: $mobile;
+
+  @include media('tablet') {
+    padding-bottom: $tablet;
+  }
+
+  @include media('desktop') {
+    padding-bottom: $desktop;
   }
 }

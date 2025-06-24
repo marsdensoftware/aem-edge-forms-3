@@ -1,7 +1,9 @@
+
 @use '../settings/fonts' as *;
 @use '../settings/colors' as *;
 @use '../settings/spacings' as *;
-
+@use '../settings/breakpoints' as *;
+@use '../settings/mixins' as *;
 
 /* ------------------------------
    Headings
@@ -18,15 +20,6 @@ h6 {
   &:last-child:not(:first-child) {
     margin-bottom: 0;
   }
-}
-
-h1,
-h2,
-h3 {
-  /*background: $color-gradient-blue;*/
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 h1 {
@@ -62,8 +55,6 @@ h6 {
   color: $text-dark;
 }
 
-
-
 /* ------------------------------
    Paragraph Default
 ------------------------------ */
@@ -71,6 +62,7 @@ p {
   margin-bottom: $spacing-500;
   line-height: 160%;
   color: $text-primary;
+  font-size: $size-font-body-default;
 }
 
 .form-wrapper p {
@@ -90,13 +82,6 @@ p {
 }
 
 /* ------------------------------
-   Paragraph Default
------------------------------- */
-p {
-  font-size: $size-font-body-default;
-}
-
-/* ------------------------------
    Paragraph Small
 ------------------------------ */
 .p-small {
@@ -113,16 +98,13 @@ p {
 /* ------------------------------
    Typography Blocks – Explicit Link & List Styling
 ------------------------------ */
-
 .typography.p-small.block {
-  // Paragraphs
   p {
     font-size: $size-font-body-small;
     line-height: 160%;
     color: $text-primary;
   }
 
-  // Links
   a {
     font-size: $size-font-body-small;
     font-weight: 500;
@@ -141,7 +123,6 @@ p {
     }
   }
 
-  // Lists
   ol li,
   ul li {
     font-size: $size-font-body-small;
@@ -151,7 +132,6 @@ p {
   }
 }
 
-// Default paragraph block (no size class)
 .default-content-wrapper a {
   color: $text-accent;
   font-weight: 500;
@@ -176,16 +156,13 @@ ul li {
   color: $text-primary;
 }
 
-// Large paragraph block
 .typography.p-large.block {
-  // Paragraphs
   p {
     font-size: $size-font-body-large;
     line-height: 160%;
     color: $text-primary;
   }
 
-  // Links
   a {
     font-size: $size-font-body-large;
     font-weight: 500;
@@ -204,7 +181,6 @@ ul li {
     }
   }
 
-  // Lists
   ol li,
   ul li {
     font-size: $size-font-body-large;
@@ -214,47 +190,45 @@ ul li {
   }
 }
 
-
 /* ------------------------------
    Form Heading Adjustments
 ------------------------------ */
 .wizard .panel-formwelcome .panel-formwelcome__item-content p {
   margin: 0;
-  padding-bottom: $spacing-200;
+  @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
 }
 
 .form-wrapper [class*='field-wrapper'] {
   h1 {
     margin: 0;
-    padding-bottom: $spacing-600;
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 
   h2 {
     margin: 0;
-    padding-bottom: $spacing-500;
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 
   h3 {
     margin: 0;
-    padding-bottom: $spacing-600; // was 200 but updated from UI
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 
   h4 {
     margin: 0;
-    padding-bottom: $spacing-200;
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 
   h5 {
     margin: 0;
-    padding-bottom: $spacing-100;
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 
   h6 {
     margin: 0;
-    padding-bottom: $spacing-200;
+    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
   }
 }
-
 
 /* ------------------------------
    Subtitle
@@ -270,7 +244,6 @@ ul li {
     margin-bottom: 0;
   }
 }
-
 
 /* ------------------------------
    Strap Title Default & Small
@@ -295,5 +268,19 @@ ul li {
   font-size: $size-font-strap-title-small;
 }
 
+/* ------------------------------
+   Form Hero Intro Subtitle
+------------------------------ */
+main.wizard--bg-dark .subtitle {
+  font-style: normal;
+  font-weight: lighter;
+  line-height: 130%;
+  margin: 0;
+  @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
 
-
+  p {
+    margin: 0;
+    color: $text-primary;
+    font-size: $size-font-subtitle;
+  }
+}

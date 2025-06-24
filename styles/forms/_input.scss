@@ -31,11 +31,11 @@ fieldset {
 
   label,
   .field-label {
-    font-size: 20px;
+    /*font-size: 20px;*/
     line-height: 120%;
     font-weight: 500;
     margin-bottom: $spacing-100;
-    color: $text-secondary;
+    color: $text-dark-primary;
     font-family: $font-family;
   }
 }
