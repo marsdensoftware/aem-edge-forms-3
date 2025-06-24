@@ -1,6 +1,6 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo } from '../../utils.js'
+import { isNo, fieldToNameValues } from '../../utils.js'
 
 export class RepeatablePanel {
     #overview;
@@ -216,50 +216,7 @@ export class RepeatablePanel {
     }
 
     _fieldToNameValues(entry) {
-        const inputs = entry.querySelectorAll('input, select, textarea');
-        const result = {};
-
-        inputs.forEach(input => {
-            const value = input.value;;
-            let displayValue = value;
-            const name = input.name;
-
-            const type = input.type;
-
-            if (input.tagName === 'SELECT') {
-                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-            }
-            else if (type === 'checkbox' || type === 'radio') {
-                // Ignore not checked
-                if (!input.checked) {
-                    return;
-                }
-
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-            }
-
-            if (value) {
-                if (result[name]) {
-                    // multi values
-                    const e = result[name];
-                    if (!e.values) {
-                        e.values = [];
-                        e.values.push(e.value);
-                        delete e.value;
-                        e.displayValues = [];
-                        e.displayValues.push(e.displayValue);
-                        delete e.displayValue;
-                    }
-                    e.values.push(value);
-                    e.displayValues.push(displayValue);
-                }
-                else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
-                }
-            }
-        });
-
-        return result;
+        return fieldToNameValues(entry);
     }
 
     #entryToReadableString(entry) {
