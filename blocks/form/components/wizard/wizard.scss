@@ -6,6 +6,7 @@
 
 .wizard--bg-dark {
   .wizard {
+    min-height: 80vh;
     background: linear-gradient(
       135deg,
       $color-accent 25%,

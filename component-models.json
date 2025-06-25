@@ -5312,6 +5312,14 @@
               {
                 "name": "Skills",
                 "value": "skills"
+              },
+              {
+                "name": "Job Titles and Industries",
+                "value": "jobTitleIndustries"
+              },
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
               }
             ]
           },
@@ -5458,6 +5466,54 @@
             "component": "boolean",
             "name": "hide-empty",
             "label": "Hide empty results",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "recommendation-results",
+        "label": "Recommendation Results",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "name": "recommendations-datasource",
+            "label": "Recommendations Data Source",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
+              },
+              {
+                "name": "Job Titles and Industries",
+                "value": "jobTitleIndustries"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "recommendations-label",
+            "label": "Recommendations label",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "empty-recommendations-message",
+            "label": "Empty recommendations message",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hide-empty-recommendations",
+            "label": "Hide empty recommendations",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "show-recommendations",
+            "label": "show recommendations",
             "valueType": "boolean"
           }
         ]
