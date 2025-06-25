@@ -18,13 +18,11 @@
         border-radius: $spacing-200;
         border: $stroke-input-stroke solid $stroke-tertiary;
         background: $bg-light-primary;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         min-height: 140px;
-        /*gap: 0.75rem;*/
         gap: $spacing-300;
         transition: all 0.2s ease;
 
@@ -35,15 +33,12 @@
 
         .text {
             font-weight: 600;
-            /*font-size: 1rem;*/
             font-size: $size-font-body-large;
             color: $text-primary;
-            /*margin-bottom: 0.25rem;*/
         }
 
         .desc {
-            /*font-size: 0.875rem;*/
-            font-size:$size-font-body-default;
+            font-size: $size-font-body-default;
             color: $text-secondary;
             font-weight: 400;
             line-height: 1.4;
@@ -63,43 +58,28 @@
         background-repeat: no-repeat;
     }
 
-    .radio-group--with-icon--car-off {
-        content: url('../../../../icons/icon-car-off.svg');
-    }
-
-    .radio-group--with-icon--car-on {
-        content: url('../../../../icons/icon-car-on.svg');
-    }
-
-    .radio-group--with-icon--full-time {
-        content: url('../../../../icons/icon-full-time.svg');
-    }
-
-    .radio-group--with-icon--part-time {
-        content: url('../../../../icons/icon-part-time.svg');
-    }
-
-    .radio-group--with-icon--list-search-1 {
-        content: url('../../../../icons/icon-streamline.svg');
-    }
-
-    .radio-group--with-icon--smiley-face {
-        content: url('../../../../icons/smiley-face.svg');
-    }
+    .radio-group--with-icon--car-off     { content: url('../../../../icons/icon-car-off.svg'); }
+    .radio-group--with-icon--car-on      { content: url('../../../../icons/icon-car-on.svg'); }
+    .radio-group--with-icon--full-time   { content: url('../../../../icons/icon-full-time.svg'); }
+    .radio-group--with-icon--part-time   { content: url('../../../../icons/icon-part-time.svg'); }
+    .radio-group--with-icon--list-search-1 { content: url('../../../../icons/icon-streamline.svg'); }
+    .radio-group--with-icon--smiley-face { content: url('../../../../icons/smiley-face.svg'); }
+    .radio-group--with-icon--no-language { content: url('../../../../icons/icon-no-language.svg'); }
+    .radio-group--with-icon--yes-language { content: url('../../../../icons/icon-yes-language.svg'); }
+    .radio-group--with-icon--no-education { content: url('../../../../icons/icon-no-education.svg'); }
+    .radio-group--with-icon--yes-education { content: url('../../../../icons/icon-yes-education.svg'); }
 
     input[type='radio'] {
-        &:checked {
-            +.radio-group--with-icon__label {
-                background-color: $color-shade-blue-10;
-                border: 2px solid $color-primary;
-                color: $text-dark-primary;
+        &:checked + .radio-group--with-icon__label {
+            background-color: $color-shade-blue-10;
+            border: 2px solid $color-primary;
+            color: $text-dark-primary;
 
-                &:after {
-                    left: auto;
-                    top: auto;
-                    bottom: $spacing-400 + 1px;
-                    margin: 0 auto;
-                }
+            &:after {
+                left: auto;
+                top: auto;
+                bottom: $spacing-400 + 1px;
+                margin: 0 auto;
             }
         }
     }
@@ -115,8 +95,7 @@
             border-radius: $border-radius-mid;
             border: 2px solid $color-shade-navy-45;
             width: 100%;
-            margin: 0;
-            margin-bottom: $spacing-200;
+            margin: 0 0 $spacing-200 0;
             justify-content: space-between;
             transition: all 0.2s ease;
 
@@ -126,19 +105,15 @@
             }
         }
 
-        input {
-            &:checked {
-                +label {
-                    border: 2px solid $stroke-accent;
-                    background-color: $color-white;
-                    color: $text-dark-primary;
+        input:checked + label {
+            border: 2px solid $stroke-accent;
+            background-color: $color-white;
+            color: $text-dark-primary;
 
-                    &::after {
-                        right: 17px;
-                        top: 17px;
-                        left: auto;
-                    }
-                }
+            &::after {
+                right: 17px;
+                top: 17px;
+                left: auto;
             }
         }
     }
@@ -155,10 +130,10 @@
     }
 }
 
-
+// Shared .desc style for checkboxes and other label-based inputs
 .checkbox-wrapper .field-label--with-description .desc {
     font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
-    color: $text-primary;
+    color: $text-secondary;
     font-weight: 400;
     line-height: 1.4;
     max-width: 45ch;
