@@ -40,18 +40,24 @@
 }
 
 .selected-cards-heading {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 120%;
   font-weight: 500;
-  margin-bottom: $spacing-100;
-  color: $text-secondary;
+  margin-bottom: $spacing-400;
+  color: $text-dark-primary;
+
+  @include media('desktop') {
+    font-size: 20px;
+  }
 }
 
-.selected-cards-wrapper {
+.selected-cards-wrapper,
+.recommendations-cards-wrapper {
   margin-top: 1rem;
 }
 
-.selected-cards {
+.selected-cards,
+.recommendations-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
@@ -65,26 +71,51 @@
 .selected-card {
   display: flex;
   align-items: center;
-  background-color: $color-grey-black-60;
-  color: $color-white;
-  border-radius: $border-radius-large;
-  padding: 6px 12px;
-  font-weight: 400;
-  font-size: 12px;
+  background-color: $color-white;
+  border-radius: $border-radius-round;
+  padding: $spacing-200 $spacing-300 $spacing-200 $spacing-450;
+  font-size: 15px;
+  line-height: 160%;
+  color: $text-secondary;
+  border: 1px solid $stroke-tertiary;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-shade-blue-10;
+    border-color: $stroke-secondary;
+    color: $text-dark-primary;
+  }
+
+  @include media('desktop') {
+    font-size: 17px;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    background-image: url('../../../../icons/icon-plus.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+  }
 
   .selected-card__button-remove {
     background-image: url('../../../../icons/icon-x.svg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    background-color: transparent;
     padding: 0;
     border: 0;
     box-shadow: none;
-    margin-left: 4px;
+    margin-left: 8px;
     cursor: pointer;
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 
     &:active,
     &:hover {
@@ -104,5 +135,21 @@
     &::after {
       display: none;
     }
+  }
+}
+
+.selected-card--is-selected {
+  background-color: $bg-dark;
+  color: $color-white;
+  border: 1px solid $stroke-dark;
+
+  &:hover {
+    background-color: $color-accent;
+    border-color: $color-accent;
+    color: $color-white;
+  }
+
+  &::after {
+    display: none;
   }
 }

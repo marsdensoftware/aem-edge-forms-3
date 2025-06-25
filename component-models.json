@@ -1833,6 +1833,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -1873,6 +1880,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Pills",
+                "value": "pills"
               }
             ],
             "value": "default"
@@ -4392,6 +4403,13 @@
             "component": "text",
             "name": "enumNames",
             "label": "Options (Display Value)",
+            "valueType": "string",
+            "multi": true
+          },
+          {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
             "valueType": "string",
             "multi": true
           },
@@ -11015,6 +11033,13 @@
             "multi": true
           },
           {
+            "component": "text",
+            "name": "enumDescriptions",
+            "label": "Enter a description to be displayed below the text",
+            "valueType": "string",
+            "multi": true
+          },
+          {
             "component": "boolean",
             "name": "withIcon",
             "label": "Enable Icon",
@@ -11055,6 +11080,10 @@
               {
                 "name": "Cards",
                 "value": "cards"
+              },
+              {
+                "name": "Bar",
+                "value": "bar"
               }
             ],
             "value": "default"
@@ -15835,6 +15864,49 @@
     ]
   },
   {
+    "id": "driverlicence",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "cardTitle",
+            "label": "Card title",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "education",
     "fields": [
       {
@@ -19224,6 +19296,14 @@
               {
                 "name": "Skills",
                 "value": "skills"
+              },
+              {
+                "name": "Job Titles and Industries",
+                "value": "jobTitleIndustries"
+              },
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
               }
             ]
           },
@@ -19978,6 +20058,54 @@
             "component": "boolean",
             "name": "hide-empty",
             "label": "Hide empty results",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "recommendation-results",
+        "label": "Recommendation Results",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "name": "recommendations-datasource",
+            "label": "Recommendations Data Source",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Experience Based Jobs",
+                "value": "experiencedBasedJobs"
+              },
+              {
+                "name": "Job Titles and Industries",
+                "value": "jobTitleIndustries"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "recommendations-label",
+            "label": "Recommendations label",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "empty-recommendations-message",
+            "label": "Empty recommendations message",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hide-empty-recommendations",
+            "label": "Hide empty recommendations",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "show-recommendations",
+            "label": "show recommendations",
             "valueType": "boolean"
           }
         ]

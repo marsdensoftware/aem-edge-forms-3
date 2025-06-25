@@ -200,12 +200,38 @@ function createRadioOrCheckboxGroup(fd) {
       enum: [value],
       required: fd.required,
     });
-    const { variant, 'afs:layout': layout } = fd.properties;
-    if (variant === 'cards') {
-      wrapper.classList.add(variant);
-    } else {
-      wrapper.classList.remove('cards');
+    
+    //###SEP-NJ START Display description below field label
+    // Wrap text inside label into a span
+    // Get the original text content and clear the label
+    const labelEl = field.querySelector('label');
+    const textContent = labelEl.textContent.trim();
+    labelEl.textContent = '';
+    
+    // Create and append the span.text
+    const textSpan = document.createElement('span');
+    textSpan.className = 'text';
+    textSpan.textContent = textContent;
+    labelEl.appendChild(textSpan);
+    
+    const description = fd.properties?.enumDescriptions?.[index];
+    
+    if(description){
+      // Create and append the span.desc
+      const descSpan = document.createElement('span');
+      descSpan.className = 'desc';
+      descSpan.textContent = description;
+      labelEl.appendChild(descSpan);
+      labelEl.classList.add('field-label--with-description');
     }
+    //###SEP-NJ END Display description
+    
+    const { variant, 'afs:layout': layout } = fd.properties;
+    //###SEP-NJ START Always show variant if defined
+    if (variant) {
+      wrapper.classList.add(`variant-${variant}`);
+    }
+    //###SEP-NJ END
     if (layout?.orientation === 'horizontal') {
       wrapper.classList.add('horizontal');
     }
@@ -226,6 +252,22 @@ function createRadioOrCheckboxGroup(fd) {
     }
     wrapper.appendChild(field);
   });
+  
+  //###SEP-NJ START Wrap radios in a container if bar display
+  if(wrapper.classList.contains('variant-bar')){
+    const wrappers = wrapper.querySelectorAll('.radio-wrapper');
+
+    const radiosWrapper = document.createElement('div');
+    radiosWrapper.className = 'radios-wrapper';
+    
+    // Insert before the first .radio-wrapper
+    wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
+    
+    // Move the all elements inside the new wrapper
+    wrappers.forEach(el => radiosWrapper.appendChild(el));
+  }
+  //###SEP-NJ END
+  
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
     wrapper.title = stripTags(fd.tooltip, '');

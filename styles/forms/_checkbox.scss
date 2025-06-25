@@ -13,42 +13,69 @@
 
   label {
     @extend %label-common-style;
+    position: relative;
+    padding: $spacing-400;
+    padding-right: 48px;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    background-color: $color-white;
+    transition: all 0.2s ease;
 
     &::before {
       content: '';
-      margin-right: $spacing-200;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
       display: block;
       width: 26px;
       height: 26px;
       border: 2px solid $stroke-tertiary;
       border-radius: $border-radius-mid;
       background-image: none;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
       transition: all 0.1s ease-in-out;
+    }
+
+    .desc {
+      font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+      color: $text-secondary;
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 45ch;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     &:hover {
       color: $text-primary;
 
       &::before {
-        border: 2px solid $stroke-accent;
+        border-color: $stroke-accent;
       }
     }
 
-    &:active &::before {
-      border: 2px solid $stroke-accent;
+    &:active::before {
+      border-color: $stroke-accent;
     }
   }
 
   input[type='checkbox'] {
     @extend %visually-hidden;
 
-    &:checked + label::before {
-      border: 2px solid $stroke-accent;
-      background-color: $stroke-accent;
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIzSURBVHgBvZYxaBNhFMffe+ldqlMKghZBbyoGBFO36GLqpkOKq4JQdBMqTiJC7sDBrRZXBxc3LengaOwiVYR6iyg45BAqDkKDU9uY7/m9Lyam6V1yae76H5Lvu+9xP957/7t7CH2aePjxkmIoM6t5vXXgQEIfEXxltTxwi8Gek+7K/ZSjZrPCzHchQSHiE2VZGjzb+A/UMNxtvgXgAqQi9Nm2SgIl2Upm6cFEXGgzJEN33cFdqsMhiEmViJqZCiQsJ2eHXieVmSdOuJTOlA2123moXD6570yzyqR/EwXWbuV1hlm4OXss7NghSFBLV08ZWLC1A3PPvobGJAaUEi5eOGHWC6/qEDR2IDVgYfoIVObaPfPebMJa/Xdk7NhAMcnKjRmzXn73E7za5sD4SGBuMgNxtHJ9pts3r/ZjaHwoUPqxceds5PPUkZikMH20a5LG9h8YGSiZlfNTulTZfxYPhy5ePN41yb3X3yNNMhTY2G7BtRffzA2ioNK3pSunzVpMUv2yBXEVWtJOicKg5k2i96LnG7+GmiQWcBC01yRSylGF+OADDwpow84YiJgiNzlh/s8//Ry7b70a+hz2Ziow0cLL+oFgsYD90FFN0i9d0vf644tOnGApr8DHkE96qFmNGz0mTI8X6JMirsIhSamWR/CouIbAy5CyWBiPi4ExjbKzrs7Xh9SEPggDOi7V8yJbdimNTCWzzkxq0Psi7q87hOQywbkx5p1AG2RVUasqLes9+Avpc/A3WvIBkQAAAABJRU5ErkJggg==);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
+    &:checked + label {
+      border-color: $stroke-accent;
+      background-color: $color-shade-blue-10;
+
+      &::before {
+        border-color: $stroke-accent;
+        background-color: $stroke-accent;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAA...");
+      }
     }
   }
 }
@@ -65,58 +92,24 @@
       margin-bottom: 8px;
     }
 
+    @media (min-width: 744px) {
+      flex-direction: row;
+      align-items: center;
+    }
+
     label {
       width: 100%;
-      border: 2px solid $stroke-tertiary;
-      padding: 16px;
-      border-radius: $border-radius-mid;
-      position: relative;
-      background-color: $color-white;
-      transition: all 0.2s ease;
 
-      &::before {
-        position: absolute;
-        right: 16px;
-        top: 16px;
-      }
+      @media (max-width: 743px) {
+        padding-right: 48px;
 
-      &:hover {
-        border-color: $stroke-accent;
-        background-color: $bg-light-primary;
-        box-shadow: 0px 4px 8px rgba(22, 44, 69, 0.18);
-      }
-
-      &:active {
-        border-color: $stroke-accent;
+        &::before {
+          right: 12px;
+          bottom: 16px;
+          top: auto;
+          transform: translateY(0);
+        }
       }
     }
-
-    input[type='checkbox']:checked + label {
-      border-color: $stroke-accent;
-      background-color: $color-shade-blue-10;
-    }
-  }
-}
-
-/**********************************
-  Responsive Tweaks (Mobile First)
-**********************************/
-@media (min-width: 744px) {
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-@media (max-width: 743px) {
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper label {
-    padding-right: 48px;
-  }
-
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper label::before {
-    right: 12px;
-    top: auto;
-    bottom: 16px;
-    transform: translateY(0);
   }
 }

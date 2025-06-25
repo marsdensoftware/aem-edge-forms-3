@@ -210,15 +210,7 @@ main .form form .field-wrapper.field-invalid .field-description {
    Dark Blue Gradient background
 ------------------------------ */
 main.wizard--bg-dark {
-  // background: var(
-  //   --Gradient-Blue,
-  //   linear-gradient(
-  //     135deg,
-  //     var(--Brand-MSD-Blue, #017ac9) 25%,
-  //     var(--Brand-MSD-Navy, #134276) 100%
-  //   )
-  // );
-  color: var(--Text-Light, #fff);
+  color: $color-white;
 
   .text-wrapper,
   .number-wrapper,
@@ -259,12 +251,7 @@ main.wizard--bg-dark {
    Light Blue Gradient background
 ------------------------------ */
 main.wizard--bg-light {
-  // background: linear-gradient(
-  //   135deg,
-  //   var(--Shades-Blues-Blue-10, #e6f2fa) 25%,
-  //   var(--Shades-Blues-Blue-25, #bfdef1) 100%
-  // );
-  color: var(--Text-Dark, #333);
+  color: $text-primary;
 
   h1,
   h2,
@@ -291,12 +278,14 @@ main.wizard--bg-light {
   .straptitle {
     color: $text-secondary;
     font-family: $font-family;
-    font-size: 1rem;
     line-height: 1.6;
   }
 }
 
 // Background pattern and gradients
+
+
+
 main.wizard--bg-dark,
 main.wizard--bg-light {
   position: relative;
@@ -326,7 +315,7 @@ main.wizard--bg-light::before {
 @include media('tablet') {
   main.wizard--bg-dark::before,
   main.wizard--bg-light::before {
-    top: 100px;
+    top: 100px; // not sure about this just yet RW
     background-image: url('../../images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
     background-repeat: no-repeat;

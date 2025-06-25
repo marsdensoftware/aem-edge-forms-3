@@ -1,20 +1,10 @@
 export default function decorate(panel: Element) {
-  panel.classList.add('panel-formhero', 'container-xxl')
+  panel.classList.add('panel-formhero')
 
-  const childEls = panel.querySelectorAll(':scope > .field-wrapper')
+  const divs = panel.querySelectorAll(':scope>fieldset,:scope>div')
 
-  childEls[0].classList.add(
-    'panel-formhero__content',
-    'col-12',
-    'col-lg-5',
-    'offset-lg-2',
-  )
+  divs[0].classList.add('panel-formhero__content')
+  divs[1].classList.add('panel-formhero__picture')
 
-  childEls[1].classList.add('panel-formhero__picture', 'col-12', 'col-md-4')
-  const row = document.createElement('section')
-  row.classList.add('row', 'panel-formhero__inner')
-  row.append(childEls[0], childEls[1])
-
-  panel.appendChild(row)
   return panel
 }

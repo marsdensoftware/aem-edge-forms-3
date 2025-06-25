@@ -18,8 +18,8 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
     static PAID_WORK = '1';
 
-    constructor(repeatablePanel) {
-        super(repeatablePanel, 'workexperience');
+    constructor(el, properties) {
+        super(el, properties, 'workexperience');
     }
 
     _fieldToNameValues(entry) {
