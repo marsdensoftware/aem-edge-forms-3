@@ -44,8 +44,7 @@
   // First screen JSP
   .current-wizard-step:is(
       [data-index='0'],
-      [data-index='1'],
-      [data-index='4']
+      [data-index='1']
     ) {
     padding-top: $spacing-600;
     // Extra space at the bottom
@@ -68,8 +67,7 @@
   // data-index="0" = first screen
   .current-wizard-step:not(
       [data-index='0'],
-      [data-index='1'],
-      [data-index='4']
+      [data-index='1']
     ) {
     @include media('desktop') {
       padding: $spacing-600 0;
