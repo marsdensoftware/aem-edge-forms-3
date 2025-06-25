@@ -4,7 +4,7 @@ import { Summarizer } from './summarizer.js'
 export default function decorate(el, field) {
     const { summaryType } = field.properties;
 
-    el.classList.add(`summary--${summaryType}`);
+    el.classList.add('field-summary');
     el.dataset.summaryType = summaryType;
 
     onElementsAddedByClassName('wizard', (wizardEl) => {
