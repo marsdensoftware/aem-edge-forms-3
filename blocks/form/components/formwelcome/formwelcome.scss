@@ -1,7 +1,17 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  .panel-formwelcome {
+  .panel-formwelcome.current-wizard-step[data-index='1'] {
+    padding-left: $spacing-600;
+    padding-right: $spacing-600;
+
+    @include media('desktop') {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
     legend {
       display: none;
     }
@@ -36,7 +46,14 @@
           @include heading-level-1;
           padding-bottom: 0;
           margin-bottom: 0;
+          max-width: 458px;
         }
+      }
+    }
+
+    .panel-formwelcome__content-container {
+      @include media('desktop') {
+        width: 577px;
       }
     }
 

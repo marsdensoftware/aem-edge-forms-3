@@ -11,6 +11,7 @@
 
     @include media('desktop') {
       flex-direction: row;
+      justify-content: center;
       gap: $spacing-400 0;
     }
 
