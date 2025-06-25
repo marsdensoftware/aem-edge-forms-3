@@ -38,6 +38,16 @@
     }
 
     .panel-formwelcome__header {
+      max-width: 311px;
+
+      @include media('tablet') {
+        max-width: 358px;
+      }
+
+      @include media('desktop') {
+        max-width: 458px;
+      }
+
       * {
         @include heading-level-3;
         margin-bottom: $spacing-600;
