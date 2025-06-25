@@ -32,10 +32,11 @@
       height: 26px;
       border: 2px solid $stroke-tertiary;
       border-radius: $border-radius-mid;
+      background-color: transparent;
       background-image: none;
       background-repeat: no-repeat;
       background-position: center;
-      background-size: contain;
+      background-size: 60% 60%;
       transition: all 0.1s ease-in-out;
     }
 
@@ -74,7 +75,7 @@
       &::before {
         border-color: $stroke-accent;
         background-color: $stroke-accent;
-        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAA...");
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 13L9 17L19 7' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       }
     }
   }
