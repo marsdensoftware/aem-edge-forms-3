@@ -77,6 +77,14 @@
         content: url('../../../../icons/smiley-face.svg');
     }
 
+    .radio-group--with-icon--yes-language {
+        content: url('../../../../icons/icon-yes-language.svg');
+    }
+
+    .radio-group--with-icon--no-language {
+        content: url('../../../../icons/icon-no-language.svg');
+    }
+
     input[type='radio'] {
         &:checked {
             +.radio-group--with-icon__label {
