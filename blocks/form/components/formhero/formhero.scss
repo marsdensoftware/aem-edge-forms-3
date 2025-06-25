@@ -1,8 +1,19 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  .panel-formhero {
-    // margin-bottom: 60px;
+  // Temporary specificity
+  // Remove this as the grid component come in
+  .panel-formhero.current-wizard-step[data-index='0'] {
+    display: flex;
+    flex-direction: column;
+    padding-left: $spacing-600;
+    padding-right: $spacing-600;
+
+    @include media('desktop') {
+      flex-direction: row;
+      justify-content: center;
+      gap: $spacing-400 0;
+    }
 
     legend {
       display: none;
@@ -16,9 +27,11 @@
   }
   .panel-formhero__picture {
     margin-bottom: $spacing-600;
+    max-width: 311px;
 
     @include media('desktop') {
       margin-bottom: 0;
+      max-width: 458px;
     }
   }
 
@@ -38,6 +51,7 @@
 
     @include media('desktop') {
       order: 0;
+      max-width: 577px;
     }
   }
 }
