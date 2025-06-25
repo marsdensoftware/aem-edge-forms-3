@@ -1,6 +1,7 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo, fieldToNameValues } from '../../utils.js'
+import { isNo } from '../../utils.js'
+import { Summarizer } from '../../summary/summarizer.js'
 
 export class RepeatablePanel {
     #overview;
@@ -215,48 +216,11 @@ export class RepeatablePanel {
         });
     }
 
-    _fieldToNameValues(entry) {
-        return fieldToNameValues(entry);
-    }
-
-    #entryToReadableString(entry) {
-        const nameValues = this._fieldToNameValues(entry)
-        const entries = [];
-
-        Object.entries(nameValues).forEach(([name, data]) => {
-            const value = data.value;
-            const displayValue = data.displayValue;
-
-            if (value) {
-                const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
-                result.dataset.value = value;
-                result.dataset.name = name;
-                result.innerHTML = displayValue;
-
-                entries.push(result);
-            }
-
-            const values = data.values;
-            const displayValues = data.displayValues;
-            if (values) {
-                const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
-                result.dataset.values = values;
-                result.innerHTML = displayValues.join(', ');
-
-                entries.push(result);
-            }
-        });
-
-        return entries;
-    }
-
     _renderEntry(entry) {
-        const readable = this.#entryToReadableString(entry);
+        const readable = Summarizer.entryToReadableString(entry);
 
         const result = document.createElement('div');
-        result.classList.add('education-entry', 'repeatable-entry');
+        result.classList.add('repeatable-entry');
         result.dataset.id = entry.dataset.id;
 
         const editLink = document.createElement('a');
