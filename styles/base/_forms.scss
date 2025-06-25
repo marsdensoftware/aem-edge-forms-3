@@ -182,24 +182,8 @@ main .form form .field-wrapper.field-invalid .field-description {
     background-position: center;
     background-size: contain;
   }
-}
 
-// main.wizard--bg-dark {
-//   background: linear-gradient(135deg, #017ac9 25%, #134276 100%) !important;
-//   color: #fff;
-// }
 
-// main.wizard--bg-light {
-//   background: linear-gradient(135deg, #e6f2fa 25%, #bfdef1 100%) !important;
-//   color: #333;
-// }
-
-/*added this for responsive testing, need to use grids then can remove Rebecca*/
-.typography-wrapper,
-.default-content-wrapper {
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1200px; // $max-width-content
 
   // Fluid side padding: scales between 16px and 64px from mobile to desktop
   padding-left: clamp(1rem, 5vw, 4rem);
