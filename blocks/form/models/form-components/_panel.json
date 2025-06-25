@@ -29,7 +29,7 @@
                     "...": "../form-common/_basic-input-fields.json"
                 },
                 {
-                    "...": "../form-common/__basic-responsive-container.json"
+                    "...": "../form-common/_basic-responsive-container.json"
                 },
                 {
                     "component": "container",
