@@ -29,6 +29,9 @@
                     "...": "../form-common/_basic-input-fields.json"
                 },
                 {
+                    "...": "../form-common/__basic-responsive-container.json"
+                },
+                {
                     "component": "container",
                     "name": "repeat",
                     "label": "Repeat Panel",

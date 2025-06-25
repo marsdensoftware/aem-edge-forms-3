@@ -362,6 +362,10 @@ function colSpanDecorator(field, element) {
     xxl: field.properties?.['colspan-xxl-offset']
   };
 
+  // Get container classes from properties
+  const containerClass = field.properties?.container;
+  const rowClass = field.properties?.row;
+
   if (element) {
     // Add default colspan class if defined
     if (defaultColSpan) {
@@ -386,6 +390,16 @@ function colSpanDecorator(field, element) {
         element.classList.add(`offset-${size}-${value}`);
       }
     });
+
+    // Add container class if defined
+    if (containerClass) {
+      element.classList.add(containerClass);
+    }
+
+    // Add row class if defined
+    if (rowClass === true) {
+      element.classList.add('row');
+    }
   }
   // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
