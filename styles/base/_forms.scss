@@ -205,6 +205,49 @@ main .form form .field-wrapper.field-invalid .field-description {
   padding-left: clamp(1rem, 5vw, 4rem);
   padding-right: clamp(1rem, 5vw, 4rem);
 }
+/* ------------------------------
+   Light Blue Gradient background
+------------------------------ */
+main.wizard--bg-light {
+  color: $text-primary;
+
+  h1,
+  h2,
+  h3 {
+    color: $text-primary;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h4,
+  h5,
+  h6 {
+    color: $color-primary-navy;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  p,
+  .subtitle,
+  .straptitle {
+    color: $text-secondary;
+    font-family: $font-family;
+    line-height: 1.6;
+  }
+}
 
 /* ------------------------------
    Dark Blue Gradient background
@@ -233,52 +276,35 @@ main.wizard--bg-dark {
 
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  .subtitle {
+  h3 {
     color: $color-white;
     background: none;
-    -webkit-text-fill-color: $color-white;
     background-clip: unset;
     -webkit-background-clip: unset;
-  }
-}
-
-/* ------------------------------
-   Light Blue Gradient background
------------------------------- */
-main.wizard--bg-light {
-  color: $text-primary;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $text-primary;
+    -webkit-text-fill-color: $color-white;
     font-family: $font-family;
     margin-bottom: $spacing-600;
 
     &:last-child:not(:first-child) {
       margin-bottom: 0;
     }
+  }
 
-    background: $color-gradient-blue;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  h4,
+  h5,
+  h6 {
+    color: $color-white;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
   }
 
   p,
-  .subtitle,
-  .straptitle {
-    color: $text-secondary;
-    font-family: $font-family;
-    line-height: 1.6;
+  .subtitle {
+    color: $color-white;
   }
 }
 
