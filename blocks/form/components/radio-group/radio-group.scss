@@ -35,13 +35,15 @@
 
         .text {
             font-weight: 600;
-            font-size: 1rem;
+            /*font-size: 1rem;*/
+            font-size: $size-font-body-large;
             color: $text-primary;
-            /*margin-bottom: 0.25rem;*/ 
+            /*margin-bottom: 0.25rem;*/
         }
 
         .desc {
-            font-size: 0.875rem;
+            /*font-size: 0.875rem;*/
+            font-size:$size-font-body-default;
             color: $text-secondary;
             font-weight: 400;
             line-height: 1.4;
