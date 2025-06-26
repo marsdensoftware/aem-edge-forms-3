@@ -217,7 +217,7 @@ main.wizard--bg-light {
   h6 {
     color: $color-primary-navy;
     font-family: $font-family;
-    margin-bottom: $spacing-600;
+    margin-bottom: 0;
 
     &:last-child:not(:first-child) {
       margin-bottom: 0;
