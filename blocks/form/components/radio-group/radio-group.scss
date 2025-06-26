@@ -151,8 +151,8 @@
 .radio-group-wrapper.variant-bar {
     .radios-wrapper {
         display: flex;
-        border: 2px solid $stroke-tertiary;
-        border-radius: 999px;
+        border: none; // ✅ Removed outer border
+        border-radius: 0; // Just in case
         overflow: hidden;
 
         .radio-wrapper {
@@ -160,7 +160,7 @@
             position: relative;
 
             input[type='radio'] {
-                // Remove native circle completely
+                // ✅ Hide native input
                 position: absolute;
                 opacity: 0;
                 pointer-events: none;
@@ -180,7 +180,7 @@
                 transition: background-color 0.2s ease, color 0.2s ease;
                 min-height: 48px;
 
-                // ✅ Remove default pseudo-elements (like the radio circle)
+                // ✅ Remove default radio styles
                 &::before,
                 &::after {
                     display: none !important;
@@ -193,11 +193,18 @@
                 }
             }
 
+            // ✅ First pill – rounded left
             &:first-child label {
                 border-top-left-radius: 999px;
                 border-bottom-left-radius: 999px;
             }
 
+            // ✅ Middle pill – no radius
+            &:not(:first-child):not(:last-child) label {
+                border-radius: 0;
+            }
+
+            // ✅ Last pill – rounded right
             &:last-child {
                 label {
                     border-top-right-radius: 999px;
