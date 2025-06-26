@@ -2,8 +2,8 @@
 
 .wizard {
   .panel-formwelcome.current-wizard-step[data-index='1'] {
-    padding-left: $spacing-600;
-    padding-right: $spacing-600;
+    // padding-left: $spacing-600;
+    // padding-right: $spacing-600;
 
     @include media('desktop') {
       display: flex;

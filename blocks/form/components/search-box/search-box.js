@@ -220,9 +220,6 @@ document.addEventListener('input', (event) => {
         // Filter main datasource entries
         const filtered = entries.filter((entry) => entry.toLowerCase().includes(query) &&
             !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
-        // Filter recommendations datasource entries
-        const filteredRecommendations = recommendationsEntries.filter((entry) => entry.toLowerCase().includes(query) &&
-            !Array.from(recommendationsCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
         // Add suggestions from main datasource
         filtered.forEach((item) => {
             const div = document.createElement('div');
@@ -237,21 +234,7 @@ document.addEventListener('input', (event) => {
             });
             suggestionsDiv.appendChild(div);
         });
-        // Add suggestions from recommendations datasource
-        filteredRecommendations.forEach((item) => {
-            const div = document.createElement('div');
-            div.classList.add('suggestion');
-            div.textContent = item;
-            div.dataset.source = 'recommendations';
-            div.addEventListener('click', () => {
-                searchInput.value = '';
-                suggestionsDiv.innerHTML = '';
-                suggestionsDiv.style.display = 'none';
-                createSelectedCard(item, selectedCardsDiv, searchInput);
-            });
-            suggestionsDiv.appendChild(div);
-        });
-        if (filtered.length > 0 || filteredRecommendations.length > 0) {
+        if (filtered.length > 0) {
             suggestionsDiv.style.display = 'block';
         }
     }
