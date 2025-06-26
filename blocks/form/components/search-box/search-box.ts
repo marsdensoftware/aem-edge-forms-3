@@ -112,6 +112,16 @@ function createRecommendationCard(
     // Get the inner div with class 'selected-cards'
     const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv) as HTMLDivElement
     createSelectedCard(item, selectedCards, searchInput)
+
+    // Find the search-box element to replenish the recommendations list
+    const searchBox = recommendationsCardsDiv.closest('.search-box') as El
+    if (searchBox) {
+      const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
+      if (recommendationsWrapper) {
+        // Replenish the recommendations list
+        populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput)
+      }
+    }
   })
 
   card.appendChild(text)
@@ -354,8 +364,8 @@ function populateRecommendationsDiv(
       ),
   )
 
-  // Add up to 4 recommendations to the recommendations div
-  for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
+  // Add up to 8 recommendations to the recommendations div
+  for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
     createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl)
   }
 }
