@@ -7,9 +7,21 @@ main .form form .panel-repeatable-panel__languagepanel {
 }
 
 .field-panel-english-skills {
+  padding-bottom: 120px;
+
   // To combat specificity from other style
   [class*='field-wrapper'] {
-    h3 {
+    p.p-large p {
+      padding-bottom: 0;
+    }
+
+    > p {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3,
+    h4 {
       padding-bottom: 0;
       margin-bottom: $spacing-400;
 
@@ -21,6 +33,11 @@ main .form form .panel-repeatable-panel__languagepanel {
 
     legend.field-label {
       margin-bottom: $spacing-200;
+      font-size: 18px;
+
+      @include media('desktop') {
+        font-size: 20px;
+      }
     }
 
     label.field-label {
@@ -29,6 +46,110 @@ main .form form .panel-repeatable-panel__languagepanel {
 
     .checkbox-wrapper:not(:last-child) {
       margin-bottom: $spacing-200;
+    }
+  }
+
+  .checkbox-group-wrapper.field-cb-english-proficiency {
+    margin-top: 32px;
+    max-width: 457px;
+  }
+}
+
+.field-panel-other-languages {
+  padding-bottom: 120px;
+
+  [class*='field-wrapper'] {
+    p.p-large p {
+      padding-bottom: 0;
+    }
+
+    > p {
+      margin: 0;
+      padding: 0;
+
+      h3 {
+        padding-bottom: 0;
+        margin-bottom: $spacing-400;
+      }
+
+      p {
+        color: $text-dark-primary;
+        margin-bottom: $spacing-600;
+        font-size: 17px;
+
+        @include media('desktop') {
+          font-size: 20px;
+          margin-bottom: $spacing-650;
+        }
+      }
+
+      h6 {
+        font-size: 24px;
+        padding-bottom: 0;
+        margin-bottom: $spacing-600;
+
+        @include media('desktop') {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+
+  .field-languagepanel {
+    @include media('desktop') {
+      max-width: 664px;
+    }
+
+    .radio-group-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-400 0;
+      padding-bottom: 0;
+      margin-bottom: $spacing-700;
+
+      @include media('desktop') {
+        flex-direction: row;
+        gap: 0 $spacing-400;
+        margin-bottom: $spacing-800;
+      }
+    }
+
+    .field-description {
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        color: $text-dark-primary;
+        margin-bottom: 8px;
+        padding-bottom: 0;
+      }
+    }
+
+    .checkbox-wrapper {
+      label {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .field-languagepanel-options-content {
+    .panel-repeatable-panel {
+      .field-wrapper {
+        // margin-top: $spacing-600;
+        margin-bottom: $spacing-600;
+      }
+
+      [data-repeatable] {
+        .button-bar {
+          margin-top: $spacing-700;
+        }
+      }
+
+      .checkbox-wrapper {
+        label {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

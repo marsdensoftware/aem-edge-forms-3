@@ -69,6 +69,14 @@
     .radio-group--with-icon--no-education { content: url('../../../../icons/icon-no-education.svg'); }
     .radio-group--with-icon--yes-education { content: url('../../../../icons/icon-yes-education.svg'); }
 
+    .radio-group--with-icon--yes-language {
+        content: url('../../../../icons/icon-yes-language.svg');
+    }
+
+    .radio-group--with-icon--no-language {
+        content: url('../../../../icons/icon-no-language.svg');
+    }
+
     input[type='radio'] {
         &:checked + .radio-group--with-icon__label {
             background-color: $color-shade-blue-10;
