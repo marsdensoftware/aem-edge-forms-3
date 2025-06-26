@@ -148,11 +148,9 @@
   Horizontal Checkbox Variants
 ******************************/
 
-
 .radio-group-wrapper.variant-bar {
     .radios-wrapper {
         display: flex;
-        border-radius: 999px;
         overflow: hidden;
 
         .radio-wrapper {
@@ -170,16 +168,17 @@
                 align-items: center;
                 justify-content: center;
                 padding: $spacing-200 $spacing-400;
-                background-color: $color-white;
-                border-right: 1px solid $stroke-tertiary;
-                border-top: 2px solid $stroke-tertiary;
-                border-bottom: 2px solid $stroke-tertiary;
                 font-weight: 600;
                 font-size: 16px;
                 color: $text-primary;
                 cursor: pointer;
-                transition: background-color 0.2s ease, color 0.2s ease;
                 min-height: 48px;
+                transition: background-color 0.2s ease, color 0.2s ease;
+
+                background: var(--Background-Light-Primary, #fff);
+                border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
+                border-right: none;
+                border-radius: 0;
 
                 &::before,
                 &::after {
@@ -193,15 +192,14 @@
             }
 
             &:first-child label {
-                border-left: 2px solid $stroke-tertiary;
                 border-top-left-radius: var(--Corner-radius-Mid, 8px);
                 border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
             }
 
             &:last-child label {
-                border-right: 2px solid $stroke-tertiary;
                 border-top-right-radius: var(--Corner-radius-Mid, 8px);
                 border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
+                border-right: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
             }
 
             input[type='radio']:checked + label {
