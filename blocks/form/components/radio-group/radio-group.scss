@@ -147,12 +147,11 @@
 /******************************
   Horizontal Checkbox Variants
 ******************************/
-
 .radio-group-wrapper.variant-bar {
     .radios-wrapper {
         display: flex;
-        border: none; // ✅ Removed outer border
-        border-radius: 0; // Just in case
+        border: none; // ✅ Outer border removed
+        border-radius: 0;
         overflow: hidden;
 
         .radio-wrapper {
@@ -160,7 +159,6 @@
             position: relative;
 
             input[type='radio'] {
-                // ✅ Hide native input
                 position: absolute;
                 opacity: 0;
                 pointer-events: none;
@@ -171,8 +169,6 @@
                 align-items: center;
                 justify-content: center;
                 padding: $spacing-200 $spacing-400;
-                background-color: $color-white;
-                border-right: 1px solid $stroke-tertiary;
                 font-weight: 600;
                 font-size: 16px;
                 color: $text-primary;
@@ -180,7 +176,11 @@
                 transition: background-color 0.2s ease, color 0.2s ease;
                 min-height: 48px;
 
-                // ✅ Remove default radio styles
+                // ✅ Apply default style for all pills
+                border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
+                background: var(--Background-Light-Primary, #FFF);
+                border-radius: 0;
+
                 &::before,
                 &::after {
                     display: none !important;
@@ -193,24 +193,15 @@
                 }
             }
 
-            // ✅ First pill – rounded left
+            // ✅ First pill – rounded left side
             &:first-child label {
-                border-top-left-radius: 999px;
-                border-bottom-left-radius: 999px;
+                border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-None, 0px) var(--Corner-radius-None, 0px) var(--Corner-radius-Mid, 8px);
             }
 
-            // ✅ Middle pill – no radius
-            &:not(:first-child):not(:last-child) label {
-                border-radius: 0;
-            }
-
-            // ✅ Last pill – rounded right
-            &:last-child {
-                label {
-                    border-top-right-radius: 999px;
-                    border-bottom-right-radius: 999px;
-                    border-right: none;
-                }
+            // ✅ Last pill – rounded right side
+            &:last-child label {
+                border-radius: var(--Corner-radius-None, 0px) var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) var(--Corner-radius-None, 0px);
+                border-right: none;
             }
 
             input[type='radio']:checked + label {
