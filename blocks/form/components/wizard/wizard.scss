@@ -36,17 +36,14 @@
   .current-wizard-step {
     @include media('tablet') {
       @media (min-height: 921px) {
-        height: calc(100vh - $nav-height - $footer-height);
+        min-height: calc(100vh - $nav-height - $footer-height);
+        height: 100%;
       }
     }
   }
 
   // First screen JSP
-  .current-wizard-step:is(
-      [data-index='0'],
-      [data-index='1'],
-      [data-index='4']
-    ) {
+  .current-wizard-step:is([data-index='1'], [data-index='4']) {
     padding-top: $spacing-600;
     // Extra space at the bottom
     // Because of fix nav
@@ -65,11 +62,7 @@
 
   // Exclude current component being styled for Bootstrap
   // data-index="0" = first screen
-  .current-wizard-step:not(
-      [data-index='0'],
-      [data-index='1'],
-      [data-index='4']
-    ) {
+  .current-wizard-step:not([data-index='1'], [data-index='4']) {
     @include media('desktop') {
       padding: $spacing-600 0;
       margin: 32px auto;
