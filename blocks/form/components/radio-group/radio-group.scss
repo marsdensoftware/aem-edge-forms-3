@@ -157,24 +157,35 @@
 
         .radio-wrapper {
             flex: 1;
+            position: relative;
 
             input[type='radio'] {
-                // Visually hide the radio input
+                // Remove native circle completely
                 position: absolute;
                 opacity: 0;
                 pointer-events: none;
             }
 
             label {
-                display: block;
-                padding: $spacing-400;
-                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: $spacing-200 $spacing-400;
                 background-color: $color-white;
                 border-right: 1px solid $stroke-tertiary;
                 font-weight: 600;
+                font-size: 16px;
                 color: $text-primary;
                 cursor: pointer;
                 transition: background-color 0.2s ease, color 0.2s ease;
+                min-height: 48px;
+
+                // ✅ Remove default pseudo-elements (like the radio circle)
+                &::before,
+                &::after {
+                    display: none !important;
+                    content: none !important;
+                }
 
                 &:hover {
                     background-color: $bg-dark;
@@ -182,18 +193,17 @@
                 }
             }
 
-            &:last-child label {
-                border-right: none;
-            }
-
             &:first-child label {
                 border-top-left-radius: 999px;
                 border-bottom-left-radius: 999px;
             }
 
-            &:last-child label {
-                border-top-right-radius: 999px;
-                border-bottom-right-radius: 999px;
+            &:last-child {
+                label {
+                    border-top-right-radius: 999px;
+                    border-bottom-right-radius: 999px;
+                    border-right: none;
+                }
             }
 
             input[type='radio']:checked + label {
