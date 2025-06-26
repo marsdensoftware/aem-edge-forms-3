@@ -3,11 +3,11 @@
 .wizard {
   // Temporary specificity
   // Remove this as the grid component come in
-  .panel-formhero.current-wizard-step[data-index='0'] {
+  .panel-formhero.current-wizard-step {
     display: flex;
     flex-direction: column;
-    padding-left: $spacing-600;
-    padding-right: $spacing-600;
+    // padding-left: $spacing-600;
+    // padding-right: $spacing-600;
 
     @include media('desktop') {
       flex-direction: row;
