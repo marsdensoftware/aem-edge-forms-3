@@ -80,6 +80,15 @@ function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDi
         // Get the inner div with class 'selected-cards'
         const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv);
         createSelectedCard(item, selectedCards, searchInput);
+        // Find the search-box element to replenish the recommendations list
+        const searchBox = recommendationsCardsDiv.closest('.search-box');
+        if (searchBox) {
+            const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper');
+            if (recommendationsWrapper) {
+                // Replenish the recommendations list
+                populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput);
+            }
+        }
     });
     card.appendChild(text);
     recommendationsCardsDiv.appendChild(card);
@@ -261,8 +270,8 @@ function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCa
     // Check if selectedCardsDiv is the wrapper div or the inner div
     const selectedCards = selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv;
     const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
-    // Add up to 4 recommendations to the recommendations div
-    for (let i = 0; i < 4 && i < availableRecommendations.length; i++) {
+    // Add up to 8 recommendations to the recommendations div
+    for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
     }
 }
