@@ -37,6 +37,10 @@ $size-font-body-large:   clamp(17px, 1.5vw, 20px); // 17 → 18 → 20
 $size-font-body-default: clamp(15px, 1.25vw, 17px); // 15 → 16 → 17
 $size-font-body-small:   clamp(12px, 1.1vw, 14px); // 12 → 13 → 14
 
+// Labels
+$size-font-label-title: clamp(17px, 1.5vw, 20px); // 17 → 18 → 20
+$size-font-label-subtitle: clamp(15px, 1.25vw, 17px); // 15 → 16 → 17
+
 // Mixins
 @mixin heading-level-1 {
   font-size: $size-font-h1;
