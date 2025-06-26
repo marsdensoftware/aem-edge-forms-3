@@ -31,35 +31,36 @@ main .form:not(.edit-mode) {
       align-items: center;
       list-style: none;
       cursor: pointer;
-      border: 1px solid transparent;
       background: transparent;
-      border-radius: 8px 8px 0 0;
+      border: none;
+      border-bottom: 2px solid var(--Shades-Blues-Blue-25, #BFDEF1);
+      border-radius: 0;
       transition: all 0.2s ease;
+      font-weight: 500;
+      color: var(--Text-Dark-Accent, #017AC9);
 
       &:not(:last-child) {
         margin-right: $spacing-200;
       }
+
+      &:hover {
+        color: var(--Text-Dark-Dark, #134276);
+        border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) 0 0;
+        border-bottom: 2px solid var(--Stroke-Accent, #017AC9);
+      }
     }
 
     > .navitems > li.navitem-current {
-      background: linear-gradient(
-                      180deg,
-                      var(--Shades-Blues-Blue-25, #BFDEF1) 0%,
-                      var(--Shades-Blues-Blue-10, #E6F2FA) 100%
-      );
-      border: 1px solid var(--Shades-Blues-Blue-25, #BFDEF1);
-      border-bottom: none;
-      border-top-left-radius: var(--Mid, 8px);
-      border-top-right-radius: var(--Mid, 8px);
+      color: var(--Text-Dark-Dark, #134276);
+      border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) 0 0;
+      border-bottom: 2px solid var(--Stroke-Accent, #017AC9);
       font-weight: bold;
     }
 
     > fieldset.formtab.formtab-current {
       display: block;
-      background: var(--Shades-Blues-Blue-10, #E6F2FA);
-      border: 1px solid var(--Shades-Blues-Blue-25, #BFDEF1);
-      border-top: none;
-      border-radius: 0 var(--Mid, 8px) var(--Mid, 8px) var(--Mid, 8px);
+      background: transparent;
+      border: none;
       padding: $spacing-500 $spacing-400;
     }
   }
