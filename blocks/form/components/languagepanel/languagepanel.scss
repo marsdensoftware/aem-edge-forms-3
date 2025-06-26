@@ -7,7 +7,7 @@ main .form form .panel-repeatable-panel__languagepanel {
 }
 
 .field-panel-english-skills {
-  padding: $spacing-600 $spacing-600 120px;
+  padding: $spacing-600 $spacing-400 120px;
 
   // To combat specificity from other style
   [class*='field-wrapper'] {
@@ -55,9 +55,13 @@ main .form form .panel-repeatable-panel__languagepanel {
 }
 
 .field-panel-other-languages {
-  padding: $spacing-600 $spacing-600 $spacing-700;
+  padding: $spacing-600 $spacing-400 120px;
 
   [class*='field-wrapper'] {
+    p.p-large p {
+      padding-bottom: 0;
+    }
+
     > p {
       margin: 0;
       padding: 0;
@@ -91,6 +95,10 @@ main .form form .panel-repeatable-panel__languagepanel {
   }
 
   .field-languagepanel {
+    @include media('desktop') {
+      max-width: 664px;
+    }
+
     .radio-group-wrapper {
       display: flex;
       flex-direction: column;
@@ -111,6 +119,7 @@ main .form form .panel-repeatable-panel__languagepanel {
         font-weight: 500;
         color: $text-dark-primary;
         margin-bottom: 8px;
+        padding-bottom: 0;
       }
     }
 
@@ -124,6 +133,7 @@ main .form form .panel-repeatable-panel__languagepanel {
   .field-languagepanel-options-content {
     .panel-repeatable-panel {
       .field-wrapper {
+        margin-top: $spacing-600;
         margin-bottom: 0;
       }
 
