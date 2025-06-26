@@ -142,3 +142,63 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+
+/******************************
+  Horizontal Checkbox Variants
+******************************/
+
+
+
+.radio-group-wrapper.variant-bar {
+    .radios-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        border: 1px solid $stroke-tertiary;
+        @include border-radius-pill;
+        overflow: hidden;
+        background-color: $color-white;
+    }
+
+    .radio-wrapper {
+        flex: 1;
+
+        input[type='radio'] {
+            @extend %visually-hidden;
+
+            &:checked + label {
+                background-color: $color-primary;
+                color: $color-white;
+            }
+        }
+
+        label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: $spacing-400;
+            font-weight: 500;
+            font-size: 1rem;
+            border-right: 1px solid $stroke-tertiary;
+            background-color: $color-white;
+            color: $text-primary;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        &:last-child label {
+            border-right: none;
+        }
+    }
+}
+%visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+

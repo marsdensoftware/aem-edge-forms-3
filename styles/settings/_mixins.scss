@@ -142,12 +142,6 @@
 }
 
 // Checkbox Variant Pills
-@mixin border-radius-pill-left {
-  border-top-left-radius: 9999px;
-  border-bottom-left-radius: 9999px;
-}
-
-@mixin border-radius-pill-right {
-  border-top-right-radius: 9999px;
-  border-bottom-right-radius: 9999px;
+@mixin border-radius-pill {
+  border-radius: 9999px;
 }
