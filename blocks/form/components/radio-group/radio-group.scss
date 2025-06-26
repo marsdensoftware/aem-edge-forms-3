@@ -147,11 +147,12 @@
 /******************************
   Horizontal Checkbox Variants
 ******************************/
+
+
 .radio-group-wrapper.variant-bar {
     .radios-wrapper {
         display: flex;
-        border: none; // ✅ Outer border removed
-        border-radius: 0;
+        border-radius: 999px;
         overflow: hidden;
 
         .radio-wrapper {
@@ -169,6 +170,10 @@
                 align-items: center;
                 justify-content: center;
                 padding: $spacing-200 $spacing-400;
+                background-color: $color-white;
+                border-right: 1px solid $stroke-tertiary;
+                border-top: 2px solid $stroke-tertiary;
+                border-bottom: 2px solid $stroke-tertiary;
                 font-weight: 600;
                 font-size: 16px;
                 color: $text-primary;
@@ -176,15 +181,9 @@
                 transition: background-color 0.2s ease, color 0.2s ease;
                 min-height: 48px;
 
-                // ✅ Apply default style for all pills
-                border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
-                background: var(--Background-Light-Primary, #FFF);
-                border-radius: 0;
-
                 &::before,
                 &::after {
                     display: none !important;
-                    content: none !important;
                 }
 
                 &:hover {
@@ -193,19 +192,21 @@
                 }
             }
 
-            // ✅ First pill – rounded left side
             &:first-child label {
-                border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-None, 0px) var(--Corner-radius-None, 0px) var(--Corner-radius-Mid, 8px);
+                border-left: 2px solid $stroke-tertiary;
+                border-top-left-radius: var(--Corner-radius-Mid, 8px);
+                border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
             }
 
-            // ✅ Last pill – rounded right side
             &:last-child label {
-                border-radius: var(--Corner-radius-None, 0px) var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) var(--Corner-radius-None, 0px);
-                border-right: none;
+                border-right: 2px solid $stroke-tertiary;
+                border-top-right-radius: var(--Corner-radius-Mid, 8px);
+                border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
             }
 
             input[type='radio']:checked + label {
                 background-color: $bg-dark;
+                border-color: $bg-dark;
                 color: $color-white;
             }
         }
