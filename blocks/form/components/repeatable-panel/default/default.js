@@ -2,7 +2,10 @@ import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 import { isNo } from '../../utils.js'
 import { Summarizer } from '../../summary/summarizer.js'
-
+import { FIELD_NAMES as WorkExperienceFieldNames } from '../../workexperience/fieldnames.js';
+import { FIELD_NAMES as EducationFieldNames } from '../../education/fieldnames.js';
+import { i18n } from '../../../../../i18n/index.js';
+import { getDurationString } from '../../utils.js'
 
 class WorkExperienceConverter {
     static canProcess(element) {

@@ -48,6 +48,11 @@ class DefaultFieldConverter {
                     result[name] = { 'value': value, 'displayValue': displayValue };
                 }
             }
+            else {
+                if (type === 'checkbox' || type === 'radio') {
+                    alert(`Name: ${name}, Value: ${value}`);
+                }
+            }
         });
 
         return result;
@@ -62,44 +67,28 @@ class WorkExperienceConverter {
     static process(element, result) {
 
         // Customize rendering for completion-year, completion status
-        const startMonth = result[WorkExperienceFieldNames.START_OF_WORK_MONTH]?.value;
-        if (!startMonth) {
-            return result;
-        }
         const stillWorking = result[WorkExperienceFieldNames.STILL_WORKING];
         const startYear = result[WorkExperienceFieldNames.START_OF_WORK_YEAR].value;
-        let endMonth;
+        let employmentDetails = result[WorkExperienceFieldNames.EMPLOYER_NAME].displayValue;
+
         let endYear;
-        let workperiod = `${result[WorkExperienceFieldNames.START_OF_WORK_MONTH].displayValue} ${result[WorkExperienceFieldNames.START_OF_WORK_YEAR].displayValue}`;
-        let endofwork;
         if (stillWorking.value == '0') {
             // No longer working
-            endofwork = `${result[WorkExperienceFieldNames.END_OF_WORK_MONTH].displayValue} ${result[WorkExperienceFieldNames.END_OF_WORK_YEAR].displayValue}`;
-            endMonth = result[WorkExperienceFieldNames.END_OF_WORK_MONTH].value;
             endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
+            employmentDetails += `, ${startYear} - ${endYear}`;
         }
         else {
             // Still working
-            const now = new Date();
-
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth() + 1;
-
-            endofwork = i18n('present');
-            endMonth = currentMonth;
-            endYear = currentYear;
+            employmentDetails += `, ${i18n('Started')} ${startYear}`;
         }
-
-        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
 
         const newResult = {};
         newResult[WorkExperienceFieldNames.JOB_TITLE] = result[WorkExperienceFieldNames.JOB_TITLE];
-        newResult[WorkExperienceFieldNames.EMPLOYER_NAME] = result[WorkExperienceFieldNames.EMPLOYER_NAME];
-        if (result[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE].value != WorkExperienceFieldNames.PAID_WORK) {
-            // Not paid work
-            newResult[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE] = result[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE];
-        }
-        newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+        newResult.employmentDetails = {
+            value: employmentDetails,
+            displayValue: employmentDetails
+        };
+        newResult[WorkExperienceFieldNames.DESCRIPTION] = result[WorkExperienceFieldNames.DESCRIPTION];
 
         return newResult;
     }
@@ -111,19 +100,27 @@ class EducationConverter {
     }
 
     static process(element, result) {
+        const newResult = {};
+
+        newResult[EducationFieldNames.COURSE] = result[EducationFieldNames.COURSE];
+        let summary = result[EducationFieldNames.PLACE_OF_LEARNING].displayValue;
+        const startYear = result[EducationFieldNames.START_YEAR];
+
         // Customize rendering for completion-year, completion status
         const completionStatus = result[EducationFieldNames.COMPLETION_STATUS];
         if (completionStatus?.value == '0') {
             // Completed
-            const year = result[EducationFieldNames.FINISH_YEAR];
-            completionStatus.displayValue += ` ${year.displayValue}`;
+            const endYear = result[EducationFieldNames.FINISH_YEAR];
+            summary += `, ${i18n('Finished')} ${endYear.displayValue}`;
+        }
+        else {
+            // Partially completed
+            summary += `, ${i18n('Started')} ${startYear.displayValue}, ${i18n('Partially complete')}.`
         }
 
-        // Delete start and finish
-        delete result[EducationFieldNames.FINISH_YEAR];
-        delete result[EducationFieldNames.START_YEAR];
+        newResult.summary = { value: summary, displayValue: summary };
 
-        return result;
+        return newResult;
     }
 }
 
@@ -168,14 +165,16 @@ export class Summarizer {
         return entries;
     }
 
-    static fieldToNameValues(element) {
+    static fieldToNameValues(element, fieldConverters) {
         let result = DefaultFieldConverter.process(element);
-        // Apply converters
-        Summarizer.fieldConverters.forEach(fieldConverter => {
-            if (fieldConverter.canProcess(element, result)) {
-                result = fieldConverter.process(element, result);
-            }
-        });
+        // Apply converters if any
+        if (fieldConverters) {
+            fieldConverters.forEach(fieldConverter => {
+                if (fieldConverter.canProcess(element, result)) {
+                    result = fieldConverter.process(element, result);
+                }
+            });
+        }
 
         return result;
     }
@@ -194,7 +193,7 @@ export class Summarizer {
     <div class="row item">
         <div class="col-md-11">
             <p><b>{{title}}</b></p>
-            <p>{{content}}</p>
+            {{content}}
         </div>
         <div class="col-md-1">
             <div class="edit"><i></i><span>${i18n('Edit')}</span></div>
@@ -203,12 +202,7 @@ export class Summarizer {
     `;
 
     static itemContentTemplate = `
-    <div class="row item">
-        <div>
-            <p><b>{{title}}</b></p>
-            <p>{{content}}</p>
-        </div>
-    </div>
+    <div class="row item">{{content}}</div>
     `;
 
     static replace(template, params) {
@@ -296,9 +290,9 @@ export class Summarizer {
         el.innerHTML = `
             <h2>${fullname}</h2>
             <div class="row">
-                <div class="col-md-2 address"><i></i><span>${address}</span></div>
+                <div class="col-md-4 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
-                <div class="col-md-2 email"><i></i><span>${email}</span></div>
+                <div class="col-md-3 email"><i></i><span>${email}</span></div>
                 <div class="col-md-2 edit"><i></i><span>${i18n('Edit')}</span></div>
             </div>
         `;
