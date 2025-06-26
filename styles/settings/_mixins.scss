@@ -140,3 +140,8 @@
     padding-bottom: $desktop;
   }
 }
+
+// Checkbox Variant Pills
+@mixin border-radius-pill {
+  border-radius: 9999px;
+}
