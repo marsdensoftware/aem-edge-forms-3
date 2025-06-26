@@ -7,9 +7,14 @@ main .form form .panel-repeatable-panel__languagepanel {
 }
 
 .field-panel-english-skills {
-  padding-top: $spacing-600;
+  padding: $spacing-600 $spacing-600 120px;
+
   // To combat specificity from other style
   [class*='field-wrapper'] {
+    p.p-large p {
+      padding-bottom: 0;
+    }
+
     > p {
       margin: 0;
       padding: 0;
@@ -27,6 +32,11 @@ main .form form .panel-repeatable-panel__languagepanel {
 
     legend.field-label {
       margin-bottom: $spacing-200;
+      font-size: 18px;
+
+      @include media('desktop') {
+        font-size: 20px;
+      }
     }
 
     label.field-label {
@@ -37,10 +47,15 @@ main .form form .panel-repeatable-panel__languagepanel {
       margin-bottom: $spacing-200;
     }
   }
+
+  .checkbox-group-wrapper.field-cb-english-proficiency {
+    margin-top: 32px;
+    max-width: 457px;
+  }
 }
 
 .field-panel-other-languages {
-  padding-top: $spacing-600;
+  padding: $spacing-600 $spacing-600 $spacing-700;
 
   [class*='field-wrapper'] {
     > p {
@@ -89,6 +104,21 @@ main .form form .panel-repeatable-panel__languagepanel {
         margin-bottom: $spacing-800;
       }
     }
+
+    .field-description {
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        color: $text-dark-primary;
+        margin-bottom: 8px;
+      }
+    }
+
+    .checkbox-wrapper {
+      label {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .field-languagepanel-options-content {
@@ -100,6 +130,12 @@ main .form form .panel-repeatable-panel__languagepanel {
       [data-repeatable] {
         .button-bar {
           margin-top: $spacing-700;
+        }
+      }
+
+      .checkbox-wrapper {
+        label {
+          margin-bottom: 0;
         }
       }
     }

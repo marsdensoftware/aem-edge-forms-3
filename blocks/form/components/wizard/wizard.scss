@@ -17,7 +17,7 @@
 
 .wizard--bg-light {
   .wizard {
-    min-height: 80vh;
+    min-height: calc(100vh - $nav-height - $footer-height);
     background: linear-gradient(
       135deg,
       $color-shade-blue-10 25%,
@@ -36,16 +36,14 @@
   .current-wizard-step {
     @include media('tablet') {
       @media (min-height: 921px) {
-        height: calc(100vh - $nav-height - $footer-height);
+        height: 100%;
+        min-height: calc(100vh - $nav-height - $footer-height);
       }
     }
   }
 
   // First screen JSP
-  .current-wizard-step:is(
-      [data-index='0'],
-      [data-index='1']
-    ) {
+  .current-wizard-step:is([data-index='0'], [data-index='1']) {
     padding-top: $spacing-600;
     // Extra space at the bottom
     // Because of fix nav
@@ -64,10 +62,7 @@
 
   // Exclude current component being styled for Bootstrap
   // data-index="0" = first screen
-  .current-wizard-step:not(
-      [data-index='0'],
-      [data-index='1']
-    ) {
+  .current-wizard-step:not([data-index='0'], [data-index='1']) {
     @include media('desktop') {
       padding: $spacing-600 0;
       margin: 32px auto;
