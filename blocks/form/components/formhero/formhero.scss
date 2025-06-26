@@ -6,8 +6,8 @@
   .panel-formhero.current-wizard-step {
     display: flex;
     flex-direction: column;
-    padding-left: $spacing-600;
-    padding-right: $spacing-600;
+    // padding-left: $spacing-600;
+    // padding-right: $spacing-600;
 
     @include media('desktop') {
       flex-direction: row;
