@@ -8,7 +8,7 @@
     padding-bottom: $spacing-600;
 
     .radio-wrapper {
-        flex: 1 1 45%; // Ensures equal width tiles, and stays side by side on mobile RW
+        flex: 1 1 45%;
         display: flex;
     }
 
@@ -18,13 +18,12 @@
         border-radius: $spacing-200;
         border: $stroke-input-stroke solid $stroke-tertiary;
         background: $bg-light-primary;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         min-height: 140px;
-        gap: 20px 0;
+        gap: $spacing-300;
         transition: all 0.2s ease;
 
         &::before {
@@ -32,16 +31,22 @@
             margin-right: 0;
         }
 
-        >span:not(.radio-group--with-icon__icon) {
-            height: 4.5rem;
-            line-height: 1.5;
+        .text {
+            font-weight: 600;
+            font-size: $size-font-body-large;
+            color: $text-primary;
+        }
+
+        .desc {
+            font-size: $size-font-body-default;
+            color: $text-secondary;
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 45ch;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
         }
     }
 
@@ -53,43 +58,28 @@
         background-repeat: no-repeat;
     }
 
-    .radio-group--with-icon--car-off {
-        content: url('../../../../icons/icon-car-off.svg');
-    }
-
-    .radio-group--with-icon--car-on {
-        content: url('../../../../icons/icon-car-on.svg');
-    }
-    
-    .radio-group--with-icon--full-time {
-        content: url('../../../../icons/icon-full-time.svg');
-    }
-
-    .radio-group--with-icon--part-time {
-        content: url('../../../../icons/icon-part-time.svg');
-    }
-
-    .radio-group--with-icon--list-search-1 {
-        content: url('../../../../icons/icon-streamline.svg');
-    }
-
-    .radio-group--with-icon--smiley-face {
-        content: url('../../../../icons/smiley-face.svg');
-    }
+    .radio-group--with-icon--car-off     { content: url('../../../../icons/icon-car-off.svg'); }
+    .radio-group--with-icon--car-on      { content: url('../../../../icons/icon-car-on.svg'); }
+    .radio-group--with-icon--full-time   { content: url('../../../../icons/icon-full-time.svg'); }
+    .radio-group--with-icon--part-time   { content: url('../../../../icons/icon-part-time.svg'); }
+    .radio-group--with-icon--list-search-1 { content: url('../../../../icons/icon-streamline.svg'); }
+    .radio-group--with-icon--smiley-face { content: url('../../../../icons/smiley-face.svg'); }
+    .radio-group--with-icon--no-language { content: url('../../../../icons/icon-no-language.svg'); }
+    .radio-group--with-icon--yes-language { content: url('../../../../icons/icon-yes-language.svg'); }
+    .radio-group--with-icon--no-education { content: url('../../../../icons/icon-no-education.svg'); }
+    .radio-group--with-icon--yes-education { content: url('../../../../icons/icon-yes-education.svg'); }
 
     input[type='radio'] {
-        &:checked {
-            +.radio-group--with-icon__label {
-                background-color: $color-shade-blue-10;
-                border: 2px solid $color-primary;
-                color: $text-dark-primary;
+        &:checked + .radio-group--with-icon__label {
+            background-color: $color-shade-blue-10;
+            border: 2px solid $color-primary;
+            color: $text-dark-primary;
 
-                &:after {
-                    left: auto;
-                    top: auto;
-                    bottom: $spacing-400 + 1px;
-                    margin: 0 auto;
-                }
+            &:after {
+                left: auto;
+                top: auto;
+                bottom: $spacing-400 + 1px;
+                margin: 0 auto;
             }
         }
     }
@@ -101,12 +91,11 @@
         flex-direction: column;
 
         label {
-            padding: 16px;
+            padding: $spacing-400;
             border-radius: $border-radius-mid;
             border: 2px solid $color-shade-navy-45;
             width: 100%;
-            margin: 0;
-            margin-bottom: 8px;
+            margin: 0 0 $spacing-200 0;
             justify-content: space-between;
             transition: all 0.2s ease;
 
@@ -116,19 +105,15 @@
             }
         }
 
-        input {
-            &:checked {
-                +label {
-                    border: 2px solid $stroke-accent;
-                    background-color: $color-white;
-                    color: $text-dark-primary;
+        input:checked + label {
+            border: 2px solid $stroke-accent;
+            background-color: $color-white;
+            color: $text-dark-primary;
 
-                    &::after {
-                        right: 17px;
-                        top: 17px;
-                        left: auto;
-                    }
-                }
+            &::after {
+                right: 17px;
+                top: 17px;
+                left: auto;
             }
         }
     }
@@ -141,7 +126,19 @@
             .radio-wrapper {
                 flex: 1;
             }
-
         }
     }
+}
+
+// Shared .desc style for checkboxes and other label-based inputs
+.checkbox-wrapper .field-label--with-description .desc {
+    font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+    color: $text-secondary;
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: 45ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

@@ -6,6 +6,7 @@
 
 .wizard--bg-dark {
   .wizard {
+    min-height: 80vh;
     background: linear-gradient(
       135deg,
       $color-accent 25%,
@@ -13,12 +14,6 @@
     );
   }
 }
-
-/*main.wizard--bg-light {
-  min-height: 100vh; // ensures it fills at least the full viewport
-  display: flex;
-  flex-direction: column;
-}*/
 
 .wizard--bg-light {
   .wizard {
@@ -62,7 +57,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        // align-items: center;
         padding-top: 96px;
         padding-bottom: 128px;
       }
