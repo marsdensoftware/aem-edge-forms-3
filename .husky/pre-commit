@@ -1,1 +1,28 @@
+#!/bin/sh
+#. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running accessibility checks..."
+
+# Run your accessibility script (assumes you've defined it in package.json)
+npm run accessibility
+
+# Check if it passed
+if [ $? -ne 0 ]; then
+  echo "❌ Accessibility check failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ Accessibility check passed."
+
+  npm run validate-html
+
+  if [ $? -ne 0 ]; then
+    echo "❌ HTML validation failed. Commit aborted."
+    exit 1
+  fi
+
+  echo "✅ HTML validation passed. Proceeding with commit."
+
+
 node .husky/pre-commit.mjs
+
