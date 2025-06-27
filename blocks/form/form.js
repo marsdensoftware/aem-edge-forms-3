@@ -339,69 +339,10 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES
-  // Get the default colspan
-  const defaultColSpan = field['Column Span'] || field.properties?.colspan;
-  const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
-
-  // Get responsive colspans from properties
-  const responsiveColSpans = {
-    sm: field.properties?.['colspan-sm'],
-    md: field.properties?.['colspan-md'],
-    lg: field.properties?.['colspan-lg'],
-    xl: field.properties?.['colspan-xl'],
-    xxl: field.properties?.['colspan-xxl']
-  };
-
-  // Get responsive offsets from properties
-  const responsiveOffsets = {
-    sm: field.properties?.['colspan-sm-offset'],
-    md: field.properties?.['colspan-md-offset'],
-    lg: field.properties?.['colspan-lg-offset'],
-    xl: field.properties?.['colspan-xl-offset'],
-    xxl: field.properties?.['colspan-xxl-offset']
-  };
-
-  // Get container classes from properties
-  const containerClass = field.properties?.container;
-  const rowClass = field.properties?.row;
-
-  if (element) {
-    // Add default colspan class if defined
-    if (defaultColSpan) {
-      element.classList.add(`col-${defaultColSpan}`);
-    }
-
-    //set a default offset - ideally, we should delete the value from the jcr
-    if (defaultOffset) {
-      element.classList.add(`offset-${defaultOffset}`);
-    }
-
-    // Add responsive colspan classes if defined
-    Object.entries(responsiveColSpans).forEach(([size, value]) => {
-      if (value) {
-        element.classList.add(`col-${size}-${value}`);
-      }
-    });
-
-    // Add responsive offset classes if defined
-    Object.entries(responsiveOffsets).forEach(([size, value]) => {
-      if (value) {
-        element.classList.add(`offset-${size}-${value}`);
-      }
-    });
-
-    // Add container class if defined
-    if (containerClass) {
-      element.classList.add(containerClass);
-    }
-
-    // Add row class if defined
-    if (rowClass === true) {
-      element.classList.add('row');
-    }
+  const colSpan = field['Column Span'] || field.properties?.colspan;
+  if (colSpan && element) {
+    element.classList.add(`col-${colSpan}`);
   }
-  // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
 
 
