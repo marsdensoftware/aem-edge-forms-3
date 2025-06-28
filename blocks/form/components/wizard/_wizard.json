@@ -40,7 +40,7 @@
           "...": "../../models/form-common/_basic-input-fields.json"
         },
         {
-          "...": "../../models/form-common/_basic-responsive-container.json"
+          "...": "../../models/form-common/_responsive-container-component.json"
         },
         {
         "...": "../../models/form-common/_help-container.json"
