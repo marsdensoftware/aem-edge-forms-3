@@ -370,7 +370,7 @@ function colSpanDecorator(field, element) {
   if (element) {
     // Add default colspan class if defined
     if (defaultColSpan) {
-      element.classList.add(`col-${defaultColSpan}`);
+      element.classList.add(`col${defaultColSpan === 'split' ? '' : `-${defaultColSpan}`}`);
     }
 
     //set a default offset - ideally, we should delete the value from the jcr
@@ -381,7 +381,7 @@ function colSpanDecorator(field, element) {
     // Add responsive colspan classes if defined
     Object.entries(responsiveColSpans).forEach(([size, value]) => {
       if (value) {
-        element.classList.add(`col-${size}-${value}`);
+        element.classList.add(`col-${size}${value === 'split' ? '' : `-${value}`}`);
       }
     });
 

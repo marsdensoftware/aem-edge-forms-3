@@ -418,6 +418,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -478,10 +482,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -540,6 +540,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -666,6 +670,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -788,6 +796,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -914,6 +926,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -1036,6 +1052,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -1367,6 +1387,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -1427,10 +1451,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -1489,6 +1509,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -1615,6 +1639,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -1737,6 +1765,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -1863,6 +1895,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -1985,6 +2021,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -2274,6 +2314,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -2334,10 +2378,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -2396,6 +2436,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -2522,6 +2566,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -2644,6 +2692,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -2770,6 +2822,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -2892,6 +2948,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -3155,6 +3215,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -3215,10 +3279,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -3277,6 +3337,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -3403,6 +3467,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -3525,6 +3593,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -3651,6 +3723,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -3773,6 +3849,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -4171,6 +4251,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -4231,10 +4315,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -4293,6 +4373,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -4419,6 +4503,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -4541,6 +4629,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -4667,6 +4759,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -4789,6 +4885,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -5052,6 +5152,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -5112,10 +5216,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -5174,6 +5274,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -5300,6 +5404,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -5422,6 +5530,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -5548,6 +5660,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -5670,6 +5786,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -5975,6 +6095,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -6035,10 +6159,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -6097,6 +6217,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -6223,6 +6347,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -6345,6 +6473,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -6471,6 +6603,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -6593,6 +6729,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -6903,6 +7043,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -6963,10 +7107,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -7025,6 +7165,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -7151,6 +7295,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -7273,6 +7421,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -7399,6 +7551,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -7521,6 +7677,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -7730,6 +7890,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -7790,10 +7954,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -7852,6 +8012,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -7978,6 +8142,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -8100,6 +8268,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -8226,6 +8398,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -8348,6 +8524,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -8569,6 +8749,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -8629,10 +8813,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -8691,6 +8871,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -8817,6 +9001,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -8939,6 +9127,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -9065,6 +9257,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -9187,6 +9383,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -9508,6 +9708,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -9568,10 +9772,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -9630,6 +9830,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -9756,6 +9960,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -9878,6 +10086,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -10004,6 +10216,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -10126,6 +10342,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -10503,6 +10723,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -10563,10 +10787,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -10625,6 +10845,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -10751,6 +10975,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -10873,6 +11101,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -10999,6 +11231,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -11121,6 +11357,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -11586,6 +11826,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -11646,10 +11890,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -11708,6 +11948,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -11834,6 +12078,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -11956,6 +12204,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -12082,6 +12334,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -12204,6 +12460,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -12443,6 +12703,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -12503,10 +12767,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -12565,6 +12825,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -12691,6 +12955,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -12813,6 +13081,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -12939,6 +13211,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -13061,6 +13337,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -13260,6 +13540,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -13320,10 +13604,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -13382,6 +13662,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -13508,6 +13792,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -13630,6 +13918,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -13756,6 +14048,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -13878,6 +14174,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -14113,6 +14413,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -14173,10 +14477,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -14235,6 +14535,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -14361,6 +14665,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -14483,6 +14791,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -14609,6 +14921,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -14731,6 +15047,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -15028,6 +15348,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -15088,10 +15412,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -15150,6 +15470,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -15276,6 +15600,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -15398,6 +15726,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -15524,6 +15856,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -15646,6 +15982,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -15928,6 +16268,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -15988,10 +16332,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -16050,6 +16390,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -16176,6 +16520,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -16298,6 +16646,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -16424,6 +16776,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -16546,6 +16902,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -16777,6 +17137,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -16837,10 +17201,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -16899,6 +17259,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -17025,6 +17389,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -17147,6 +17515,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -17273,6 +17645,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -17395,6 +17771,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -17594,6 +17974,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -17654,10 +18038,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -17716,6 +18096,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -17842,6 +18226,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -17964,6 +18352,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -18090,6 +18482,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -18212,6 +18608,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -18389,6 +18789,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -18449,10 +18853,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -18511,6 +18911,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -18637,6 +19041,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -18759,6 +19167,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -18885,6 +19297,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -19007,6 +19423,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -19172,6 +19592,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -19232,10 +19656,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -19294,6 +19714,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -19420,6 +19844,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -19542,6 +19970,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -19668,6 +20100,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -19790,6 +20226,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -19992,6 +20432,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20052,10 +20496,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20114,6 +20554,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -20240,6 +20684,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20362,6 +20810,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -20488,6 +20940,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20610,6 +21066,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -20775,6 +21235,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20835,10 +21299,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -20897,6 +21357,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -21023,6 +21487,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -21145,6 +21613,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -21271,6 +21743,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -21393,6 +21869,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -21571,6 +22051,10 @@
                     "value": ""
                   },
                   {
+                    "name": "Evenly split",
+                    "value": "split"
+                  },
+                  {
                     "name": "1 column",
                     "value": "1"
                   },
@@ -21631,10 +22115,6 @@
                     "value": ""
                   },
                   {
-                    "name": "Reset",
-                    "value": "0"
-                  },
-                  {
                     "name": "1 column",
                     "value": "1"
                   },
@@ -21693,6 +22173,10 @@
                   {
                     "name": "Default",
                     "value": ""
+                  },
+                  {
+                    "name": "Evenly split",
+                    "value": "split"
                   },
                   {
                     "name": "1 column",
@@ -21819,6 +22303,10 @@
                     "value": ""
                   },
                   {
+                    "name": "Evenly split",
+                    "value": "split"
+                  },
+                  {
                     "name": "1 column",
                     "value": "1"
                   },
@@ -21941,6 +22429,10 @@
                   {
                     "name": "Default",
                     "value": ""
+                  },
+                  {
+                    "name": "Evenly split",
+                    "value": "split"
                   },
                   {
                     "name": "1 column",
@@ -22067,6 +22559,10 @@
                     "value": ""
                   },
                   {
+                    "name": "Evenly split",
+                    "value": "split"
+                  },
+                  {
                     "name": "1 column",
                     "value": "1"
                   },
@@ -22189,6 +22685,10 @@
                   {
                     "name": "Default",
                     "value": ""
+                  },
+                  {
+                    "name": "Evenly split",
+                    "value": "split"
                   },
                   {
                     "name": "1 column",
@@ -22394,6 +22894,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -22454,10 +22958,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -22516,6 +23016,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -22642,6 +23146,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -22764,6 +23272,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -22890,6 +23402,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -23012,6 +23528,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -23177,6 +23697,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -23237,10 +23761,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -23299,6 +23819,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -23425,6 +23949,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -23547,6 +24075,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -23673,6 +24205,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -23795,6 +24331,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -23960,6 +24500,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24020,10 +24564,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24082,6 +24622,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -24208,6 +24752,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24330,6 +24878,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -24456,6 +25008,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24578,6 +25134,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -24781,6 +25341,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24841,10 +25405,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -24903,6 +25463,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -25029,6 +25593,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -25151,6 +25719,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -25277,6 +25849,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -25399,6 +25975,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -25622,6 +26202,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -25682,10 +26266,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -25744,6 +26324,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -25870,6 +26454,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -25992,6 +26580,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -26118,6 +26710,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -26240,6 +26836,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -26533,6 +27133,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -26593,10 +27197,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -26655,6 +27255,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -26781,6 +27385,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -26903,6 +27511,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -27029,6 +27641,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -27151,6 +27767,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -27542,6 +28162,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -27602,10 +28226,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -27664,6 +28284,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -27790,6 +28414,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -27912,6 +28540,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -28038,6 +28670,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -28160,6 +28796,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -28459,6 +29099,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -28519,10 +29163,6 @@
                 "value": ""
               },
               {
-                "name": "Reset",
-                "value": "0"
-              },
-              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -28581,6 +29221,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -28707,6 +29351,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -28829,6 +29477,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
@@ -28955,6 +29607,10 @@
                 "value": ""
               },
               {
+                "name": "Evenly split",
+                "value": "split"
+              },
+              {
                 "name": "1 column",
                 "value": "1"
               },
@@ -29077,6 +29733,10 @@
               {
                 "name": "Default",
                 "value": ""
+              },
+              {
+                "name": "Evenly split",
+                "value": "split"
               },
               {
                 "name": "1 column",
