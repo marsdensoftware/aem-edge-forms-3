@@ -26,6 +26,13 @@
       "label": "Add Row Class",
       "valueType": "boolean",
       "value": false
+    },
+    {
+      "component": "boolean",
+      "name": "flex-wrap-reverse",
+      "label": "Reverse Wrap Direction",
+      "valueType": "boolean",
+      "value": false
     }
   ]
 }

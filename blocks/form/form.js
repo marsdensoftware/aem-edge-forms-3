@@ -365,6 +365,7 @@ function colSpanDecorator(field, element) {
   // Get container classes from properties
   const containerClass = field.properties?.container;
   const rowClass = field.properties?.row;
+  const reverseRowWrap = field.properties?.['flex-wrap-reverse']
 
   if (element) {
     // Add default colspan class if defined
@@ -399,6 +400,9 @@ function colSpanDecorator(field, element) {
     // Add row class if defined
     if (rowClass === true) {
       element.classList.add('row');
+      if (reverseRowWrap) {
+        element.classList.add('flex-wrap-reverse');
+      }
     }
   }
   // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
