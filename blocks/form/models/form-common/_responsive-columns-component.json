@@ -33,6 +33,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},
@@ -75,6 +76,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},
@@ -117,6 +119,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},
@@ -159,6 +162,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},
@@ -201,6 +205,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},
@@ -243,6 +248,7 @@
       "valueType": "string",
       "options": [
         {"name": "Default", "value": ""},
+        {"name": "Reset", "value": "0"},
         {"name": "1 column", "value": "1"},
         {"name": "2 columns", "value": "2"},
         {"name": "3 columns", "value": "3"},

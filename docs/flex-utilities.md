@@ -122,12 +122,41 @@ Control how flex items grow and shrink with these classes:
 </div>
 ```
 
+### Order
+
+Control the visual order of flex items with these classes:
+
+- `order-first`: Places the item at the beginning (order: -1)
+- `order-last`: Places the item at the end (order: 6)
+- `order-0` through `order-5`: Places the item at a specific position (order: 0-5)
+
+```html
+<div class="d-flex">
+  <div class="order-3">Third displayed</div>
+  <div class="order-1">First displayed</div>
+  <div class="order-2">Second displayed</div>
+</div>
+```
+
+Example of reordering content:
+
+```html
+<div class="d-flex">
+  <div class="order-last">This will appear last</div>
+  <div>This will appear in the middle</div>
+  <div class="order-first">This will appear first</div>
+</div>
+```
+
 ## Responsive Variants
 
 All flex utilities have responsive variants for different screen sizes:
 
 - `d-sm-flex`, `d-md-flex`, `d-lg-flex`, `d-xl-flex`, `d-xxl-flex`
 - `flex-sm-row`, `flex-md-row`, `flex-lg-row`, `flex-xl-row`, `flex-xxl-row`
+- `order-sm-first`, `order-md-first`, `order-lg-first`, `order-xl-first`, `order-xxl-first`
+- `order-sm-last`, `order-md-last`, `order-lg-last`, `order-xl-last`, `order-xxl-last`
+- `order-sm-0` through `order-sm-5`, and similarly for other breakpoints
 - And so on for all other flex utilities
 
 Example of responsive flex behavior:
@@ -135,6 +164,15 @@ Example of responsive flex behavior:
 ```html
 <div class="d-flex flex-column flex-md-row">
   <!-- Items will be arranged vertically on small screens and horizontally on medium and larger screens -->
+</div>
+```
+
+Example of responsive order:
+
+```html
+<div class="d-flex">
+  <div class="order-2 order-md-1">First on medium screens, second on small screens</div>
+  <div class="order-1 order-md-2">Second on medium screens, first on small screens</div>
 </div>
 ```
 
