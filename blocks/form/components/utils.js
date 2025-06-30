@@ -5,10 +5,20 @@ export class DefaultFieldConverter {
     constructor() {
     }
 
-    convert(element) {
-        let result = {};
+    convert(entry) {
+        function getLabelText(input) {
+            // First check text inside label
+            let label = input.parentElement.querySelector('label>.text');
+            if (!label) {
+                // Fallback to label
+                label = input.parentElement.querySelector('label');
+            }
 
-        const inputs = element.querySelectorAll('input, select, textarea');
+            return label.textContent.trim()
+        }
+
+        const inputs = entry.querySelectorAll('input, select, textarea');
+        const result = {};
 
         inputs.forEach(input => {
             const value = input.value;;
@@ -26,7 +36,7 @@ export class DefaultFieldConverter {
                     return;
                 }
 
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
+                displayValue = input.checked ? getLabelText(input) : '';
             }
 
             if (value) {

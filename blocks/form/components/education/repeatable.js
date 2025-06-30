@@ -2,7 +2,7 @@ import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
 import { FIELD_NAMES } from './fieldnames.js'
 import { DefaultFieldConverter } from '../utils.js'
 
-class EducationConverter extends DefaultFieldConverter {
+class Converter extends DefaultFieldConverter {
 
     convert(element) {
         const result = super.convert(element);
@@ -26,7 +26,7 @@ class EducationConverter extends DefaultFieldConverter {
 export class EducationRepeatable extends ConditionalRepeatable {
 
     constructor(repeatablePanel, properties) {
-        super(repeatablePanel, properties, 'education', new EducationConverter());
+        super(repeatablePanel, properties, 'education', new Converter());
     }
 
     _init(entry) {

@@ -1,7 +1,8 @@
 import { i18n } from '../../../../i18n/index.js';
 import { FIELD_NAMES as WorkExperienceFieldNames } from '../workexperience/fieldnames.js';
 import { FIELD_NAMES as EducationFieldNames } from '../education/fieldnames.js';
-import { DefaultFieldConverter } from '../utils.js'
+import { FIELD_NAMES as DriverLicenceFieldNames } from '../driverlicence/fieldnames.js';
+import { DefaultFieldConverter, isNo } from '../utils.js'
 
 class WorkExperienceConverter {
     static canProcess(element) {
@@ -68,6 +69,35 @@ class EducationConverter {
     }
 }
 
+class DriverLicenceConverter {
+    static process(result) {
+        const newResult = {};
+
+        // Customize rendering for licence class/stage
+        const licenceClass = result[DriverLicenceFieldNames.LICENCE_CLASS];
+        if (licenceClass.value) {
+            licenceClass.values = [licenceClass.value];
+            licenceClass.displayValues = [licenceClass.displayValue];
+        }
+
+        newResult[DriverLicenceFieldNames.LICENCE_CLASS] = { values: [], displayValues: [] };
+        const hasEndorsements = !isNo(result[DriverLicenceFieldNames.ENDORSEMENTS_AVAILABLE]);
+        if (hasEndorsements) {
+            newResult[DriverLicenceFieldNames.ENDORSEMENTS] = result[DriverLicenceFieldNames.ENDORSEMENTS];
+        }
+
+        licenceClass.values.forEach((value, index) => {
+            const stage = result[`class${value}-stage`];
+            const displayValue = licenceClass.displayValues[index];
+
+            newResult[DriverLicenceFieldNames.LICENCE_CLASS].values.push(`${value}-${stage.value}`);
+            newResult[DriverLicenceFieldNames.LICENCE_CLASS].displayValues.push(`${displayValue} - ${stage.displayValue}`);
+        });
+
+        return newResult;
+    }
+}
+
 export class Summarizer {
 
     // List of converters
@@ -110,8 +140,8 @@ export class Summarizer {
         return entries;
     }
 
-    static createMarkupObjects(entry) {
-        let nameValues;
+    static getNameValues(entry) {
+        let nameValues = undefined;
         try {
             nameValues = entry.dataset.data
                 ? JSON.parse(entry.dataset.data)
@@ -119,6 +149,12 @@ export class Summarizer {
         } catch (e) {
             nameValues = Summarizer.fieldToNameValues(entry);
         }
+
+        return nameValues;
+    }
+
+    static createMarkupObjects(entry) {
+        let nameValues = Summarizer.getNameValues(entry);
 
         // Apply converters
         Summarizer.fieldConverters.forEach(fieldConverter => {
@@ -281,7 +317,56 @@ export class Summarizer {
     }
 
     static driver_licence(el, properties) {
-        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_driver_licence', el, properties);
+        const form = el.closest('form');
+        const name = 'driverlicence';
+
+        const entry = form.querySelector(`[name="${name}"] [data-repeatable].saved`);
+
+        if (entry) {
+            let nameValues = Summarizer.getNameValues(entry);
+            nameValues = DriverLicenceConverter.process(nameValues);
+
+            const entries = [
+                {
+                    'licenceClassTitle': {
+                        value: 'licence-class-title',
+                        displayValue: i18n('Classes')
+                    }
+                },
+                {
+                    'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
+                },
+                {
+                    'endorsementsTitle': {
+                        value: 'endorsements-title',
+                        displayValue: i18n('Endorsements')
+                    }
+                },
+                {
+                    'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
+                }
+            ];
+
+            const contents = [];
+            entries.forEach(entryNameValues => {
+                const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
+                let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
+                content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content })
+                contents.push(content);
+            });
+
+            if (contents.length > 0) {
+                const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
+                el.innerHTML = content;
+                el.dataset.visible = true;
+            }
+            else {
+                el.dataset.visible = false;
+            }
+        }
+        else {
+            el.dataset.visible = false;
+        }
     }
 
     static education(el, properties) {
@@ -297,9 +382,21 @@ export class Summarizer {
     }
 
     static work_preferences(el, properties) {
-        properties.showEdit = true;
-        el.innerHTML = Summarizer.defaultSummarizer('panel_work_preferences', el, properties);
+        const form = el.closest('form');
+
+        // Combines 3_2_jobs, 3_3_hours, 3_4_work_availability, 3_5_work_location
+        const childrenNames = ['panel_jobs', 'panel_hours', 'panel_work_availability', 'panel_working_locations'];
+        const contents = [];
+        const showEdit = true;
+
+        childrenNames.forEach(name => {
+            const entry = form.querySelector(`[name="${name}"]`);
+
+            if (entry) {
+                contents.push(Summarizer.getItemContent(entry, showEdit));
+            }
+        });
+
+        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
     }
-
-
 }

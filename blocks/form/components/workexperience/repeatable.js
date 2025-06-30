@@ -3,7 +3,7 @@ import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
 import { FIELD_NAMES } from './fieldnames.js';
 
-class WorkExperienceConverter extends DefaultFieldConverter {
+class Converter extends DefaultFieldConverter {
 
     convert(element) {
 
@@ -59,7 +59,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static PAID_WORK = '1';
 
     constructor(repeatablePanel, properties) {
-        super(repeatablePanel, properties, 'workexperience', new WorkExperienceConverter());
+        super(repeatablePanel, properties, 'workexperience', new Converter());
     }
 
     _init(entry) {
