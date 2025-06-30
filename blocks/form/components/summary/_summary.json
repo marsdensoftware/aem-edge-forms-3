@@ -36,15 +36,15 @@
                             "options": [
                                 {
                                     "name": "Personal details",
-                                    "value": "personalDetails"
+                                    "value": "personal_details"
                                 },
                                 {
                                     "name": "Personal statement",
-                                    "value": "personalStatement"
+                                    "value": "personal_statement"
                                 },
                                 {
-                                    "name": "Education",
-                                    "value": "education"
+                                    "name": "Strengths",
+                                    "value": "strengths"
                                 },
                                 {
                                     "name": "Experience",
@@ -56,11 +56,23 @@
                                 },
                                 {
                                     "name": "NZ driver licence",
-                                    "value": "driverLicence"
+                                    "value": "driver_licence"
                                 },
                                 {
-                                    "name": "Strengths",
-                                    "value": "strengths"
+                                    "name": "Education",
+                                    "value": "education"
+                                },
+                                {
+                                    "name": "Work skills",
+                                    "value": "work_skills"
+                                },
+                                {
+                                    "name": "Skills",
+                                    "value": "skills"
+                                },
+                                {
+                                    "name": "Work preferences",
+                                    "value": "work_preferences"
                                 }
                             ]
                         },
