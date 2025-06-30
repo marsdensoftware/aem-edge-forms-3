@@ -115,3 +115,65 @@
   }
 }
 
+/**********************************
+  Horizontal Variant Pills Group
+**********************************/
+
+.checkbox-group-wrapper.variant-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .checkbox-wrapper {
+    input[type='checkbox'] {
+      display: none; // Hide native checkbox
+    }
+
+    label {
+      display: flex;
+      padding: var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-300, 12px)
+      var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-450, 20px);
+      align-items: center;
+      gap: var(--Spacing-Spacing-000, 0px);
+      background-color: $color-white;
+      border-radius: $border-radius-round;
+      font-size: clamp(15px, 1.25vw, 17px); // from $size-font-body-default
+      line-height: 160%;
+      color: $text-secondary;
+      border: 1px solid $stroke-tertiary;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+
+      &::after {
+        content: '';
+        display: block;
+        background-image: url('../../icons/icon-plus.svg');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+      }
+
+      &::before {
+        display: none !important;
+      }
+    }
+
+    input[type='checkbox']:checked + label {
+      background-color: $bg-dark;
+      color: $color-white;
+      border: 1px solid $stroke-dark;
+
+      &::after {
+        background-image: url('../../icons/icon-x.svg');
+      }
+
+      &:hover {
+        background-color: $color-accent;
+        border-color: $color-accent;
+      }
+    }
+  }
+}
