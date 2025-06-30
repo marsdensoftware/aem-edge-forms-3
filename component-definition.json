@@ -1302,6 +1302,22 @@
           }
         },
         {
+          "title": "Summary",
+          "id": "summary",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Summary",
+                  "fieldType": "panel",
+                  "fd:viewType": "summary"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {

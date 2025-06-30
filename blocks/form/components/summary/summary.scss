@@ -1,0 +1,48 @@
+@use '../../../../styles/settings' as *;
+
+.field-summary {
+    padding: $spacing-600 0;
+    border-top: solid 2px $color-shade-navy-20;
+
+    .edit {width: 56px;
+        height: 26px;
+        background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
+        background-repeat: no-repeat;
+        display: block;
+        text-align: center;
+        padding-left: 28px;
+        text-decoration: underline;
+
+        font-family: $font-family;
+        font-size: $size-font-body-default;
+        font-style: normal;
+        font-weight: $font-weight-medium;
+        line-height: 133%;
+        letter-spacing: $letter-spacing-default;
+        color: $text-accent;
+
+        &:hover,
+        &:focus,
+        &:visited {
+            color: $text-dark;
+        }
+    }
+
+    .summary-entry,
+    .item {
+        padding-right: $spacing-400;
+
+        &:not(:last-child) {
+            padding-top: $spacing-400;
+            padding-bottom: $spacing-400;
+        }
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+
+        > :first-child {
+            font-size: $size-font-body-large;
+        }
+    }
+}

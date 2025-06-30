@@ -1,23 +1,39 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
+import { FIELD_NAMES } from './fieldnames.js'
+import { DefaultFieldConverter } from '../utils.js'
+
+class EducationConverter extends DefaultFieldConverter {
+
+    convert(element) {
+        const result = super.convert(element);
+
+        // Customize rendering for completion-year, completion status
+        const completionStatus = result[FIELD_NAMES.COMPLETION_STATUS];
+        if (completionStatus?.value == '0') {
+            // Completed
+            const year = result[FIELD_NAMES.FINISH_YEAR];
+            completionStatus.displayValue += ` ${year.displayValue}`;
+        }
+
+        // Delete start and finish
+        delete result[FIELD_NAMES.FINISH_YEAR];
+        delete result[FIELD_NAMES.START_YEAR];
+
+        return result;
+    }
+}
 
 export class EducationRepeatable extends ConditionalRepeatable {
 
-    static FIELD_NAMES = {
-        'COMPLETION_STATUS': 'completion-status',
-        'START_YEAR': 'start-year',
-        'FINISH_YEAR': 'finish-year',
-        'EDUCATION_SELECTION': 'education-selection'
-    };
-
     constructor(repeatablePanel, properties) {
-        super(repeatablePanel, properties, 'education');
+        super(repeatablePanel, properties, 'education', new EducationConverter());
     }
 
     _init(entry) {
         super._init(entry);
         // Register listener on completion status
-        const completionStatusRadios = entry.querySelectorAll(`input[name="${EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS}"]`);
-        const finishYear = entry.querySelector(`.field-${EducationRepeatable.FIELD_NAMES.FINISH_YEAR}`);
+        const completionStatusRadios = entry.querySelectorAll(`input[name="${FIELD_NAMES.COMPLETION_STATUS}"]`);
+        const finishYear = entry.querySelector(`.field-${FIELD_NAMES.FINISH_YEAR}`);
 
         completionStatusRadios.forEach(radio => {
             radio.addEventListener('change', () => {
@@ -37,23 +53,5 @@ export class EducationRepeatable extends ConditionalRepeatable {
         this._init(entry);
 
         super._onItemAdded(entry);
-    }
-
-    _fieldToNameValues(entry) {
-        const result = super._fieldToNameValues(entry);
-
-        // Customize rendering for completion-year, completion status
-        const completionStatus = result[EducationRepeatable.FIELD_NAMES.COMPLETION_STATUS];
-        if (completionStatus?.value == '0') {
-            // Completed
-            const year = result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
-            completionStatus.displayValue += ` ${year.displayValue}`;
-        }
-
-        // Delete start and finish
-        delete result[EducationRepeatable.FIELD_NAMES.FINISH_YEAR];
-        delete result[EducationRepeatable.FIELD_NAMES.START_YEAR];
-
-        return result;
     }
 }
