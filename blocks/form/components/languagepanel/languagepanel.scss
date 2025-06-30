@@ -1,7 +1,34 @@
 @use '../../../../styles/settings' as *;
 
 main .form form .panel-repeatable-panel__languagepanel {
-    [name='proficiency'] {
-        display: none;
+  [name='proficiency'] {
+    display: none;
+  }
+}
+
+.field-panel-english-skills {
+  // To combat specificity from other style
+  [class*='field-wrapper'] {
+    h3 {
+      padding-bottom: 0;
+      margin-bottom: $spacing-400;
+
+      & + p {
+        color: $text-dark-primary;
+        margin-bottom: $spacing-600;
+      }
     }
+
+    legend.field-label {
+      margin-bottom: $spacing-200;
+    }
+
+    label.field-label {
+      margin-bottom: 0;
+    }
+
+    .checkbox-wrapper:not(:last-child) {
+      margin-bottom: $spacing-200;
+    }
+  }
 }

@@ -1,15 +1,20 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo } from '../../utils.js'
+import { isNo, DefaultFieldConverter } from '../../utils.js'
 
 export class RepeatablePanel {
+
     #overview;
-    constructor(repeatablePanel) {
+    #converter;
+
+    constructor(repeatablePanel, converter) {
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
 
         this._repeatablePanel = repeatablePanel;
         this._repeatablePanel.classList.add('panel-repeatable-panel');
+
+        this.#converter = converter || new DefaultFieldConverter();
 
         // create overview
         this.#overview = document.createElement('div');
@@ -215,56 +220,19 @@ export class RepeatablePanel {
         });
     }
 
-    _fieldToNameValues(entry) {
-        const inputs = entry.querySelectorAll('input, select, textarea');
-        const result = {};
-
-        inputs.forEach(input => {
-            const value = input.value;;
-            let displayValue = value;
-            const name = input.name;
-
-            const type = input.type;
-
-            if (input.tagName === 'SELECT') {
-                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-            }
-            else if (type === 'checkbox' || type === 'radio') {
-                // Ignore not checked
-                if (!input.checked) {
-                    return;
-                }
-
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-            }
-
-            if (value) {
-                if (result[name]) {
-                    // multi values
-                    const e = result[name];
-                    if (!e.values) {
-                        e.values = [];
-                        e.values.push(e.value);
-                        delete e.value;
-                        e.displayValues = [];
-                        e.displayValues.push(e.displayValue);
-                        delete e.displayValue;
-                    }
-                    e.values.push(value);
-                    e.displayValues.push(displayValue);
-                }
-                else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
-                }
-            }
-        });
+    #fieldToNameValues(element) {
+        const result = this.#converter.convert(element);
 
         return result;
     }
 
     #entryToReadableString(entry) {
-        const nameValues = this._fieldToNameValues(entry)
+        const nameValues = this.#fieldToNameValues(entry)
         const entries = [];
+        const classPrefix = 'repeatable';
+
+        // Save original values to be used later to restore
+        entry.dataset.data = JSON.stringify(new DefaultFieldConverter().convert(entry));
 
         Object.entries(nameValues).forEach(([name, data]) => {
             const value = data.value;
@@ -272,7 +240,7 @@ export class RepeatablePanel {
 
             if (value) {
                 const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
+                result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.value = value;
                 result.dataset.name = name;
                 result.innerHTML = displayValue;
@@ -284,7 +252,7 @@ export class RepeatablePanel {
             const displayValues = data.displayValues;
             if (values) {
                 const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
+                result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.values = values;
                 result.innerHTML = displayValues.join(', ');
 
@@ -299,7 +267,7 @@ export class RepeatablePanel {
         const readable = this.#entryToReadableString(entry);
 
         const result = document.createElement('div');
-        result.classList.add('education-entry', 'repeatable-entry');
+        result.classList.add('repeatable-entry');
         result.dataset.id = entry.dataset.id;
 
         const editLink = document.createElement('a');
@@ -411,8 +379,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
     // A field with many options with one that yields no,0,false as value
     _conditionField;
 
-    constructor(repeatablePanel, name) {
-        super(repeatablePanel);
+    constructor(repeatablePanel, name, converter) {
+        super(repeatablePanel, converter);
 
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);

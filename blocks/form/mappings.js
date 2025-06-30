@@ -12,6 +12,7 @@ let customComponents = [
   'languagepanel',
   'workexperience',
   'advanceddatepicker',
+  'summary',
   'search-box']
 
 const OOTBComponentDecorators = [
