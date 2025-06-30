@@ -1,70 +1,14 @@
 import { i18n } from '../../../../i18n/index.js';
-import { getDurationString } from '../utils.js'
 import { FIELD_NAMES as WorkExperienceFieldNames } from '../workexperience/fieldnames.js';
 import { FIELD_NAMES as EducationFieldNames } from '../education/fieldnames.js';
-
-class DefaultFieldConverter {
-
-    static process(element) {
-        let result = [];
-
-        const inputs = element.querySelectorAll('input, select, textarea');
-
-        inputs.forEach(input => {
-            const value = input.value;;
-            let displayValue = value;
-            const name = input.name;
-
-            const type = input.type;
-
-            if (input.tagName === 'SELECT') {
-                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-            }
-            else if (type === 'checkbox' || type === 'radio') {
-                // Ignore not checked
-                if (!input.checked) {
-                    return;
-                }
-
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-            }
-
-            if (value) {
-                if (result[name]) {
-                    // multi values
-                    const e = result[name];
-                    if (!e.values) {
-                        e.values = [];
-                        e.values.push(e.value);
-                        delete e.value;
-                        e.displayValues = [];
-                        e.displayValues.push(e.displayValue);
-                        delete e.displayValue;
-                    }
-                    e.values.push(value);
-                    e.displayValues.push(displayValue);
-                }
-                else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
-                }
-            }
-            else {
-                if (type === 'checkbox' || type === 'radio') {
-                    alert(`Name: ${name}, Value: ${value}`);
-                }
-            }
-        });
-
-        return result;
-    }
-}
+import { DefaultFieldConverter } from '../utils.js'
 
 class WorkExperienceConverter {
     static canProcess(element) {
         return element.closest('[name="workexperience"]') != undefined;
     }
 
-    static process(element, result) {
+    static process(result) {
 
         // Customize rendering for completion-year, completion status
         const stillWorking = result[WorkExperienceFieldNames.STILL_WORKING];
@@ -99,7 +43,7 @@ class EducationConverter {
         return element.closest('[name="education"]') != undefined;
     }
 
-    static process(element, result) {
+    static process(result) {
         const newResult = {};
 
         newResult[EducationFieldNames.COURSE] = result[EducationFieldNames.COURSE];
@@ -132,8 +76,9 @@ export class Summarizer {
         EducationConverter
     ];
 
-    static entryToReadableString(entry, fieldConverters, classPrefix) {
-        const nameValues = Summarizer.fieldToNameValues(entry, fieldConverters)
+    static markupFromNameValues(nameValues) {
+
+        const classPrefix = 'summary';
         const entries = [];
 
         Object.entries(nameValues).forEach(([name, data]) => {
@@ -165,25 +110,35 @@ export class Summarizer {
         return entries;
     }
 
-    static fieldToNameValues(element, fieldConverters) {
-        let result = DefaultFieldConverter.process(element);
-        // Apply converters if any
-        if (fieldConverters) {
-            fieldConverters.forEach(fieldConverter => {
-                if (fieldConverter.canProcess(element, result)) {
-                    result = fieldConverter.process(element, result);
-                }
-            });
+    static createMarkupObjects(entry) {
+        let nameValues;
+        try {
+            nameValues = entry.dataset.data
+                ? JSON.parse(entry.dataset.data)
+                : Summarizer.fieldToNameValues(entry);
+        } catch (e) {
+            nameValues = Summarizer.fieldToNameValues(entry);
         }
 
-        return result;
+        // Apply converters
+        Summarizer.fieldConverters.forEach(fieldConverter => {
+            if (fieldConverter.canProcess(entry)) {
+                nameValues = fieldConverter.process(nameValues);
+            }
+        });
+
+        return Summarizer.markupFromNameValues(nameValues);
+    }
+
+    static fieldToNameValues(element) {
+        return new DefaultFieldConverter().convert(element);
     }
 
     static summaryTemplate = `
     <div class="row">
         <div class="col-md-5">
             <h4>{{title}}</h4>
-            <div class="edit"><i></i><span>${i18n('Edit')}</span></div>
+            <div><a class="edit">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -192,7 +147,6 @@ export class Summarizer {
     static itemContentEditTemplate = `
     <div class="row item">
         <div class="col-md-11">
-            <p><b>{{title}}</b></p>
             {{content}}
         </div>
         <div class="col-md-1">
@@ -201,9 +155,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `
-    <div class="row item">{{content}}</div>
-    `;
+    static itemContentTemplate = `{{content}}`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -217,68 +169,51 @@ export class Summarizer {
         return Summarizer.replace(template, { content: content })
     }
 
-    static renderEntry(entry) {
-        const readable = Summarizer.entryToReadableString(entry, Summarizer.fieldConverters, 'summary');
-
+    static createSummaryFromMarkupObjects(markupObjects) {
         const result = document.createElement('div');
         result.classList.add('summary-entry');
 
-        readable.forEach(r => {
-            result.append(r);
+        markupObjects.forEach(mo => {
+            result.append(mo);
         });
 
         return result.outerHTML;
     }
 
-    /* SUMMARIZERS */
+    static renderEntry(entry) {
+        const markupObjects = Summarizer.createMarkupObjects(entry);
 
-    static languages(el, properties) {
-        const form = el.closest('form');
-
-        function getEnglishContent(fieldset) {
-            const data = Summarizer.fieldToNameValues(fieldset);
-            const proficiency = data['cb_english_proficiency'];
-            if (!proficiency) {
-                return undefined;
-            }
-            const languageTitle = i18n('English');
-            let content = '';
-
-            if (proficiency?.displayValue) {
-                content = proficiency.displayValue;
-            }
-
-            if (proficiency?.displayValues) {
-                content = proficiency.displayValues.join(', ');
-            }
-
-            return Summarizer.replace(Summarizer.itemContentEditTemplate, { title: languageTitle, content: content })
-        }
-
-        let languagesContent = [];
-
-        // Read english language
-        const languageFieldset = form.querySelector('fieldset[name="panel_english_skills"]');
-        let languageContent = getEnglishContent(languageFieldset);
-
-        languagesContent.push(languageContent);
-
-        // Read other languages
-        const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
-        otherLanguages.forEach(otherLanguage => {
-            languageContent = Summarizer.getItemContent(otherLanguage, true);
-            if (languageContent) {
-                languagesContent.push(languageContent);
-            }
-        });
-
-        if (languagesContent.length > 0) {
-            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: languagesContent.join('') });
-            el.innerHTML = content;
-        }
+        return Summarizer.createSummaryFromMarkupObjects(markupObjects);
     }
 
-    static personalDetails(el, properties) {
+    /* SUMMARIZERS */
+    static defaultSummarizer(name, el, properties) {
+        const form = el.closest('form');
+
+        const entry = form.querySelector(`[name="${name}"]`);
+        let content = '';
+        if (entry) {
+            content = Summarizer.getItemContent(entry, properties.showEdit);
+        }
+
+        return Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: content });
+    }
+
+    static defaultRepeatableSummarizer(name, el, properties) {
+        const form = el.closest('form');
+
+        let contents = [];
+
+        const entries = form.querySelectorAll(`[name="${name}"] [data-repeatable].saved`);
+        entries.forEach(entry => {
+            let content = Summarizer.getItemContent(entry);
+            contents.push(content);
+        });
+
+        return Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
+    }
+
+    static personal_details(el) {
         const form = el.closest('form');
 
         // TODO Read from API
@@ -293,56 +228,78 @@ export class Summarizer {
                 <div class="col-md-4 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
                 <div class="col-md-3 email"><i></i><span>${email}</span></div>
-                <div class="col-md-2 edit"><i></i><span>${i18n('Edit')}</span></div>
+                <div class="col-md-2"><a href="#" class="edit">${i18n('Edit')}</a></div>
             </div>
         `;
     }
 
-    static personalStatement(el, properties) {
-        const form = el.closest('form');
-
-        const entry = form.querySelector('[name="panel_personal_summary"]');
-        let content = Summarizer.getItemContent(entry);
-
-        content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: content });
-        el.innerHTML = content;
-    }
-
-    static education(el, properties) {
-        const form = el.closest('form');
-
-        let contents = [];
-
-        const entries = form.querySelectorAll('[name="panel_educations"] [data-repeatable].saved');
-        entries.forEach(entry => {
-            let content = Summarizer.getItemContent(entry);
-            contents.push(content);
-        });
-
-        const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
-        el.innerHTML = content;
-    }
-
-    static experience(el, properties) {
-        const form = el.closest('form');
-
-        let contents = [];
-
-        const entries = form.querySelectorAll('[name="panel_work_experiences"] [data-repeatable].saved');
-        entries.forEach(entry => {
-            let content = Summarizer.getItemContent(entry);
-            contents.push(content);
-        });
-
-        const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
-        el.innerHTML = content;
-    }
-
-    static driverLicence(el, properties) {
-
+    static personal_statement(el, properties) {
+        el.innerHTML = Summarizer.defaultSummarizer('panel_personal_summary', el, properties);
     }
 
     static strengths(el, properties) {
-
+        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_strengths', el, properties);
     }
+
+    static experience(el, properties) {
+        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_work_experiences', el, properties);
+    }
+
+    static languages(el, properties) {
+        const form = el.closest('form');
+
+        let languagesContent = [];
+
+        // Read english language
+        const englishFieldset = form.querySelector('fieldset[name="panel_english_skills"]');
+        const nameValues = {
+            language: { value: 'english', displayValue: i18n('English') },
+            ...Summarizer.fieldToNameValues(englishFieldset)
+        };
+
+        // English content
+        let languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
+        let languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
+        languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { content: languageContent })
+
+        languagesContent.push(languageContent);
+
+        // Read other languages
+        const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
+        const showEdit = true;
+        otherLanguages.forEach(otherLanguage => {
+            languageContent = Summarizer.getItemContent(otherLanguage, showEdit);
+            if (languageContent) {
+                languagesContent.push(languageContent);
+            }
+        });
+
+        if (languagesContent.length > 0) {
+            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: languagesContent.join('') });
+            el.innerHTML = content;
+        }
+    }
+
+    static driver_licence(el, properties) {
+        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_driver_licence', el, properties);
+    }
+
+    static education(el, properties) {
+        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_educations', el, properties);
+    }
+
+    static work_skills(el, properties) {
+        el.innerHTML = Summarizer.defaultSummarizer('panel_work_skills', el, properties);
+    }
+
+    static skills(el, properties) {
+        el.innerHTML = Summarizer.defaultSummarizer('panel_skills', el, properties);
+    }
+
+    static work_preferences(el, properties) {
+        properties.showEdit = true;
+        el.innerHTML = Summarizer.defaultSummarizer('panel_work_preferences', el, properties);
+    }
+
+
 }

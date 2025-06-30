@@ -1,10 +1,32 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
 import { FIELD_NAMES } from './fieldnames.js'
+import { DefaultFieldConverter } from '../utils.js'
+
+class EducationConverter extends DefaultFieldConverter {
+
+    convert(element) {
+        const result = super.convert(element);
+
+        // Customize rendering for completion-year, completion status
+        const completionStatus = result[FIELD_NAMES.COMPLETION_STATUS];
+        if (completionStatus?.value == '0') {
+            // Completed
+            const year = result[FIELD_NAMES.FINISH_YEAR];
+            completionStatus.displayValue += ` ${year.displayValue}`;
+        }
+
+        // Delete start and finish
+        delete result[FIELD_NAMES.FINISH_YEAR];
+        delete result[FIELD_NAMES.START_YEAR];
+
+        return result;
+    }
+}
 
 export class EducationRepeatable extends ConditionalRepeatable {
 
     constructor(repeatablePanel) {
-        super(repeatablePanel, 'education');
+        super(repeatablePanel, 'education', new EducationConverter());
     }
 
     _init(entry) {

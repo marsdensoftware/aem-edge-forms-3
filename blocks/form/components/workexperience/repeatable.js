@@ -1,6 +1,57 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
-import { isNo } from '../utils.js'
+import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
+import { i18n } from '../../../../i18n/index.js'
 import { FIELD_NAMES } from './fieldnames.js';
+
+class WorkExperienceConverter extends DefaultFieldConverter {
+
+    convert(element) {
+
+        const result = super.convert(element)
+
+        // Customize rendering for completion-year, completion status
+        const startMonth = result[FIELD_NAMES.START_OF_WORK_MONTH]?.value;
+        if (!startMonth) {
+            return result;
+        }
+        const stillWorking = result[FIELD_NAMES.STILL_WORKING];
+        const startYear = result[FIELD_NAMES.START_OF_WORK_YEAR].value;
+        let endMonth;
+        let endYear;
+        let workperiod = `${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
+        let endofwork;
+        if (stillWorking.value == '0') {
+            // No longer working
+            endofwork = `${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
+            endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
+            endYear = result[FIELD_NAMES.END_OF_WORK_YEAR].value;
+        }
+        else {
+            // Still working
+            const now = new Date();
+
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth() + 1;
+
+            endofwork = i18n('present');
+            endMonth = currentMonth;
+            endYear = currentYear;
+        }
+
+        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
+
+        const newResult = {};
+        newResult[FIELD_NAMES.JOB_TITLE] = result[FIELD_NAMES.JOB_TITLE];
+        newResult[FIELD_NAMES.EMPLOYER_NAME] = result[FIELD_NAMES.EMPLOYER_NAME];
+        if (result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value != FIELD_NAMES.PAID_WORK) {
+            // Not paid work
+            newResult[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
+        }
+        newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+
+        return newResult;
+    }
+}
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
 
@@ -8,7 +59,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     static PAID_WORK = '1';
 
     constructor(repeatablePanel) {
-        super(repeatablePanel, 'workexperience');
+        super(repeatablePanel, 'workexperience', new WorkExperienceConverter());
     }
 
     _init(entry) {

@@ -1,98 +1,20 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo } from '../../utils.js'
-import { Summarizer } from '../../summary/summarizer.js'
-import { FIELD_NAMES as WorkExperienceFieldNames } from '../../workexperience/fieldnames.js';
-import { FIELD_NAMES as EducationFieldNames } from '../../education/fieldnames.js';
-import { i18n } from '../../../../../i18n/index.js';
-import { getDurationString } from '../../utils.js'
-
-class WorkExperienceConverter {
-    static canProcess(element) {
-        return element.closest('[name="workexperience"]') != undefined;
-    }
-
-    static process(element, result) {
-
-        // Customize rendering for completion-year, completion status
-        const startMonth = result[WorkExperienceFieldNames.START_OF_WORK_MONTH]?.value;
-        if (!startMonth) {
-            return result;
-        }
-        const stillWorking = result[WorkExperienceFieldNames.STILL_WORKING];
-        const startYear = result[WorkExperienceFieldNames.START_OF_WORK_YEAR].value;
-        let endMonth;
-        let endYear;
-        let workperiod = `${result[WorkExperienceFieldNames.START_OF_WORK_MONTH].displayValue} ${result[WorkExperienceFieldNames.START_OF_WORK_YEAR].displayValue}`;
-        let endofwork;
-        if (stillWorking.value == '0') {
-            // No longer working
-            endofwork = `${result[WorkExperienceFieldNames.END_OF_WORK_MONTH].displayValue} ${result[WorkExperienceFieldNames.END_OF_WORK_YEAR].displayValue}`;
-            endMonth = result[WorkExperienceFieldNames.END_OF_WORK_MONTH].value;
-            endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
-        }
-        else {
-            // Still working
-            const now = new Date();
-
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth() + 1;
-
-            endofwork = i18n('present');
-            endMonth = currentMonth;
-            endYear = currentYear;
-        }
-
-        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
-
-        const newResult = {};
-        newResult[WorkExperienceFieldNames.JOB_TITLE] = result[WorkExperienceFieldNames.JOB_TITLE];
-        newResult[WorkExperienceFieldNames.EMPLOYER_NAME] = result[WorkExperienceFieldNames.EMPLOYER_NAME];
-        if (result[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE].value != WorkExperienceFieldNames.PAID_WORK) {
-            // Not paid work
-            newResult[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE] = result[WorkExperienceFieldNames.TYPE_OF_WORK_EXPERIENCE];
-        }
-        newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
-
-        return newResult;
-    }
-}
-
-class EducationConverter {
-    static canProcess(element) {
-        return element.closest('[name="education"]') != undefined;
-    }
-
-    static process(element, result) {
-        // Customize rendering for completion-year, completion status
-        const completionStatus = result[EducationFieldNames.COMPLETION_STATUS];
-        if (completionStatus?.value == '0') {
-            // Completed
-            const year = result[EducationFieldNames.FINISH_YEAR];
-            completionStatus.displayValue += ` ${year.displayValue}`;
-        }
-
-        // Delete start and finish
-        delete result[EducationFieldNames.FINISH_YEAR];
-        delete result[EducationFieldNames.START_YEAR];
-
-        return result;
-    }
-}
+import { isNo, DefaultFieldConverter } from '../../utils.js'
 
 export class RepeatablePanel {
-    // List of converters
-    static fieldConverters = [
-        WorkExperienceConverter,
-        EducationConverter
-    ];
+
     #overview;
-    constructor(repeatablePanel) {
+    #converter;
+
+    constructor(repeatablePanel, converter) {
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
 
         this._repeatablePanel = repeatablePanel;
         this._repeatablePanel.classList.add('panel-repeatable-panel');
+
+        this.#converter = converter || new DefaultFieldConverter();
 
         // create overview
         this.#overview = document.createElement('div');
@@ -298,8 +220,51 @@ export class RepeatablePanel {
         });
     }
 
+    #fieldToNameValues(element) {
+        const result = this.#converter.convert(element);
+
+        return result;
+    }
+
+    #entryToReadableString(entry) {
+        const nameValues = this.#fieldToNameValues(entry)
+        const entries = [];
+        const classPrefix = 'repeatable';
+
+        // Save original values to be used later to restore
+        entry.dataset.data = JSON.stringify(new DefaultFieldConverter().convert(entry));
+
+        Object.entries(nameValues).forEach(([name, data]) => {
+            const value = data.value;
+            const displayValue = data.displayValue;
+
+            if (value) {
+                const result = document.createElement('div');
+                result.classList.add(`${classPrefix}-entry__${name}`);
+                result.dataset.value = value;
+                result.dataset.name = name;
+                result.innerHTML = displayValue;
+
+                entries.push(result);
+            }
+
+            const values = data.values;
+            const displayValues = data.displayValues;
+            if (values) {
+                const result = document.createElement('div');
+                result.classList.add(`${classPrefix}-entry__${name}`);
+                result.dataset.values = values;
+                result.innerHTML = displayValues.join(', ');
+
+                entries.push(result);
+            }
+        });
+
+        return entries;
+    }
+
     _renderEntry(entry) {
-        const readable = Summarizer.entryToReadableString(entry, RepeatablePanel.fieldConverters, 'repeatable');
+        const readable = this.#entryToReadableString(entry);
 
         const result = document.createElement('div');
         result.classList.add('repeatable-entry');
@@ -414,8 +379,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
     // A field with many options with one that yields no,0,false as value
     _conditionField;
 
-    constructor(repeatablePanel, name) {
-        super(repeatablePanel);
+    constructor(repeatablePanel, name, converter) {
+        super(repeatablePanel, converter);
 
         // Add class
         repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
