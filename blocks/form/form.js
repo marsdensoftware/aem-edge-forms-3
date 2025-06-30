@@ -339,7 +339,7 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate js file and importing it
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
