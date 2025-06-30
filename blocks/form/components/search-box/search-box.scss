@@ -3,12 +3,24 @@
 
 .search-box {
   position: relative;
-}
 
-// This is to combat badly class name being added to mixin
-#search-box__input {
-  input[type='text'] {
-    padding-right: 48px;
+  @include media('desktop') {
+    max-width: 456px;
+  }
+
+  .field-description {
+    p {
+      padding-bottom: 0;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 133%;
+      color: $text-dark-primary;
+      margin-bottom: $spacing-200;
+
+      @include media('desktop') {
+        font-size: 20px;
+      }
+    }
   }
 }
 
@@ -17,6 +29,7 @@
 
   input[type='text'] {
     width: 100%;
+    padding-right: 48px;
   }
 
   &::after {
@@ -48,24 +61,33 @@
 
   @include media('desktop') {
     font-size: 20px;
+    margin-bottom: $spacing-200;
   }
 }
 
-.selected-cards-wrapper,
 .recommendations-cards-wrapper {
-  margin-top: 1rem;
+  margin-top: $spacing-600;
+}
+
+.selected-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: $spacing-400;
+  gap: $spacing-400 $spacing-200;
 }
 
 .selected-cards,
+.recommendations-cards {
+  &:empty::after {
+    content: attr(data-empty-selection-message);
+  }
+}
+
 .recommendations-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
   margin-bottom: 32px;
-
-  &:empty::after {
-    content: attr(data-empty-selection-message);
-  }
 }
 
 .selected-card {
