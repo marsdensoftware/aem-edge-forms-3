@@ -7,27 +7,34 @@
 .wizard--bg-dark {
   .wizard {
     background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
+                    135deg,
+                    $color-accent 25%,
+                    $color-primary-navy 100%
+    );
+  }
+}
+
+.wizard--bg-mid {
+  .wizard {
+    background: linear-gradient(
+                    135deg,
+                    $color-shade-blue-10 25%,
+                    $color-shade-blue-25 100%
     );
   }
 }
 
 .wizard--bg-light {
   .wizard {
-    background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
-    );
+    background: var(--Background-Light-Secondary, #F5FAFD);
+
   }
 }
 
 .wizard {
   min-height: calc(100vh - $nav-height - $footer-height);
   height: 100%;
-  // Temporary fix until AEM grid built in
+
   @media (max-width: 1279px) {
     padding-left: $spacing-600;
     padding-right: $spacing-600;
@@ -35,9 +42,9 @@
   }
 
   background: linear-gradient(
-    135deg,
-    $color-accent 25%,
-    $color-primary-navy 100%
+                  135deg,
+                  $color-accent 25%,
+                  $color-primary-navy 100%
   );
 
   .current-wizard-step {
@@ -49,11 +56,8 @@
     }
   }
 
-  // First screen JSP
   .current-wizard-step:is([data-index='1']) {
     padding-top: $spacing-600;
-    // Extra space at the bottom
-    // Because of fix nav
     padding-bottom: 120px;
 
     @include media('tablet') {
@@ -67,8 +71,6 @@
     }
   }
 
-  // Exclude current component being styled for Bootstrap
-  // data-index="0" = first screen
   .current-wizard-step:not([data-index='1']) {
     @include media('desktop') {
       padding: $spacing-600 0;
@@ -145,16 +147,16 @@ main .form form .wizard .wizard-button-wrapper .field-wrapper {
 }
 
 main
-  form
-  .wizard
-  > .current-wizard-step.panel-wrapper:first-of-type
-  ~ .wizard-button-wrapper
-  > .wizard-button-prev,
+form
+.wizard
+> .current-wizard-step.panel-wrapper:first-of-type
+~ .wizard-button-wrapper
+> .wizard-button-prev,
 main
-  form
-  .wizard
-  > .current-wizard-step.panel-wrapper:last-of-type
-  ~ .wizard-button-wrapper
-  > .wizard-button-next {
+form
+.wizard
+> .current-wizard-step.panel-wrapper:last-of-type
+~ .wizard-button-wrapper
+> .wizard-button-next {
   display: none;
 }

@@ -6,8 +6,6 @@
   .panel-formhero.current-wizard-step {
     display: flex;
     flex-direction: column;
-    // padding-left: $spacing-600;
-    // padding-right: $spacing-600;
 
     @include media('desktop') {
       flex-direction: row;
@@ -53,6 +51,28 @@
     @include media('desktop') {
       order: 0;
       max-width: 577px;
+    }
+  }
+
+  // Panel Hero on Mahi form
+  .panel-formhero.field-intro3 {
+    .panel-formhero__content {
+      p {
+        p {
+          font-size: 28px;
+          color: $text-dark;
+          margin-bottom: $spacing-200;
+
+          @include media('tablet') {
+            font-size: 30px;
+          }
+
+          @include media('desktop') {
+            font-size: 32px;
+            margin-bottom: $spacing-300;
+          }
+        }
+      }
     }
   }
 }
