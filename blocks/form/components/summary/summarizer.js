@@ -106,6 +106,32 @@ export class Summarizer {
         EducationConverter
     ];
 
+    static navigate(wizardEl, index) {
+        const current = wizardEl.querySelector('.current-wizard-step');
+        const currentMenuItem = wizardEl.querySelector('.wizard-menu-active-item');
+
+        const navigateTo = wizardEl.querySelector(`:scope>[data-index="${index}"]`);
+
+        if (navigateTo) {
+            current.classList.remove('current-wizard-step');
+            navigateTo.classList.add('current-wizard-step');
+            // add/remove active class from menu item
+            const navigateToMenuItem = wizardEl.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
+            currentMenuItem.classList.remove('wizard-menu-active-item');
+            navigateToMenuItem.classList.add('wizard-menu-active-item');
+
+            const event = new CustomEvent('wizard:navigate', {
+                detail: {
+                    prevStep: { id: current.id, index: +current.dataset.index },
+                    currStep: { id: navigateTo.id, index: +navigateTo.dataset.index },
+                },
+                bubbles: true,
+            });
+
+            wizardEl.dispatchEvent(event);
+        }
+    }
+
     static markupFromNameValues(nameValues) {
 
         const classPrefix = 'summary';
@@ -267,6 +293,14 @@ export class Summarizer {
                 <div class="col-md-2"><a href="#" class="edit">${i18n('Edit')}</a></div>
             </div>
         `;
+
+        el.querySelector('.edit').addEventListener('click', () => {
+            const panelEl = form.querySelector('[name="panel_personal_details"]');
+            const wizardEl = panelEl.closest('.wizard');
+            const index = panelEl.dataset.index;
+
+            Summarizer.navigate(wizardEl, index);
+        });
     }
 
     static personal_statement(el, properties) {
