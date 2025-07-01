@@ -14,10 +14,10 @@
         text-align: center;
         padding-left: 28px;
         text-decoration: underline;
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
+        font-family: $font-family;
+        font-size: $size-font-body-default;
         font-style: normal;
-        font-weight: 500;
+        font-weight: $font-weight-medium;
         line-height: 133%;
         letter-spacing: 0;
         color: #017AC9;
@@ -43,7 +43,7 @@
         }
 
         > :first-child {
-            font-size: 17px;
+            font-size: $size-font-body-default;
         }
     }
 
@@ -51,48 +51,48 @@
     .summary-entry__course,
     .summary-entry__title {
         color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
+        font-family: $font-family;
+        font-size: $size-font-body-default;
         font-style: normal;
         font-weight: 700;
         line-height: 160%;
     }
     .summary-entry__cb_english_proficiency {
         color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
+        font-family: $font-family;
+        font-size: $size-font-body-default;
         font-style: normal;
-        font-weight: 400;
+        font-weight: $font-weight-regular;
         line-height: 160%;
     }
 
     .summary-entry__personal-summary {
         color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
+        font-family: $font-family;
         font-size: var(--Typography-Sizes-Body-Large-paragraph, 20px);
         font-style: normal;
-        font-weight: var(--Typography-Font-weight-Regular, 400);
+        font-weight: $font-weight-regular;
         line-height: 160%; // 32px
-        letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+        letter-spacing: 0px;
     }
 
     .panel-wrapper.field-summary-personal-details.field-wrapper.field-summary {
         h2 {
             color: #134276;
             font-feature-settings: 'liga' off, 'clig' off;
-            font-family: "Atkinson Hyperlegible Next";
+            font-family: $font-family;
             font-size: 48px;
             font-style: normal;
-            font-weight: 700;
+            font-weight: $font-weight-bold;
             line-height: 110%;
         }
 
         span {
             color: var(--Text-Dark-Primary, #333);
-            font-family: "Atkinson Hyperlegible Next";
-            font-size: 17px;
+            font-family: $font-family;
+            font-size: $size-font-body-default;
             font-style: normal;
-            font-weight: 700;
+            font-weight: $font-weight-bold;
             line-height: 160%;
             vertical-align: middle;
         }
