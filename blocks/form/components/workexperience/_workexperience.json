@@ -45,6 +45,7 @@
                                 "hideTitle": true,
                                 "fieldType": "panel",
                                 "repeatable": true,
+                                "minOccur": 1,
                                 "name": "workexperience-options-content",
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatAddButtonLabel": "Add another",
