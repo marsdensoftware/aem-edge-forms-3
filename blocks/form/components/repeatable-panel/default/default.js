@@ -1,10 +1,13 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo } from '../../utils.js'
+import { isNo, DefaultFieldConverter } from '../../utils.js'
 
 export class RepeatablePanel {
+
     #overview;
-    constructor(el, properties, name) {
+    #converter;
+    
+    constructor(el, properties, name, converter) {
         this._repeatablePanel = el.querySelector('.repeat-wrapper');
         this._name = name;
 
@@ -19,6 +22,8 @@ export class RepeatablePanel {
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
 
         this._repeatablePanel.classList.add('panel-repeatable-panel');
+
+        this.#converter = converter || new DefaultFieldConverter();
 
         // create overview
         this.#overview = document.createElement('div');
@@ -232,67 +237,19 @@ export class RepeatablePanel {
         });
     }
 
-    _fieldToNameValues(entry) {
-        function getLabelText(input) {
-            // First check text inside label
-            let label = input.parentElement.querySelector('label>.text');
-            if (!label) {
-                // Fallback to label
-                label = input.parentElement.querySelector('label');
-            }
-
-            return label.textContent.trim()
-        }
-
-        const inputs = entry.querySelectorAll('input, select, textarea');
-        const result = {};
-
-        inputs.forEach(input => {
-            const value = input.value;;
-            let displayValue = value;
-            const name = input.name;
-
-            const type = input.type;
-
-            if (input.tagName === 'SELECT') {
-                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-            }
-            else if (type === 'checkbox' || type === 'radio') {
-                // Ignore not checked
-                if (!input.checked) {
-                    return;
-                }
-
-                displayValue = input.checked ? getLabelText(input) : '';
-            }
-
-            if (value) {
-                if (result[name]) {
-                    // multi values
-                    const e = result[name];
-                    if (!e.values) {
-                        e.values = [];
-                        e.values.push(e.value);
-                        delete e.value;
-                        e.displayValues = [];
-                        e.displayValues.push(e.displayValue);
-                        delete e.displayValue;
-                    }
-                    e.values.push(value);
-                    e.displayValues.push(displayValue);
-                }
-                else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
-                }
-            }
-        });
+    #fieldToNameValues(element) {
+        const result = this.#converter.convert(element);
 
         return result;
     }
 
     #entryToReadableString(entry) {
-        let nameValues = this._fieldToNameValues(entry)
+        let nameValues = this.#fieldToNameValues(entry)
         const entries = [];
+        const classPrefix = 'repeatable';
+
+        // Save original values to be used later to restore
+        entry.dataset.data = JSON.stringify(new DefaultFieldConverter().convert(entry));
 
         if (this._cardTitle) {
             // Add card title as first entry
@@ -311,7 +268,7 @@ export class RepeatablePanel {
 
             if (value) {
                 const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
+                result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.value = value;
                 result.dataset.name = name;
                 result.innerHTML = displayValue;
@@ -323,7 +280,7 @@ export class RepeatablePanel {
             const displayValues = data.displayValues;
             if (values) {
                 const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
+                result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.values = values;
                 result.innerHTML = displayValues.join(', ');
 
@@ -455,8 +412,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
     // A field with many options with one that yields no,0,false as value
     _conditionField;
 
-    constructor(el, properties, name) {
-        super(el, properties, name);
+    constructor(el, properties, name, converter) {
+        super(el, properties, name, converter);
 
         // Add class
         this._repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);

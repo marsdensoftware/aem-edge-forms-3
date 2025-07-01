@@ -5611,6 +5611,86 @@
     ]
   },
   {
+    "id": "summary",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "select",
+            "name": "summaryType",
+            "label": "Type",
+            "valueType": "string",
+            "value": "text",
+            "options": [
+              {
+                "name": "Personal details",
+                "value": "personal_details"
+              },
+              {
+                "name": "Personal statement",
+                "value": "personal_statement"
+              },
+              {
+                "name": "Strengths",
+                "value": "strengths"
+              },
+              {
+                "name": "Experience",
+                "value": "experience"
+              },
+              {
+                "name": "Languages",
+                "value": "languages"
+              },
+              {
+                "name": "NZ driver licence",
+                "value": "driver_licence"
+              },
+              {
+                "name": "Education",
+                "value": "education"
+              },
+              {
+                "name": "Work skills",
+                "value": "work_skills"
+              },
+              {
+                "name": "Skills",
+                "value": "skills"
+              },
+              {
+                "name": "Work preferences",
+                "value": "work_preferences"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "tnc",
     "fields": [
       {

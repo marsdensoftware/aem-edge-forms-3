@@ -606,6 +606,7 @@
                     "repeatDeleteButtonLabel": "Delete",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "maxOccur": 1,
+                    "minOccur": 1,
                     "licence_class": {
                       "fieldType": "checkbox-group",
                       "orientation": "horizontal",
@@ -859,6 +860,7 @@
                     "repeatAddButtonLabel": "Add another",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatable": true,
+                    "minOccur": 1,
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "intro": {
                       "fieldType": "plain-text",
@@ -1182,6 +1184,7 @@
                     "repeatAddButtonLabel": "Add another",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatable": true,
+                    "minOccur": 1,
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "intro": {
                       "fieldType": "plain-text",
@@ -1296,6 +1299,22 @@
                   "required": false,
                   "description": "Search box with typeahead functionality",
                   "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Summary",
+          "id": "summary",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Summary",
+                  "fieldType": "panel",
+                  "fd:viewType": "summary"
                 }
               }
             }
@@ -1429,6 +1448,7 @@
                     "hideTitle": true,
                     "fieldType": "panel",
                     "repeatable": true,
+                    "minOccur": 1,
                     "name": "workexperience-options-content",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatAddButtonLabel": "Add another",

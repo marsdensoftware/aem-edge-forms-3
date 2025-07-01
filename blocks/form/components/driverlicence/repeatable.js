@@ -1,5 +1,39 @@
 import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
+import { FIELD_NAMES } from './fieldnames.js'
 import { isNo } from '../utils.js'
+import { DefaultFieldConverter } from '../utils.js'
+
+class Converter extends DefaultFieldConverter {
+
+    convert(element) {
+        const result = super.convert(element);
+
+        const newResult = {};
+
+        // Customize rendering for licence class/stage
+        const licenceClass = result[FIELD_NAMES.LICENCE_CLASS];
+        if (licenceClass.value) {
+            licenceClass.values = [licenceClass.value];
+            licenceClass.displayValues = [licenceClass.displayValue];
+        }
+
+        newResult[FIELD_NAMES.LICENCE_CLASS] = { values: [], displayValues: [] };
+        const hasEndorsements = !isNo(result[FIELD_NAMES.ENDORSEMENTS_AVAILABLE]);
+        if (hasEndorsements) {
+            newResult[FIELD_NAMES.ENDORSEMENTS] = result[FIELD_NAMES.ENDORSEMENTS];
+        }
+
+        licenceClass.values.forEach((value, index) => {
+            const stage = result[`class${value}-stage`];
+            const displayValue = licenceClass.displayValues[index];
+
+            newResult[FIELD_NAMES.LICENCE_CLASS].values.push(`${value}-${stage.value}`);
+            newResult[FIELD_NAMES.LICENCE_CLASS].displayValues.push(`${displayValue} - ${stage.displayValue}`);
+        });
+
+        return newResult;
+    }
+}
 
 export class DriverLicenceRepeatable extends ConditionalRepeatable {
     static FIELD_NAMES = {
@@ -9,7 +43,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     };
 
     constructor(el, properties) {
-        super(el, properties, 'driverlicence');
+        super(el, properties, 'driverlicence', new Converter());
     }
 
     _init(entry) {
@@ -18,11 +52,11 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
 
     _clearFields(entry) {
         super._clearFields(entry);
-        
-        const endorsementsField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS}"]`);
+
+        const endorsementsField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS}"]`);
         endorsementsField.dataset.visible = false;
 
-        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
+        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
         endorsementsAvailableField.dataset.visible = false;
 
         const classStages = entry.querySelectorAll('[name^="class"][name$="-stage"]');
@@ -34,10 +68,10 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
 
     _bindEvents(entry) {
         // Register change on licence class to show/hide the relevant class stage and endorsements
-        const licenceClass = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS}"]`);
+        const licenceClass = entry.querySelectorAll(`input[name="${FIELD_NAMES.LICENCE_CLASS}"]`);
 
-        const endorsementsAvailable = entry.querySelectorAll(`input[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
-        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
+        const endorsementsAvailable = entry.querySelectorAll(`input[name="${FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
+        const endorsementsAvailableField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
 
         licenceClass.forEach(cb => {
             cb.addEventListener('change', () => {
@@ -53,7 +87,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         });
 
         // Register change on endorsement to change dependent field
-        const endorsements = entry.querySelector(`fieldset[name="${DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS}"]`);
+        const endorsements = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS}"]`);
 
         endorsementsAvailable.forEach(radio => {
             radio.addEventListener('change', (event) => {
@@ -67,29 +101,6 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
 
     _fieldToNameValues(entry) {
         const result = super._fieldToNameValues(entry);
-        const newResult = {};
 
-        // Customize rendering for licence class/stage
-        const licenceClass = result[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS];
-        if (licenceClass.value) {
-            licenceClass.values = [licenceClass.value];
-            licenceClass.displayValues = [licenceClass.displayValue];
-        }
-
-        newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS] = { values: [], displayValues: [] };
-        const hasEndorsements = !isNo(result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS_AVAILABLE]);
-        if (hasEndorsements) {
-            newResult[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS] = result[DriverLicenceRepeatable.FIELD_NAMES.ENDORSEMENTS];
-        }
-
-        licenceClass.values.forEach((value, index) => {
-            const stage = result[`class${value}-stage`];
-            const displayValue = licenceClass.displayValues[index];
-
-            newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS].values.push(`${value}-${stage.value}`);
-            newResult[DriverLicenceRepeatable.FIELD_NAMES.LICENCE_CLASS].displayValues.push(`${displayValue} - ${stage.displayValue}`);
-        });
-
-        return newResult;
     }
 }

@@ -13,6 +13,7 @@ let customComponents = [
   'workexperience',
   'driverlicence',
   'advanceddatepicker',
+  'summary',
   'search-box']
 
 const OOTBComponentDecorators = [
