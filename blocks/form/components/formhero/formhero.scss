@@ -8,10 +8,10 @@
     flex-direction: column;
 
     @include media('desktop') {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 0 $spacing-400;
+      // flex-direction: row;
+      // justify-content: center;
+      // align-items: center;
+      // gap: 0 $spacing-400;
     }
 
     legend {
@@ -50,7 +50,7 @@
 
     @include media('desktop') {
       order: 0;
-      max-width: 577px;
+      // max-width: 577px;
     }
   }
 
