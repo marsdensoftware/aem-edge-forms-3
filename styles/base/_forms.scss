@@ -192,7 +192,8 @@ main .form form .field-wrapper.field-invalid .field-description {
 /* ------------------------------
    Light Blue Gradient background
 ------------------------------ */
-main.wizard--bg-light {
+main.wizard--bg-light,
+main.wizard--bg-mid {
   color: $text-primary;
 
   h1,
@@ -294,16 +295,16 @@ main.wizard--bg-dark {
 
 // Background pattern and gradients
 
-
-
 main.wizard--bg-dark,
+main.wizard--bg-mid,
 main.wizard--bg-light {
   position: relative;
   z-index: 1;
 }
 
+// Default pattern for desktop
 main.wizard--bg-dark::before,
-main.wizard--bg-light::before {
+main.wizard--bg-mid::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -315,28 +316,53 @@ main.wizard--bg-light::before {
   pointer-events: none;
 }
 
+main.wizard--bg-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
+  pointer-events: none;
+}
+
+// Mobile: remove background images
 @media (max-width: 743px) {
   main.wizard--bg-dark::before,
+  main.wizard--bg-mid::before,
   main.wizard--bg-light::before {
     background-image: none;
   }
 }
 
+// Tablet override: top right for dark and mid
 @include media('tablet') {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
-    top: 100px; // not sure about this just yet RW
+  main.wizard--bg-mid::before {
+    top: 100px;
     background-image: url('../../images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
-    background-repeat: no-repeat;
-    background-size: auto;
+  }
+
+  main.wizard--bg-light::before {
+    top: 100px;
+    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 
+// Desktop override: bottom left for dark and mid
 @include media('desktop') {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
+  }
+
+  main.wizard--bg-light::before {
+    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }

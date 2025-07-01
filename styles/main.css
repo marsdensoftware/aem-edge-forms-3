@@ -1777,12 +1777,16 @@ main .form form .field-wrapper.field-invalid .field-description::before {
   background-position: center;
   background-size: contain;
 }
-main.wizard--bg-light {
+main.wizard--bg-light,
+main.wizard--bg-mid {
   color: #2e2e2e;
 }
 main.wizard--bg-light h1,
 main.wizard--bg-light h2,
-main.wizard--bg-light h3 {
+main.wizard--bg-light h3,
+main.wizard--bg-mid h1,
+main.wizard--bg-mid h2,
+main.wizard--bg-mid h3 {
   color: #2e2e2e;
   font-family: 'Atkinson Hyperlegible Next', sans-serif;
   margin-bottom: 2rem;
@@ -1793,24 +1797,36 @@ main.wizard--bg-light h3 {
 }
 main.wizard--bg-light h1:last-child:not(:first-child),
 main.wizard--bg-light h2:last-child:not(:first-child),
-main.wizard--bg-light h3:last-child:not(:first-child) {
+main.wizard--bg-light h3:last-child:not(:first-child),
+main.wizard--bg-mid h1:last-child:not(:first-child),
+main.wizard--bg-mid h2:last-child:not(:first-child),
+main.wizard--bg-mid h3:last-child:not(:first-child) {
   margin-bottom: 0;
 }
 main.wizard--bg-light h4,
 main.wizard--bg-light h5,
-main.wizard--bg-light h6 {
+main.wizard--bg-light h6,
+main.wizard--bg-mid h4,
+main.wizard--bg-mid h5,
+main.wizard--bg-mid h6 {
   color: #134276;
   font-family: 'Atkinson Hyperlegible Next', sans-serif;
   margin-bottom: 0;
 }
 main.wizard--bg-light h4:last-child:not(:first-child),
 main.wizard--bg-light h5:last-child:not(:first-child),
-main.wizard--bg-light h6:last-child:not(:first-child) {
+main.wizard--bg-light h6:last-child:not(:first-child),
+main.wizard--bg-mid h4:last-child:not(:first-child),
+main.wizard--bg-mid h5:last-child:not(:first-child),
+main.wizard--bg-mid h6:last-child:not(:first-child) {
   margin-bottom: 0;
 }
 main.wizard--bg-light p,
 main.wizard--bg-light .subtitle,
-main.wizard--bg-light .straptitle {
+main.wizard--bg-light .straptitle,
+main.wizard--bg-mid p,
+main.wizard--bg-mid .subtitle,
+main.wizard--bg-mid .straptitle {
   color: #706868;
   font-family: 'Atkinson Hyperlegible Next', sans-serif;
   line-height: 1.6;
@@ -1891,12 +1907,13 @@ main.wizard--bg-dark .subtitle {
   color: #ffffff;
 }
 main.wizard--bg-dark,
+main.wizard--bg-mid,
 main.wizard--bg-light {
   position: relative;
   z-index: 1;
 }
 main.wizard--bg-dark::before,
-main.wizard--bg-light::before {
+main.wizard--bg-mid::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1907,27 +1924,46 @@ main.wizard--bg-light::before {
   background-position: bottom left;
   pointer-events: none;
 }
+main.wizard--bg-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
+  pointer-events: none;
+}
 @media (max-width: 743px) {
   main.wizard--bg-dark::before,
+  main.wizard--bg-mid::before,
   main.wizard--bg-light::before {
     background-image: none;
   }
 }
 @media (min-width: 744px) {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     top: 6.25rem;
     background-image: url('../../images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
-    background-repeat: no-repeat;
-    background-size: auto;
+  }
+  main.wizard--bg-light::before {
+    top: 6.25rem;
+    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 @media (min-width: 1280px) {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
+  }
+  main.wizard--bg-light::before {
+    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 h1,

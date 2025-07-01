@@ -43,6 +43,7 @@
                                 "repeatAddButtonLabel": "Add another",
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatable": true,
+                                "minOccur": 1,
                                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                                 "intro": {
                                     "fieldType": "plain-text",
