@@ -196,11 +196,32 @@ export class Summarizer {
         return new DefaultFieldConverter().convert(element);
     }
 
+    static gotoWizardStep(el) {
+        const stepName = el.dataset.stepName;
+        const entryId = el.dataset.entryId;
+
+        const form = el.closest('form');
+
+        const panelEl = form.querySelector(`[name="${stepName}"]`);
+        const wizardEl = panelEl.closest('.wizard');
+        const index = panelEl.dataset.index;
+
+        Summarizer.navigate(wizardEl, index);
+
+        if (entryIndexId) {
+            const editEl = panelEl.querySelector(`[data-id="${entryId}"] .repeatable-entry__edit`);
+            if (editEl) {
+                // Switch to edit mode by triggering click on edit link;
+                editEl.click();
+            }
+        }
+    }
+
     static summaryTemplate = `
     <div class="row">
         <div class="col-md-5">
             <h4>{{title}}</h4>
-            <div><a class="edit">${i18n('Edit')}</a></div>
+            <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -212,7 +233,7 @@ export class Summarizer {
             {{content}}
         </div>
         <div class="col-md-1">
-            <div class="edit"><i></i><span>${i18n('Edit')}</span></div>
+            <a class="edit" href="#" data-step-name="{{stepName}}" data-entry-id="{{entryId}}">${i18n('Edit')}</a>
         </div>
     </div>
     `;
@@ -223,12 +244,13 @@ export class Summarizer {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
     }
 
-    static getItemContent(fieldset, showEdit) {
+    static getItemContent(fieldset, stepName, showEdit) {
         const content = Summarizer.renderEntry(fieldset);
+        const entryId = fieldset.dataset.id;
 
         const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
 
-        return Summarizer.replace(template, { content: content })
+        return Summarizer.replace(template, { content: content, stepName: stepName, entryId: entryId })
     }
 
     static createSummaryFromMarkupObjects(markupObjects) {
@@ -249,30 +271,30 @@ export class Summarizer {
     }
 
     /* SUMMARIZERS */
-    static defaultSummarizer(name, el, properties) {
+    static defaultSummarizer(stepName, el, properties) {
         const form = el.closest('form');
 
-        const entry = form.querySelector(`[name="${name}"]`);
+        const entry = form.querySelector(`[name="${stepName}"]`);
         let content = '';
         if (entry) {
-            content = Summarizer.getItemContent(entry, properties.showEdit);
+            content = Summarizer.getItemContent(entry, stepName, properties.showEdit);
         }
 
-        return Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: content });
+        return Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: content });
     }
 
-    static defaultRepeatableSummarizer(name, el, properties) {
+    static defaultRepeatableSummarizer(stepName, el, properties) {
         const form = el.closest('form');
 
         let contents = [];
 
-        const entries = form.querySelectorAll(`[name="${name}"] [data-repeatable].saved`);
+        const entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
         entries.forEach(entry => {
-            let content = Summarizer.getItemContent(entry);
+            let content = Summarizer.getItemContent(entry, stepName);
             contents.push(content);
         });
 
-        return Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
+        return Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: contents.join('') });
     }
 
     static personal_details(el) {
@@ -290,17 +312,9 @@ export class Summarizer {
                 <div class="col-md-4 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
                 <div class="col-md-3 email"><i></i><span>${email}</span></div>
-                <div class="col-md-2"><a href="#" class="edit">${i18n('Edit')}</a></div>
+                <div class="col-md-2"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
             </div>
         `;
-
-        el.querySelector('.edit').addEventListener('click', () => {
-            const panelEl = form.querySelector('[name="panel_personal_details"]');
-            const wizardEl = panelEl.closest('.wizard');
-            const index = panelEl.dataset.index;
-
-            Summarizer.navigate(wizardEl, index);
-        });
     }
 
     static personal_statement(el, properties) {
@@ -330,7 +344,7 @@ export class Summarizer {
         // English content
         let languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
         let languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
-        languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { content: languageContent })
+        languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName: 'panel_english_skills', content: languageContent })
 
         languagesContent.push(languageContent);
 
@@ -338,7 +352,7 @@ export class Summarizer {
         const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
         const showEdit = true;
         otherLanguages.forEach(otherLanguage => {
-            languageContent = Summarizer.getItemContent(otherLanguage, showEdit);
+            languageContent = Summarizer.getItemContent(otherLanguage, 'panel_other_languages', showEdit);
             if (languageContent) {
                 languagesContent.push(languageContent);
             }
@@ -352,9 +366,9 @@ export class Summarizer {
 
     static driver_licence(el, properties) {
         const form = el.closest('form');
-        const name = 'driverlicence';
+        const stepName = 'panel_driver_licence';
 
-        const entry = form.querySelector(`[name="${name}"] [data-repeatable].saved`);
+        const entry = form.querySelector(`[name="${stepName}"] [data-repeatable].saved`);
 
         if (entry) {
             let nameValues = Summarizer.getNameValues(entry);
@@ -397,7 +411,7 @@ export class Summarizer {
             });
 
             if (contents.length > 0) {
-                const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
+                const content = Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: contents.join('') });
                 el.innerHTML = content;
                 el.dataset.visible = true;
             }
@@ -430,11 +444,11 @@ export class Summarizer {
         const contents = [];
         const showEdit = true;
 
-        childrenNames.forEach(name => {
-            const entry = form.querySelector(`[name="${name}"]`);
+        childrenNames.forEach(stepName => {
+            const entry = form.querySelector(`[name="${stepName}"]`);
 
             if (entry) {
-                contents.push(Summarizer.getItemContent(entry, showEdit));
+                contents.push(Summarizer.getItemContent(entry, stepName, showEdit));
             }
         });
 
