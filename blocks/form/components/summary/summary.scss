@@ -1,81 +1,113 @@
 @use '../../../../styles/settings' as *;
 @use '../../../../styles/base' as *;  // Testing RW
 
-
 .field-summary {
     padding: 64px 0;
     border-top: solid 2px #b0c4de;
-}
 
-.field-summary .edit {
-    width: 56px;
-    height: 26px;
-    background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
-    background-repeat: no-repeat;
-    display: block;
-    text-align: center;
-    padding-left: 28px;
-    text-decoration: underline;
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 133%;
-    letter-spacing: 0;
-    color: #017AC9;
-}
+    .edit {
+        width: 56px;
+        height: 26px;
+        background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
+        background-repeat: no-repeat;
+        display: block;
+        text-align: center;
+        padding-left: 28px;
+        text-decoration: underline;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 133%;
+        letter-spacing: 0;
+        color: #017AC9;
 
-.field-summary .edit:hover,
-.field-summary .edit:focus,
-.field-summary .edit:visited {
-    color: #134276;
-}
+        &:hover,
+        &:focus,
+        &:visited {
+            color: #134276;
+        }
+    }
 
-.field-summary .summary-entry,
-.field-summary .item {
-    padding-right: 32px;
-}
+    .summary-entry,
+    .item {
+        padding-right: 32px;
 
-.field-summary .summary-entry:not(:last-child),
-.field-summary .item:not(:last-child) {
-    padding-top: 32px;
-    padding-bottom: 32px;
-}
+        &:not(:last-child) {
+            padding-top: 32px;
+            padding-bottom: 32px;
+        }
 
-.field-summary .summary-entry:last-child,
-.field-summary .item:last-child {
-    padding-bottom: 0;
-}
+        &:last-child {
+            padding-bottom: 0;
+        }
 
-.field-summary .summary-entry > :first-child,
-.field-summary .item > :first-child {
-    font-size: 20px;
-}
+        > :first-child {
+            font-size: 17px;
+        }
+    }
 
-.field-summary .panel-wrapper.field-summary-personal-details.field-wrapper.field-summary h2 {
-    color: #134276;
-    font-feature-settings: 'liga' off, 'clig' off;
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-}
+    .summary-entry__language {
+        color: var(--Text-Dark-Primary, #333);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+    }
 
-.field-summary .summary-entry__language {
-    color: var(--Text-Dark-Primary, #333);
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 160%;
-}
+    .summary-entry__cb_english_proficiency {
+        color: var(--Text-Dark-Primary, #333);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+    }
 
-.field-summary .summary-entry__cb_english_proficiency {
-    color: var(--Text-Dark-Primary, #333);
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 160%;
+    .panel-wrapper.field-summary-personal-details.field-wrapper.field-summary {
+        h2 {
+            color: #134276;
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 110%;
+        }
+
+        span {
+            color: var(--Text-Dark-Primary, #333);
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 160%;
+            vertical-align: middle;
+        }
+
+        .address i,
+        .phone i,
+        .email i {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            vertical-align: middle;
+        }
+
+        .address i {
+            background-image: url('../../../../icons/icon-x.svg');
+        }
+
+        .phone i {
+            background-image: url('../../../../icons/icon-x.svg');
+        }
+
+        .email i {
+            background-image: url('../../../../icons/icon-x.svg');
+        }
+    }
 }
