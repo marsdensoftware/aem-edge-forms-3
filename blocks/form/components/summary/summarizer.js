@@ -369,17 +369,24 @@ export class Summarizer {
                 },
                 {
                     'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
-                },
-                {
-                    'endorsementsTitle': {
-                        value: 'endorsements-title',
-                        displayValue: i18n('Endorsements')
-                    }
-                },
-                {
-                    'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
                 }
             ];
+
+            if (nameValues[DriverLicenceFieldNames.ENDORSEMENTS]) {
+                entries.push(
+                    {
+                        'endorsementsTitle': {
+                            value: 'endorsements-title',
+                            displayValue: i18n('Endorsements')
+                        }
+                    }
+                );
+                entries.push(
+                    {
+                        'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
+                    }
+                );
+            }
 
             const contents = [];
             entries.forEach(entryNameValues => {
