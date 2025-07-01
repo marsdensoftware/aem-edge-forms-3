@@ -1,10 +1,12 @@
 @use '../../../../styles/settings' as *;
+@use '../../../../styles/base' as *;  // Testing RW
 
 .field-summary {
-    padding: $spacing-600 0;
-    border-top: solid 2px $color-shade-navy-20;
+    padding: 64px 0;
+    border-top: solid 2px #b0c4de;
 
-    .edit {width: 56px;
+    .edit {
+        width: 56px;
         height: 26px;
         background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
         background-repeat: no-repeat;
@@ -12,29 +14,28 @@
         text-align: center;
         padding-left: 28px;
         text-decoration: underline;
-
-        font-family: $font-family;
-        font-size: $size-font-body-default;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
         font-style: normal;
-        font-weight: $font-weight-medium;
+        font-weight: 500;
         line-height: 133%;
-        letter-spacing: $letter-spacing-default;
-        color: $text-accent;
+        letter-spacing: 0;
+        color: #017AC9;
 
         &:hover,
         &:focus,
         &:visited {
-            color: $text-dark;
+            color: #134276;
         }
     }
 
     .summary-entry,
     .item {
-        padding-right: $spacing-400;
+        padding-right: 32px;
 
         &:not(:last-child) {
-            padding-top: $spacing-400;
-            padding-bottom: $spacing-400;
+            padding-top: 32px;
+            padding-bottom: 32px;
         }
 
         &:last-child {
@@ -42,7 +43,82 @@
         }
 
         > :first-child {
-            font-size: $size-font-body-large;
+            font-size: 17px;
+        }
+    }
+
+    .summary-entry__language,
+    .summary-entry__course,
+    .summary-entry__title {
+        color: var(--Text-Dark-Primary, #333);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+    }
+    .summary-entry__cb_english_proficiency {
+        color: var(--Text-Dark-Primary, #333);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+    }
+
+    .summary-entry__personal-summary {
+        color: var(--Text-Dark-Primary, #333);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: var(--Typography-Sizes-Body-Large-paragraph, 20px);
+        font-style: normal;
+        font-weight: var(--Typography-Font-weight-Regular, 400);
+        line-height: 160%; // 32px
+        letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+    }
+
+    .panel-wrapper.field-summary-personal-details.field-wrapper.field-summary {
+        h2 {
+            color: #134276;
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 110%;
+        }
+
+        span {
+            color: var(--Text-Dark-Primary, #333);
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 160%;
+            vertical-align: middle;
+        }
+
+        .address i,
+        .phone i,
+        .email i {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            vertical-align: middle;
+        }
+
+        .address i {
+            background-image: url('../../../../icons/icon-x.svg');
+        }
+
+        .phone i {
+            background-image: url('../../../../icons/icon-x.svg');
+        }
+
+        .email i {
+            background-image: url('../../../../icons/icon-x.svg');
         }
     }
 }
