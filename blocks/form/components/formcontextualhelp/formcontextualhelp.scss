@@ -6,10 +6,10 @@
 *******************************/
 .panel-formcontextualhelp {
   padding: $spacing-400 $spacing-300;
-  background: var(--Shades-Blues-Blue-10, #E6F2FA);
+  background: $bg-primary;
   display: block;
   border-radius: var(--Corner-radius-Mid, 8px);
-  border: 1px solid var(--Stroke-Tertiary, #A1B3C8);
+  border: 1px solid $color-shade-navy-40;
   margin-bottom: $spacing-600;
 
   // Elevation-1
@@ -64,12 +64,12 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      color: var(--Text-Dark-Primary, #333);
+      color: $text-dark-primary;
       font-weight: 500;
 
       &:hover,
       &:focus {
-        color: var(--Text-Dark-Primary, #333);
+        color: $text-dark-primary;
         text-decoration: none;
       }
 
