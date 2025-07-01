@@ -45,4 +45,38 @@
             font-size: $size-font-body-large;
         }
     }
+
+
+// fonts
+
+.panel-wrapper.field-panel-review h2 {
+    color: $color-primary-navy;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: $font-family;
+    font-size: $size-font-h2; // clamp(36px, 5vw, 48px)
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; // 52.8px max
 }
+}
+
+.summary-entry__language {
+    color: var(--Text-Dark-Primary, #333);
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-bold;
+    line-height: 160%; /* 27.2px */
+}
+
+.summary-entry__cb_english_proficiency {
+    color: var(--Text-Dark-Primary, #333);
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight:$font-weight-regular;
+    line-height: 160%; /* 27.2px */
+}
+
+
+
