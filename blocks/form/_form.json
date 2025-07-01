@@ -202,7 +202,8 @@
         "telephone-input",
         "text-input",
         "tnc",
-        "wizard"
+        "wizard",
+        "icon-radio-group"
       ]
     }
   ]
