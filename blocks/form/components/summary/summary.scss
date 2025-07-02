@@ -2,123 +2,175 @@
 @use '../../../../styles/base' as *;  // Testing RW
 
 .field-summary {
-    padding: 64px 0;
-    border-top: solid 2px #b0c4de;
+  padding: 64px 0;
+  border-top: solid 2px #b0c4de;
 
-    .edit {
-        width: 56px;
-        height: 26px;
-        background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
-        background-repeat: no-repeat;
-        display: block;
-        text-align: center;
-        padding-left: 28px;
-        text-decoration: underline;
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 133%;
-        letter-spacing: 0;
-        color: #017AC9;
+  .edit {
+    width: 56px;
+    height: 26px;
+    background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    display: block;
+    text-align: center;
+    padding-left: 28px;
+    text-decoration: underline;
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: 0;
+    color: #017AC9;
 
-        &:hover,
-        &:focus,
-        &:visited {
-            color: #134276;
-        }
+    &:hover,
+    &:focus,
+    &:visited {
+      color: #134276;
+    }
+  }
+
+  .summary-entry,
+  .item {
+    padding-right: 32px;
+
+    &:not(:last-child) {
+      padding-top: 32px;
+      padding-bottom: 32px;
     }
 
-    .summary-entry,
-    .item {
-        padding-right: 32px;
-
-        &:not(:last-child) {
-            padding-top: 32px;
-            padding-bottom: 32px;
-        }
-
-        &:last-child {
-            padding-bottom: 0;
-        }
-
-        > :first-child {
-            font-size: 17px;
-        }
+    &:last-child {
+      padding-bottom: 0;
     }
 
-    .summary-entry__language,
-    .summary-entry__course,
-    .summary-entry__title {
-        color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 160%;
+    > :first-child {
+      font-size: $size-font-body-default;
     }
-    .summary-entry__cb_english_proficiency {
-        color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 160%;
+  }
+
+  .field-summary-personal-details {
+    h2 {
+      color: var(--Text-Dark-Dark, #134276);
+      font-feature-settings: 'liga' off, 'clig' off;
+      font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+      font-size: var(--Typography-Sizes-Headers-H2, 48px);
+      font-style: normal;
+      font-weight: var(--Typography-Font-weight-Bold, 700);
+      line-height: 110%; // 52.8px
+      letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
     }
 
-    .summary-entry__personal-summary {
-        color: var(--Text-Dark-Primary, #333);
-        font-family: "Atkinson Hyperlegible Next";
-        font-size: var(--Typography-Sizes-Body-Large-paragraph, 20px);
-        font-style: normal;
-        font-weight: var(--Typography-Font-weight-Regular, 400);
-        line-height: 160%; // 32px
-        letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+    span {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-size: $size-font-body-default;
+      font-style: normal;
+      font-weight: $font-weight-bold;
+      line-height: 160%;
+      vertical-align: middle;
     }
 
-    .panel-wrapper.field-summary-personal-details.field-wrapper.field-summary {
-        h2 {
-            color: #134276;
-            font-feature-settings: 'liga' off, 'clig' off;
-            font-family: "Atkinson Hyperlegible Next";
-            font-size: 48px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 110%;
-        }
-
-        span {
-            color: var(--Text-Dark-Primary, #333);
-            font-family: "Atkinson Hyperlegible Next";
-            font-size: 17px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 160%;
-            vertical-align: middle;
-        }
-
-        .address i,
-        .phone i,
-        .email i {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            vertical-align: middle;
-        }
-
-        .address i {
-            background-image: url('../../../../icons/icon-x.svg');
-        }
-
-        .phone i {
-            background-image: url('../../../../icons/icon-x.svg');
-        }
-
-        .email i {
-            background-image: url('../../../../icons/icon-x.svg');
-        }
+    .address i,
+    .phone i,
+    .email i {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      vertical-align: middle;
     }
+
+    .address i {
+      background-image: url('../../../../icons/icon-x.svg');
+    }
+
+    .phone i {
+      background-image: url('../../../../icons/icon-x.svg');
+    }
+
+    .email i {
+      background-image: url('../../../../icons/icon-x.svg');
+    }
+  }
+
+  .summary-entry__language,
+  .summary-entry__course,
+  .summary-entry__title,
+  .summary-entry__licenceClassTitle,
+  .summary-entry__cb_english_proficiency {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-style: normal;
+    line-height: 160%;
+    font-size: $size-font-body-default;
+  }
+
+  .summary-entry__language,
+  .summary-entry__course,
+  .summary-entry__title,
+  .summary-entry__licenceClassTitle {
+    font-weight: 700;
+    margin-bottom: $spacing-100;
+  }
+
+  .summary-entry__cb_english_proficiency {
+    font-weight: $font-weight-regular;
+  }
+
+  .summary-entry__personal-summary {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-style: normal;
+    line-height: 160%;
+    font-size: $size-font-body-large;
+    font-weight: $font-weight-regular;
+    letter-spacing: 0;
+    margin-bottom: $spacing-100;
+  }
+
+  .summary-entry__employmentDetails,
+  .summary-entry__description,
+  .summary-entry__summary,
+  .summary-entry__days_you_can_work,
+  .summary-entry__hours_you_can_work,
+  .summary-entry__specific_days_cb,
+  .summary-entry__proficiency {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: $size-font-body-default;
+    line-height: 160%;
+    margin-top: $spacing-100;
+    margin-bottom: $spacing-100;
+  }
+}
+
+.summary-entry {
+  color: $text-dark-primary;
+  font-family: $font-family;
+  font-size: $size-font-body-large; // ← updated here
+  font-style: normal;
+  font-weight: $font-weight-regular;
+  line-height: 160%; // 32px
+  letter-spacing: 0px;
+
+  &:not(:last-child):not(:only-child) {
+    border-bottom: 1px solid $stroke-tertiary;
+    padding-bottom: $spacing-300;
+    margin-bottom: $spacing-300;
+  }
+}
+
+.summary-entry__employmentDetails {
+  margin-top: $spacing-100;
+  margin-bottom: $spacing-100;
+}
+
+.field-summary {
+  .summary-entry:first-child,
+  .item:first-child {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
