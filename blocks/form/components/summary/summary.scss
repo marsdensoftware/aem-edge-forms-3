@@ -20,77 +20,26 @@
     font-weight: $font-weight-medium;
     line-height: 133%;
     letter-spacing: 0;
-    color: #017AC9;
+    color: $color-primary;
 
     &:hover,
     &:focus,
     &:visited {
-      color: #134276;
+      color: $color-primary-navy;
     }
   }
 
   .summary-entry,
   .item {
-    padding-right: 32px;
+    padding-right: $spacing-600;
 
     &:not(:last-child) {
-      padding-top: 32px;
-      padding-bottom: 32px;
+      padding-top: $spacing-600;
+      padding-bottom: $spacing-600;
     }
 
     &:last-child {
       padding-bottom: 0;
-    }
-
-    > :first-child {
-      font-size: $size-font-body-default;
-    }
-  }
-
-  .field-summary-personal-details {
-    h2 {
-      color: var(--Text-Dark-Dark, #134276);
-      font-feature-settings: 'liga' off, 'clig' off;
-      font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
-      font-size: var(--Typography-Sizes-Headers-H2, 48px);
-      font-style: normal;
-      font-weight: var(--Typography-Font-weight-Bold, 700);
-      line-height: 110%; // 52.8px
-      letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-    }
-
-    span {
-      color: $text-dark-primary;
-      font-family: $font-family;
-      font-size: $size-font-body-default;
-      font-style: normal;
-      font-weight: $font-weight-bold;
-      line-height: 160%;
-      vertical-align: middle;
-    }
-
-    .address i,
-    .phone i,
-    .email i {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      background-repeat: no-repeat;
-      background-size: contain;
-      vertical-align: middle;
-    }
-
-    .address i {
-      background-image: url('../../../../icons/icon-x.svg');
-    }
-
-    .phone i {
-      background-image: url('../../../../icons/icon-x.svg');
-    }
-
-    .email i {
-      background-image: url('../../../../icons/icon-x.svg');
     }
   }
 
@@ -135,7 +84,8 @@
   .summary-entry__days_you_can_work,
   .summary-entry__hours_you_can_work,
   .summary-entry__specific_days_cb,
-  .summary-entry__proficiency {
+  .summary-entry__proficiency,
+  .summary-entry__licence-class {
     color: $text-dark-primary;
     font-family: $font-family;
     font-style: normal;
@@ -144,15 +94,67 @@
     margin-top: $spacing-100;
     margin-bottom: $spacing-100;
   }
+
+  .summary-entry:first-child,
+  .item:first-child {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &.field-summary-work-preferences {
+    .p-small {
+      color: $text-dark-primary;
+    }
+  }
+}
+
+.field-summary-personal-details {
+  h2 {
+    color: $color-primary-navy;
+  }
+
+  span {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-bold;
+    line-height: 160%;
+    vertical-align: middle;
+  }
+
+  .address i,
+  .phone i,
+  .email i {
+    display: inline-block;
+    width: $spacing-450;
+    height: $spacing-450;
+    margin-right: $spacing-200;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  .address i {
+    background-image: url('../../../../icons/icon-x.svg');
+  }
+
+  .phone i {
+    background-image: url('../../../../icons/icon-x.svg');
+  }
+
+  .email i {
+    background-image: url('../../../../icons/icon-x.svg');
+  }
 }
 
 .summary-entry {
   color: $text-dark-primary;
   font-family: $font-family;
-  font-size: $size-font-body-large; // ← updated here
+  font-size: $size-font-body-large;
   font-style: normal;
   font-weight: $font-weight-regular;
-  line-height: 160%; // 32px
+  line-height: 160%;
   letter-spacing: 0px;
 
   &:not(:last-child):not(:only-child) {
@@ -165,12 +167,4 @@
 .summary-entry__employmentDetails {
   margin-top: $spacing-100;
   margin-bottom: $spacing-100;
-}
-
-.field-summary {
-  .summary-entry:first-child,
-  .item:first-child {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 }
