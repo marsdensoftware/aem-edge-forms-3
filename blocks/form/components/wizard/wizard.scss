@@ -46,6 +46,22 @@
                   $color-accent 25%,
                   $color-primary-navy 100%
   );
+  
+  .field-save-changes{
+      display: none;
+      margin-left: auto;
+  }
+  
+  &.from-review{
+      .field-save-changes{
+          display: block;
+      }
+      
+      .wizard-button-prev,
+      .wizard-button-next{
+          display: none;
+      }
+  }
 
   .current-wizard-step {
     @include media('tablet') {
