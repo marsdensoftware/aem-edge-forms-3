@@ -16,7 +16,7 @@ const datasources = {
         'Assume responsibility for the management of a business',
         'Build trust',
     ],
-    languages: ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'],
+    languages: ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew'],
     occupations: [
         'Software Developer',
         'Primary School Teacher',
