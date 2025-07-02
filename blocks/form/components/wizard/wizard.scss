@@ -29,16 +29,15 @@
 .wizard {
   min-height: calc(100vh - $nav-height - $footer-height);
   height: 100%;
-
-  @media (max-width: 1279px) {
-    padding-top: $spacing-600;
-  }
-
   background: linear-gradient(
     135deg,
     $color-accent 25%,
     $color-primary-navy 100%
   );
+
+  @media (max-width: 1279px) {
+    padding-top: $spacing-600;
+  }
 
   .current-wizard-step {
     padding-bottom: 120px;
