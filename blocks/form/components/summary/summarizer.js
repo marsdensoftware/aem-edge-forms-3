@@ -208,7 +208,7 @@ export class Summarizer {
 
         Summarizer.navigate(wizardEl, index);
 
-        if (entryIndexId) {
+        if (entryId) {
             const editEl = panelEl.querySelector(`[data-id="${entryId}"] .repeatable-entry__edit`);
             if (editEl) {
                 // Switch to edit mode by triggering click on edit link;
@@ -217,11 +217,22 @@ export class Summarizer {
         }
     }
 
+    static summaryEditTemplate = `
+    <div class="row">
+        <div class="col-md-5">
+            <h4 class="title">{{title}}</h4>
+            <p class="p-small">{{description}}</p>
+            <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
+        </div>
+        <div class="col-md-7">{{content}}</div>
+    </div>
+    `;
+
     static summaryTemplate = `
     <div class="row">
         <div class="col-md-5">
-            <h4>{{title}}</h4>
-            <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
+            <h4 class="title">{{title}}</h4>
+            <p class="p-small">{{description}}</p>
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -280,7 +291,7 @@ export class Summarizer {
             content = Summarizer.getItemContent(entry, stepName, properties.showEdit);
         }
 
-        return Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: content });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: content });
     }
 
     static defaultRepeatableSummarizer(stepName, el, properties) {
@@ -294,7 +305,7 @@ export class Summarizer {
             contents.push(content);
         });
 
-        return Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: contents.join('') });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
     }
 
     static personal_details(el) {
@@ -359,7 +370,7 @@ export class Summarizer {
         });
 
         if (languagesContent.length > 0) {
-            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: languagesContent.join('') });
+            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: languagesContent.join('') });
             el.innerHTML = content;
         }
     }
@@ -411,7 +422,7 @@ export class Summarizer {
             });
 
             if (contents.length > 0) {
-                const content = Summarizer.replace(Summarizer.summaryTemplate, { stepName: stepName, title: properties.title, content: contents.join('') });
+                const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
                 el.innerHTML = content;
                 el.dataset.visible = true;
             }
@@ -452,6 +463,6 @@ export class Summarizer {
             }
         });
 
-        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, content: contents.join('') });
+        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: contents.join('') });
     }
 }
