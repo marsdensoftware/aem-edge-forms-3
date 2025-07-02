@@ -1,37 +1,52 @@
 import { onElementsAddedByClassName } from '../utils.js'
 import { Summarizer } from './summarizer.js'
 
+const summaryComponents = [];
+
+onElementsAddedByClassName('wizard', (wizardEl) => {
+    wizardEl.addEventListener('wizard:navigate', (e) => {
+        const stepId = e.detail.currStep.id;
+        const step = document.getElementById(stepId);
+
+        summaryComponents.forEach(summary => {
+            if (step.contains(summary.el)) {
+                // Render summary
+
+                summary.summarizer(summary.el, summary.properties);
+
+                // Register click on edit
+                summary.el.querySelectorAll('.edit').forEach(a => {
+                    a.addEventListener('click', () => {
+                        Summarizer.gotoWizardStep(a);
+                    });
+                });
+
+            };
+        });
+    });
+});
+
 export default function decorate(el, field) {
     const { summaryType } = field.properties;
+    const summarizer = Summarizer[summaryType];
 
     el.classList.add('field-summary');
     el.dataset.summaryType = summaryType;
 
-    onElementsAddedByClassName('wizard', (wizardEl) => {
-        wizardEl.addEventListener('wizard:navigate', (e) => {
-            const stepId = e.detail.currStep.id;
-            const step = document.getElementById(stepId);
+    if (typeof summarizer !== 'function') {
+        // ignore
+        el.innerHTML = `Invalid summarizer ${summaryType}`;
+        return el;
+    }
 
-            if (step.contains(el)) {
-                // Render summary
-                const summarizer = Summarizer[summaryType];
-                if (typeof summarizer === 'function') {
-                    const { properties } = field;
-                    properties.title = field?.label?.value;
-                    properties.description = field?.description;
+    const { properties } = field;
+    properties.title = field?.label?.value;
+    properties.description = field?.description;
 
-                    summarizer(el, properties);
-
-                    // Register click on edit
-                    el.querySelectorAll('.edit').forEach(a => {
-                        a.addEventListener('click', () => {
-                            Summarizer.gotoWizardStep(a);
-                        });
-                    });
-                }
-            };
-
-        });
+    summaryComponents.push({
+        summarizer,
+        el,
+        properties
     });
 
     return el;
