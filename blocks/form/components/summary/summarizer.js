@@ -448,18 +448,41 @@ export class Summarizer {
     }
 
     static work_preferences(el, properties) {
+
+        function getContent(workEntryFieldset, stepName, title) {
+            const nameValues = {
+                title: { value: stepName, displayValue: title },
+                ...Summarizer.fieldToNameValues(workEntryFieldset)
+            };
+
+            // English content
+            let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
+            let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
+
+            return Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName, content })
+
+        }
+
         const form = el.closest('form');
 
         // Combines 3_2_jobs, 3_3_hours, 3_4_work_availability, 3_5_work_location
-        const childrenNames = ['panel_jobs', 'panel_hours', 'panel_work_availability', 'panel_working_locations'];
+        const childrenNames = [
+            ['panel_jobs', i18n('Work you’re interested in')],
+            ['panel_hours', i18n('Hours you’re looking for')],
+            ['panel_work_availability', i18n('Work availability')],
+            ['panel_working_locations', i18n('Work location')]
+        ];
         const contents = [];
-        const showEdit = true;
 
-        childrenNames.forEach(stepName => {
+        childrenNames.forEach(step => {
+            const stepName = step[0];
+            const title = step[1];
+
             const entry = form.querySelector(`[name="${stepName}"]`);
 
             if (entry) {
-                contents.push(Summarizer.getItemContent(entry, stepName, showEdit));
+                const content = getContent(entry, stepName, title);
+                contents.push(content);
             }
         });
 
