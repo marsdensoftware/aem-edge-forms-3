@@ -18,8 +18,16 @@ export default function decorate(el, field) {
                 if (typeof summarizer === 'function') {
                     const { properties } = field;
                     properties.title = field?.label?.value;
+                    properties.description = field?.description;
 
                     summarizer(el, properties);
+
+                    // Register click on edit
+                    el.querySelectorAll('.edit').forEach(a => {
+                        a.addEventListener('click', () => {
+                            Summarizer.gotoWizardStep(a);
+                        });
+                    });
                 }
             };
 
