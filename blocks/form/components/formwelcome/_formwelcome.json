@@ -111,6 +111,9 @@
                     ]
                 },
                 {
+                    "...": "../../models/form-common/_responsive-container-component.json"
+                },
+                {
                     "...": "../../models/form-common/_responsive-columns-component.json"
                 }
             ]
