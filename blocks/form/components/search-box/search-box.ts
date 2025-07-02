@@ -141,7 +141,7 @@ const courses = [
   'Build trust',
 ]
 
-const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew']
+const languages = ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew']
 
 const userLocations = [
   'Auckland Central (en)',
