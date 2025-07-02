@@ -30204,6 +30204,12 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "label": "Description",
+            "valueType": "string"
           }
         ]
       }
