@@ -27,6 +27,7 @@
 }
 
 .wizard {
+  padding-top: $spacing-600;
   min-height: calc(100vh - $nav-height - $footer-height);
   height: 100%;
   background: linear-gradient(
@@ -51,22 +52,15 @@
     }
   }
 
-  @media (max-width: 1279px) {
-    padding-top: $spacing-600;
-  }
-
   .current-wizard-step {
     padding-bottom: 120px;
 
     @include media('tablet') {
+      padding-top: $spacing-700;
+
       @media (min-height: 921px) {
         min-height: calc(100vh - $nav-height - $footer-height);
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-top: 96px;
-        padding-bottom: 128px;
       }
     }
   }
