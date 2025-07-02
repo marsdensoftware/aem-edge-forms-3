@@ -51,7 +51,6 @@
     h2 {
       color: var(--Text-Dark-Dark, #134276);
       font-feature-settings: 'liga' off, 'clig' off;
-
       font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
       font-size: var(--Typography-Sizes-Headers-H2, 48px);
       font-style: normal;
@@ -129,12 +128,28 @@
     letter-spacing: 0;
     margin-bottom: $spacing-100;
   }
+
+  .summary-entry__employmentDetails,
+  .summary-entry__description,
+  .summary-entry__summary,
+  .summary-entry__days_you_can_work,
+  .summary-entry__hours_you_can_work,
+  .summary-entry__specific_days_cb,
+  .summary-entry__proficiency {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: $size-font-body-default;
+    line-height: 160%;
+    margin-top: $spacing-100;
+    margin-bottom: $spacing-100;
+  }
 }
 
 .summary-entry {
   color: $text-dark-primary;
   font-family: $font-family;
-  font-size: $size-font-body-large; 
+  font-size: $size-font-body-large; // ← updated here
   font-style: normal;
   font-weight: $font-weight-regular;
   line-height: 160%; // 32px
