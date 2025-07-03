@@ -23,7 +23,9 @@ main .form form .panel-repeatable-panel {
             margin-bottom: $spacing-600;
 
             &__language,
-            .repeatable-entry__cardTitle {
+            .repeatable-entry__cardTitle,
+            .repeatable-entry__course,
+            .repeatable-entry__title {
                 color: $color-primary-navy;
                 font-feature-settings: 'liga' off, 'clig' off;
                 font-family: $font-family;
@@ -33,6 +35,7 @@ main .form form .panel-repeatable-panel {
                 line-height: 130%;
                 letter-spacing: $letter-spacing-default;
             }
+
 
             &__proficiency {
                 color: $text-primary;
