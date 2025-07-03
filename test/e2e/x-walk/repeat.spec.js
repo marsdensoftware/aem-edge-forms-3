@@ -1,9 +1,9 @@
 import { test, expect } from '../fixtures.js';
-import {openPage} from '../utils.js';
+import {openPage, testRepeatablePanel} from '../utils.js';
 
 const panelLocator = 'fieldset[class="panel-wrapper field-wrapper"]';
 test.describe('Repeatability test', () => {
-  const testURL = '/content/aem-boilerplate-forms-xwalk-collaterals/fdm-invoke-service';
+  const testURL = '/content/aem-boilerplate-forms-xwalk-collaterals/repeat-panel';
   const testURL1 = '/content/aem-boilerplate-forms-xwalk-collaterals/repeat-panel/repeatable-panel-validation';
   test('test newly added panels are within div.repeat-wrapper', async ({ page }) => {
     await openPage(page, testURL);
@@ -54,25 +54,3 @@ test.describe('Repeatability test', () => {
     await testRepeatablePanel(page, panelLocator);
   });
 });
-
-const testRepeatablePanel = async (page, panelLocator) => {
-  const panel = page.locator(panelLocator);
-  const addButton = page.getByText('Add');
-  const deleteButtons = page.getByText('Delete');
-  await expect(panel).toHaveCount(1);
-  await expect(addButton).toBeVisible();
-  await addButton.click();
-  await expect(panel).toHaveCount(2);
-  const panelCount = await panel.count();
-  for (let i = 0; i < panelCount; i++) {
-    await expect(panel.nth(i)).toBeVisible();
-  }
-  await expect(addButton).toBeHidden();
-  await expect(deleteButtons).toHaveCount(2);
-  await expect(deleteButtons.last()).toBeVisible();
-  await deleteButtons.last().click();
-  await expect(addButton).toBeVisible();
-  await expect(panel).toHaveCount(1);
-};
-
-export { testRepeatablePanel };
