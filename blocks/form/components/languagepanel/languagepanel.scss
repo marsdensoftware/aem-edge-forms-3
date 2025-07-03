@@ -95,10 +95,6 @@
   }
 
   .field-languagepanel {
-    @include media('desktop') {
-      max-width: 664px;
-    }
-
     .radio-group-wrapper {
       display: flex;
       flex-direction: column;
