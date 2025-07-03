@@ -380,6 +380,7 @@ export class Summarizer {
         const stepName = 'panel_driver_licence';
 
         const entry = form.querySelector(`[name="${stepName}"] [data-repeatable].saved`);
+        const contents = [];
 
         if (entry) {
             let nameValues = Summarizer.getNameValues(entry);
@@ -413,26 +414,16 @@ export class Summarizer {
                 );
             }
 
-            const contents = [];
             entries.forEach(entryNameValues => {
                 const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
                 let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
                 content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content })
                 contents.push(content);
             });
+        }
 
-            if (contents.length > 0) {
-                const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
-                el.innerHTML = content;
-                el.dataset.visible = true;
-            }
-            else {
-                el.dataset.visible = false;
-            }
-        }
-        else {
-            el.dataset.visible = false;
-        }
+        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        el.innerHTML = content;
     }
 
     static education(el, properties) {
