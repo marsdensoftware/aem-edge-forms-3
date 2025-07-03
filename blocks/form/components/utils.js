@@ -6,15 +6,30 @@ export class DefaultFieldConverter {
     }
 
     convert(entry) {
-        function getLabelText(input) {
-            // First check text inside label
-            let label = input.parentElement.querySelector('label>.text');
-            if (!label) {
-                // Fallback to label
-                label = input.parentElement.querySelector('label');
+        function getDisplayText(input) {
+            const labelEl = input.parentElement.querySelector('label');
+            let result = '';
+
+            if (!labelEl) {
+                return result;
             }
 
-            return label.textContent.trim()
+            // First check text inside label
+            let textEl = labelEl.querySelector(':scope>.text');
+            if (textEl) {
+                result = textEl.textContent.trim();
+
+                // Check description
+                let descEl = labelEl.querySelector(':scope>.desc');
+                if (descEl) {
+                    result += ' - ' + descEl.textContent.trim();
+                }
+            }
+            else {
+                result = labelEl.textContent.trim();
+            }
+
+            return result;
         }
 
         const inputs = entry.querySelectorAll('input, select, textarea');
@@ -36,7 +51,7 @@ export class DefaultFieldConverter {
                     return;
                 }
 
-                displayValue = input.checked ? getLabelText(input) : '';
+                displayValue = input.checked ? getDisplayText(input) : '';
             }
 
             if (value) {
