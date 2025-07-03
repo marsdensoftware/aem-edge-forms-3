@@ -36,6 +36,10 @@
     $color-primary-navy 100%
   );
 
+  @include media('tablet') {
+    padding-top: $spacing-700;
+  }
+
   .field-save-changes {
     display: none;
     margin-left: auto;
@@ -56,8 +60,6 @@
     padding-bottom: 120px;
 
     @include media('tablet') {
-      padding-top: $spacing-700;
-
       @media (min-height: 921px) {
         min-height: calc(100vh - $nav-height - $footer-height);
         height: 100%;
