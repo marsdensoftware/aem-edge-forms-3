@@ -47,8 +47,12 @@ class EducationConverter {
     static process(result) {
         const newResult = {};
 
+        const summary = [];
+
+        const placeOfLearning = result[EducationFieldNames.PLACE_OF_LEARNING]?.displayValue;
+        if (placeOfLearning) summary.push(placeOfLearning);
+
         newResult[EducationFieldNames.COURSE] = result[EducationFieldNames.COURSE];
-        let summary = result[EducationFieldNames.PLACE_OF_LEARNING].displayValue;
         const startYear = result[EducationFieldNames.START_YEAR];
 
         // Customize rendering for completion-year, completion status
@@ -56,14 +60,15 @@ class EducationConverter {
         if (completionStatus?.value == '0') {
             // Completed
             const endYear = result[EducationFieldNames.FINISH_YEAR];
-            summary += `, ${i18n('Finished')} ${endYear.displayValue}`;
+            summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
         }
         else {
             // Partially completed
-            summary += `, ${i18n('Started')} ${startYear.displayValue}, ${i18n('Partially complete')}.`
+            summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`)
         }
 
-        newResult.summary = { value: summary, displayValue: summary };
+        const value = summary?.length ? `${summary.join(', ')}.` : '';
+        newResult.summary = { value, displayValue: value };
 
         return newResult;
     }
@@ -138,6 +143,7 @@ export class Summarizer {
         const entries = [];
 
         Object.entries(nameValues).forEach(([name, data]) => {
+            if (!data) return;
             const value = data.value;
             const displayValue = data.displayValue;
 
@@ -380,6 +386,7 @@ export class Summarizer {
         const stepName = 'panel_driver_licence';
 
         const entry = form.querySelector(`[name="${stepName}"] [data-repeatable].saved`);
+        const contents = [];
 
         if (entry) {
             let nameValues = Summarizer.getNameValues(entry);
@@ -413,26 +420,16 @@ export class Summarizer {
                 );
             }
 
-            const contents = [];
             entries.forEach(entryNameValues => {
                 const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
                 let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
                 content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content })
                 contents.push(content);
             });
+        }
 
-            if (contents.length > 0) {
-                const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
-                el.innerHTML = content;
-                el.dataset.visible = true;
-            }
-            else {
-                el.dataset.visible = false;
-            }
-        }
-        else {
-            el.dataset.visible = false;
-        }
+        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        el.innerHTML = content;
     }
 
     static education(el, properties) {

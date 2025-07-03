@@ -44,6 +44,11 @@ function addRecommendationsCardsDiv(headingText, emptySelectionMessage) {
 function createSelectedCard(item, selectedCardsDiv, searchInput) {
     const card = document.createElement('div');
     card.classList.add('selected-card', 'selected-card--is-selected');
+    // Create hidden input to store the value
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.value = item;
+    hiddenInput.name = `selected-item-${item.replace(/\s+/g, '-').toLowerCase()}`;
     const text = document.createElement('div');
     text.textContent = item;
     const removeBtn = document.createElement('button');
@@ -65,6 +70,7 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
             }
         }
     });
+    card.appendChild(hiddenInput);
     card.appendChild(text);
     card.appendChild(removeBtn);
     selectedCardsDiv.appendChild(card);
@@ -105,7 +111,7 @@ const courses = [
     'Assume responsibility for the management of a business',
     'Build trust',
 ];
-const languages = ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'];
+const languages = ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew'];
 const userLocations = [
     'Auckland Central (en)',
     'Blenheim (en)',

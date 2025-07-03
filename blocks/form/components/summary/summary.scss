@@ -1,5 +1,4 @@
 @use '../../../../styles/settings' as *;
-@use '../../../../styles/base' as *;  // Testing RW
 
 .field-summary {
   padding: 64px 0;
@@ -155,16 +154,11 @@
   font-style: normal;
   font-weight: $font-weight-regular;
   line-height: 160%;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 
   &:not(:last-child):not(:only-child) {
     border-bottom: 1px solid $stroke-tertiary;
     padding-bottom: $spacing-300;
     margin-bottom: $spacing-300;
   }
-}
-
-.summary-entry__employmentDetails {
-  margin-top: $spacing-100;
-  margin-bottom: $spacing-100;
 }
