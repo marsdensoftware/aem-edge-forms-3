@@ -1,3 +1,5 @@
+
+
 @use '../../../../styles/settings' as *;
 @use '../../../../styles/base' as *;
 
@@ -34,8 +36,8 @@
     padding-right: $spacing-600;
 
     &:not(:last-child) {
-      padding-top: $spacing-600;
-      padding-bottom: $spacing-600;
+    /*  padding-top: $spacing-600;
+      padding-bottom: $spacing-600;*/
     }
 
     &:last-child {
@@ -58,13 +60,10 @@
   .summary-entry__language,
   .summary-entry__course,
   .summary-entry__title,
-  .summary-entry__licenceClassTitle {
+  .summary-entry__licenceClassTitle, .summary-entry__endorsementsTitle {
     font-weight: 700;
     margin-bottom: $spacing-100;
-  }
-
-  .summary-entry__cb_english_proficiency {
-    font-weight: $font-weight-regular;
+    font-size: $size-font-body-default;
   }
 
   .summary-entry__personal-summary {
@@ -85,7 +84,8 @@
   .summary-entry__hours_you_can_work,
   .summary-entry__specific_days_cb,
   .summary-entry__proficiency,
-  .summary-entry__licence-class {
+  .summary-entry__licence-class,
+  .summary-entry__reliable-transport, .summary-entry__endorsements {
     color: $text-dark-primary;
     font-family: $font-family;
     font-style: normal;
@@ -136,15 +136,15 @@
   }
 
   .address i {
-    background-image: url('../../../../icons/icon-x.svg');
+    background-image: url('../../../../../icons/icon-x.svg');
   }
 
   .phone i {
-    background-image: url('../../../../icons/icon-x.svg');
+    background-image: url('../../../../../../icons/icon-x.svg');
   }
 
   .email i {
-    background-image: url('../../../../icons/icon-x.svg');
+    background-image: url('../../../../../../../icons/icon-x.svg');
   }
 }
 
@@ -158,8 +158,53 @@
   letter-spacing: 0;
 
   &:not(:last-child):not(:only-child) {
-    border-bottom: 1px solid $stroke-tertiary;
-    padding-bottom: $spacing-300;
-    margin-bottom: $spacing-300;
+   /* padding-bottom: $spacing-300;
+    margin-bottom: $spacing-300;*/
   }
+}
+
+// Job Titles
+.summary-entry [data-name^='selected-item-job-title'],
+.summary-entry [class*='selected-item-job-title'] {
+  color: $text-dark-primary;
+  font-family: $font-family;
+  font-style: normal;
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  margin-top: $spacing-100;
+  margin-bottom: $spacing-100;
+}
+
+// Radio Buttons
+.summary-entry [data-name^='radiobutton'],
+.summary-entry [class*='radiobutton'] {
+  color: $text-dark-primary;
+  font-family: $font-family;
+  font-style: normal;
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  margin-top: $spacing-100;
+  margin-bottom: $spacing-100;
+}
+
+.summary-entry [data-name^='selected-item'],
+.summary-entry [class*='selected-item'] {
+  color: $text-dark-primary;
+  font-family: $font-family;
+  font-style: normal;
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  margin-top: $spacing-100;
+  margin-bottom: $spacing-100;
+}
+
+.summary-entry [data-name^='textinput'],
+.summary-entry [class*='textinput'] {
+  color: $text-dark-primary;
+  font-family: $font-family;
+  font-style: normal;
+  font-size: $size-font-body-default;
+  line-height: 160%;
+  margin-top: $spacing-100;
+  margin-bottom: $spacing-100;
 }

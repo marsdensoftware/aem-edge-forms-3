@@ -294,7 +294,7 @@ main.wizard--bg-mid::before {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
+  background-image: url('../../../../images/mymsd-unity-pattern-bottom-left.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: bottom left;
@@ -306,7 +306,7 @@ main.wizard--bg-light::before {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+  background-image: url('../../../../images/mymsd-unity-pattern-top-right-light.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: top right;
@@ -325,13 +325,13 @@ main.wizard--bg-light::before {
   main.wizard--bg-dark::before,
   main.wizard--bg-mid::before {
     top: 100px;
-    background-image: url('../../images/mymsd-unity-pattern-top-right.svg');
+    background-image: url('../../../../../../images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
   }
 
   main.wizard--bg-light::before {
     top: 100px;
-    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-image: url('../../../../images/mymsd-unity-pattern-top-right-light.svg');
     background-position: top right;
   }
 }
@@ -339,12 +339,15 @@ main.wizard--bg-light::before {
 @include media('desktop') {
   main.wizard--bg-dark::before,
   main.wizard--bg-mid::before {
-    background-image: url('../../images/mymsd-unity-pattern-bottom-left.svg');
+    background-image: url('../../../../images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
   }
 
   main.wizard--bg-light::before {
-    background-image: url('../../images/mymsd-unity-pattern-top-right-light.svg');
+    background-image: url('../../../../images/mymsd-unity-pattern-top-right-light.svg');
     background-position: top right;
   }
 }
+
+
+
