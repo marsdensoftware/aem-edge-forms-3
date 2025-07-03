@@ -398,8 +398,7 @@ export class Summarizer {
                         value: 'licence-class-title',
                         displayValue: i18n('Classes')
                     }
-                },
-                {
+                    ,
                     'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
                 }
             ];
@@ -410,11 +409,8 @@ export class Summarizer {
                         'endorsementsTitle': {
                             value: 'endorsements-title',
                             displayValue: i18n('Endorsements')
-                        }
-                    }
-                );
-                entries.push(
-                    {
+                        },
+
                         'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
                     }
                 );
