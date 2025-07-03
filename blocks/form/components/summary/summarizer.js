@@ -48,7 +48,7 @@ class EducationConverter {
         const newResult = {};
 
         newResult[EducationFieldNames.COURSE] = result[EducationFieldNames.COURSE];
-        let summary = result[EducationFieldNames.PLACE_OF_LEARNING].displayValue;
+        let summary = result[EducationFieldNames.PLACE_OF_LEARNING]?.displayValue || '';
         const startYear = result[EducationFieldNames.START_YEAR];
 
         // Customize rendering for completion-year, completion status
