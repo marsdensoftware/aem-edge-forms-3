@@ -64,6 +64,12 @@ function createSelectedCard(
   const card = document.createElement('div')
   card.classList.add('selected-card', 'selected-card--is-selected')
 
+  // Create hidden input to store the value
+  const hiddenInput = document.createElement('input')
+  hiddenInput.type = 'hidden'
+  hiddenInput.value = item
+  hiddenInput.name = `selected-item-${item.replace(/\s+/g, '-').toLowerCase()}`
+
   const text = document.createElement('div')
   text.textContent = item
 
@@ -89,6 +95,7 @@ function createSelectedCard(
     }
   })
 
+  card.appendChild(hiddenInput)
   card.appendChild(text)
   card.appendChild(removeBtn)
   selectedCardsDiv.appendChild(card)
