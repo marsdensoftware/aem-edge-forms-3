@@ -22,7 +22,8 @@ main .form form .panel-repeatable-panel {
             position: relative;
             margin-bottom: $spacing-600;
 
-            &__language {
+            &__language,
+            .repeatable-entry__cardTitle {
                 color: $color-primary-navy;
                 font-feature-settings: 'liga' off, 'clig' off;
                 font-family: $font-family;
