@@ -45,7 +45,7 @@
     font-weight: $font-weight-regular;
     line-height: 160%;
     letter-spacing: 0;
-    border-bottom: 1px solid $stroke-tertiary;
+    border-bottom: solid 2px $color-border-secondary;
     padding-top: $spacing-450;
     padding-bottom: $spacing-450;
     margin-bottom: $spacing-300;
@@ -222,3 +222,4 @@
   .phone i { background-image: url('/icons/icon-summary-mobile-blue.svg'); }
   .email i { background-image: url('/icons/icon-summary-mail-blue.svg'); }
 }
+
