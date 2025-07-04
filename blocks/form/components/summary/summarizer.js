@@ -245,7 +245,7 @@ export class Summarizer {
     `;
 
     static itemContentEditTemplate = `
-    <div class="row item">
+    <div class="row summary-entry">
         <div class="col-md-11">
             {{content}}
         </div>
@@ -255,7 +255,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `{{content}}`;
+    static itemContentTemplate = `<div class="row summary-entry">{{content}}</div>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -272,13 +272,12 @@ export class Summarizer {
 
     static createSummaryFromMarkupObjects(markupObjects) {
         const result = document.createElement('div');
-        result.classList.add('summary-entry');
 
         markupObjects.forEach(mo => {
             result.append(mo);
         });
 
-        return result.outerHTML;
+        return result.innerHTML;
     }
 
     static renderEntry(entry) {
