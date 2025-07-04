@@ -456,6 +456,16 @@ export class Summarizer {
                 delete nameValues['specific_days_cb'];
             }
 
+            if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
+                if (isNo(nameValues['reliable-transport'])) {
+                    nameValues['reliable-transport'].displayValue = i18n('I don\'t have reliable transport to get to work');
+                }
+                else {
+                    nameValues['reliable-transport'].displayValue = i18n('I have reliable transport to get to work');
+                }
+
+            }
+
             // Content
             let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
             let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);

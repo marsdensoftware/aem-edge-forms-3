@@ -23,6 +23,8 @@ export class DefaultFieldConverter {
         inputs.forEach(input => {
             const value = input.value;;
             let displayValue = value;
+            let label;
+
             const name = input.name;
 
             const type = input.type;
@@ -36,6 +38,7 @@ export class DefaultFieldConverter {
                     return;
                 }
 
+                label = input.closest('fieldset').querySelector('legend')?.textContent.trim();
                 displayValue = input.checked ? getLabelText(input) : '';
             }
 
@@ -55,7 +58,7 @@ export class DefaultFieldConverter {
                     e.displayValues.push(displayValue);
                 }
                 else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
+                    result[name] = { label, value, displayValue };
                 }
             }
         });
