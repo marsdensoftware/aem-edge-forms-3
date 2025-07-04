@@ -447,7 +447,16 @@ export class Summarizer {
                 ...Summarizer.fieldToNameValues(workEntryFieldset)
             };
 
-            // English content
+            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
+                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
+                // Specific days
+                const index = nameValues['days_you_can_work'].values.indexOf('3');
+                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
+
+                delete nameValues['specific_days_cb'];
+            }
+
+            // Content
             let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
             let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
 
