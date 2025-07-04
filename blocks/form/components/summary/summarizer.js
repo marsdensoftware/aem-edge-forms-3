@@ -245,7 +245,7 @@ export class Summarizer {
     `;
 
     static itemContentEditTemplate = `
-    <div class="row item">
+    <div class="row summary-entry">
         <div class="col-md-11">
             {{content}}
         </div>
@@ -255,7 +255,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `{{content}}`;
+    static itemContentTemplate = `<div class="row summary-entry">{{content}}</div>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -272,13 +272,12 @@ export class Summarizer {
 
     static createSummaryFromMarkupObjects(markupObjects) {
         const result = document.createElement('div');
-        result.classList.add('summary-entry');
 
         markupObjects.forEach(mo => {
             result.append(mo);
         });
 
-        return result.outerHTML;
+        return result.innerHTML;
     }
 
     static renderEntry(entry) {
@@ -448,7 +447,26 @@ export class Summarizer {
                 ...Summarizer.fieldToNameValues(workEntryFieldset)
             };
 
-            // English content
+            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
+                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
+                // Specific days
+                const index = nameValues['days_you_can_work'].values.indexOf('3');
+                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
+
+                delete nameValues['specific_days_cb'];
+            }
+
+            if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
+                if (isNo(nameValues['reliable-transport'])) {
+                    nameValues['reliable-transport'].displayValue = i18n('I don\'t have reliable transport to get to work');
+                }
+                else {
+                    nameValues['reliable-transport'].displayValue = i18n('I have reliable transport to get to work');
+                }
+
+            }
+
+            // Content
             let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
             let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
 

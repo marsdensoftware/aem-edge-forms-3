@@ -9,7 +9,7 @@ const summaryComponents = [];
 onElementsAddedByClassName('wizard', (wizardEl) => {
     // Add save button to go back to the review page after save
     const def = {
-        label: { value: i18n('Review') }, fieldType: 'button', name: 'save-changes', id: 'wizard-button-save-changes',
+        label: { value: i18n('Save changes') }, fieldType: 'button', name: 'save-changes', id: 'wizard-button-save-changes',
     };
 
     const saveBtn = createButton(def);
