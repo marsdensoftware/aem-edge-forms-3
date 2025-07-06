@@ -1,66 +1,47 @@
 @use '../../../../styles/settings' as *;
 
+// Hide menu items globally
 .wizard .wizard-menu-items {
   display: none !important;
 }
 
-.wizard--bg-dark {
-  .wizard {
-    background: linear-gradient(
-                    135deg,
-                    $color-accent 25%,
-                    $color-primary-navy 100%
-    );
-  }
+// Background themes
+.wizard--bg-dark .wizard {
+  background: linear-gradient(135deg, $color-accent 25%, $color-primary-navy 100%);
 }
 
-.wizard--bg-mid {
-  .wizard {
-    background: linear-gradient(
-                    135deg,
-                    $color-shade-blue-10 25%,
-                    $color-shade-blue-25 100%
-    );
-  }
+.wizard--bg-mid .wizard {
+  background: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);
 }
 
-.wizard--bg-light {
-  .wizard {
-    background: var(--Background-Light-Secondary, #F5FAFD);
-
-  }
+.wizard--bg-light .wizard {
+  background: var(--Background-Light-Secondary, #F5FAFD);
 }
 
+// Wizard container
 .wizard {
   min-height: calc(100vh - $nav-height - $footer-height);
   height: 100%;
+  background: linear-gradient(135deg, $color-accent 25%, $color-primary-navy 100%);
 
   @media (max-width: 1279px) {
-    padding-left: $spacing-600;
-    padding-right: $spacing-600;
-    padding-top: $spacing-600;
+    padding: $spacing-600;
   }
 
-  background: linear-gradient(
-                  135deg,
-                  $color-accent 25%,
-                  $color-primary-navy 100%
-  );
-  
-  .field-save-changes{
-      display: none;
-      margin-left: auto;
+  .field-save-changes {
+    display: none;
+    margin-left: auto;
   }
-  
-  &.from-review{
-      .field-save-changes{
-          display: block;
-      }
-      
-      .wizard-button-prev,
-      .wizard-button-next{
-          display: none;
-      }
+
+  &.from-review {
+    .field-save-changes {
+      display: block;
+    }
+
+    .wizard-button-prev,
+    .wizard-button-next {
+      display: none;
+    }
   }
 
   .current-wizard-step {
@@ -106,12 +87,11 @@
     gap: 50px;
     flex-wrap: wrap;
     list-style: none;
-    padding: 0;
+    padding: 0 0 var(--form-wizard-padding) 0;
     margin: 0;
     font-weight: var(--form-fieldset-legend-font-weight);
     font-size: var(--form-fieldset-legend-font-size);
     color: var(--form-fieldset-legend-color);
-    padding-bottom: var(--form-wizard-padding);
     grid-column: span 12;
   }
 
@@ -150,10 +130,7 @@
 }
 
 // Utility/hiding logic
-main .form form .wizard > fieldset > legend {
-  display: none;
-}
-
+main .form form .wizard > fieldset > legend,
 main .form form .wizard > fieldset:not(.current-wizard-step) {
   display: none;
 }
@@ -162,17 +139,7 @@ main .form form .wizard .wizard-button-wrapper .field-wrapper {
   flex: unset;
 }
 
-main
-form
-.wizard
-> .current-wizard-step.panel-wrapper:first-of-type
-~ .wizard-button-wrapper
-> .wizard-button-prev,
-main
-form
-.wizard
-> .current-wizard-step.panel-wrapper:last-of-type
-~ .wizard-button-wrapper
-> .wizard-button-next {
+main form .wizard > .current-wizard-step.panel-wrapper:first-of-type ~ .wizard-button-wrapper > .wizard-button-prev,
+main form .wizard > .current-wizard-step.panel-wrapper:last-of-type ~ .wizard-button-wrapper > .wizard-button-next {
   display: none;
 }

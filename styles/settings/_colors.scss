@@ -122,9 +122,6 @@ $bg-contextual-help-primary: $bg-primary;
 $bg-contextual-help-secondary: $color-shade-blue-10;
 $bg-contextual-help-tertiary: $color-primary-dark-navy;
 
-
- // RW
-
 // UI Icons
 $icon-accent: $color-primary;
 $icon-dark: $color-primary-navy;
@@ -143,6 +140,9 @@ $stroke-tertiary: $color-shade-navy-40;
 $stroke-dark: $color-primary-navy;
 $stroke-error: $color-feedback-red;
 $stroke-focus: $color-feedback-pink;
+
+// border
+$color-border-secondary: #D0D9E4;
 
 // Input stroke widths
 $stroke-input-stroke: 2px;
