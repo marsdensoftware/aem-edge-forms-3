@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel__languagepanel {
+.panel-repeatable-panel__languagepanel {
   [name='proficiency'] {
     display: none;
   }
@@ -51,7 +51,6 @@ main .form form .panel-repeatable-panel__languagepanel {
 
   .checkbox-group-wrapper.field-cb-english-proficiency {
     margin-top: 32px;
-    max-width: 457px;
   }
 }
 
@@ -96,10 +95,6 @@ main .form form .panel-repeatable-panel__languagepanel {
   }
 
   .field-languagepanel {
-    @include media('desktop') {
-      max-width: 664px;
-    }
-
     .radio-group-wrapper {
       display: flex;
       flex-direction: column;

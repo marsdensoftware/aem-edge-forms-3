@@ -200,22 +200,22 @@ function createRadioOrCheckboxGroup(fd) {
       enum: [value],
       required: fd.required,
     });
-    
+
     //###SEP-NJ START Display description below field label
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
     const textContent = labelEl.textContent.trim();
     labelEl.textContent = '';
-    
+
     // Create and append the span.text
     const textSpan = document.createElement('span');
     textSpan.className = 'text';
     textSpan.textContent = textContent;
     labelEl.appendChild(textSpan);
-    
+
     const description = fd.properties?.enumDescriptions?.[index];
-    
+
     if(description){
       // Create and append the span.desc
       const descSpan = document.createElement('span');
@@ -225,7 +225,7 @@ function createRadioOrCheckboxGroup(fd) {
       labelEl.classList.add('field-label--with-description');
     }
     //###SEP-NJ END Display description
-    
+
     const { variant, 'afs:layout': layout } = fd.properties;
     //###SEP-NJ START Always show variant if defined
     if (variant) {
@@ -252,22 +252,22 @@ function createRadioOrCheckboxGroup(fd) {
     }
     wrapper.appendChild(field);
   });
-  
+
   //###SEP-NJ START Wrap radios in a container if bar display
   if(wrapper.classList.contains('variant-bar')){
     const wrappers = wrapper.querySelectorAll('.radio-wrapper');
 
     const radiosWrapper = document.createElement('div');
     radiosWrapper.className = 'radios-wrapper';
-    
+
     // Insert before the first .radio-wrapper
     wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
-    
+
     // Move the all elements inside the new wrapper
     wrappers.forEach(el => radiosWrapper.appendChild(el));
   }
   //###SEP-NJ END
-  
+
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
     wrapper.title = stripTags(fd.tooltip, '');
@@ -339,10 +339,73 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  const colSpan = field['Column Span'] || field.properties?.colspan;
-  if (colSpan && element) {
-    element.classList.add(`col-${colSpan}`);
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate js file and importing it
+  // Get the default colspan
+  const defaultColSpan = field['Column Span'] || field.properties?.colspan;
+  const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
+
+  // Get responsive colspans from properties
+  const responsiveColSpans = {
+    sm: field.properties?.['colspan-sm'],
+    md: field.properties?.['colspan-md'],
+    lg: field.properties?.['colspan-lg'],
+    xl: field.properties?.['colspan-xl'],
+    xxl: field.properties?.['colspan-xxl']
+  };
+
+  // Get responsive offsets from properties
+  const responsiveOffsets = {
+    sm: field.properties?.['colspan-sm-offset'],
+    md: field.properties?.['colspan-md-offset'],
+    lg: field.properties?.['colspan-lg-offset'],
+    xl: field.properties?.['colspan-xl-offset'],
+    xxl: field.properties?.['colspan-xxl-offset']
+  };
+
+  // Get container classes from properties
+  const containerClass = field.properties?.container;
+  const rowClass = field.properties?.row;
+  const reverseRowWrap = field.properties?.['flex-wrap-reverse']
+
+  if (element) {
+    // Add default colspan class if defined
+    if (defaultColSpan) {
+      element.classList.add(`col${defaultColSpan === 'split' ? '' : `-${defaultColSpan}`}`);
+    }
+
+    //set a default offset - ideally, we should delete the value from the jcr
+    if (defaultOffset) {
+      element.classList.add(`offset-${defaultOffset}`);
+    }
+
+    // Add responsive colspan classes if defined
+    Object.entries(responsiveColSpans).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`col-${size}${value === 'split' ? '' : `-${value}`}`);
+      }
+    });
+
+    // Add responsive offset classes if defined
+    Object.entries(responsiveOffsets).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`offset-${size}-${value}`);
+      }
+    });
+
+    // Add container class if defined
+    if (containerClass) {
+      element.classList.add(containerClass);
+    }
+
+    // Add row class if defined
+    if (rowClass === true) {
+      element.classList.add('row');
+      if (reverseRowWrap) {
+        element.classList.add('flex-wrap-reverse');
+      }
+    }
   }
+  // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
 
 const handleFocus = (input, field) => {

@@ -1,3 +1,142 @@
-.field-summary{padding:4rem 0;border-top:solid 2px #b0c4de}.field-summary .edit{width:3.5rem;height:1.625rem;background-image:url("../../../../icons/icon-repeatable-panel-edit-blue.svg");background-repeat:no-repeat;display:block;text-align:center;padding-left:1.75rem;text-decoration:underline;font-family:"Atkinson Hyperlegible Next", sans-serif;font-size:clamp(0.9375rem, 1.25vw, 1.0625rem);font-style:normal;font-weight:500;line-height:133%;letter-spacing:0;color:#017ac9}.field-summary .edit:hover, .field-summary .edit:focus, .field-summary .edit:visited{color:#134276}.field-summary .summary-entry, .field-summary .item{padding-right:2rem}.field-summary .summary-entry:not(:last-child), .field-summary .item:not(:last-child){padding-top:2rem;padding-bottom:2rem}.field-summary .summary-entry:last-child, .field-summary .item:last-child{padding-bottom:0}.field-summary .summary-entry__language, .field-summary .summary-entry__course, .field-summary .summary-entry__title, .field-summary .summary-entry__licenceClassTitle, .field-summary .summary-entry__cb_english_proficiency{color:#333333;font-family:"Atkinson Hyperlegible Next", sans-serif;font-style:normal;line-height:160%;font-size:clamp(0.9375rem, 1.25vw, 1.0625rem)}.field-summary .summary-entry__language, .field-summary .summary-entry__course, .field-summary .summary-entry__title, .field-summary .summary-entry__licenceClassTitle{font-weight:700;margin-bottom:0.25rem}.field-summary .summary-entry__cb_english_proficiency{font-weight:400}.field-summary .summary-entry__personal-summary{color:#333333;font-family:"Atkinson Hyperlegible Next", sans-serif;font-style:normal;line-height:160%;font-size:clamp(1.0625rem, 1.5vw, 1.25rem);font-weight:400;letter-spacing:0;margin-bottom:0.25rem}.field-summary .summary-entry__employmentDetails, .field-summary .summary-entry__description, .field-summary .summary-entry__summary, .field-summary .summary-entry__days_you_can_work, .field-summary .summary-entry__hours_you_can_work, .field-summary .summary-entry__specific_days_cb, .field-summary .summary-entry__proficiency, .field-summary .summary-entry__licence-class{color:#333333;font-family:"Atkinson Hyperlegible Next", sans-serif;font-style:normal;font-size:clamp(0.9375rem, 1.25vw, 1.0625rem);line-height:160%;margin-top:0.25rem;margin-bottom:0.25rem}.field-summary .summary-entry:first-child, .field-summary .item:first-child{padding-top:0;padding-bottom:0}.field-summary.field-summary-work-preferences .p-small{color:#333333}.field-summary-personal-details h2{color:#134276}.field-summary-personal-details span{color:#333333;font-family:"Atkinson Hyperlegible Next", sans-serif;font-size:clamp(0.9375rem, 1.25vw, 1.0625rem);font-style:normal;font-weight:700;line-height:160%;vertical-align:middle}.field-summary-personal-details .address i, .field-summary-personal-details .phone i, .field-summary-personal-details .email i{display:inline-block;width:1.25rem;height:1.25rem;margin-right:0.5rem;background-repeat:no-repeat;background-size:contain;vertical-align:middle}.field-summary-personal-details .address i{background-image:url("../../../../icons/icon-x.svg")}.field-summary-personal-details .phone i{background-image:url("../../../../icons/icon-x.svg")}.field-summary-personal-details .email i{background-image:url("../../../../icons/icon-x.svg")}.summary-entry{color:#333333;font-family:"Atkinson Hyperlegible Next", sans-serif;font-size:clamp(1.0625rem, 1.5vw, 1.25rem);font-style:normal;font-weight:400;line-height:160%;letter-spacing:0}.summary-entry:not(:last-child):not(:only-child){border-bottom:1px solid #a1b3c8;padding-bottom:0.75rem;margin-bottom:0.75rem}
+.field-summary {
+  padding: 4rem 0;
+  border-top: solid 2px #b0c4de;
+}
+.field-summary .edit {
+  width: 3.5rem;
+  height: 1.625rem;
+  background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
+  background-repeat: no-repeat;
+  display: block;
+  text-align: center;
+  padding-left: 1.75rem;
+  text-decoration: underline;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 133%;
+  letter-spacing: 0;
+  color: #017ac9;
+}
+.field-summary .edit:hover,
+.field-summary .edit:focus,
+.field-summary .edit:visited {
+  color: #134276;
+}
+.field-summary .summary-entry,
+.field-summary .item {
+  padding-right: 2rem;
+}
+.field-summary .summary-entry:not(:last-child),
+.field-summary .item:not(:last-child) {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.field-summary .summary-entry:last-child,
+.field-summary .item:last-child {
+  padding-bottom: 0;
+}
+.field-summary .summary-entry__language,
+.field-summary .summary-entry__course,
+.field-summary .summary-entry__title,
+.field-summary .summary-entry__licenceClassTitle,
+.field-summary .summary-entry__cb_english_proficiency {
+  color: #333333;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-style: normal;
+  line-height: 160%;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+}
+.field-summary .summary-entry__language,
+.field-summary .summary-entry__course,
+.field-summary .summary-entry__title,
+.field-summary .summary-entry__licenceClassTitle {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.field-summary .summary-entry__cb_english_proficiency {
+  font-weight: 400;
+}
+.field-summary .summary-entry__personal-summary {
+  color: #333333;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-style: normal;
+  line-height: 160%;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: 0.25rem;
+}
+.field-summary .summary-entry__employmentDetails,
+.field-summary .summary-entry__description,
+.field-summary .summary-entry__summary,
+.field-summary .summary-entry__days_you_can_work,
+.field-summary .summary-entry__hours_you_can_work,
+.field-summary .summary-entry__specific_days_cb,
+.field-summary .summary-entry__proficiency,
+.field-summary .summary-entry__licence-class {
+  color: #333333;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-style: normal;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  line-height: 160%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.field-summary .summary-entry:first-child,
+.field-summary .item:first-child {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.field-summary.field-summary-work-preferences .p-small {
+  color: #333333;
+}
+.field-summary-personal-details h2 {
+  color: #134276;
+}
+.field-summary-personal-details span {
+  color: #333333;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+  vertical-align: middle;
+}
+.field-summary-personal-details .address i,
+.field-summary-personal-details .phone i,
+.field-summary-personal-details .email i {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.field-summary-personal-details .address i {
+  background-image: url('../../../../icons/icon-x.svg');
+}
+.field-summary-personal-details .phone i {
+  background-image: url('../../../../icons/icon-x.svg');
+}
+.field-summary-personal-details .email i {
+  background-image: url('../../../../icons/icon-x.svg');
+}
+.summary-entry {
+  color: #333333;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  letter-spacing: 0;
+}
+.summary-entry:not(:last-child):not(:only-child) {
+  border-bottom: 1px solid #a1b3c8;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
 
 /*# sourceMappingURL=summary.css.map */

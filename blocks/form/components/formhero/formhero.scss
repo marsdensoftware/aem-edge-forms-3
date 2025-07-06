@@ -1,18 +1,9 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  // Temporary specificity
-  // Remove this as the grid component come in
-  .panel-formhero.current-wizard-step {
+  .panel-formhero {
     display: flex;
     flex-direction: column;
-
-    @include media('desktop') {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 0 $spacing-400;
-    }
 
     legend {
       display: none;
@@ -50,7 +41,6 @@
 
     @include media('desktop') {
       order: 0;
-      max-width: 577px;
     }
   }
 

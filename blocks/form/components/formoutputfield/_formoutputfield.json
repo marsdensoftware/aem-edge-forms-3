@@ -59,6 +59,9 @@
                   "value": "Date"
                 }
               ]
+            },
+            {
+              "...": "../../models/form-common/_responsive-columns-component.json"
             }
           ]
         }
