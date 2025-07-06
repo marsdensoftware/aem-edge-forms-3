@@ -25,7 +25,7 @@ body.modal-open {
   }
 
   .modal dialog .modal-content {
-    max-height: calc(100vh - 90px);
+    max-height: calc(100rem - 90px);
   }
 }
 
