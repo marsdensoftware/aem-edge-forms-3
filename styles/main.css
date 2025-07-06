@@ -1632,8 +1632,8 @@ fieldset {
   border: 0;
 }
 .multiline-wrapper label {
-  margin-bottom: 0.5rem;
   display: block;
+  margin-bottom: 0.5rem;
 }
 textarea {
   width: 100%;
@@ -1689,9 +1689,9 @@ textarea:hover {
 .number-wrapper input[type='number']::placeholder {
   color: #706868;
 }
-.number-wrapper input[type='number']:focus-visible,
 .number-wrapper input[type='number']:focus,
 .number-wrapper input[type='number']:active,
+.number-wrapper input[type='number']:focus-visible,
 .number-wrapper input[type='number']:hover {
   border-color: #017ac9;
   outline: #017ac9;
@@ -1739,9 +1739,9 @@ textarea:hover {
 .email-wrapper input[type='email']::placeholder {
   color: #706868;
 }
-.email-wrapper input[type='email']:focus-visible,
 .email-wrapper input[type='email']:focus,
 .email-wrapper input[type='email']:active,
+.email-wrapper input[type='email']:focus-visible,
 .email-wrapper input[type='email']:hover {
   border-color: #017ac9;
   outline: #017ac9;
@@ -1754,7 +1754,8 @@ textarea:hover {
 }
 main .form form .field-wrapper.field-invalid .field-description {
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
   margin-top: 0.5rem;
   color: #134276;
   font-family: 'Atkinson Hyperlegible Next', sans-serif;
@@ -1770,21 +1771,65 @@ main .form form .field-wrapper.field-invalid .field-description::before {
   left: 0;
   width: 1rem;
   height: 1rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E")
+    no-repeat center/contain;
 }
-.typography-wrapper,
-.default-content-wrapper {
-  width: 100%;
-  margin: 0 auto;
-  max-width: 75rem;
-  padding-left: clamp(1rem, 5vw, 4rem);
-  padding-right: clamp(1rem, 5vw, 4rem);
+main.wizard--bg-light,
+main.wizard--bg-mid {
+  color: #2e2e2e;
+}
+main.wizard--bg-light h1,
+main.wizard--bg-light h2,
+main.wizard--bg-light h3,
+main.wizard--bg-mid h1,
+main.wizard--bg-mid h2,
+main.wizard--bg-mid h3 {
+  color: #2e2e2e;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #017ac9 25%, #134276 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+main.wizard--bg-light h1:last-child:not(:first-child),
+main.wizard--bg-light h2:last-child:not(:first-child),
+main.wizard--bg-light h3:last-child:not(:first-child),
+main.wizard--bg-mid h1:last-child:not(:first-child),
+main.wizard--bg-mid h2:last-child:not(:first-child),
+main.wizard--bg-mid h3:last-child:not(:first-child) {
+  margin-bottom: 0;
+}
+main.wizard--bg-light h4,
+main.wizard--bg-light h5,
+main.wizard--bg-light h6,
+main.wizard--bg-mid h4,
+main.wizard--bg-mid h5,
+main.wizard--bg-mid h6 {
+  color: #134276;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  margin-bottom: 0;
+}
+main.wizard--bg-light h4:last-child:not(:first-child),
+main.wizard--bg-light h5:last-child:not(:first-child),
+main.wizard--bg-light h6:last-child:not(:first-child),
+main.wizard--bg-mid h4:last-child:not(:first-child),
+main.wizard--bg-mid h5:last-child:not(:first-child),
+main.wizard--bg-mid h6:last-child:not(:first-child) {
+  margin-bottom: 0;
+}
+main.wizard--bg-light p,
+main.wizard--bg-light .subtitle,
+main.wizard--bg-light .straptitle,
+main.wizard--bg-mid p,
+main.wizard--bg-mid .subtitle,
+main.wizard--bg-mid .straptitle {
+  color: #706868;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  line-height: 1.6;
 }
 main.wizard--bg-dark {
-  color: var(--Text-Light, #fff);
+  color: #ffffff;
 }
 main.wizard--bg-dark .text-wrapper label,
 main.wizard--bg-dark .text-wrapper .field-label,
@@ -1828,58 +1873,44 @@ main.wizard--bg-dark .radio-wrapper textarea::placeholder {
 }
 main.wizard--bg-dark h1,
 main.wizard--bg-dark h2,
-main.wizard--bg-dark h3,
+main.wizard--bg-dark h3 {
+  color: #ffffff;
+  background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #ffffff;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  margin-bottom: 2rem;
+}
+main.wizard--bg-dark h1:last-child:not(:first-child),
+main.wizard--bg-dark h2:last-child:not(:first-child),
+main.wizard--bg-dark h3:last-child:not(:first-child) {
+  margin-bottom: 0;
+}
 main.wizard--bg-dark h4,
 main.wizard--bg-dark h5,
-main.wizard--bg-dark h6,
+main.wizard--bg-dark h6 {
+  color: #ffffff;
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  margin-bottom: 2rem;
+}
+main.wizard--bg-dark h4:last-child:not(:first-child),
+main.wizard--bg-dark h5:last-child:not(:first-child),
+main.wizard--bg-dark h6:last-child:not(:first-child) {
+  margin-bottom: 0;
+}
 main.wizard--bg-dark p,
 main.wizard--bg-dark .subtitle {
   color: #ffffff;
-  background: none;
-  -webkit-text-fill-color: #ffffff;
-  background-clip: unset;
-  -webkit-background-clip: unset;
-}
-main.wizard--bg-light {
-  color: var(--Text-Dark, #333);
-}
-main.wizard--bg-light h1,
-main.wizard--bg-light h2,
-main.wizard--bg-light h3,
-main.wizard--bg-light h4,
-main.wizard--bg-light h5,
-main.wizard--bg-light h6 {
-  color: #2e2e2e;
-  font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #017ac9 25%, #134276 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-main.wizard--bg-light h1:last-child:not(:first-child),
-main.wizard--bg-light h2:last-child:not(:first-child),
-main.wizard--bg-light h3:last-child:not(:first-child),
-main.wizard--bg-light h4:last-child:not(:first-child),
-main.wizard--bg-light h5:last-child:not(:first-child),
-main.wizard--bg-light h6:last-child:not(:first-child) {
-  margin-bottom: 0;
-}
-main.wizard--bg-light p,
-main.wizard--bg-light .subtitle,
-main.wizard--bg-light .straptitle {
-  color: #706868;
-  font-family: 'Atkinson Hyperlegible Next', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
 }
 main.wizard--bg-dark,
+main.wizard--bg-mid,
 main.wizard--bg-light {
   position: relative;
   z-index: 1;
 }
 main.wizard--bg-dark::before,
-main.wizard--bg-light::before {
+main.wizard--bg-mid::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1890,27 +1921,46 @@ main.wizard--bg-light::before {
   background-position: bottom left;
   pointer-events: none;
 }
+main.wizard--bg-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
+  pointer-events: none;
+}
 @media (max-width: 743px) {
   main.wizard--bg-dark::before,
+  main.wizard--bg-mid::before,
   main.wizard--bg-light::before {
     background-image: none;
   }
 }
 @media (min-width: 744px) {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     top: 6.25rem;
     background-image: url('/images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
-    background-repeat: no-repeat;
-    background-size: auto;
+  }
+  main.wizard--bg-light::before {
+    top: 6.25rem;
+    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 @media (min-width: 1280px) {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
+  }
+  main.wizard--bg-light::before {
+    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 h1,
@@ -2262,7 +2312,7 @@ main.wizard--bg-light .p-large p p {
 }
 .wizard .wizard-button-wrapper .button[name='next']::before {
   content: '';
-  background-image: url('/icons/icon-wizard-next-button-white-arrow-right.svg');
+  background-image: url('../../../../icons/icon-wizard-next-button-white-arrow-right.svg');
   order: 1;
   margin-left: 0.5rem;
 }
@@ -2272,7 +2322,7 @@ main.wizard--bg-light .p-large p p {
 }
 .wizard .wizard-button-wrapper .button[name='back']::before {
   content: '';
-  background-image: url('/icons/icon-wizard-back-button-navy-arrow-left.svg');
+  background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
   margin-right: 0.5rem;
 }
 .repeat-actions .item-add {

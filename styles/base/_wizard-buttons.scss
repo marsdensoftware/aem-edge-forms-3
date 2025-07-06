@@ -49,7 +49,7 @@
     &::before {
       @extend %common-wizard-button;
       content: '';
-      background-image: url('/icons/icon-wizard-next-button-white-arrow-right.svg');
+      background-image: url('../../../../icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
       margin-left: 0.5rem;
     }
@@ -64,7 +64,7 @@
     &::before {
       @extend %common-wizard-button;
       content: '';
-      background-image: url('/icons/icon-wizard-back-button-navy-arrow-left.svg');
+      background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
 
       margin-right: 0.5rem;
     }
@@ -79,7 +79,7 @@
   justify-content: center;
   align-items: center;
   gap: $spacing-200;
-  font-family: $font-family; // Assuming defined in settings
+  font-family: $font-family;
   font-size: 20px;
   font-style: normal;
   line-height: 24px;
@@ -88,7 +88,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  border-radius: $border-radius-round; // Assuming token defined for round corners
+  border-radius: $border-radius-round;
   border: $stroke-input-stroke solid $stroke-tertiary;
   background: $bg-light-primary;
   color: $text-dark-primary;
@@ -119,8 +119,6 @@
 
   &:focus {
     background: $bg-light-primary;
-    box-shadow:
-      0 0 0 2px $bg-light-primary,
-      0 0 0 4px $stroke-focus;
+    box-shadow: 0 0 0 2px $bg-light-primary, 0 0 0 4px $stroke-focus;
   }
 }
