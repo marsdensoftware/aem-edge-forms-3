@@ -62,9 +62,13 @@ class EducationConverter {
             const endYear = result[EducationFieldNames.FINISH_YEAR];
             summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
         }
-        else {
-            // Partially completed
-            summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`)
+        else if(completionStatus?.value == '1') {
+            // In progress, partially completed
+            summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
+        }
+        else{
+            // Not completed
+            summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${completionStatus.displayValue}`);
         }
 
         const value = summary?.length ? `${summary.join(', ')}.` : '';
