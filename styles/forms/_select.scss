@@ -8,15 +8,19 @@
 @mixin select-chevron {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: $spacing-400;
-  transform: translateY(-48%);
-  width: 1.5rem;            // 24px
-  height: 1.5rem;
+  width: $spacing-500;
+  height: $spacing-500;
   background-image: url('/icons/icon-chevron-down.svg');
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
+}
+
+.field-completion-status .radio-wrapper label .text {
+  font-size: $size-font-body-large;
+  font-weight: 400;
 }
 
 // 2. Shared Select Mixin
@@ -26,12 +30,13 @@
   border: 2px solid $stroke-tertiary;
   padding: $spacing-400;
   font-family: $font-family;
-  font-size: 20px;
-  line-height: 120%;
+  font-size: $size-font-body-large;
+  line-height: 133%;
   appearance: none;
   width: 100%;
-  height: 56px;
+  height: $spacing-800;
   background-color: $color-white;
+  color: $text-secondary;
 
   &:focus-visible,
   &:focus,
@@ -65,7 +70,6 @@
   }
 }
 
-
 .drop-down-wrapper {
   position: relative;
   display: inline-block;
@@ -85,7 +89,6 @@
   }
 }
 
-
 select[required] {
   @include base-select-style;
   position: relative;
@@ -93,4 +96,22 @@ select[required] {
 
 select[required]::after {
   @include select-chevron;
+}
+
+// 3. Apply 16px gap between Month & Year drop-downs inside advanceddatepicker
+.field-advanceddatepicker,
+.field-when-finish {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-400;
+
+  .drop-down-wrapper {
+    flex: 1 1 0%;
+  }
+}
+
+.col-md-5,
+.col-md-7 {
+  flex: 1 1 auto;
+  min-width: 0;
 }
