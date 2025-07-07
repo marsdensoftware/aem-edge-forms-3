@@ -29,7 +29,7 @@
 // Wizard container
 .wizard {
   padding-top: $spacing-600;
-  min-height: calc(100vh - $nav-height - $footer-height);
+  min-height: $wizard-body-height;
   height: 100%;
   background: linear-gradient(
     135deg,
@@ -39,6 +39,7 @@
 
   @include media('tablet') {
     padding-top: $spacing-700;
+    padding-bottom: 120px;
   }
 
   .field-save-changes {
@@ -54,17 +55,6 @@
     .wizard-button-prev,
     .wizard-button-next {
       display: none;
-    }
-  }
-
-  .current-wizard-step {
-    padding-bottom: 120px;
-
-    @include media('tablet') {
-      @media (min-height: 921px) {
-        min-height: calc(100vh - $nav-height - $footer-height);
-        height: 100%;
-      }
     }
   }
 

@@ -1,2 +1,28 @@
-$nav-height: 98px;
-$footer-height: 83px;
+@use 'sass:math';
+@use 'breakpoints' as *;
+
+@function pxToVh($pxValue) {
+  $result: math.div($pxValue, 100) * 100;
+  @return $result * 1vh;
+}
+
+@function result($nav-height, $footer-height) {
+  $result: calc(100vh - ($nav-height + $footer-height));
+  @return $result;
+}
+
+$nav-height: (44 + 20 + 20) * 1px;
+$footer-height: (56 + 16 + 24) * 1px;
+$wizard-body-height: result($nav-height, $footer-height);
+
+@include media('tablet') {
+  $nav-height: 44 + 24 + 24;
+  $footer-height: 57 + 20 + 32;
+  $wizard-body-height: 100vh - $nav-height-vh - $footer-height-vh;
+}
+
+@include media('desktop') {
+  $nav-height: 87 + 20 + 16;
+  $footer-height: 59 + 20 + 32;
+  $wizard-body-height: 100vh - $nav-height-vh - $footer-height-vh;
+}

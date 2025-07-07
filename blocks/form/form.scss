@@ -32,7 +32,7 @@ main .form > div:not(:first-child) {
   align-items: center;
   justify-content: space-between;
   padding: $spacing-500 $spacing-400;
-  max-height: 98px;
+  max-height: $nav-height;
   height: 100%;
 
   .image-wrapper picture {
@@ -131,9 +131,12 @@ main .form form fieldset.cards > .checkbox-wrapper > label > img {
   object-fit: contain;
 }
 
-main .form form .field-label--with-description:not(.radio-group--with-icon__label){
-    flex-direction: column;
-    align-items: start;
+main
+  .form
+  form
+  .field-label--with-description:not(.radio-group--with-icon__label) {
+  flex-direction: column;
+  align-items: start;
 }
 
 // Repeatable field actions
