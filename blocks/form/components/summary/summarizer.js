@@ -249,7 +249,7 @@ export class Summarizer {
     `;
 
     static itemContentEditTemplate = `
-    <div class="row item">
+    <div class="row summary-entry">
         <div class="col-md-11">
             {{content}}
         </div>
@@ -259,7 +259,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `{{content}}`;
+    static itemContentTemplate = `<div class="row summary-entry">{{content}}</div>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -276,13 +276,12 @@ export class Summarizer {
 
     static createSummaryFromMarkupObjects(markupObjects) {
         const result = document.createElement('div');
-        result.classList.add('summary-entry');
 
         markupObjects.forEach(mo => {
             result.append(mo);
         });
 
-        return result.outerHTML;
+        return result.innerHTML;
     }
 
     static renderEntry(entry) {
@@ -330,10 +329,10 @@ export class Summarizer {
         el.innerHTML = `
             <h2>${fullname}</h2>
             <div class="row">
-                <div class="col-md-4 address"><i></i><span>${address}</span></div>
+                <div class="col-md-3 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
-                <div class="col-md-3 email"><i></i><span>${email}</span></div>
-                <div class="col-md-2"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
+                <div class="col-md-4 email"><i></i><span>${email}</span></div>
+                <div class="col-md-1"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
             </div>
         `;
     }
@@ -402,8 +401,7 @@ export class Summarizer {
                         value: 'licence-class-title',
                         displayValue: i18n('Classes')
                     }
-                },
-                {
+                    ,
                     'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
                 }
             ];
@@ -414,11 +412,8 @@ export class Summarizer {
                         'endorsementsTitle': {
                             value: 'endorsements-title',
                             displayValue: i18n('Endorsements')
-                        }
-                    }
-                );
-                entries.push(
-                    {
+                        },
+
                         'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
                     }
                 );
@@ -456,7 +451,26 @@ export class Summarizer {
                 ...Summarizer.fieldToNameValues(workEntryFieldset)
             };
 
-            // English content
+            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
+                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
+                // Specific days
+                const index = nameValues['days_you_can_work'].values.indexOf('3');
+                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
+
+                delete nameValues['specific_days_cb'];
+            }
+
+            if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
+                if (isNo(nameValues['reliable-transport'])) {
+                    nameValues['reliable-transport'].displayValue = i18n('I don\'t have reliable transport to get to work');
+                }
+                else {
+                    nameValues['reliable-transport'].displayValue = i18n('I have reliable transport to get to work');
+                }
+
+            }
+
+            // Content
             let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
             let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
 

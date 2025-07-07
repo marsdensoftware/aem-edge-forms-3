@@ -1,13 +1,13 @@
 @use '../../../../styles/settings' as *;
 
 .field-summary {
-  padding: 64px 0;
-  border-top: solid 2px #b0c4de;
+  padding: $spacing-600 0;
+  border-top: solid 2px $color-border-secondary;
 
   .edit {
     width: 56px;
     height: 26px;
-    background-image: url('../../../../icons/icon-repeatable-panel-edit-blue.svg');
+    background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
     background-repeat: no-repeat;
     display: block;
     text-align: center;
@@ -32,133 +32,194 @@
   .item {
     padding-right: $spacing-600;
 
-    &:not(:last-child) {
-      padding-top: $spacing-600;
-      padding-bottom: $spacing-600;
-    }
-
     &:last-child {
       padding-bottom: 0;
     }
   }
 
-  .summary-entry__language,
-  .summary-entry__course,
-  .summary-entry__title,
-  .summary-entry__licenceClassTitle,
-  .summary-entry__cb_english_proficiency {
+  .summary-entry {
     color: $text-dark-primary;
     font-family: $font-family;
-    font-style: normal;
-    line-height: 160%;
-    font-size: $size-font-body-default;
-  }
-
-  .summary-entry__language,
-  .summary-entry__course,
-  .summary-entry__title,
-  .summary-entry__licenceClassTitle {
-    font-weight: 700;
-    margin-bottom: $spacing-100;
-  }
-
-  .summary-entry__cb_english_proficiency {
-    font-weight: $font-weight-regular;
-  }
-
-  .summary-entry__personal-summary {
-    color: $text-dark-primary;
-    font-family: $font-family;
-    font-style: normal;
-    line-height: 160%;
     font-size: $size-font-body-large;
-    font-weight: $font-weight-regular;
-    letter-spacing: 0;
-    margin-bottom: $spacing-100;
-  }
-
-  .summary-entry__employmentDetails,
-  .summary-entry__description,
-  .summary-entry__summary,
-  .summary-entry__days_you_can_work,
-  .summary-entry__hours_you_can_work,
-  .summary-entry__specific_days_cb,
-  .summary-entry__proficiency,
-  .summary-entry__licence-class {
-    color: $text-dark-primary;
-    font-family: $font-family;
     font-style: normal;
-    font-size: $size-font-body-default;
+    font-weight: $font-weight-regular;
     line-height: 160%;
-    margin-top: $spacing-100;
-    margin-bottom: $spacing-100;
+    letter-spacing: 0;
+    border-bottom: solid 2px $color-border-secondary;
+    padding-top: $spacing-450;
+    padding-bottom: $spacing-450;
+    margin-bottom: $spacing-300;
+
+    &:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    [data-name^='selected-item-job-title'],
+    [class*='selected-item-job-title'],
+    [data-name^='radiobutton'],
+    [class*='radiobutton'],
+    [data-name^='selected-item'],
+    [class*='selected-item'],
+    [data-name^='textinput'],
+    [class*='textinput'] {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      font-size: $size-font-body-default;
+      line-height: 160%;
+      margin-top: $spacing-100;
+      margin-bottom: $spacing-100;
+    }
+
+    &__language,
+    &__course,
+    &__title,
+    &__licenceClassTitle,
+    &__endorsementsTitle {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      line-height: 160%;
+      font-weight: 700;
+      font-size: $size-font-body-default;
+      margin-bottom: $spacing-100;
+    }
+
+    &__personal-summary {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      line-height: 160%;
+      font-size: $size-font-body-large;
+      font-weight: $font-weight-regular;
+      letter-spacing: 0;
+      margin-bottom: $spacing-100;
+    }
+
+    &__employmentDetails,
+    &__description,
+    &__summary,
+    &__days_you_can_work,
+    &__hours_you_can_work,
+    &__specific_days_cb,
+    &__proficiency,
+    &__cb_english_proficiency,
+    &__licence-class,
+    &__reliable-transport,
+    &__endorsements {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      font-size: $size-font-body-default;
+      line-height: 160%;
+      margin-top: $spacing-100;
+      margin-bottom: $spacing-100;
+    }
   }
 
   .summary-entry:first-child,
   .item:first-child {
     padding-top: 0;
-    padding-bottom: 0;
   }
 
-  &.field-summary-work-preferences {
-    .p-small {
-      color: $text-dark-primary;
+  &.field-summary-work-preferences .p-small {
+    color: $text-dark-primary;
+  }
+
+  .row.item {
+    display: flex;
+    flex-direction: column;
+
+    .col-md-11,
+    .col-md-1 {
+      width: 100%;
+    }
+
+    .summary-entry {
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+
+      &__title {
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+
+      .edit {
+        margin-top: 0;
+        text-align: right;
+      }
+    }
+
+    @include media('tablet') {
+      flex-direction: row;
+      align-items: flex-start;
+
+      .col-md-11,
+      .col-md-1 {
+        width: auto;
+      }
+
+      .summary-entry {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
     }
   }
 }
 
 .field-summary-personal-details {
   h2 {
-    color: $color-primary-navy;
+    color: pink !important;
   }
 
-  span {
-    color: $text-dark-primary;
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: $spacing-500;
+    justify-content: flex-start;
+  }
+
+  .col-md-4,
+  .col-md-2,
+  .col-md-3 {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-200;
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
     font-weight: $font-weight-bold;
     line-height: 160%;
-    vertical-align: middle;
+    color: $text-dark-primary;
+
+    i {
+      display: inline-block;
+      width: $spacing-450;
+      height: $spacing-450;
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex-shrink: 0;
+    }
+
+    span {
+      display: inline-block;
+      line-height: normal;
+      word-break: break-word;
+    }
   }
 
-  .address i,
-  .phone i,
-  .email i {
-    display: inline-block;
-    width: $spacing-450;
-    height: $spacing-450;
-    margin-right: $spacing-200;
-    background-repeat: no-repeat;
-    background-size: contain;
-    vertical-align: middle;
+  .edit {
+    display: inline-flex;
+    align-items: flex-start;
+    text-align: right;
   }
 
-  .address i {
-    background-image: url('../../../../icons/icon-x.svg');
-  }
-
-  .phone i {
-    background-image: url('../../../../icons/icon-x.svg');
-  }
-
-  .email i {
-    background-image: url('../../../../icons/icon-x.svg');
-  }
+  .address i { background-image: url('/icons/icon-summary-map-blue.svg'); }
+  .phone i { background-image: url('/icons/icon-summary-mobile-blue.svg'); }
+  .email i { background-image: url('/icons/icon-summary-mail-blue.svg'); }
 }
 
-.summary-entry {
-  color: $text-dark-primary;
-  font-family: $font-family;
-  font-size: $size-font-body-large;
-  font-style: normal;
-  font-weight: $font-weight-regular;
-  line-height: 160%;
-  letter-spacing: 0;
-
-  &:not(:last-child):not(:only-child) {
-    border-bottom: 1px solid $stroke-tertiary;
-    padding-bottom: $spacing-300;
-    margin-bottom: $spacing-300;
-  }
-}

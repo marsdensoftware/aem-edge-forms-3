@@ -4,33 +4,46 @@
 @use '../settings' as *;
 @use '../base/forms' as *;
 
-// Shared select styling
+
+@mixin select-chevron {
+  content: '';
+  position: absolute;
+  top: 55%;
+  right: $spacing-400;
+  width: $spacing-500;
+  height: $spacing-500;
+  background-image: url('/icons/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.field-completion-status .radio-wrapper label .text {
+  font-size: $size-font-body-large;
+  font-weight: 400;
+}
+
+
 @mixin base-select-style {
   cursor: pointer;
   border-radius: $border-radius-mid;
   border: 2px solid $stroke-tertiary;
   padding: $spacing-400;
   font-family: $font-family;
-  font-size: 20px;
-  line-height: 120%;
-  appearance: none; // changed from base-select to none for broader compatibility
+  font-size: $size-font-body-large;
+  line-height: 133%;
+  appearance: none;
   width: 100%;
-  background-color: $color-white; // <-- Added to give the select a white background
+  height: $spacing-800;
+  background-color: $color-white;
+  color: $text-secondary;
 
   &:focus-visible,
   &:focus,
   &:active,
   &:hover {
     border-color: $stroke-accent;
-    outline: $stroke-accent;
-  }
-
-  &::picker-icon {
-    transition: 0.4s rotate;
-  }
-
-  &:open::picker-icon {
-    rotate: 180deg;
+    outline: none;
   }
 
   option {
@@ -58,15 +71,47 @@
 }
 
 .drop-down-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
   label {
     @extend %label-common-style;
   }
 
   select {
     @include base-select-style;
+    position: relative;
+  }
+
+  &::after {
+    @include select-chevron;
   }
 }
 
 select[required] {
   @include base-select-style;
+  position: relative;
+}
+
+select[required]::after {
+  @include select-chevron;
+}
+
+
+.field-advanceddatepicker,
+.field-when-finish {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-400;
+
+  .drop-down-wrapper {
+    flex: 1 1 0%;
+  }
+}
+
+.col-md-5,
+.col-md-7 {
+  flex: 1 1 auto;
+  min-width: 0;
 }

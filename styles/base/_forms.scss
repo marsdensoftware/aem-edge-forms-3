@@ -14,11 +14,9 @@ fieldset {
   border: 0;
 }
 
-.multiline-wrapper {
-  label {
-    margin-bottom: 8px;
-    display: block;
-  }
+.multiline-wrapper label {
+  display: block;
+  margin-bottom: 8px;
 }
 
 textarea {
@@ -77,9 +75,9 @@ textarea {
       color: $text-secondary;
     }
 
-    &:focus-visible,
     &:focus,
     &:active,
+    &:focus-visible,
     &:hover {
       border-color: $stroke-accent;
       outline: $stroke-accent;
@@ -99,7 +97,6 @@ textarea {
 /********************
    INPUT EMAIL
 ********************/
-
 .email-wrapper {
   display: flex;
   flex-direction: column;
@@ -132,9 +129,9 @@ textarea {
       color: $text-secondary;
     }
 
-    &:focus-visible,
     &:focus,
     &:active,
+    &:focus-visible,
     &:hover {
       border-color: $stroke-accent;
       outline: $stroke-accent;
@@ -145,7 +142,6 @@ textarea {
 /********************************************************
 FORM required asterisk for radio and checkbox group
 ********************************************************/
-
 .radio-group-wrapper[data-required='true'],
 .checkbox-group-wrapper[data-required='true'] {
   > legend.field-label::after {
@@ -158,67 +154,78 @@ FORM required asterisk for radio and checkbox group
 /********************
  FORM ERROR MESSAGE
 ********************/
-
 main .form form .field-wrapper.field-invalid .field-description {
   position: relative;
-  padding-left: 24px; // Adjusted for 16px icon
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
   margin-top: $spacing-200;
   color: $text-dark;
   font-family: $font-family;
   font-size: $size-font-body-small;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.6; // 160%
+  line-height: 1.6;
 
   &::before {
     content: '';
     position: absolute;
-    top: 3px; /* Adjusted for vertical alignment */
+    top: 3px;
     left: 0;
     width: 16px;
     height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E") no-repeat center / contain;
   }
 }
 
-// main.wizard--bg-dark {
-//   background: linear-gradient(135deg, #017ac9 25%, #134276 100%) !important;
-//   color: #fff;
-// }
+/* ------------------------------
+   Light Blue Gradient background
+------------------------------ */
+main.wizard--bg-light,
+main.wizard--bg-mid {
+  color: $text-primary;
 
-// main.wizard--bg-light {
-//   background: linear-gradient(135deg, #e6f2fa 25%, #bfdef1 100%) !important;
-//   color: #333;
-// }
+  h1,
+  h2,
+  h3 {
+    color: $text-primary;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-/*added this for responsive testing, need to use grids then can remove Rebecca*/
-.typography-wrapper,
-.default-content-wrapper {
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1200px; // $max-width-content
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
 
-  // Fluid side padding: scales between 16px and 64px from mobile to desktop
-  padding-left: clamp(1rem, 5vw, 4rem);
-  padding-right: clamp(1rem, 5vw, 4rem);
+  h4,
+  h5,
+  h6 {
+    color: $color-primary-navy;
+    font-family: $font-family;
+    margin-bottom: 0;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  p,
+  .subtitle,
+  .straptitle {
+    color: $text-secondary;
+    font-family: $font-family;
+    line-height: 1.6;
+  }
 }
 
 /* ------------------------------
    Dark Blue Gradient background
 ------------------------------ */
 main.wizard--bg-dark {
-  // background: var(
-  //   --Gradient-Blue,
-  //   linear-gradient(
-  //     135deg,
-  //     var(--Brand-MSD-Blue, #017ac9) 25%,
-  //     var(--Brand-MSD-Navy, #134276) 100%
-  //   )
-  // );
-  color: var(--Text-Light, #fff);
+  color: $color-white;
 
   .text-wrapper,
   .number-wrapper,
@@ -241,70 +248,48 @@ main.wizard--bg-dark {
 
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  .subtitle {
+  h3 {
     color: $color-white;
     background: none;
-    -webkit-text-fill-color: $color-white;
     background-clip: unset;
     -webkit-background-clip: unset;
-  }
-}
-
-/* ------------------------------
-   Light Blue Gradient background
------------------------------- */
-main.wizard--bg-light {
-  // background: linear-gradient(
-  //   135deg,
-  //   var(--Shades-Blues-Blue-10, #e6f2fa) 25%,
-  //   var(--Shades-Blues-Blue-25, #bfdef1) 100%
-  // );
-  color: var(--Text-Dark, #333);
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $text-primary;
+    -webkit-text-fill-color: $color-white;
     font-family: $font-family;
     margin-bottom: $spacing-600;
 
     &:last-child:not(:first-child) {
       margin-bottom: 0;
     }
+  }
 
-    background: $color-gradient-blue;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  h4,
+  h5,
+  h6 {
+    color: $color-white;
+    font-family: $font-family;
+    margin-bottom: $spacing-600;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
   }
 
   p,
-  .subtitle,
-  .straptitle {
-    color: $text-secondary;
-    font-family: $font-family;
-    font-size: 1rem;
-    line-height: 1.6;
+  .subtitle {
+    color: $color-white;
   }
 }
 
 // Background pattern and gradients
 main.wizard--bg-dark,
+main.wizard--bg-mid,
 main.wizard--bg-light {
   position: relative;
   z-index: 1;
 }
 
 main.wizard--bg-dark::before,
-main.wizard--bg-light::before {
+main.wizard--bg-mid::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -316,8 +301,21 @@ main.wizard--bg-light::before {
   pointer-events: none;
 }
 
+main.wizard--bg-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top right;
+  pointer-events: none;
+}
+
 @media (max-width: 743px) {
   main.wizard--bg-dark::before,
+  main.wizard--bg-mid::before,
   main.wizard--bg-light::before {
     background-image: none;
   }
@@ -325,19 +323,31 @@ main.wizard--bg-light::before {
 
 @include media('tablet') {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     top: 100px;
     background-image: url('/images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
-    background-repeat: no-repeat;
-    background-size: auto;
+  }
+
+  main.wizard--bg-light::before {
+    top: 100px;
+    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
   }
 }
 
 @include media('desktop') {
   main.wizard--bg-dark::before,
-  main.wizard--bg-light::before {
+  main.wizard--bg-mid::before {
     background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
   }
+
+  main.wizard--bg-light::before {
+    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+    background-position: top right;
+  }
 }
+
+
+
