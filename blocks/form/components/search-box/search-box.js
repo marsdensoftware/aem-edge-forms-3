@@ -150,6 +150,23 @@ const skills = [
     'Use accounting software',
     'Adapt to changing work environments',
 ];
+const additionalHardSkills = [
+    'business analysis',
+    'risk management',
+    'market research',
+    'data visualisation software',
+    'scientific research methodology',
+    'business communication',
+    'management systems standards',
+    'business analytics',
+    'management consulting',
+    'analyse external factors of companies',
+    'build business relationships',
+    'advise on efficiency improvements',
+    'apply change management',
+    'identify undetected organisational needs',
+    'analyse business plans',
+];
 const jobTitleIndustries = [
     'Fruit Production Owner',
     'Field Crop Grower',
@@ -191,6 +208,7 @@ const datasources = {
     skills,
     experiencedBasedJobs,
     jobTitleIndustries,
+    additionalHardSkills,
 };
 // Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
