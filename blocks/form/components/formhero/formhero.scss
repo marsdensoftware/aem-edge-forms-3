@@ -1,17 +1,15 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  // Temporary specificity
-  // Remove this as the grid component come in
   .panel-formhero.current-wizard-step {
     display: flex;
     flex-direction: column;
 
     @include media('desktop') {
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 0 $spacing-400;
+      gap: $spacing-400;
     }
 
     legend {
@@ -19,23 +17,47 @@
     }
   }
 
-  .panel-formhero__inner {
+  .panel-formhero.field-panelcontainer1751863678379 {
+    display: flex;
+    flex-direction: column;
+
     @include media('desktop') {
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
+      gap: $spacing-400;
     }
   }
+
+  .panel-formhero__inner {
+    @include media('desktop') {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $spacing-400;
+    }
+  }
+
   .panel-formhero__picture {
     margin-bottom: $spacing-600;
     max-width: 311px;
 
+    display: none;
+
+    @include media('tablet') {
+      display: none;
+    }
+
     @include media('desktop') {
+      display: block;
       margin-bottom: 0;
       max-width: 458px;
+      order: 1;
     }
   }
 
   .panel-formhero__content {
-    order: 1;
+    order: 0;
 
     h2 {
       @include heading-level-1;
@@ -49,12 +71,10 @@
     }
 
     @include media('desktop') {
-      order: 0;
       max-width: 577px;
     }
   }
 
-  // Panel Hero on Mahi form
   .panel-formhero.field-intro3 {
     .panel-formhero__content {
       p {

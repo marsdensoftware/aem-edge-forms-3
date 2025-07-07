@@ -325,10 +325,10 @@ export class Summarizer {
         el.innerHTML = `
             <h2>${fullname}</h2>
             <div class="row">
-                <div class="col-md-4 address"><i></i><span>${address}</span></div>
+                <div class="col-md-3 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
-                <div class="col-md-3 email"><i></i><span>${email}</span></div>
-                <div class="col-md-2"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
+                <div class="col-md-4 email"><i></i><span>${email}</span></div>
+                <div class="col-md-1"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
             </div>
         `;
     }
