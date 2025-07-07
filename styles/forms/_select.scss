@@ -4,7 +4,7 @@
 @use '../settings' as *;
 @use '../base/forms' as *;
 
-// 1. Shared Chevron Mixin
+
 @mixin select-chevron {
   content: '';
   position: absolute;
@@ -23,7 +23,7 @@
   font-weight: 400;
 }
 
-// 2. Shared Select Mixin
+
 @mixin base-select-style {
   cursor: pointer;
   border-radius: $border-radius-mid;
@@ -98,7 +98,7 @@ select[required]::after {
   @include select-chevron;
 }
 
-// 3. Apply 16px gap between Month & Year drop-downs inside advanceddatepicker
+
 .field-advanceddatepicker,
 .field-when-finish {
   display: flex;
