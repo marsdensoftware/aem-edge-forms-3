@@ -1,28 +1,51 @@
-@use 'sass:math';
 @use 'breakpoints' as *;
-
-@function pxToVh($pxValue) {
-  $result: math.div($pxValue, 100) * 100;
-  @return $result * 1vh;
-}
 
 @function result($nav-height, $footer-height) {
   $result: calc(100vh - ($nav-height + $footer-height));
   @return $result;
 }
 
-$nav-height: (44 + 20 + 20) * 1px;
-$footer-height: (56 + 16 + 24) * 1px;
+$nav-inner: 44;
+$nav-padding-top: 20;
+$nav-padding-bottom: 20;
+$nav-padding-top-tablet: 24;
+$nav-padding-bottom-tablet: 24;
+$nav-inner-desktop: 87;
+$nav-padding-top-desktop: 20;
+$nav-padding-bottom-desktop: 16;
+
+$footer-inner: 56;
+$footer-padding-top: 16;
+$footer-padding-bottom: 24;
+$footer-inner-tablet: 57;
+$footer-padding-top-tablet: 20;
+$footer-padding-bottom-tablet: 32;
+$footer-inner-desktop: 59;
+$footer-padding-top-desktop: 20;
+$footer-padding-bottom-desktop: 32;
+
+$nav-height: ($nav-inner + $nav-padding-top + $nav-padding-bottom) * 1px;
+$nav-height-tablet: (
+    $nav-inner + $nav-padding-top-tablet + $nav-padding-bottom-tablet
+  ) * 1px;
+$nav-height-desktop: (
+    $nav-inner + $nav-padding-top-desktop + $nav-padding-bottom-desktop
+  ) * 1px;
+
+$footer-height: ($footer-inner + $footer-padding-top + $footer-padding-bottom) *
+  1px;
+$footer-height-tablet: (
+    $footer-inner-tablet + $footer-padding-top-tablet +
+      $footer-padding-bottom-tablet
+  ) * 1px;
+$footer-height-desktop: (
+    $footer-inner-desktop + $footer-padding-top-desktop +
+      $footer-padding-bottom-desktop
+  ) * 1px;
+
 $wizard-body-height: result($nav-height, $footer-height);
-
-@include media('tablet') {
-  $nav-height: 44 + 24 + 24;
-  $footer-height: 57 + 20 + 32;
-  $wizard-body-height: 100vh - $nav-height-vh - $footer-height-vh;
-}
-
-@include media('desktop') {
-  $nav-height: 87 + 20 + 16;
-  $footer-height: 59 + 20 + 32;
-  $wizard-body-height: 100vh - $nav-height-vh - $footer-height-vh;
-}
+$wizard-body-height-tablet: result($nav-height-tablet, $footer-height-tablet);
+$wizard-body-height-desktop: result(
+  $nav-height-desktop,
+  $footer-height-desktop
+);

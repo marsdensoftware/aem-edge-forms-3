@@ -36,6 +36,14 @@
   gap: $spacing-300;
   border-top: 1px solid $stroke-secondary;
 
+  @include media('tablet') {
+    max-height: $footer-height-tablet;
+  }
+
+  @include media('desktop') {
+    max-height: $footer-height-desktop;
+  }
+
   .wizard-button-next {
     margin-left: auto;
   }

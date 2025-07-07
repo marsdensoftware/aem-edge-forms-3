@@ -35,6 +35,14 @@ main .form > div:not(:first-child) {
   max-height: $nav-height;
   height: 100%;
 
+  @include media('tablet') {
+    max-height: $nav-height-tablet;
+  }
+
+  @include media('desktop') {
+    max-height: $nav-height-desktop;
+  }
+
   .image-wrapper picture {
     max-width: 150px;
 
