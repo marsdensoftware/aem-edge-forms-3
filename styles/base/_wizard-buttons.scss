@@ -23,7 +23,7 @@
 
 .wizard .wizard-button-wrapper {
   height: 100%;
-  max-height: 83px;
+  max-height: $footer-height;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -35,6 +35,14 @@
   justify-content: space-between;
   gap: $spacing-300;
   border-top: 1px solid $stroke-secondary;
+
+  @include media('tablet') {
+    max-height: $footer-height-tablet;
+  }
+
+  @include media('desktop') {
+    max-height: $footer-height-desktop;
+  }
 
   .wizard-button-next {
     margin-left: auto;
