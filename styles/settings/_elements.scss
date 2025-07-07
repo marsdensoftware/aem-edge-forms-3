@@ -1,47 +1,51 @@
 @use 'breakpoints' as *;
+@use 'spacings' as *;
 
 @function result($nav-height, $footer-height) {
   $result: calc(100vh - ($nav-height + $footer-height));
   @return $result;
 }
 
-$nav-inner: 44;
-$nav-padding-top: 20;
-$nav-padding-bottom: 20;
-$nav-padding-top-tablet: 24;
-$nav-padding-bottom-tablet: 24;
-$nav-inner-desktop: 87;
-$nav-padding-top-desktop: 20;
-$nav-padding-bottom-desktop: 16;
+$nav-inner: 44px;
+$nav-padding-top: $spacing-450;
+$nav-padding-bottom: $spacing-450;
 
-$footer-inner: 56;
-$footer-padding-top: 16;
-$footer-padding-bottom: 24;
-$footer-inner-tablet: 57;
-$footer-padding-top-tablet: 20;
-$footer-padding-bottom-tablet: 32;
-$footer-inner-desktop: 59;
-$footer-padding-top-desktop: 20;
-$footer-padding-bottom-desktop: 32;
+$nav-padding-top-tablet: $spacing-500;
+$nav-padding-bottom-tablet: $spacing-500;
 
-$nav-height: ($nav-inner + $nav-padding-top + $nav-padding-bottom) * 1px;
+$nav-inner-desktop: 47px;
+$nav-padding-top-desktop: $spacing-450 + $spacing-450;
+$nav-padding-bottom-desktop: $spacing-450 + $spacing-400;
+
+$footer-inner: 56px;
+$footer-padding-top: $spacing-400;
+$footer-padding-bottom: $spacing-500;
+
+$footer-inner-tablet: 57px;
+$footer-padding-top-tablet: $spacing-450;
+$footer-padding-bottom-tablet: $spacing-600;
+
+$footer-inner-desktop: 59px;
+$footer-padding-top-desktop: $spacing-450;
+$footer-padding-bottom-desktop: $spacing-600;
+
+$nav-height: ($nav-inner + $nav-padding-top + $nav-padding-bottom);
 $nav-height-tablet: (
-    $nav-inner + $nav-padding-top-tablet + $nav-padding-bottom-tablet
-  ) * 1px;
+  $nav-inner + $nav-padding-top-tablet + $nav-padding-bottom-tablet
+);
 $nav-height-desktop: (
-    $nav-inner + $nav-padding-top-desktop + $nav-padding-bottom-desktop
-  ) * 1px;
+  $nav-inner-desktop + $nav-padding-top-desktop + $nav-padding-bottom-desktop
+);
 
-$footer-height: ($footer-inner + $footer-padding-top + $footer-padding-bottom) *
-  1px;
+$footer-height: ($footer-inner + $footer-padding-top + $footer-padding-bottom);
 $footer-height-tablet: (
-    $footer-inner-tablet + $footer-padding-top-tablet +
-      $footer-padding-bottom-tablet
-  ) * 1px;
+  $footer-inner-tablet + $footer-padding-top-tablet +
+    $footer-padding-bottom-tablet
+);
 $footer-height-desktop: (
-    $footer-inner-desktop + $footer-padding-top-desktop +
-      $footer-padding-bottom-desktop
-  ) * 1px;
+  $footer-inner-desktop + $footer-padding-top-desktop +
+    $footer-padding-bottom-desktop
+);
 
 $wizard-body-height: result($nav-height, $footer-height);
 $wizard-body-height-tablet: result($nav-height-tablet, $footer-height-tablet);

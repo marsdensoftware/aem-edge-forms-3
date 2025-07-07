@@ -31,16 +31,18 @@ main .form > div:not(:first-child) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $spacing-500 $spacing-400;
+  padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
   height: 100%;
 
   @include media('tablet') {
     max-height: $nav-height-tablet;
+    padding: $nav-padding-top-tablet $spacing-400 $nav-padding-bottom-tablet;
   }
 
   @include media('desktop') {
     max-height: $nav-height-desktop;
+    padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
   }
 
   .image-wrapper picture {
