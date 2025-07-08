@@ -69,10 +69,6 @@
       @include font-body-large;
       margin-bottom: 12px;
     }
-
-    @include media('desktop') {
-      max-width: 577px;
-    }
   }
 
   .panel-formhero.field-intro3 {
