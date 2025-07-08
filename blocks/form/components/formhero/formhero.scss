@@ -2,16 +2,6 @@
 
 .wizard {
   .panel-formhero.current-wizard-step {
-    display: flex;
-    flex-direction: column;
-
-    @include media('desktop') {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: $spacing-400;
-    }
-
     legend {
       display: none;
     }
