@@ -17,16 +17,21 @@ form output {
   font-size: 1.625rem;
 }
 
-form:not(.edit-mode) [data-visible='false'] {
+/*form:not(.edit-mode) [data-visible='false'] {
   display: none !important;
+}*/
+
+form:not(.edit-mode) [data-visible='false'] {
+  display: none;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
-// Only show first form step initially
 main .form > div:not(:first-child) {
   display: none;
 }
 
-// Top navigation panel layout
 .panel-wrapper.field-top-nav {
   display: flex;
   align-items: center;
@@ -52,9 +57,63 @@ main .form > div:not(:first-child) {
       max-width: 300px;
     }
   }
+
+  .button-wrapper button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-000, 0px);
+    gap: $spacing-200;
+    font-family: $font-family;
+    font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: 0px;
+    color: $color-primary;
+    text-decoration: none;
+    background-image: none;
+    border: none;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      background-image: url('/icons/icon-logout-exit-blue.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-left: 8px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      color: $color-primary-navy;
+    }
+  }
 }
 
-// Input overrides
+.panel-formhero__picture {
+  display: block !important; // this will be removed when we have the grid system is added
+  width: 100%;
+  order: -1;
+  margin-bottom: $spacing-400;
+
+  @include media('tablet') {
+    display: block !important; // this will be removed when we have the grid system is added
+    order: -1;
+    margin-bottom: $spacing-400;
+  }
+
+  @include media('desktop') {
+    display: block !important; // this will be removed when we have the grid system is added
+    order: 1;
+    margin-bottom: 0;
+  }
+}
+
+// Remaining unchanged styles
 main .form input:disabled,
 main .form textarea:disabled,
 main .form select:disabled,
@@ -81,7 +140,6 @@ main .form label.required::after {
   padding-inline-start: 5px;
 }
 
-// File input styling
 input::file-selector-button {
   color: var(--form-upload-color);
   background: var(--form-upload-background-color);
@@ -89,7 +147,6 @@ input::file-selector-button {
   text-align: center;
 }
 
-// Buttons
 main .form button {
   @extend %button--primary;
 }
@@ -98,15 +155,12 @@ main form .file-wrapper > button {
   display: flex;
 }
 
-main .submit-wrapper {
-  button {
-    @extend %button--hollow;
-    display: block;
-    margin-left: auto;
-  }
+main .submit-wrapper button {
+  @extend %button--hollow;
+  display: block;
+  margin-left: auto;
 }
 
-// File upload drag and drop area
 main .file-wrapper.decorated input[type='file'] {
   display: none;
 }
@@ -120,7 +174,6 @@ main .file-wrapper .field-dropregion {
   text-align: center;
 }
 
-// Cards input (radio/checkbox)
 main .form form fieldset.cards > .radio-wrapper > input,
 main .form form fieldset.cards > .checkbox-wrapper > input {
   position: absolute;
@@ -149,7 +202,6 @@ main
   align-items: start;
 }
 
-// Repeatable field actions
 main .form form .repeat-actions {
   grid-column: span 12;
   order: 2;
@@ -171,7 +223,6 @@ main .form form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
-// File list display
 main .form .file-description {
   display: flex;
   gap: 20px;
@@ -187,7 +238,6 @@ main .form .file-description .file-description-name {
 
 main .file-wrapper .file-description button {
   --form-button-padding: 15px;
-
   width: 12px;
   height: 12px;
   border: none;
@@ -217,14 +267,12 @@ main .form .button-wrapper button[disabled] {
   }
 }
 
-// Form layout: repeat wrapper
 main .form form .repeat-wrapper {
   display: grid;
   grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
-// Messages
 main .form .form-message.success-message {
   color: #0f5132;
   background-color: #d1e7dd;
@@ -243,7 +291,6 @@ main .form .form-message.error-message {
   padding: 10px;
 }
 
-// Drag area in file wrapper
 main .form .file-wrapper .file-drag-area {
   border: 1px dashed var(--border-color);
   border-radius: 5px;
@@ -255,20 +302,16 @@ main .form .file-wrapper .file-drag-area {
   align-items: center;
 }
 
-// Captcha
 main .form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-// Inline group descriptions
 main .form form .radio-group-wrapper.horizontal .field-description,
 main .form form .checkbox-group-wrapper.horizontal .field-description {
   width: 100%;
-  //order: 1;
   margin-top: 0.5rem;
 }
 
-// Responsive adjustments for mobile
 @media (width <= 599px) {
   :root {
     --form-field-horz-gap: 10px;
@@ -283,7 +326,6 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
   }
 }
 
-// SEP-specific ordering
 .checkbox-wrapper > input {
   order: 2;
 }
