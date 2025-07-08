@@ -54,8 +54,8 @@ $color-shade-navy-20: #d0d9e4;
 $color-shade-blue-60: #67afdf;
 $color-shade-blue-40: #99cae9;
 $color-shade-blue-25: #bfdef1;
-$color-shade-blue-10: #e6f2fa; // Secondary panel background
-$color-shade-blue-04: #f5fafd; // Lightest background
+$color-shade-blue-10: #e6f2fa;
+$color-shade-blue-04: #f5fafd;
 
 /*************************
       Gradients
@@ -115,7 +115,7 @@ $bg-tertiary: $color-grey-black-10;
 $bg-error: $color-feedback-red;
 $bg-success: $color-feedback-green;
 $bg-warning: $color-feedback-orange;
-$bg-light-secondary: var(--Background-Light-Secondary, #f5fafd);
+$bg-light-secondary: $color-shade-blue-04;
 
 // Contextual Help Backgrounds (semantic)
 $bg-contextual-help-primary: $bg-primary;
