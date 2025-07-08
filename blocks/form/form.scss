@@ -17,8 +17,15 @@ form output {
   font-size: 1.625rem;
 }
 
-form:not(.edit-mode) [data-visible='false'] {
+/*form:not(.edit-mode) [data-visible='false'] {
   display: none !important;
+}*/
+
+form:not(.edit-mode) [data-visible='false'] {
+  display: none;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
 main .form > div:not(:first-child) {
@@ -47,14 +54,14 @@ main .form > div:not(:first-child) {
     align-items: center;
     justify-content: center;
     padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-000, 0px);
-    gap: var(--Spacing-Spacing-200, 8px);
-    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    gap: $spacing-200;
+    font-family: $font-family;
     font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
     font-style: normal;
-    font-weight: 500;
+    font-weight: $font-weight-medium;
     line-height: 133%;
     letter-spacing: 0px;
-    color: #017ac9;
+    color: $color-primary;
     text-decoration: none;
     background-image: none;
     border: none;
@@ -73,7 +80,7 @@ main .form > div:not(:first-child) {
     &:hover,
     &:focus {
       background-color: transparent;
-      color: #134276;
+      color: $color-primary-navy;
     }
   }
 }
