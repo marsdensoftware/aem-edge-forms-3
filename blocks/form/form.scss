@@ -85,20 +85,22 @@ main .form > div:not(:first-child) {
   }
 }
 
+
+
 .panel-formhero__picture {
-  display: block !important;
+  display: block !important; // this will be removed when we have the grid system is added
   width: 100%;
   order: -1;
   margin-bottom: $spacing-400;
 
   @include media('tablet') {
-    display: block !important;
+    display: block !important; // this will be removed when we have the grid system is added
     order: -1;
     margin-bottom: $spacing-400;
   }
 
   @include media('desktop') {
-    display: block !important;
+    display: block !important; // this will be removed when we have the grid system is added
     order: 1;
     margin-bottom: 0;
   }
