@@ -5314,6 +5314,10 @@
                 "value": "skills"
               },
               {
+                "name": "Additional Hard Skills",
+                "value": "additionalHardSkills"
+              },
+              {
                 "name": "Job Titles and Industries",
                 "value": "jobTitleIndustries"
               },
