@@ -1,3 +1,5 @@
+const componentStateMap = new WeakMap();
+// --- Helper functions to create DOM elements ---
 function addSuggestionDiv() {
     const el = document.createElement('div');
     el.classList.add('suggestions');
@@ -6,7 +8,6 @@ function addSuggestionDiv() {
 function addSelectedCardsDiv(headingText, emptySelectionMessage) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('selected-cards-wrapper');
-    // Only add heading if headingText is provided and not empty
     if (headingText && headingText.trim() !== '') {
         const heading = document.createElement('div');
         heading.classList.add('selected-cards-heading');
@@ -15,7 +16,6 @@ function addSelectedCardsDiv(headingText, emptySelectionMessage) {
     }
     const cardsDiv = document.createElement('div');
     cardsDiv.classList.add('selected-cards');
-    // Only set the empty selection message if it's provided and not empty
     if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
         cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
     }
@@ -25,7 +25,6 @@ function addSelectedCardsDiv(headingText, emptySelectionMessage) {
 function addRecommendationsCardsDiv(headingText, emptySelectionMessage) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('recommendations-cards-wrapper');
-    // Only add heading if headingText is provided and not empty
     if (headingText && headingText.trim() !== '') {
         const heading = document.createElement('div');
         heading.classList.add('selected-cards-heading');
@@ -34,17 +33,17 @@ function addRecommendationsCardsDiv(headingText, emptySelectionMessage) {
     }
     const cardsDiv = document.createElement('div');
     cardsDiv.classList.add('recommendations-cards');
-    // Only set the empty selection message if it's provided and not empty
     if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
         cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage;
     }
     wrapper.appendChild(cardsDiv);
     return wrapper;
 }
-function createSelectedCard(item, selectedCardsDiv, searchInput) {
+// --- Card creation and management functions ---
+function createSelectedCard(item, selectedCardsDiv, searchInput, source) {
     const card = document.createElement('div');
     card.classList.add('selected-card', 'selected-card--is-selected');
-    // Create hidden input to store the value
+    card.dataset.source = source; // Store where the item came from
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'hidden';
     hiddenInput.value = item;
@@ -56,19 +55,27 @@ function createSelectedCard(item, selectedCardsDiv, searchInput) {
     removeBtn.setAttribute('aria-label', `Remove ${item}`);
     removeBtn.innerHTML = `<span>Remove ${item}</span>`;
     removeBtn.addEventListener('click', () => {
+        const searchBox = selectedCardsDiv.closest('.search-box');
+        if (searchBox && componentStateMap.has(searchBox)) {
+            const state = componentStateMap.get(searchBox);
+            const cardSource = card.dataset.source;
+            // Add the item back to the correct source list in the state
+            if (cardSource === 'main' && !state.main.includes(item)) {
+                state.main.push(item);
+            }
+            else if (cardSource === 'recommendation' && !state.recommendations.includes(item)) {
+                state.recommendations.push(item);
+            }
+            // Re-populate recommendations if they are visible
+            const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper');
+            if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+                populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput);
+            }
+        }
         card.remove();
         // Trigger a change event to update any validation
         const event = new Event('change', { bubbles: true });
         searchInput.dispatchEvent(event);
-        // Find the search-box element and the recommendations div
-        const searchBox = selectedCardsDiv.closest('.search-box');
-        if (searchBox) {
-            const recommendationsCardsDiv = searchBox.querySelector('.recommendations-cards-wrapper');
-            if (recommendationsCardsDiv && recommendationsCardsDiv.style.display !== 'none') {
-                // Recreate the recommendations div to include the removed item
-                populateRecommendationsDiv(searchBox, recommendationsCardsDiv, selectedCardsDiv, searchInput);
-            }
-        }
     });
     card.appendChild(hiddenInput);
     card.appendChild(text);
@@ -80,18 +87,19 @@ function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDi
     card.classList.add('selected-card');
     const text = document.createElement('div');
     text.textContent = item;
-    // Add click event to move the recommendation to the selectedCardsDiv
     card.addEventListener('click', () => {
-        card.remove();
-        // Get the inner div with class 'selected-cards'
-        const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv);
-        createSelectedCard(item, selectedCards, searchInput);
-        // Find the search-box element to replenish the recommendations list
         const searchBox = recommendationsCardsDiv.closest('.search-box');
+        if (searchBox && componentStateMap.has(searchBox)) {
+            const state = componentStateMap.get(searchBox);
+            // Remove item from the recommendations state
+            state.recommendations = state.recommendations.filter((i) => i !== item);
+        }
+        card.remove();
+        const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv);
+        createSelectedCard(item, selectedCards, searchInput, 'recommendation');
         if (searchBox) {
             const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper');
             if (recommendationsWrapper) {
-                // Replenish the recommendations list
                 populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput);
             }
         }
@@ -99,6 +107,7 @@ function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDi
     card.appendChild(text);
     recommendationsCardsDiv.appendChild(card);
 }
+// --- Datasources (static data) ---
 const courses = [
     'Marketing management',
     'Financial management',
@@ -210,40 +219,32 @@ const datasources = {
     jobTitleIndustries,
     additionalHardSkills,
 };
+// --- Global Event Listeners ---
 // Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-    const searchInput = window.searchInput;
-    const suggestionsDiv = window.suggestionsDiv;
-    if (searchInput && !searchInput.contains(e.target)) {
-        suggestionsDiv.innerHTML = '';
-        suggestionsDiv.style.display = 'none';
-    }
+    document.querySelectorAll('.search-box .suggestions').forEach((suggestionsDiv) => {
+        const searchBox = suggestionsDiv.closest('.search-box');
+        if (searchBox && !searchBox.contains(e.target)) {
+            suggestionsDiv.style.display = 'none';
+        }
+    });
 });
 document.addEventListener('input', (event) => {
     const element = event.target.closest('.search-box');
-    if (element) {
+    if (element && componentStateMap.has(element)) {
         const searchInput = element.querySelector('input[type="text"]');
-        window.searchInput = searchInput;
         const query = searchInput.value.toLowerCase();
+        const suggestionsDiv = element.querySelector('.suggestions');
+        suggestionsDiv.innerHTML = '';
         if (query.length < 3) {
+            suggestionsDiv.style.display = 'none';
             return;
         }
-        const suggestionsDiv = element.querySelector('.suggestions');
-        window.suggestionsDiv = suggestionsDiv;
-        suggestionsDiv.innerHTML = '';
-        const { datasource, recommendationsDatasource } = element.dataset;
-        // Get entries from the main datasource
-        const entries = datasources[datasource];
+        const state = componentStateMap.get(element);
         const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper');
         const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards');
-        // Get entries from the recommendations datasource
-        const recommendationsEntries = recommendationsDatasource ?
-            datasources[recommendationsDatasource] :
-            [];
-        const recommendationsCardsDiv = element.querySelector('.recommendations-cards');
-        // Filter main datasource entries
-        const filtered = entries.filter((entry) => entry.toLowerCase().includes(query) &&
-            !Array.from(selectedCardsDiv.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+        // Filter main datasource entries from the component's state
+        const filtered = state.main.filter((entry) => entry.toLowerCase().includes(query));
         // Add suggestions from main datasource
         filtered.forEach((item) => {
             const div = document.createElement('div');
@@ -251,32 +252,34 @@ document.addEventListener('input', (event) => {
             div.textContent = item;
             div.dataset.source = 'main';
             div.addEventListener('click', () => {
+                // Remove item from the main state
+                state.main = state.main.filter((i) => i !== item);
                 searchInput.value = '';
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
-                createSelectedCard(item, selectedCardsDiv, searchInput);
+                createSelectedCard(item, selectedCardsDiv, searchInput, 'main');
             });
             suggestionsDiv.appendChild(div);
         });
         if (filtered.length > 0) {
             suggestionsDiv.style.display = 'block';
         }
+        else {
+            suggestionsDiv.style.display = 'none';
+        }
     }
 });
-// Function to populate the recommendations div with items from the recommendations datasource
-function populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl) {
-    // Clear existing recommendations
-    const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards');
+// --- Component Logic ---
+function populateRecommendationsDiv(element, recommendationsCardsWrapper, selectedCardsDiv, inputEl) {
+    const recommendationsCards = recommendationsCardsWrapper.querySelector('.recommendations-cards');
+    if (!recommendationsCards)
+        return;
     recommendationsCards.innerHTML = '';
-    const { recommendationsDatasource } = element.dataset;
-    // Get entries from the recommendations datasource
-    const recommendationsEntries = recommendationsDatasource ?
-        datasources[recommendationsDatasource] :
-        [];
-    // Filter out items that are already in the selected cards div
-    // Check if selectedCardsDiv is the wrapper div or the inner div
-    const selectedCards = selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv;
-    const availableRecommendations = recommendationsEntries.filter((entry) => !Array.from(selectedCards.children).some((card) => { var _a; return ((_a = card.firstChild) === null || _a === void 0 ? void 0 : _a.textContent) === entry; }));
+    if (!componentStateMap.has(element))
+        return;
+    const state = componentStateMap.get(element);
+    // Use available recommendations from the component's state
+    const availableRecommendations = state.recommendations;
     // Add up to 8 recommendations to the recommendations div
     for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
@@ -293,7 +296,14 @@ export default function decorate(element, field) {
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
     element.dataset.recommendationsDatasource = recommendationsDatasource;
-    // Moved input into container so we can attached icon input
+    // --- Initialize State for this component instance ---
+    const mainData = datasources[datasource] || [];
+    const recData = datasources[recommendationsDatasource] || [];
+    componentStateMap.set(element, {
+        main: [...mainData], // Use spread to create a copy
+        recommendations: [...recData], // Use spread to create a copy
+    });
+    // --- Build DOM ---
     const inputEl = element.querySelector('input');
     const container = document.createElement('div');
     container.className = 'search-box__input';
@@ -302,18 +312,16 @@ export default function decorate(element, field) {
         container.appendChild(inputEl);
     }
     element.appendChild(container);
-    // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
-    // Add selected cards container
     const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage);
-    // Add recommendations cards container
     const recommendationsCardsDiv = addRecommendationsCardsDiv(recommendationsLabel, emptyRecommendationsMessage);
-    // Hide recommendations div by default, show only if show-recommendations is true
     recommendationsCardsDiv.style.display = showRecommendations ? 'block' : 'none';
     element.appendChild(selectedCardsDiv);
     element.appendChild(recommendationsCardsDiv);
     container.appendChild(suggestionsDiv);
-    // Populate the recommendations div
-    populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl);
+    // Populate initial recommendations
+    if (showRecommendations) {
+        populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl);
+    }
     return element;
 }
