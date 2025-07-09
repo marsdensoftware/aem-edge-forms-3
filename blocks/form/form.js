@@ -372,6 +372,8 @@ function colSpanDecorator(field, element) {
     xxl: field.properties?.['display-xxl']
   }
 
+  console.log(responsiveDisplayOptions);
+
   // Get container classes from properties
   const containerClass = field.properties?.container;
   const rowClass = field.properties?.row;
