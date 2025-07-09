@@ -57,6 +57,10 @@ $color-shade-blue-25: #bfdef1;
 $color-shade-blue-10: #e6f2fa;
 $color-shade-blue-04: #f5fafd;
 
+// Shades Red
+$color-shade-red-15: #f8e1e0;
+$color-shade-red-05: #fdf5f5;
+
 /*************************
       Gradients
 *************************/
@@ -169,7 +173,7 @@ $color-gradient-wizard-light: linear-gradient(
 $bg-wizard-dark: $color-gradient-wizard-dark;
 $bg-wizard-light: $color-gradient-wizard-light;
 
-$bg-wizard-dark: linear-gradient(135deg, $color-primary 25%, $color-primary-navy 100%);
-$bg-wizard-light: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);
+/*$bg-wizard-dark: linear-gradient(135deg, $color-primary 25%, $color-primary-navy 100%);
+$bg-wizard-light: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);*/
 
 
