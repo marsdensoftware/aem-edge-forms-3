@@ -17,16 +17,21 @@ form output {
   font-size: 1.625rem;
 }
 
-form:not(.edit-mode) [data-visible='false'] {
+/*form:not(.edit-mode) [data-visible='false'] {
   display: none !important;
+}*/
+
+form:not(.edit-mode) [data-visible='false'] {
+  display: none;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
-// Only show first form step initially
-.form > div:not(:first-child) {
+main .form > div:not(:first-child) {
   display: none;
 }
 
-// Top navigation panel layout
 .panel-wrapper.field-top-nav {
   display: flex;
   align-items: center;
@@ -58,14 +63,14 @@ form:not(.edit-mode) [data-visible='false'] {
     align-items: center;
     justify-content: center;
     padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-000, 0px);
-    gap: var(--Spacing-Spacing-200, 8px);
-    font-family: 'Atkinson Hyperlegible Next', sans-serif;
+    gap: $spacing-200;
+    font-family: $font-family;
     font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
     font-style: normal;
-    font-weight: 500;
+    font-weight: $font-weight-medium;
     line-height: 133%;
     letter-spacing: 0px;
-    color: #017ac9;
+    color: $color-primary;
     text-decoration: none;
     background-image: none;
     border: none;
@@ -84,16 +89,35 @@ form:not(.edit-mode) [data-visible='false'] {
     &:hover,
     &:focus {
       background-color: transparent;
-      color: #134276;
+      color: $color-primary-navy;
     }
   }
 }
 
-// Input overrides
-.form input:disabled,
-.form textarea:disabled,
-.form select:disabled,
-.form button:disabled {
+.panel-formhero__picture {
+  display: block !important; // this will be removed when we have the grid system is added
+  width: 100%;
+  order: -1;
+  margin-bottom: $spacing-400;
+
+  @include media('tablet') {
+    display: block !important; // this will be removed when we have the grid system is added
+    order: -1;
+    margin-bottom: $spacing-400;
+  }
+
+  @include media('desktop') {
+    display: block !important; // this will be removed when we have the grid system is added
+    order: 1;
+    margin-bottom: 0;
+  }
+}
+
+// Remaining unchanged styles
+main .form input:disabled,
+main .form textarea:disabled,
+main .form select:disabled,
+main .form button:disabled {
   background-color: var(--form-input-disable-color);
 }
 
@@ -116,7 +140,6 @@ form:not(.edit-mode) [data-visible='false'] {
   padding-inline-start: 5px;
 }
 
-// File input styling
 input::file-selector-button {
   color: var(--form-upload-color);
   background: var(--form-upload-background-color);
@@ -124,8 +147,7 @@ input::file-selector-button {
   text-align: center;
 }
 
-// Buttons
-.form button {
+main .form button {
   @extend %button--primary;
 }
 
@@ -141,8 +163,7 @@ form .file-wrapper > button {
   }
 }
 
-// File upload drag and drop area
-.file-wrapper.decorated input[type='file'] {
+main .file-wrapper.decorated input[type='file'] {
   display: none;
 }
 
@@ -155,9 +176,8 @@ form .file-wrapper > button {
   text-align: center;
 }
 
-// Cards input (radio/checkbox)
-.form form fieldset.cards > .radio-wrapper > input,
-.form form fieldset.cards > .checkbox-wrapper > input {
+main .form form fieldset.cards > .radio-wrapper > input,
+main .form form fieldset.cards > .checkbox-wrapper > input {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -181,8 +201,7 @@ form .file-wrapper > button {
   align-items: start;
 }
 
-// Repeatable field actions
-.form form .repeat-actions {
+main .form form .repeat-actions {
   grid-column: span 12;
   order: 2;
 }
@@ -203,8 +222,7 @@ form .file-wrapper > button {
   display: block;
 }
 
-// File list display
-.form .file-description {
+main .form .file-description {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -248,15 +266,13 @@ form .file-wrapper > button {
   }
 }
 
-// Form layout: repeat wrapper
-.form form .repeat-wrapper {
+main .form form .repeat-wrapper {
   display: grid;
   grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
-// Messages
-.form .form-message.success-message {
+main .form .form-message.success-message {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #badbcc;
@@ -274,8 +290,7 @@ form .file-wrapper > button {
   padding: 10px;
 }
 
-// Drag area in file wrapper
-.form .file-wrapper .file-drag-area {
+main .form .file-wrapper .file-drag-area {
   border: 1px dashed var(--border-color);
   border-radius: 5px;
   padding: 10px 5px;
@@ -286,19 +301,16 @@ form .file-wrapper > button {
   align-items: center;
 }
 
-// Captcha
-.form form:not(.edit-mode) .captcha-wrapper {
+main .form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-// Inline group descriptions
-.form form .radio-group-wrapper.horizontal .field-description,
-.form form .checkbox-group-wrapper.horizontal .field-description {
+main .form form .radio-group-wrapper.horizontal .field-description,
+main .form form .checkbox-group-wrapper.horizontal .field-description {
   width: 100%;
   margin-top: 0.5rem;
 }
 
-// Responsive adjustments for mobile
 @media (width <= 599px) {
   :root {
     --form-field-horz-gap: 10px;
@@ -313,7 +325,6 @@ form .file-wrapper > button {
   }
 }
 
-// SEP-specific ordering
 .checkbox-wrapper > input {
   order: 2;
 }

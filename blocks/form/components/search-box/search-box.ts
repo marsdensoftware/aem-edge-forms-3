@@ -190,6 +190,24 @@ const skills = [
   'Adapt to changing work environments',
 ]
 
+const additionalHardSkills = [
+  'Business Analysis',
+  'Risk Management',
+  'Market Research',
+  'Data Visualisation Software',
+  'Scientific Research Methodology',
+  'Business Communication',
+  'Management Systems Standards',
+  'Business Analytics',
+  'Management Consulting',
+  'Analyse External Factors of Companies',
+  'Build Business Relationships',
+  'Advise on Efficiency Improvements',
+  'Apply Change Management',
+  'Identify Undetected Organisational Needs',
+  'Analyse Business Plans',
+]
+
 const jobTitleIndustries = [
   'Fruit Production Owner',
   'Field Crop Grower',
@@ -233,6 +251,7 @@ const datasources = {
   skills,
   experiencedBasedJobs,
   jobTitleIndustries,
+  additionalHardSkills,
 }
 
 interface El extends Element {
