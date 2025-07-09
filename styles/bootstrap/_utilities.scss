@@ -10,6 +10,38 @@
   display: inline-flex;
 }
 
+.d-none {
+  display: none;
+}
+
+.d-inline {
+  display: inline;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.d-table {
+  display: table;
+}
+
+.d-table-row {
+  display: table-row;
+}
+
+.d-table-cell {
+  display: table-cell;
+}
+
 // Flex direction
 .flex-row {
   flex-direction: row;
@@ -168,6 +200,30 @@
     .d#{$infix}-inline-flex {
       display: inline-flex;
     }
+    .d#{$infix}-none {
+      display: none;
+    }
+    .d#{$infix}-inline {
+      display: inline;
+    }
+    .d#{$infix}-inline-block {
+      display: inline-block;
+    }
+    .d#{$infix}-block {
+      display: block;
+    }
+    .d#{$infix}-grid {
+      display: grid;
+    }
+    .d#{$infix}-table {
+      display: table;
+    }
+    .d#{$infix}-table-row {
+      display: table-row;
+    }
+    .d#{$infix}-table-cell {
+      display: table-cell;
+    }
 
     .flex#{$infix}-row {
       flex-direction: row;
@@ -281,4 +337,15 @@
       order: 5;
     }
   }
+}
+
+// Visibility
+// https://getbootstrap.com/docs/5.3/utilities/visibility/
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
 }
