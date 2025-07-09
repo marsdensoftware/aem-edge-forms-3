@@ -362,6 +362,15 @@ function colSpanDecorator(field, element) {
     xxl: field.properties?.['colspan-xxl-offset']
   };
 
+  // Get the responsive display options from properties
+  const responsiveDisplayOptions = {
+    sm: field.properties?.['display-sm'],
+    md: field.properties?.['display-md'],
+    lg: field.properties?.['display-lg'],
+    xl: field.properties?.['display-xl'],
+    xxl: field.properties?.['display-xxl']
+  }
+
   // Get container classes from properties
   const containerClass = field.properties?.container;
   const rowClass = field.properties?.row;
@@ -389,6 +398,13 @@ function colSpanDecorator(field, element) {
     Object.entries(responsiveOffsets).forEach(([size, value]) => {
       if (value) {
         element.classList.add(`offset-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display options classes if defined
+    Object.entries(responsiveDisplayOptions).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`d-${size}-${value}`);
       }
     });
 
