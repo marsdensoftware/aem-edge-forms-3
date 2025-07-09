@@ -343,6 +343,7 @@ function colSpanDecorator(field, element) {
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
+  const defaultDisplay = field['Column Display'] || field.properties?.['display'];
 
   // Get responsive colspans from properties
   const responsiveColSpans = {
@@ -385,6 +386,11 @@ function colSpanDecorator(field, element) {
     //set a default offset - ideally, we should delete the value from the jcr
     if (defaultOffset) {
       element.classList.add(`offset-${defaultOffset}`);
+    }
+
+    // Add the default display value
+    if (defaultDisplay) {
+      element.classList.add(`d-${defaultDisplay}`);
     }
 
     // Add responsive colspan classes if defined
