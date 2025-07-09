@@ -229,31 +229,33 @@ export class Summarizer {
 
     static summaryEditTemplate = `
     <div class="row">
-        <div class="col-md-5">
-            <h4 class="title">{{title}}</h4>
-            <p class="p-small">{{description}}</p>
-            <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
+        <div class="col-md-4 row">
+            <div class="col-md-12 col-9">
+                <h4 class="title">{{title}}</h4>
+                <p class="p-small">{{description}}</p>
+            </div>
+            <div class="col-md-12 col-3"><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
-        <div class="col-md-7">{{content}}</div>
+        <div class="col-md-8">{{content}}</div>
     </div>
     `;
 
     static summaryTemplate = `
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <h4 class="title">{{title}}</h4>
             <p class="p-small">{{description}}</p>
         </div>
-        <div class="col-md-7">{{content}}</div>
+        <div class="col-md-8">{{content}}</div>
     </div>
     `;
 
     static itemContentEditTemplate = `
     <div class="row summary-entry">
-        <div class="col-md-11">
+        <div class="col-10">
             {{content}}
         </div>
-        <div class="col-md-1">
+        <div class="col-2">
             <a class="edit" href="#" data-step-name="{{stepName}}" data-entry-id="{{entryId}}">${i18n('Edit')}</a>
         </div>
     </div>
