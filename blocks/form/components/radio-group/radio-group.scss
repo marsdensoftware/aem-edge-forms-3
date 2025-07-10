@@ -2,14 +2,22 @@
 
 .radio-group--with-icon {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0 16px;
   padding-bottom: $spacing-600;
+  gap: $spacing-400 0;
+
+  @include media('desktop') {
+    flex-direction: row;
+    gap: $spacing-400;
+  }
 
   .radio-wrapper {
-    flex: 1 1 45%;
-    display: flex;
+    width: 100%;
+
+    @include media('desktop') {
+      width: calc(50% - $spacing-400);
+    }
   }
 
   .radio-group--with-icon__label {
@@ -166,8 +174,7 @@
           transition: background-color 0.2s ease, color 0.2s ease;
 
           background: $color-white;
-          border: var(--Stroke-weight-Button-stroke, 2px) solid
-            var(--Stroke-Tertiary, #a1b3c8);
+          border: 2px solid $stroke-tertiary;
           border-right: none;
           border-radius: 0;
 
@@ -183,15 +190,14 @@
         }
 
         &:first-child label {
-          border-top-left-radius: var(--Corner-radius-Mid, 8px);
-          border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
+          border-top-left-radius: $border-radius-mid;
+          border-bottom-left-radius: $border-radius-mid;
         }
 
         &:last-child label {
-          border-top-right-radius: var(--Corner-radius-Mid, 8px);
-          border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
-          border-right: var(--Stroke-weight-Button-stroke, 2px) solid
-            var(--Stroke-Tertiary, #a1b3c8);
+          border-top-right-radius: $border-radius-mid;
+          border-bottom-right-radius: $border-radius-mid;
+          border-right: 2px solid $stroke-tertiary;
         }
 
         input[type='radio']:checked + label {

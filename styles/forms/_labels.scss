@@ -3,7 +3,7 @@
 @use '../settings/spacings' as *;
 
 // Base label styling including fieldsets and legends used as labels
-.form label,
+.form label:not(.radio-group--with-icon__label),
 .form legend.field-label,
 .form fieldset.checkbox-group-wrapper legend,
 .form fieldset.radio-group-wrapper legend {
