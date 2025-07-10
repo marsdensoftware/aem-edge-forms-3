@@ -110,6 +110,27 @@
   }
 }
 
+%state-focus {
+  &:focus {
+    box-shadow: 0 0 0 2px $color-white; /*0 0 0 4px $color-focus-state;*/
+    outline: 3px solid transparent;
+  }
+
+  &:active:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+%label-common-style {
+  @extend %state-focus;
+  color: $text-secondary;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
 /******************************
   Error State
 *******************************/

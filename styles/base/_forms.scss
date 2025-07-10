@@ -85,15 +85,6 @@ textarea {
   }
 }
 
-%label-common-style {
-  @extend %state-focus;
-  color: $text-secondary;
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-}
-
 /********************
    INPUT EMAIL
 ********************/
