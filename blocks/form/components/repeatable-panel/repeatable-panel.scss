@@ -108,15 +108,10 @@
 
   .field-wrapper {
     color: $text-primary;
-    /* margin-bottom: $spacing-500;*/
-  }
-
-  .field-label {
-    /* margin-bottom: $spacing-300;*/
   }
 
   .item-remove {
-    display: none !important;
+    display: none;
   }
 
   .item-add i {
@@ -134,7 +129,7 @@
     .item-add,
     .repeatable-entry__edit,
     .repeatable-entry__delete {
-      display: none !important;
+      display: none;
     }
   }
 

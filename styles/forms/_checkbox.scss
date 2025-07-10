@@ -132,7 +132,7 @@
     label {
       display: flex;
       padding: var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-300, 12px)
-      var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-450, 20px);
+        var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-450, 20px);
       align-items: center;
       gap: var(--Spacing-Spacing-000, 0px);
       background-color: $color-white;
@@ -157,7 +157,7 @@
       }
 
       &::before {
-        display: none !important;
+        display: none;
       }
     }
 
