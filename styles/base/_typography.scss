@@ -270,7 +270,7 @@ ul li {
 /* ------------------------------
    Form Hero Intro Subtitle
 ------------------------------ */
-main.wizard--bg-dark .subtitle {
+.wizard--bg-dark .subtitle {
   font-style: normal;
   font-weight: lighter;
   line-height: 130%;
@@ -284,7 +284,7 @@ main.wizard--bg-dark .subtitle {
   }
 }
 
-main.wizard--bg-light .p-large p {
+.wizard--bg-light .p-large p {
   font-size: $size-font-body-large;
   color: $text-dark-primary;
   font-weight: normal;

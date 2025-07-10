@@ -17,10 +17,6 @@ form output {
   font-size: 1.625rem;
 }
 
-/*form:not(.edit-mode) [data-visible='false'] {
-  display: none !important;
-}*/
-
 form:not(.edit-mode) [data-visible='false'] {
   display: none;
   visibility: hidden;
@@ -28,7 +24,7 @@ form:not(.edit-mode) [data-visible='false'] {
   overflow: hidden;
 }
 
-main .form > div:not(:first-child) {
+.form > div:not(:first-child) {
   display: none;
 }
 
@@ -106,30 +102,11 @@ main .form > div:not(:first-child) {
   }
 }
 
-.panel-formhero__picture {
-  display: block !important; // this will be removed when we have the grid system is added
-  width: 100%;
-  order: -1;
-  margin-bottom: $spacing-400;
-
-  @include media('tablet') {
-    display: block !important; // this will be removed when we have the grid system is added
-    order: -1;
-    margin-bottom: $spacing-400;
-  }
-
-  @include media('desktop') {
-    display: block !important; // this will be removed when we have the grid system is added
-    order: 1;
-    margin-bottom: 0;
-  }
-}
-
 // Remaining unchanged styles
-main .form input:disabled,
-main .form textarea:disabled,
-main .form select:disabled,
-main .form button:disabled {
+.form input:disabled,
+.form textarea:disabled,
+.form select:disabled,
+.form button:disabled {
   background-color: var(--form-input-disable-color);
 }
 
@@ -159,7 +136,7 @@ input::file-selector-button {
   text-align: center;
 }
 
-main .form button {
+.form button {
   @extend %button--primary;
 }
 
@@ -167,7 +144,7 @@ form .file-wrapper > button {
   display: flex;
 }
 
-main .submit-wrapper {
+.submit-wrapper {
   button {
     @extend %button--hollow;
     display: block;
@@ -175,7 +152,7 @@ main .submit-wrapper {
   }
 }
 
-main .file-wrapper.decorated input[type='file'] {
+.file-wrapper.decorated input[type='file'] {
   display: none;
 }
 
@@ -188,8 +165,8 @@ main .file-wrapper.decorated input[type='file'] {
   text-align: center;
 }
 
-main .form form fieldset.cards > .radio-wrapper > input,
-main .form form fieldset.cards > .checkbox-wrapper > input {
+.form form fieldset.cards > .radio-wrapper > input,
+.form form fieldset.cards > .checkbox-wrapper > input {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -208,15 +185,12 @@ main .form form fieldset.cards > .checkbox-wrapper > input {
   object-fit: contain;
 }
 
-main
-  .form
-  form
-  .field-label--with-description:not(.radio-group--with-icon__label) {
+.form form .field-label--with-description:not(.radio-group--with-icon__label) {
   flex-direction: column;
   align-items: start;
 }
 
-main .form form .repeat-actions {
+.form form .repeat-actions {
   grid-column: span 12;
   order: 2;
 }
@@ -237,7 +211,7 @@ main .form form .repeat-actions {
   display: block;
 }
 
-main .form .file-description {
+.form .file-description {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -281,13 +255,13 @@ main .form .file-description {
   }
 }
 
-main .form form .repeat-wrapper {
+.form form .repeat-wrapper {
   display: grid;
   grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
-main .form .form-message.success-message {
+.form .form-message.success-message {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #badbcc;
@@ -305,7 +279,7 @@ main .form .form-message.success-message {
   padding: 10px;
 }
 
-main .form .file-wrapper .file-drag-area {
+.form .file-wrapper .file-drag-area {
   border: 1px dashed var(--border-color);
   border-radius: 5px;
   padding: 10px 5px;
@@ -316,12 +290,12 @@ main .form .file-wrapper .file-drag-area {
   align-items: center;
 }
 
-main .form form:not(.edit-mode) .captcha-wrapper {
+.form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-main .form form .radio-group-wrapper.horizontal .field-description,
-main .form form .checkbox-group-wrapper.horizontal .field-description {
+.form form .radio-group-wrapper.horizontal .field-description,
+.form form .checkbox-group-wrapper.horizontal .field-description {
   width: 100%;
   margin-top: 0.5rem;
 }

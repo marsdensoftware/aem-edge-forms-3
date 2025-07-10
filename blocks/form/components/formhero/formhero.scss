@@ -1,7 +1,7 @@
 @use '../../../../styles/settings' as *;
 
 .wizard {
-  .panel-formhero.current-wizard-step {
+  .panel-formhero {
     legend {
       display: none;
     }
@@ -31,19 +31,7 @@
   .panel-formhero__picture {
     margin-bottom: $spacing-600;
     max-width: 311px;
-
     display: none;
-
-    @include media('tablet') {
-      display: none;
-    }
-
-    @include media('desktop') {
-      display: block;
-      margin-bottom: 0;
-      max-width: 458px;
-      order: 1;
-    }
   }
 
   .panel-formhero__content {

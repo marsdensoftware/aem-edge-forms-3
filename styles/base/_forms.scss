@@ -154,7 +154,7 @@ FORM required asterisk for radio and checkbox group
 /********************
  FORM ERROR MESSAGE
 ********************/
-main .form form .field-wrapper.field-invalid .field-description {
+.form form .field-wrapper.field-invalid .field-description {
   position: relative;
   padding-left: clamp(1rem, 5vw, 4rem);
   padding-right: clamp(1rem, 5vw, 4rem);
@@ -173,15 +173,16 @@ main .form form .field-wrapper.field-invalid .field-description {
     left: 0;
     width: 16px;
     height: 16px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E") no-repeat center / contain;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E")
+      no-repeat center / contain;
   }
 }
 
 /* ------------------------------
    Light Blue Gradient background
 ------------------------------ */
-main.wizard--bg-light,
-main.wizard--bg-mid {
+.wizard--bg-light,
+.wizard--bg-mid {
   color: $text-primary;
 
   h1,
@@ -224,7 +225,7 @@ main.wizard--bg-mid {
 /* ------------------------------
    Dark Blue Gradient background
 ------------------------------ */
-main.wizard--bg-dark {
+.wizard--bg-dark {
   color: $color-white;
 
   .text-wrapper,
@@ -281,15 +282,15 @@ main.wizard--bg-dark {
 }
 
 // Background pattern and gradients
-main.wizard--bg-dark,
-main.wizard--bg-mid,
-main.wizard--bg-light {
+.wizard--bg-dark,
+.wizard--bg-mid,
+.wizard--bg-light {
   position: relative;
   z-index: 1;
 }
 
-main.wizard--bg-dark::before,
-main.wizard--bg-mid::before {
+.wizard--bg-dark::before,
+.wizard--bg-mid::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -301,7 +302,7 @@ main.wizard--bg-mid::before {
   pointer-events: none;
 }
 
-main.wizard--bg-light::before {
+.wizard--bg-light::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -314,22 +315,22 @@ main.wizard--bg-light::before {
 }
 
 @media (max-width: 743px) {
-  main.wizard--bg-dark::before,
-  main.wizard--bg-mid::before,
-  main.wizard--bg-light::before {
+  .wizard--bg-dark::before,
+  .wizard--bg-mid::before,
+  .wizard--bg-light::before {
     background-image: none;
   }
 }
 
 @include media('tablet') {
-  main.wizard--bg-dark::before,
-  main.wizard--bg-mid::before {
+  .wizard--bg-dark::before,
+  .wizard--bg-mid::before {
     top: 100px;
     background-image: url('/images/mymsd-unity-pattern-top-right.svg');
     background-position: top right;
   }
 
-  main.wizard--bg-light::before {
+  .wizard--bg-light::before {
     top: 100px;
     background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
     background-position: top right;
@@ -337,17 +338,14 @@ main.wizard--bg-light::before {
 }
 
 @include media('desktop') {
-  main.wizard--bg-dark::before,
-  main.wizard--bg-mid::before {
+  .wizard--bg-dark::before,
+  .wizard--bg-mid::before {
     background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
     background-position: bottom left;
   }
 
-  main.wizard--bg-light::before {
+  .wizard--bg-light::before {
     background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
     background-position: top right;
   }
 }
-
-
-
