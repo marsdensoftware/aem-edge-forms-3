@@ -66,7 +66,7 @@
 
     p {
       @include font-body-large;
-      margin-bottom: 12px;
+      margin-bottom: $spacing-300;
     }
 
     @include media('desktop') {
@@ -74,25 +74,15 @@
     }
   }
 
-  // Apply shared styles for intro1, intro2, and intro3
   .panel-formhero.field-intro1,
   .panel-formhero.field-intro2,
   .panel-formhero.field-intro3 {
     .panel-formhero__content {
       p {
         p {
-          font-size: 1.75rem;
+          font-size: $size-font-h4;
           color: $text-dark;
-          margin-bottom: 0.5rem;
-
-          @include media('tablet') {
-            font-size: 1.875rem; // 30px
-          }
-
-          @include media('desktop') {
-            font-size: 2rem; // 32px
-            margin-bottom: $spacing-300;
-          }
+          margin-bottom: $spacing-200;
         }
       }
     }
