@@ -1,2 +1,54 @@
-$nav-height: 98px;
-$footer-height: 83px;
+@use 'spacings' as *;
+
+@function result($nav-height, $footer-height) {
+  $result: calc(100vh - ($nav-height + $footer-height));
+  @return $result;
+}
+
+$nav-inner: 44px;
+$nav-padding-top: $spacing-450;
+$nav-padding-bottom: $spacing-450;
+
+$nav-padding-top-tablet: $spacing-500;
+$nav-padding-bottom-tablet: $spacing-500;
+
+$nav-inner-desktop: 47px;
+$nav-padding-top-desktop: $spacing-450 + $spacing-450;
+$nav-padding-bottom-desktop: $spacing-450 + $spacing-400;
+
+$footer-inner: 56px;
+$footer-padding-top: $spacing-400;
+$footer-padding-bottom: $spacing-500;
+
+$footer-inner-tablet: 57px;
+$footer-padding-top-tablet: $spacing-450;
+$footer-padding-bottom-tablet: $spacing-600;
+
+$footer-inner-desktop: 59px;
+$footer-padding-top-desktop: $spacing-450;
+$footer-padding-bottom-desktop: $spacing-600;
+
+$nav-height: ($nav-inner + $nav-padding-top + $nav-padding-bottom);
+$nav-height-tablet: (
+  $nav-inner + $nav-padding-top-tablet + $nav-padding-bottom-tablet
+);
+$nav-height-desktop: (
+  $nav-inner-desktop + $nav-padding-top-desktop + $nav-padding-bottom-desktop
+);
+
+$footer-height: ($footer-inner + $footer-padding-top + $footer-padding-bottom);
+$footer-height-tablet: (
+  $footer-inner-tablet + $footer-padding-top-tablet +
+    $footer-padding-bottom-tablet
+);
+$footer-height-desktop: (
+  $footer-inner-desktop + $footer-padding-top-desktop +
+    $footer-padding-bottom-desktop
+);
+
+$wizard-body-height: result($nav-height, $footer-height);
+$wizard-body-height-tablet: result($nav-height-tablet, $footer-height-tablet);
+$wizard-body-height-desktop: result(
+  $nav-height-desktop,
+  $footer-height-desktop
+);
