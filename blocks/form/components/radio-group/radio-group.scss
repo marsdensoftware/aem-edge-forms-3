@@ -33,20 +33,12 @@
 
     .text {
       font-weight: 600;
-      /*font-size: $size-font-body-large;*/
       color: $text-dark-primary;
     }
 
     .desc {
       font-size: $size-font-body-default;
       color: $text-secondary;
-      font-weight: 400;
-      line-height: 1.4;
-      max-width: 45ch;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
   }
 
@@ -149,92 +141,64 @@
   &.variant-bar {
     .radios-wrapper {
       display: flex;
-      flex-direction: row;
+      overflow: hidden;
 
       .radio-wrapper {
         flex: 1;
-      }
-    }
-  }
-}
+        position: relative;
 
-// Shared .desc style for checkboxes and other label-based inputs
-.checkbox-wrapper .field-label--with-description .desc {
-  font-size: $size-font-body-default;
-  color: $text-secondary;
-  font-weight: 400;
-  line-height: 1.4;
-  max-width: 45ch;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/******************************
-  Horizontal Checkbox Variants
-******************************/
-
-.radio-group-wrapper.variant-bar {
-  .radios-wrapper {
-    display: flex;
-    overflow: hidden;
-
-    .radio-wrapper {
-      flex: 1;
-      position: relative;
-
-      input[type='radio'] {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: $spacing-200 $spacing-400;
-        font-weight: normal;
-        font-size: $size-font-body-large;
-        color: $text-primary;
-        cursor: pointer;
-        min-height: 48px;
-        transition: background-color 0.2s ease, color 0.2s ease;
-
-        background: $color-white;
-        border: var(--Stroke-weight-Button-stroke, 2px) solid
-          var(--Stroke-Tertiary, #a1b3c8);
-        border-right: none;
-        border-radius: 0;
-
-        &::before,
-        &::after {
-          display: none;
+        input[type='radio'] {
+          position: absolute;
+          opacity: 0;
+          pointer-events: none;
         }
 
-        &:hover {
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: $spacing-200 $spacing-400;
+          font-weight: normal;
+          font-size: $size-font-body-large;
+          color: $text-primary;
+          cursor: pointer;
+          min-height: 48px;
+          transition: background-color 0.2s ease, color 0.2s ease;
+
+          background: $color-white;
+          border: var(--Stroke-weight-Button-stroke, 2px) solid
+            var(--Stroke-Tertiary, #a1b3c8);
+          border-right: none;
+          border-radius: 0;
+
+          &::before,
+          &::after {
+            display: none;
+          }
+
+          &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+          }
+        }
+
+        &:first-child label {
+          border-top-left-radius: var(--Corner-radius-Mid, 8px);
+          border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
+        }
+
+        &:last-child label {
+          border-top-right-radius: var(--Corner-radius-Mid, 8px);
+          border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
+          border-right: var(--Stroke-weight-Button-stroke, 2px) solid
+            var(--Stroke-Tertiary, #a1b3c8);
+        }
+
+        input[type='radio']:checked + label {
           background-color: $color-primary;
+          border-color: $color-primary;
           color: $color-white;
         }
-      }
-
-      &:first-child label {
-        border-top-left-radius: var(--Corner-radius-Mid, 8px);
-        border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
-      }
-
-      &:last-child label {
-        border-top-right-radius: var(--Corner-radius-Mid, 8px);
-        border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
-        border-right: var(--Stroke-weight-Button-stroke, 2px) solid
-          var(--Stroke-Tertiary, #a1b3c8);
-      }
-
-      input[type='radio']:checked + label {
-        background-color: $color-primary;
-        border-color: $color-primary;
-        color: $color-white;
       }
     }
   }

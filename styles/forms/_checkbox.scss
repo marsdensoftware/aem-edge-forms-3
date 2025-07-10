@@ -1,12 +1,5 @@
-@use '../settings/colors' as *;
-@use '../settings/mixins' as *;
-@use '../settings/spacings' as *;
 @use '../settings' as *;
-@use '../base/forms' as *;
 
-/******************************
-  Checkbox Wrapper
-******************************/
 .checkbox-wrapper {
   display: flex;
   align-items: center;
@@ -79,11 +72,14 @@
       }
     }
   }
+
+  // Shared .desc style for checkboxes and other label-based inputs
+  .field-label--with-description .desc {
+    font-size: $size-font-body-default;
+    color: $text-secondary;
+  }
 }
 
-/******************************
-  Horizontal Checkbox Group
-******************************/
 .checkbox-group-wrapper.horizontal {
   .checkbox-wrapper {
     flex-direction: column;
