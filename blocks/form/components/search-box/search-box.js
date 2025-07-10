@@ -56,24 +56,29 @@ function createSelectedCard(item, selectedCardsDiv, searchInput, source) {
     removeBtn.innerHTML = `<span>Remove ${item}</span>`;
     removeBtn.addEventListener('click', () => {
         const searchBox = selectedCardsDiv.closest('.search-box');
+        // Remove the card from the DOM immediately.
+        card.remove();
         if (searchBox && componentStateMap.has(searchBox)) {
+            // Now, update the component's internal state to reflect the removal.
+            // 1. Get all items that are *still* selected.
+            const remainingSelectedItems = Array.from(selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')).map((input) => input.value);
+            // 2. Get the original, ordered datasources.
+            const recDatasourceName = searchBox.dataset.recommendationsDatasource;
+            const originalRecs = datasources[recDatasourceName] || [];
+            const mainDatasourceName = searchBox.dataset.datasource;
+            const originalMain = datasources[mainDatasourceName] || [];
+            // 3. Re-create the available items state by filtering the original lists.
+            // This elegantly preserves the original order without needing a complex sort.
             const state = componentStateMap.get(searchBox);
-            const cardSource = card.dataset.source;
-            // Add the item back to the correct source list in the state
-            if (cardSource === 'main' && !state.main.includes(item)) {
-                state.main.push(item);
-            }
-            else if (cardSource === 'recommendation' && !state.recommendations.includes(item)) {
-                state.recommendations.push(item);
-            }
-            // Re-populate recommendations if they are visible
+            state.recommendations = originalRecs.filter((i) => !remainingSelectedItems.includes(i));
+            state.main = originalMain.filter((i) => !remainingSelectedItems.includes(i));
+            // 4. Re-populate the recommendations UI to show the newly available item.
             const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper');
             if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
                 populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput);
             }
         }
-        card.remove();
-        // Trigger a change event to update any validation
+        // Finally, trigger a change event for form validation.
         const event = new Event('change', { bubbles: true });
         searchInput.dispatchEvent(event);
     });
