@@ -61,20 +61,17 @@
     }
   }
 
+  .panel-formhero.field-intro1,
+  .panel-formhero.field-intro2,
   .panel-formhero.field-intro3 {
     .panel-formhero__content {
       p {
         p {
-          font-size: 28px;
+          font-size: $size-font-subtitle;
           color: $text-dark;
           margin-bottom: $spacing-200;
 
-          @include media('tablet') {
-            font-size: 30px;
-          }
-
           @include media('desktop') {
-            font-size: 32px;
             margin-bottom: $spacing-300;
           }
         }
