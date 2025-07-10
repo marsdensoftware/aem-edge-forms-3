@@ -7,7 +7,7 @@ fieldset {
 }
 
 // Hide debug output
-main .form pre {
+.form pre {
   display: none;
 }
 
@@ -38,7 +38,19 @@ main .form > div:not(:first-child) {
   justify-content: space-between;
   padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
+  padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
+  max-height: $nav-height;
   height: 100%;
+
+  @include media('tablet') {
+    max-height: $nav-height-tablet;
+    padding: $nav-padding-top-tablet $spacing-400 $nav-padding-bottom-tablet;
+  }
+
+  @include media('desktop') {
+    max-height: $nav-height-desktop;
+    padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
+  }
 
   @include media('tablet') {
     max-height: $nav-height-tablet;
@@ -121,20 +133,20 @@ main .form button:disabled {
   background-color: var(--form-input-disable-color);
 }
 
-main .form input[type='file'] {
+.form input[type='file'] {
   border: none;
   padding-inline-start: 0;
   background: unset;
   color: unset;
 }
 
-main .form textarea {
+.form textarea {
   min-height: 100px;
   font-family: $font-family;
   font-size: $size-font-body-default;
 }
 
-main .form label.required::after {
+.form label.required::after {
   content: '*';
   color: var(--form-label-color);
   padding-inline-start: 5px;
@@ -151,21 +163,23 @@ main .form button {
   @extend %button--primary;
 }
 
-main form .file-wrapper > button {
+form .file-wrapper > button {
   display: flex;
 }
 
-main .submit-wrapper button {
-  @extend %button--hollow;
-  display: block;
-  margin-left: auto;
+main .submit-wrapper {
+  button {
+    @extend %button--hollow;
+    display: block;
+    margin-left: auto;
+  }
 }
 
 main .file-wrapper.decorated input[type='file'] {
   display: none;
 }
 
-main .file-wrapper .field-dropregion {
+.file-wrapper .field-dropregion {
   background: rgb(0 0 0 / 2%);
   border: 1px dashed var(--form-input-border-color);
   border-radius: 4px;
@@ -182,13 +196,13 @@ main .form form fieldset.cards > .checkbox-wrapper > input {
   height: 0;
 }
 
-main .form .form-image-wrapper img {
+.form .form-image-wrapper img {
   max-width: 100%;
   height: auto;
 }
 
-main .form form fieldset.cards > .radio-wrapper > label > img,
-main .form form fieldset.cards > .checkbox-wrapper > label > img {
+.form form fieldset.cards > .radio-wrapper > label > img,
+.form form fieldset.cards > .checkbox-wrapper > label > img {
   max-width: 18px;
   max-height: 18px;
   object-fit: contain;
@@ -207,19 +221,19 @@ main .form form .repeat-actions {
   order: 2;
 }
 
-main .form form .item-remove,
-main .form form .item-add {
+.form form .item-remove,
+.form form .item-add {
   overflow: unset;
 }
 
-main .form form .item-remove {
+.form form .item-remove {
   justify-self: end;
   grid-column: span 12;
   order: 1;
 }
 
-main .form form div[data-variant='addRemoveButtons'] .item-add,
-main .form form div[data-variant='addRemoveButtons'] .item-remove {
+.form form div[data-variant='addRemoveButtons'] .item-add,
+.form form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
@@ -230,13 +244,13 @@ main .form .file-description {
   margin-top: 5px;
 }
 
-main .form .file-description .file-description-name {
+.form .file-description .file-description-name {
   cursor: pointer;
   text-decoration: underline;
   flex: 1;
 }
 
-main .file-wrapper .file-description button {
+.file-wrapper .file-description button {
   --form-button-padding: 15px;
   width: 12px;
   height: 12px;
@@ -257,7 +271,7 @@ main .file-wrapper .file-description button {
   }
 }
 
-main .form .button-wrapper button[disabled] {
+.form .button-wrapper button[disabled] {
   cursor: auto;
 
   &:hover {
@@ -282,7 +296,7 @@ main .form .form-message.success-message {
   padding: 10px;
 }
 
-main .form .form-message.error-message {
+.form .form-message.error-message {
   color: #842029;
   background-color: #f8d7da;
   border-color: #f5c2c7;
@@ -317,7 +331,7 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
     --form-field-horz-gap: 10px;
   }
 
-  main .form form .wizard {
+  .form form .wizard {
     .wizard-menu-items {
       gap: 20px;
     }
