@@ -109,9 +109,3 @@ select[required]::after {
     flex: 1 1 0%;
   }
 }
-
-.col-md-5,
-.col-md-7 {
-  flex: 1 1 auto;
-  min-width: 0;
-}
