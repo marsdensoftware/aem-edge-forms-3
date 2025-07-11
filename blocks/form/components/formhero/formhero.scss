@@ -58,14 +58,22 @@
     p {
       @include font-body-large;
       margin-bottom: 12px;
+    }
+  }
 
+  .panel-formhero.field-intro1,
+  .panel-formhero.field-intro2,
+  .panel-formhero.field-intro3 {
+    .panel-formhero__content {
       p {
-        font-size: $size-font-subtitle;
-        color: $text-dark;
-        margin-bottom: $spacing-200;
+        p {
+          font-size: $size-font-subtitle;
+          color: $text-dark;
+          margin-bottom: $spacing-200;
 
-        @include media('desktop') {
-          margin-bottom: $spacing-300;
+          @include media('desktop') {
+            margin-bottom: $spacing-300;
+          }
         }
       }
     }
