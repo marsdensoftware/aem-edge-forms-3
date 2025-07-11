@@ -5,7 +5,9 @@
 */
 @use '../settings' as *;
 
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -32,7 +34,7 @@ ul {
   li {
     font-size: $size-font-base;
     line-height: 1.6;
-    margin-bottom: $spacing-100; // Requested change 2729
+    margin-bottom: $spacing-100;
 
     &::marker {
       color: $color-grey-black-80;

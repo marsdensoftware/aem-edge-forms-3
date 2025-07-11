@@ -31,15 +31,3 @@
 .form .checkbox-wrapper > label::after {
   content: none;
 }
-
-// Optional help text (field description)
-.form .field-description {
-  color: var(--form-label-color);
-  font-size: var(--form-font-size-xs);
-}
-
-// Field description for invalid fields
-.form form .field-invalid .field-description {
-  color: var(--form-error-color);
-  font-weight: 700;
-}
