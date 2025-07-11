@@ -20502,8 +20502,16 @@
                 "value": "warning"
               },
               {
-                "name": "Error",
-                "value": "error"
+                "name": "primary",
+                "value": "contextual-help--primary"
+              },
+              {
+                "name": "secondary",
+                "value": "contextual-help--secondary"
+              },
+              {
+                "name": "tertiary",
+                "value": "contextual-help--tertiary"
               }
             ]
           },
