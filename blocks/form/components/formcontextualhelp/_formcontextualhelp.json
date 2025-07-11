@@ -53,15 +53,15 @@
                 },
                 {
                   "name": "primary",
-                  "value": "contextual-help--primary"
+                  "value": "primary"
                 },
                 {
                   "name": "secondary",
-                  "value": "contextual-help--secondary"
+                  "value": "secondary"
                 },
                 {
                   "name": "tertiary",
-                  "value": "contextual-help--tertiary"
+                  "value": "tertiary"
                 }
               ]
             },
