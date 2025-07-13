@@ -146,6 +146,11 @@
         background-color: $color-white;
         border-color: $color-shade-navy-40;
       }
+
+      .btn-save,
+      .btn-cancel {
+        @include elevation-1;
+      }
     }
 
     &.current {
