@@ -33,11 +33,6 @@
       transition: all 0.1s ease-in-out;
     }
 
-    .desc {
-      font-size: clamp(15px, 1.25vw, 17px);
-      color: $text-secondary;
-    }
-
     &:hover {
       color: $text-primary;
 
@@ -69,10 +64,15 @@
     }
   }
 
-  // Shared .desc style for checkboxes and other label-based inputs
-  .field-label--with-description .desc {
+  .desc {
     font-size: $size-font-body-default;
     color: $text-secondary;
+    font-weight: 400;
+  }
+
+  .text {
+    color: $text-dark-primary;
+    font-weight: 400;
   }
 }
 
