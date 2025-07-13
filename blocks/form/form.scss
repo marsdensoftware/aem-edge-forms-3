@@ -294,10 +294,17 @@ form .file-wrapper > button {
   display: none;
 }
 
-.form form .radio-group-wrapper.horizontal .field-description,
-.form form .checkbox-group-wrapper.horizontal .field-description {
-  width: 100%;
-  margin-top: 0.5rem;
+.radio-group-wrapper.horizontal .field-description,
+.checkbox-group-wrapper.horizontal .field-description {
+  p {
+    font-size: 15px;
+    color: $text-dark-primary;
+    margin-bottom: $spacing-200;
+
+    @include media('desktop') {
+      font-size: 17px;
+    }
+  }
 }
 
 @media (width <= 599px) {
