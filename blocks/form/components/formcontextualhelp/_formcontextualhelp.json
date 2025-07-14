@@ -52,8 +52,16 @@
                   "value": "warning"
                 },
                 {
-                  "name": "Error",
-                  "value": "error"
+                  "name": "primary",
+                  "value": "primary"
+                },
+                {
+                  "name": "secondary",
+                  "value": "secondary"
+                },
+                {
+                  "name": "tertiary",
+                  "value": "tertiary"
                 }
               ]
             },
@@ -92,6 +100,9 @@
               "valueType": "boolean"
             }
           ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
         }
       ]
     }

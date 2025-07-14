@@ -105,6 +105,9 @@
                             "description": "Upper boundary for year. Could be 2030, or -/+45. Default is current year."
                         }
                     ]
+                },
+                {
+                    "...": "../../models/form-common/_responsive-columns-component.json"
                 }
             ]
         }

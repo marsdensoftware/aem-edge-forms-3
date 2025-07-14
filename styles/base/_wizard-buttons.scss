@@ -17,8 +17,8 @@
   background-size: contain;
   background-repeat: no-repeat;
   display: block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
 }
 
 .wizard .wizard-button-wrapper {
@@ -51,6 +51,7 @@
   .button[name='next'] {
     @extend %button;
     @extend %button--primary;
+    @include elevation-2;
     display: flex;
     align-items: center;
 
@@ -59,13 +60,14 @@
       content: '';
       background-image: url('../../../../icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
-      margin-left: 0.5rem;
+      margin-left: 8px;
     }
   }
 
   .button[name='back'] {
     @extend %button;
     @extend %button--hollow;
+    @include elevation-2;
     display: flex;
     align-items: center;
 
@@ -73,8 +75,7 @@
       @extend %common-wizard-button;
       content: '';
       background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
-
-      margin-right: 0.5rem;
+      margin-right: 8px;
     }
   }
 }
@@ -83,13 +84,12 @@
     REPEAT ACTIONS BUTTON (Hollow Style)
 *****************************/
 .repeat-actions .item-add {
+  @include elevation-1;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: $spacing-200;
-  font-family: $font-family;
   font-size: 20px;
-  font-style: normal;
   line-height: 24px;
   letter-spacing: 0;
   text-align: center;
@@ -100,9 +100,6 @@
   border: $stroke-input-stroke solid $stroke-tertiary;
   background: $bg-light-primary;
   color: $text-dark-primary;
-
-  // Elevation-1 (manually translated from vars)
-  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.2);
 
   &.default {
     padding: $spacing-400 $spacing-500;

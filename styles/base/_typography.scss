@@ -14,6 +14,7 @@ h4,
 h5,
 h6 {
   font-family: $font-family;
+  margin-top: 0;
   margin-bottom: $spacing-600;
 
   &:last-child:not(:first-child) {
@@ -66,7 +67,6 @@ p {
 
 .form-wrapper p {
   margin: 0;
-  padding-bottom: $spacing-100;
 }
 
 /* ------------------------------
@@ -190,46 +190,6 @@ ul li {
 }
 
 /* ------------------------------
-   Form Heading Adjustments
------------------------------- */
-.wizard .panel-formwelcome .panel-formwelcome__item-content p {
-  margin: 0;
-  @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-}
-
-.form-wrapper [class*='field-wrapper'] {
-  h1 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-
-  h2 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-
-  h3 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-
-  h4 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-
-  h5 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-
-  h6 {
-    margin: 0;
-    @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
-  }
-}
-
-/* ------------------------------
    Subtitle
 ------------------------------ */
 .typography.subtitle.block p {
@@ -270,12 +230,11 @@ ul li {
 /* ------------------------------
    Form Hero Intro Subtitle
 ------------------------------ */
-main.wizard--bg-dark .subtitle {
+.wizard--bg-dark .subtitle {
   font-style: normal;
   font-weight: lighter;
   line-height: 130%;
   margin: 0;
-  @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
 
   p {
     margin: 0;
@@ -284,14 +243,13 @@ main.wizard--bg-dark .subtitle {
   }
 }
 
-main.wizard--bg-light .p-large p {
+.wizard--bg-light .p-large p {
   font-size: $size-font-body-large;
   color: $text-dark-primary;
   font-weight: normal;
   font-style: normal;
   line-height: 130%;
   margin: 0;
-  @include responsive-padding-bottom($spacing-400, $spacing-450, $spacing-500);
 
   p {
     margin: 0;

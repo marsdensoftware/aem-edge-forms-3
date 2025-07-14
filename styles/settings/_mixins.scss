@@ -52,10 +52,10 @@
 *******************************/
 
 %button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-300 $spacing-500;
+  padding: $spacing-400 $spacing-500;
   font-family: $font-family;
   font-weight: normal;
   font-size: 18px;
@@ -110,6 +110,27 @@
   }
 }
 
+%state-focus {
+  &:focus {
+    box-shadow: 0 0 0 2px $color-white; /*0 0 0 4px $color-focus-state;*/
+    outline: 3px solid transparent;
+  }
+
+  &:active:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+%label-common-style {
+  @extend %state-focus;
+  color: $text-secondary;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
 /******************************
   Error State
 *******************************/
@@ -123,25 +144,4 @@
   &::placeholder {
     color: $color-feedback-red;
   }
-}
-
-/******************************
-  Wizard Hero Welcome
-*******************************/
-
-@mixin responsive-padding-bottom($mobile, $tablet, $desktop) {
-  padding-bottom: $mobile;
-
-  @include media('tablet') {
-    padding-bottom: $tablet;
-  }
-
-  @include media('desktop') {
-    padding-bottom: $desktop;
-  }
-}
-
-// Checkbox Variant Pills
-@mixin border-radius-pill {
-  border-radius: 9999px;
 }

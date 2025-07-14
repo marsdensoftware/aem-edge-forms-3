@@ -1,92 +1,61 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel {
-    &[data-max="1"] button.item-add {
-        display: none;
-    }
+.form form .panel-repeatable-panel {
+  &[data-max='1'] button.item-add {
+    display: none;
+  }
 
-    .repeatable-entries {
-        .repeatable-entry {
-            padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
-            border-radius: 8px;
+  .repeatable-entries {
+    .repeatable-entry {
+      padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
+      border-radius: 8px;
 
-            // Borders and background
-            border-top: 8px solid $color-shade-blue-40;
-            border-right: 2px solid $color-shade-blue-40;
-            border-bottom: 2px solid $color-shade-blue-40;
-            border-left: 2px solid $color-shade-blue-40;
-            background: $bg-light-primary;
+      // Borders and background
+      border-top: 8px solid $color-shade-blue-40;
+      border-right: 2px solid $color-shade-blue-40;
+      border-bottom: 2px solid $color-shade-blue-40;
+      border-left: 2px solid $color-shade-blue-40;
+      background: $bg-light-primary;
 
-            // Shadow
-            box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
-            position: relative;
-            margin-bottom: $spacing-600;
+      // Shadow
+      box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
+      position: relative;
+      margin-bottom: $spacing-600;
 
-            &__language,
-            .repeatable-entry__cardTitle,
-            .repeatable-entry__course,
-            .repeatable-entry__title {
-                color: $color-primary-navy;
-                font-feature-settings: 'liga' off, 'clig' off;
-                font-family: $font-family;
-                font-size: $size-font-h6;
-                font-style: normal;
-                font-weight: $font-weight-bold;
-                line-height: 130%;
-                letter-spacing: $letter-spacing-default;
-            }
+      &__language,
+      .repeatable-entry__cardTitle,
+      .repeatable-entry__course,
+      .repeatable-entry__title {
+        color: $color-primary-navy;
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: $font-family;
+        font-size: $size-font-h6;
+        font-style: normal;
+        font-weight: $font-weight-bold;
+        line-height: 130%;
+        letter-spacing: $letter-spacing-default;
+      }
 
+      &__proficiency {
+        color: $text-primary;
+        font-family: $font-family;
+        font-size: $size-font-body-default;
+        font-style: normal;
+        font-weight: $font-weight-regular;
+        line-height: 160%;
+        letter-spacing: $letter-spacing-default;
+      }
 
-            &__proficiency {
-                color: $text-primary;
-                font-family: $font-family;
-                font-size: $size-font-body-default;
-                font-style: normal;
-                font-weight: $font-weight-regular;
-                line-height: 160%;
-                letter-spacing: $letter-spacing-default;
-            }
-
-            &__delete {
-                position: absolute;
-                top: ($spacing-400 * 2 + 26px);
-                right: $spacing-400;
-                width: 56px;
-                height: 26px;
-                background-repeat: no-repeat;
-                display: block;
-                text-decoration: underline;
-                padding-left: 28px;
-
-                font-family: $font-family;
-                font-size: $size-font-body-default;
-                font-style: normal;
-                font-weight: $font-weight-medium;
-                line-height: 133%;
-                letter-spacing: $letter-spacing-default;
-                color: $text-accent;
-
-                &:hover,
-                &:focus,
-                &:visited {
-                    color: $text-dark;
-                }
-            }
-        }
-    }
-
-    .repeatable-entry__edit {
+      &__delete {
         position: absolute;
-        top: $spacing-400;
+        top: ($spacing-400 * 2 + 26px);
         right: $spacing-400;
         width: 56px;
         height: 26px;
-        background-image: url('./images/icon-repeatable-panel-edit-blue.svg');
         background-repeat: no-repeat;
         display: block;
-        text-align: center;
-        padding-left: 28px;
         text-decoration: underline;
+        padding-left: 28px;
 
         font-family: $font-family;
         font-size: $size-font-body-default;
@@ -99,64 +68,93 @@ main .form form .panel-repeatable-panel {
         &:hover,
         &:focus,
         &:visited {
-            color: $text-dark;
+          color: $text-dark;
         }
+      }
+    }
+  }
+
+  .repeatable-entry__edit {
+    position: absolute;
+    top: $spacing-400;
+    right: $spacing-400;
+    width: 56px;
+    height: 26px;
+    background-image: url('./images/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    display: block;
+    text-align: center;
+    padding-left: 28px;
+    text-decoration: underline;
+
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: $letter-spacing-default;
+    color: $text-accent;
+
+    &:hover,
+    &:focus,
+    &:visited {
+      color: $text-dark;
+    }
+  }
+
+  &__conditional {
+    display: none;
+  }
+
+  .field-wrapper {
+    color: $text-primary;
+  }
+
+  .item-remove {
+    display: none;
+  }
+
+  .item-add i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('images/icon-repeatable-panel-plus-blue.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  &.editing {
+    .item-add,
+    .repeatable-entry__edit,
+    .repeatable-entry__delete {
+      display: none;
+    }
+  }
+
+  [data-repeatable] {
+    display: none;
+
+    .button-bar {
+      display: flex;
+      gap: 20px;
+      margin-top: 65px;
+
+      .btn-cancel {
+        color: $text-dark-primary;
+        background-color: $color-white;
+        border-color: $color-shade-navy-40;
+      }
+
+      .btn-save,
+      .btn-cancel {
+        @include elevation-1;
+      }
     }
 
-    &__conditional {
-        display: none;
+    &.current {
+      display: block;
     }
-
-    .field-wrapper {
-        color: $text-primary;
-        /* margin-bottom: $spacing-500;*/
-    }
-
-    .field-label {
-        /* margin-bottom: $spacing-300;*/
-    }
-
-    .item-remove {
-        display: none !important;
-    }
-
-    .item-add i {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        background-image: url('images/icon-repeatable-panel-plus-blue.svg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        margin-right: 8px;
-        vertical-align: middle;
-    }
-
-    &.editing {
-
-        .item-add,
-        .repeatable-entry__edit,
-        .repeatable-entry__delete {
-            display: none !important;
-        }
-    }
-
-    [data-repeatable] {
-        display: none;
-
-        .button-bar {
-            display: flex;
-            gap: 20px;
-            margin-top: 65px;
-
-            .btn-cancel{
-                color: $text-dark-primary;
-                background-color: $color-white;
-                border-color: $color-shade-navy-40;
-            }
-        }
-
-        &.current {
-            display: block;
-        }
-    }
+  }
 }

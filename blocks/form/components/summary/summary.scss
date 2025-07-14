@@ -172,7 +172,7 @@
 
 .field-summary-personal-details {
   h2 {
-    color: pink !important;
+    color: pink;
   }
 
   .row {
@@ -218,8 +218,13 @@
     text-align: right;
   }
 
-  .address i { background-image: url('/icons/icon-summary-map-blue.svg'); }
-  .phone i { background-image: url('/icons/icon-summary-mobile-blue.svg'); }
-  .email i { background-image: url('/icons/icon-summary-mail-blue.svg'); }
+  .address i {
+    background-image: url('/icons/icon-summary-map-blue.svg');
+  }
+  .phone i {
+    background-image: url('/icons/icon-summary-mobile-blue.svg');
+  }
+  .email i {
+    background-image: url('/icons/icon-summary-mail-blue.svg');
+  }
 }
-

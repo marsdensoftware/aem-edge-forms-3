@@ -99,6 +99,9 @@
                     ]
                 },
                 {
+                    "...": "../form-common/_responsive-columns-component.json"
+                },
+                {
                     "...": "../form-common/_help-container.json"
                 },
                 {

@@ -3,16 +3,15 @@
 *************************/
 
 // Primary Colours
-$color-primary: #017ac9;               // MSD Blue
-$color-primary-navy: #134276;          // MSD Navy
-$color-primary-dark-navy: #162c45;     // MSD Dark Navy
-$color-accent: #017AC9;                // Same as MSD Blue
-$color-primary-dark: #0160a6;          // Darker blue
-$color-primary-darker: #014f8a;        // Even darker blue
-
+$color-primary: #017ac9; // MSD Blue
+$color-primary-navy: #134276; // MSD Navy
+$color-primary-dark-navy: #162c45; // MSD Dark Navy
+$color-accent: #017ac9; // Same as MSD Blue
+$color-primary-dark: #0160a6; // Darker blue
+$color-primary-darker: #014f8a; // Even darker blue
 
 // Secondary Colours
-$color-secondary: #9BA5B7;
+$color-secondary: #9ba5b7;
 $color-secondary-teal: #35c0ba; // MSD Teal
 $color-secondary-accessible-teal: #23807b; // Accessible Teal
 $color-secondary-salmon: #f75c58; // MSD Salmon
@@ -28,7 +27,7 @@ $color-grey-black-05: #f2f2f2;
 $color-grey-black-10: #dddddd;
 $color-grey-black-20: #cccccc;
 $color-grey-black-40: #999999;
-$color-grey-black-60: #706868;
+$color-grey-black-60: #666666;
 $color-grey-black-80: #2e2e2e;
 $color-grey-black-100: #000000;
 $color-white: #ffffff;
@@ -66,34 +65,27 @@ $color-shade-red-05: #fdf5f5;
 *************************/
 
 $color-gradient-blue: linear-gradient(
-                135deg,
-                $color-primary 25%,
-                $color-primary-navy 100%
+  135deg,
+  $color-primary 25%,
+  $color-primary-navy 100%
 );
 
 $color-gradient-green: linear-gradient(
-                135deg,
-                $color-secondary-teal 25%,
-                $color-secondary-accessible-teal 100%
+  135deg,
+  $color-secondary-teal 25%,
+  $color-secondary-accessible-teal 100%
 );
 
 $color-gradient-light: linear-gradient(
-                135deg,
-                $color-grey-black-20 25%,
-                $color-grey-black-40 100%
+  135deg,
+  $color-grey-black-20 25%,
+  $color-grey-black-40 100%
 );
 
 $color-gradient-grey-dark: linear-gradient(
-                135deg,
-                $color-grey-black-60 25%,
-                $color-grey-black-80 100%
-);
-
-// For animated buttons (if needed)
-$color-primary-animated: linear-gradient(
-                0,
-                $color-primary 25%,
-                $color-primary 100%
+  135deg,
+  $color-grey-black-60 25%,
+  $color-grey-black-80 100%
 );
 
 /************************
@@ -146,7 +138,7 @@ $stroke-error: $color-feedback-red;
 $stroke-focus: $color-feedback-pink;
 
 // border
-$color-border-secondary: #D0D9E4;
+$color-border-secondary: #d0d9e4;
 
 // Input stroke widths
 $stroke-input-stroke: 2px;
@@ -155,25 +147,3 @@ $stroke-hover-stroke: 2px;
 // input field background colour
 $bg-light-primary: $color-white;
 $bg-light-secondary: $color-shade-blue-04;
-
-// Wizard background colours
-$color-gradient-wizard-dark: linear-gradient(
-                135deg,
-                $color-primary 25%,
-                $color-primary-navy 100%
-);
-
-$color-gradient-wizard-light: linear-gradient(
-                135deg,
-                $color-shade-blue-10 25%,
-                $color-shade-blue-25 100%
-);
-
-// Semantic tokens
-$bg-wizard-dark: $color-gradient-wizard-dark;
-$bg-wizard-light: $color-gradient-wizard-light;
-
-/*$bg-wizard-dark: linear-gradient(135deg, $color-primary 25%, $color-primary-navy 100%);
-$bg-wizard-light: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);*/
-
-

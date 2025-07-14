@@ -2,7 +2,7 @@
 
 /* Tabs styling */
 
-main .form:not(.edit-mode) {
+.form:not(.edit-mode) {
   fieldset.formtabs {
     padding: 0;
     margin-bottom: 32px;
@@ -33,11 +33,11 @@ main .form:not(.edit-mode) {
       cursor: pointer;
       background: transparent;
       border: none;
-      border-bottom: 2px solid var(--Shades-Blues-Blue-25, #BFDEF1);
+      border-bottom: 2px solid var(--Shades-Blues-Blue-25, #bfdef1);
       border-radius: 0;
       transition: all 0.2s ease;
       font-weight: 500;
-      color: var(--Text-Dark-Accent, #017AC9);
+      color: var(--Text-Dark-Accent, #017ac9);
 
       &:not(:last-child) {
         margin-right: $spacing-200;
@@ -45,15 +45,17 @@ main .form:not(.edit-mode) {
 
       &:hover {
         color: var(--Text-Dark-Dark, #134276);
-        border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) 0 0;
-        border-bottom: 2px solid var(--Stroke-Accent, #017AC9);
+        border-radius: var(--Corner-radius-Mid, 8px)
+          var(--Corner-radius-Mid, 8px) 0 0;
+        border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
       }
     }
 
     > .navitems > li.navitem-current {
       color: var(--Text-Dark-Dark, #134276);
-      border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px) 0 0;
-      border-bottom: 2px solid var(--Stroke-Accent, #017AC9);
+      border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px)
+        0 0;
+      border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
       font-weight: bold;
     }
 
@@ -66,7 +68,7 @@ main .form:not(.edit-mode) {
   }
 }
 
-main .form.edit-mode {
+.form.edit-mode {
   fieldset.formtabs > .navitems {
     display: none;
   }
