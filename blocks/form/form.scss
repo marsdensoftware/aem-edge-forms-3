@@ -48,16 +48,6 @@ form:not(.edit-mode) [data-visible='false'] {
     padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
   }
 
-  @include media('tablet') {
-    max-height: $nav-height-tablet;
-    padding: $nav-padding-top-tablet $spacing-400 $nav-padding-bottom-tablet;
-  }
-
-  @include media('desktop') {
-    max-height: $nav-height-desktop;
-    padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
-  }
-
   .image-wrapper picture {
     max-width: 150px;
 
