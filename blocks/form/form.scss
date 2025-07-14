@@ -46,20 +46,26 @@ form:not(.edit-mode) [data-visible='false'] {
     padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
   }
 
-  .image-wrapper picture {
-    max-width: 200px;
+  .image-wrapper {
+    a {
+      line-height: 0;
+    }
 
-    @include media('desktop') {
-      max-width: 300px;
+    picture {
+      max-width: 200px;
+
+      @include media('desktop') {
+        max-width: 240px;
+      }
     }
   }
 
   .button-wrapper button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-300 0;
-    gap: $spacing-200;
+    padding: 0;
+    gap: 0 $spacing-200;
     font-size: clamp(15px, 1.25vw, 17px);
     font-weight: 500;
     line-height: 133%;
@@ -70,13 +76,17 @@ form:not(.edit-mode) [data-visible='false'] {
 
     &::after {
       content: '';
-      display: inline-block;
+      display: block;
       width: 16px;
       height: 16px;
       background-image: url('/icons/icon-logout-exit-blue.svg');
       background-repeat: no-repeat;
       background-size: contain;
-      margin-left: 8px;
+
+      @include media('desktop') {
+        width: 53px;
+        height: 18px;
+      }
     }
 
     &:hover,
