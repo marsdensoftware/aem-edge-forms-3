@@ -70,14 +70,12 @@ form:not(.edit-mode) [data-visible='false'] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-000, 0px);
+    padding: $spacing-300 0;
     gap: $spacing-200;
     font-family: $font-family;
-    font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
-    font-style: normal;
-    font-weight: $font-weight-medium;
+    font-size: clamp(15px, 1.25vw, 17px);
+    font-weight: 400;
     line-height: 133%;
-    letter-spacing: 0px;
     color: $color-primary;
     text-decoration: none;
     background-image: none;
@@ -86,8 +84,8 @@ form:not(.edit-mode) [data-visible='false'] {
     &::after {
       content: '';
       display: inline-block;
-      width: 1rem;
-      height: 1rem;
+      width: 16px;
+      height: 16px;
       background-image: url('/icons/icon-logout-exit-blue.svg');
       background-repeat: no-repeat;
       background-size: contain;
