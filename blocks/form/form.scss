@@ -35,15 +35,16 @@ form:not(.edit-mode) [data-visible='false'] {
   padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
   height: 100%;
+  border-bottom: 1px solid $color-shade-navy-40;
 
   @include media('tablet') {
     max-height: $nav-height-tablet;
-    padding: $nav-padding-top-tablet $spacing-400 $nav-padding-bottom-tablet;
+    padding: $nav-padding-top-tablet $spacing-600 $nav-padding-bottom-tablet;
   }
 
   @include media('desktop') {
     max-height: $nav-height-desktop;
-    padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
+    padding: $nav-padding-top-desktop $spacing-700 $nav-padding-bottom-desktop;
   }
 
   .image-wrapper {
