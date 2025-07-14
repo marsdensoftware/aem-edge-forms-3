@@ -14,8 +14,8 @@ export default function decorate(panel: Element, field: Field) {
 
   const divs = panel.querySelectorAll(':scope>fieldset,:scope>div')
 
-  divs[0].classList.add('panel-formhero__content')
-  divs[1].classList.add('panel-formhero__picture')
+  divs[0]?.classList.add('panel-formhero__content')
+  divs[1]?.classList.add('panel-formhero__picture')
 
   return panel
 }
