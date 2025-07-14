@@ -1,21 +1,38 @@
 import { onElementsAddedByClassName } from '../utils.js';
 
+// Define the possible background classes in a constant for clarity and reuse.
+const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light'];
+
+/**
+ * Finds the background class on the current wizard step and applies it to the container.
+ * @param {HTMLElement} wizardEl The main wizard element.
+ * @param {HTMLElement} container The container element to apply the background to.
+ */
+function updateBackground(wizardEl, container) {
+  // 1. Find the currently active step by its class.
+  const currentStepEl = wizardEl.querySelector('.current-wizard-step');
+  if (!currentStepEl) return;
+
+  // 2. Find which of the defined background classes is present on the active step.
+  const newBgClass = BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls));
+
+  // 3. Clear any pre-existing background classes from the container for a clean slate.
+  container.classList.remove(...BG_CLASSES);
+
+  // 4. If a background class was found on the step, apply it to the container.
+  if (newBgClass) {
+    container.classList.add(newBgClass);
+  }
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main');
-  container.classList.add('wizard--bg-dark');
 
-  wizardEl.addEventListener('wizard:navigate', (e) => {
-    const index = e.detail.currStep.index;
+  // Set the initial background based on the default active step on page load.
+  updateBackground(wizardEl, container);
 
-    // Clear all background classes first
-    container.classList.remove('wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light');
-
-    if (index === 0 || index === 1) {
-      container.classList.add('wizard--bg-dark');
-    } else if (index === 2) {
-      container.classList.add('wizard--bg-mid');
-    } else {
-      container.classList.add('wizard--bg-light');
-    }
+  // Add an event listener to update the background whenever the step changes.
+  wizardEl.addEventListener('wizard:navigate', () => {
+    updateBackground(wizardEl, container);
   });
 });
