@@ -1,5 +1,4 @@
 @use '../../../../styles/settings' as *;
-@use '../../../../styles/settings/breakpoints' as *;
 
 /******************************
     Base Panel Styling
@@ -8,7 +7,7 @@
   padding: $spacing-400 $spacing-300;
   background: $bg-primary;
   display: block;
-  border-radius: var(--Corner-radius-Mid, 8px);
+  border-radius: $border-radius-low;
   border: 1px solid $color-shade-navy-40;
   margin-bottom: $spacing-600;
 
@@ -99,6 +98,32 @@
 
       &:visited {
         color: $text-dark;
+      }
+    }
+  }
+
+  &--error {
+    border: 1px solid $stroke-error;
+    background: $color-shade-red-05;
+
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-error-primary.svg');
+    }
+
+    .panel-formcontextualhelp__title {
+      color: $text-error;
+    }
+
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text {
+      color: $text-error;
+      font-weight:$font-weight-medium;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:visited {
+        color: $text-error;
       }
     }
   }

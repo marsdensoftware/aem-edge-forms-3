@@ -1,17 +1,25 @@
+/**
+ * A WeakMap to hold the state for each search-box instance.
+ * This prevents memory leaks if a search-box element is removed from the DOM.
+ */
+interface ComponentState {
+  main: string[]
+  recommendations: string[]
+}
+const componentStateMap = new WeakMap<Element, ComponentState>()
+
+// --- Helper functions to create DOM elements ---
+
 function addSuggestionDiv() {
   const el = document.createElement('div')
   el.classList.add('suggestions')
   return el
 }
 
-function addSelectedCardsDiv(
-  headingText: string,
-  emptySelectionMessage: string,
-) {
+function addSelectedCardsDiv(headingText: string, emptySelectionMessage: string) {
   const wrapper = document.createElement('div')
   wrapper.classList.add('selected-cards-wrapper')
 
-  // Only add heading if headingText is provided and not empty
   if (headingText && headingText.trim() !== '') {
     const heading = document.createElement('div')
     heading.classList.add('selected-cards-heading')
@@ -21,7 +29,6 @@ function addSelectedCardsDiv(
 
   const cardsDiv = document.createElement('div')
   cardsDiv.classList.add('selected-cards')
-  // Only set the empty selection message if it's provided and not empty
   if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
     cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage
   }
@@ -30,14 +37,10 @@ function addSelectedCardsDiv(
   return wrapper
 }
 
-function addRecommendationsCardsDiv(
-  headingText: string,
-  emptySelectionMessage: string,
-) {
+function addRecommendationsCardsDiv(headingText: string, emptySelectionMessage: string) {
   const wrapper = document.createElement('div')
   wrapper.classList.add('recommendations-cards-wrapper')
 
-  // Only add heading if headingText is provided and not empty
   if (headingText && headingText.trim() !== '') {
     const heading = document.createElement('div')
     heading.classList.add('selected-cards-heading')
@@ -47,7 +50,6 @@ function addRecommendationsCardsDiv(
 
   const cardsDiv = document.createElement('div')
   cardsDiv.classList.add('recommendations-cards')
-  // Only set the empty selection message if it's provided and not empty
   if (emptySelectionMessage && emptySelectionMessage.trim() !== '') {
     cardsDiv.dataset.emptySelectionMessage = emptySelectionMessage
   }
@@ -56,15 +58,18 @@ function addRecommendationsCardsDiv(
   return wrapper
 }
 
+// --- Card creation and management functions ---
+
 function createSelectedCard(
-  item: string,
-  selectedCardsDiv: HTMLDivElement,
-  searchInput: HTMLInputElement,
+    item: string,
+    selectedCardsDiv: HTMLDivElement,
+    searchInput: HTMLInputElement,
+    source: 'main' | 'recommendation',
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card', 'selected-card--is-selected')
+  card.dataset.source = source // Store where the item came from
 
-  // Create hidden input to store the value
   const hiddenInput = document.createElement('input')
   hiddenInput.type = 'hidden'
   hiddenInput.value = item
@@ -79,20 +84,41 @@ function createSelectedCard(
   removeBtn.innerHTML = `<span>Remove ${item}</span>`
 
   removeBtn.addEventListener('click', () => {
-    card.remove()
-    // Trigger a change event to update any validation
-    const event = new Event('change', { bubbles: true })
-    searchInput.dispatchEvent(event)
-
-    // Find the search-box element and the recommendations div
     const searchBox = selectedCardsDiv.closest('.search-box') as El
-    if (searchBox) {
-      const recommendationsCardsDiv = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
-      if (recommendationsCardsDiv && recommendationsCardsDiv.style.display !== 'none') {
-        // Recreate the recommendations div to include the removed item
-        populateRecommendationsDiv(searchBox, recommendationsCardsDiv, selectedCardsDiv, searchInput)
+
+    // Remove the card from the DOM immediately.
+    card.remove()
+
+    if (searchBox && componentStateMap.has(searchBox)) {
+      // Now, update the component's internal state to reflect the removal.
+
+      // 1. Get all items that are *still* selected.
+      const remainingSelectedItems = Array.from(
+          selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]'),
+      ).map((input) => (input as HTMLInputElement).value)
+
+      // 2. Get the original, ordered datasources.
+      const recDatasourceName = searchBox.dataset.recommendationsDatasource as keyof typeof datasources
+      const originalRecs = datasources[recDatasourceName] || []
+      const mainDatasourceName = searchBox.dataset.datasource as keyof typeof datasources
+      const originalMain = datasources[mainDatasourceName] || []
+
+      // 3. Re-create the available items state by filtering the original lists.
+      // This elegantly preserves the original order without needing a complex sort.
+      const state = componentStateMap.get(searchBox)!
+      state.recommendations = originalRecs.filter((i) => !remainingSelectedItems.includes(i))
+      state.main = originalMain.filter((i) => !remainingSelectedItems.includes(i))
+
+      // 4. Re-populate the recommendations UI to show the newly available item.
+      const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
+      if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+        populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput)
       }
     }
+
+    // Finally, trigger a change event for form validation.
+    const event = new Event('change', { bubbles: true })
+    searchInput.dispatchEvent(event)
   })
 
   card.appendChild(hiddenInput)
@@ -102,10 +128,10 @@ function createSelectedCard(
 }
 
 function createRecommendationCard(
-  item: string,
-  recommendationsCardsDiv: HTMLDivElement,
-  selectedCardsDiv: HTMLDivElement,
-  searchInput: HTMLInputElement,
+    item: string,
+    recommendationsCardsDiv: HTMLDivElement,
+    selectedCardsDiv: HTMLDivElement,
+    searchInput: HTMLInputElement,
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card')
@@ -113,20 +139,22 @@ function createRecommendationCard(
   const text = document.createElement('div')
   text.textContent = item
 
-  // Add click event to move the recommendation to the selectedCardsDiv
   card.addEventListener('click', () => {
-    card.remove()
-    // Get the inner div with class 'selected-cards'
-    const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv) as HTMLDivElement
-    createSelectedCard(item, selectedCards, searchInput)
+    const searchBox = recommendationsCardsDiv.closest('.search-box')
+    if (searchBox && componentStateMap.has(searchBox)) {
+      const state = componentStateMap.get(searchBox)!
+      // Remove item from the recommendations state
+      state.recommendations = state.recommendations.filter((i) => i !== item)
+    }
 
-    // Find the search-box element to replenish the recommendations list
-    const searchBox = recommendationsCardsDiv.closest('.search-box') as El
+    card.remove()
+    const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv) as HTMLDivElement
+    createSelectedCard(item, selectedCards, searchInput, 'recommendation')
+
     if (searchBox) {
       const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
       if (recommendationsWrapper) {
-        // Replenish the recommendations list
-        populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput)
+        populateRecommendationsDiv(searchBox as El, recommendationsWrapper, selectedCardsDiv, searchInput)
       }
     }
   })
@@ -134,6 +162,8 @@ function createRecommendationCard(
   card.appendChild(text)
   recommendationsCardsDiv.appendChild(card)
 }
+
+// --- Datasources (static data) ---
 
 const courses = [
   'Marketing management',
@@ -254,59 +284,56 @@ const datasources = {
   additionalHardSkills,
 }
 
+// --- Type definitions ---
+
 interface El extends Element {
   dataset: {
-    datasource: string[]
-    recommendationsDatasource?: string[]
+    datasource: string
+    recommendationsDatasource?: string
   }
 }
 
+interface Field {
+  [key: string]: any
+  properties: {
+    datasource: string
+    [key: string]: any
+  }
+}
+
+// --- Global Event Listeners ---
+
 // Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-  const searchInput = (window as any).searchInput as HTMLElement
-  const suggestionsDiv = (window as any).suggestionsDiv as HTMLElement
-  if (searchInput && !searchInput.contains(e.target as Node)) {
-    suggestionsDiv.innerHTML = ''
-    suggestionsDiv.style.display = 'none'
-  }
+  document.querySelectorAll('.search-box .suggestions').forEach((suggestionsDiv) => {
+    const searchBox = suggestionsDiv.closest('.search-box')
+    if (searchBox && !searchBox.contains(e.target as Node)) {
+      (suggestionsDiv as HTMLElement).style.display = 'none'
+    }
+  })
 })
 
 document.addEventListener('input', (event) => {
   const element = (event.target as Element).closest('.search-box') as El
 
-  if (element) {
+  if (element && componentStateMap.has(element)) {
     const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
-    (window as any).searchInput = searchInput
     const query = searchInput.value.toLowerCase()
+    const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
+    suggestionsDiv.innerHTML = ''
 
     if (query.length < 3) {
+      suggestionsDiv.style.display = 'none'
       return
     }
 
-    const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
-    (window as any).suggestionsDiv = suggestionsDiv
-    suggestionsDiv.innerHTML = ''
-
-    const {datasource, recommendationsDatasource} = element.dataset
-
-    // Get entries from the main datasource
-    const entries = datasources[datasource as unknown as keyof typeof datasources] as string[]
+    const state = componentStateMap.get(element)!
     const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper') as HTMLDivElement
     const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards') as HTMLDivElement
 
-    // Get entries from the recommendations datasource
-    const recommendationsEntries = recommendationsDatasource ?
-      datasources[recommendationsDatasource as unknown as keyof typeof datasources] as string[] :
-      []
-    const recommendationsCardsDiv = element.querySelector('.recommendations-cards') as HTMLDivElement
-
-    // Filter main datasource entries
-    const filtered = entries.filter(
-      (entry) =>
-        entry.toLowerCase().includes(query) &&
-          !Array.from(selectedCardsDiv.children).some(
-              (card) => card.firstChild?.textContent === entry,
-        ),
+    // Filter main datasource entries from the component's state
+    const filtered = state.main.filter(
+        (entry) => entry.toLowerCase().includes(query),
     )
 
     // Add suggestions from main datasource
@@ -316,55 +343,42 @@ document.addEventListener('input', (event) => {
       div.textContent = item
       div.dataset.source = 'main'
       div.addEventListener('click', () => {
+        // Remove item from the main state
+        state.main = state.main.filter((i) => i !== item)
+
         searchInput.value = ''
         suggestionsDiv.innerHTML = ''
         suggestionsDiv.style.display = 'none'
-        createSelectedCard(item, selectedCardsDiv, searchInput)
+        createSelectedCard(item, selectedCardsDiv, searchInput, 'main')
       })
       suggestionsDiv.appendChild(div)
     })
 
     if (filtered.length > 0) {
       suggestionsDiv.style.display = 'block'
+    } else {
+      suggestionsDiv.style.display = 'none'
     }
   }
 })
 
-interface Field {
-  [key: string]: any
-  properties: {
-    datasource: string[]
-    [key: string]: any
-  }
-}
+// --- Component Logic ---
 
-// Function to populate the recommendations div with items from the recommendations datasource
 function populateRecommendationsDiv(
-  element: El,
-  recommendationsCardsDiv: HTMLDivElement,
-  selectedCardsDiv: HTMLDivElement,
-  inputEl: HTMLInputElement,
+    element: El,
+    recommendationsCardsWrapper: HTMLDivElement,
+    selectedCardsDiv: HTMLDivElement,
+    inputEl: HTMLInputElement,
 ) {
-  // Clear existing recommendations
-  const recommendationsCards = recommendationsCardsDiv.querySelector('.recommendations-cards') as HTMLDivElement
+  const recommendationsCards = recommendationsCardsWrapper.querySelector('.recommendations-cards') as HTMLDivElement
+  if (!recommendationsCards) return
   recommendationsCards.innerHTML = ''
 
-  const { recommendationsDatasource } = element.dataset
+  if (!componentStateMap.has(element)) return
+  const state = componentStateMap.get(element)!
 
-  // Get entries from the recommendations datasource
-  const recommendationsEntries = recommendationsDatasource ?
-    datasources[recommendationsDatasource as unknown as keyof typeof datasources] as string[] :
-    []
-
-  // Filter out items that are already in the selected cards div
-  // Check if selectedCardsDiv is the wrapper div or the inner div
-  const selectedCards = selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv
-  const availableRecommendations = recommendationsEntries.filter(
-    (entry) =>
-      !Array.from(selectedCards.children).some(
-        (card) => card.firstChild?.textContent === entry,
-      ),
-  )
+  // Use available recommendations from the component's state
+  const availableRecommendations = state.recommendations
 
   // Add up to 8 recommendations to the recommendations div
   for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
@@ -385,7 +399,15 @@ export default function decorate(element: El, field: Field) {
   element.dataset.datasource = datasource
   element.dataset.recommendationsDatasource = recommendationsDatasource
 
-  // Moved input into container so we can attached icon input
+  // --- Initialize State for this component instance ---
+  const mainData = datasources[datasource as keyof typeof datasources] || []
+  const recData = datasources[recommendationsDatasource as keyof typeof datasources] || []
+  componentStateMap.set(element, {
+    main: [...mainData], // Use spread to create a copy
+    recommendations: [...recData], // Use spread to create a copy
+  })
+
+  // --- Build DOM ---
   const inputEl = element.querySelector('input') as HTMLInputElement
   const container = document.createElement('div')
   container.className = 'search-box__input'
@@ -397,30 +419,20 @@ export default function decorate(element: El, field: Field) {
 
   element.appendChild(container)
 
-  // Add suggestion div
   const suggestionsDiv = addSuggestionDiv()
+  const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage)
+  const recommendationsCardsDiv = addRecommendationsCardsDiv(recommendationsLabel, emptyRecommendationsMessage)
 
-  // Add selected cards container
-  const selectedCardsDiv = addSelectedCardsDiv(
-    selectionLabel,
-    emptySelectionMessage,
-  )
-
-  // Add recommendations cards container
-  const recommendationsCardsDiv = addRecommendationsCardsDiv(
-    recommendationsLabel,
-    emptyRecommendationsMessage,
-  )
-
-  // Hide recommendations div by default, show only if show-recommendations is true
   recommendationsCardsDiv.style.display = showRecommendations ? 'block' : 'none'
 
   element.appendChild(selectedCardsDiv)
   element.appendChild(recommendationsCardsDiv)
   container.appendChild(suggestionsDiv)
 
-  // Populate the recommendations div
-  populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl)
+  // Populate initial recommendations
+  if (showRecommendations) {
+    populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl)
+  }
 
   return element
 }
