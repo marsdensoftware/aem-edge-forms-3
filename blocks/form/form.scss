@@ -28,12 +28,10 @@ form:not(.edit-mode) [data-visible='false'] {
   display: none;
 }
 
-.panel-wrapper.field-top-nav {
+.field-top-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
-  max-height: $nav-height;
   padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
   height: 100%;
@@ -49,7 +47,7 @@ form:not(.edit-mode) [data-visible='false'] {
   }
 
   .image-wrapper picture {
-    max-width: 150px;
+    max-width: 200px;
 
     @include media('desktop') {
       max-width: 300px;
@@ -62,9 +60,8 @@ form:not(.edit-mode) [data-visible='false'] {
     justify-content: center;
     padding: $spacing-300 0;
     gap: $spacing-200;
-    font-family: $font-family;
     font-size: clamp(15px, 1.25vw, 17px);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 133%;
     color: $color-primary;
     text-decoration: none;
