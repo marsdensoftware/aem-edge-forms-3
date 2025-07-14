@@ -14,7 +14,9 @@ let customComponents = [
   'driverlicence',
   'advanceddatepicker',
   'summary',
-  'search-box']
+  'search-box',
+  'icon-radio-group',
+]
 
 const OOTBComponentDecorators = [
   'file-input',

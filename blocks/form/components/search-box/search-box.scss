@@ -4,10 +4,6 @@
 .search-box {
   position: relative;
 
-  @include media('desktop') {
-    max-width: 456px;
-  }
-
   .field-description {
     p {
       padding-bottom: 0;

@@ -1,46 +1,28 @@
-@use '../settings/colors' as *;
-@use '../settings/fonts' as *;
-@use '../settings/spacings' as *;
+@use '../settings' as *;
 
 // Base label styling including fieldsets and legends used as labels
-main .form label,
-main .form legend.field-label,
-main .form fieldset.checkbox-group-wrapper legend,
-main .form fieldset.radio-group-wrapper legend {
-  font-family: $font-family;
+.form label:not(.radio-group--with-icon__label, .field-label--with-description),
+.form legend.field-label,
+.form fieldset.checkbox-group-wrapper legend,
+.form fieldset.radio-group-wrapper legend {
   font-size: $size-font-label;
   color: $text-primary;
-  font-style: normal;
-  font-weight: $font-weight-medium;
+  font-weight: 500;
   line-height: 133%;
-  letter-spacing: $letter-spacing-default;
   margin-bottom: 0;
   margin-top: $spacing-300;
 }
 
 // Add required asterisk
-main .form [data-required='true'] > label::after,
-main .form label.required::after {
+.form [data-required='true'] > label::after,
+.form label.required::after {
   content: '*';
   color: var(--form-error-color);
   padding-inline-start: 5px;
 }
 
 // Don't add asterisk after radio/checkbox labels
-main .form .radio-wrapper > label::after,
-main .form .checkbox-wrapper > label::after {
+.form .radio-wrapper > label::after,
+.form .checkbox-wrapper > label::after {
   content: none;
 }
-
-// Optional help text (field description)
-main .form .field-description {
-  color: var(--form-label-color);
-  font-size: var(--form-font-size-xs);
-}
-
-// Field description for invalid fields
-main .form form .field-invalid .field-description {
-  color: var(--form-error-color);
-  font-weight: 700;
-}
-

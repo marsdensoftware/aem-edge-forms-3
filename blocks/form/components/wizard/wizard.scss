@@ -28,7 +28,7 @@
 
 // Wizard container
 .wizard {
-  padding: $spacing-600 32px 120px; // more spacing at the bottom to be able to scroll through past the last content
+  padding: $spacing-600 0 120px; // more spacing at the bottom to be able to scroll through past the last content
   min-height: $wizard-body-height;
   height: 100%;
   background: linear-gradient(
@@ -46,15 +46,6 @@
     min-height: $wizard-body-height-desktop;
   }
 
-  .current-wizard-step:not([data-index='1']) {
-    @include media('desktop') {
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-      max-width: 1038px;
-    }
-  }
-
   .field-save-changes {
     display: none;
     margin-left: auto;
@@ -70,44 +61,6 @@
       display: none;
     }
   }
-
-  // .wizard-menu-items {
-  //   display: flex;
-  //   gap: 50px;
-  //   flex-wrap: wrap;
-  //   list-style: none;
-  //   padding: 0;
-  //   margin: 0;
-  //   font-weight: var(--form-fieldset-legend-font-weight);
-  //   font-size: var(--form-fieldset-legend-font-size);
-  //   color: var(--form-fieldset-legend-color);
-  //   padding-bottom: var(--form-wizard-padding);
-  //   grid-column: span 12;
-  // }
-
-  // .wizard-menu-item {
-  //   counter-increment: wizard-step-counter;
-
-  //   &::before {
-  //     content: counter(wizard-step-counter);
-  //     border: 2px solid var(--form-wizard-number-color);
-  //     color: var(--form-wizard-number-color);
-  //     border-radius: 50%;
-  //     width: 35px;
-  //     height: 35px;
-  //     margin-right: 10px;
-  //     text-align: center;
-  //     line-height: 2;
-  //     display: inline-block;
-  //   }
-  // }
-
-  // .wizard-menu-active-item::before {
-  //   border: 2px solid var(--form-wizard-number-color);
-  //   background: var(--form-wizard-number-color);
-  //   color: var(--background-color-primary);
-  //   font-weight: 600;
-  // }
 
   &.left {
     display: flex;
