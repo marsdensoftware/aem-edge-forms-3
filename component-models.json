@@ -4531,6 +4531,31 @@
             "valueType": "string"
           }
         ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "wizardtheme",
+        "label": "Wizard Theme",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
+          },
+          {
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
+          }
+        ]
       }
     ]
   },
@@ -4732,6 +4757,31 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "wizardtheme",
+        "label": "Wizard Theme",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
+          },
+          {
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
           }
         ]
       }
