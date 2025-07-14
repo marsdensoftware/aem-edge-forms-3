@@ -2,9 +2,11 @@ import { onElementsAddedByClassName } from '../utils.js';
 
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light'];
+const DEFAULT_BG_CLASS = 'wizard--bg-light';
 
 /**
- * Finds the background class on the current wizard step and applies it to the container.
+ * Finds the background class on the current wizard step and applies it to the container,
+ * falling back to a default class if no specific one is found.
  * @param {HTMLElement} wizardEl The main wizard element.
  * @param {HTMLElement} container The container element to apply the background to.
  */
@@ -13,8 +15,10 @@ function updateBackground(wizardEl, container) {
   const currentStepEl = wizardEl.querySelector('.current-wizard-step');
   if (!currentStepEl) return;
 
-  // 2. Find which of the defined background classes is present on the active step.
-  const newBgClass = BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls));
+  // 2. Find which of the defined background classes is present on the active step.If none is found, use the default.
+  //    This uses short-circuiting: if currentStepEl is null, it immediately uses the default.
+  const newBgClass =
+    (currentStepEl && BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) || DEFAULT_BG_CLASS;
 
   // 3. Clear any pre-existing background classes from the container for a clean slate.
   container.classList.remove(...BG_CLASSES);
