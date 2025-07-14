@@ -62,11 +62,11 @@ class EducationConverter {
             const endYear = result[EducationFieldNames.FINISH_YEAR];
             summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
         }
-        else if(completionStatus?.value == 1) {
+        else if (completionStatus?.value == 1) {
             // In progress, partially completed
             summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
         }
-        else{
+        else {
             // Not completed
             summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${completionStatus.displayValue}`);
         }
@@ -453,13 +453,33 @@ export class Summarizer {
                 ...Summarizer.fieldToNameValues(workEntryFieldset)
             };
 
-            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
-                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
-                // Specific days
-                const index = nameValues['days_you_can_work'].values.indexOf('3');
-                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
+            if (stepName == 'panel_work_availability') {
 
-                delete nameValues['specific_days_cb'];
+                if (nameValues['days_you_can_work'] && nameValues['days_you_can_work'].value) {
+                    nameValues['days_you_can_work'].values = [nameValues['days_you_can_work'].value];
+                    nameValues['days_you_can_work'].displayValues = [nameValues['days_you_can_work'].displayValue];
+                    
+                    delete nameValues['days_you_can_work'].value;
+                    delete nameValues['days_you_can_work'].displayValue
+                }
+
+                if (nameValues['days_you_can_work']
+                    && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
+                    // Specific days
+                    const index = nameValues['days_you_can_work'].values.indexOf('3');
+
+                    if (nameValues['specific_days_cb'] && nameValues['specific_days_cb'].value) {
+                        nameValues['specific_days_cb'].values = [nameValues['specific_days_cb'].value];
+                        nameValues['specific_days_cb'].displayValues = [nameValues['specific_days_cb'].displayValue];
+                        
+                        delete nameValues['specific_days_cb'].value;
+                        delete nameValues['specific_days_cb'].displayValue;
+                    }
+
+                    nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
+
+                    delete nameValues['specific_days_cb'];
+                }
             }
 
             if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
