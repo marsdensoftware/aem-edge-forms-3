@@ -29,6 +29,39 @@
                     "...": "../form-common/_basic-input-fields.json"
                 },
                 {
+                    "component": "select",
+                    "valueType": "string[]",
+                    "name": "theme",
+                    "label": "Panel Theme",
+                    "value": "",
+                    "options": [
+                        {
+                            "name": "None",
+                            "value": ""
+                        },
+                        {
+                            "name": "Dark Blue Background",
+                            "value": "background--dark-blue"
+                        },
+                        {
+                            "name": "Light Blue Background",
+                            "value": "background--light-blue"
+                        },
+                        {
+                            "name": "Form Header",
+                            "value": "form-row--header"
+                        },
+                        {
+                            "name": "Form content",
+                            "value": "form-row--content"
+                        },
+                        {
+                            "name": "Form footer",
+                            "value": "form-row--footer"
+                        }
+                    ]
+                },
+                {
                     "component": "container",
                     "name": "repeat",
                     "label": "Repeat Panel",
