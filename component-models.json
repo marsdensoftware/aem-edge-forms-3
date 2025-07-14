@@ -2837,8 +2837,8 @@
       },
       {
         "component": "select",
-        "valueType": "string[]",
-        "name": "theme",
+        "valueType": "string",
+        "name": "classes",
         "label": "Panel Theme",
         "value": "",
         "options": [
