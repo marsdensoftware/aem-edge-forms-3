@@ -2839,7 +2839,7 @@
         "component": "select",
         "valueType": "string",
         "name": "wizardtheme",
-        "label": "Panel Theme",
+        "label": "Wizard Theme",
         "value": "",
         "options": [
           {
