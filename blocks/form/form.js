@@ -173,6 +173,14 @@ function createFieldSet(fd) {
   wrapper.name = fd.name;
   if (fd.fieldType === 'panel') {
     wrapper.classList.add('panel-wrapper');
+    //###GKW Added option to add a theme class
+    if (fd.properties?.wizardtheme) {
+      wrapper.classList.add(fd.properties.wizardtheme);
+    }
+    if (fd.properties?.panelrole) {
+      wrapper.classList.add(fd.properties.panelrole);
+    }
+    //###GKW END
   }
   if (fd.repeatable === true) {
     createRepeatablePanel(wrapper, fd);
@@ -200,22 +208,22 @@ function createRadioOrCheckboxGroup(fd) {
       enum: [value],
       required: fd.required,
     });
-    
+
     //###SEP-NJ START Display description below field label
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
     const textContent = labelEl.textContent.trim();
     labelEl.textContent = '';
-    
+
     // Create and append the span.text
     const textSpan = document.createElement('span');
     textSpan.className = 'text';
     textSpan.textContent = textContent;
     labelEl.appendChild(textSpan);
-    
+
     const description = fd.properties?.enumDescriptions?.[index];
-    
+
     if(description){
       // Create and append the span.desc
       const descSpan = document.createElement('span');
@@ -225,7 +233,7 @@ function createRadioOrCheckboxGroup(fd) {
       labelEl.classList.add('field-label--with-description');
     }
     //###SEP-NJ END Display description
-    
+
     const { variant, 'afs:layout': layout } = fd.properties;
     //###SEP-NJ START Always show variant if defined
     if (variant) {
@@ -252,22 +260,22 @@ function createRadioOrCheckboxGroup(fd) {
     }
     wrapper.appendChild(field);
   });
-  
+
   //###SEP-NJ START Wrap radios in a container if bar display
   if(wrapper.classList.contains('variant-bar')){
     const wrappers = wrapper.querySelectorAll('.radio-wrapper');
 
     const radiosWrapper = document.createElement('div');
     radiosWrapper.className = 'radios-wrapper';
-    
+
     // Insert before the first .radio-wrapper
     wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
-    
+
     // Move the all elements inside the new wrapper
     wrappers.forEach(el => radiosWrapper.appendChild(el));
   }
   //###SEP-NJ END
-  
+
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
     wrapper.title = stripTags(fd.tooltip, '');

@@ -2836,6 +2836,56 @@
         ]
       },
       {
+        "component": "select",
+        "valueType": "string",
+        "name": "wizardtheme",
+        "label": "Wizard Theme",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
+          },
+          {
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "panelrole",
+        "label": "Panel Role",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Form Header",
+            "value": "form-row--header"
+          },
+          {
+            "name": "Form content",
+            "value": "form-row--content"
+          },
+          {
+            "name": "Form footer",
+            "value": "form-row--footer"
+          }
+        ]
+      },
+      {
         "component": "container",
         "name": "repeat",
         "label": "Repeat Panel",
@@ -4481,6 +4531,31 @@
             "valueType": "string"
           }
         ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "wizardtheme",
+        "label": "Wizard Theme",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
+          },
+          {
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
+          }
+        ]
       }
     ]
   },
@@ -4682,6 +4757,31 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "wizardtheme",
+        "label": "Wizard Theme",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
+          },
+          {
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
           }
         ]
       }
