@@ -84,7 +84,6 @@ form:not(.edit-mode) [data-visible='false'] {
       background-size: contain;
 
       @include media('desktop') {
-        width: 53px;
         height: 18px;
       }
     }
