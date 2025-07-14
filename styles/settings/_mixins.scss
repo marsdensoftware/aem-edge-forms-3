@@ -52,10 +52,10 @@
 *******************************/
 
 %button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-300 $spacing-500;
+  padding: $spacing-400 $spacing-500;
   font-family: $font-family;
   font-weight: normal;
   font-size: 18px;
@@ -143,21 +143,5 @@
 
   &::placeholder {
     color: $color-feedback-red;
-  }
-}
-
-/******************************
-  Wizard Hero Welcome
-*******************************/
-
-@mixin responsive-padding-bottom($mobile, $tablet, $desktop) {
-  padding-bottom: $mobile;
-
-  @include media('tablet') {
-    padding-bottom: $tablet;
-  }
-
-  @include media('desktop') {
-    padding-bottom: $desktop;
   }
 }
