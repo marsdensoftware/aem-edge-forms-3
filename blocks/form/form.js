@@ -174,9 +174,13 @@ function createFieldSet(fd) {
   if (fd.fieldType === 'panel') {
     wrapper.classList.add('panel-wrapper');
     //###GKW Added option to add a theme class
-    if (fd.properties?.theme) {
-      wrapper.classList.add(fd.properties.theme);
+    if (fd.properties?.wizardtheme) {
+      wrapper.classList.add(fd.properties.wizardtheme);
     }
+    if (fd.properties?.panelrole) {
+      wrapper.classList.add(fd.properties.panelrole);
+    }
+    //###GKW END
   }
   if (fd.repeatable === true) {
     createRepeatablePanel(wrapper, fd);

@@ -2838,7 +2838,7 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "classes",
+        "name": "wizardtheme",
         "label": "Panel Theme",
         "value": "",
         "options": [
@@ -2857,6 +2857,19 @@
           {
             "name": "Light Blue Theme",
             "value": "wizard--bg-light"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "panelrole",
+        "label": "Panel Role",
+        "value": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
           },
           {
             "name": "Form Header",
