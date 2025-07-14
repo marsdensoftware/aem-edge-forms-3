@@ -1,5 +1,17 @@
-export default function decorate(panel: Element) {
+interface Field {
+  properties: {
+    wizardtheme: string
+  }
+}
+
+export default function decorate(panel: Element, field: Field) {
   panel.classList.add('panel-formwelcome')
+
+  // if the field properties contain a wizardtheme add it to the class list
+  if (field.properties.wizardtheme) {
+    panel.classList.add(field.properties.wizardtheme)
+  }
+
   const children = panel.querySelectorAll(':scope > fieldset')
 
   // container for text
