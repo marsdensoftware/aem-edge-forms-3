@@ -1,5 +1,6 @@
 export default function decorate(panel: Element) {
   panel.classList.add('panel-formhero')
+  panel.classList.add('wizard--bg-dark')
 
   const divs = panel.querySelectorAll(':scope>fieldset,:scope>div')
 

@@ -1,5 +1,7 @@
 export default function decorate(panel: Element) {
   panel.classList.add('panel-formwelcome')
+  panel.classList.add('wizard--bg-mid')
+
   const children = panel.querySelectorAll(':scope > fieldset')
 
   // container for text

@@ -2847,12 +2847,16 @@
             "value": ""
           },
           {
-            "name": "Dark Blue Background",
-            "value": "background--dark-blue"
+            "name": "Dark Blue Theme",
+            "value": "wizard--bg-dark"
           },
           {
-            "name": "Light Blue Background",
-            "value": "background--light-blue"
+            "name": "Mid Blue Theme",
+            "value": "wizard--bg-mid"
+          },
+          {
+            "name": "Light Blue Theme",
+            "value": "wizard--bg-light"
           },
           {
             "name": "Form Header",
