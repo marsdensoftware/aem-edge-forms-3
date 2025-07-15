@@ -965,13 +965,14 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "name": "extcbcontainer",
                 "template": {
-                  "fd:viewType": "extended-checkbox",
                   "fieldType": "panel",
-                  "jcr:title": "Extended Checkbox",
+                  "jcr:title": "Extended Checkbox Container",
                   "hideTitle": true,
-                  "name": "extended-checkbox",
+                  "name": "extended-checkbox-container",
                   "checkbox": {
+                    "fd:viewType": "extended-checkbox",
                     "fieldType": "checkbox",
                     "name": "main-checkbox",
                     "jcr:title": "Checkbox Title",
@@ -979,11 +980,13 @@
                     "checkedValue": "on"
                   },
                   "modal": {
+                    "fd:viewType": "modal",
                     "fieldType": "panel",
                     "name": "modal-content",
                     "jcr:title": "Modal Title",
-                    "sling:resourceType": "core/fd/components/form/modal/v1/modal",
-                    "content": "Modal content goes here"
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "content": "Modal content goes here",
+                    "visible": false
                   }
                 }
               }
