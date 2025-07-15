@@ -1,5 +1,6 @@
 @use '../../../../styles/settings' as *;
 @forward 'wizard-theme';
+
 .wizard,
 .current-wizard-step {
   padding-top: $spacing-600;
