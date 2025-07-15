@@ -16,7 +16,7 @@ let customComponents = [
   'summary',
   'search-box',
   'icon-radio-group',
-  'extended-checkbox-group',
+  'extended-checkbox',
 ]
 
 const OOTBComponentDecorators = [
