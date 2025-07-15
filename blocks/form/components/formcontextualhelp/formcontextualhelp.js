@@ -21,7 +21,11 @@ export default function decorate(panelEl, model) {
     panelEl.prepend(infoHeader);
     legendEl === null || legendEl === void 0 ? void 0 : legendEl.remove();
     const helpType = properties.helpType || 'info';
+    const hideIcon = properties.hideIcon;
     panelEl.classList.add(`${className}--${helpType}`);
+    if (hideIcon) {
+        panelEl.classList.add(`${className}--no-icon`);
+    }
     if (properties.link && properties.linkText) {
         // Create the footer div
         const footerEl = document.createElement('div');
