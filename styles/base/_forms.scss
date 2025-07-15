@@ -10,10 +10,6 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
-fieldset {
-  border: 0;
-}
-
 .multiline-wrapper label {
   display: block;
   margin-bottom: 8px;
@@ -269,74 +265,5 @@ FORM required asterisk for radio and checkbox group
   p,
   .subtitle {
     color: $color-white;
-  }
-}
-
-// Background pattern and gradients
-.wizard--bg-dark,
-.wizard--bg-mid,
-.wizard--bg-light {
-  position: relative;
-  z-index: 1;
-}
-
-.wizard--bg-dark::before,
-.wizard--bg-mid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: bottom left;
-  pointer-events: none;
-}
-
-.wizard--bg-light::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: top right;
-  pointer-events: none;
-}
-
-@media (max-width: 743px) {
-  .wizard--bg-dark::before,
-  .wizard--bg-mid::before,
-  .wizard--bg-light::before {
-    background-image: none;
-  }
-}
-
-@include media('tablet') {
-  .wizard--bg-dark::before,
-  .wizard--bg-mid::before {
-    top: 100px;
-    background-image: url('/images/mymsd-unity-pattern-top-right.svg');
-    background-position: top right;
-  }
-
-  .wizard--bg-light::before {
-    top: 100px;
-    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-    background-position: top right;
-  }
-}
-
-@include media('desktop') {
-  .wizard--bg-dark::before,
-  .wizard--bg-mid::before {
-    background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
-    background-position: bottom left;
-  }
-
-  .wizard--bg-light::before {
-    background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-    background-position: top right;
   }
 }
