@@ -5,7 +5,6 @@
 @use '../base/forms' as *;
 @use '../settings' as *;
 
-
 /******************************
    Base Form Elements
 *******************************/
@@ -14,10 +13,6 @@ input[type='text'],
 input[type='radio'],
 input[type='checkbox'] {
   cursor: pointer;
-}
-
-fieldset {
-  border: 0;
 }
 
 /******************************
@@ -92,7 +87,7 @@ textarea {
   }
 
   input[type='radio'] {
-   /* appearance: none;
+    /* appearance: none;
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
