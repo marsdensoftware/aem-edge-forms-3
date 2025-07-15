@@ -968,6 +968,7 @@
                 "template": {
                   "jcr:title": "Extended checkbox",
                   "fieldType": "checkbox",
+                  "fd:viewType": "extended-checkbox",
                   "checkedValue": "on"
                 }
               }
