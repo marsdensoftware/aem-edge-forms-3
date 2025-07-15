@@ -6,14 +6,16 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/fd/components/form/checkbox/v1/checkbox",
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "template": {
-              "jcr:title": "Extended checkbox",
-              "fieldType": "checkbox",
-              "fd:viewType": "extended-checkbox",
-              "checkedValue": "on",
-              "modal": {
-                "model": "modal"
+              "jcr:title": "Extended checkbox container",
+              "fieldType": "panel",
+              "checkbox": {
+                "resourceType": "core/fd/components/form/checkbox/v1/checkbox",
+                "jcr:title": "Extended checkbox",
+                "fieldType": "checkbox",
+                "fd:viewType": "extended-checkbox",
+                "checkedValue": "on"
               }
             }
           }
