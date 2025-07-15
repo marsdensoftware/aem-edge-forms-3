@@ -72,7 +72,6 @@
       }
     }
 
-    // Merged Anchor Link Text Styles
     .panel-formcontextualhelp__footer__link-text {
       margin-right: 0.75rem;
       color: $text-dark;
@@ -115,6 +114,81 @@
       &:visited {
         color: $text-error;
       }
+    }
+  }
+
+  &--primary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $stroke-tertiary;
+    background: $bg-contextual-help-primary;
+    display: flex;
+    padding: $spacing-400;
+    align-items: flex-start;
+    gap: $spacing-300;
+    align-self: stretch;
+
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-contextual-help-info-primary.svg');
+    }
+
+    .plain-text-wrapper p {
+      color: $text-dark-primary;
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-arrow-primary.svg');
+      margin-left: 0.5rem;
+    }
+  }
+
+  &--secondary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $stroke-accent;
+    background: $bg-contextual-help-secondary;
+    display: flex;
+    padding: $spacing-400;
+    align-items: flex-start;
+    gap: $spacing-300;
+    align-self: stretch;
+
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-contextual-help-info-secondary.svg');
+    }
+
+    .plain-text-wrapper p {
+      color: $text-dark-primary;
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-arrow-secondary.svg');
+      margin-left: 0.5rem;
+    }
+  }
+
+  &--tertiary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $stroke-dark;
+    background: $bg-contextual-help-tertiary;
+    display: flex;
+    padding: $spacing-400;
+    align-items: flex-start;
+    gap: $spacing-300;
+    align-self: stretch;
+
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-contextual-help-info-tertiary.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-arrow-tertiary.svg');
+      margin-left: 0.5rem;
+    }
+
+    .panel-formcontextualhelp__title,
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text,
+    .plain-text-wrapper p {
+      color: $text-white;
     }
   }
 }
