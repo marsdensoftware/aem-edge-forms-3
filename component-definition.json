@@ -965,12 +965,12 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                "name": "extcbcontainer",
+                "name": "modal-cb-container",
                 "template": {
                   "fieldType": "panel",
-                  "jcr:title": "Extended Checkbox Container",
+                  "jcr:title": "Modal Checkbox Container",
                   "hideTitle": true,
-                  "name": "extended-checkbox-container",
+                  "name": "modal-checkbox-container",
                   "checkbox": {
                     "fd:viewType": "extended-checkbox",
                     "fieldType": "checkbox",
