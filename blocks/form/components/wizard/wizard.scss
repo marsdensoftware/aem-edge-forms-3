@@ -1,41 +1,12 @@
 @use '../../../../styles/settings' as *;
+@forward 'wizard-theme';
 
-.wizard--bg-dark {
-  .wizard {
-    background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
-    );
-  }
-}
-
-.wizard--bg-mid {
-  .wizard {
-    background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
-    );
-  }
-}
-
-.wizard--bg-light {
-  .wizard {
-    background: $color-shade-blue-04;
-  }
-}
-
-// Wizard container
-.wizard {
-  padding: $spacing-600 0 120px; // more spacing at the bottom to be able to scroll through past the last content
+.wizard,
+.current-wizard-step {
+  padding-top: $spacing-600;
+  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
   min-height: $wizard-body-height;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    $color-accent 25%,
-    $color-primary-navy 100%
-  );
 
   @include media('tablet') {
     padding-top: $spacing-700;
@@ -45,7 +16,9 @@
   @include media('desktop') {
     min-height: $wizard-body-height-desktop;
   }
+}
 
+.wizard {
   .field-save-changes {
     display: none;
     margin-left: auto;
