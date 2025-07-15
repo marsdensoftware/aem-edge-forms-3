@@ -336,7 +336,6 @@ const fieldRenderers = {
   'drop-down': createSelect,
   'plain-text': createPlainText,
   checkbox: createRadioOrCheckbox,
-  'extended-checkbox': createRadioOrCheckbox,
   button: createButton,
   multiline: createTextArea,
   panel: createFieldSet,
