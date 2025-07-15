@@ -5,7 +5,6 @@
   padding: $spacing-400 $spacing-300;
   background: $bg-primary;
   display: block;
-  border-radius: $border-radius-mid;
   border-radius: $border-radius-low;
   border: 1px solid $color-shade-navy-40;
   margin-bottom: $spacing-600;
@@ -118,35 +117,22 @@
   }
 
   &--primary {
-    border-radius: $border-radius-mid;
-    border: 1px solid $stroke-dark;
-    background: $bg-contextual-help-tertiary;
-    display: flex;
-    padding: $spacing-400;
-    align-items: flex-start;
-    gap: $spacing-300;
-    align-self: stretch;
-
+    @extend .panel-formcontextualhelp--tertiary;
     .panel-formcontextualhelp__icon {
       content: url('images/icon-contextual-help-info-primary.svg');
     }
-
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-arrow-primary.svg');
+    }
     .panel-formcontextualhelp__title {
       color: $text-dark;
     }
-
     .plain-text-wrapper p {
       color: $text-dark-primary;
-    }
-
-    .panel-formcontextualhelp__footer__link::after {
-      content: url('images/icon-contextual-help-arrow-primary.svg');
-      margin-left: 0.5rem;
     }
   }
 
   &--secondary {
-    border-radius: $border-radius-mid;
     border: 1px solid $stroke-tertiary;
     background: $bg-contextual-help-secondary;
     display: flex;
@@ -159,18 +145,17 @@
       content: url('images/icon-contextual-help-info-secondary.svg');
     }
 
-    .plain-text-wrapper p {
-      color: $text-dark-primary;
-    }
-
     .panel-formcontextualhelp__footer__link::after {
       content: url('images/icon-contextual-help-arrow-secondary.svg');
       margin-left: 0.5rem;
     }
+
+    .plain-text-wrapper p {
+      color: $text-dark-primary;
+    }
   }
 
   &--tertiary {
-    border-radius: $border-radius-mid;
     border: 1px solid $stroke-dark;
     background: $bg-contextual-help-tertiary;
     display: flex;
@@ -197,7 +182,6 @@
   }
 }
 
-// Icon alignment for image and text
 .field-wrapper.row {
   display: flex;
   align-items: center;
