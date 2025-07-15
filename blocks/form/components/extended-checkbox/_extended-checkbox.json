@@ -9,7 +9,7 @@
             "resourceType": "core/fd/components/form/checkbox/v1/checkbox",
             "template": {
               "jcr:title": "Extended checkbox",
-              "fieldType": "extended-checkbox",
+              "fieldType": "checkbox",
               "checkedValue": "on"
             }
           }
