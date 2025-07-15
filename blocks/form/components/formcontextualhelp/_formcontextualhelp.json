@@ -98,6 +98,12 @@
               "name": "linkOpenInNewTab",
               "label": "Open link in new tab",
               "valueType": "boolean"
+            },
+            {
+              "component": "boolean",
+              "name": "hideIcon",
+              "label": "Hide Icon",
+              "valueType": "boolean"
             }
           ]
         },
