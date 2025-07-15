@@ -1,21 +1,33 @@
 {
   "definitions": [
     {
-      "title": "Extended checkbox",
+      "title": "Extended Checkbox",
       "id": "extended-checkbox",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "template": {
-              "jcr:title": "Extended checkbox container",
+              "fd:viewType": "extended-checkbox",
               "fieldType": "panel",
+              "jcr:title": "Extended Checkbox",
+              "hideTitle": true,
+              "name": "extended-checkbox",
+
               "checkbox": {
-                "resourceType": "core/fd/components/form/checkbox/v1/checkbox",
-                "jcr:title": "Extended checkbox",
                 "fieldType": "checkbox",
-                "fd:viewType": "extended-checkbox",
+                "name": "main-checkbox",
+                "jcr:title": "Checkbox Title",
+                "sling:resourceType": "core/fd/components/form/checkbox/v1/checkbox",
                 "checkedValue": "on"
+              },
+
+              "modal": {
+                "fieldType": "panel",
+                "name": "modal-content",
+                "jcr:title": "Modal Title",
+                "sling:resourceType": "core/fd/components/form/modal/v1/modal",
+                "content": "Modal content goes here"
               }
             }
           }
@@ -34,60 +46,19 @@
           "collapsible": false,
           "fields": [
             {
-              "...": "../../models/form-common/_basic-input-fields.json#/fields"
-            },
-            {
-              "component": "select",
-              "label": "Data type of submitted value",
-              "name": "type",
+              "component": "text",
+              "name": "name",
+              "label": "Name",
               "valueType": "string",
-              "options": [
-                {
-                  "name": "String",
-                  "value": "string"
-                },
-                {
-                  "name": "Boolean",
-                  "value": "boolean"
-                },
-                {
-                  "name": "Number",
-                  "value": "number"
-                }
-              ]
+              "required": true
             },
             {
               "component": "text",
-              "name": "checkedValue",
-              "label": "When Checked, return value",
-              "valueType": "string"
-            },
-            {
-              "component": "boolean",
-              "name": "enableUncheckedValue",
-              "label": "Preserve Uncheck state value.",
-              "valueType": "boolean"
-            },
-            {
-              "component": "text",
-              "name": "default",
-              "label": "Default Value",
+              "name": "jcr:title",
+              "label": "Title",
               "valueType": "string"
             }
           ]
-        },
-        {
-          "...": "../../models/form-common/_responsive-columns-component.json"
-        },
-        {
-          "...": "../../models/form-common/_help-container.json"
-        },
-        {
-          "component": "container",
-          "name": "validation",
-          "label": "Validation",
-          "collapsible": true,
-          "...": "../../models/form-common/_basic-validation-fields.json"
         }
       ]
     }
