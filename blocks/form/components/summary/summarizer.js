@@ -230,11 +230,11 @@ export class Summarizer {
     static summaryEditTemplate = `
     <div class="row">
         <div class="col-md-4 row">
-            <div class="col-md-12 col-9">
+            <div class="col-md-12 col-10">
                 <h4 class="title">{{title}}</h4>
                 <p class="p-small">{{description}}</p>
             </div>
-            <div class="col-md-12 col-3"><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
+            <div class="col-md-12 col-2"><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-8">{{content}}</div>
     </div>
