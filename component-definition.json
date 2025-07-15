@@ -959,6 +959,22 @@
           }
         },
         {
+          "title": "Extended checkbox",
+          "id": "extended-checkbox",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/checkbox/v1/checkbox",
+                "template": {
+                  "jcr:title": "Extended checkbox",
+                  "fieldType": "extended-checkbox",
+                  "checkedValue": "on"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Form Contextual Help",
           "id": "formcontextualhelp",
           "plugins": {
