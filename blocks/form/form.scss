@@ -18,6 +18,28 @@ form output {
   font-size: 1.625rem;
 }
 
+form:not(.edit-mode) {
+    [name='top_nav']{
+      .field-exitbtn{
+        display: none;
+      }
+    }
+    
+    &[data-current-wizard-step='0'],
+    &[data-current-wizard-step='1'],
+    &[data-current-wizard-step='2'],
+    &[data-current-wizard-step='3']{
+      [name='top_nav']{
+          .field-saveexitbtn{
+              display: none;
+          }
+          .field-exitbtn{
+              display: flex;
+          }
+      }
+    }
+}
+
 form:not(.edit-mode) [data-visible='false'] {
   display: none;
   visibility: hidden;

@@ -31,14 +31,25 @@ function updateBackground(wizardEl, container) {
   }
 }
 
+function updateClasses(wizardEl){
+  const currentStepEl = wizardEl.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
+  
+  const index = currentStepEl.dataset.index;
+  
+  wizardEl.closest('form').dataset.currentWizardStep = index;
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('.wizard')
 
   // Set the initial background based on the default active step on page load.
   updateBackground(wizardEl, container)
+  updateClasses(wizardEl)
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
     updateBackground(wizardEl, container)
+    updateClasses(wizardEl)
   })
 })
