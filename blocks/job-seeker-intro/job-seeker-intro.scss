@@ -1,58 +1,58 @@
-@use '../../styles/settings' as *;
+// @use '../../styles/settings' as *;
 
-.block {
-  &.job-seeker-intro {
-    min-height: 400px;
+// .block {
+//   &.job-seeker-intro {
+//     min-height: 400px;
 
-    @include media('desktop') {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 120px 0;
-      max-width: 930px;
-      margin: 0 auto;
-    }
+//     @include media('desktop') {
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       padding: 120px 0;
+//       max-width: 930px;
+//       margin: 0 auto;
+//     }
 
-    .job-seeker-intro__picture {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 160px;
-      margin: 0 auto;
+//     .job-seeker-intro__picture {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       width: 100%;
+//       max-width: 160px;
+//       margin: 0 auto;
 
-      @include media('desktop') {
-        order: 2;
-        max-width: 240px;
-      }
+//       @include media('desktop') {
+//         order: 2;
+//         max-width: 240px;
+//       }
 
-      .job-seeker-intro__inner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
+//       .job-seeker-intro__inner {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         width: 100%;
+//       }
 
-      .job-seeker-intro__inner,
-      picture,
-      img {
-        width: 100%;
-      }
-    }
+//       .job-seeker-intro__inner,
+//       picture,
+//       img {
+//         width: 100%;
+//       }
+//     }
 
-    .job-seeker-intro__content-inner {
-      text-align: center;
+//     .job-seeker-intro__content-inner {
+//       text-align: center;
 
-      h2 {
-        @include heading-level-3;
-      }
+//       h2 {
+//         @include heading-level-3;
+//       }
 
-      @include media('desktop') {
-        text-align: left;
-        order: 1;
-        width: 510px;
-        margin-right: 60px;
-      }
-    }
-  }
-}
+//       @include media('desktop') {
+//         text-align: left;
+//         order: 1;
+//         width: 510px;
+//         margin-right: 60px;
+//       }
+//     }
+//   }
+// }

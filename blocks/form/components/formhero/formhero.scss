@@ -1,81 +1,81 @@
-@use '../../../../styles/settings' as *;
+// @use '../../../../styles/settings' as *;
 
-.wizard {
-  .panel-formhero {
-    legend {
-      display: none;
-    }
-  }
+// .wizard {
+//   .panel-formhero {
+//     legend {
+//       display: none;
+//     }
+//   }
 
-  .panel-formhero.field-panelcontainer1751863678379 {
-    display: flex;
-    flex-direction: column;
+//   .panel-formhero.field-panelcontainer1751863678379 {
+//     display: flex;
+//     flex-direction: column;
 
-    @include media('desktop') {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: $spacing-400;
-    }
-  }
+//     @include media('desktop') {
+//       flex-direction: row;
+//       justify-content: space-between;
+//       align-items: center;
+//       gap: $spacing-400;
+//     }
+//   }
 
-  .panel-formhero__inner {
-    @include media('desktop') {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: $spacing-400;
-    }
-  }
+//   .panel-formhero__inner {
+//     @include media('desktop') {
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       gap: $spacing-400;
+//     }
+//   }
 
-  .panel-formhero__picture {
-    margin-bottom: $spacing-600;
-    max-width: 311px;
-    display: none;
-  }
+//   .panel-formhero__picture {
+//     margin-bottom: $spacing-600;
+//     max-width: 311px;
+//     display: none;
+//   }
 
-  .panel-formhero__content {
-    order: 0;
+//   .panel-formhero__content {
+//     order: 0;
 
-    picture {
-      margin-bottom: $spacing-600;
+//     picture {
+//       margin-bottom: $spacing-600;
 
-      @include media('tablet') {
-        margin-bottom: $spacing-700;
-      }
+//       @include media('tablet') {
+//         margin-bottom: $spacing-700;
+//       }
 
-      @include media('desktop') {
-        margin-bottom: 0;
-      }
-    }
+//       @include media('desktop') {
+//         margin-bottom: 0;
+//       }
+//     }
 
-    h2 {
-      @include heading-level-1;
-      margin-top: 0;
-      margin-bottom: $spacing-500;
-    }
+//     h2 {
+//       @include heading-level-1;
+//       margin-top: 0;
+//       margin-bottom: $spacing-500;
+//     }
 
-    p {
-      @include font-body-large;
-      margin-bottom: 12px;
-    }
-  }
+//     p {
+//       @include font-body-large;
+//       margin-bottom: 12px;
+//     }
+//   }
 
-  .panel-formhero.field-intro1,
-  .panel-formhero.field-intro2,
-  .panel-formhero.field-intro3 {
-    .panel-formhero__content {
-      p {
-        p {
-          font-size: $size-font-subtitle;
-          color: $text-dark;
-          margin-bottom: $spacing-200;
+//   .panel-formhero.field-intro1,
+//   .panel-formhero.field-intro2,
+//   .panel-formhero.field-intro3 {
+//     .panel-formhero__content {
+//       p {
+//         p {
+//           font-size: $size-font-subtitle;
+//           color: $text-dark;
+//           margin-bottom: $spacing-200;
 
-          @include media('desktop') {
-            margin-bottom: $spacing-300;
-          }
-        }
-      }
-    }
-  }
-}
+//           @include media('desktop') {
+//             margin-bottom: $spacing-300;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

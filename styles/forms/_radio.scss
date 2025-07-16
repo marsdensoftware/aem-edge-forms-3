@@ -1,67 +1,67 @@
-@use '../settings' as *;
+// @use '../settings' as *;
 
-.radio-group-wrapper {
-  display: flex;
+// .radio-group-wrapper {
+//   display: flex;
 
-  legend {
-    @extend %label-common-style;
-  }
-}
+//   legend {
+//     @extend %label-common-style;
+//   }
+// }
 
-.radio-wrapper {
-  display: flex;
+// .radio-wrapper {
+//   display: flex;
 
-  label {
-    @extend %label-common-style;
-    position: relative;
+//   label {
+//     @extend %label-common-style;
+//     position: relative;
 
-    &:focus,
-    &::before,
-    &::after {
-      border-radius: $border-radius-round;
-    }
+//     &:focus,
+//     &::before,
+//     &::after {
+//       border-radius: $border-radius-round;
+//     }
 
-    &::before {
-      content: '';
-      margin-right: $spacing-200;
-      display: block;
-      width: 26px;
-      height: 26px;
-      border: 2px solid $color-shade-navy-45;
-      border-radius: $border-radius-round;
-    }
+//     &::before {
+//       content: '';
+//       margin-right: $spacing-200;
+//       display: block;
+//       width: 26px;
+//       height: 26px;
+//       border: 2px solid $color-shade-navy-45;
+//       border-radius: $border-radius-round;
+//     }
 
-    &:hover {
-      color: $text-primary;
+//     &:hover {
+//       color: $text-primary;
 
-      &::before {
-        border: 2px solid $stroke-accent;
-      }
-    }
-  }
+//       &::before {
+//         border: 2px solid $stroke-accent;
+//       }
+//     }
+//   }
 
-  input {
-    @extend %visually-hidden;
+//   input {
+//     @extend %visually-hidden;
 
-    &:checked {
-      + label {
-        color: $text-primary;
+//     &:checked {
+//       + label {
+//         color: $text-primary;
 
-        &::before {
-          border-color: $stroke-accent;
-        }
+//         &::before {
+//           border-color: $stroke-accent;
+//         }
 
-        &::after {
-          display: block;
-          content: '';
-          position: absolute;
-          left: 1px;
-          top: 1px;
-          width: 24px;
-          height: 24px;
-          border: 6px solid $stroke-accent;
-        }
-      }
-    }
-  }
-}
+//         &::after {
+//           display: block;
+//           content: '';
+//           position: absolute;
+//           left: 1px;
+//           top: 1px;
+//           width: 24px;
+//           height: 24px;
+//           border: 6px solid $stroke-accent;
+//         }
+//       }
+//     }
+//   }
+// }

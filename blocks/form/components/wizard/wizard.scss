@@ -1,72 +1,72 @@
-@use '../../../../styles/settings' as *;
-@use 'wizard-theme';
+// @use '../../../../styles/settings' as *;
+// @use 'wizard-theme';
 
-.wizard,
-.current-wizard-step {
-  padding-top: $spacing-600;
-  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
-  min-height: $wizard-body-height;
-  height: 100%;
+// .wizard,
+// .current-wizard-step {
+//   padding-top: $spacing-600;
+//   padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
+//   min-height: $wizard-body-height;
+//   height: 100%;
 
-  @include media('tablet') {
-    padding-top: $spacing-700;
-    min-height: $wizard-body-height-tablet;
-  }
+//   @include media('tablet') {
+//     padding-top: $spacing-700;
+//     min-height: $wizard-body-height-tablet;
+//   }
 
-  @include media('desktop') {
-    min-height: $wizard-body-height-desktop;
-  }
-}
+//   @include media('desktop') {
+//     min-height: $wizard-body-height-desktop;
+//   }
+// }
 
-.wizard {
-  .field-save-changes {
-    display: none;
-    margin-left: auto;
-  }
+// .wizard {
+//   .field-save-changes {
+//     display: none;
+//     margin-left: auto;
+//   }
 
-  &.from-review {
-    .field-save-changes {
-      display: block;
-    }
+//   &.from-review {
+//     .field-save-changes {
+//       display: block;
+//     }
 
-    .wizard-button-prev,
-    .wizard-button-next {
-      display: none;
-    }
-  }
+//     .wizard-button-prev,
+//     .wizard-button-next {
+//       display: none;
+//     }
+//   }
 
-  &.left {
-    display: flex;
+//   &.left {
+//     display: flex;
 
-    .wizard-menu-items {
-      flex-direction: column;
-      width: 300px;
-    }
-  }
+//     .wizard-menu-items {
+//       flex-direction: column;
+//       width: 300px;
+//     }
+//   }
 
-  > legend.field-label,
-  .wizard-menu-items {
-    display: none;
-  }
+//   > legend.field-label,
+//   .wizard-menu-items {
+//     display: none;
+//   }
 
-  > .current-wizard-step.panel-wrapper:first-of-type
-    ~ .wizard-button-wrapper
-    > .wizard-button-prev,
-  > .current-wizard-step.panel-wrapper:last-of-type
-    ~ .wizard-button-wrapper
-    > .wizard-button-next {
-    display: none;
-  }
+//   > .current-wizard-step.panel-wrapper:first-of-type
+//     ~ .wizard-button-wrapper
+//     > .wizard-button-prev,
+//   > .current-wizard-step.panel-wrapper:last-of-type
+//     ~ .wizard-button-wrapper
+//     > .wizard-button-next {
+//     display: none;
+//   }
 
-  > fieldset > legend {
-    display: none;
-  }
+//   > fieldset > legend {
+//     display: none;
+//   }
 
-  > fieldset:not(.current-wizard-step) {
-    display: none;
-  }
+//   > fieldset:not(.current-wizard-step) {
+//     display: none;
+//   }
 
-  .wizard-button-wrapper .field-wrapper {
-    flex: unset;
-  }
-}
+//   .wizard-button-wrapper .field-wrapper {
+//     flex: unset;
+//   }
+// }
