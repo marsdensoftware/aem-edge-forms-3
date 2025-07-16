@@ -128,8 +128,6 @@
     background: $color-shade-blue-04;
 
     &::after {
-
-
       @include media('desktop') {
         background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
         background-position: left bottom;
@@ -157,7 +155,19 @@
   &.wizard--bg-mid {
     color: $text-primary;
 
-    h1, h2, h3 {
+    h1 {
+      font-size: $size-font-h1;
+      font-weight: 700;
+      line-height: 130%;
+      color: $text-primary;
+      background: $color-gradient-blue;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2,
+    h3 {
       @include heading-default($text-primary);
       background: $color-gradient-blue;
       background-clip: text;
@@ -165,7 +175,9 @@
       -webkit-text-fill-color: transparent;
     }
 
-    h4, h5, h6 {
+    h4,
+    h5,
+    h6 {
       font-family: $font-family;
       font-weight: $font-weight-bold;
       font-size: $size-font-h6;
