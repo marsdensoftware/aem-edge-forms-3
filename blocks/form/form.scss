@@ -37,6 +37,7 @@ form:not(.edit-mode) [data-visible='false'] {
   max-height: $nav-height;
   height: 100%;
   border-bottom: 1px solid $color-shade-navy-40;
+  background-color: $color-white;
 
   @include media('tablet') {
     max-height: $nav-height-tablet;
