@@ -1,8 +1,7 @@
 @use '../../../../styles/settings' as *;
-@forward 'wizard-theme';
+@use 'wizard-theme';
 
-.wizard,
-.current-wizard-step {
+.wizard {
   padding-top: $spacing-600;
   padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
   min-height: $wizard-body-height;
