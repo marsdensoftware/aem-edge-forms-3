@@ -210,13 +210,13 @@
   }
 }
 
-@include media('mobile') {
-  .field-wrapper.row {
-    flex-direction: column;
-    align-items: flex-start;
+// @include media('mobile') {
+//   .field-wrapper.row {
+//     flex-direction: column;
+//     align-items: flex-start;
 
-    .plain-text-wrapper {
-      margin-top: $spacing-300;
-    }
-  }
-}
+//     .plain-text-wrapper {
+//       margin-top: $spacing-300;
+//     }
+//   }
+// }
