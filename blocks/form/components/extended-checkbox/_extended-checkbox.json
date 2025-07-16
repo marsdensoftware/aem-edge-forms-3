@@ -30,6 +30,22 @@
                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "content": "Modal content goes here",
                 "visible": false,
+                "content-panel": {
+                  "fieldType": "panel",
+                  "hideTitle": true,
+                  "name": "modal-content-panel",
+                  "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                  "text": {
+                    "fieldType": "text-input",
+                    "multiLine": true,
+                    "name": "modal-text",
+                    "jcr:title": "Modal Text",
+                    "textIsRich": true,
+                    "placeholder": "Enter description here",
+                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                  }
+                },
+
                 "buttons-panel": {
                   "fieldType": "panel",
                   "name": "modal-buttons",
