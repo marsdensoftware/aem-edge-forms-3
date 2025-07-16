@@ -161,40 +161,29 @@
   &.wizard--bg-mid {
     color: $text-primary;
 
-    h1,
-    h2,
-    h3 {
-      color: $text-primary;
-      font-family: $font-family;
-      margin-bottom: $spacing-600;
+    h1, h2, h3 {
+      @include heading-default($text-primary);
       background: $color-gradient-blue;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
-      }
     }
 
-    h4,
-    h5,
-    h6 {
-      color: $color-primary-navy;
-      font-family: $font-family;
-      margin-bottom: 0;
-
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
-      }
+    h4, h5, h6 {
+      @include heading-secondary($color-primary-navy);
     }
 
-    p,
     .subtitle,
     .straptitle {
-      color: $text-secondary;
-      font-family: $font-family;
-      line-height: 1.6;
+      @include subtitle-text();
     }
+  }
+
+  p {
+    color: $text-dark-primary;
+    font-size: $size-font-body-default;
+    font-family: $font-family;
+    line-height: 1.6;
+    font-weight: 400;
   }
 }
