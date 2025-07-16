@@ -27,6 +27,7 @@
                 "fieldType": "panel",
                 "name": "modal-content",
                 "jcr:title": "Modal Title",
+                "hideTitle": true,
                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "content": "Modal content goes here",
                 "visible": false,
@@ -38,6 +39,7 @@
                   "text": {
                     "fieldType": "text-input",
                     "multiLine": true,
+                    "hideTitle": true,
                     "name": "modal-text",
                     "jcr:title": "Modal Text",
                     "textIsRich": true,
