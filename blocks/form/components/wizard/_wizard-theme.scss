@@ -5,9 +5,9 @@
 
   &.wizard--bg-dark {
     background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
+                    135deg,
+                    $color-accent 25%,
+                    $color-primary-navy 100%
     );
     color: $color-white;
 
@@ -71,7 +71,6 @@
 
       p {
         margin: 0;
-
         font-size: $size-font-subtitle;
       }
     }
@@ -79,9 +78,9 @@
 
   &.wizard--bg-mid {
     background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
+                    135deg,
+                    $color-shade-blue-10 25%,
+                    $color-shade-blue-25 100%
     );
   }
 
@@ -120,7 +119,7 @@
 
       @include media('desktop') {
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
-        background-position: bottom left;
+        background-position: calc(100% - 120px) left;
       }
     }
   }
@@ -129,10 +128,7 @@
     background: $color-shade-blue-04;
 
     &::after {
-      @include media('tablet') {
-        background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-        background-position: top right;
-      }
+
 
       @include media('desktop') {
         background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
@@ -170,12 +166,21 @@
     }
 
     h4, h5, h6 {
-      @include heading-secondary($color-primary-navy);
+      font-family: $font-family;
+      font-weight: $font-weight-bold;
+      font-size: $size-font-h6;
+      color: $color-primary-navy;
+      line-height: 130%;
+      letter-spacing: $letter-spacing-default;
     }
 
     .subtitle,
     .straptitle {
-      @include subtitle-text();
+      font-size: $size-font-subtitle;
+      color: $text-dark-primary;
+      font-weight: normal;
+      line-height: 130%;
+      margin: 0;
     }
   }
 
