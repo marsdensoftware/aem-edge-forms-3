@@ -1,48 +1,48 @@
-// @use '../../../../styles/settings' as *;
+@use '../../../../styles/settings' as *;
 
-// .wizard {
-//   .panel-formwelcome.current-wizard-step {
-//     legend {
-//       display: none;
-//     }
+.wizard {
+  .panel-formwelcome.current-wizard-step {
+    legend {
+      display: none;
+    }
 
-//     .panel-formwelcome__inner {
-//       @include media('desktop') {
-//         display: flex;
-//         align-items: center;
-//       }
-//     }
+    .panel-formwelcome__inner {
+      @include media('desktop') {
+        display: flex;
+        align-items: center;
+      }
+    }
 
-//     .panel-formwelcome__item {
-//       display: flex;
-//       align-items: center;
-//       justify-content: space-between;
+    .panel-formwelcome__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-//       &:not(:last-child) {
-//         margin-bottom: $spacing-500;
+      &:not(:last-child) {
+        margin-bottom: $spacing-500;
 
-//         @include media('desktop') {
-//           margin-bottom: $spacing-600;
-//         }
-//       }
-//     }
+        @include media('desktop') {
+          margin-bottom: $spacing-600;
+        }
+      }
+    }
 
-//     .panel-formwelcome__item-image {
-//       order: 1;
-//     }
+    .panel-formwelcome__item-image {
+      order: 1;
+    }
 
-//     .panel-formwelcome__item-content {
-//       h3 {
-//         @include font-body-large;
+    .panel-formwelcome__item-content {
+      h3 {
+        @include font-body-large;
 
-//         @include media('desktop') {
-//           @include heading-level-6;
-//         }
-//       }
+        @include media('desktop') {
+          @include heading-level-6;
+        }
+      }
 
-//       p {
-//         @include font-body-large;
-//       }
-//     }
-//   }
-// }
+      p {
+        @include font-body-large;
+      }
+    }
+  }
+}

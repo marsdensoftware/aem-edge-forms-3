@@ -1,43 +1,43 @@
-// @use '../../../../styles/settings' as *;
+@use '../../../../styles/settings' as *;
 
-// .form form .panel-repeatable-panel__workexperience {
-//   .repeatable-entry {
-//     &__title {
-//       @include font-body-large;
-//       font-weight: $font-weight-bold;
-//     }
+.form form .panel-repeatable-panel__workexperience {
+  .repeatable-entry {
+    &__title {
+      @include font-body-large;
+      font-weight: $font-weight-bold;
+    }
 
-//     &__workperiod {
-//       color: $color-grey-black-60;
-//       margin-top: $spacing-200;
-//     }
-//   }
-// }
+    &__workperiod {
+      color: $color-grey-black-60;
+      margin-top: $spacing-200;
+    }
+  }
+}
 
-// fieldset.field-panel-jobs {
-//   [class*='field-wrapper'] {
-//     p,
-//     h3,
-//     h6 {
-//       padding-bottom: 0;
-//     }
+fieldset.field-panel-jobs {
+  [class*='field-wrapper'] {
+    p,
+    h3,
+    h6 {
+      padding-bottom: 0;
+    }
 
-//     h3 {
-//       margin-bottom: $spacing-400;
-//     }
-//   }
+    h3 {
+      margin-bottom: $spacing-400;
+    }
+  }
 
-//   .p-large {
-//     margin-bottom: $spacing-600;
-//     padding-bottom: 0;
+  .p-large {
+    margin-bottom: $spacing-600;
+    padding-bottom: 0;
 
-//     @include media('desktop') {
-//       margin-bottom: $spacing-650;
-//     }
+    @include media('desktop') {
+      margin-bottom: $spacing-650;
+    }
 
-//     p {
-//       @include font-body-large;
-//       padding-bottom: 0;
-//     }
-//   }
-// }
+    p {
+      @include font-body-large;
+      padding-bottom: 0;
+    }
+  }
+}

@@ -1,75 +1,75 @@
-// @use '../../../../styles/settings' as *;
+@use '../../../../styles/settings' as *;
 
-// /* Tabs styling */
+/* Tabs styling */
 
-// .form:not(.edit-mode) {
-//   fieldset.formtabs {
-//     padding: 0;
-//     margin-bottom: 32px;
+.form:not(.edit-mode) {
+  fieldset.formtabs {
+    padding: 0;
+    margin-bottom: 32px;
 
-//     legend {
-//       display: none;
-//     }
+    legend {
+      display: none;
+    }
 
-//     > fieldset.formtab {
-//       margin: 0;
-//       display: none;
-//     }
+    > fieldset.formtab {
+      margin: 0;
+      display: none;
+    }
 
-//     > .navitems {
-//       padding: 0;
-//       margin: 0;
-//       display: flex;
-//       height: $spacing-700;
-//       list-style: none;
-//     }
+    > .navitems {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      height: $spacing-700;
+      list-style: none;
+    }
 
-//     > .navitems > li {
-//       padding: 0 $spacing-400;
-//       margin: 0;
-//       display: flex;
-//       align-items: center;
-//       list-style: none;
-//       cursor: pointer;
-//       background: transparent;
-//       border: none;
-//       border-bottom: 2px solid var(--Shades-Blues-Blue-25, #bfdef1);
-//       border-radius: 0;
-//       transition: all 0.2s ease;
-//       font-weight: 500;
-//       color: var(--Text-Dark-Accent, #017ac9);
+    > .navitems > li {
+      padding: 0 $spacing-400;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      list-style: none;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--Shades-Blues-Blue-25, #bfdef1);
+      border-radius: 0;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      color: var(--Text-Dark-Accent, #017ac9);
 
-//       &:not(:last-child) {
-//         margin-right: $spacing-200;
-//       }
+      &:not(:last-child) {
+        margin-right: $spacing-200;
+      }
 
-//       &:hover {
-//         color: var(--Text-Dark-Dark, #134276);
-//         border-radius: var(--Corner-radius-Mid, 8px)
-//           var(--Corner-radius-Mid, 8px) 0 0;
-//         border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
-//       }
-//     }
+      &:hover {
+        color: var(--Text-Dark-Dark, #134276);
+        border-radius: var(--Corner-radius-Mid, 8px)
+          var(--Corner-radius-Mid, 8px) 0 0;
+        border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
+      }
+    }
 
-//     > .navitems > li.navitem-current {
-//       color: var(--Text-Dark-Dark, #134276);
-//       border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px)
-//         0 0;
-//       border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
-//       font-weight: bold;
-//     }
+    > .navitems > li.navitem-current {
+      color: var(--Text-Dark-Dark, #134276);
+      border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px)
+        0 0;
+      border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
+      font-weight: bold;
+    }
 
-//     > fieldset.formtab.formtab-current {
-//       display: block;
-//       background: transparent;
-//       border: none;
-//       padding: $spacing-500 $spacing-400;
-//     }
-//   }
-// }
+    > fieldset.formtab.formtab-current {
+      display: block;
+      background: transparent;
+      border: none;
+      padding: $spacing-500 $spacing-400;
+    }
+  }
+}
 
-// .form.edit-mode {
-//   fieldset.formtabs > .navitems {
-//     display: none;
-//   }
-// }
+.form.edit-mode {
+  fieldset.formtabs > .navitems {
+    display: none;
+  }
+}

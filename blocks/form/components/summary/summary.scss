@@ -1,230 +1,230 @@
-// @use '../../../../styles/settings' as *;
+@use '../../../../styles/settings' as *;
 
-// .field-summary {
-//   padding: $spacing-600 0;
-//   border-top: solid 2px $color-border-secondary;
+.field-summary {
+  padding: $spacing-600 0;
+  border-top: solid 2px $color-border-secondary;
 
-//   .edit {
-//     width: 56px;
-//     height: 26px;
-//     background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
-//     background-repeat: no-repeat;
-//     display: block;
-//     text-align: center;
-//     padding-left: 28px;
-//     text-decoration: underline;
-//     font-family: $font-family;
-//     font-size: $size-font-body-default;
-//     font-style: normal;
-//     font-weight: $font-weight-medium;
-//     line-height: 133%;
-//     letter-spacing: 0;
-//     color: $color-primary;
+  .edit {
+    width: 56px;
+    height: 26px;
+    background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    display: block;
+    text-align: center;
+    padding-left: 28px;
+    text-decoration: underline;
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: 0;
+    color: $color-primary;
 
-//     &:hover,
-//     &:focus,
-//     &:visited {
-//       color: $color-primary-navy;
-//     }
-//   }
+    &:hover,
+    &:focus,
+    &:visited {
+      color: $color-primary-navy;
+    }
+  }
 
-//   .summary-entry,
-//   .item {
-//     padding-right: $spacing-600;
+  .summary-entry,
+  .item {
+    padding-right: $spacing-600;
 
-//     &:last-child {
-//       padding-bottom: 0;
-//     }
-//   }
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
 
-//   .summary-entry {
-//     color: $text-dark-primary;
-//     font-family: $font-family;
-//     font-size: $size-font-body-large;
-//     font-style: normal;
-//     font-weight: $font-weight-regular;
-//     line-height: 160%;
-//     letter-spacing: 0;
-//     border-bottom: solid 2px $color-border-secondary;
-//     padding-top: $spacing-450;
-//     padding-bottom: $spacing-450;
-//     margin-bottom: $spacing-300;
+  .summary-entry {
+    color: $text-dark-primary;
+    font-family: $font-family;
+    font-size: $size-font-body-large;
+    font-style: normal;
+    font-weight: $font-weight-regular;
+    line-height: 160%;
+    letter-spacing: 0;
+    border-bottom: solid 2px $color-border-secondary;
+    padding-top: $spacing-450;
+    padding-bottom: $spacing-450;
+    margin-bottom: $spacing-300;
 
-//     &:last-of-type {
-//       border-bottom: none;
-//       padding-bottom: 0;
-//       margin-bottom: 0;
-//     }
+    &:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
 
-//     [data-name^='selected-item-job-title'],
-//     [class*='selected-item-job-title'],
-//     [data-name^='radiobutton'],
-//     [class*='radiobutton'],
-//     [data-name^='selected-item'],
-//     [class*='selected-item'],
-//     [data-name^='textinput'],
-//     [class*='textinput'] {
-//       color: $text-dark-primary;
-//       font-family: $font-family;
-//       font-style: normal;
-//       font-size: $size-font-body-default;
-//       line-height: 160%;
-//       margin-top: $spacing-100;
-//       margin-bottom: $spacing-100;
-//     }
+    [data-name^='selected-item-job-title'],
+    [class*='selected-item-job-title'],
+    [data-name^='radiobutton'],
+    [class*='radiobutton'],
+    [data-name^='selected-item'],
+    [class*='selected-item'],
+    [data-name^='textinput'],
+    [class*='textinput'] {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      font-size: $size-font-body-default;
+      line-height: 160%;
+      margin-top: $spacing-100;
+      margin-bottom: $spacing-100;
+    }
 
-//     &__language,
-//     &__course,
-//     &__title,
-//     &__licenceClassTitle,
-//     &__endorsementsTitle {
-//       color: $text-dark-primary;
-//       font-family: $font-family;
-//       font-style: normal;
-//       line-height: 160%;
-//       font-weight: 700;
-//       font-size: $size-font-body-default;
-//       margin-bottom: $spacing-100;
-//     }
+    &__language,
+    &__course,
+    &__title,
+    &__licenceClassTitle,
+    &__endorsementsTitle {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      line-height: 160%;
+      font-weight: 700;
+      font-size: $size-font-body-default;
+      margin-bottom: $spacing-100;
+    }
 
-//     &__personal-summary {
-//       color: $text-dark-primary;
-//       font-family: $font-family;
-//       font-style: normal;
-//       line-height: 160%;
-//       font-size: $size-font-body-large;
-//       font-weight: $font-weight-regular;
-//       letter-spacing: 0;
-//       margin-bottom: $spacing-100;
-//     }
+    &__personal-summary {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      line-height: 160%;
+      font-size: $size-font-body-large;
+      font-weight: $font-weight-regular;
+      letter-spacing: 0;
+      margin-bottom: $spacing-100;
+    }
 
-//     &__employmentDetails,
-//     &__description,
-//     &__summary,
-//     &__days_you_can_work,
-//     &__hours_you_can_work,
-//     &__specific_days_cb,
-//     &__proficiency,
-//     &__cb_english_proficiency,
-//     &__licence-class,
-//     &__reliable-transport,
-//     &__endorsements {
-//       color: $text-dark-primary;
-//       font-family: $font-family;
-//       font-style: normal;
-//       font-size: $size-font-body-default;
-//       line-height: 160%;
-//       margin-top: $spacing-100;
-//       margin-bottom: $spacing-100;
-//     }
-//   }
+    &__employmentDetails,
+    &__description,
+    &__summary,
+    &__days_you_can_work,
+    &__hours_you_can_work,
+    &__specific_days_cb,
+    &__proficiency,
+    &__cb_english_proficiency,
+    &__licence-class,
+    &__reliable-transport,
+    &__endorsements {
+      color: $text-dark-primary;
+      font-family: $font-family;
+      font-style: normal;
+      font-size: $size-font-body-default;
+      line-height: 160%;
+      margin-top: $spacing-100;
+      margin-bottom: $spacing-100;
+    }
+  }
 
-//   .summary-entry:first-child,
-//   .item:first-child {
-//     padding-top: 0;
-//   }
+  .summary-entry:first-child,
+  .item:first-child {
+    padding-top: 0;
+  }
 
-//   &.field-summary-work-preferences .p-small {
-//     color: $text-dark-primary;
-//   }
+  &.field-summary-work-preferences .p-small {
+    color: $text-dark-primary;
+  }
 
-//   .row.item {
-//     display: flex;
-//     flex-direction: column;
+  .row.item {
+    display: flex;
+    flex-direction: column;
 
-//     .col-md-11,
-//     .col-md-1 {
-//       width: 100%;
-//     }
+    .col-md-11,
+    .col-md-1 {
+      width: 100%;
+    }
 
-//     .summary-entry {
-//       justify-content: space-between;
-//       align-items: center;
-//       flex-wrap: nowrap;
+    .summary-entry {
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
 
-//       &__title {
-//         font-weight: bold;
-//         margin-bottom: 0;
-//       }
+      &__title {
+        font-weight: bold;
+        margin-bottom: 0;
+      }
 
-//       .edit {
-//         margin-top: 0;
-//         text-align: right;
-//       }
-//     }
+      .edit {
+        margin-top: 0;
+        text-align: right;
+      }
+    }
 
-//     @include media('tablet') {
-//       flex-direction: row;
-//       align-items: flex-start;
+    @include media('tablet') {
+      flex-direction: row;
+      align-items: flex-start;
 
-//       .col-md-11,
-//       .col-md-1 {
-//         width: auto;
-//       }
+      .col-md-11,
+      .col-md-1 {
+        width: auto;
+      }
 
-//       .summary-entry {
-//         flex-wrap: wrap;
-//         align-items: flex-start;
-//       }
-//     }
-//   }
-// }
+      .summary-entry {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+    }
+  }
+}
 
-// .field-summary-personal-details {
-//   h2 {
-//     color: pink;
-//   }
+.field-summary-personal-details {
+  h2 {
+    color: pink;
+  }
 
-//   .row {
-//     display: flex;
-//     flex-wrap: wrap;
-//     align-items: flex-start;
-//     gap: $spacing-500;
-//     justify-content: flex-start;
-//   }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: $spacing-500;
+    justify-content: flex-start;
+  }
 
-//   .col-md-4,
-//   .col-md-2,
-//   .col-md-3 {
-//     display: flex;
-//     align-items: flex-start;
-//     gap: $spacing-200;
-//     font-family: $font-family;
-//     font-size: $size-font-body-default;
-//     font-style: normal;
-//     font-weight: $font-weight-bold;
-//     line-height: 160%;
-//     color: $text-dark-primary;
+  .col-md-4,
+  .col-md-2,
+  .col-md-3 {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-200;
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-bold;
+    line-height: 160%;
+    color: $text-dark-primary;
 
-//     i {
-//       display: inline-block;
-//       width: $spacing-450;
-//       height: $spacing-450;
-//       background-repeat: no-repeat;
-//       background-size: contain;
-//       flex-shrink: 0;
-//     }
+    i {
+      display: inline-block;
+      width: $spacing-450;
+      height: $spacing-450;
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex-shrink: 0;
+    }
 
-//     span {
-//       display: inline-block;
-//       line-height: normal;
-//       word-break: break-word;
-//     }
-//   }
+    span {
+      display: inline-block;
+      line-height: normal;
+      word-break: break-word;
+    }
+  }
 
-//   .edit {
-//     display: inline-flex;
-//     align-items: flex-start;
-//     text-align: right;
-//   }
+  .edit {
+    display: inline-flex;
+    align-items: flex-start;
+    text-align: right;
+  }
 
-//   .address i {
-//     background-image: url('/icons/icon-summary-map-blue.svg');
-//   }
-//   .phone i {
-//     background-image: url('/icons/icon-summary-mobile-blue.svg');
-//   }
-//   .email i {
-//     background-image: url('/icons/icon-summary-mail-blue.svg');
-//   }
-// }
+  .address i {
+    background-image: url('/icons/icon-summary-map-blue.svg');
+  }
+  .phone i {
+    background-image: url('/icons/icon-summary-mobile-blue.svg');
+  }
+  .email i {
+    background-image: url('/icons/icon-summary-mail-blue.svg');
+  }
+}
