@@ -50,17 +50,26 @@
                 {
                   "name": "Warning",
                   "value": "warning"
-                },
+                }
+              ]
+            },
+            {
+              "component": "select",
+              "name": "variant",
+              "label": "Variant",
+              "valueType": "string",
+              "value": "text",
+              "options": [
                 {
-                  "name": "primary",
+                  "name": "Primary",
                   "value": "primary"
                 },
                 {
-                  "name": "secondary",
+                  "name": "Secondary",
                   "value": "secondary"
                 },
                 {
-                  "name": "tertiary",
+                  "name": "Tertiary",
                   "value": "tertiary"
                 }
               ]

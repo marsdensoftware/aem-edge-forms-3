@@ -22,7 +22,11 @@ export default function decorate(panelEl, model) {
     legendEl === null || legendEl === void 0 ? void 0 : legendEl.remove();
     const helpType = properties.helpType || 'info';
     const hideIcon = properties.hideIcon;
+    const variant = properties.variant;
     panelEl.classList.add(`${className}--${helpType}`);
+    if (variant) {
+        panelEl.classList.add(`${className}--${variant}`);
+    }
     if (hideIcon) {
         panelEl.classList.add(`${className}--no-icon`);
     }
