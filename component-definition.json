@@ -986,7 +986,31 @@
                     "jcr:title": "Modal Title",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "content": "Modal content goes here",
-                    "visible": false
+                    "visible": false,
+                    "buttons-panel": {
+                      "fieldType": "panel",
+                      "name": "modal-buttons",
+                      "hideTitle": true,
+                      "row": true,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "cancelButton": {
+                        "colspan": 2,
+                        "fieldType": "button",
+                        "name": "cancel-button",
+                        "jcr:title": "Cancel",
+                        "buttonType": "button",
+                        "sling:resourceType": "core/fd/components/form/button/v1/button"
+                      },
+                      "saveButton": {
+                        "colspan": 2,
+                        "colspan-offset": 7,
+                        "fieldType": "button",
+                        "name": "save-button",
+                        "jcr:title": "Save",
+                        "buttonType": "submit",
+                        "sling:resourceType": "core/fd/components/form/button/v1/button"
+                      }
+                    }
                   }
                 }
               }
