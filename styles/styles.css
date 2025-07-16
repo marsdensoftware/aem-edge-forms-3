@@ -50,19 +50,19 @@
     --heading-font-size-xs: 1.125rem;
   }
 } */
-body {
+/* body {
   display: none;
 }
 
 body.appear {
   display: block;
-}
+} */
 /*
 header {
   height: var(--nav-height);
 } */
 
-header .header,
+/* header .header,
 footer .footer {
   visibility: hidden;
 }
@@ -70,7 +70,7 @@ footer .footer {
 header .header[data-block-status='loaded'],
 footer .footer[data-block-status='loaded'] {
   visibility: visible;
-}
+} */
 
 /* h1,
 h2,
