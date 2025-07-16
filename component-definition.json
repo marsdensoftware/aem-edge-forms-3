@@ -1011,7 +1011,7 @@
                       "row": true,
                       "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                       "cancelButton": {
-                        "colspan": 2,
+                        "colspan": "2",
                         "fieldType": "button",
                         "name": "cancel-button",
                         "jcr:title": "Cancel",
@@ -1019,8 +1019,8 @@
                         "sling:resourceType": "core/fd/components/form/button/v1/button"
                       },
                       "saveButton": {
-                        "colspan": 2,
-                        "colspan-offset": 7,
+                        "colspan": "2",
+                        "colspan-offset": "7",
                         "fieldType": "button",
                         "name": "save-button",
                         "jcr:title": "Save",
