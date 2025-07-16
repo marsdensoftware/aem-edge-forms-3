@@ -32,7 +32,7 @@ function updateBackground(wizardEl, container) {
 }
 
 onElementsAddedByClassName('wizard', (wizardEl) => {
-  const container = wizardEl.closest('.wizard')
+  const container = wizardEl.closest('main')
 
   // Set the initial background based on the default active step on page load.
   updateBackground(wizardEl, container)
