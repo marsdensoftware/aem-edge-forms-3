@@ -154,8 +154,8 @@
 }
 
 @mixin heading-h1-override($color) {
-  font-size: 60px;
-  font-weight: 700;
+  font-size: $size-font-h1;
+  font-weight: $font-weight-bold;
   line-height: 130%;
   color: $color;
   background: $color-gradient-blue;
