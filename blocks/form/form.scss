@@ -36,7 +36,8 @@ form:not(.edit-mode) [data-visible='false'] {
   padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
   height: 100%;
-  border-bottom: 1px solid $color-shade-navy-40;
+
+      border-bottom: 1px solid $color-shade-navy-40;
   background-color: $color-white;
 
   @include media('tablet') {
@@ -325,3 +326,17 @@ form .file-wrapper > button {
 .checkbox-wrapper > label {
   order: 1;
 }
+
+
+@mixin heading-h1-override($color) {
+  font-size: $size-font-h1;
+  font-weight: $font-weight-bold;
+  line-height: 130%;
+  color: $color;
+  background: $color-gradient-blue;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+

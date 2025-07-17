@@ -152,15 +152,3 @@
   line-height: 130%;
   color: $color;
 }
-
-@mixin heading-h1-override($color) {
-  font-size: $size-font-h1;
-  font-weight: $font-weight-bold;
-  line-height: 130%;
-  color: $color;
-  background: $color-gradient-blue;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
