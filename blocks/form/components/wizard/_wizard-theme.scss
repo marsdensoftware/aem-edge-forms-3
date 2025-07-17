@@ -1,14 +1,11 @@
 @use '../../../../styles/settings' as *;
+@use '../../../../styles/base' as *;
 
-main {
+.wizard {
   position: relative;
 
   &.wizard--bg-dark {
-    background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
-    );
+    background: linear-gradient(135deg, $color-accent 25%, $color-primary-navy 100%);
     color: $color-white;
 
     .text-wrapper,
@@ -77,11 +74,7 @@ main {
   }
 
   &.wizard--bg-mid {
-    background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
-    );
+    background: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);
   }
 
   &.wizard--bg-dark,
@@ -119,7 +112,7 @@ main {
 
       @include media('desktop') {
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
-        background-position: bottom left;
+        background-position: calc(100% - 120px) left;
       }
     }
   }
@@ -155,7 +148,17 @@ main {
   &.wizard--bg-mid {
     color: $text-primary;
 
-    h1,
+    h1 {
+      font-size: $size-font-h1;
+      font-weight: 700;
+      line-height: 130%;
+      color: $text-primary;
+      background: $color-gradient-blue;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     h2,
     h3 {
       @include heading-default($text-primary);
@@ -168,6 +171,7 @@ main {
     h4,
     h5,
     h6 {
+      font-family: $font-family;
       font-weight: $font-weight-bold;
       font-size: $size-font-h6;
       color: $color-primary-navy;
@@ -176,10 +180,10 @@ main {
     }
 
     .subtitle,
-    .straptitle {
+    .strap-title {
       font-size: $size-font-subtitle;
       color: $text-dark-primary;
-      font-weight: 400;
+      font-weight: normal;
       line-height: 130%;
       margin: 0;
     }
@@ -188,6 +192,7 @@ main {
   p {
     color: $text-dark-primary;
     font-size: $size-font-body-default;
+    font-family: $font-family;
     line-height: 1.6;
     font-weight: 400;
   }
