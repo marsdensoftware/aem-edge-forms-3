@@ -518,7 +518,7 @@ $grid-breakpoints: (
 $container-max-widths: (
   sm: 540px,
   md: 720px,
-  lg: 1190px,
+  lg: 1251px,
   xl: 1200px,
   xxl: 1440px,
 ) !default;
@@ -540,7 +540,7 @@ $grid-row-columns: 6 !default;
 // // Container padding
 
 // $container-padding-x: $grid-gutter-width !default; // ORIGINAL BOOTSTRAP
-$container-padding-x: $spacing-900 !default;
+$container-padding-x: $spacing-600 !default;
 
 // // Components
 // //
