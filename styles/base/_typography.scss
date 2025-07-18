@@ -97,7 +97,7 @@ p {
 /* ------------------------------
    Typography Blocks – Explicit Link & List Styling
 ------------------------------ */
-.typography.p-small.block {
+
   p {
     font-size: $size-font-body-small;
     line-height: 160%;
@@ -126,10 +126,9 @@ p {
   ul li {
     font-size: $size-font-body-small;
     line-height: 160%;
-    margin-bottom: 0.5rem;
     color: $text-primary;
   }
-}
+
 
 .default-content-wrapper a {
   color: $text-accent;
@@ -151,7 +150,6 @@ p {
 ol li,
 ul li {
   @include font-body-default;
-  margin-bottom: 0.5rem;
   color: $text-primary;
 }
 
@@ -184,7 +182,6 @@ ul li {
   ul li {
     font-size: $size-font-body-large;
     line-height: 160%;
-    margin-bottom: 0.5rem;
     color: $text-primary;
   }
 }
@@ -192,11 +189,10 @@ ul li {
 /* ------------------------------
    Subtitle
 ------------------------------ */
-.typography.subtitle.block p {
+.subtitle {
   font-family: $font-family;
   font-size: $size-font-subtitle;
   line-height: 130%;
-  margin: 0 0 40px 0;
   color: $text-dark;
 
   &:last-child {
@@ -216,7 +212,6 @@ ul li {
 
 .strap-title {
   font-size: $size-font-strap-title;
-  margin: 0 0 8px 0;
 
   &:last-child {
     margin-bottom: 0;

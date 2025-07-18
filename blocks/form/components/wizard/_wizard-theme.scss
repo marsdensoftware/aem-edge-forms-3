@@ -1,123 +1,208 @@
+
 @use '../../../../styles/settings' as *;
 
+/* ----------------------------- */
+/* TYPOGRAPHY MIXINS */
+/* ----------------------------- */
+@mixin font-heading-h1 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h1;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-heading-h2 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h2;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-heading-h3 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h3;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-heading-h4 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h4;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-heading-h5 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h5;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-heading-h6 {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $size-font-h6;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+@mixin font-subtitle {
+  font-family: $font-family;
+  font-size: $size-font-subtitle;
+  font-weight: $font-weight-regular;
+  line-height: 130%;
+  margin: 0;
+}
+
+@mixin font-strap-title {
+  font-family: $font-family;
+  font-size: $size-font-strap-title;
+  font-weight: $font-weight-regular;
+  line-height: 130%;
+  margin: 0;
+}
+
+@mixin font-strap-title-small {
+  font-family: $font-family;
+  font-size: $size-font-strap-title-small;
+  font-weight: $font-weight-regular;
+  line-height: 130%;
+  margin: 0;
+}
+
+@mixin font-body-default {
+  font-family: $font-family;
+  font-size: $size-font-body-default;
+  font-weight: $font-weight-regular;
+  line-height: 1.6;
+}
+
+@mixin font-body-large {
+  font-family: $font-family;
+  font-size: $size-font-body-large;
+  font-weight: $font-weight-regular;
+  line-height: 130%;
+  margin: 0;
+}
+
+@mixin font-body-small {
+  font-family: $font-family;
+  font-size: $size-font-body-small;
+  font-weight: $font-weight-regular;
+  line-height: 130%;
+  margin: 0;
+}
+
+/* ----------------------------- */
+/* BACKGROUND PATTERN MIXIN */
+/* ----------------------------- */
+@mixin wizard-pattern-top-right($img) {
+  @include media('tablet') {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 90px;
+    right: 0;
+    width: 360px;
+    height: 388px;
+    background: url(#{$img}) no-repeat top right;
+    background-size: contain;
+  }
+}
+
+/* ----------------------------- */
+/* WIZARD THEMES */
+/* ----------------------------- */
 main {
   position: relative;
 
   &.wizard--bg-dark {
-    background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
-    );
+    background: linear-gradient(135deg, $color-accent 25%, $color-primary-navy 100%);
     color: $color-white;
 
-    .text-wrapper,
-    .number-wrapper,
-    .email-wrapper,
-    .radio-wrapper {
-      label,
-      .field-label {
-        color: $color-white;
-      }
-
-      input,
-      textarea {
-        color: $color-white;
-
-        &::placeholder {
-          color: rgba($color-white, 0.75);
-        }
-      }
-    }
-
-    h1,
-    h2,
-    h3 {
+    h1, h2, h3, h4, h5, h6,
+    p,
+    .subtitle,
+    .strap-title,
+    .strap-title-small,
+    .p-large,
+    .p-small,
+    .text-wrapper label,
+    .text-wrapper .field-label,
+    .number-wrapper label,
+    .number-wrapper .field-label,
+    .email-wrapper label,
+    .email-wrapper .field-label,
+    .radio-wrapper label,
+    .radio-wrapper .field-label {
       color: $color-white;
       background: none;
       background-clip: unset;
       -webkit-background-clip: unset;
       -webkit-text-fill-color: $color-white;
-      font-family: $font-family;
-      margin-bottom: $spacing-600;
-
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
-      }
     }
 
-    h4,
-    h5,
-    h6 {
+    input,
+    textarea {
       color: $color-white;
-      font-family: $font-family;
-      margin-bottom: $spacing-100;
 
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
+      &::placeholder {
+        color: rgba($color-white, 0.75);
       }
     }
 
-    p,
-    .subtitle {
-      color: $color-white;
-    }
-
-    .subtitle {
-      font-style: normal;
-      font-weight: lighter;
-      line-height: 130%;
-      margin: 0;
-
-      p {
-        margin: 0;
-        font-size: $size-font-subtitle;
-      }
-    }
-  }
-
-  &.wizard--bg-mid {
-    background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
-    );
-  }
-
-  &.wizard--bg-dark,
-  &.wizard--bg-mid,
-  &.wizard--bg-light {
     &::after {
-      @include media('tablet') {
-        content: '';
-        position: absolute;
-        display: block;
-        top: 0;
-        right: 0;
-        width: 360px;
-        height: 388px;
-        background-repeat: no-repeat;
-        background-size: contain;
-      }
+      @include wizard-pattern-top-right('/images/mymsd-unity-pattern-top-right.svg');
 
       @include media('desktop') {
         top: auto;
         right: auto;
         left: 0;
-        bottom: 0;
+        bottom: 5.5rem;
+        background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
+        background-position: bottom left;
       }
     }
   }
 
-  &.wizard--bg-dark,
   &.wizard--bg-mid {
+    background: linear-gradient(135deg, $color-shade-blue-10 25%, $color-shade-blue-25 100%);
+    color: $text-primary;
+
+    h1, h2, h3 {
+      background: $color-gradient-blue;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p,
+    .strap-title,
+    .strap-title-small,
+    .p-large,
+    .p-small {
+      color: $text-primary;
+    }
+
+    .subtitle {
+      color: $text-dark;
+    }
+
     &::after {
-      @include media('tablet') {
-        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
-        background-position: top right;
-      }
+      @include wizard-pattern-top-right('/images/mymsd-unity-pattern-top-right.svg');
 
       @include media('desktop') {
+        top: auto;
+        right: auto;
+        left: 0;
+        bottom: 5.5rem;
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
         background-position: bottom left;
       }
@@ -126,69 +211,97 @@ main {
 
   &.wizard--bg-light {
     background: $color-shade-blue-04;
-
-    &::after {
-      @include media('desktop') {
-        background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-        background-position: left bottom;
-        transform: rotate(180deg);
-      }
-    }
-
-    .p-large p {
-      font-size: $size-font-body-large;
-      color: $text-dark-primary;
-      font-weight: normal;
-      font-style: normal;
-      line-height: 130%;
-      margin: 0;
-
-      p {
-        margin: 0;
-        color: $text-primary;
-        font-size: $size-font-body-large;
-      }
-    }
-  }
-
-  &.wizard--bg-light,
-  &.wizard--bg-mid {
     color: $text-primary;
 
-    h1,
-    h2,
-    h3 {
-      @include heading-default($text-primary);
+    h1, h2, h3 {
       background: $color-gradient-blue;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    h4,
-    h5,
-    h6 {
-      font-weight: $font-weight-bold;
-      font-size: $size-font-h6;
-      color: $color-primary-navy;
-      line-height: 130%;
-      letter-spacing: $letter-spacing-default;
+    h4, h5, h6 {
+      color: #134276;
     }
 
+    h1, h2, h3,
+    p,
     .subtitle,
-    .straptitle {
-      font-size: $size-font-subtitle;
+    .strap-title,
+    .strap-title-small,
+    .p-large,
+    .p-small {
+      color: $text-primary;
+    }
+
+    .p-large p {
       color: $text-dark-primary;
-      font-weight: 400;
-      line-height: 130%;
-      margin: 0;
+
+      p {
+        color: $text-primary;
+      }
+    }
+
+    &::after {
+
+
+      @include media('desktop') {
+        content: '';
+        position: absolute;
+        display: block;
+        right: 0;
+        top: 123px;
+        width: 360px;
+        height: 388px;
+        background: url('/images/mymsd-unity-pattern-top-right-light.svg') no-repeat top right;
+        display: block;
+        background-size: contain;
+
+      }
     }
   }
 
-  p {
-    color: $text-dark-primary;
-    font-size: $size-font-body-default;
-    line-height: 1.6;
-    font-weight: 400;
+  /* Typography Includes */
+  h1 { @include font-heading-h1; }
+  h2 { @include font-heading-h2; }
+  h3 { @include font-heading-h3; }
+  h4 { @include font-heading-h4; }
+  h5 { @include font-heading-h5; }
+  h6 { @include font-heading-h6; }
+
+  p { @include font-body-default; }
+  .subtitle { @include font-subtitle; }
+  .strap-title { @include font-strap-title; }
+  .strap-title-small { @include font-strap-title-small; }
+
+  .p-large p { @include font-body-large; }
+  .p-small p { @include font-body-small; }
+
+  h1, h2, h3,
+  h4, h5, h6,
+  p,
+  .subtitle,
+  .strap-title,
+  .strap-title-small,
+  .p-large,
+  .p-small {
+    margin: 0;
+    padding: 0;
   }
 }
+
+/* ----------------------------- */
+/* SHARED TEXT OVERRIDES BY THEME */
+/* ----------------------------- */
+@mixin wizard-theme-text-dark-primary($theme) {
+  main.#{$theme} p,
+  main.#{$theme} .strap-title,
+  main.#{$theme} .strap-title-small,
+  main.#{$theme} .p-large,
+  main.#{$theme} .p-small {
+    color: $text-dark-primary;
+  }
+}
+
+@include wizard-theme-text-dark-primary('wizard--bg-light');
+@include wizard-theme-text-dark-primary('wizard--bg-mid');
