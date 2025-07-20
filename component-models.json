@@ -10810,15 +10810,15 @@
           },
           {
             "name": "Form Header",
-            "value": "form-row--header"
+            "value": "form-panel-header"
           },
           {
-            "name": "Form content",
-            "value": "form-row--content"
+            "name": "Form Content",
+            "value": "form-panel-content"
           },
           {
-            "name": "Form footer",
-            "value": "form-row--footer"
+            "name": "Form Footer",
+            "value": "form-panel-footer"
           }
         ]
       },
@@ -20550,17 +20550,26 @@
               {
                 "name": "Warning",
                 "value": "warning"
-              },
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "variant",
+            "label": "Variant",
+            "valueType": "string",
+            "value": "text",
+            "options": [
               {
-                "name": "primary",
+                "name": "Primary",
                 "value": "primary"
               },
               {
-                "name": "secondary",
+                "name": "Secondary",
                 "value": "secondary"
               },
               {
-                "name": "tertiary",
+                "name": "Tertiary",
                 "value": "tertiary"
               }
             ]
@@ -20597,6 +20606,12 @@
             "component": "boolean",
             "name": "linkOpenInNewTab",
             "label": "Open link in new tab",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "hideIcon",
+            "label": "Hide Icon",
             "valueType": "boolean"
           }
         ]

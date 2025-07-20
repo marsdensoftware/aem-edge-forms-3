@@ -352,6 +352,7 @@ function colSpanDecorator(field, element) {
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
   const defaultDisplay = field['Column Display'] || field.properties?.['display'];
+  const defaultOrder = field['Column Order'] || field.properties?.['d-order'];
 
   // Get responsive colspans from properties
   const responsiveColSpans = {
@@ -380,7 +381,14 @@ function colSpanDecorator(field, element) {
     xxl: field.properties?.['display-xxl']
   }
 
-  console.log(responsiveDisplayOptions);
+  // Get the responsive display orders from properties
+  const responsiveDisplayOrders = {
+    sm: field.properties?.['d-order-sm'],
+    md: field.properties?.['d-order-md'],
+    lg: field.properties?.['d-order-lg'],
+    xl: field.properties?.['d-order-xl'],
+    xxl: field.properties?.['d-order-xxl']
+  }
 
   // Get container classes from properties
   const containerClass = field.properties?.container;
@@ -403,6 +411,11 @@ function colSpanDecorator(field, element) {
       element.classList.add(`d-${defaultDisplay}`);
     }
 
+    // Add the default order value
+    if (defaultOrder) {
+      element.classList.add(`order-${defaultOrder}`);
+    }
+
     // Add responsive colspan classes if defined
     Object.entries(responsiveColSpans).forEach(([size, value]) => {
       if (value) {
@@ -421,6 +434,13 @@ function colSpanDecorator(field, element) {
     Object.entries(responsiveDisplayOptions).forEach(([size, value]) => {
       if (value) {
         element.classList.add(`d-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display order classes if defined
+    Object.entries(responsiveDisplayOrders).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`order-${size}-${value}`);
       }
     });
 

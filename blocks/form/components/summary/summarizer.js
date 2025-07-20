@@ -141,10 +141,14 @@ export class Summarizer {
         }
     }
 
-    static markupFromNameValues(nameValues) {
+    static markupFromNameValues(nameValues, properties) {
 
         const classPrefix = 'summary';
         const entries = [];
+        let tagName = 'div';
+        if (properties && properties.summaryEntryItemsTag) {
+            tagName = properties.summaryEntryItemsTag;
+        }
 
         Object.entries(nameValues).forEach(([name, data]) => {
             if (!data) return;
@@ -152,7 +156,7 @@ export class Summarizer {
             const displayValue = data.displayValue;
 
             if (value) {
-                const result = document.createElement('div');
+                const result = document.createElement(tagName);
                 result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.value = value;
                 result.dataset.name = name;
@@ -164,7 +168,7 @@ export class Summarizer {
             const values = data.values;
             const displayValues = data.displayValues;
             if (values) {
-                const result = document.createElement('div');
+                const result = document.createElement(tagName);
                 result.classList.add(`${classPrefix}-entry__${name}`);
                 result.dataset.values = values;
                 result.innerHTML = displayValues.join(', ');
@@ -189,7 +193,7 @@ export class Summarizer {
         return nameValues;
     }
 
-    static createMarkupObjects(entry) {
+    static createMarkupObjects(entry, properties) {
         let nameValues = Summarizer.getNameValues(entry);
 
         // Apply converters
@@ -199,7 +203,7 @@ export class Summarizer {
             }
         });
 
-        return Summarizer.markupFromNameValues(nameValues);
+        return Summarizer.markupFromNameValues(nameValues, properties);
     }
 
     static fieldToNameValues(element) {
@@ -261,23 +265,31 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `<div class="row summary-entry">{{content}}</div>`;
+    static itemContentTemplate = `<{{summaryEntryTag}} class="row summary-entry">{{content}}</{{summaryEntryTag}}>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
     }
 
-    static getItemContent(fieldset, stepName, showEdit) {
-        const content = Summarizer.renderEntry(fieldset);
+    static getItemContent(fieldset, stepName, properties) {
+        const content = Summarizer.renderEntry(fieldset, properties);
         const entryId = fieldset.dataset.id;
+        const showEdit = properties && properties.showEdit;
+        let summaryEntryTag = 'div';
+
+        if (properties && properties.summaryEntryTag) {
+            summaryEntryTag = properties.summaryEntryTag;
+        }
 
         const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
 
-        return Summarizer.replace(template, { content: content, stepName: stepName, entryId: entryId })
+        return Summarizer.replace(template, { content, stepName, entryId, summaryEntryTag })
     }
 
     static createSummaryFromMarkupObjects(markupObjects) {
-        const result = document.createElement('div');
+        let summaryEntryItemsTag = 'div';
+
+        const result = document.createElement(summaryEntryItemsTag);
 
         markupObjects.forEach(mo => {
             result.append(mo);
@@ -286,8 +298,8 @@ export class Summarizer {
         return result.innerHTML;
     }
 
-    static renderEntry(entry) {
-        const markupObjects = Summarizer.createMarkupObjects(entry);
+    static renderEntry(entry, properties) {
+        const markupObjects = Summarizer.createMarkupObjects(entry, properties);
 
         return Summarizer.createSummaryFromMarkupObjects(markupObjects);
     }
@@ -299,7 +311,7 @@ export class Summarizer {
         const entry = form.querySelector(`[name="${stepName}"]`);
         let content = '';
         if (entry) {
-            content = Summarizer.getItemContent(entry, stepName, properties.showEdit);
+            content = Summarizer.getItemContent(entry, stepName, properties);
         }
 
         return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: content });
@@ -372,9 +384,9 @@ export class Summarizer {
 
         // Read other languages
         const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
-        const showEdit = true;
+        properties.showEdit = true;
         otherLanguages.forEach(otherLanguage => {
-            languageContent = Summarizer.getItemContent(otherLanguage, 'panel_other_languages', showEdit);
+            languageContent = Summarizer.getItemContent(otherLanguage, 'panel_other_languages', properties);
             if (languageContent) {
                 languagesContent.push(languageContent);
             }
@@ -438,10 +450,16 @@ export class Summarizer {
     }
 
     static work_skills(el, properties) {
+        properties.summaryEntryTag = 'ul';
+        properties.summaryEntryItemsTag = 'li';
+
         el.innerHTML = Summarizer.defaultSummarizer('panel_work_skills', el, properties);
     }
 
     static skills(el, properties) {
+        properties.summaryEntryTag = 'ul';
+        properties.summaryEntryItemsTag = 'li';
+
         el.innerHTML = Summarizer.defaultSummarizer('panel_skills', el, properties);
     }
 

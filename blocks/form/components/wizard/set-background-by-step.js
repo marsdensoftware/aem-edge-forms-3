@@ -1,8 +1,8 @@
-import { onElementsAddedByClassName } from '../utils.js';
+import { onElementsAddedByClassName } from '../utils.js'
 
 // Define the possible background classes in a constant for clarity and reuse.
-const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light'];
-const DEFAULT_BG_CLASS = 'wizard--bg-light';
+const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
+const DEFAULT_BG_CLASS = 'wizard--bg-light'
 
 /**
  * Finds the background class on the current wizard step and applies it to the container,
@@ -12,31 +12,33 @@ const DEFAULT_BG_CLASS = 'wizard--bg-light';
  */
 function updateBackground(wizardEl, container) {
   // 1. Find the currently active step by its class.
-  const currentStepEl = wizardEl.querySelector('.current-wizard-step');
-  if (!currentStepEl) return;
+  const currentStepEl = wizardEl.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
 
   // 2. Find which of the defined background classes is present on the active step.If none is found, use the default.
   //    This uses short-circuiting: if currentStepEl is null, it immediately uses the default.
   const newBgClass =
-    (currentStepEl && BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) || DEFAULT_BG_CLASS;
+    (currentStepEl &&
+      BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) ||
+    DEFAULT_BG_CLASS
 
   // 3. Clear any pre-existing background classes from the container for a clean slate.
-  container.classList.remove(...BG_CLASSES);
+  container.classList.remove(...BG_CLASSES)
 
   // 4. If a background class was found on the step, apply it to the container.
   if (newBgClass) {
-    container.classList.add(newBgClass);
+    container.classList.add(newBgClass)
   }
 }
 
 onElementsAddedByClassName('wizard', (wizardEl) => {
-  const container = wizardEl.closest('main');
+  const container = wizardEl.closest('main')
 
   // Set the initial background based on the default active step on page load.
-  updateBackground(wizardEl, container);
+  updateBackground(wizardEl, container)
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
-    updateBackground(wizardEl, container);
-  });
-});
+    updateBackground(wizardEl, container)
+  })
+})
