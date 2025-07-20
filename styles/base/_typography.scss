@@ -65,14 +65,11 @@ p {
   font-size: $size-font-body-default;
 }
 
-.form-wrapper p {
-  margin: 0;
-}
-
-/* ------------------------------
-   Form Lists
------------------------------- */
 .form-wrapper {
+  p {
+    margin: 0;
+  }
+
   ol,
   ul {
     margin: 0;
@@ -81,67 +78,29 @@ p {
 }
 
 /* ------------------------------
-   Paragraph Small
+   Paragraph Variants
 ------------------------------ */
 .p-small {
   font-size: $size-font-body-small;
 }
 
-/* ------------------------------
-   Paragraph Large
------------------------------- */
 .p-large {
   font-size: $size-font-body-large;
 }
 
 /* ------------------------------
-   Typography Blocks – Explicit Link & List Styling
+   Typography Blocks – Link & List Styling
 ------------------------------ */
-
-  p {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  a {
-    font-size: $size-font-body-small;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  ol li,
-  ul li {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-
-.default-content-wrapper a {
-  color: $text-accent;
+a {
+  font-size: $size-font-body-small;
   font-weight: 500;
+  color: $text-accent;
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 0.2s ease;
 
   &:hover,
-  &:focus {
-    color: $text-dark;
-  }
-
+  &:focus,
   &:visited {
     color: $text-dark;
   }
@@ -151,6 +110,24 @@ ol li,
 ul li {
   @include font-body-default;
   color: $text-primary;
+  font-size: $size-font-body-small;
+  line-height: 160%;
+}
+
+.default-content-wrapper {
+  a {
+    color: $text-accent;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus,
+    &:visited {
+      color: $text-dark;
+    }
+  }
 }
 
 .typography.p-large.block {
@@ -169,10 +146,7 @@ ul li {
     transition: color 0.2s ease;
 
     &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
+    &:focus,
     &:visited {
       color: $text-dark;
     }
@@ -201,7 +175,7 @@ ul li {
 }
 
 /* ------------------------------
-   Strap Title Default & Small
+   Strap Titles
 ------------------------------ */
 .strap-title,
 .strap-title-small {

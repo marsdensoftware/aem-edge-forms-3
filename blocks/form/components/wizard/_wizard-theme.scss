@@ -2,104 +2,6 @@
 @use '../../../../styles/settings' as *;
 
 /* ----------------------------- */
-/* TYPOGRAPHY MIXINS */
-/* ----------------------------- */
-@mixin font-heading-h1 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h1;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h2 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h2;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h3 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h3;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h4 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h4;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h5 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h5;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h6 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h6;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-subtitle {
-  font-family: $font-family;
-  font-size: $size-font-subtitle;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-strap-title {
-  font-family: $font-family;
-  font-size: $size-font-strap-title;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-strap-title-small {
-  font-family: $font-family;
-  font-size: $size-font-strap-title-small;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-body-default {
-  font-family: $font-family;
-  font-size: $size-font-body-default;
-  font-weight: $font-weight-regular;
-  line-height: 1.6;
-}
-
-@mixin font-body-large {
-  font-family: $font-family;
-  font-size: $size-font-body-large;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-body-small {
-  font-family: $font-family;
-  font-size: $size-font-body-small;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-/* ----------------------------- */
 /* BACKGROUND PATTERN MIXIN */
 /* ----------------------------- */
 @mixin wizard-pattern-top-right($img) {
@@ -164,7 +66,7 @@ main {
         top: auto;
         right: auto;
         left: 0;
-        bottom: 5.5rem;
+        bottom: 88px;
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
         background-position: bottom left;
       }
@@ -202,7 +104,7 @@ main {
         top: auto;
         right: auto;
         left: 0;
-        bottom: 5.5rem;
+        bottom: 88px;
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
         background-position: bottom left;
       }
@@ -252,7 +154,7 @@ main {
         right: 0;
         top: 123px;
         width: 360px;
-        height: 388px;
+        height: 88px;
         background: url('/images/mymsd-unity-pattern-top-right-light.svg') no-repeat top right;
         display: block;
         background-size: contain;
