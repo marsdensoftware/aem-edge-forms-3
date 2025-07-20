@@ -1,0 +1,70 @@
+@use '../../styles/settings' as *;
+
+main > .section.columns-container:nth-of-type(1) {
+  background: linear-gradient(
+                  135deg,
+                  $color-primary-dark-navy 25%,
+                  $color-primary-navy 100%
+  );
+
+  color: $color-white;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: lighten($color-white, 10%);
+    }
+  }
+}
+
+main > .section.columns-container:nth-of-type(2) {
+  background-color: $color-primary-navy;
+  background-image: url('/images/website-footer-repeating-petals.svg');
+  background-repeat: repeat;
+  background-position: top left;
+  background-size: auto; // or 'contain', 'cover', or a specific size like '200px'
+  color: $color-white;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: lighten($color-white, 10%);
+    }
+  }
+}
+
+
+main > .section.columns-container:nth-of-type(3) {
+  background-color: $color-primary-dark-navy;
+  color: $color-white;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: lighten($color-white, 10%);
+    }
+  }
+}
+
+
+
+footer a {
+  color: var(--Shades-Blues-Blue-40, #99CAE9);
+  text-align: center;
+
+  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
+  font-size: var(--Typography-Sizes-Components-Button-small, 17px);
+  font-style: normal;
+  font-weight: var(--Typography-Font-weight-Medium, 500);
+  line-height: 133%; // 22.61px
+  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+}
