@@ -12,13 +12,14 @@ main > .section.columns-container:nth-of-type(1) {
   );
   color: $color-white;
 
+
+
   a {
     display: inline-flex;
-    align-items: center;
+    justify-content: left;
+    width: 100%;
     gap: 0.5rem;
     color: var(--Shades-Blues-Blue-40, #99CAE9);
-    text-align: center;
-
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
@@ -40,6 +41,14 @@ main > .section.columns-container:nth-of-type(1) {
     &:focus {
       color: lighten($color-white, 10%);
     }
+
+
+    .section.columns-container h5 {
+      color: $color-shade-navy-40;
+    }
+
+
+
   }
 }
 
@@ -56,7 +65,6 @@ main > .section.columns-container:nth-of-type(2) {
 
   a {
     color: $color-white;
-    text-decoration: underline;
 
     &:hover,
     &:focus {
@@ -71,10 +79,6 @@ main > .section.columns-container:nth-of-type(2) {
 main > .section.columns-container:nth-of-type(3) {
   background-color: $color-primary-dark-navy;
   color: $color-white;
-
-  h5 {
-    color: $color-shade-navy-40;
-  }
 
   .columns.block.columns-1-cols > div > div {
     display: flex;
@@ -97,7 +101,7 @@ main > .section.columns-container:nth-of-type(3) {
     font-weight: $font-weight-medium;
     line-height: 133%;
     letter-spacing: $letter-spacing-default;
-    text-decoration: underline;
+    text-decoration: none;
 
     &:hover,
     &:focus {
@@ -196,4 +200,73 @@ main > .section.columns-container:nth-of-type(2) .button-container,
 main > .section.columns-container:nth-of-type(3) .button-container {
   all: unset;
 }
+
+/* ----------------------------- */
+/* GLOBAL FOOTER <p> COLOR OVERRIDE */
+/* ----------------------------- */
+main > .section.columns-container:nth-of-type(1) p,
+main > .section.columns-container:nth-of-type(2) p,
+main > .section.columns-container:nth-of-type(3) p {
+  color: $color-shade-navy-20;
+}
+
+/* ----------------------------- */
+/* IMAGE ALIGNMENT PER SECTION */
+/* ----------------------------- */
+
+/* Section 1 - Align images left */
+main > .section.columns-container:nth-of-type(1) {
+  img,
+  picture,
+  picture > img,
+  .columns-img-col,
+  .columns-img-col picture,
+  .columns-img-col picture > img {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: auto;
+  }
+}
+
+/* Section 2 - Align images left */
+main > .section.columns-container:nth-of-type(2) {
+  img,
+  picture,
+  picture > img,
+  .columns-img-col,
+  .columns-img-col picture,
+  .columns-img-col picture > img {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: auto;
+  }
+}
+
+/* Section 3 - Align images right */
+main > .section.columns-container:nth-of-type(3) {
+  img,
+  picture,
+  picture > img,
+  .columns-img-col,
+  .columns-img-col picture,
+  .columns-img-col picture > img {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: auto;
+  }
+}
+
+
 
