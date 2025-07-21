@@ -8,10 +8,16 @@
   }
 }
 
+// Allow more spacing at the bottom
+// So the content underneath the footer
+// Can be scroll through
+$content-bottom-spacing: $spacing-700 + $footer-height;
+$content-bottom-spacing-desktop: $spacing-800 + $footer-height-desktop;
+
 .form-panel-content {
-  padding: 0 0 $spacing-700;
+  padding: 0 0 $content-bottom-spacing;
 
   @include media('desktop') {
-    padding: 0 0 $spacing-800;
+    padding: 0 0 $content-bottom-spacing-desktop;
   }
 }
