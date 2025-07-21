@@ -226,34 +226,3 @@ ul li {
 .strap-title-small {
   font-size: $size-font-strap-title-small;
 }
-
-/* ------------------------------
-   Form Hero Intro Subtitle
------------------------------- */
-.wizard--bg-dark .subtitle {
-  font-style: normal;
-  font-weight: lighter;
-  line-height: 130%;
-  margin: 0;
-
-  p {
-    margin: 0;
-    color: $text-white;
-    font-size: $size-font-subtitle;
-  }
-}
-
-.wizard--bg-light .p-large p {
-  font-size: $size-font-body-large;
-  color: $text-dark-primary;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 130%;
-  margin: 0;
-
-  p {
-    margin: 0;
-    color: $text-primary;
-    font-size: $size-font-body-large;
-  }
-}

@@ -145,3 +145,10 @@
     color: $color-feedback-red;
   }
 }
+
+@mixin heading-default($color) {
+  font-size: $size-font-h4;
+  font-weight: $font-weight-bold;
+  line-height: 130%;
+  color: $color;
+}
