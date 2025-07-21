@@ -1,0 +1,17 @@
+@use '../../styles/settings' as *;
+
+.form-panel-header {
+  padding: $spacing-500 0;
+
+  @include media('desktop') {
+    padding: $spacing-700 0;
+  }
+}
+
+.form-panel-content {
+  padding: 0 0 $spacing-700;
+
+  @include media('desktop') {
+    padding: 0 0 $spacing-800;
+  }
+}
