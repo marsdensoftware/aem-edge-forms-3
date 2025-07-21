@@ -31800,6 +31800,28 @@
     ]
   },
   {
+    "id": "list",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "style",
+        "value": "",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Item style A",
+            "value": "list-item-style-a"
+          },
+          {
+            "name": "Item style B",
+            "value": "list-item-style-b"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "listitem",
     "fields": [
       {
