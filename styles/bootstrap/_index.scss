@@ -2,22 +2,22 @@
 /// https://getbootstrap.com/docs/5.3/layout/grid/
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
-@import 'functions';
+// @use 'functions';
 
 // 2. Include any default variable overrides here
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
-@import 'variables';
-@import 'variables-dark';
+// @use 'variables';
+// @use 'variables-dark';
 
 // 4. Include any default map overrides here
 
 // 5. Include remainder of required parts
-@import 'maps';
-@import 'mixins';
-@import 'root';
+// @use 'maps';
+// @use 'mixins';
+// @use 'root';
 
 // 6. Include any other optional stylesheet partials as desired; list below is not inclusive of all available stylesheets
-@import 'containers';
-@import 'grid';
-@import 'utilities';
+@use 'containers';
+@use 'grid';
+@use 'utilities';
