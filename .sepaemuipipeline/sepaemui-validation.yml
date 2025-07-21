@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+      - '*' # to trigger this pipeline on changes to all branches
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  # Sync code with Github
+  
+  # Build steps
+  - stage: Build
+    jobs:
+      - job:
+        steps:
+          - script: |
+              npm ci
+              npm run build:css
+            displayName: Build CSS
+          - publish: $(System.DefaultWorkingDirectory)/styles
+            artifact: CSSBuilt
+          - download: current
+            artifact: CSSBuilt
+            patterns: '**/styles/main.css'
