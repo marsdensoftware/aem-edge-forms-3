@@ -132,53 +132,6 @@ $size-font-label-subtitle: clamp(15px, 1.25vw, 17px);
   margin: 0;
 }
 
-
-// Mixins
-@mixin heading-level-1 {
-  font-size: $size-font-h1;
-  line-height: 105%;
-}
-
-@mixin heading-level-2 {
-  font-size: $size-font-h2;
-  line-height: 110%;
-}
-
-@mixin heading-level-3 {
-  font-size: $size-font-h3;
-  line-height: 115%;
-}
-
-@mixin heading-level-4 {
-  font-size: $size-font-h4;
-  line-height: 120%;
-}
-
-@mixin heading-level-5 {
-  font-size: $size-font-h5;
-  line-height: 125%;
-}
-
-@mixin heading-level-6 {
-  font-size: $size-font-h6;
-  line-height: 130%;
-}
-
-@mixin font-body-default {
-  font-size: $size-font-body-default;
-  line-height: 160%;
-}
-
-@mixin font-body-small {
-  font-size: $size-font-body-small;
-  line-height: 160%;
-}
-
-@mixin font-body-large {
-  font-size: $size-font-body-large;
-  line-height: 160%;
-}
-
 @mixin font-link-small {
   font-size: $size-font-body-small;
   line-height: 160%;
