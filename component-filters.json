@@ -91,5 +91,9 @@
   {
     "id": "jobseekerintro",
     "components": null
+  },
+  {
+    "id": "list",
+    "components": null
   }
 ]
