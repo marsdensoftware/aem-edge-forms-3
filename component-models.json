@@ -31803,11 +31803,11 @@
     "id": "list",
     "fields": [
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "testnumber",
+        "component": "richtext",
+        "name": "text",
         "value": "",
-        "label": "Test Number"
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
