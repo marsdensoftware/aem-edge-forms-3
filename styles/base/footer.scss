@@ -1,17 +1,40 @@
+
 @use '../../styles/settings' as *;
 
+/* ----------------------------- */
+/* SECTION 1 - DARK GRADIENT BACKGROUND + ICON LINKS */
+/* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) {
   background: linear-gradient(
                   135deg,
                   $color-primary-dark-navy 25%,
                   $color-primary-navy 100%
   );
-
   color: $color-white;
 
   a {
-    color: $color-white;
-    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--Shades-Blues-Blue-40, #99CAE9);
+    text-align: center;
+
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: $letter-spacing-default;
+    text-decoration: none;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url('/images/footer-icon-blue-arrow-bend-right.svg') no-repeat center;
+      background-size: contain;
+    }
 
     &:hover,
     &:focus {
@@ -20,12 +43,15 @@ main > .section.columns-container:nth-of-type(1) {
   }
 }
 
+/* ----------------------------- */
+/* SECTION 2 - NAVY + REPEATING SVG */
+/* ----------------------------- */
 main > .section.columns-container:nth-of-type(2) {
   background-color: $color-primary-navy;
   background-image: url('/images/website-footer-repeating-petals.svg');
   background-repeat: repeat;
   background-position: top left;
-  background-size: auto; // or 'contain', 'cover', or a specific size like '200px'
+  background-size: auto;
   color: $color-white;
 
   a {
@@ -39,32 +65,135 @@ main > .section.columns-container:nth-of-type(2) {
   }
 }
 
-
+/* ----------------------------- */
+/* SECTION 3 - DARK NAVY SOLID */
+/* ----------------------------- */
 main > .section.columns-container:nth-of-type(3) {
   background-color: $color-primary-dark-navy;
   color: $color-white;
 
+  h5 {
+    color: $color-shade-navy-40;
+  }
+
+  .columns.block.columns-1-cols > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-300;
+  }
+
+  .button-container {
+    margin: 0;
+    display: inline-block;
+  }
+
   a {
-    color: $color-white;
+    color: $color-shade-blue-40;
+    text-align: left;
+
+    font-family: $font-family;
+    font-size: $size-font-body-default;
+    font-style: normal;
+    font-weight: $font-weight-medium;
+    line-height: 133%;
+    letter-spacing: $letter-spacing-default;
     text-decoration: underline;
 
     &:hover,
     &:focus {
-      color: lighten($color-white, 10%);
+      color: lighten($color-shade-blue-40, 10%);
     }
   }
 }
 
-
-
+/* ----------------------------- */
+/* GENERAL FOOTER <a> STYLING */
+/* ----------------------------- */
 footer a {
-  color: var(--Shades-Blues-Blue-40, #99CAE9);
-  text-align: center;
+  color: $color-shade-blue-40;
+  text-align: left;
 
-  font-family: var(--Typography-Font-family-Primary-font, "Atkinson Hyperlegible Next");
-  font-size: var(--Typography-Sizes-Components-Button-small, 17px);
+  font-family: $font-family;
+  font-size: $size-font-body-default;
   font-style: normal;
-  font-weight: var(--Typography-Font-weight-Medium, 500);
-  line-height: 133%; // 22.61px
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
+  font-weight: $font-weight-medium;
+  line-height: 133%;
+  letter-spacing: $letter-spacing-default;
 }
+
+footer h5 {
+  color: $color-shade-navy-40;
+}
+
+
+/* ----------------------------- */
+/* GLOBAL ALIGNMENT OVERRIDES FOR FOOTER */
+/* ----------------------------- */
+footer, footer * {
+  text-align: left !important;
+}
+
+footer img {
+  display: block;
+  margin: 0;
+  text-align: left;
+}
+
+/* ----------------------------- */
+/* SECTION 2 - MATCH SECTION 1 LINK STYLES */
+/* ----------------------------- */
+main > .section.columns-container:nth-of-type(2) a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: $color-shade-blue-40;
+  text-align: left;
+
+  font-family: $font-family;
+  font-size: $size-font-body-default;
+  font-style: normal;
+  font-weight: $font-weight-medium;
+  line-height: 133%;
+  letter-spacing: $letter-spacing-default;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('/images/footer-icon-blue-arrow-bend-right.svg') no-repeat center;
+    background-size: contain;
+  }
+
+  &:hover,
+  &:focus {
+    color: lighten($color-white, 10%);
+  }
+}
+
+
+/* ----------------------------- */
+/* GLOBAL ALIGNMENT FOR ALL FOOTER IMAGES */
+/* ----------------------------- */
+footer img,
+footer picture,
+footer picture > img,
+footer .columns-img-col,
+footer .columns-img-col picture,
+footer .columns-img-col picture > img {
+  display: block;
+  margin: 0;
+  text-align: left;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+main > .section.columns-container:nth-of-type(1) .button-container,
+main > .section.columns-container:nth-of-type(2) .button-container,
+main > .section.columns-container:nth-of-type(3) .button-container {
+  all: unset;
+}
+
