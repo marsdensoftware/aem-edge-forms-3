@@ -31803,6 +31803,13 @@
     "id": "list",
     "fields": [
       {
+        "component": "text",
+        "valueType": "number",
+        "name": "testnumber",
+        "value": "",
+        "label": "Test Number"
+      },
+      {
         "component": "multiselect",
         "name": "style",
         "value": "",
