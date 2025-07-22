@@ -1,14 +1,20 @@
+/* ----------------------------- */
+/* FONT FAMILY + BASE SIZE */
+/* ----------------------------- */
 $font-family: 'Atkinson Hyperlegible Next', sans-serif;
 $size-font-base: 16px;
 
-// Font Weights
+/* ----------------------------- */
+/* FONT WEIGHTS + LETTER SPACING */
+/* ----------------------------- */
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
-
-// Letter Spacing
 $letter-spacing-default: 0px;
 
+/* ----------------------------- */
+/* TYPE SCALE */
+/* ----------------------------- */
 /* Headings */
 $size-font-h1: clamp(40px, 5.5vw, 60px);
 $size-font-h2: clamp(36px, 5vw, 48px);
@@ -17,144 +23,90 @@ $size-font-h4: clamp(24px, 3.5vw, 32px);
 $size-font-h5: clamp(20px, 2.75vw, 24px);
 $size-font-h6: clamp(18px, 2.25vw, 20px);
 
-// Subtitle
+/* Subtitle + Strap Titles */
 $size-font-subtitle: clamp(24px, 4vw, 32px);
-
-// Strap Titles
 $size-font-strap-title: clamp(20px, 2.8vw, 24px);
 $size-font-strap-title-small: clamp(14px, 2.2vw, 16px);
 
-// Body Text
+/* Body Text */
 $size-font-body-large: clamp(17px, 1.5vw, 20px);
 $size-font-body-default: clamp(15px, 1.25vw, 17px);
 $size-font-body-small: clamp(12px, 1.1vw, 14px);
 
-// Labels
+/* Labels + Forms */
 $size-font-label-title: clamp(17px, 1.5vw, 20px);
 $size-font-label-subtitle: clamp(15px, 1.25vw, 17px);
-
-
-/* ----------------------------- */
-/* TYPOGRAPHY MIXINS */
-/* ----------------------------- */
-@mixin font-heading-h1 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h1;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h2 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h2;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h3 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h3;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h4 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h4;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h5 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h5;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-heading-h6 {
-  font-family: $font-family;
-  font-weight: $font-weight-bold;
-  font-size: $size-font-h6;
-  line-height: 130%;
-  letter-spacing: $letter-spacing-default;
-}
-
-@mixin font-subtitle {
-  font-family: $font-family;
-  font-size: $size-font-subtitle;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-strap-title {
-  font-family: $font-family;
-  font-size: $size-font-strap-title;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-strap-title-small {
-  font-family: $font-family;
-  font-size: $size-font-strap-title-small;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-body-default {
-  font-family: $font-family;
-  font-size: $size-font-body-default;
-  font-weight: $font-weight-regular;
-  line-height: 1.6;
-}
-
-@mixin font-body-large {
-  font-family: $font-family;
-  font-size: $size-font-body-large;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-body-small {
-  font-family: $font-family;
-  font-size: $size-font-body-small;
-  font-weight: $font-weight-regular;
-  line-height: 130%;
-  margin: 0;
-}
-
-@mixin font-link-small {
-  font-size: $size-font-body-small;
-  line-height: 160%;
-  text-decoration: underline;
-}
-
-@mixin font-link-default {
-  font-size: $size-font-body-default;
-  line-height: 160%;
-  text-decoration: underline;
-}
-
-@mixin font-link-large {
-  font-size: $size-font-body-default;
-  line-height: 160%;
-  text-decoration: underline;
-}
-
-// Form Inputs and Buttons
+$size-font-label: clamp(18px, 1.25vw, 20px);
 $size-font-button-default: clamp(18px, 1.25vw, 20px);
 $size-font-button-small: clamp(16px, 1.1vw, 18px);
 $size-font-error-link: clamp(15px, 1.1vw, 18px);
 $size-font-error-message: clamp(12px, 1vw, 14px);
 $size-font-hint: clamp(15px, 1.1vw, 18px);
 $size-font-input-text: clamp(18px, 1.25vw, 20px);
-$size-font-label: clamp(18px, 1.25vw, 20px);
+
+/* ----------------------------- */
+/* MIXINS */
+/* ----------------------------- */
+
+/* Headings */
+@mixin font-heading($size) {
+  font-weight: $font-weight-bold;
+  font-size: $size;
+  line-height: 130%;
+  letter-spacing: $letter-spacing-default;
+}
+
+/* Legacy heading mixins for backward compatibility */
+@mixin heading-level-1 { @include font-heading($size-font-h1); }
+@mixin heading-level-2 { @include font-heading($size-font-h2); }
+@mixin heading-level-3 { @include font-heading($size-font-h3); }
+@mixin heading-level-4 { @include font-heading($size-font-h4); }
+@mixin heading-level-5 { @include font-heading($size-font-h5); }
+@mixin heading-level-6 { @include font-heading($size-font-h6); }
+
+/* Body & Supporting Styles */
+@mixin font-style($size, $line-height: 130%, $margin: 0) {
+  font-size: $size;
+  font-weight: $font-weight-regular;
+  line-height: $line-height;
+  margin: $margin;
+}
+
+/* Optional legacy mixins for backward compatibility */
+@mixin font-body-default { @include font-style($size-font-body-default, 1.6, null); }
+@mixin font-body-large   { @include font-style($size-font-body-large); }
+@mixin font-body-small   { @include font-style($size-font-body-small); }
+@mixin font-subtitle     { @include font-style($size-font-subtitle); }
+@mixin font-strap-title  { @include font-style($size-font-strap-title); }
+@mixin font-strap-title-small { @include font-style($size-font-strap-title-small); }
+
+/* Link styles */
+@mixin font-link($size) {
+  font-size: $size;
+  line-height: 160%;
+  text-decoration: underline;
+}
+
+@mixin font-link-small   { @include font-link($size-font-body-small); }
+@mixin font-link-default { @include font-link($size-font-body-default); }
+@mixin font-link-large   { @include font-link($size-font-body-default); }
+
+/* ----------------------------- */
+/* GLOBAL DEFAULTS */
+/* ----------------------------- */
+h1 { @include font-heading($size-font-h1); }
+h2 { @include font-heading($size-font-h2); }
+h3 { @include font-heading($size-font-h3); }
+h4 { @include font-heading($size-font-h4); }
+h5 { @include font-heading($size-font-h5); }
+h6 { @include font-heading($size-font-h6); }
+
+.subtitle           { @include font-style($size-font-subtitle); }
+.strap-title        { @include font-style($size-font-strap-title); }
+.strap-title-small  { @include font-style($size-font-strap-title-small); }
+.body-default       { @include font-style($size-font-body-default, 1.6, null); }
+.body-large         { @include font-style($size-font-body-large); }
+.body-small         { @include font-style($size-font-body-small); }
+.link-small         { @include font-link($size-font-body-small); }
+.link-default       { @include font-link($size-font-body-default); }
+.link-large         { @include font-link($size-font-body-default); }
