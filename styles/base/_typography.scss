@@ -65,21 +65,6 @@ p {
   font-size: $size-font-body-default;
 }
 
-.form-wrapper p {
-  margin: 0;
-}
-
-/* ------------------------------
-   Form Lists
------------------------------- */
-.form-wrapper {
-  ol,
-  ul {
-    margin: 0;
-    padding: 0 0 0 2rem;
-  }
-}
-
 /* ------------------------------
    Paragraph Small
 ------------------------------ */
@@ -92,43 +77,6 @@ p {
 ------------------------------ */
 .p-large {
   font-size: $size-font-body-large;
-}
-
-/* ------------------------------
-   Typography Blocks – Explicit Link & List Styling
------------------------------- */
-.typography.p-small.block {
-  p {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  a {
-    font-size: $size-font-body-small;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  ol li,
-  ul li {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
 }
 
 .default-content-wrapper a {
@@ -151,57 +99,8 @@ p {
 ol li,
 ul li {
   @include font-body-default;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: $text-primary;
-}
-
-.typography.p-large.block {
-  p {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  a {
-    font-size: $size-font-body-large;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  ol li,
-  ul li {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
-}
-
-/* ------------------------------
-   Subtitle
------------------------------- */
-.typography.subtitle.block p {
-  font-family: $font-family;
-  font-size: $size-font-subtitle;
-  line-height: 130%;
-  margin: 0 0 40px 0;
-  color: $text-dark;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
 
 /* ------------------------------
