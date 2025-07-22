@@ -31829,8 +31829,7 @@
         "numberMax": 100,
         "name": "pagesize",
         "value": 25,
-        "label": "Page size",
-        "hidden": true
+        "label": "Page size"
       },
       {
         "component": "multiselect",
