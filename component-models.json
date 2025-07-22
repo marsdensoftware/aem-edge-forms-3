@@ -31832,8 +31832,8 @@
         "label": "Page size"
       },
       {
-        "component": "multiselect",
-        "name": "multiselect",
+        "component": "select",
+        "name": "select-output",
         "label": "Item type",
         "valueType": "string",
         "options": [
