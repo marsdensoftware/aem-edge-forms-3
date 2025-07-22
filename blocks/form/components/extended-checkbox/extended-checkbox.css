@@ -1,0 +1,42 @@
+/*
+ * Styles for the Extended Checkbox component.
+ */
+
+/* Target labels that have a description to apply flex layout. */
+.field-main-checkbox .field-label {
+  display: flex;
+  flex-direction: column; /* Stacks the text and description vertically */
+  align-items: flex-start; /* Aligns items to the start of the cross axis */
+  gap: 4px; /* Adds a small space between the label text and description */
+}
+
+/* Style the main text span of the checkbox label. */
+.field-main-checkbox .field-label .text {
+  font-weight: normal;
+}
+
+/* Style the new description span. */
+.field-main-checkbox .field-label .desc {
+  font-size: var(--body-font-size-s); /* Use a smaller font size for the description */
+  color: var(--text-color-secondary, #555); /* Use a secondary text color */
+  line-height: 1.4;
+}
+
+.checkbox-wrapper .field-main-checkbox label::before {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top: 1.8rem;
+  transform: translateY(-50%);
+  display: block;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 2px solid #a1b3c8;
+  border-radius: 8px;
+  background-color: transparent;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60% 60%;
+  transition: all 0.1s ease-in-out;
+}
