@@ -59,13 +59,6 @@
             { "name": "Option 1", "value": "option1" },
             { "name": "Option 2", "value": "option2" }
           ]
-        },
-        {
-          "component": "text",
-          "valueType": "number",
-          "name": "testnumber",
-          "value": "",
-          "label": "Test Number"
         }
       ]
     }

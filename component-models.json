@@ -31846,13 +31846,6 @@
             "value": "option2"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "number",
-        "name": "testnumber",
-        "value": "",
-        "label": "Test Number"
       }
     ]
   },
