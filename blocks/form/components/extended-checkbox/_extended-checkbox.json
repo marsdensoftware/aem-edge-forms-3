@@ -91,7 +91,23 @@
           "collapsible": false,
           "fields": [
             {
-              "...": "../../models/form-common/_basic-select-fields.json#/fields"
+              "...": "../../models/form-common/_basic-input-fields.json#/fields"
+            },
+            {
+              "component": "boolean",
+              "name": "withIcon",
+              "label": "Enable Icon",
+              "valueType": "boolean",
+              "value": false
+            },
+            {
+              "component": "text",
+              "name": "enumIconNames",
+              "label": "Icon",
+              "description": "Enter the name of the icon. list-search",
+              "multi": true,
+              "value": "",
+              "condition": { "===": [{"var" : "withIcon"}, true] }
             },
             {
               "component": "select",
