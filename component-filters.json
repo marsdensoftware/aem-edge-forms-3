@@ -91,5 +91,11 @@
   {
     "id": "jobseekerintro",
     "components": null
+  },
+  {
+    "id": "list",
+    "components": [
+      "listitem"
+    ]
   }
 ]
