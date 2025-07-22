@@ -92,43 +92,14 @@
     }
   }
 
-  // Icon alignment for image and text
-  .field-wrapper.row {
-    display: flex;
-    align-items: center;
-    gap: $spacing-300;
-
-    .image-wrapper {
-      display: flex;
-      align-items: center;
-
-      img {
-        display: block;
-        height: auto;
-        max-width: 100%;
-      }
-    }
-
-    .plain-text-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      h6,
-      p {
-        margin: 0;
-      }
-    }
-  }
-
   @media (max-width: 743px) {
-    .field-wrapper.row {
+    .panel-formcontextualhelp__header {
       flex-direction: column;
       align-items: flex-start;
+    }
 
-      .plain-text-wrapper {
-        margin-top: $spacing-300;
-      }
+    .panel-formcontextualhelp__icon {
+      margin-bottom: $spacing-200;
     }
   }
 
