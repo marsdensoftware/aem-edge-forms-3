@@ -4,6 +4,7 @@
 
 // Primary Colours
 $color-primary: #017ac9; // MSD Blue
+$color-primary-accessible: #0071BB; // Accessible MSD Blue
 $color-primary-navy: #134276; // MSD Navy
 $color-primary-dark-navy: #162c45; // MSD Dark Navy
 $color-accent: #017ac9; // Same as MSD Blue
@@ -120,6 +121,7 @@ $bg-contextual-help-tertiary: $color-primary-dark-navy;
 
 // UI Icons
 $icon-accent: $color-primary;
+$icon-accessible: $color-primary-accessible;
 $icon-dark: $color-primary-navy;
 $icon-primary: $color-grey-black-80;
 $icon-secondary: $color-grey-black-60;
@@ -130,6 +132,7 @@ $icon-warning: $color-feedback-orange;
 
 // UI Stroke
 $stroke-accent: $color-primary;
+$stroke-accessible: $color-primary-accessible;
 $stroke-primary: $color-grey-black-80;
 $stroke-secondary: $color-grey-black-60;
 $stroke-tertiary: $color-shade-navy-40;
