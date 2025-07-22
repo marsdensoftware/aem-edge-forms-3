@@ -94,8 +94,6 @@
   },
   {
     "id": "list",
-    "components": [
-      "listitem"
-    ]
+    "components": []
   }
 ]

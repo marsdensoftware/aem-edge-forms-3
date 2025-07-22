@@ -1729,21 +1729,6 @@
           }
         },
         {
-          "title": "List Item",
-          "id": "listitem",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "List Item",
-                  "model": "listitem"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Typography",
           "id": "typography",
           "plugins": {

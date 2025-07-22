@@ -15,27 +15,40 @@
           }
         }
       }
-    },
-    {
-      "title": "List Item",
-      "id": "listitem",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "List Item",
-              "model": "listitem"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
     {
       "id": "list",
       "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "source",
+          "label": "Source",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "offsetarg",
+          "label": "Offset parameter",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "pagesizearg",
+          "label": "Page size parameter",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "pagesize",
+          "value": "25",
+          "label": "Page size"
+        },
         {
           "component": "text",
           "valueType": "number",
@@ -44,33 +57,12 @@
           "label": "Test Number"
         }
       ]
-    },
-    {
-      "id": "listitem",
-      "fields": [
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "image",
-          "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "richtext",
-          "name": "text",
-          "value": "",
-          "label": "Text",
-          "valueType": "string"
-        }
-      ]
     }
   ],
   "filters": [
     {
       "id": "list",
-      "components": [
-        "listitem"
-      ]
+      "components": []
     }
   ]
 }
