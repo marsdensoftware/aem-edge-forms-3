@@ -31803,11 +31803,10 @@
     "id": "list",
     "fields": [
       {
-        "component": "reference",
+        "component": "text",
         "valueType": "string",
         "name": "source",
-        "label": "Source",
-        "multi": false
+        "label": "Source"
       },
       {
         "component": "text",
