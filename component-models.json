@@ -31811,14 +31811,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "offsetarg",
+        "name": "offset-arg",
         "label": "Offset parameter",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "pagesizearg",
+        "name": "page-size-arg",
         "label": "Page size parameter",
         "value": ""
       },
@@ -31827,7 +31827,7 @@
         "valueType": "number",
         "numberMin": 1,
         "numberMax": 100,
-        "name": "pagesize",
+        "name": "page-size",
         "value": 25,
         "label": "Page size"
       },
