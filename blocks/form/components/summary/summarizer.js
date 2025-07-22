@@ -515,6 +515,7 @@ export class Summarizer {
         let content = Summarizer.createSummaryFromMarkupObjects(markupObjects)
         content = Summarizer.replace(Summarizer.itemContentTemplate, {
           content: content,
+          summaryEntryTag: 'div'
         })
         contents.push(content)
       })
