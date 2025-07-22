@@ -103,6 +103,23 @@
     }
   }
 
+  &--info {
+    .panel-formcontextualhelp__icon {
+      content: url('images/icon-contextual-help-info-blue-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-arrow-navy-right.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text,
+    .plain-text-wrapper p,
+    .panel-formcontextualhelp__title {
+      color: $text-dark-primary;
+    }
+  }
+
   &--primary.panel-formcontextualhelp--info {
     background: $bg-contextual-help-tertiary;
     border: 1px solid $stroke-dark;
