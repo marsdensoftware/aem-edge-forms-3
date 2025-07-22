@@ -20593,27 +20593,11 @@
             "valueType": "boolean"
           },
           {
-            "component": "boolean",
-            "name": "withIcon",
-            "label": "Enable Icon",
-            "valueType": "boolean",
-            "value": false
-          },
-          {
             "component": "text",
-            "name": "enumIconNames",
+            "name": "iconName",
             "label": "Icon",
             "description": "Enter the name of the icon. list-search",
-            "multi": true,
-            "value": "",
-            "condition": {
-              "===": [
-                {
-                  "var": "withIcon"
-                },
-                true
-              ]
-            }
+            "value": ""
           },
           {
             "component": "select",
