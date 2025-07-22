@@ -1,7 +1,7 @@
 @use '../../../../styles/settings' as *;
 
 .field-summary {
-  padding: $spacing-600 0;
+  padding: $spacing-600 $spacing-600 $spacing-600 0;
   border-top: solid 2px $color-border-secondary;
 
   .edit {
@@ -30,7 +30,6 @@
 
   .summary-entry,
   .item {
-    padding-right: $spacing-600;
 
     &:last-child {
       padding-bottom: 0;

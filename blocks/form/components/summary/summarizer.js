@@ -254,17 +254,15 @@ export class Summarizer {
                     <h4 class="title">{{title}}</h4>
                     <p class="p-small">{{description}}</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-10">{{content}}</div>
-                <div class="col-md-2"><a class="edit" href="#" data-step-name="{{stepName}}">${i18n(
+                <div class="col-md-12 col-2"><a class="edit" href="#" data-step-name="{{stepName}}">${i18n(
                   'Edit',
                 )}</a>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-8">
+            {{content}}
         </div>
     </div>
     `
