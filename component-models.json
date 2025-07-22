@@ -31825,9 +31825,28 @@
       {
         "component": "text",
         "valueType": "number",
+        "numberMin": 1,
+        "numberMax": 100,
         "name": "pagesize",
-        "value": "25",
-        "label": "Page size"
+        "value": 25,
+        "label": "Page size",
+        "hidden": true
+      },
+      {
+        "component": "multiselect",
+        "name": "multiselect",
+        "label": "Item type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Option 1",
+            "value": "option1"
+          },
+          {
+            "name": "Option 2",
+            "value": "option2"
+          }
+        ]
       },
       {
         "component": "text",
