@@ -158,22 +158,20 @@ main {
     h1,
     h2,
     h3 {
-      @include heading-default($text-primary);
       background: $color-gradient-blue;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    h4,
-    h5,
-    h6 {
-      font-weight: $font-weight-bold;
-      font-size: $size-font-h6;
-      color: $color-primary-navy;
-      line-height: 130%;
-      letter-spacing: $letter-spacing-default;
-    }
+    // h4,
+    // h5,
+    // h6 {
+    //   font-weight: $font-weight-bold;
+    //   color: $color-primary-navy;
+    //   line-height: 130%;
+    //   letter-spacing: $letter-spacing-default;
+    // }
 
     .subtitle,
     .straptitle {
@@ -183,12 +181,5 @@ main {
       line-height: 130%;
       margin: 0;
     }
-  }
-
-  p {
-    color: $text-dark-primary;
-    font-size: $size-font-body-default;
-    line-height: 1.6;
-    font-weight: 400;
   }
 }

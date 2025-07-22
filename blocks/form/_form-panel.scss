@@ -3,6 +3,10 @@
 .form-panel-header {
   padding: $spacing-500 0;
 
+  p:not(:last-child) {
+    margin-bottom: $spacing-500;
+  }
+
   @include media('desktop') {
     padding: $spacing-700 0;
   }
