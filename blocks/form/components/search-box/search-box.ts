@@ -411,7 +411,6 @@ export default function decorate(element: El, field: Field) {
   const inputEl = element.querySelector('input') as HTMLInputElement
   const container = document.createElement('div')
   container.className = 'search-box__input'
-  container.id = 'search-box__input'
 
   if (inputEl) {
     container.appendChild(inputEl)
