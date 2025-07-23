@@ -35,7 +35,7 @@ function updateExitButtonText(wizardEl) {
   const currentStepEl = wizardEl.querySelector('.current-wizard-step')
   if (!currentStepEl) return
 
-  const exitBtn = document.querySelector('form [name="top_nav"] [name="exitBtn"]')
+  const exitBtn = currentStepEl.closest('form').querySelector('[name="top_nav"] [name="exitBtn"]')
   if (!exitBtn) return
 
   exitBtn.textContent = currentStepEl.classList.contains('wizard-intro') ? 'Exit' : 'Save & exit'
