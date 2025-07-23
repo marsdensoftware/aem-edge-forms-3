@@ -2,43 +2,55 @@
  * Styles for the Extended Checkbox component.
  */
 
-.field-modal-checkbox-container .field-main-checkbox {
+.form .field-modal-checkbox-container .field-main-checkbox {
     align-items: center;
     border-radius: 8px;
     border: 2px solid #a1b3c8;
 }
 
 /* Target labels that have a description to apply flex layout. */
-.field-main-checkbox {
+.form .field-main-checkbox {
   display: flex;
   flex-direction: column; /* Stacks the text and description vertically */
   align-items: flex-start; /* Aligns items to the start of the cross axis */
   gap: 4px; /* Adds a small space between the label text and description */
 }
 
-.field-main-checkbox label,textarea {
+.form .field-main-checkbox textarea {
   border: 0;
   background: transparent;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-.field-main-checkbox hr {
+.form .field-main-checkbox label {
+  border: 0;
+  background: transparent;
+  order: 0;
+  margin-top: 0;
+}
+
+.form .field-main-checkbox .checkbox-divider {
   width: 90%;
+  height: 1px;
+  border-width: 0;
+  background-color: #017AC9;
 }
 
+.form .field-main-checkbox .edit {
+  height: 26px;
+  background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+  background-repeat: no-repeat;
+  display: block;
+  padding-left: 28px;
+  text-decoration: underline;
+  color: #017ac9;
+}
 
 /* Style the main text span of the checkbox label. */
-.field-main-checkbox .field-label .text {
+.form .field-main-checkbox .field-label .text {
   font-weight: normal;
 }
-
-/* Style the new description span. */
-.field-main-checkbox .field-label .desc {
-  font-size: var(--body-font-size-s); /* Use a smaller font size for the description */
-  color: var(--text-color-secondary, #555); /* Use a secondary text color */
-  line-height: 1.4;
-}
-
-/* In extended-checkbox.css */
 
 /* Use flexbox on the label for easy alignment of the icon and text */
 .extended-checkbox .field-label {
