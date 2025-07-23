@@ -28,7 +28,7 @@ function configFromFields(block) {
   return result;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   console.log('decorating', block);
 
   const config = configFromFields(block);
@@ -57,13 +57,13 @@ export default function decorate(block) {
     console.log('clicked');
     button.onclick = function(){};
     button.disabled = true;
-    /*
+
     pager.loading = 'down'; // TODO not invasive
     const cards = await loadPage(wrapper, pager, pager.config.offset);
     if (cards) {
       pager.top = cards[0];
       pager.up_observer.observe(pager.top);
-    }*/
+    }
   };
   button.className = 'hack'; // TODO FIXME temp
 
