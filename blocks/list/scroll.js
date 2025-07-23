@@ -109,8 +109,8 @@ export async function loadPage(container, pager, new_offset, up) {
 
   await new Promise(r => setTimeout(r, 1000));
   // TODO better error handling
-  console.log('should request page', pager, pager.source);
-  const target_url = new URL(pager.source);
+  console.log('should request page', pager, pager.config.source);
+  const target_url = new URL(pager.config.source);
   target_url.searchParams.set(pager.config.page_size_arg, temp_page_size);
   target_url.searchParams.set(pager.config.offset_arg, new_offset);
 
