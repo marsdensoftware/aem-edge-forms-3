@@ -81,52 +81,5 @@ main {
         transform: rotate(180deg);
       }
     }
-
-    .p-large p {
-      font-size: $size-font-body-large;
-      color: $text-dark-primary;
-      font-weight: normal;
-      font-style: normal;
-      line-height: 130%;
-      margin: 0;
-
-      p {
-        margin: 0;
-        color: $text-primary;
-        font-size: $size-font-body-large;
-      }
-    }
-  }
-
-  &.wizard--bg-light,
-  &.wizard--bg-mid {
-    color: $text-primary;
-
-    h1,
-    h2,
-    h3 {
-      background: $color-gradient-blue;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    // h4,
-    // h5,
-    // h6 {
-    //   font-weight: $font-weight-bold;
-    //   color: $color-primary-navy;
-    //   line-height: 130%;
-    //   letter-spacing: $letter-spacing-default;
-    // }
-
-    .subtitle,
-    .straptitle {
-      font-size: $size-font-subtitle;
-      color: $text-dark-primary;
-      font-weight: 400;
-      line-height: 130%;
-      margin: 0;
-    }
   }
 }
