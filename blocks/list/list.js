@@ -22,19 +22,23 @@ const PagerConfig = {
   },
 }
 
+function dataProp(block, name) {
+  return (block.querySelector(`[data-aue-prop="${name}"]`)?.innerText || '').trim();
+}
+
 function configFromFields(block) {
   // TODO validate url
-  const src = block.querySelector('[data-aue-prop="source"]');
+  const src = dataProp(block, 'source');
 
-  // TODO strip and check not empty
-  const offset_arg = block.querySelector('[data-aue-prop="offset-arg"]');
-  const page_size_arg = block.querySelector('[data-aue-prop="page-size-arg"]');
+  // TODO check not empty
+  const offset_arg = dataProp(block, 'offset-arg');
+  const page_size_arg = dataProp(block, 'page-size-arg');
 
   // TODO to integer
-  const page_size = block.querySelector('[data-aue-prop="page-size"]');
+  const page_size = dataProp(block, 'page-size');
 
   // TODO validate?
-  const item_type = block.querySelector('[data-aue-prop="select-output"]');
+  const item_type = dataProp(block, 'select-output');
 
   const result = Object.create(PagerConfig);
   result.offset_arg = offset_arg;
