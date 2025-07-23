@@ -145,12 +145,14 @@
     .panel-formcontextualhelp__footer__link::after {
       background-image: url('/icons/icon-contextual-help-primary-info-link-arrow.svg');
     }
+
     .panel-formcontextualhelp__footer__link:hover,
     .panel-formcontextualhelp__footer__link:focus,
     .panel-formcontextualhelp__footer__link-text:hover,
     .panel-formcontextualhelp__footer__link-text:focus {
       color: $color-primary-navy;
-  }}
+    }
+  }
 
   /* Secondary Info */
   &--info.panel-formcontextualhelp--secondary {
@@ -170,12 +172,14 @@
     .panel-formcontextualhelp__footer__link::after {
       background-image: url('/icons/icon-contextual-help-secondary-info-link-arrow.svg');
     }
+
     .panel-formcontextualhelp__footer__link:hover,
     .panel-formcontextualhelp__footer__link:focus,
     .panel-formcontextualhelp__footer__link-text:hover,
     .panel-formcontextualhelp__footer__link-text:focus {
       color: $color-accent;
-    }}
+    }
+  }
 
   /* Tertiary Info */
   &--info.panel-formcontextualhelp--tertiary {
@@ -197,12 +201,14 @@
     .panel-formcontextualhelp__footer__link::after {
       background-image: url('/icons/icon-contextual-help-tertiary-info-link-arrow.svg');
     }
+
     .panel-formcontextualhelp__footer__link:hover,
     .panel-formcontextualhelp__footer__link:focus,
     .panel-formcontextualhelp__footer__link-text:hover,
     .panel-formcontextualhelp__footer__link-text:focus {
       color: $color-shade-blue-10;
-    }}
+    }
+  }
 
   /* Warning Primary */
   &--warning.panel-formcontextualhelp--primary {
@@ -230,12 +236,14 @@
     .panel-formcontextualhelp__footer__link::after {
       background-image: url('/icons/icon-contextual-help-warning-primary-link-arrow.svg');
     }
+
     .panel-formcontextualhelp__footer__link:hover,
     .panel-formcontextualhelp__footer__link:focus,
     .panel-formcontextualhelp__footer__link-text:hover,
     .panel-formcontextualhelp__footer__link-text:focus {
       color: $text-dark-primary;
-    }}
+    }
+  }
 
   /* Warning Secondary */
   &--warning.panel-formcontextualhelp--secondary {
@@ -257,13 +265,12 @@
     .panel-formcontextualhelp__footer__link::after {
       background-image: url('/icons/icon-contextual-help-warning-secondary-link-arrow.svg');
     }
+
     .panel-formcontextualhelp__footer__link:hover,
     .panel-formcontextualhelp__footer__link:focus,
     .panel-formcontextualhelp__footer__link-text:hover,
     .panel-formcontextualhelp__footer__link-text:focus {
       color: $text-dark-primary;
-    }}
-
-
-
+    }
+  }
 }
