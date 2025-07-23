@@ -5,6 +5,7 @@
 .wizard {
   min-height: $wizard-body-height;
   height: 100%;
+  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
 
   @include media('tablet') {
     min-height: $wizard-body-height-tablet;
