@@ -464,36 +464,86 @@ export class Summarizer {
     static work_preferences(el, properties) {
 
         function getContent(workEntryFieldset, stepName, title) {
-            const nameValues = {
-                title: { value: stepName, displayValue: title },
-                ...Summarizer.fieldToNameValues(workEntryFieldset)
-            };
-
-            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
-                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
-                // Specific days
-                const index = nameValues['days_you_can_work'].values.indexOf('3');
-                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
-
-                delete nameValues['specific_days_cb'];
+          const nameValues = {
+            title: { value: stepName, displayValue: title },
+            ...Summarizer.fieldToNameValues(workEntryFieldset),
+          }
+    
+          if (stepName == 'panel_work_availability') {
+            if (
+              nameValues['days_you_can_work'] &&
+              nameValues['days_you_can_work'].value
+            ) {
+              nameValues['days_you_can_work'].values = [
+                nameValues['days_you_can_work'].value,
+              ]
+              nameValues['days_you_can_work'].displayValues = [
+                nameValues['days_you_can_work'].displayValue,
+              ]
+    
+              delete nameValues['days_you_can_work'].value
+              delete nameValues['days_you_can_work'].displayValue
             }
-
-            if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
-                if (isNo(nameValues['reliable-transport'])) {
-                    nameValues['reliable-transport'].displayValue = i18n('I don\'t have reliable transport to get to work');
-                }
-                else {
-                    nameValues['reliable-transport'].displayValue = i18n('I have reliable transport to get to work');
-                }
-
+    
+            if (
+              nameValues['days_you_can_work'] &&
+              nameValues['days_you_can_work'].values &&
+              nameValues['days_you_can_work'].values.indexOf('3') > -1
+            ) {
+              // Specific days
+              const index = nameValues['days_you_can_work'].values.indexOf('3')
+    
+              if (
+                nameValues['specific_days_cb'] &&
+                nameValues['specific_days_cb'].value
+              ) {
+                nameValues['specific_days_cb'].values = [
+                  nameValues['specific_days_cb'].value,
+                ]
+                nameValues['specific_days_cb'].displayValues = [
+                  nameValues['specific_days_cb'].displayValue,
+                ]
+    
+                delete nameValues['specific_days_cb'].value
+                delete nameValues['specific_days_cb'].displayValue
+              }
+              
+              if(nameValues['specific_days_cb']){
+                nameValues['days_you_can_work'].displayValues[index] =
+                nameValues['specific_days_cb'].displayValues.join(', ')
+    
+                delete nameValues['specific_days_cb']
+              }
+              else{
+                  delete nameValues['days_you_can_work'].displayValues[index];
+              }
             }
-
-            // Content
-            let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
-            let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
-
-            return Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName, content })
-
+          }
+    
+          if (
+            stepName == 'panel_working_locations' &&
+            nameValues['reliable-transport']
+          ) {
+            if (isNo(nameValues['reliable-transport'])) {
+              nameValues['reliable-transport'].displayValue = i18n(
+                "I don't have reliable transport to get to work",
+              )
+            } else {
+              nameValues['reliable-transport'].displayValue = i18n(
+                'I have reliable transport to get to work',
+              )
+            }
+          }
+    
+          // Content
+          let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
+          let content =
+            Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects)
+    
+          return Summarizer.replace(Summarizer.itemContentEditTemplate, {
+            stepName,
+            content,
+          })
         }
 
         const form = el.closest('form');
