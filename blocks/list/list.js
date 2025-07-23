@@ -35,6 +35,7 @@ export default function decorate(block) {
   console.log('extracted config', config);
 
   const button = document.createElement('button');
+  button.innerText = 'Click here';
   button.onclick = function() {console.log('clicked');};
   button.className = 'hack'; // TODO FIXME temp
   block.replaceChildren(button);
