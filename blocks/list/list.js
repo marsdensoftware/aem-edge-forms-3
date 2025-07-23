@@ -5,9 +5,21 @@ function dataProp(block, name) {
   return (block.querySelector(`[data-aue-prop="${name}"]`)?.innerText || '').trim();
 }
 
+function dataPropFirstLink(block) {
+  return (block.querySelector('div > div:not([data-aue-prop]) > p > a')?.innerText || '').trim();
+}
+
+function dataPropSource(block) {
+  const propSrc = dataProp(block, 'source');
+  if (propSrc) {
+    return propSrc;
+  }
+  return dataPropFirstLink(block);
+}
+
 function configFromFields(block) {
   // TODO validate url
-  const src = dataProp(block, 'source');
+  const src = dataPropSource(block);
 
   // TODO check not empty
   const offset_arg = dataProp(block, 'offset-arg');

@@ -31806,7 +31806,8 @@
         "component": "text",
         "valueType": "string",
         "name": "source",
-        "label": "Source"
+        "label": "Source",
+        "value": ""
       },
       {
         "component": "text",
