@@ -40,5 +40,11 @@ export default function decorate(block) {
 
   const config = configFromFields(block);
   console.log('extracted config', config);
+
+  // .replaceChildren or set .innerHTML
+  const button = document.createElement('button');
+  button.onclick = function() {console.log('clicked');};
+  block.replaceChildren(button);
+
   /*select by data-aue-prop= like document.querySelector('[data-aue-prop="14"]');*/
 }
