@@ -28,7 +28,7 @@ function configFromFields(block) {
   return result;
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   console.log('decorating', block);
 
   const config = configFromFields(block);
@@ -49,7 +49,7 @@ export default async function decorate(block) {
   pager.down_observer = makePageLoadObserver(wrapper, pager, false);
   pager.pos_observer = makePositionObserver(pager);
 
-  button.onclick = function() {
+  button.onclick = async function() {
     if (pager.loading) {
       return;
     }
