@@ -4,12 +4,13 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding-bottom: $spacing-600;
   gap: $spacing-400 0;
+  margin-bottom: $spacing-700;
 
   @include media('desktop') {
     flex-direction: row;
     gap: $spacing-400;
+    margin-bottom: $spacing-800;
   }
 
   .radio-wrapper {
