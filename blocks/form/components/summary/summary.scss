@@ -2,7 +2,7 @@
 
 .field-summary {
   padding: $spacing-600 $spacing-600 $spacing-600 0;
-  border-top: solid 2px $color-border-secondary; 
+  border-top: solid 2px $color-border-secondary;
 
   .edit {
     width: 56px;
@@ -22,15 +22,13 @@
     color: $color-primary;
 
     &:hover,
-    &:focus,
-    &:visited {
+    &:focus {
       color: $color-primary-navy;
     }
   }
 
   .summary-entry,
   .item {
-
     &:last-child {
       padding-bottom: 0;
     }
