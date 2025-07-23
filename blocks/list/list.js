@@ -1,4 +1,4 @@
-import { Pager, PagerConfig } from './scroll.js';
+import { Pager, PagerConfig, makePageLoadObserver, makePositionObserver } from './scroll.js';
 import { validUrl } from './utils.js';
 
 function dataProp(block, name) {
