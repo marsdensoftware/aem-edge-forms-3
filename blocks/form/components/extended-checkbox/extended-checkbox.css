@@ -22,21 +22,52 @@
   line-height: 1.4;
 }
 
-.checkbox-wrapper .field-main-checkbox label::before {
-  content: "";
-  position: absolute;
-  right: 1rem;
-  top: 1.8rem;
-  transform: translateY(-50%);
-  display: block;
-  width: 1.625rem;
-  height: 1.625rem;
-  border: 2px solid #a1b3c8;
-  border-radius: 8px;
-  background-color: transparent;
-  background-image: none;
+/* In extended-checkbox.css */
+
+/* Use flexbox on the label for easy alignment of the icon and text */
+.extended-checkbox .field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Adjust the space between the icon and the label text */
+}
+
+/*
+ * This creates the "icon holder" for any checkbox that has an icon class.
+ * The [class*="..."] selector is a flexible way to target any element
+ * whose class contains "extended-checkbox--icon-".
+ */
+[class*="extended-checkbox--icon-"] .field-label::before {
+  content: ''; /* This is required for a pseudo-element to be displayed */
+  display: inline-block;
+  width: 24px;  /* Example: Set your desired icon width */
+  height: 24px; /* Example: Set your desired icon height */
   background-repeat: no-repeat;
+  background-size: contain;
   background-position: center;
-  background-size: 60% 60%;
-  transition: all 0.1s ease-in-out;
+  flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+}
+
+/*
+ * --- Define each specific icon ---
+ * For each possible `iconName` you might configure in the authoring dialog,
+ * you add a corresponding CSS rule here to set the background image.
+ */
+
+/* Example for when an author enters 'user' as the iconName */
+.extended-checkbox--icon-user .field-label::before {
+  background-image: url('/icons/user.svg'); /* Path to your user icon */
+}
+
+/* Example for when an author enters 'skill' as the iconName */
+.extended-checkbox--icon-skill .field-label::before {
+  background-image: url('/icons/skill.svg'); /* Path to your skill icon */
+}
+
+/* Add more rules for other icons as needed */
+.extended-checkbox--icon-work .field-label::before {
+  background-image: url('/icons/work.svg');
+}
+
+.extended-checkbox--icon-car-off .field-label::before {
+  background-image: url('../../../../icons/icon-car-off.svg');
 }
