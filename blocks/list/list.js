@@ -9,6 +9,10 @@ function validUrl(s) {
   return false;
 }
 
+function dataProp(block, name) {
+  return (block.querySelector(`[data-aue-prop="${name}"]`)?.innerText || '').trim();
+}
+
 function configFromFields(block) {
   // TODO validate url
   const src = dataProp(block, 'source');
