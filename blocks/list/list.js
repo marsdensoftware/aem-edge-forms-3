@@ -24,12 +24,11 @@ function configFromFields(block) {
   result.offset_arg = offset_arg;
   result.page_size_arg = page_size_arg;
   result.set_page_size(page_size);
-  result.src = src;
   return result;
 }
 
 export default function decorate(block) {
-  console.log('decorating', block);
+  console.log('decorating: ' + block.innerHTML, block);
 
   const config = configFromFields(block);
   console.log('extracted config', config);
