@@ -1,13 +1,5 @@
 import { PagerConfig } from './scroll.js';
-
-function validUrl(s) {
-  try {
-    const url = new URL(s);
-    return url.protocol === "http:" || url.protocol === "https:";
-  } catch (_) {
-  }
-  return false;
-}
+import { validUrl } from './utils.js';
 
 function dataProp(block, name) {
   return (block.querySelector(`[data-aue-prop="${name}"]`)?.innerText || '').trim();
@@ -28,6 +20,7 @@ function configFromFields(block) {
   const item_type = dataProp(block, 'select-output');
 
   const result = Object.create(PagerConfig);
+  result.source = src;
   result.offset_arg = offset_arg;
   result.page_size_arg = page_size_arg;
   result.set_page_size(page_size);
@@ -41,10 +34,8 @@ export default function decorate(block) {
   const config = configFromFields(block);
   console.log('extracted config', config);
 
-  // .replaceChildren or set .innerHTML
   const button = document.createElement('button');
   button.onclick = function() {console.log('clicked');};
+  button.className = 'hack'; // TODO FIXME temp
   block.replaceChildren(button);
-
-  /*select by data-aue-prop= like document.querySelector('[data-aue-prop="14"]');*/
 }
