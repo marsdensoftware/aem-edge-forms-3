@@ -109,7 +109,7 @@ export async function loadPage(container, pager, new_offset, up) {
 
   await new Promise(r => setTimeout(r, 1000));
   // TODO better error handling
-  const data = await fetch(`${pager.source}?${pager.config.page_size_arg}=${temp_page_size}&${pager.config.offset_arg}=${new_offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
+  const data = await fetch(`https://dummyjson.com/users?${pager.config.page_size_arg}=${temp_page_size}&${pager.config.offset_arg}=${new_offset}&select=id,firstName,lastName,age,gender,birthDate,company`)
     .then((r) => {
       if (!r.ok) {
         throw new Error(`Received: ${r.status}`);
