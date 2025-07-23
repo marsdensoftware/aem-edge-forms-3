@@ -1,23 +1,20 @@
 @use '../../../../styles/settings' as *;
 @use 'wizard-theme';
+@use 'wizard-intro';
 
 .wizard {
-  padding-top: $spacing-600;
-  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
   min-height: $wizard-body-height;
   height: 100%;
+  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
 
   @include media('tablet') {
-    padding-top: $spacing-700;
     min-height: $wizard-body-height-tablet;
   }
 
   @include media('desktop') {
     min-height: $wizard-body-height-desktop;
   }
-}
 
-.wizard {
   .field-save-changes {
     display: none;
     margin-left: auto;

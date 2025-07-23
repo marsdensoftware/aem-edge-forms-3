@@ -9,69 +9,16 @@ main {
       $color-accent 25%,
       $color-primary-navy 100%
     );
-    color: $color-white;
 
-    .text-wrapper,
-    .number-wrapper,
-    .email-wrapper,
-    .radio-wrapper {
-      label,
-      .field-label {
-        color: $color-white;
+    &::after {
+      @include media('tablet') {
+        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
+        background-position: top right;
       }
 
-      input,
-      textarea {
-        color: $color-white;
-
-        &::placeholder {
-          color: rgba($color-white, 0.75);
-        }
-      }
-    }
-
-    h1,
-    h2,
-    h3 {
-      color: $color-white;
-      background: none;
-      background-clip: unset;
-      -webkit-background-clip: unset;
-      -webkit-text-fill-color: $color-white;
-      font-family: $font-family;
-      margin-bottom: $spacing-600;
-
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
-      }
-    }
-
-    h4,
-    h5,
-    h6 {
-      color: $color-white;
-      font-family: $font-family;
-      margin-bottom: $spacing-100;
-
-      &:last-child:not(:first-child) {
-        margin-bottom: 0;
-      }
-    }
-
-    p,
-    .subtitle {
-      color: $color-white;
-    }
-
-    .subtitle {
-      font-style: normal;
-      font-weight: lighter;
-      line-height: 130%;
-      margin: 0;
-
-      p {
-        margin: 0;
-        font-size: $size-font-subtitle;
+      @include media('desktop') {
+        background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
+        background-position: bottom left;
       }
     }
   }
@@ -134,61 +81,5 @@ main {
         transform: rotate(180deg);
       }
     }
-
-    .p-large p {
-      font-size: $size-font-body-large;
-      color: $text-dark-primary;
-      font-weight: normal;
-      font-style: normal;
-      line-height: 130%;
-      margin: 0;
-
-      p {
-        margin: 0;
-        color: $text-primary;
-        font-size: $size-font-body-large;
-      }
-    }
-  }
-
-  &.wizard--bg-light,
-  &.wizard--bg-mid {
-    color: $text-primary;
-
-    h1,
-    h2,
-    h3 {
-      @include heading-default($text-primary);
-      background: $color-gradient-blue;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    h4,
-    h5,
-    h6 {
-      font-weight: $font-weight-bold;
-      font-size: $size-font-h6;
-      color: $color-primary-navy;
-      line-height: 130%;
-      letter-spacing: $letter-spacing-default;
-    }
-
-    .subtitle,
-    .straptitle {
-      font-size: $size-font-subtitle;
-      color: $text-dark-primary;
-      font-weight: 400;
-      line-height: 130%;
-      margin: 0;
-    }
-  }
-
-  p {
-    color: $text-dark-primary;
-    font-size: $size-font-body-default;
-    line-height: 1.6;
-    font-weight: 400;
   }
 }

@@ -10809,8 +10809,16 @@
             "value": ""
           },
           {
+            "name": "Wizard Intro",
+            "value": "wizard-intro"
+          },
+          {
             "name": "Form Header",
             "value": "form-panel-header"
+          },
+          {
+            "name": "Form Section Intro",
+            "value": "section-intro"
           },
           {
             "name": "Form Content",
