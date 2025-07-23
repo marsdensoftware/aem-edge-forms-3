@@ -1,0 +1,112 @@
+@use '../../../../styles/settings' as *;
+
+.wizard-intro {
+  padding-top: $spacing-600;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @include media('tablet') {
+    padding-top: $spacing-700;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @include media('desktop') {
+    padding-top: 96px;
+  }
+
+  picture {
+    margin-bottom: $spacing-700;
+
+    @include media('tablet') {
+      margin-bottom: $spacing-650;
+    }
+
+    @include media('desktop') {
+      margin-bottom: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: $color-white;
+    background: none;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: $color-white;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    color: $color-white;
+
+    &:last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  p,
+  .subtitle {
+    color: $color-white;
+  }
+
+  .subtitle {
+    font-size: $size-font-subtitle;
+
+    p {
+      font-size: $size-font-subtitle;
+      margin: 0;
+    }
+  }
+
+  p.p-large {
+    * {
+      font-size: $size-font-body-large;
+    }
+  }
+}
+
+.section-intro {
+  padding-top: $spacing-600;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: $text-primary;
+
+  @include media('tablet') {
+    padding-top: $spacing-700;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @include media('desktop') {
+    padding-top: 96px;
+  }
+
+  picture {
+    margin-bottom: $spacing-700;
+
+    @include media('tablet') {
+      margin-bottom: $spacing-650;
+    }
+
+    @include media('desktop') {
+      margin-bottom: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    @include heading-level-2;
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

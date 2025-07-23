@@ -1,0 +1,36 @@
+@use '../../styles/settings' as *;
+
+.form-panel-header {
+  padding: $spacing-500 0;
+
+  @include media('desktop') {
+    padding: $spacing-700 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    background: $color-gradient-blue;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: $spacing-500;
+  }
+}
+
+// Allow more spacing at the bottom
+// So the content underneath the footer
+// Can be scroll through
+$content-bottom-spacing: $spacing-700 + $footer-height;
+$content-bottom-spacing-desktop: $spacing-800 + $footer-height-desktop;
+
+.form-panel-content {
+  padding: 0 0 $content-bottom-spacing;
+
+  @include media('desktop') {
+    padding: 0 0 $content-bottom-spacing-desktop;
+  }
+}
