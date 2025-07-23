@@ -24,6 +24,13 @@
     margin-right: $spacing-200;
     width: 24px;
     height: 24px;
+
+    &::before {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      content: '';
+    }
   }
 
   .panel-formcontextualhelp__title {
@@ -57,9 +64,11 @@
     }
 
     &::after {
+      display: inline-block;
       margin-left: $spacing-200;
-      font-size: $size-font-body-large;
-      line-height: 1;
+      width: 20px;
+      height: 20px;
+      content: '';
     }
   }
 
@@ -103,7 +112,7 @@
     }
   }
 
-  /* Shared styles for both info and primary variants */
+  /* Shared styles for info and primary */
   &--info,
   &--primary {
     border-radius: $border-radius-mid;
@@ -123,7 +132,7 @@
       color: $color-primary;
     }
 
-    .panel-formcontextualhelp__icon {
+    .panel-formcontextualhelp__icon::before {
       content: url('images/icon-contextual-help-primary-info.svg');
     }
 
@@ -132,7 +141,7 @@
     }
   }
 
-  /* Secondary variant */
+  /* Secondary Info */
   &--info.panel-formcontextualhelp--secondary {
     border-radius: $border-radius-mid;
     border: 1px solid $border-radius-mid;
@@ -142,9 +151,17 @@
     .panel-formcontextualhelp__footer__link-text {
       color: $color-primary-navy;
     }
+
+    .panel-formcontextualhelp__icon::before {
+      content: url('images/icon-contextual-help-secondary-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-secondary-info-link-arrow.svg');
+    }
   }
 
-  /* Tertiary variant */
+  /* Tertiary Info */
   &--info.panel-formcontextualhelp--tertiary {
     border-radius: $border-radius-mid;
     border: 1px solid $stroke-dark;
@@ -156,42 +173,49 @@
     .panel-formcontextualhelp__footer__link-text {
       color: $color-white;
     }
+
+    .panel-formcontextualhelp__icon::before {
+      content: url('images/icon-contextual-help-tertiary-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      content: url('images/icon-contextual-help-tertiary-info-link-arrow.svg');
+    }
   }
 
-
-  /* Warning variant */
+  /* Warning Primary */
   &--warning.panel-formcontextualhelp--primary {
-    border-radius: var(--Corner-radius-Mid, 8px);
-    border: var(--Stroke-weight-Separator, 2px) solid var(--Stroke-Error, #D03633);
-    background: var(--Shades-Red-Red-05, #FDF5F5);
+    border-radius: $border-radius-mid;
+    border: 2px solid $color-feedback-red;
+    background: $color-shade-red-05;
 
     .panel-formcontextualhelp__title {
-      color: var(--Text-Dark-Error, #D03633);
+      color: $color-feedback-red;
     }
 
     .plain-text-wrapper p {
-      color: var(--Text-Dark-Primary, #333);
+      color: $text-dark-primary;
     }
 
     .panel-formcontextualhelp__footer__link,
     .panel-formcontextualhelp__footer__link-text {
-      color: var(--Text-Dark-Error, #D03633);
+      color: $color-feedback-red;
     }
 
-    .panel-formcontextualhelp__icon {
-      content: url('images/icon-contextual-help-warning-error.svg');
+    .panel-formcontextualhelp__icon::before {
+      content: url('images/icon-contextual-help-warning-primary.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('images/icon-contextual-help-warning-error-link-arrow.svg');
+      content: url('images/icon-contextual-help-warning-primary-link-arrow.svg');
     }
   }
 
-  /* Warning Secondary variant */
+  /* Warning Secondary */
   &--warning.panel-formcontextualhelp--secondary {
-    border-radius: var(--Corner-radius-Mid, 8px);
-    border: 1px solid var(--Stroke-Error, #D03633);
-    background: var(--Background-Dark-Error, #D03633);
+    border-radius: $border-radius-mid;
+    border: 1px solid $color-feedback-red;
+    background: $color-feedback-red;
 
     .panel-formcontextualhelp__title,
     .plain-text-wrapper p,
@@ -200,13 +224,12 @@
       color: $color-white;
     }
 
-    .panel-formcontextualhelp__icon {
-      content: url('images/icon-contextual-help-warning-error.svg');
+    .panel-formcontextualhelp__icon::before {
+      content: url('images/icon-contextual-help-warning-secondary.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('images/icon-contextual-help-warning-error-link-arrow.svg');
+      content: url('images/icon-contextual-help-warning-secondary-link-arrow.svg');
     }
   }
-
 }
