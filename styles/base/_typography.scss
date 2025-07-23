@@ -76,7 +76,7 @@ p {
   ol,
   ul {
     margin: 0;
-    padding: 0 0 0 2rem;
+    padding: 0;
   }
 }
 
@@ -126,7 +126,6 @@ p {
   ul li {
     font-size: $size-font-body-small;
     line-height: 160%;
-    margin-bottom: 0.5rem;
     color: $text-primary;
   }
 }
@@ -151,7 +150,6 @@ p {
 ol li,
 ul li {
   @include font-body-default;
-  margin-bottom: 0.5rem;
   color: $text-primary;
 }
 
@@ -184,7 +182,6 @@ ul li {
   ul li {
     font-size: $size-font-body-large;
     line-height: 160%;
-    margin-bottom: 0.5rem;
     color: $text-primary;
   }
 }

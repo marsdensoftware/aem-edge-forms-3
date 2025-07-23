@@ -1,11 +1,13 @@
 @use '../../../../styles/settings' as *;
 
-/* Tabs styling */
+/* -----------------------------
+   Tabs Styling
+----------------------------- */
 
 .form:not(.edit-mode) {
   fieldset.formtabs {
     padding: 0;
-    margin-bottom: 32px;
+    margin-bottom: $spacing-600;
 
     legend {
       display: none;
@@ -17,46 +19,43 @@
     }
 
     > .navitems {
+      display: flex;
       padding: 0;
       margin: 0;
-      display: flex;
       height: $spacing-700;
       list-style: none;
-    }
 
-    > .navitems > li {
-      padding: 0 $spacing-400;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      list-style: none;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid var(--Shades-Blues-Blue-25, #bfdef1);
-      border-radius: 0;
-      transition: all 0.2s ease;
-      font-weight: 500;
-      color: var(--Text-Dark-Accent, #017ac9);
+      > li {
+        display: flex;
+        align-items: center;
+        padding: 0 $spacing-400;
+        margin: 0;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid $color-shade-blue-25;
+        border-radius: 0;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        color: $color-primary;
 
-      &:not(:last-child) {
-        margin-right: $spacing-200;
+        &:not(:last-child) {
+          margin-right: $spacing-200;
+        }
+
+        &:hover {
+          color: $color-primary-navy;
+          border-radius: $border-radius-mid $border-radius-mid 0 0;
+          border-bottom: 2px solid $color-primary;
+        }
+
+        &.navitem-current {
+          color: $color-primary-navy;
+          font-weight: $font-weight-bold;
+          border-radius: $border-radius-mid $border-radius-mid 0 0;
+          border-bottom: 2px solid $stroke-accent;
+        }
       }
-
-      &:hover {
-        color: var(--Text-Dark-Dark, #134276);
-        border-radius: var(--Corner-radius-Mid, 8px)
-          var(--Corner-radius-Mid, 8px) 0 0;
-        border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
-      }
-    }
-
-    > .navitems > li.navitem-current {
-      color: var(--Text-Dark-Dark, #134276);
-      border-radius: var(--Corner-radius-Mid, 8px) var(--Corner-radius-Mid, 8px)
-        0 0;
-      border-bottom: 2px solid var(--Stroke-Accent, #017ac9);
-      font-weight: bold;
     }
 
     > fieldset.formtab.formtab-current {
@@ -68,8 +67,15 @@
   }
 }
 
+/* -----------------------------
+   Hide Tabs in Edit Mode
+----------------------------- */
 .form.edit-mode {
   fieldset.formtabs > .navitems {
     display: none;
+  }
+
+  fieldset.formtabs ul.navitems li {
+    margin-bottom: 0;
   }
 }
