@@ -1,5 +1,6 @@
 @use '../../../../styles/settings' as *;
 @use 'wizard-theme';
+@use 'wizard-intro';
 
 .wizard {
   min-height: $wizard-body-height;
