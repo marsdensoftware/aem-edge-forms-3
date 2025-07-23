@@ -24,12 +24,16 @@
     margin-right: $spacing-200;
     width: 24px;
     height: 24px;
+    overflow: hidden;
 
     &::before {
+      content: '';
       display: inline-block;
       width: 24px;
       height: 24px;
-      content: '';
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 
@@ -64,11 +68,14 @@
     }
 
     &::after {
+      content: '';
       display: inline-block;
       margin-left: $spacing-200;
       width: 20px;
       height: 20px;
-      content: '';
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 
@@ -132,11 +139,11 @@
     }
 
     .panel-formcontextualhelp__icon::before {
-      content: url('/icons/icon-contextual-help-primary-info.svg');
+      background-image: url('/icons/icon-contextual-help-primary-info.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('/icons/icon-contextual-help-primary-info-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-primary-info-link-arrow.svg');
     }
   }
 
@@ -152,11 +159,11 @@
     }
 
     .panel-formcontextualhelp__icon::before {
-      content: url('/icons/icon-contextual-help-secondary-info.svg');
+      background-image: url('/icons/icon-contextual-help-secondary-info.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('/icons/icon-contextual-help-secondary-info-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-secondary-info-link-arrow.svg');
     }
   }
 
@@ -174,11 +181,11 @@
     }
 
     .panel-formcontextualhelp__icon::before {
-      content: url('/icons/icon-contextual-help-tertiary-info.svg');
+      background-image: url('/icons/icon-contextual-help-tertiary-info.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('/icons/icon-contextual-help-tertiary-info-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-tertiary-info-link-arrow.svg');
     }
   }
 
@@ -202,11 +209,11 @@
     }
 
     .panel-formcontextualhelp__icon::before {
-      content: url('/icons/icon-contextual-help-warning-primary.svg');
+      background-image: url('/icons/icon-contextual-help-warning-primary.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('/icons/icon-contextual-help-warning-primary-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-warning-primary-link-arrow.svg');
     }
   }
 
@@ -224,11 +231,11 @@
     }
 
     .panel-formcontextualhelp__icon::before {
-      content: url('/icons/icon-contextual-help-warning-secondary.svg');
+      background-image: url('/icons/icon-contextual-help-warning-secondary.svg');
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      content: url('/icons/icon-contextual-help-warning-secondary-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-warning-secondary-link-arrow.svg');
     }
   }
 }
