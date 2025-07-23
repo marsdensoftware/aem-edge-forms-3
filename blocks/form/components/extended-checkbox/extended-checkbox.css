@@ -2,13 +2,29 @@
  * Styles for the Extended Checkbox component.
  */
 
+.field-modal-checkbox-container .field-main-checkbox {
+    align-items: center;
+    border-radius: 8px;
+    border: 2px solid #a1b3c8;
+}
+
 /* Target labels that have a description to apply flex layout. */
-.field-main-checkbox .field-label {
+.field-main-checkbox {
   display: flex;
   flex-direction: column; /* Stacks the text and description vertically */
   align-items: flex-start; /* Aligns items to the start of the cross axis */
   gap: 4px; /* Adds a small space between the label text and description */
 }
+
+.field-main-checkbox label,textarea {
+  border: 0;
+  background: transparent;
+}
+
+.field-main-checkbox hr {
+  width: 90%;
+}
+
 
 /* Style the main text span of the checkbox label. */
 .field-main-checkbox .field-label .text {
