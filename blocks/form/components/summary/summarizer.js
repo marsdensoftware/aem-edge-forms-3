@@ -518,6 +518,9 @@ export class Summarizer {
                   delete nameValues['days_you_can_work'].displayValues[index];
               }
             }
+            else{
+                delete nameValues['specific_days_cb'];
+            }
           }
     
           if (
