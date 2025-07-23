@@ -45,11 +45,9 @@ export default function decorate(block) {
   const wrapper = document.createElement('div');
   block.append(wrapper);
 
-  /*
   pager.up_observer = makePageLoadObserver(wrapper, pager, true); // TODO need to bind this to an element after first load -- maybe separate .observe() logic from the rest?
   pager.down_observer = makePageLoadObserver(wrapper, pager, false);
   pager.pos_observer = makePositionObserver(pager);
-   */
 
   button.onclick = function() {
     if (pager.loading) {
