@@ -434,7 +434,7 @@ export class Summarizer {
             entries.forEach(entryNameValues => {
                 const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
                 let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
-                content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content })
+                content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content, summaryEntryTag: 'div' })
                 contents.push(content);
             });
         }
