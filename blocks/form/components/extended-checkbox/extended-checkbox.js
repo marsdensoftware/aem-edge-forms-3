@@ -1,36 +1,91 @@
 export default function decorate(fieldDiv, fieldJson) {
-    var _a;
     console.log('hi from extended checkbox group');
     const { iconName } = fieldJson.properties;
-    // if we have an iconName, then add the extended-checkbox--icon-${iconName} class to the fieldDiv
     if (iconName) {
         fieldDiv.classList.add(`extended-checkbox--icon-${iconName}`);
     }
-    // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
-    const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
-    // 2. Find the source textarea within that container using a specific attribute selector.
-    const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
-    // 3. Get the value from the source textarea. Fallback to an empty string if not found.
-    const textAreaText = (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) ||
-        'Copy here explaining an example of this skill etc over multiple lines as required. Copy here explaining an example of this skill etc over multiple lines as required.';
-    if (textAreaText) {
-        // Create the divider
-        const divider = document.createElement('hr');
-        divider.classList.add('checkbox-divider');
-        // Create the destination textarea and set its value
-        const textArea = document.createElement('textarea');
-        textArea.classList.add('checkbox-description');
-        textArea.placeholder = 'Enter description here';
-        textArea.value = textAreaText; // Use the dynamically fetched value
-        // Create the edit link container
-        const editDiv = document.createElement('div');
-        const editLink = document.createElement('a');
-        editLink.classList.add('edit');
-        editLink.href = '#';
-        editLink.textContent = 'Edit description';
-        editDiv.appendChild(editLink);
-        // Append all new elements to the main field div
-        fieldDiv.append(divider, textArea, editDiv);
-    }
+    setTimeout(() => {
+        var _a;
+        // --- Setup: Find all related elements from the sibling modal ---
+        const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('fieldset[name="modal-content"]');
+        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('textarea[name="modal-text"]');
+        const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
+        // if (saveButton) {
+        console.log('saveButton', saveButton);
+        // }
+        const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('dialog');
+        // --- Initial Render: Display pre-existing text on page load ---
+        const initialText = (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) || '';
+        if (initialText) {
+            const divider = document.createElement('hr');
+            divider.classList.add('checkbox-divider');
+            const descriptionTextarea = document.createElement('textarea');
+            descriptionTextarea.classList.add('checkbox-description');
+            descriptionTextarea.placeholder = 'Enter description here';
+            descriptionTextarea.value = initialText;
+            const editDiv = document.createElement('div');
+            const editLink = document.createElement('a');
+            editLink.classList.add('edit');
+            editLink.href = '#';
+            editLink.textContent = 'Edit description';
+            editDiv.appendChild(editLink);
+            // Make the "Edit" link functional by having it open the modal
+            editLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                dialog === null || dialog === void 0 ? void 0 : dialog.showModal();
+            });
+            fieldDiv.append(divider, descriptionTextarea, editDiv);
+        }
+        // --- Event Listener: Connect the modal's "Save" button to this component ---
+        if (saveButton && sourceTextarea && dialog) {
+            saveButton.addEventListener('click', (event) => {
+                var _a;
+                // --- ADDED FOR DEBUGGING ---
+                console.log('Modal "Save" button clicked!');
+                // Prevent the button from submitting the form
+                event.preventDefault();
+                const newText = sourceTextarea.value;
+                // Find the description elements within this checkbox component
+                let divider = fieldDiv.querySelector('.checkbox-divider');
+                let descriptionTextarea = fieldDiv.querySelector('.checkbox-description');
+                let editContainer = (_a = fieldDiv.querySelector('.edit')) === null || _a === void 0 ? void 0 : _a.parentElement;
+                if (newText) {
+                    // If description elements don't exist yet, create them now
+                    if (!descriptionTextarea) {
+                        divider = document.createElement('hr');
+                        divider.className = 'checkbox-divider';
+                        descriptionTextarea = document.createElement('textarea');
+                        descriptionTextarea.className = 'checkbox-description';
+                        descriptionTextarea.placeholder = 'Enter description here';
+                        editContainer = document.createElement('div');
+                        const editLink = document.createElement('a');
+                        editLink.className = 'edit';
+                        editLink.href = '#';
+                        editLink.textContent = 'Edit description';
+                        editContainer.appendChild(editLink);
+                        // Also make this newly created "Edit" link open the modal
+                        editLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            dialog.showModal();
+                        });
+                        fieldDiv.append(divider, descriptionTextarea, editContainer);
+                    }
+                    // Update the textarea's value with the new text from the modal
+                    descriptionTextarea.value = newText;
+                }
+                else {
+                    // If the new text is empty, remove the description elements
+                    divider === null || divider === void 0 ? void 0 : divider.remove();
+                    descriptionTextarea === null || descriptionTextarea === void 0 ? void 0 : descriptionTextarea.remove();
+                    editContainer === null || editContainer === void 0 ? void 0 : editContainer.remove();
+                }
+                // Close the modal after the "save" action is complete
+                dialog.close();
+            });
+        }
+        else {
+            console.log('Could not find all modal elements');
+        }
+    }, 500);
     return fieldDiv;
 }
