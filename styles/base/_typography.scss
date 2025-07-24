@@ -13,7 +13,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-family;
   margin-top: 0;
   margin-bottom: $spacing-600;
 
@@ -24,34 +23,28 @@ h6 {
 
 h1 {
   @include heading-level-1;
-  font-size: $size-font-h1;
 }
 
 h2 {
   @include heading-level-2;
-  font-size: $size-font-h2;
 }
 
 h3 {
   @include heading-level-3;
-  font-size: $size-font-h3;
 }
 
 h4 {
   @include heading-level-4;
-  font-size: $size-font-h4;
   color: $text-dark;
 }
 
 h5 {
   @include heading-level-5;
-  font-size: $size-font-h5;
   color: $text-dark;
 }
 
 h6 {
   @include heading-level-6;
-  font-size: $size-font-h6;
   color: $text-dark;
 }
 
@@ -59,25 +52,11 @@ h6 {
    Paragraph Default
 ------------------------------ */
 p {
+  margin-top: 0;
   margin-bottom: $spacing-500;
   line-height: 160%;
   color: $text-primary;
   font-size: $size-font-body-default;
-}
-
-.form-wrapper p {
-  margin: 0;
-}
-
-/* ------------------------------
-   Form Lists
------------------------------- */
-.form-wrapper {
-  ol,
-  ul {
-    margin: 0;
-    padding: 0 0 0 2rem;
-  }
 }
 
 /* ------------------------------
@@ -92,43 +71,6 @@ p {
 ------------------------------ */
 .p-large {
   font-size: $size-font-body-large;
-}
-
-/* ------------------------------
-   Typography Blocks – Explicit Link & List Styling
------------------------------- */
-.typography.p-small.block {
-  p {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  a {
-    font-size: $size-font-body-small;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  ol li,
-  ul li {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
 }
 
 .default-content-wrapper a {
@@ -151,57 +93,8 @@ p {
 ol li,
 ul li {
   @include font-body-default;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: $text-primary;
-}
-
-.typography.p-large.block {
-  p {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  a {
-    font-size: $size-font-body-large;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  ol li,
-  ul li {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
-}
-
-/* ------------------------------
-   Subtitle
------------------------------- */
-.typography.subtitle.block p {
-  font-family: $font-family;
-  font-size: $size-font-subtitle;
-  line-height: 130%;
-  margin: 0 0 40px 0;
-  color: $text-dark;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
 
 /* ------------------------------
@@ -210,19 +103,34 @@ ul li {
 .strap-title,
 .strap-title-small {
   text-transform: uppercase;
-  line-height: 100%;
-  color: $text-dark;
 }
 
 .strap-title {
   font-size: $size-font-strap-title;
-  margin: 0 0 8px 0;
+  color: $color-primary-navy;
+  margin-bottom: $spacing-400;
 
-  &:last-child {
+  p {
+    color: $color-primary-navy;
+    font-size: $size-font-strap-title;
     margin-bottom: 0;
   }
 }
 
 .strap-title-small {
   font-size: $size-font-strap-title-small;
+}
+
+.subtitle {
+  font-size: $size-font-subtitle;
+  font-weight: 300;
+  line-height: 130%;
+  margin-bottom: $spacing-500;
+
+  p {
+    font-size: $size-font-subtitle;
+    font-weight: 300;
+    line-height: 130%;
+    margin: 0;
+  }
 }
