@@ -7,50 +7,43 @@ const DEFAULT_BG_CLASS = 'wizard--bg-light'
 /**
  * Finds the background class on the current wizard step and applies it to the container,
  * falling back to a default class if no specific one is found.
- * @param {HTMLElement} wizardEl The main wizard element.
+ * @param {HTMLElement} currentStepEl The current wizard step element.
  * @param {HTMLElement} container The container element to apply the background to.
  */
-function updateBackground(wizardEl, container) {
-  // 1. Find the currently active step by its class.
-  const currentStepEl = wizardEl.querySelector('.current-wizard-step')
+function updateBackground(currentStepEl, container) {
   if (!currentStepEl) return
 
-  // 2. Find which of the defined background classes is present on the active step.If none is found, use the default.
-  //    This uses short-circuiting: if currentStepEl is null, it immediately uses the default.
+  // Find which of the defined background classes is present on the active step.
+  // If none is found, use the default.
   const newBgClass =
-    (currentStepEl &&
-      BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) ||
+    BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls)) ||
     DEFAULT_BG_CLASS
 
-  // 3. Clear any pre-existing background classes from the container for a clean slate.
+  // Clear any pre-existing background classes from the container for a clean slate.
   container.classList.remove(...BG_CLASSES)
 
-  // 4. If a background class was found on the step, apply it to the container.
+  // If a background class was found on the step, apply it to the container.
   if (newBgClass) {
     container.classList.add(newBgClass)
   }
 }
 
-function updateExitButtonText(wizardEl) {
-  const currentStepEl = wizardEl.querySelector('.current-wizard-step')
+/**
+ * Updates the exit button text based on whether the current step has the wizard-intro class.
+ * @param {HTMLElement} currentStepEl The current wizard step element.
+ */
+function updateExitButtonText(currentStepEl) {
   if (!currentStepEl) return
 
-  const exitBtn = currentStepEl.closest('form').querySelector('[name="top_nav"] [name="exitBtn"]')
+  const exitBtn = currentStepEl.closest('form')?.querySelector('[name="top_nav"] [name="exitBtn"]')
   if (!exitBtn) return
 
   exitBtn.textContent = currentStepEl.classList.contains('wizard-intro') ? 'Exit' : 'Save & exit'
 }
 
-onElementsAddedByClassName('wizard', (wizardEl) => {
-  const container = wizardEl.closest('main')
+onElementsAddedByClassName('current-wizard-step', (wizardStepEl) => {
+  const container = wizardStepEl.closest('main')
 
-  // Set the initial background based on the default active step on page load.
-  updateBackground(wizardEl, container)
-  updateExitButtonText(wizardEl)
-
-  // Add an event listener to update the background whenever the step changes.
-  wizardEl.addEventListener('wizard:navigate', () => {
-    updateBackground(wizardEl, container)
-    updateExitButtonText(wizardEl)
-  })
+  updateBackground(wizardStepEl, container)
+  updateExitButtonText(wizardStepEl)
 })
