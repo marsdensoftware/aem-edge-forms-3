@@ -282,7 +282,7 @@ form .file-wrapper > button {
   padding: 10px 5px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: $spacing-450;
   justify-content: center;
   align-items: center;
 }
@@ -294,12 +294,11 @@ form .file-wrapper > button {
 .radio-group-wrapper.horizontal .field-description,
 .checkbox-group-wrapper.horizontal .field-description {
   p {
-    font-size: 15px;
     color: $text-dark-primary;
     margin-bottom: $spacing-200;
 
     @include media('desktop') {
-      font-size: 17px;
+      font-size: $size-font-body-default;
     }
   }
 }
@@ -311,7 +310,7 @@ form .file-wrapper > button {
 
   .form form .wizard {
     .wizard-menu-items {
-      gap: 20px;
+      gap: $spacing-450;
     }
 
     margin: 0;
