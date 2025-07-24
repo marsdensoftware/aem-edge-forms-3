@@ -1024,7 +1024,7 @@
                         "fieldType": "button",
                         "name": "modal-save-button",
                         "jcr:title": "Save",
-                        "buttonType": "submit",
+                        "buttonType": "button",
                         "sling:resourceType": "core/fd/components/form/button/v1/button"
                       }
                     }
