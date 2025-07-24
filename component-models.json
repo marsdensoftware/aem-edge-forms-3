@@ -31847,6 +31847,14 @@
             "value": "option2"
           }
         ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dummy",
+        "label": "Dummy",
+        "value": "",
+        "hidden": true
       }
     ]
   },

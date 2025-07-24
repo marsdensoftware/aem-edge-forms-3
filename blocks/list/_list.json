@@ -60,6 +60,14 @@
             { "name": "Option 1", "value": "option1" },
             { "name": "Option 2", "value": "option2" }
           ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "dummy",
+          "label": "Dummy",
+          "value": "",
+          "hidden": true
         }
       ]
     }
