@@ -67,11 +67,11 @@
   .desc {
     font-size: $size-font-body-default;
     color: $text-secondary;
-    font-weight: 400;
+    font-weight: $font-weight-regular;
   }
 
   .text {
-    font-weight: 400;
+    font-weight: $font-weight-regular;
   }
 }
 
@@ -87,7 +87,7 @@
       align-items: flex-start;
 
       &:not(:last-child) {
-        margin-bottom: $spacing-200;
+        margin-bottom: 0;
       }
 
       @media (min-width: 744px) {
@@ -112,44 +112,47 @@
   }
 
   &.variant-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-300;
-
     .checkbox-wrapper {
+      margin: 0;
+
       input[type='checkbox'] {
-        display: none; // Hide native checkbox
+        display: none;
       }
 
       label {
         display: flex;
-        padding: $spacing-200 $spacing-300 $spacing-200 $spacing-450;
         align-items: center;
         gap: 0;
+        padding: $spacing-300 $spacing-450 $spacing-300 $spacing-450;
+        margin: 0;
         background-color: $color-white;
+        border: 1px solid $stroke-tertiary;
         border-radius: $border-radius-round;
         font-size: clamp(15px, 1.25vw, 17px);
         line-height: 160%;
         color: $text-secondary;
-        border: 1px solid $stroke-tertiary;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease,
-          border 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+
+        &::before {
+          display: none;
+        }
 
         &::after {
           content: '';
           display: block;
-          background-image: url('../../icons/icon-plus.svg');
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat;
           width: $spacing-400;
           height: $spacing-400;
           margin-left: $spacing-200;
+          background-image: url('../../icons/icon-plus.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
         }
 
-        &::before {
-          display: none;
+        > span.text {
+          margin: 0;
+          line-height: 1;
         }
       }
 
@@ -166,6 +169,20 @@
           background-color: $color-accent;
           border-color: $color-accent;
         }
+      }
+    }
+
+    // INSERTED CODE — properly scoped override for pills + horizontal
+    &.horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-200;
+      margin: 0;
+
+      .checkbox-wrapper {
+        flex: 0 1 auto;
+        min-width: max-content;
+        margin-bottom: 0;
       }
     }
   }
