@@ -235,7 +235,7 @@ export class Summarizer {
     <div class="row">
         <div class="col-md-5">
             <h4 class="title">{{title}}</h4>
-            <p class="p-small">{{description}}</p>
+            {{description}}
             <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-7">{{content}}</div>
@@ -246,7 +246,7 @@ export class Summarizer {
     <div class="row">
         <div class="col-md-5">
             <h4 class="title">{{title}}</h4>
-            <p class="p-small">{{description}}</p>
+            {{description}}
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -311,8 +311,11 @@ export class Summarizer {
         if (entry) {
             content = Summarizer.getItemContent(entry, stepName, properties);
         }
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: content });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
     }
 
     static defaultRepeatableSummarizer(stepName, el, properties) {
@@ -325,8 +328,12 @@ export class Summarizer {
             let content = Summarizer.getItemContent(entry, stepName);
             contents.push(content);
         });
+        
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     }
 
     static personal_details(el) {
@@ -391,7 +398,9 @@ export class Summarizer {
         });
 
         if (languagesContent.length > 0) {
-            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: languagesContent.join('') });
+            const description = properties['description'];
+            const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml , content: languagesContent.join('') });
             el.innerHTML = content;
         }
     }
@@ -438,8 +447,11 @@ export class Summarizer {
                 contents.push(content);
             });
         }
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
         el.innerHTML = content;
     }
 
@@ -571,7 +583,10 @@ export class Summarizer {
                 contents.push(content);
             }
         });
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: contents.join('') });
+        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
     }
 }
