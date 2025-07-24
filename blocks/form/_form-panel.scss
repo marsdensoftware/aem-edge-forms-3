@@ -15,10 +15,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
-  p:not(:last-child) {
-    margin-bottom: $spacing-500;
-  }
 }
 
 // Allow more spacing at the bottom
