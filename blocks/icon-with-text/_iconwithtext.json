@@ -11,9 +11,7 @@
               "name": "Icon with text",
               "model": "iconwithtext",
               "iconwithtextText_titleType": "h2",
-              "iconwithtextText_title": "<h2>Heading level 2</h2>",
-              "iconwithtextText_description": "<p>Paragraph one</p>",
-              "iconwithtextText2_description": "<p>Paragraph two</p>"
+              "iconwithtextText_description": "<p>Paragraph one</p>"
             }
           }
         }
@@ -52,16 +50,9 @@
           "required": true
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "iconwithtextText_description",
-          "label": "Description",
-          "required": true
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "iconwithtextText2_description",
           "label": "Description",
           "required": true
         }

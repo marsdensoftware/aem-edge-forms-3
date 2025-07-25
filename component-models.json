@@ -31793,16 +31793,9 @@
         "required": true
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "iconwithtextText_description",
-        "label": "Description",
-        "required": true
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "iconwithtextText2_description",
         "label": "Description",
         "required": true
       }
