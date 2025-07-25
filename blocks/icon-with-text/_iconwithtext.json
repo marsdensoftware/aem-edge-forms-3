@@ -38,7 +38,7 @@
         },
         {
             "component": "aem-content",
-            "name": "iconwithtextLink",
+            "name": "iconwithtextText_Link",
             "label": "Link",
             "valueType": "string"
         },
