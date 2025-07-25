@@ -31801,34 +31801,33 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
+        "name": "icon",
+        "label": "Icon",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "required": true
-      },
-      {
-        "component": "richtext",
-        "name": "textContent_text",
-        "label": "Text",
-        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon alt text",
         "required": true
       },
       {
         "component": "aem-content",
-        "name": "textContent_cta",
+        "name": "cta",
         "label": "CTA",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "textContent_ctaText",
-        "label": "CTA label",
+        "name": "ctaText",
+        "label": "CTA text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaContent",
+        "label": "CTA content",
         "valueType": "string"
       },
       {
