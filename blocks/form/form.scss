@@ -127,10 +127,6 @@ input::file-selector-button {
   text-align: center;
 }
 
-.form button {
-  @extend %button--primary;
-}
-
 form .file-wrapper > button {
   display: flex;
 }
