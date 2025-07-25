@@ -47,6 +47,7 @@
     {
       "id": "column",
       "components": [
+        "typography",
         "text",
         "image",
         "button",
