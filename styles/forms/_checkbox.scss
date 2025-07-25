@@ -8,7 +8,7 @@
     @extend %label-common-style;
     position: relative;
     padding: $spacing-400;
-    padding-right: 48px;
+    padding-right: $spacing-700;
     border-radius: $border-radius-mid;
     border: 2px solid $stroke-tertiary;
     background-color: $color-white;
@@ -17,7 +17,7 @@
     &::before {
       content: '';
       position: absolute;
-      right: 16px;
+      right: $spacing-400;
       top: 50%;
       transform: translateY(-50%);
       display: block;
@@ -58,8 +58,8 @@
         background-color: $stroke-accent;
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
         background-size: 17px;
-        width: 24px;
-        height: 24px;
+        width: $spacing-500;
+        height: $spacing-500;
       }
     }
   }
@@ -71,7 +71,6 @@
   }
 
   .text {
-    color: $text-dark-primary;
     font-weight: 400;
   }
 }
@@ -88,7 +87,7 @@
       align-items: flex-start;
 
       &:not(:last-child) {
-        margin-bottom: 8px;
+        margin-bottom: $spacing-200;
       }
 
       @media (min-width: 744px) {
@@ -100,10 +99,10 @@
         width: 100%;
 
         @media (max-width: 743px) {
-          padding-right: 48px;
+          padding-right: $spacing-700;
 
           &::before {
-            right: 12px;
+            right: $spacing-300;
             top: 50%;
             transform: translateY(-50%);
           }
@@ -115,7 +114,7 @@
   &.variant-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: $spacing-300;
 
     .checkbox-wrapper {
       input[type='checkbox'] {
@@ -124,14 +123,12 @@
 
       label {
         display: flex;
-        padding: var(--Spacing-Spacing-200, 8px)
-          var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-200, 8px)
-          var(--Spacing-Spacing-450, 20px);
+        padding: $spacing-200 $spacing-300 $spacing-200 $spacing-450;
         align-items: center;
-        gap: var(--Spacing-Spacing-000, 0px);
+        gap: 0;
         background-color: $color-white;
         border-radius: $border-radius-round;
-        font-size: clamp(15px, 1.25vw, 17px); // from $size-font-body-default
+        font-size: clamp(15px, 1.25vw, 17px);
         line-height: 160%;
         color: $text-secondary;
         border: 1px solid $stroke-tertiary;
@@ -146,9 +143,9 @@
           background-position: center;
           background-size: contain;
           background-repeat: no-repeat;
-          width: 16px;
-          height: 16px;
-          margin-left: 8px;
+          width: $spacing-400;
+          height: $spacing-400;
+          margin-left: $spacing-200;
         }
 
         &::before {
