@@ -54,34 +54,19 @@
                     "valueType": "string"
                 },
                 {
-                    "component": "select",
-                    "name": "textContent_ctaTextClass",
-                    "label": "CTA Size",
+                    "component": "multiselect",
+                    "name": "classes",
+                    "value": [],
+                    "label": "Options",
+                    "valueType": "array",
                     "options": [
-                        {
-                            "name": "Small",
-                            "value": ""
-                        },
                         {
                             "name": "Large",
                             "value": "large"
-                        }
-                    ]
-                },
-                {
-                    "component": "select",
-                    "name": "imageClass",
-                    "value": "",
-                    "label": "Image position",
-                    "valueType": "string",
-                    "options": [
-                        {
-                            "name": "Left",
-                            "value": ""
                         },
                         {
-                            "name": "Right",
-                            "value": "Right"
+                            "name": "Icon on right",
+                            "value": "right"
                         }
                     ]
                 }
