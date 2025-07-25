@@ -348,7 +348,7 @@ form .file-wrapper > button {
     &::after {
       content: '';
       display: block;
-      height: 1px;
+      height: 2px;
       width: 100%;
       background-color: $color-shade-navy-20;
       margin: $spacing-500 0;
