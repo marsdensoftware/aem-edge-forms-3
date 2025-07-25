@@ -31830,6 +31830,38 @@
         "name": "textContent_ctaText",
         "label": "CTA label",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "textContent_ctaSize",
+        "label": "CTA Size",
+        "options": [
+          {
+            "name": "Small",
+            "value": ""
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "imagePosition",
+        "value": "",
+        "label": "Image position",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Left",
+            "value": ""
+          },
+          {
+            "name": "Right",
+            "value": "side-by-side left"
+          }
+        ]
       }
     ]
   },
