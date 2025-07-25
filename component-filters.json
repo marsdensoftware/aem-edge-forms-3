@@ -22,6 +22,24 @@
     ]
   },
   {
+    "id": "account",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "auth-callback",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
