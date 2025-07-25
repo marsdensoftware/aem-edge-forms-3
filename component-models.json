@@ -123,7 +123,14 @@
   },
   {
     "id": "account",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Title",
+        "valueType": "string"
+      }
+    ]
   },
   {
     "id": "auth-callback",
