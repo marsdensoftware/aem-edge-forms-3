@@ -56,7 +56,7 @@
         {
           "component": "richtext",
           "name": "text",
-          "value": "Typography",
+          "value": "Text",
           "label": "Text",
           "valueType": "string"
         }
