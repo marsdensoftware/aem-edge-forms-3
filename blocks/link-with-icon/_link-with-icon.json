@@ -55,7 +55,7 @@
                 },
                 {
                     "component": "select",
-                    "name": "textContent_ctaSize",
+                    "name": "textContent_ctaTextClass",
                     "label": "CTA Size",
                     "options": [
                         {
@@ -70,7 +70,7 @@
                 },
                 {
                     "component": "select",
-                    "name": "imagePosition",
+                    "name": "imageClass",
                     "value": "",
                     "label": "Image position",
                     "valueType": "string",
@@ -81,7 +81,7 @@
                         },
                         {
                             "name": "Right",
-                            "value": "side-by-side left"
+                            "value": "Right"
                         }
                     ]
                 }
