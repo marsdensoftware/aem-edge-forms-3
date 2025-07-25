@@ -31780,6 +31780,12 @@
         "required": true
       },
       {
+        "component": "aem-content",
+        "name": "iconwithtextLink",
+        "label": "Link",
+        "valueType": "string"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "iconwithtextText_title",
