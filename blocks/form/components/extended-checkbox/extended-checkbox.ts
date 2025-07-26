@@ -11,104 +11,44 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
   const { iconName } = fieldJson.properties
 
+  // if we have an iconName, then add the extended-checkbox--icon-${iconName} class to the fieldDiv
   if (iconName) {
     fieldDiv.classList.add(`extended-checkbox--icon-${iconName}`)
   }
 
-  setTimeout(() => {
-    // --- Setup: Find all related elements from the sibling modal ---
-    const modalContainer = fieldDiv.parentElement?.querySelector('fieldset[name="modal-content"]')
-    const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>('textarea[name="modal-text"]')
-    const saveButton = modalContainer?.querySelector('button[name="modal-save-button"]')
-    // if (saveButton) {
-    console.log('saveButton', saveButton)
-    // }
-    const dialog = modalContainer?.querySelector('dialog')
+  // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
+  const modalContentContainer = fieldDiv.parentElement?.nextElementSibling
 
-    // --- Initial Render: Display pre-existing text on page load ---
-    const initialText = sourceTextarea?.value || ''
-    if (initialText) {
-      const divider = document.createElement('hr')
-      divider.classList.add('checkbox-divider')
+  // 2. Find the source textarea within that container using a specific attribute selector.
+  const sourceTextarea = modalContentContainer?.querySelector<HTMLTextAreaElement>('textarea[name="modal-text"]')
 
-      const descriptionTextarea = document.createElement('textarea')
-      descriptionTextarea.classList.add('checkbox-description')
-      descriptionTextarea.placeholder = 'Enter description here'
-      descriptionTextarea.value = initialText
+  // 3. Get the value from the source textarea. Fallback to an empty string if not found.
+  const textAreaText = sourceTextarea?.value ||
+      'Copy here explaining an example of this skill etc over multiple lines as required. Copy here explaining an example of this skill etc over multiple lines as required.'
 
-      const editDiv = document.createElement('div')
-      const editLink = document.createElement('a')
-      editLink.classList.add('edit')
-      editLink.href = '#'
-      editLink.textContent = 'Edit description'
-      editDiv.appendChild(editLink)
+  if (textAreaText) {
+    // Create the divider
+    const divider = document.createElement('hr')
+    divider.classList.add('checkbox-divider')
 
-      // Make the "Edit" link functional by having it open the modal
-      editLink.addEventListener('click', (e) => {
-        e.preventDefault()
-        dialog?.showModal()
-      })
+    // Create the destination textarea and set its value
+    const textArea = document.createElement('textarea')
+    textArea.classList.add('checkbox-description')
+    textArea.placeholder = 'Enter description here'
+    textArea.value = textAreaText; // Use the dynamically fetched value
 
-      fieldDiv.append(divider, descriptionTextarea, editDiv)
-    }
+    // Create the edit link container
+    const editDiv = document.createElement('div')
+    const editLink = document.createElement('a')
+    editLink.classList.add('edit')
+    editLink.href = '#'
+    editLink.textContent = 'Edit description'
+    editDiv.appendChild(editLink)
 
-    // --- Event Listener: Connect the modal's "Save" button to this component ---
-    if (saveButton && sourceTextarea && dialog) {
-      saveButton.addEventListener('click', (event) => {
-        // --- ADDED FOR DEBUGGING ---
-        console.log('Modal "Save" button clicked!')
-
-        // Prevent the button from submitting the form
-        event.preventDefault()
-
-        const newText = sourceTextarea.value
-
-        // Find the description elements within this checkbox component
-        let divider = fieldDiv.querySelector('.checkbox-divider')
-        let descriptionTextarea = fieldDiv.querySelector<HTMLTextAreaElement>('.checkbox-description')
-        let editContainer = fieldDiv.querySelector('.edit')?.parentElement
-
-        if (newText) {
-          // If description elements don't exist yet, create them now
-          if (!descriptionTextarea) {
-            divider = document.createElement('hr')
-            divider.className = 'checkbox-divider'
-
-            descriptionTextarea = document.createElement('textarea')
-            descriptionTextarea.className = 'checkbox-description'
-            descriptionTextarea.placeholder = 'Enter description here'
-
-            editContainer = document.createElement('div')
-            const editLink = document.createElement('a')
-            editLink.className = 'edit'
-            editLink.href = '#'
-            editLink.textContent = 'Edit description'
-            editContainer.appendChild(editLink)
-
-            // Also make this newly created "Edit" link open the modal
-            editLink.addEventListener('click', (e) => {
-              e.preventDefault()
-              dialog.showModal()
-            })
-
-            fieldDiv.append(divider, descriptionTextarea, editContainer)
-          }
-          // Update the textarea's value with the new text from the modal
-          descriptionTextarea.value = newText
-        } else {
-          // If the new text is empty, remove the description elements
-          divider?.remove()
-          descriptionTextarea?.remove()
-          editContainer?.remove()
-        }
-
-        // Close the modal after the "save" action is complete
-        dialog.close()
-      })
-    } else {
-      console.log('Could not find all modal elements')
-    }
-  }, 500)
+    // Append all new elements to the main field div
+    fieldDiv.append(divider, textArea, editDiv)
+  }
 
   return fieldDiv
+
 }
