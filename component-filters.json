@@ -18,9 +18,7 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form",
-      "account",
-      "auth-callback"
+      "embed-adaptive-form"
     ]
   },
   {
