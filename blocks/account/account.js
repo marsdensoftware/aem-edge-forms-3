@@ -1,16 +1,13 @@
-import { createOptimizedPicture } from '../../scripts/aem.js'
-import { moveInstrumentation } from '../../scripts/scripts.js'
-// import odic from '../../scripts/auth/oidc-entry.js'
-
-const signInText = 'Sign in'
-const signOutText = 'Sign out'
+const signInText = 'sign-in'
+const signOutText = 'sign-out'
 
 const decorateSignInButton = async (block) => {
-
-  const link = [...block.querySelectorAll('a.button')].find(a => {
-    const t = (a.textContent ?? '').replace(/\s+/g, ' ').trim().toLowerCase();
-    return t === 'sign in' || t === 'sign out';
-  });
+  const link = [...block.querySelectorAll('a.button')].find((a) => {
+    const t = (a.textContent ?? '').replace(/\s+/g, ' ').trim().toLowerCase()
+    return (
+      t === 'sign in' || t === 'sign out' || t === 'sign-in' || t === 'sign-out'
+    )
+  })
 
   if (!link) {
     console.warn('sign in button not found')
