@@ -31814,36 +31814,38 @@
       },
       {
         "component": "aem-content",
-        "name": "cta",
-        "label": "CTA",
+        "name": "link",
+        "label": "Link",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "ctaText",
-        "label": "CTA text",
+        "name": "linkText",
+        "label": "Link text",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "name": "ctaContent",
-        "label": "CTA content",
-        "valueType": "string"
-      },
-      {
-        "component": "multiselect",
+        "component": "select",
         "name": "classes",
-        "value": [],
-        "label": "Options",
-        "valueType": "array",
+        "value": "",
+        "label": "Variants",
+        "valueType": "string",
         "options": [
           {
-            "name": "Large",
+            "name": "Small with icon on left",
+            "value": ""
+          },
+          {
+            "name": "Small with icon on right",
+            "value": "icon--right"
+          },
+          {
+            "name": "Large with icon on left",
             "value": "large"
           },
           {
-            "name": "Icon on right",
-            "value": "right"
+            "name": "Large with icon on right",
+            "value": "large icon--right"
           }
         ]
       }
