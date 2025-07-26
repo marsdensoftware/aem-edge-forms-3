@@ -6,11 +6,13 @@ const signInText = 'Sign in'
 const signOutText = 'Sign out'
 
 const decorateSignInButton = async (block) => {
-  const links = [...block.querySelectorAll('a.button.secondary')].filter((a) =>
-    /^(sign in|sign out)$/i.test(a.textContent.trim()),
-  )
 
-  if (!links) {
+  const link = [...block.querySelectorAll('a.button')].find(a => {
+    const t = (a.textContent ?? '').replace(/\s+/g, ' ').trim().toLowerCase();
+    return t === 'sign in' || t === 'sign out';
+  });
+
+  if (!link) {
     console.warn('sign in button not found')
     return
   }
@@ -29,18 +31,18 @@ const decorateSignInButton = async (block) => {
     isAuthenticated = false
   }
 
-  const updateLink = (link, text, onClick) => {
-    link.textContent = text
-    link.title = text
-    if (link._prevClickHandler) {
-      link.removeEventListener('click', link._prevClickHandler)
+  const updateLink = (a, text, onClick) => {
+    a.textContent = text
+    a.title = text
+    if (a._prevClickHandler) {
+      a.removeEventListener('click', a._prevClickHandler)
     }
-    link._prevClickHandler = onClick // save reference for next time
-    link.addEventListener('click', onClick)
+    a._prevClickHandler = onClick // save reference for next time
+    a.addEventListener('click', onClick)
   }
 
   updateLink(
-    links[0],
+    link,
     isAuthenticated ? signOutText : signInText,
     isAuthenticated ? handleSignOut : handleSignIn,
   )
