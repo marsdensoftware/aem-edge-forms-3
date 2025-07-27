@@ -47,6 +47,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
   let mo = null
 
   const extraTeardowns = new Set()
+
   const onTeardown = (fn) => {
     if (typeof fn !== 'function') return
     if (done) {
@@ -61,7 +62,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
     }
   }
 
-  function runTeardowns(source) {
+  const runTeardowns = (source) => {
     extraTeardowns.forEach((fn) => {
       try {
         fn({ source })
@@ -72,7 +73,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
     extraTeardowns.clear()
   }
 
-  function teardown({ source } = { source: 'manual' }) {
+  const teardown = ({ source } = { source: 'manual' }) => {
     if (done) return
     done = true
     try {
@@ -176,4 +177,6 @@ const isHistoryTraversal = (e) => {
   return typeof t === 'number' && t === 2
 }
 
+/* eslint-disable object-curly-newline */
 export { withBlockLifecycle, isHistoryTraversal, isEditor, queryFirst }
+/* eslint-enable object-curly-newline */
