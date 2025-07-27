@@ -35,6 +35,18 @@ const assertString = (v, msg) => {
   if (!isString(v)) throw new Error(msg)
 }
 
+const error = (...args) => {
+  console.error(...args) // eslint-disable-line no-console
+}
+
+const warn = (...args) => {
+  console.warn(...args) // eslint-disable-line no-console
+}
+
+const debug = (...args) => {
+  console.debug(...args) // eslint-disable-line no-console
+}
+
 /* ──────────────────────────────────────── PKCE  ──────────────────────────────────────── */
 
 // refernce code https://github.com/crouchcd/pkce-challenge/blob/master/src/index.ts
@@ -203,7 +215,7 @@ const withLock = async (fn, options = {}) => {
 
     while (!isFree()) {
       if (Date.now() >= deadline) {
-        console.warn('Lock timed out', key) // eslint-disable-line no-console
+        warn('Lock timed out', key) // eslint-disable-line no-console
         return undefined // timed out
       }
       await sleep(opts.poll) // eslint-disable-line no-await-in-loop
@@ -255,7 +267,7 @@ const userInfo = {
         refreshBy: Number.isFinite(rb) ? rb * 1000 : 0, // sec → ms
       }
     } catch (err) {
-      console.error('Failed to parse user_info cookie:', err) // eslint-disable-line no-console
+      error('Failed to parse user_info cookie:', err)
       return DEFAULT_INFO
     }
   },
@@ -293,8 +305,8 @@ const createBackend = (origin) => {
     if (ct.includes(MIME.JSON)) {
       try {
         return { type: 'json', data: await resp.json() }
-      } catch (error) {
-        return { type: 'json', data: null, error }
+      } catch (err) {
+        return { type: 'json', data: null, error: err }
       }
     }
 
@@ -306,7 +318,7 @@ const createBackend = (origin) => {
   /** @param {string} uri @param {unknown} body */
   const post = async (uri, body = null) => {
     // TODO: rm debug statement
-    console.log('POST', uri, body) // eslint-disable-line no-console
+    debug('POST', uri, body)
 
     const resp = await fetch(new URL(uri, origin), {
       method: 'POST',
@@ -389,7 +401,7 @@ const makeChannel = (channelName = 'default-channel') => {
     }
   }
   // ✱ Optional fallback; here we just no-op.
-  console.warn('BroadcastChannel not supported in this browser') // eslint-disable-line no-console
+  warn('BroadcastChannel not supported in this browser')
   const noop = () => {}
   return { post: noop, on: noop, close: noop }
 }
@@ -560,7 +572,7 @@ const createAuthClient = ({
       const verifier = sessionStorage.getItem('ka:cv')
       sessionStorage.removeItem('ka:cv')
       if (!verifier) {
-        console.warn('verifier already used.') // eslint-disable-line no-console
+        warn('verifier already used.')
         return { ok: false }
       }
       const res = await backend.exchangeCodeForCookies({ code, verifier })
@@ -572,11 +584,11 @@ const createAuthClient = ({
     start() {
       if (timerId != null) return
       tick().catch((err) => {
-        console.error('tick() failed', err) // eslint-disable-line no-console
+        error('tick() failed', err)
       })
       timerId = setInterval(() => {
         tick().catch((err) => {
-          console.error('tick() failed', err) // eslint-disable-line no-console
+          error('tick() failed', err)
         })
       }, TICK_EVERY)
     },

@@ -8,26 +8,25 @@ import {
 import {
   withBlockLifecycle,
   isHistoryTraversal,
+  queryFirst,
 } from '../../scripts/msd/blocks.js'
+
+import { warn, error } from '../../scripts/msd/log.js'
 
 const DASH_OR_SPACE = /[\s\p{Pd}]+/gu
 const SIGN_IN_BTN_TARGETS = new Set(['signin', 'signout'])
 
 const signInOutButton = (block) => {
-  const find = (block) => {
-    for (const a of block.querySelectorAll('a.button')) {
-      if (!a.textContent) continue
-      const t = a.textContent.toLowerCase().replace(DASH_OR_SPACE, '')
-      if (SIGN_IN_BTN_TARGETS.has(t)) return a
-    }
-    return null
-  }
-
-  const a = find(block)
+  const a = queryFirst(block, 'a.button', (m) => {
+    const text = m.textContent?.trim()
+    if (!text) return null
+    const normalized = text.toLowerCase().replace(DASH_OR_SPACE, '')
+    return SIGN_IN_BTN_TARGETS.has(normalized) ? m : null
+  })
   if (!a) return null
 
   const updateText = () => {
-    const isAuthenticated = authStatus().isAuthenticated
+    const { isAuthenticated } = authStatus()
     a.textContent = isAuthenticated ? 'sign-out' : 'sign-in'
     a.title = a.textContent
   }
@@ -35,19 +34,21 @@ const signInOutButton = (block) => {
   const setBusy = (busy = true) => {
     a.classList.toggle('is-busy', busy)
     if (busy) {
-      a.setAttribute('aria-disabled', 'true')
       a.setAttribute('aria-busy', 'true')
     } else {
-      a.removeAttribute('aria-disabled')
       a.removeAttribute('aria-busy')
     }
   }
 
   return {
     update: updateText,
-    setBusy: () => setBusy(true),
-    clearBusy: () => setBusy(false),
-    isBusy: () => a.getAttribute('aria-disabled') === 'true',
+    isBusy: a.getAttribute('aria-busy') === 'true',
+    setBusy: () => {
+      setBusy(true)
+    },
+    clearBusy: () => {
+      setBusy(false)
+    },
     reset: () => {
       updateText()
       setBusy(false)
@@ -62,7 +63,7 @@ export default async function decorate(block) {
     ({ signal, isEditor }) => {
       const btn = signInOutButton(block)
       if (!btn) {
-        console.warn(
+        warn(
           'could not find sign-in button. In UE name it sign-in and set the link to #',
         )
         return
@@ -75,7 +76,7 @@ export default async function decorate(block) {
       const onSignInOutClick = async (e) => {
         e.preventDefault()
         // debouce
-        if (btn.isBusy()) return
+        if (btn.isBusy) return
         btn.setBusy()
 
         try {
@@ -85,11 +86,16 @@ export default async function decorate(block) {
             await authLogout()
             return
           }
+
           const url = await authLoginUrl()
-          await new Promise((r) => requestAnimationFrame(r))
+
+          await new Promise((r) => {
+            requestAnimationFrame(r)
+          })
+
           window.location.assign(url)
         } catch (err) {
-          console.error(err)
+          error(err)
           btn.reset()
         }
       }
@@ -100,7 +106,12 @@ export default async function decorate(block) {
       }
 
       window.addEventListener('pageshow', onPageShow, { signal })
-      onAuthChange(() => btn.reset(), { signal })
+      onAuthChange(
+        () => {
+          btn.reset()
+        },
+        { signal },
+      )
       btn.addEventListener('click', onSignInOutClick, { signal })
     },
     // if you want to reset btn on nav back/forward set this to default

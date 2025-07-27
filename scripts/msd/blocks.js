@@ -1,8 +1,18 @@
+import { error } from './log.js'
+
 const isEditor = (block) => {
   const is =
     block.hasAttribute('data-aue-resource') ||
     block.hasAttribute('data-aue-label')
   return is
+}
+
+const queryFirst = (container, selector, matchFn) => {
+  const elements = container.querySelectorAll(selector)
+  for (let i = 0; i < elements.length; i += 1) {
+    if (matchFn(elements[i])) return elements[i]
+  }
+  return null
 }
 
 /**
@@ -44,7 +54,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
       try {
         fn({ source: 'late-register' })
       } catch (e) {
-        console.error('onTeardown error', e) // eslint-disable-line no-console
+        error('onTeardown error', e)
       }
     } else {
       extraTeardowns.add(fn)
@@ -56,7 +66,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
       try {
         fn({ source })
       } catch (e) {
-        console.error('teardown error', e) // eslint-disable-line no-console
+        error('teardown error', e)
       }
     })
     extraTeardowns.clear()
@@ -141,7 +151,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
       })
       if (typeof ret === 'function') onTeardown(ret)
     } catch (err) {
-      console.error('block init failed:', err) // eslint-disable-line no-console
+      error('block init failed:', err)
       teardown({ source: 'init-error' }) // pass a source to avoid destructuring error
     }
   }
@@ -166,4 +176,4 @@ const isHistoryTraversal = (e) => {
   return typeof t === 'number' && t === 2
 }
 
-export { withBlockLifecycle, isHistoryTraversal, isEditor }
+export { withBlockLifecycle, isHistoryTraversal, isEditor, queryFirst }

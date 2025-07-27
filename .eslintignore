@@ -16,4 +16,6 @@ component-models.json
 # include msd scripts
 #!scripts/msd/**
 #
-!scripts/msd/*.js
+!scripts/msd/*
+!blocks/account/*
+!blocks/auth-redirect/*

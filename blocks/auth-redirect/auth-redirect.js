@@ -1,12 +1,13 @@
 import { isEditor } from '../../scripts/msd/blocks.js'
 import { authExchange } from '../../scripts/msd/auth.js'
+import { debug, error } from '../../scripts/msd/log.js'
 
 export default async function decorate(block) {
-  console.log('hello auth-callback block', { isEditor: isEditor(block) })
+  debug('hello auth-callback block', { isEditor: isEditor(block) })
   const queryParams = new URLSearchParams(window.location.search)
 
   if (queryParams.has('error')) {
-    console.error('Auth error:', queryParams.get('error'))
+    error('Auth error:', queryParams.get('error'))
   }
 
   if (queryParams.has('code')) {

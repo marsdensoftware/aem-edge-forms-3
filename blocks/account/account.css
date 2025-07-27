@@ -4,7 +4,6 @@
   font-optical-sizing: auto;
 }
 .account .button.is-busy,
-.account .button[aria-disabled='true'],
 .account .button[aria-busy='true'] {
   /* include busy for completeness */
   color: burlywood;
