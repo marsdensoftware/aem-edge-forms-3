@@ -1,8 +1,8 @@
 const isEditor = (block) => {
-  return (
+  const is =
     block.hasAttribute('data-aue-resource') ||
     block.hasAttribute('data-aue-label')
-  )
+  return is
 }
 
 /**
@@ -24,7 +24,9 @@ const withBlockLifecycle = (block, init, opts = {}) => {
   } = opts
 
   // Prevent double initialization on the same element
-  if (block.hasAttribute(marker)) return () => {}
+  if (block.hasAttribute(marker)) {
+    return () => {}
+  }
 
   block.setAttribute(marker, 'true')
 
@@ -42,7 +44,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
       try {
         fn({ source: 'late-register' })
       } catch (e) {
-        console.error(e)
+        console.error('onTeardown error', e) // eslint-disable-line no-console
       }
     } else {
       extraTeardowns.add(fn)
@@ -50,13 +52,13 @@ const withBlockLifecycle = (block, init, opts = {}) => {
   }
 
   function runTeardowns(source) {
-    for (const fn of extraTeardowns) {
+    extraTeardowns.forEach((fn) => {
       try {
         fn({ source })
       } catch (e) {
-        console.error('teardown error', e)
+        console.error('teardown error', e) // eslint-disable-line no-console
       }
-    }
+    })
     extraTeardowns.clear()
   }
 
@@ -68,14 +70,22 @@ const withBlockLifecycle = (block, init, opts = {}) => {
     } finally {
       try {
         ac.abort()
-      } catch {}
+      } catch {
+        /* empty */
+      }
       try {
         block.removeAttribute(marker)
-      } catch {}
-      try {
-        mo && mo.disconnect()
-      } catch {}
-      mo = null
+      } catch {
+        /* empty */
+      }
+      if (mo) {
+        try {
+          mo.disconnect()
+        } catch {
+          /* empty */
+        }
+        mo = null
+      }
     }
   }
 
@@ -83,7 +93,9 @@ const withBlockLifecycle = (block, init, opts = {}) => {
   if (teardownOnPageHide) {
     window.addEventListener(
       'pagehide',
-      () => teardown({ source: 'pagehide' }),
+      () => {
+        teardown({ source: 'pagehide' })
+      },
       {
         once: true,
         signal,
@@ -100,22 +112,27 @@ const withBlockLifecycle = (block, init, opts = {}) => {
         teardown({ source: 'mutation' })
         return
       }
-      // Otherwise, scan removals quickly to avoid extra work
-      for (const m of mutations) {
-        if (m.type !== 'childList' || !m.removedNodes.length) continue
-        for (const n of m.removedNodes) {
+
+      const removed = mutations.some((m) => {
+        if (m.type !== 'childList' || !m.removedNodes.length) return false
+        for (let i = 0; i < m.removedNodes.length; i += 1) {
+          const n = m.removedNodes[i]
           if (n === block || (n.contains && n.contains(block))) {
-            teardown({ source: 'mutation' })
-            return
+            return true
           }
         }
+        return false
+      })
+
+      if (removed) {
+        teardown({ source: 'mutation' })
       }
     })
     mo.observe(document.body, { childList: true, subtree: true })
   }
 
   // Run initializer (supports sync/async; may return a teardown)
-  ;(async () => {
+  const runInit = async () => {
     try {
       const ret = await init({
         signal,
@@ -124,11 +141,12 @@ const withBlockLifecycle = (block, init, opts = {}) => {
       })
       if (typeof ret === 'function') onTeardown(ret)
     } catch (err) {
-      console.error('block init failed:', err)
+      console.error('block init failed:', err) // eslint-disable-line no-console
       teardown({ source: 'init-error' }) // pass a source to avoid destructuring error
     }
-  })()
+  }
 
+  runInit()
   return teardown
 }
 
