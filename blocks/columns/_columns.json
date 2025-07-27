@@ -48,11 +48,11 @@
       "id": "column",
       "components": [
         "typography",
+        "link-with-icon",
         "text",
         "image",
         "button",
-        "title",
-        "link-with-icon"
+        "title"
       ]
     }
   ]
