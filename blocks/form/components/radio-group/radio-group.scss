@@ -41,8 +41,8 @@
     }
 
     .text {
-      font-weight: 600;
       color: $text-dark-primary;
+      font-size: clamp(18px, 2.25vw, 20px);
     }
 
     .desc {
@@ -223,6 +223,24 @@
           color: $color-white;
         }
       }
+    }
+  }
+}
+
+.field-workexperience-selection {
+  @include media('up-to-desktop') {
+    input[type='radio']:checked + .radio-group--with-icon__label {
+      &::after {
+        right: $spacing-400 + 1px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .radio-group--with-icon__label {
+      flex-direction: row;
+      padding: $spacing-400;
+      min-height: auto;
     }
   }
 }
