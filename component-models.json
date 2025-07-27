@@ -31828,7 +31828,7 @@
         "component": "select",
         "name": "classes",
         "value": "",
-        "label": "Variants",
+        "label": "Options",
         "valueType": "string",
         "options": [
           {
