@@ -1,3 +1,10 @@
+const isEditor = (block) => {
+  return (
+    block.hasAttribute('data-aue-resource') ||
+    block.hasAttribute('data-aue-label')
+  )
+}
+
 /**
  * Attach lifecycle to an AEM EDS block.
  * @param {Element} block
@@ -112,7 +119,7 @@ const withBlockLifecycle = (block, init, opts = {}) => {
     try {
       const ret = await init({
         signal,
-        isEditor: block.hasAttribute('data-aue-resource'),
+        isEditor: isEditor(block),
         onTeardown,
       })
       if (typeof ret === 'function') onTeardown(ret)
@@ -141,4 +148,4 @@ const isHistoryTraversal = (e) => {
   return typeof t === 'number' && t === 2
 }
 
-export { withBlockLifecycle, isHistoryTraversal }
+export { withBlockLifecycle, isHistoryTraversal, isEditor }

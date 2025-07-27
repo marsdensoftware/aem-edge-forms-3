@@ -1,9 +1,7 @@
 [
   {
     "id": "main",
-    "components": [
-      "section"
-    ]
+    "components": ["section"]
   },
   {
     "id": "section",
@@ -18,47 +16,30 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form"
+      "embed-adaptive-form",
+      "account",
+      "auth-callback"
     ]
   },
   {
     "id": "account",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
+    "components": ["text", "image", "button", "title"]
   },
   {
     "id": "auth-callback",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
+    "components": ["text", "image", "button", "title"]
   },
   {
     "id": "cards",
-    "components": [
-      "card"
-    ]
+    "components": ["card"]
   },
   {
     "id": "columns",
-    "components": [
-      "column"
-    ]
+    "components": ["column"]
   },
   {
     "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
+    "components": ["text", "image", "button", "title"]
   },
   {
     "id": "form",
