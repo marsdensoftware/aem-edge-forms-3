@@ -93,7 +93,7 @@ const pkceChallenge = async (length = 43) => {
  * @param {string} params.redirectUri  – Registered redirect URI.
  * @param {string} params.clientId     – Public client ID.
  * @param {string} params.profile      – Azure B2C policy or tenant profile.
- * @param {string} params.code_challenge – PKCE code challenge.
+ * @param {string} params.challenge – PKCE code challenge.
  * @param {string[]} params.claims     – Optional claims.
  * @returns {string}
  */
@@ -102,7 +102,7 @@ const buildAuthorizationUrl = ({
   redirectUri,
   clientId,
   profile,
-  codeChallenge,
+  challenge,
   claims,
 }) => {
   const params = new URLSearchParams()
@@ -120,7 +120,7 @@ const buildAuthorizationUrl = ({
   params.set('response_type', 'code')
   params.set('scope', 'openid offline_access')
   params.set('nonce', 'defaultNonce')
-  params.set('code_challenge', codeChallenge)
+  params.set('code_challenge', challenge)
   params.set('code_challenge_method', 'S256')
   params.set('prompt', 'login')
 
@@ -305,6 +305,9 @@ const createBackend = (origin) => {
 
   /** @param {string} uri @param {unknown} body */
   const post = async (uri, body = null) => {
+    // TODO: rm debug statement
+    console.log('POST', uri, body) // eslint-disable-line no-console
+
     const resp = await fetch(new URL(uri, origin), {
       method: 'POST',
       keepalive: true,
@@ -524,6 +527,10 @@ const createAuthClient = ({
       return cleanup
     },
 
+    removeAuthenticatedChange: (fn) => {
+      listeners.delete(fn)
+    },
+
     /** grab current snapshot */
     status: updateStatus,
 
@@ -596,5 +603,7 @@ export const authLoginUrl = authClient.loginUrl.bind(authClient)
 export const authExchange = authClient.exchange.bind(authClient)
 export const authStatus = authClient.status.bind(authClient)
 export const onAuthChange = authClient.onAuthenticatedChange.bind(authClient)
+export const removeAuthChange =
+  authClient.removeAuthenticatedChange.bind(authClient)
 export const authStartKeepAlive = authClient.start.bind(authClient)
 export const authStopKeepAlive = authClient.stop.bind(authClient)

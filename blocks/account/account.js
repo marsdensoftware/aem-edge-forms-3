@@ -2,6 +2,7 @@ import {
   authStatus,
   onAuthChange,
   authLoginUrl,
+  authLogout,
 } from '../../scripts/msd/auth.js'
 
 import {
