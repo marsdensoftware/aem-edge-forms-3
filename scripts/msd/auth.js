@@ -288,7 +288,7 @@ const NO_BODY_STATUS = Object.freeze(new Set([204, 205, 304]))
  * @description Creates a backend client for calling APIs.
  * @param {string} origin  – fully-qualified URL such as "https://api.example.com"
  */
-const createBackend = (origin) => {
+const createBackend = (origin, rootUri = '/session') => {
   assertString(origin, 'createBackend: origin is required')
 
   /** Decode an HTTP Response
@@ -346,13 +346,13 @@ const createBackend = (origin) => {
   /* ---- public API ---- */
   return {
     // eslint-disable-next-line implicit-arrow-linebreak
-    logout: () => post('/session/logout'),
+    logout: () => post(`${rootUri}/logout`),
 
     check: () =>
       withLock(
         async (lock) => {
           if (!lock) return undefined
-          return post('/session/check')
+          return post(`${rootUri}/check`)
         },
         { name: LOCK, ifAvailable: true },
       ),
@@ -361,7 +361,7 @@ const createBackend = (origin) => {
       withLock(
         async (lock) => {
           if (!lock) return undefined
-          return post('/session/exchange', { code, code_verifier: verifier })
+          return post(`${rootUri}/exchange`, { code, code_verifier: verifier })
         },
         { name: LOCK, maxWait: 30_000 },
       ),
@@ -430,8 +430,9 @@ const makeChannel = (channelName = 'default-channel') => {
  * @property {string} redirectUri
  * @property {string} clientId
  * @property {string} profile
- * @property {string} [origin]
  * @property {[string]} [claims]
+ * @property {string} backendUri
+ * @property {string} [origin]
  * @param {Partial<AuthOptions>} [options={}]  All keys optional at the call-site;
  *                                             run-time checks inside the function
  *                                             enforce that the four critical ones
@@ -443,15 +444,23 @@ const createAuthClient = ({
   redirectUri,
   clientId,
   profile,
-  origin = window.location.origin,
   claims,
+  backendUri,
+  origin,
 } = {}) => {
-  const params = [authEndpoint, redirectUri, clientId, profile, origin]
+  const params = [
+    authEndpoint,
+    redirectUri,
+    clientId,
+    profile,
+    origin,
+    backendUri,
+  ]
   params.forEach((v) => {
     assertString(v, 'createAuthClient: missing required config')
   })
 
-  const backend = createBackend(origin)
+  const backend = createBackend(origin, backendUri)
 
   /* ---- reactive status ---- */
   let status = { isAuthenticated: false, userID: '', refreshBy: 0 }
@@ -608,6 +617,8 @@ const authClient = createAuthClient({
     'https://identity.dev.az.msd.govt.nz/identity.dev.az.msd.govt.nz/B2C_1A_AEM/oauth2/v2.0/authorize',
   redirectUri: 'https://www.cutandpatch.com/auth-callback',
   claims: ['uid'],
+  backendUri: '/session',
+  origin: window.location.origin,
 })
 
 export const authLogout = authClient.logout.bind(authClient)
