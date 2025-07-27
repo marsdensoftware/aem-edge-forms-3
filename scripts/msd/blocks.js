@@ -173,7 +173,7 @@ const isHistoryTraversal = (e) => {
 
   // Legacy (deprecated) – older Safari
   // 2 === TYPE_BACK_FORWARD
-  const t = performance.navigation?.type
+  const t = performance?.navigation?.type
   return typeof t === 'number' && t === 2
 }
 
