@@ -40,11 +40,11 @@ export class EducationRepeatable extends ConditionalRepeatable {
     )
     // Defaults to hidden, as there is no option of this in
     // UE for advanced date picker.
-    panel.setAttribute('data-visible', false)
+    panel?.setAttribute('data-visible', false)
 
     completionStatusRadios.forEach((radio) => {
       radio.addEventListener('change', () => {
-        panel.setAttribute('data-visible', radio.value === '0')
+        panel?.setAttribute('data-visible', radio.value === '0')
       })
     })
   }
