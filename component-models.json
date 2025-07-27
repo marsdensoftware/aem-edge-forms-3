@@ -122,10 +122,6 @@
     ]
   },
   {
-    "id": "auth-callback",
-    "fields": []
-  },
-  {
     "id": "card",
     "fields": [
       {

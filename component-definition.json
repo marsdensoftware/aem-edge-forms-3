@@ -98,16 +98,15 @@
           }
         },
         {
-          "title": "Auth Callback",
-          "id": "auth-callback",
+          "title": "Auth Redirect",
+          "id": "auth-redirect",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "AuthCallback",
-                  "model": "auth-callback",
-                  "filter": "auth-callback"
+                  "name": "Auth Redirect",
+                  "filter": "auth-redirect"
                 }
               }
             }

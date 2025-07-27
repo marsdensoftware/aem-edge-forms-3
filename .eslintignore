@@ -6,5 +6,12 @@ blocks/form/rules/functions.js
 scripts/editor-support.js
 scripts/editor-support-rte.js
 /test
+
+# todo add these back in at some point.
 blocks/**/*.js
 scripts/**/*.js
+i18n/**/*.js
+component-models.json
+
+# include msd scripts
+#!scripts/msd/**
