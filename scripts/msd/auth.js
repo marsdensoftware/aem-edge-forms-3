@@ -1,6 +1,7 @@
 /* ──────────────────────────────────────── Web Crypto  ──────────────────────────────────────── */
 /*
- * this code locks the crypto module from being tampered with / polyfilled. This script should be run before any extern imports are.
+ * this code locks the crypto module from being tampered
+ * with / polyfilled. This script should be run before any extern imports are.
  */
 
 if (!crypto?.getRandomValues || !crypto.subtle) {
@@ -15,6 +16,25 @@ Object.freeze(Object.getPrototypeOf(crypto))
 Object.freeze(crypto.subtle)
 Object.freeze(Object.getPrototypeOf(crypto.subtle))
 
+/* ──────────────────────────────────────── helpers  ──────────────────────────────────────── */
+
+/** @param {unknown} v */
+const isString = (v) => {
+  if (typeof v === 'string' && v.length > 0) {
+    return true
+  }
+  return false
+}
+
+/**
+ * @param {any} v
+ * @param {string} msg error message
+ * @throws {Error}
+ */
+const assertString = (v, msg) => {
+  if (!isString(v)) throw new Error(msg)
+}
+
 /* ──────────────────────────────────────── PKCE  ──────────────────────────────────────── */
 
 // refernce code https://github.com/crouchcd/pkce-challenge/blob/master/src/index.ts
@@ -28,7 +48,7 @@ const generateVerifier = (size) => {
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~'
   let result = ''
   const randomUints = safeGetRandomValues(new Uint8Array(size))
-  for (let i = 0; i < size; i++) {
+  for (let i = 0; i < size; i += 1) {
     // cap the value of the randomIndex to mask.length - 1
     const randomIndex = randomUints[i] % mask.length
     result += mask[randomIndex]
@@ -36,12 +56,9 @@ const generateVerifier = (size) => {
   return result
 }
 
-/** @param {string} code_verifier */
-const generateChallenge = async (code_verifier) => {
-  const buffer = await safeDigest(
-    'SHA-256',
-    new TextEncoder().encode(code_verifier),
-  )
+/** @param {string} codeVerifier */
+const generateChallenge = async (verifier) => {
+  const buffer = await safeDigest('SHA-256', new TextEncoder().encode(verifier))
   // Generate base64url string
   // btoa is deprecated in Node.js but is used here for web browser compatibility
   // (which has no good replacement yet, see also https://github.com/whatwg/html/issues/6811)
@@ -53,18 +70,17 @@ const generateChallenge = async (code_verifier) => {
 
 /** Generate a PKCE challenge pair
  * @param {number} length Length of the verifier (between 43-128). Defaults to 43.
- * @returns {Promise<{code_verifier: string, code_challenge: string}>} PKCE challenge pair
+ * @returns {Promise<{verifier: string, challenge: string}>} PKCE challenge pair
  */
 const pkceChallenge = async (length = 43) => {
-  if (!length) length = 43
   if (length < 43 || length > 128) {
-    throw `Expected a length between 43 and 128. Received ${length}.`
+    throw new Error(`Expected a length between 43 and 128. Received ${length}.`)
   }
   const verifier = generateVerifier(length)
   const challenge = await generateChallenge(verifier)
   return {
-    code_verifier: verifier,
-    code_challenge: challenge,
+    verifier,
+    challenge,
   }
 }
 
@@ -86,7 +102,7 @@ const buildAuthorizationUrl = ({
   redirectUri,
   clientId,
   profile,
-  code_challenge,
+  codeChallenge,
   claims,
 }) => {
   const params = new URLSearchParams()
@@ -94,9 +110,9 @@ const buildAuthorizationUrl = ({
   if (profile) params.set('p', profile)
 
   if (claims && Array.isArray(claims)) {
-    for (const claim of claims) {
-      params.append('claims', claim)
-    }
+    claims.filter(isString).forEach((c) => {
+      params.append('claims', c)
+    })
   }
 
   params.set('client_id', clientId)
@@ -104,25 +120,11 @@ const buildAuthorizationUrl = ({
   params.set('response_type', 'code')
   params.set('scope', 'openid offline_access')
   params.set('nonce', 'defaultNonce')
-  params.set('code_challenge', code_challenge)
+  params.set('code_challenge', codeChallenge)
   params.set('code_challenge_method', 'S256')
   params.set('prompt', 'login')
 
   return `${authEndpoint}?${params}`
-}
-
-/* ──────────────────────────────────────── helpers  ──────────────────────────────────────── */
-
-/** @param {unknown} v */
-const isString = (v) => typeof v === 'string' && v.length > 0
-
-/**
- * @param {any} v
- * @param {string} msg error message
- * @throws {Error}
- */
-const assertString = (v, msg) => {
-  if (!isString(v)) throw new Error(msg)
 }
 
 /* ──────────────────────────────────────── Locking  ──────────────────────────────────────── */
@@ -143,20 +145,21 @@ const TAB_ID = crypto.randomUUID()
  * @param {<T=any>() => (T|Promise<T>)} fn   Critical-section callback.
  * @returns {Promise<ReturnType<fn>|undefined>}
  */
-const withLock = async (opts = {}, fn) => {
-  opts = {
+const withLock = async (fn, options = {}) => {
+  const opts = {
     name: '',
     ifAvailable: false,
     maxAge: 15_000,
     maxWait: 30_000,
     poll: 100,
-    ...opts,
+    ...options,
   }
   /* ——— native Web Locks API when it exists ——— */
   if (navigator?.locks?.request) {
     if (opts.ifAvailable) {
       return navigator.locks.request(opts.name, { ifAvailable: true }, fn)
-    } else if (!opts.maxWait) {
+    }
+    if (!opts.maxWait) {
       return navigator.locks.request(opts.name, fn)
     }
     return navigator.locks.request(
@@ -189,15 +192,21 @@ const withLock = async (opts = {}, fn) => {
   }
 
   if (!isFree()) {
-    // match Web Locks API
+    // Match Web Locks API behavior
     if (opts.ifAvailable) return undefined
+
     const deadline = Date.now() + opts.maxWait
+    const sleep = (ms) =>
+      new Promise((resolve) => {
+        setTimeout(resolve, ms)
+      })
+
     while (!isFree()) {
       if (Date.now() >= deadline) {
-        console.log(`Lock timed out ${key}`)
+        console.warn('Lock timed out', key) // eslint-disable-line no-console
         return undefined // timed out
       }
-      await new Promise((r) => setTimeout(r, opts.poll))
+      await sleep(opts.poll) // eslint-disable-line no-await-in-loop
     }
   }
 
@@ -217,15 +226,22 @@ const withLock = async (opts = {}, fn) => {
 const DEFAULT_INFO = Object.freeze({ userID: '', refreshBy: 0 })
 
 /** @param {string} name */
-const readCookie = (name) =>
-  document.cookie
-    .split('; ')
-    .find((c) => c.startsWith(`${name}=`))
-    ?.slice(name.length + 1) ?? null
+const readCookie = (name) => {
+  function startsWith(c) {
+    return c.startsWith(`${name}=`)
+  }
+  return (
+    document.cookie
+      .split('; ')
+      .find(startsWith)
+      ?.slice(name.length + 1) ?? null
+  )
+}
 
 /** @param {string} name */
-const clearCookie = (name) =>
-  (document.cookie = `${name}=; Path=/; Secure; SameSite=Strict; Max-Age=0`)
+const clearCookie = (name) => {
+  document.cookie = `${name}=; Path=/; Secure; SameSite=Strict; Max-Age=0`
+}
 
 const userInfo = {
   /** @returns {{userID:string, refreshBy:number}} */
@@ -239,7 +255,7 @@ const userInfo = {
         refreshBy: Number.isFinite(rb) ? rb * 1000 : 0, // sec → ms
       }
     } catch (err) {
-      console.error('Failed to parse user_info cookie:', err)
+      console.error('Failed to parse user_info cookie:', err) // eslint-disable-line no-console
       return DEFAULT_INFO
     }
   },
@@ -270,8 +286,9 @@ const createBackend = (origin) => {
   const decode = async (resp) => {
     const ct = resp.headers.get('content-type') ?? ''
 
-    if (ct === '' || NO_BODY_STATUS.has(resp.status))
+    if (ct === '' || NO_BODY_STATUS.has(resp.status)) {
       return { type: 'empty', data: null }
+    }
 
     if (ct.includes(MIME.JSON)) {
       try {
@@ -313,19 +330,26 @@ const createBackend = (origin) => {
 
   /* ---- public API ---- */
   return {
+    // eslint-disable-next-line implicit-arrow-linebreak
     logout: () => post('/session/logout'),
 
     check: () =>
-      withLock({ name: LOCK, ifAvailable: true }, async (lock) => {
-        if (!lock) return undefined
-        return await post('/session/check')
-      }),
+      withLock(
+        async (lock) => {
+          if (!lock) return undefined
+          return post('/session/check')
+        },
+        { name: LOCK, ifAvailable: true },
+      ),
 
-    exchangeCodeForCookies: ({ code, code_verifier }) =>
-      withLock({ name: LOCK, maxWait: 30_000 }, async (lock) => {
-        if (!lock) return undefined
-        return await post('/session/exchange', { code, code_verifier })
-      }),
+    exchangeCodeForCookies: ({ code, verifier }) =>
+      withLock(
+        async (lock) => {
+          if (!lock) return undefined
+          return post('/session/exchange', { code, code_verifier: verifier })
+        },
+        { name: LOCK, maxWait: 30_000 },
+      ),
   }
 }
 
@@ -342,17 +366,27 @@ const makeChannel = (channelName = 'default-channel') => {
     /* Native, modern path — Chrome 54+, Edge 79+, Firefox 38+, Safari 15.4+ */
     const id = crypto.randomUUID()
     const bc = new BroadcastChannel(channelName)
-    const post = (msg) => bc.postMessage({ sender: id, msg })
+    const post = (msg) => {
+      bc.postMessage({ sender: id, msg })
+    }
+
     const on = (fn) =>
       bc.addEventListener('message', (e) => {
         if (e.data.sender === id) return
         fn(e.data)
       })
 
-    return { post, on, close: () => bc.close(), id }
+    return {
+      post,
+      on,
+      close: () => {
+        bc.close()
+      },
+      id,
+    }
   }
   // ✱ Optional fallback; here we just no-op.
-  console.warn('BroadcastChannel not supported in this browser')
+  console.warn('BroadcastChannel not supported in this browser') // eslint-disable-line no-console
   const noop = () => {}
   return { post: noop, on: noop, close: noop }
 }
@@ -397,18 +431,12 @@ const createAuthClient = ({
   origin = window.location.origin,
   claims,
 } = {}) => {
-  // Validate required strings
-  ;[authEndpoint, redirectUri, clientId, profile, origin].forEach((v) =>
-    assertString(v, 'createAuthClient: missing required config'),
-  )
+  const params = [authEndpoint, redirectUri, clientId, profile, origin]
+  params.forEach((v) => {
+    assertString(v, 'createAuthClient: missing required config')
+  })
 
   const backend = createBackend(origin)
-
-  const updateChannel = makeChannel('auth-status')
-
-  updateChannel.on((msg) => {
-    if (msg === 'update') updateStatus(false)
-  })
 
   /* ---- reactive status ---- */
   let status = { isAuthenticated: false, userID: '', refreshBy: 0 }
@@ -431,9 +459,19 @@ const createAuthClient = ({
       isAuthenticated,
     }
 
+    const updateChannel = makeChannel('auth-status')
+
+    updateChannel.on((msg) => {
+      if (msg === 'update') {
+        updateStatus(false)
+      }
+    })
+
     if (JSON.stringify(next) !== JSON.stringify(status)) {
       status = next
-      listeners.forEach((fn) => fn({ ...next }))
+      listeners.forEach((fn) => {
+        fn({ ...next })
+      })
       if (allowChannelUpdate) updateChannel.post('update')
     }
 
@@ -442,13 +480,16 @@ const createAuthClient = ({
 
   /* ---- last-check throttle (per-tab lock) ---- */
   const canCheck = async (cooldownMs = 5_000) =>
-    withLock({ name: 'checkAllowed', ifAvailable: true }, async (lock) => {
-      if (!lock) return false
-      const last = +localStorage.getItem('last-check')
-      const ok = !last || last + cooldownMs <= Date.now()
-      if (ok) localStorage.setItem('last-check', Date.now().toString())
-      return ok
-    })
+    withLock(
+      async (lock) => {
+        if (!lock) return false
+        const last = +localStorage.getItem('last-check')
+        const ok = !last || last + cooldownMs <= Date.now()
+        if (ok) localStorage.setItem('last-check', Date.now().toString())
+        return ok
+      },
+      { name: 'checkAllowed', ifAvailable: true },
+    )
 
   /* ---- keep-alive loop ---- */
   const CHECK_COOLDOWN = 5_000
@@ -494,28 +535,28 @@ const createAuthClient = ({
 
     /** build the B2C login URL + store verifier in sessionStorage */
     loginUrl: async () => {
-      const { code_verifier, code_challenge } = await pkceChallenge(96)
+      const { verifier, challenge } = await pkceChallenge(96)
       const url = buildAuthorizationUrl({
         authEndpoint,
         redirectUri,
         clientId,
         profile,
-        code_challenge,
+        challenge,
         claims,
       })
-      sessionStorage.setItem('ka:cv', code_verifier)
+      sessionStorage.setItem('ka:cv', verifier)
       return url
     },
 
     /** claim tokens, update cookie-derived status */
     exchange: async ({ code }) => {
-      const code_verifier = sessionStorage.getItem('ka:cv')
+      const verifier = sessionStorage.getItem('ka:cv')
       sessionStorage.removeItem('ka:cv')
-      if (!code_verifier) {
-        console.warn('code_verifier already used.')
+      if (!verifier) {
+        console.warn('verifier already used.') // eslint-disable-line no-console
         return { ok: false }
       }
-      const res = await backend.exchangeCodeForCookies({ code, code_verifier })
+      const res = await backend.exchangeCodeForCookies({ code, verifier })
       const ok = res?.status === 204 || res?.status === 200
       if (ok) updateStatus()
       return ok
@@ -523,8 +564,14 @@ const createAuthClient = ({
 
     start() {
       if (timerId != null) return
-      tick().catch(console.error)
-      timerId = setInterval(() => tick().catch(console.error), TICK_EVERY)
+      tick().catch((err) => {
+        console.error('tick() failed', err) // eslint-disable-line no-console
+      })
+      timerId = setInterval(() => {
+        tick().catch((err) => {
+          console.error('tick() failed', err) // eslint-disable-line no-console
+        })
+      }, TICK_EVERY)
     },
 
     stop() {
@@ -535,7 +582,7 @@ const createAuthClient = ({
 }
 
 /* ───── ready-made singleton ───── */
-const _auth = createAuthClient({
+const authClient = createAuthClient({
   clientId: '97f6a189-d3a1-404d-a871-deee589c63dc',
   profile: 'B2C_1A_AEM',
   authEndpoint:
@@ -544,10 +591,10 @@ const _auth = createAuthClient({
   claims: ['uid'],
 })
 
-export const authLogout = () => _auth.logout()
-export const authLoginUrl = () => _auth.loginUrl()
-export const authExchange = (c) => _auth.exchange(c)
-export const authStatus = () => _auth.status()
-export const onAuthChange = (fn, opts) => _auth.onAuthenticatedChange(fn, opts)
-export const authStartKeepAlive = () => _auth.start()
-export const authStopKeepAlive = () => _auth.stop()
+export const authLogout = authClient.logout.bind(authClient)
+export const authLoginUrl = authClient.loginUrl.bind(authClient)
+export const authExchange = authClient.exchange.bind(authClient)
+export const authStatus = authClient.status.bind(authClient)
+export const onAuthChange = authClient.onAuthenticatedChange.bind(authClient)
+export const authStartKeepAlive = authClient.start.bind(authClient)
+export const authStopKeepAlive = authClient.stop.bind(authClient)

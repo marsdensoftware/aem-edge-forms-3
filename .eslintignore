@@ -15,3 +15,5 @@ component-models.json
 
 # include msd scripts
 #!scripts/msd/**
+#
+!scripts/msd/auth.js
