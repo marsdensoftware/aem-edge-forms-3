@@ -12,6 +12,6 @@ export default async function decorate(block) {
   if (queryParams.has('code')) {
     const code = queryParams.get('code')
     await authExchange({ code })
-    // window.location.href = '/auth-login'
+    window.location.href = '/auth-login'
   }
 }
