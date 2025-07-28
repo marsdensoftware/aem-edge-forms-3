@@ -193,8 +193,8 @@ form .file-wrapper > button {
   order: 1;
 }
 
-.form form div[data-variant='addRemoveButtons'] .item-add,
-.form form div[data-variant='addRemoveButtons'] .item-remove {
+.form div[data-variant='addRemoveButtons'] .item-add,
+.form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
@@ -284,13 +284,9 @@ form .file-wrapper > button {
 .radio-group-wrapper.horizontal .field-description,
 .checkbox-group-wrapper.horizontal .field-description {
   p {
-    font-size: 15px;
+    font-size: $size-font-body-default;
     color: $text-dark-primary;
     margin-bottom: $spacing-200;
-
-    @include media('desktop') {
-      font-size: 17px;
-    }
   }
 }
 
