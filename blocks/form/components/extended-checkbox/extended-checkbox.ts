@@ -11,9 +11,16 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
   const { iconName } = fieldJson.properties
 
-  // if we have an iconName, then add the extended-checkbox--icon-${iconName} class to the fieldDiv
+  // Find the checkbox input
+  const checkbox = fieldDiv.querySelector<HTMLInputElement>('input[type="checkbox"]')
+
+  // if we have an iconName, add an icon element with the appropriate classes
   if (iconName) {
-    fieldDiv.classList.add(`extended-checkbox--icon-${iconName}`)
+    const iconElement = document.createElement('i')
+    iconElement.classList.add('extended-checkbox__icon', `extended-checkbox--${iconName}`)
+
+    // Insert the icon after the checkbox input
+    checkbox?.insertAdjacentElement('afterend', iconElement)
   }
 
   // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
@@ -25,9 +32,6 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // 3. Get the value from the source textarea. Fallback to an empty string if not found.
   // const textAreaText = sourceTextarea?.value
   //      || 'Copy here explaining an example of this skill etc over multiple lines as required. Copy here explaining an example of this skill etc over multiple lines as required.';
-
-  // Find the checkbox input
-  const checkbox = fieldDiv.querySelector<HTMLInputElement>('input[type="checkbox"]')
 
   // Create the destination textarea and set its value
   const destTextArea = document.createElement('textarea')
