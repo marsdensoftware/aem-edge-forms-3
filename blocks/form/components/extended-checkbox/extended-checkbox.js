@@ -52,9 +52,9 @@ export default function decorate(fieldDiv, fieldJson) {
     // in a timeout of 500ms to give a chance for the modal to be created:
     setTimeout(() => {
         var _a;
-        const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('fieldset[name="modal-content"]');
+        const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
         console.log('modalContainer', modalContainer);
-        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('textarea[name="modal-text"]');
+        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-text textarea');
         // print out the value of the sourceTextArea as soon as we get it - gets the default value
         if (sourceTextarea) {
             console.log('Source textarea value:', sourceTextarea.value);
@@ -104,9 +104,13 @@ export default function decorate(fieldDiv, fieldJson) {
                     editDiv.style.display = 'block';
                 }
                 // get the closest dialog element
-                const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('dialog');
+                const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.closest('dialog');
                 if (dialog) {
+                    console.log('got the dialog', dialog);
                     dialog.close();
+                }
+                else {
+                    console.log('no dialog found');
                 }
             });
         }

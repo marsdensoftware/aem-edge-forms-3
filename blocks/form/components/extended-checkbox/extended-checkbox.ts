@@ -82,13 +82,11 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // get hold of the modal's 'save' button
   // in a timeout of 500ms to give a chance for the modal to be created:
   setTimeout(() => {
-    const modalContainer = fieldDiv.parentElement?.querySelector(
-      'fieldset[name="modal-content"]',
-    )
+    const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
     console.log('modalContainer', modalContainer)
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
-      'textarea[name="modal-text"]',
+        '.field-modal-text textarea',
     )
     // print out the value of the sourceTextArea as soon as we get it - gets the default value
     if (sourceTextarea) {
@@ -144,9 +142,12 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
         }
 
         // get the closest dialog element
-        const dialog = modalContainer?.querySelector('dialog')
+        const dialog = modalContainer?.closest('dialog')
         if (dialog) {
+          console.log('got the dialog', dialog)
           dialog.close()
+        } else {
+          console.log('no dialog found')
         }
       })
     } else {
