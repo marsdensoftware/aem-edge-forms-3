@@ -24,6 +24,7 @@
     margin-top: 0;
     display: flex;
     width: 100%;
+    color: $text-dark-primary;
   }
 
   label,
@@ -96,15 +97,21 @@
  * The [class*="..."] selector is a flexible way to target any element
  * whose class contains "extended-checkbox--icon-".
  */
-[class*='extended-checkbox--icon-'] .field-label::before {
-  content: ''; /* This is required for a pseudo-element to be displayed */
-  display: inline-block;
-  width: 24px; /* Example: Set your desired icon width */
-  height: 24px; /* Example: Set your desired icon height */
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+.extended-checkbox__icon {
+  display: block;
+  margin-right: $spacing-400;
+
+  &::before {
+    content: ''; /* This is required for a pseudo-element to be displayed */
+    display: block;
+    // Override size for each icon if needed below
+    width: 29px;
+    height: 29px;
+    background-repeat: no-repeat;
+    background-size: 29px;
+    background-position: center;
+    flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+  }
 }
 
 /*
@@ -114,20 +121,28 @@
  */
 
 /* Example for when an author enters 'user' as the iconName */
-// .extended-checkbox--icon-user .field-label::before {
-//   background-image: url('/icons/user.svg'); /* Path to your user icon */
-// }
+.extended-checkbox__icon--user {
+  &::before {
+    background-image: url('/icons/user.svg'); /* Path to your user icon */
+  }
+}
 
-// /* Example for when an author enters 'skill' as the iconName */
-// .extended-checkbox--icon-skill .field-label::before {
-//   background-image: url('/icons/skill.svg'); /* Path to your skill icon */
-// }
+/* Example for when an author enters 'skill' as the iconName */
+.extended-checkbox__icon--skill {
+  &::before {
+    background-image: url('/icons/skill.svg'); /* Path to your skill icon */
+  }
+}
 
-// /* Add more rules for other icons as needed */
-// .extended-checkbox--icon-work .field-label::before {
-//   background-image: url('/icons/work.svg');
-// }
+/* Add more rules for other icons as needed */
+.extended-checkbox__icon--work {
+  &::before {
+    background-image: url('/icons/work.svg');
+  }
+}
 
-// .extended-checkbox--icon-car-off .field-label::before {
-//   background-image: url('../../../../icons/icon-car-off.svg');
-// }
+.extended-checkbox__icon--car-off {
+  &::before {
+    background-image: url('../../../../icons/icon-car-off.svg');
+  }
+}

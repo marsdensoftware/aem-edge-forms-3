@@ -12,32 +12,41 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   const { iconName } = fieldJson.properties
 
   // Find the checkbox input
-  const checkbox = fieldDiv.querySelector<HTMLInputElement>('input[type="checkbox"]')
+  const checkbox = fieldDiv.querySelector<HTMLInputElement>(
+    'input[type="checkbox"]',
+  )
 
+  const label = fieldDiv.querySelector('label')
   // if we have an iconName, add an icon element with the appropriate classes
   if (iconName) {
-    const iconElement = document.createElement('i')
-    iconElement.classList.add('extended-checkbox__icon', `extended-checkbox--${iconName}`)
+    const iconElement = document.createElement('span')
+    iconElement.classList.add(
+      'extended-checkbox__icon',
+      `extended-checkbox__icon--${iconName}`,
+    )
 
-    // Insert the icon after the checkbox input
-    checkbox?.insertAdjacentElement('afterend', iconElement)
+    // Insert the icon after inside label
+    label?.prepend(iconElement)
   }
 
   // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
   const modalContentContainer = fieldDiv.parentElement?.nextElementSibling
 
   // 2. Find the source textarea within that container using a specific attribute selector.
-  const sourceTextarea = modalContentContainer?.querySelector<HTMLTextAreaElement>('textarea[name="modal-text"]')
+  const sourceTextarea =
+    modalContentContainer?.querySelector<HTMLTextAreaElement>(
+      'textarea[name="modal-text"]',
+    )
 
   // 3. Get the value from the source textarea. Fallback to an empty string if not found.
   // const textAreaText = sourceTextarea?.value
-  //      || 'Copy here explaining an example of this skill etc over multiple lines as required. Copy here explaining an example of this skill etc over multiple lines as required.';
+  // || 'Copy here explaining an example of this skill etc over multiple lines as required.
+  // Copy here explaining an example of this skill etc over multiple lines as required.';
 
   // Create the destination textarea and set its value
   const destTextArea = document.createElement('textarea')
   destTextArea.classList.add('checkbox-description')
   // destTextArea.placeholder = 'Enter description here'
-
 
   // Create the divider
   const divider = document.createElement('hr')
@@ -63,59 +72,65 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // Append all new elements to the main field div
   fieldDiv.append(divider, destTextArea, editDiv)
 
-  //if there is no sourceTextarea.value, don't show the fieldDiv element
+  // if there is no sourceTextarea.value, don't show the fieldDiv element
   if (!sourceTextarea?.value) {
     divider.style.display = 'none'
     destTextArea.style.display = 'none'
     editDiv.style.display = 'none'
   }
 
-  //get hold of the modal's 'save' button in a timeout of 500ms to give a chance for the modal to be created:
+  // get hold of the modal's 'save' button
+  // in a timeout of 500ms to give a chance for the modal to be created:
   setTimeout(() => {
-    const modalContainer = fieldDiv.parentElement?.querySelector('fieldset[name="modal-content"]')
+    const modalContainer = fieldDiv.parentElement?.querySelector(
+      'fieldset[name="modal-content"]',
+    )
     console.log('modalContainer', modalContainer)
 
-    const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>('textarea[name="modal-text"]')
-    //print out the value of the sourceTextArea as soon as we get it - gets the default value
+    const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
+      'textarea[name="modal-text"]',
+    )
+    // print out the value of the sourceTextArea as soon as we get it - gets the default value
     if (sourceTextarea) {
       console.log('Source textarea value:', sourceTextarea.value)
     } else {
       console.log('Source textarea not found')
     }
 
-    //get the destTextArea value
+    // get the destTextArea value
     if (destTextArea) {
-      console.log("Text Area: ", destTextArea)
+      console.log('Text Area: ', destTextArea)
     } else {
       console.log('Dest text area not found')
     }
 
     if (sourceTextarea && destTextArea) {
-      destTextArea.value = sourceTextarea.value;
+      destTextArea.value = sourceTextarea.value
     }
 
-    //console log the saveButton as soon as we get it
-    const saveButton = modalContainer?.querySelector('button[name="modal-save-button"]')
+    // console log the saveButton as soon as we get it
+    const saveButton = modalContainer?.querySelector(
+      'button[name="modal-save-button"]',
+    )
     if (saveButton) {
       console.log('Save button:', saveButton)
       saveButton.textContent = 'Save'
 
-      //add an onclick listener to the save button which will simply console log the value from the sourceTextArea
+      // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
       saveButton.addEventListener('click', () => {
         if (sourceTextarea) {
           console.log('Source textarea value:', sourceTextarea.value)
         }
-        //get the destTextArea value
+        // get the destTextArea value
         if (destTextArea) {
-          console.log("Text Area in eventListener: ", destTextArea)
+          console.log('Text Area in eventListener: ', destTextArea)
         } else {
           console.log('Dest text area not found in eventListener')
         }
 
         if (sourceTextarea && destTextArea) {
-
           if (sourceTextarea?.value) {
-            destTextArea.value = sourceTextarea.value;
+            destTextArea.value = sourceTextarea.value
             destTextArea.style.display = 'block'
             editLink.textContent = 'Edit description'
           } else {
@@ -128,24 +143,19 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
           editDiv.style.display = 'block'
         }
 
-        //get the closest dialog element
+        // get the closest dialog element
         const dialog = modalContainer?.querySelector('dialog')
         if (dialog) {
           dialog.close()
         }
       })
-
     } else {
       console.log('Save button not found')
-
     }
-    //change the label on the save button to be "Update"
-    if (saveButton) {
-    }
-
-
+    // change the label on the save button to be "Update"
+    // if (saveButton) {
+    // }
   }, 500)
 
   return fieldDiv
-
 }

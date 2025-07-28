@@ -4,12 +4,13 @@ export default function decorate(fieldDiv, fieldJson) {
     const { iconName } = fieldJson.properties;
     // Find the checkbox input
     const checkbox = fieldDiv.querySelector('input[type="checkbox"]');
+    const label = fieldDiv.querySelector('label');
     // if we have an iconName, add an icon element with the appropriate classes
     if (iconName) {
-        const iconElement = document.createElement('i');
-        iconElement.classList.add('extended-checkbox__icon', `extended-checkbox--${iconName}`);
-        // Insert the icon after the checkbox input
-        checkbox === null || checkbox === void 0 ? void 0 : checkbox.insertAdjacentElement('afterend', iconElement);
+        const iconElement = document.createElement('span');
+        iconElement.classList.add('extended-checkbox__icon', `extended-checkbox__icon--${iconName}`);
+        // Insert the icon after inside label
+        label === null || label === void 0 ? void 0 : label.prepend(iconElement);
     }
     // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
     const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
@@ -17,7 +18,8 @@ export default function decorate(fieldDiv, fieldJson) {
     const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
     // 3. Get the value from the source textarea. Fallback to an empty string if not found.
     // const textAreaText = sourceTextarea?.value
-    //      || 'Copy here explaining an example of this skill etc over multiple lines as required. Copy here explaining an example of this skill etc over multiple lines as required.';
+    // || 'Copy here explaining an example of this skill etc over multiple lines as required.
+    // Copy here explaining an example of this skill etc over multiple lines as required.';
     // Create the destination textarea and set its value
     const destTextArea = document.createElement('textarea');
     destTextArea.classList.add('checkbox-description');
@@ -40,28 +42,29 @@ export default function decorate(fieldDiv, fieldJson) {
     editDiv.appendChild(editLink);
     // Append all new elements to the main field div
     fieldDiv.append(divider, destTextArea, editDiv);
-    //if there is no sourceTextarea.value, don't show the fieldDiv element
+    // if there is no sourceTextarea.value, don't show the fieldDiv element
     if (!(sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value)) {
         divider.style.display = 'none';
         destTextArea.style.display = 'none';
         editDiv.style.display = 'none';
     }
-    //get hold of the modal's 'save' button in a timeout of 500ms to give a chance for the modal to be created:
+    // get hold of the modal's 'save' button
+    // in a timeout of 500ms to give a chance for the modal to be created:
     setTimeout(() => {
         var _a;
         const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('fieldset[name="modal-content"]');
         console.log('modalContainer', modalContainer);
         const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('textarea[name="modal-text"]');
-        //print out the value of the sourceTextArea as soon as we get it - gets the default value
+        // print out the value of the sourceTextArea as soon as we get it - gets the default value
         if (sourceTextarea) {
             console.log('Source textarea value:', sourceTextarea.value);
         }
         else {
             console.log('Source textarea not found');
         }
-        //get the destTextArea value
+        // get the destTextArea value
         if (destTextArea) {
-            console.log("Text Area: ", destTextArea);
+            console.log('Text Area: ', destTextArea);
         }
         else {
             console.log('Dest text area not found');
@@ -69,19 +72,19 @@ export default function decorate(fieldDiv, fieldJson) {
         if (sourceTextarea && destTextArea) {
             destTextArea.value = sourceTextarea.value;
         }
-        //console log the saveButton as soon as we get it
+        // console log the saveButton as soon as we get it
         const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
         if (saveButton) {
             console.log('Save button:', saveButton);
             saveButton.textContent = 'Save';
-            //add an onclick listener to the save button which will simply console log the value from the sourceTextArea
+            // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
             saveButton.addEventListener('click', () => {
                 if (sourceTextarea) {
                     console.log('Source textarea value:', sourceTextarea.value);
                 }
-                //get the destTextArea value
+                // get the destTextArea value
                 if (destTextArea) {
-                    console.log("Text Area in eventListener: ", destTextArea);
+                    console.log('Text Area in eventListener: ', destTextArea);
                 }
                 else {
                     console.log('Dest text area not found in eventListener');
@@ -100,7 +103,7 @@ export default function decorate(fieldDiv, fieldJson) {
                     divider.style.display = 'block';
                     editDiv.style.display = 'block';
                 }
-                //get the closest dialog element
+                // get the closest dialog element
                 const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('dialog');
                 if (dialog) {
                     dialog.close();
@@ -110,9 +113,9 @@ export default function decorate(fieldDiv, fieldJson) {
         else {
             console.log('Save button not found');
         }
-        //change the label on the save button to be "Update"
-        if (saveButton) {
-        }
+        // change the label on the save button to be "Update"
+        // if (saveButton) {
+        // }
     }, 500);
     return fieldDiv;
 }
