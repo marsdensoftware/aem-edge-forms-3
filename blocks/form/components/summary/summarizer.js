@@ -235,7 +235,7 @@ export class Summarizer {
     <div class="row">
         <div class="col-md-5">
             <h4 class="title">{{title}}</h4>
-            <p class="p-small">{{description}}</p>
+            {{description}}
             <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-7">{{content}}</div>
@@ -246,7 +246,7 @@ export class Summarizer {
     <div class="row">
         <div class="col-md-5">
             <h4 class="title">{{title}}</h4>
-            <p class="p-small">{{description}}</p>
+            {{description}}
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -311,8 +311,11 @@ export class Summarizer {
         if (entry) {
             content = Summarizer.getItemContent(entry, stepName, properties);
         }
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: content });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
     }
 
     static defaultRepeatableSummarizer(stepName, el, properties) {
@@ -325,8 +328,12 @@ export class Summarizer {
             let content = Summarizer.getItemContent(entry, stepName);
             contents.push(content);
         });
+        
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     }
 
     static personal_details(el) {
@@ -391,7 +398,9 @@ export class Summarizer {
         });
 
         if (languagesContent.length > 0) {
-            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: languagesContent.join('') });
+            const description = properties['description'];
+            const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+            const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml , content: languagesContent.join('') });
             el.innerHTML = content;
         }
     }
@@ -434,12 +443,15 @@ export class Summarizer {
             entries.forEach(entryNameValues => {
                 const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
                 let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
-                content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content })
+                content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content, summaryEntryTag: 'div' })
                 contents.push(content);
             });
         }
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: properties['description'], content: contents.join('') });
+        const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
         el.innerHTML = content;
     }
 
@@ -464,36 +476,89 @@ export class Summarizer {
     static work_preferences(el, properties) {
 
         function getContent(workEntryFieldset, stepName, title) {
-            const nameValues = {
-                title: { value: stepName, displayValue: title },
-                ...Summarizer.fieldToNameValues(workEntryFieldset)
-            };
-
-            if (stepName == 'panel_work_availability' && nameValues['days_you_can_work']
-                && nameValues['days_you_can_work'].values && nameValues['days_you_can_work'].values.indexOf('3') > -1) {
-                // Specific days
-                const index = nameValues['days_you_can_work'].values.indexOf('3');
-                nameValues['days_you_can_work'].displayValues[index] = nameValues['specific_days_cb'].displayValues.join(', ');
-
+          const nameValues = {
+            title: { value: stepName, displayValue: title },
+            ...Summarizer.fieldToNameValues(workEntryFieldset),
+          }
+    
+          if (stepName == 'panel_work_availability') {
+            if (
+              nameValues['days_you_can_work'] &&
+              nameValues['days_you_can_work'].value
+            ) {
+              nameValues['days_you_can_work'].values = [
+                nameValues['days_you_can_work'].value,
+              ]
+              nameValues['days_you_can_work'].displayValues = [
+                nameValues['days_you_can_work'].displayValue,
+              ]
+    
+              delete nameValues['days_you_can_work'].value
+              delete nameValues['days_you_can_work'].displayValue
+            }
+    
+            if (
+              nameValues['days_you_can_work'] &&
+              nameValues['days_you_can_work'].values &&
+              nameValues['days_you_can_work'].values.indexOf('3') > -1
+            ) {
+              // Specific days
+              const index = nameValues['days_you_can_work'].values.indexOf('3')
+    
+              if (
+                nameValues['specific_days_cb'] &&
+                nameValues['specific_days_cb'].value
+              ) {
+                nameValues['specific_days_cb'].values = [
+                  nameValues['specific_days_cb'].value,
+                ]
+                nameValues['specific_days_cb'].displayValues = [
+                  nameValues['specific_days_cb'].displayValue,
+                ]
+    
+                delete nameValues['specific_days_cb'].value
+                delete nameValues['specific_days_cb'].displayValue
+              }
+              
+              if(nameValues['specific_days_cb']){
+                nameValues['days_you_can_work'].displayValues[index] =
+                nameValues['specific_days_cb'].displayValues.join(', ')
+    
+                delete nameValues['specific_days_cb']
+              }
+              else{
+                  delete nameValues['days_you_can_work'].displayValues[index];
+              }
+            }
+            else{
                 delete nameValues['specific_days_cb'];
             }
-
-            if (stepName == 'panel_working_locations' && nameValues['reliable-transport']) {
-                if (isNo(nameValues['reliable-transport'])) {
-                    nameValues['reliable-transport'].displayValue = i18n('I don\'t have reliable transport to get to work');
-                }
-                else {
-                    nameValues['reliable-transport'].displayValue = i18n('I have reliable transport to get to work');
-                }
-
+          }
+    
+          if (
+            stepName == 'panel_working_locations' &&
+            nameValues['reliable-transport']
+          ) {
+            if (isNo(nameValues['reliable-transport'])) {
+              nameValues['reliable-transport'].displayValue = i18n(
+                "I don't have reliable transport to get to work",
+              )
+            } else {
+              nameValues['reliable-transport'].displayValue = i18n(
+                'I have reliable transport to get to work',
+              )
             }
-
-            // Content
-            let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
-            let content = Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects);
-
-            return Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName, content })
-
+          }
+    
+          // Content
+          let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
+          let content =
+            Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects)
+    
+          return Summarizer.replace(Summarizer.itemContentEditTemplate, {
+            stepName,
+            content,
+          })
         }
 
         const form = el.closest('form');
@@ -518,7 +583,10 @@ export class Summarizer {
                 contents.push(content);
             }
         });
+        
+        const description = properties['description'];
+        const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
 
-        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: properties['description'], content: contents.join('') });
+        el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
     }
 }
