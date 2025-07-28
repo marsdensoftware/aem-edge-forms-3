@@ -1,0 +1,133 @@
+@use '../../../../styles/settings' as *;
+
+/*
+ * Styles for the Extended Checkbox component.
+ */
+
+/* Target labels that have a description to apply flex layout. */
+.form .field-main-checkbox {
+  align-items: center;
+  border-radius: $border-radius-mid;
+  border: 2px solid $color-shade-navy-40;
+  display: flex;
+  flex-direction: column; /* Stacks the text and description vertically */
+  align-items: flex-start; /* Aligns items to the start of the cross axis */
+  gap: 4px; /* Adds a small space between the label text and description */
+  width: 100%;
+  padding: $spacing-400;
+
+  label {
+    font-weight: 400;
+    border: 0;
+    background: transparent;
+    order: 0;
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+  }
+
+  label,
+  textarea {
+    padding: 0;
+  }
+
+  .edit {
+    @extend %link-button;
+    background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: block;
+    padding-left: 28px;
+    text-decoration: none;
+  }
+
+  input[type='checkbox']:checked + label {
+    background-color: transparent;
+  }
+
+  .checkbox-divider {
+    height: 1px;
+    width: 100%;
+    border-width: 0;
+    background-color: $color-primary;
+    margin: $spacing-400 0 $spacing-300;
+  }
+
+  textarea {
+    border: 0;
+    background: transparent;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: $size-font-label-subtitle;
+  }
+}
+
+.field-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  button[name='modal-cancel-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--hollow;
+  }
+
+  button[name='modal-save-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--primary;
+  }
+}
+
+/* Style the main text span of the checkbox label. */
+.form .field-main-checkbox .field-label .text {
+  font-weight: normal;
+}
+
+/* Use flexbox on the label for easy alignment of the icon and text */
+.extended-checkbox .field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Adjust the space between the icon and the label text */
+}
+
+/*
+ * This creates the "icon holder" for any checkbox that has an icon class.
+ * The [class*="..."] selector is a flexible way to target any element
+ * whose class contains "extended-checkbox--icon-".
+ */
+[class*='extended-checkbox--icon-'] .field-label::before {
+  content: ''; /* This is required for a pseudo-element to be displayed */
+  display: inline-block;
+  width: 24px; /* Example: Set your desired icon width */
+  height: 24px; /* Example: Set your desired icon height */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+}
+
+/*
+ * --- Define each specific icon ---
+ * For each possible `iconName` you might configure in the authoring dialog,
+ * you add a corresponding CSS rule here to set the background image.
+ */
+
+/* Example for when an author enters 'user' as the iconName */
+// .extended-checkbox--icon-user .field-label::before {
+//   background-image: url('/icons/user.svg'); /* Path to your user icon */
+// }
+
+// /* Example for when an author enters 'skill' as the iconName */
+// .extended-checkbox--icon-skill .field-label::before {
+//   background-image: url('/icons/skill.svg'); /* Path to your skill icon */
+// }
+
+// /* Add more rules for other icons as needed */
+// .extended-checkbox--icon-work .field-label::before {
+//   background-image: url('/icons/work.svg');
+// }
+
+// .extended-checkbox--icon-car-off .field-label::before {
+//   background-image: url('../../../../icons/icon-car-off.svg');
+// }
