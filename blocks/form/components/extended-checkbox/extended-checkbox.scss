@@ -13,7 +13,6 @@
   flex-direction: column; /* Stacks the text and description vertically */
   align-items: flex-start; /* Aligns items to the start of the cross axis */
   gap: 4px; /* Adds a small space between the label text and description */
-  width: 100%;
   padding: $spacing-400;
 
   label {
