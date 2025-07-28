@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-.form form .panel-repeatable-panel {
+.form .panel-repeatable-panel {
   &[data-max='1'] button.item-add {
     display: none;
   }
@@ -108,6 +108,10 @@
 
   .field-wrapper {
     color: $text-primary;
+
+    + .field-wrapper {
+      margin-top: $spacing-600;
+    }
   }
 
   .item-remove {

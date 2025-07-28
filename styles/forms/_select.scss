@@ -91,14 +91,3 @@ select[required] {
 select[required]::after {
   @include select-chevron;
 }
-
-.field-advanceddatepicker,
-.field-when-finish {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $spacing-400;
-
-  .drop-down-wrapper {
-    flex: 1 1 0%;
-  }
-}

@@ -4,7 +4,7 @@
 
 // Primary Colours
 $color-primary: #017ac9; // MSD Blue
-$color-primary-accessible: #0071BB; // Accessible MSD Blue
+$color-primary-accessible: #0071bb; // Accessible MSD Blue
 $color-primary-navy: #134276; // MSD Navy
 $color-primary-dark-navy: #162c45; // MSD Dark Navy
 $color-accent: #017ac9; // Same as MSD Blue
@@ -139,9 +139,6 @@ $stroke-tertiary: $color-shade-navy-40;
 $stroke-dark: $color-primary-navy;
 $stroke-error: $color-feedback-red;
 $stroke-focus: $color-feedback-pink;
-
-// border
-$color-border-secondary: #d0d9e4;
 
 // Input stroke widths
 $stroke-input-stroke: 2px;
