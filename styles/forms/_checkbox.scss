@@ -177,7 +177,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: $spacing-200;
-      margin: 0 0 $spacing-600 0;
+      margin: $spacing-400 0 $spacing-600 0;
 
       .checkbox-wrapper {
         flex: 0 1 auto;

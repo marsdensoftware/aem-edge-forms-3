@@ -67,7 +67,7 @@
 .selected-cards {
   display: flex;
   flex-wrap: wrap;
-  margin-top: $spacing-400;
+  margin: $spacing-400 0 $spacing-600 0;
   gap: $spacing-200;
 }
 
