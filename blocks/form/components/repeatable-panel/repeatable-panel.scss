@@ -28,7 +28,6 @@
       .repeatable-entry__title {
         color: $color-primary-navy;
         font-feature-settings: 'liga' off, 'clig' off;
-        font-family: $font-family;
         font-size: $size-font-h6;
         font-style: normal;
         font-weight: $font-weight-bold;
@@ -38,7 +37,6 @@
 
       &__proficiency {
         color: $text-primary;
-        font-family: $font-family;
         font-size: $size-font-body-default;
         font-style: normal;
         font-weight: $font-weight-regular;
@@ -56,8 +54,6 @@
         display: block;
         text-decoration: underline;
         padding-left: 28px;
-
-        font-family: $font-family;
         font-size: $size-font-body-default;
         font-style: normal;
         font-weight: $font-weight-medium;
@@ -86,8 +82,6 @@
     text-align: center;
     padding-left: 28px;
     text-decoration: underline;
-
-    font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
     font-weight: $font-weight-medium;
