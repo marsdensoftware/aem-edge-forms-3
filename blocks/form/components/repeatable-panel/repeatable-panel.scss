@@ -100,7 +100,7 @@
     display: none;
   }
 
-  .field-wrapper {
+  .field-wrapper:not([data-visible='false']) {
     color: $text-primary;
 
     + .field-wrapper {
