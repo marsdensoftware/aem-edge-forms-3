@@ -10,6 +10,9 @@ $breakpoints: (
   'tablet': (
     min-width: 744px,
   ),
+  'up-to-desktop': (
+    max-width: 1279px,
+  ),
   'desktop': (
     min-width: 1280px,
   ),

@@ -10,7 +10,7 @@ main {
       $color-primary-navy 100%
     );
 
-    &::after {
+    &::before {
       @include media('tablet') {
         background-image: url('/images/mymsd-unity-pattern-top-right.svg');
         background-position: top right;
@@ -34,7 +34,7 @@ main {
   &.wizard--bg-dark,
   &.wizard--bg-mid,
   &.wizard--bg-light {
-    &::after {
+    &::before {
       @include media('tablet') {
         content: '';
         position: absolute;
@@ -45,6 +45,7 @@ main {
         height: 388px;
         background-repeat: no-repeat;
         background-size: contain;
+        z-index: 0;
       }
 
       @include media('desktop') {
@@ -58,7 +59,7 @@ main {
 
   &.wizard--bg-dark,
   &.wizard--bg-mid {
-    &::after {
+    &::before {
       @include media('tablet') {
         background-image: url('/images/mymsd-unity-pattern-top-right.svg');
         background-position: top right;
@@ -74,7 +75,7 @@ main {
   &.wizard--bg-light {
     background: $color-shade-blue-04;
 
-    &::after {
+    &::before {
       @include media('desktop') {
         background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
         background-position: left bottom;
