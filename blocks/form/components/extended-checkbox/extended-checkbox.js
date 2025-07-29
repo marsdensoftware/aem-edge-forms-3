@@ -1,6 +1,8 @@
 export default function decorate(fieldDiv, fieldJson) {
     var _a;
-    console.log('hi from extended checkbox group');
+    console.log('hi from extended checkbox', fieldDiv);
+    //add the extended-checkbox-wrapper class to the fieldDiv
+    fieldDiv.classList.add('extended-checkbox');
     const { iconName } = fieldJson.properties;
     // Find the checkbox input
     const checkbox = fieldDiv.querySelector('input[type="checkbox"]');

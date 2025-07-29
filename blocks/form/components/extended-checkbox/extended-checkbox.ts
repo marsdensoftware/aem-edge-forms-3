@@ -7,7 +7,10 @@ interface Field {
 }
 
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
-  console.log('hi from extended checkbox group')
+  console.log('hi from extended checkbox', fieldDiv)
+
+      //add the extended-checkbox-wrapper class to the fieldDiv
+  fieldDiv.classList.add('extended-checkbox')
 
   const { iconName } = fieldJson.properties
 
