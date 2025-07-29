@@ -265,3 +265,34 @@ main > .section.columns-container:nth-of-type(2) .button-container,
 main > .section.columns-container:nth-of-type(3) .button-container {
   all: unset;
 }
+.link-with-icon {
+  display: flex;
+  align-items: center;
+  gap: $spacing-300;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: $spacing-200;
+
+    picture {
+      display: block;
+
+      img {
+        width: 24px;
+        height: auto;
+        display: block;
+      }
+    }
+
+    .button-container {
+      display: flex;
+
+      a.button {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
