@@ -1,10 +1,10 @@
-.account .button {
+.account-menu .button {
   font-size: 2rem;
   color: #333;
   font-optical-sizing: auto;
 }
-.account .button.is-busy,
-.account .button[aria-busy='true'] {
+.account-menu .button.is-busy,
+.account-menu .button[aria-busy='true'] {
   /* include busy for completeness */
   color: burlywood;
   opacity: 0.5;
