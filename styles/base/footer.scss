@@ -49,6 +49,15 @@ main > .section.columns-container:nth-of-type(1) {
   h5 {
     color: $color-shade-navy-40;
   }
+
+   .strap-title-small {
+    font-size: $size-font-strap-title-small;
+    color: pink;
+  }
+
+   .typography .p-large {
+    font-size: $size-font-footer-large;
+  }
 }
 
 /* ----------------------------- */
@@ -171,18 +180,7 @@ footer a {
   letter-spacing: $letter-spacing-default;
 }
 
-footer h5 {
-  color: $color-shade-navy-40;
-}
 
-footer .strap-title-small {
-  font-size: $size-font-strap-title-small;
-  color: pink;
-}
-
-footer .typography .p-large {
-  font-size: $size-font-footer-large;
-}
 
 /* ----------------------------- */
 /* GLOBAL ALIGNMENT OVERRIDES FOR FOOTER */
