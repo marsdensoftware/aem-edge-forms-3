@@ -1,11 +1,14 @@
-
 @use "../../styles/settings" as *;
 
 /* ----------------------------- */
 /* SECTION 1 - DARK GRADIENT BACKGROUND + ICON LINKS */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) {
-  background: linear-gradient(135deg, $color-primary-dark-navy 25%, $color-primary-navy 100%);
+  background: linear-gradient(
+                  135deg,
+                  $color-primary-dark-navy 25%,
+                  $color-primary-navy 100%
+  );
   color: $color-white;
   padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   flex-direction: column;
@@ -35,6 +38,7 @@ main > .section.columns-container:nth-of-type(1) {
 
   h5 {
     color: $color-shade-navy-40;
+    margin-bottom: $spacing-100;
   }
 
   .strap-title-small {
@@ -258,6 +262,18 @@ main > .section.columns-container:nth-of-type(3) a::before {
   align-items: center;
   gap: 0;
 
+  &.icon--right {
+    flex-direction: row-reverse;
+
+    > div {
+      // optional: adjust spacing between icon and text
+      &:first-child {
+        margin-left: $spacing-200; // or any spacing token you prefer
+        margin-right: 0;
+      }
+    }
+  }
+
   > div {
     margin: 0;
     padding: 0;
@@ -281,3 +297,4 @@ main > .section.columns-container:nth-of-type(3) a::before {
     }
   }
 }
+
