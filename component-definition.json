@@ -984,6 +984,7 @@
                 "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "name": "modal-cb-container",
                 "template": {
+                  "fd:viewType": "ext-checkbox-container",
                   "fieldType": "panel",
                   "jcr:title": "Modal Checkbox Container",
                   "hideTitle": true,
