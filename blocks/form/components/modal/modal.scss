@@ -1,32 +1,21 @@
+@use '../../../../styles/settings' as *;
+
 body.modal-open {
   overflow: hidden;
 }
 
 .modal dialog {
   --dialog-border-radius: 16px;
-
+  padding: 0;
   overscroll-behavior: none;
-  border: 1px solid #ccc;
-  border-radius: var(--dialog-border-radius);
-  width: 100vw;
+  border: none;
+  border-radius: $border-radius-mid;
+  width: 100%;
+  outline: none;
 }
 
 .modal dialog .modal-content {
-  overflow-y: auto;
-  overscroll-behavior: none;
   max-height: calc(100dvh - 60px);
-}
-
-@media (width >= 600px) {
-  .modal dialog {
-    padding: 30px;
-    width: 80vw;
-    max-width: 700px;
-  }
-
-  .modal dialog .modal-content {
-    max-height: calc(100vh - 90px);
-  }
 }
 
 .modal dialog::backdrop {
@@ -37,10 +26,10 @@ body.modal-open {
   position: absolute;
   top: 0;
   right: 0;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   padding: 6px;
-  border-radius: 0 var(--dialog-border-radius) 0 0;
+  border-radius: $border-radius-mid;
   background-color: unset;
   text-overflow: clip;
   margin: 0;

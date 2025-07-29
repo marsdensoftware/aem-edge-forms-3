@@ -1,12 +1,39 @@
 @use '../../../../styles/settings' as *;
 
-/*
- * Styles for the Extended Checkbox component.
- */
+.extended-checkbox-container {
+  .modal {
+    dialog {
+      max-width: 696px;
+    }
+
+    .close-button {
+      right: $spacing-500;
+      top: $spacing-500;
+    }
+  }
+
+  .modal-content {
+    background-color: $color-shade-blue-04;
+
+    > legend {
+      @include heading-level-4;
+      padding: $spacing-450;
+      color: $color-primary-navy;
+      font-weight: 700;
+      border-bottom: 2px solid $color-shade-navy-20;
+      margin-bottom: $spacing-500;
+      background-color: $color-white;
+    }
+
+    > fieldset:not(.field-modal-buttons),
+    fieldset.formtabs {
+      padding: 0 $spacing-500;
+    }
+  }
+}
 
 /* Target labels that have a description to apply flex layout. */
 .form .extended-checkbox {
-  align-items: center;
   border-radius: $border-radius-mid;
   border: 2px solid $color-shade-navy-40;
   display: flex;
@@ -65,6 +92,9 @@
 .field-modal-buttons {
   display: flex;
   justify-content: space-between;
+  background-color: $color-white;
+  padding: $spacing-500;
+  border-top: 2px solid $color-shade-navy-20;
 
   button[name='modal-cancel-button'] {
     @include elevation-1;
