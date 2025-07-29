@@ -4,11 +4,7 @@
 /* SECTION 1 - DARK GRADIENT BACKGROUND + ICON LINKS */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) {
-  background: linear-gradient(
-                  135deg,
-                  $color-primary-dark-navy 25%,
-                  $color-primary-navy 100%
-  );
+  background: linear-gradient(135deg, $color-primary-dark-navy 25%, $color-primary-navy 100%);
   color: $color-white;
   padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   flex-direction: column;
@@ -262,17 +258,17 @@ main > .section.columns-container:nth-of-type(3) a::before {
   gap: 0;
 
   &.icon--right {
-    flex-direction: row; // keep normal direction
-    justify-content: flex-start; // ensures whole block aligns left
+    flex-direction: row;
+    justify-content: flex-start;
 
     > div:first-child {
-      order: 2; // icon goes second (right of text)
+      order: 2;
       margin-left: $spacing-200;
       margin-right: 0;
     }
 
     > div:last-child {
-      order: 1; // text stays on the left
+      order: 1;
     }
 
     .button-container {
@@ -297,18 +293,29 @@ main > .section.columns-container:nth-of-type(3) a::before {
       width: 24px;
       height: auto;
     }
+  }
+}
 
-    .link-with-icon.large {
-      a,
-      .button-container a.button {
+.link-with-icon {
+  a,
+  .button-container a.button {
+    font-size: clamp(12px, 1.1vw, 14px);
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  &.large {
+    a,
+    .button-container a.button {
       font-size: clamp(14px, 2.2vw, 16px);
 
-        &:hover,
-        &:focus {
-          color: $color-white;
-        }
+      &:hover,
+      &:focus {
+        text-decoration: underline;
       }
     }
-
   }
 }
