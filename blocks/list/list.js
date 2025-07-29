@@ -60,9 +60,9 @@ export default async function decorate(block) {
   // TODO FIXME need to parse html in order to work in publisher
   const config = configFromFields(block);
   console.log('extracted config', config);
-  /*if (config.item_type) {
+  if (config.item_type) {
     const item_mod = await loadItem(config.item_type);
-  }*/
+  }
 
 
   const pager = Object.create(Pager);
