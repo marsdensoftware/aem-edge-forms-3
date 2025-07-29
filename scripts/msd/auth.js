@@ -703,7 +703,9 @@ const createAuthClient = ({
       const { verifier, challenge } = await pkceChallenge(96)
       const url = buildAuthorizationUrl({
         authEndpoint,
-        redirectUri,
+        redirectUri: redirectUri.startsWith('/')
+          ? origin + redirectUri
+          : redirectUri,
         clientId,
         profile,
         challenge,
@@ -741,7 +743,7 @@ const authClient = createAuthClient({
   profile: 'B2C_1A_AEM',
   authEndpoint:
     'https://identity.dev.az.msd.govt.nz/identity.dev.az.msd.govt.nz/B2C_1A_AEM/oauth2/v2.0/authorize',
-  redirectUri: 'https://www.cutandpatch.com/auth-callback',
+  redirectUri: '/auth-callback',
   // claims: ['uid'],
   claims: ['UUID'],
   backendUri: '/bin/session',
