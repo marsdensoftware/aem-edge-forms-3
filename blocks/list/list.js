@@ -1,5 +1,5 @@
     import { Pager, PagerConfig, makePageLoadObserver, makePositionObserver, loadPage } from './scroll.js';
-import { validUrl } from './utils.js';
+import { toInt, validUrl } from './utils.js';
 
 function dataPropsByStructure(block) {
   return [...block
