@@ -2,8 +2,8 @@
 import { validUrl } from './utils.js';
 
 function dataPropsByStructure(block) {
-  return block
-    .querySelectorAll('div > div > p')
+  return [...block
+    .querySelectorAll('div > div > p')]
     .map((e) => {
       return ((e.querySelector('a') || e)?.innerText || '').trim();
     });
