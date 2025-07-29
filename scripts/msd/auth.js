@@ -258,7 +258,7 @@ const clearCookie = (name) => {
 const userInfo = {
   /** @returns {{userID:string, refreshBy:number}} */
   read() {
-    const raw = readCookie('user_info')
+    const raw = readCookie('user')
     if (!raw) return DEFAULT_INFO
     try {
       const obj = JSON.parse(atob(raw))
@@ -271,13 +271,13 @@ const userInfo = {
         refreshBy,
       }
     } catch (err) {
-      error('Failed to parse user_info cookie:', err)
+      error('Failed to parse user cookie:', err)
       return DEFAULT_INFO
     }
   },
 
   clear() {
-    clearCookie('user_info')
+    clearCookie('user')
   },
 }
 
