@@ -54,7 +54,9 @@
         "columns",
         "fragment",
         "form",
-        "embed-adaptive-form"
+        "embed-adaptive-form",
+        "account-menu",
+        "auth-redirect"
       ]
     }
   ]
