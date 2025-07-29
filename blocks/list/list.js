@@ -36,14 +36,35 @@ function configFromFields(block) {
   result.offset_arg = offset_arg;
   result.page_size_arg = page_size_arg;
   result.set_page_size(page_size);
+  result.item_type = item_type; // TODO FIXME this is a hack
   return result;
 }
 
-export default function decorate(block) {
+async function loadItem(blockName) {
+  try {
+    const mod = await import(
+      `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
+    );
+    console.log('loaded', mod);
+    /*if (mod.default) {
+      await mod.default(block);
+      }*/
+  } catch (error) {
+    console.log(`failed to load module for ${blockName}`, error);
+  }
+}
+
+export default async function decorate(block) {
   console.log('decorating: ' + block.innerHTML, block);
 
+
+  // TODO FIXME need to parse html in order to work in publisher
   const config = configFromFields(block);
   console.log('extracted config', config);
+  if (config.item_type) {
+    const item_mod = await loadItem(config.item_type);
+  }
+
 
   const pager = Object.create(Pager);
   pager.config = config;
