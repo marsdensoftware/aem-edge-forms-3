@@ -18,7 +18,27 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form"
+      "embed-adaptive-form",
+      "account-menu",
+      "auth-redirect"
+    ]
+  },
+  {
+    "id": "account-menu",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "auth-redirect",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -79,7 +99,8 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard"
+      "wizard",
+      "icon-radio-group"
     ]
   },
   {

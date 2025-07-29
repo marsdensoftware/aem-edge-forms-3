@@ -1,7 +1,3 @@
-@use '../settings/colors' as *;
-@use '../settings/fonts' as *;
-@use '../settings/spacings' as *;
-
 /*
     Based style applied directly to the elements
     Overide this element inside the component
@@ -9,7 +5,9 @@
 */
 @use '../settings' as *;
 
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -25,9 +23,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  min-height: 100vh;
-  padding-bottom: 85px; // Reserve space for the footer
-  box-sizing: border-box;
 }
 
 ol,
@@ -38,7 +33,7 @@ ul {
   li {
     font-size: $size-font-base;
     line-height: 1.6;
-    margin-bottom: $spacing-100; // Requested change 2729
+    margin-bottom: $spacing-100;
 
     &::marker {
       color: $color-grey-black-80;

@@ -1,19 +1,13 @@
 @use '../../../../styles/settings' as *;
 
-/******************************
-    Base Panel Styling
-*******************************/
 .panel-formcontextualhelp {
+  @include elevation-1;
   padding: $spacing-400 $spacing-300;
   background: $bg-primary;
   display: block;
-  border-radius: $border-radius-low;
+  border-radius: $border-radius-mid;
   border: 1px solid $color-shade-navy-40;
   margin-bottom: $spacing-600;
-
-  // Elevation-1
-  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.20);
-  width: 100%;
 
   > legend {
     margin-bottom: 0;
@@ -30,14 +24,22 @@
     margin-right: $spacing-200;
     width: 24px;
     height: 24px;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
   .panel-formcontextualhelp__title {
     color: $text-dark;
-    font-feature-settings: 'liga' off, 'clig' off;
-    font-family: $font-family;
     font-size: $size-font-h6;
-    font-style: normal;
     font-weight: $font-weight-bold;
     line-height: 125%;
     letter-spacing: $letter-spacing-default;
@@ -54,77 +56,221 @@
     }
   }
 
-  &--info {
-    .panel-formcontextualhelp__icon {
-      content: url('images/icon-contextual-help-info-blue-info.svg');
+  .panel-formcontextualhelp__footer__link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
     }
 
-    .panel-formcontextualhelp__footer__link {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      color: $text-dark-primary;
-      font-weight: 500;
-
-      &:hover,
-      &:focus {
-        color: $text-dark-primary;
-        text-decoration: none;
-      }
-
-      &::after {
-        content: url('images/icon-contextual-help-arrow-navy-right.svg');
-        margin-left: 0.5rem;
-        font-size: 1.25rem;
-        line-height: 1;
-      }
-    }
-
-    // Merged Anchor Link Text Styles
-    .panel-formcontextualhelp__footer__link-text {
-      margin-right: 0.75rem;
-      color: $text-dark;
-      font-weight: 500;
-      text-decoration: none;
-      text-underline: none;
-      transition: color 0.2s ease;
-
-      &:hover,
-      &:focus {
-        color: $text-accent;
-        text-decoration: none;
-        text-underline: none;
-      }
-
-      &:visited {
-        color: $text-dark;
-      }
+    &::after {
+      content: '';
+      display: inline-block;
+      margin-left: $spacing-200;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 
-  &--error {
-    border: 1px solid $stroke-error;
-    background: $color-shade-red-05;
+  .panel-formcontextualhelp__footer__link-text {
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &--no-icon {
+    padding: $spacing-400;
 
     .panel-formcontextualhelp__icon {
-      content: url('images/icon-error-primary.svg');
+      display: none;
     }
 
+    .panel-formcontextualhelp__header {
+      align-items: flex-start;
+    }
+
+    .plain-text-wrapper p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 743px) {
+    .panel-formcontextualhelp__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .panel-formcontextualhelp__icon {
+      margin-bottom: $spacing-200;
+    }
+  }
+
+  /* Shared styles for info and primary */
+  &--info,
+  &--primary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $color-shade-navy-40;
+    background: $bg-primary;
+
     .panel-formcontextualhelp__title {
-      color: $text-error;
+      color: $color-primary-navy;
+    }
+
+    .plain-text-wrapper p {
+      color: $text-dark-primary;
     }
 
     .panel-formcontextualhelp__footer__link,
     .panel-formcontextualhelp__footer__link-text {
-      color: $text-error;
-      font-weight:$font-weight-medium;
-      text-decoration: none;
+      color: $color-primary;
+    }
 
-      &:hover,
-      &:focus,
-      &:visited {
-        color: $text-error;
-      }
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-primary-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      background-image: url('/icons/icon-contextual-help-primary-info-link-arrow.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link:hover,
+    .panel-formcontextualhelp__footer__link:focus,
+    .panel-formcontextualhelp__footer__link-text:hover,
+    .panel-formcontextualhelp__footer__link-text:focus {
+      color: $color-primary-navy;
+    }
+  }
+
+  /* Secondary Info */
+  &--info.panel-formcontextualhelp--secondary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $border-radius-mid;
+    background: $color-shade-blue-10;
+
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text {
+      color: $color-primary-navy;
+    }
+
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-secondary-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      background-image: url('/icons/icon-contextual-help-secondary-info-link-arrow.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link:hover,
+    .panel-formcontextualhelp__footer__link:focus,
+    .panel-formcontextualhelp__footer__link-text:hover,
+    .panel-formcontextualhelp__footer__link-text:focus {
+      color: $color-accent;
+    }
+  }
+
+  /* Tertiary Info */
+  &--info.panel-formcontextualhelp--tertiary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $stroke-dark;
+    background: $bg-dark;
+
+    .panel-formcontextualhelp__title,
+    .plain-text-wrapper p,
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text {
+      color: $color-white;
+    }
+
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-tertiary-info.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      background-image: url('/icons/icon-contextual-help-tertiary-info-link-arrow.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link:hover,
+    .panel-formcontextualhelp__footer__link:focus,
+    .panel-formcontextualhelp__footer__link-text:hover,
+    .panel-formcontextualhelp__footer__link-text:focus {
+      color: $color-shade-blue-10;
+    }
+  }
+
+  /* Warning Primary */
+  &--warning.panel-formcontextualhelp--primary {
+    border-radius: $border-radius-mid;
+    border: 2px solid $color-feedback-red;
+    background: $color-shade-red-05;
+
+    .panel-formcontextualhelp__title {
+      color: $color-feedback-red;
+    }
+
+    .plain-text-wrapper p {
+      color: $text-dark-primary;
+    }
+
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text {
+      color: $color-feedback-red;
+    }
+
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-warning-primary.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      background-image: url('/icons/icon-contextual-help-warning-primary-link-arrow.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link:hover,
+    .panel-formcontextualhelp__footer__link:focus,
+    .panel-formcontextualhelp__footer__link-text:hover,
+    .panel-formcontextualhelp__footer__link-text:focus {
+      color: $text-dark-primary;
+    }
+  }
+
+  /* Warning Secondary */
+  &--warning.panel-formcontextualhelp--secondary {
+    border-radius: $border-radius-mid;
+    border: 1px solid $color-feedback-red;
+    background: $color-feedback-red;
+
+    .panel-formcontextualhelp__title,
+    .plain-text-wrapper p,
+    .panel-formcontextualhelp__footer__link,
+    .panel-formcontextualhelp__footer__link-text {
+      color: $color-white;
+    }
+
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-warning-secondary.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link::after {
+      background-image: url('/icons/icon-contextual-help-warning-secondary-link-arrow.svg');
+    }
+
+    .panel-formcontextualhelp__footer__link:hover,
+    .panel-formcontextualhelp__footer__link:focus,
+    .panel-formcontextualhelp__footer__link-text:hover,
+    .panel-formcontextualhelp__footer__link-text:focus {
+      color: $text-dark-primary;
     }
   }
 }

@@ -50,10 +50,27 @@
                 {
                   "name": "Warning",
                   "value": "warning"
+                }
+              ]
+            },
+            {
+              "component": "select",
+              "name": "variant",
+              "label": "Variant",
+              "valueType": "string",
+              "value": "text",
+              "options": [
+                {
+                  "name": "Primary",
+                  "value": "primary"
                 },
                 {
-                  "name": "Error",
-                  "value": "error"
+                  "name": "Secondary",
+                  "value": "secondary"
+                },
+                {
+                  "name": "Tertiary",
+                  "value": "tertiary"
                 }
               ]
             },
@@ -90,8 +107,17 @@
               "name": "linkOpenInNewTab",
               "label": "Open link in new tab",
               "valueType": "boolean"
+            },
+            {
+              "component": "boolean",
+              "name": "hideIcon",
+              "label": "Hide Icon",
+              "valueType": "boolean"
             }
           ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
         }
       ]
     }

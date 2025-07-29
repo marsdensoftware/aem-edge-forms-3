@@ -1,9 +1,4 @@
-@use '../settings/colors' as *;
-@use '../settings/spacings' as *;
-@use '../settings/mixins' as *;
 @use '../settings' as *;
-@use '../base/forms' as *;
-
 
 @mixin select-chevron {
   content: '';
@@ -23,13 +18,11 @@
   font-weight: 400;
 }
 
-
 @mixin base-select-style {
   cursor: pointer;
   border-radius: $border-radius-mid;
   border: 2px solid $stroke-tertiary;
   padding: $spacing-400;
-  font-family: $font-family;
   font-size: $size-font-body-large;
   line-height: 133%;
   appearance: none;
@@ -96,22 +89,4 @@ select[required] {
 
 select[required]::after {
   @include select-chevron;
-}
-
-
-.field-advanceddatepicker,
-.field-when-finish {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $spacing-400;
-
-  .drop-down-wrapper {
-    flex: 1 1 0%;
-  }
-}
-
-.col-md-5,
-.col-md-7 {
-  flex: 1 1 auto;
-  min-width: 0;
 }

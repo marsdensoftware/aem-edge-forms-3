@@ -3,10 +3,7 @@
 
 .search-box {
   position: relative;
-
-  @include media('desktop') {
-    max-width: 456px;
-  }
+  margin-bottom: $spacing-600;
 
   .field-description {
     p {

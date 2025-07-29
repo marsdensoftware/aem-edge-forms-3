@@ -1,8 +1,10 @@
 interface Model {
   properties: {
     helpType: string
+    variant: string
     link: string
     linkOpenInNewTab: boolean
+    hideIcon: boolean
     linkText: string
   }
 }
@@ -38,7 +40,18 @@ export default function decorate(panelEl: Element, model: Model) {
   legendEl?.remove()
 
   const helpType = properties.helpType || 'info'
+  const hideIcon = properties.hideIcon;
+  const variant = properties.variant;
+  
   panelEl.classList.add(`${className}--${helpType}`)
+  
+  if(variant){
+    panelEl.classList.add(`${className}--${variant}`)
+  }
+  
+  if(hideIcon){
+    panelEl.classList.add(`${className}--no-icon`)  
+  }
 
   if (properties.link && properties.linkText) {
     // Create the footer div

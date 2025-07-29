@@ -14,7 +14,9 @@ let customComponents = [
   'driverlicence',
   'advanceddatepicker',
   'summary',
-  'search-box']
+  'search-box',
+  'icon-radio-group',
+]
 
 const OOTBComponentDecorators = [
   'file-input',
@@ -67,6 +69,7 @@ async function loadComponent(componentName, element, fd, container) {
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log(`failed to load component for ${blockName}`, error)
+            console.log('component details: ', {componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items})
           }
           resolve()
         })()
@@ -75,6 +78,7 @@ async function loadComponent(componentName, element, fd, container) {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load component ${blockName}`, error)
+      console.log('component details: ', {componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items})
     }
     element.dataset.componentStatus = 'loaded'
   }

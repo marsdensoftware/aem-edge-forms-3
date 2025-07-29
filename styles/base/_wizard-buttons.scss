@@ -1,27 +1,6 @@
 @use '../../styles/settings' as *;
 
-/*****************************
-    WIZARD BUTTONS
-*****************************/
-
-%common-panel-spacing {
-  margin: 32px 0;
-
-  @include media('desktop') {
-    padding: 60px 0;
-  }
-}
-
-%common-wizard-button {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: block;
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.wizard .wizard-button-wrapper {
+.wizard-button-wrapper {
   height: 100%;
   max-height: $footer-height;
   position: fixed;
@@ -34,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   gap: $spacing-300;
-  border-top: 1px solid $stroke-secondary;
+  border-top: 1px solid $color-shade-navy-20;
 
   @include media('tablet') {
     max-height: $footer-height-tablet;
@@ -48,85 +27,47 @@
     margin-left: auto;
   }
 
-  .button[name='next'] {
-    @extend %button;
-    @extend %button--primary;
+  .button[name='next'],
+  .button[name='back'] {
+    @include elevation-1;
     display: flex;
     align-items: center;
 
     &::before {
-      @extend %common-wizard-button;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: block;
+      width: 20px;
+      height: 20px;
       content: '';
+    }
+  }
+
+  .button[name='next'] {
+    @extend %button;
+    @extend %button--primary;
+
+    &::before {
       background-image: url('../../../../icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
-      margin-left: 0.5rem;
+      margin-left: 8px;
     }
   }
 
   .button[name='back'] {
     @extend %button;
     @extend %button--hollow;
-    display: flex;
-    align-items: center;
 
     &::before {
-      @extend %common-wizard-button;
-      content: '';
       background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
-
-      margin-right: 0.5rem;
+      margin-right: 8px;
     }
   }
 }
 
-/*****************************
-    REPEAT ACTIONS BUTTON (Hollow Style)
-*****************************/
 .repeat-actions .item-add {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: $spacing-200;
-  font-family: $font-family;
-  font-size: 20px;
-  font-style: normal;
-  line-height: 24px;
-  letter-spacing: 0;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  border-radius: $border-radius-round;
-  border: $stroke-input-stroke solid $stroke-tertiary;
-  background: $bg-light-primary;
-  color: $text-dark-primary;
-
-  // Elevation-1 (manually translated from vars)
-  box-shadow: 0px 2px 4px 0px rgba(22, 44, 69, 0.2);
-
-  &.default {
-    padding: $spacing-400 $spacing-500;
-  }
-
-  &.small {
-    padding: $spacing-300 $spacing-400;
-  }
-
-  &:hover {
-    border-color: $stroke-primary;
-    background: $bg-light-primary;
-    color: $stroke-primary;
-  }
-
-  &:active {
-    border-color: $stroke-accent;
-    background: $bg-light-primary;
-    color: $stroke-accent;
-    transform: scale(0.98);
-  }
-
-  &:focus {
-    background: $bg-light-primary;
-    box-shadow: 0 0 0 2px $bg-light-primary, 0 0 0 4px $stroke-focus;
-  }
+  @include elevation-1;
+  @extend %button;
+  @extend %button--hollow;
 }

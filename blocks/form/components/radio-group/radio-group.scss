@@ -1,220 +1,246 @@
 @use '../../../../styles/settings' as *;
 
 .radio-group--with-icon {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: $spacing-400 0;
+  margin-bottom: $spacing-700;
+
+  @include media('desktop') {
+    flex-direction: row;
+    gap: $spacing-400;
+    margin-bottom: $spacing-800;
+  }
+
+  .radio-wrapper {
+    width: 100%;
+
+    @include media('desktop') {
+      width: calc(50% - $spacing-400);
+    }
+  }
+
+  .radio-group--with-icon__label {
+    width: 100%;
+    padding: $spacing-400;
+    border-radius: $spacing-200;
+    border: $stroke-input-stroke solid $stroke-tertiary;
+    background: $bg-light-primary;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0 16px;
-    padding-bottom: $spacing-600;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 140px;
+    gap: $spacing-300;
+    transition: all 0.2s ease;
 
-    .radio-wrapper {
-        flex: 1 1 45%;
-        display: flex;
+    &::before {
+      order: 1;
+      margin-right: 0;
     }
 
-    .radio-group--with-icon__label {
-        width: 100%;
-        padding: $spacing-400;
-        border-radius: $spacing-200;
-        border: $stroke-input-stroke solid $stroke-tertiary;
-        background: $bg-light-primary;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        min-height: 140px;
-        gap: $spacing-300;
-        transition: all 0.2s ease;
-
-        &::before {
-            order: 1;
-            margin-right: 0;
-        }
-
-        .text {
-            font-weight: 600;
-            /*font-size: $size-font-body-large;*/
-            color: $text-dark-primary;
-        }
-
-        .desc {
-            font-size: $size-font-body-default;
-            color: $text-secondary;
-            font-weight: 400;
-            line-height: 1.4;
-            max-width: 45ch;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+    .text {
+      color: $text-dark-primary;
+      font-size: clamp(18px, 2.25vw, 20px);
     }
 
-    .radio-group--with-icon__icon {
-        width: 40px;
-        height: 40px;
-        display: block;
-        background-size: contain;
-        background-repeat: no-repeat;
+    .desc {
+      font-size: $size-font-body-default;
+      color: $text-secondary;
     }
+  }
 
-    .radio-group--with-icon--car-off     { content: url('../../../../icons/icon-car-off.svg'); }
-    .radio-group--with-icon--car-on      { content: url('../../../../icons/icon-car-on.svg'); }
-    .radio-group--with-icon--full-time   { content: url('../../../../icons/icon-full-time.svg'); }
-    .radio-group--with-icon--part-time   { content: url('../../../../icons/icon-part-time.svg'); }
-    .radio-group--with-icon--list-search-1 { content: url('../../../../icons/icon-streamline.svg'); }
-    .radio-group--with-icon--smiley-face { content: url('../../../../icons/smiley-face.svg'); }
-    .radio-group--with-icon--no-language { content: url('../../../../icons/icon-no-language.svg'); }
-    .radio-group--with-icon--yes-language { content: url('../../../../icons/icon-yes-language.svg'); }
-    .radio-group--with-icon--no-education { content: url('../../../../icons/icon-no-education.svg'); }
-    .radio-group--with-icon--yes-education { content: url('../../../../icons/icon-yes-education.svg'); }
+  .radio-group--with-icon__icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 
-    .radio-group--with-icon--yes-language {
-        content: url('../../../../icons/icon-yes-language.svg');
+  .radio-group--with-icon--car-off {
+    content: url('../../../../icons/icon-car-off.svg');
+  }
+  .radio-group--with-icon--car-on {
+    content: url('../../../../icons/icon-car-on.svg');
+  }
+  .radio-group--with-icon--full-time {
+    content: url('../../../../icons/icon-full-time.svg');
+  }
+  .radio-group--with-icon--part-time {
+    content: url('../../../../icons/icon-part-time.svg');
+  }
+  .radio-group--with-icon--list-search-1 {
+    content: url('../../../../icons/icon-streamline.svg');
+  }
+  .radio-group--with-icon--smiley-face {
+    content: url('../../../../icons/smiley-face.svg');
+  }
+  .radio-group--with-icon--no-language {
+    content: url('../../../../icons/icon-no-language.svg');
+  }
+  .radio-group--with-icon--yes-language {
+    content: url('../../../../icons/icon-yes-language.svg');
+  }
+  .radio-group--with-icon--no-education {
+    content: url('../../../../icons/icon-no-education.svg');
+  }
+  .radio-group--with-icon--yes-education {
+    content: url('../../../../icons/icon-yes-education.svg');
+  }
+
+  .radio-group--with-icon--yes-language {
+    content: url('../../../../icons/icon-yes-language.svg');
+  }
+
+  .radio-group--with-icon--no-language {
+    content: url('../../../../icons/icon-no-language.svg');
+  }
+
+  .radio-group--with-icon--work-non-paid {
+    content: url('../../../../icons/icon-work-non-paid.svg');
+  }
+
+  .radio-group--with-icon--work-nothing-to-add {
+    content: url('../../../../icons/icon-work-nothing-to-add.svg');
+  }
+
+  .radio-group--with-icon--work-paid {
+    content: url('../../../../icons/icon-work-paid.svg');
+  }
+
+  .radio-group--with-icon--work-volunteer {
+    content: url('../../../../icons/icon-work-volunteer.svg');
+  }
+
+  input[type='radio'] {
+    &:checked + .radio-group--with-icon__label {
+      background-color: $color-shade-blue-10;
+      border: 2px solid $color-primary;
+      color: $text-dark-primary;
+
+      &:after {
+        left: auto;
+        top: auto;
+        bottom: $spacing-400 + 1px;
+        margin: 0 auto;
+      }
     }
-
-    .radio-group--with-icon--no-language {
-        content: url('../../../../icons/icon-no-language.svg');
-    }
-
-    input[type='radio'] {
-        &:checked + .radio-group--with-icon__label {
-            background-color: $color-shade-blue-10;
-            border: 2px solid $color-primary;
-            color: $text-dark-primary;
-
-            &:after {
-                left: auto;
-                top: auto;
-                bottom: $spacing-400 + 1px;
-                margin: 0 auto;
-            }
-        }
-    }
+  }
 }
 
 .radio-group-wrapper {
-    &.horizontal {
-        display: flex;
-        flex-direction: column;
+  &.horizontal {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      padding: $spacing-400;
+      border-radius: $border-radius-mid;
+      border: 2px solid $color-shade-navy-45;
+      width: 100%;
+      margin: 0 0 $spacing-200 0;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+
+      &::before {
+        order: 1;
+        margin-right: 0;
+      }
+    }
+
+    input:checked + label {
+      border: 2px solid $stroke-accent;
+      background-color: $color-white;
+      color: $text-dark-primary;
+
+      &::after {
+        right: 17px;
+        top: 17px;
+        left: auto;
+      }
+    }
+  }
+
+  &.variant-bar {
+    .radios-wrapper {
+      display: flex;
+      overflow: hidden;
+
+      .radio-wrapper {
+        flex: 1;
+        position: relative;
+
+        input[type='radio'] {
+          position: absolute;
+          opacity: 0;
+          pointer-events: none;
+        }
 
         label {
-            padding: $spacing-400;
-            border-radius: $border-radius-mid;
-            border: 2px solid $color-shade-navy-45;
-            width: 100%;
-            margin: 0 0 $spacing-200 0;
-            justify-content: space-between;
-            transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: $spacing-200 $spacing-400;
+          font-weight: normal;
+          font-size: $size-font-body-large;
+          color: $text-primary;
+          cursor: pointer;
+          min-height: 48px;
+          transition: background-color 0.2s ease, color 0.2s ease;
+          background: $color-white;
+          border: 2px solid $stroke-tertiary;
+          border-right: none;
+          border-radius: 0;
+          margin-bottom: 0;
 
-            &::before {
-                order: 1;
-                margin-right: 0;
-            }
+          &::before,
+          &::after {
+            display: none;
+          }
+
+          &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+          }
         }
 
-        input:checked + label {
-            border: 2px solid $stroke-accent;
-            background-color: $color-white;
-            color: $text-dark-primary;
-
-            &::after {
-                right: 17px;
-                top: 17px;
-                left: auto;
-            }
+        &:first-child label {
+          border-top-left-radius: $border-radius-mid;
+          border-bottom-left-radius: $border-radius-mid;
         }
+
+        &:last-child label {
+          border-top-right-radius: $border-radius-mid;
+          border-bottom-right-radius: $border-radius-mid;
+          border-right: 2px solid $stroke-tertiary;
+        }
+
+        input[type='radio']:checked + label {
+          background-color: $color-primary;
+          border-color: $color-primary;
+          color: $color-white;
+        }
+      }
     }
-
-    &.variant-bar {
-        .radios-wrapper {
-            display: flex;
-            flex-direction: row;
-
-            .radio-wrapper {
-                flex: 1;
-            }
-        }
-    }
+  }
 }
 
-// Shared .desc style for checkboxes and other label-based inputs
-.checkbox-wrapper .field-label--with-description .desc {
-    font-size: $size-font-body-default;
-    color: $text-secondary;
-    font-weight: 400;
-    line-height: 1.4;
-    max-width: 45ch;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-
-/******************************
-  Horizontal Checkbox Variants
-******************************/
-
-.radio-group-wrapper.variant-bar {
-    .radios-wrapper {
-        display: flex;
-        overflow: hidden;
-
-        .radio-wrapper {
-            flex: 1;
-            position: relative;
-
-            input[type='radio'] {
-                position: absolute;
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            label {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: $spacing-200 $spacing-400;
-                font-weight: normal;
-                font-size: $size-font-body-large;
-                color: $text-primary;
-                cursor: pointer;
-                min-height: 48px;
-                transition: background-color 0.2s ease, color 0.2s ease;
-
-                background: $color-white;
-                border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
-                border-right: none;
-                border-radius: 0;
-
-                &::before,
-                &::after {
-                    display: none !important;
-                }
-
-                &:hover {
-                    background-color: $color-primary;
-                    color: $color-white;
-                }
-            }
-
-            &:first-child label {
-                border-top-left-radius: var(--Corner-radius-Mid, 8px);
-                border-bottom-left-radius: var(--Corner-radius-Mid, 8px);
-            }
-
-            &:last-child label {
-                border-top-right-radius: var(--Corner-radius-Mid, 8px);
-                border-bottom-right-radius: var(--Corner-radius-Mid, 8px);
-                border-right: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
-            }
-
-            input[type='radio']:checked + label {
-                background-color: $color-primary;
-                border-color: $color-primary;
-                color: $color-white;
-            }
-        }
+.field-workexperience-selection {
+  @include media('up-to-desktop') {
+    input[type='radio']:checked + .radio-group--with-icon__label {
+      &::after {
+        right: $spacing-400 + 1px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
+
+    .radio-group--with-icon__label {
+      flex-direction: row;
+      padding: $spacing-400;
+      min-height: auto;
+    }
+  }
 }

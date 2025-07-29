@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel__languagepanel {
+.panel-repeatable-panel__languagepanel {
   [name='proficiency'] {
     display: none;
   }
@@ -48,39 +48,16 @@ main .form form .panel-repeatable-panel__languagepanel {
       margin-bottom: $spacing-200;
     }
   }
-
-  .checkbox-group-wrapper.field-cb-english-proficiency {
-    margin-top: 32px;
-    max-width: 457px;
-  }
 }
 
 .field-panel-other-languages {
   padding-bottom: 120px;
 
   [class*='field-wrapper'] {
-    p.p-large p {
-      padding-bottom: 0;
-    }
-
     > p {
-      margin: 0;
-      padding: 0;
-
       h3 {
         padding-bottom: 0;
         margin-bottom: $spacing-400;
-      }
-
-      p {
-        color: $text-dark-primary;
-        margin-bottom: $spacing-600;
-        font-size: 17px;
-
-        @include media('desktop') {
-          font-size: 20px;
-          margin-bottom: $spacing-650;
-        }
       }
 
       h6 {
@@ -96,10 +73,6 @@ main .form form .panel-repeatable-panel__languagepanel {
   }
 
   .field-languagepanel {
-    @include media('desktop') {
-      max-width: 664px;
-    }
-
     .radio-group-wrapper {
       display: flex;
       flex-direction: column;
@@ -134,7 +107,6 @@ main .form form .panel-repeatable-panel__languagepanel {
   .field-languagepanel-options-content {
     .panel-repeatable-panel {
       .field-wrapper {
-        // margin-top: $spacing-600;
         margin-bottom: $spacing-600;
       }
 

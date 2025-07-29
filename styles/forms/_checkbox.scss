@@ -1,12 +1,5 @@
-@use '../settings/colors' as *;
-@use '../settings/mixins' as *;
-@use '../settings/spacings' as *;
 @use '../settings' as *;
-@use '../base/forms' as *;
 
-/******************************
-  Checkbox Wrapper
-******************************/
 .checkbox-wrapper {
   display: flex;
   align-items: center;
@@ -15,7 +8,7 @@
     @extend %label-common-style;
     position: relative;
     padding: $spacing-400;
-    padding-right: 48px;
+    padding-right: $spacing-700;
     border-radius: $border-radius-mid;
     border: 2px solid $stroke-tertiary;
     background-color: $color-white;
@@ -24,7 +17,7 @@
     &::before {
       content: '';
       position: absolute;
-      right: 16px;
+      right: $spacing-400;
       top: 50%;
       transform: translateY(-50%);
       display: block;
@@ -38,18 +31,6 @@
       background-position: center;
       background-size: 60% 60%;
       transition: all 0.1s ease-in-out;
-    }
-
-    .desc {
-      font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
-      color: $text-secondary;
-      font-weight: 400;
-      line-height: 1.4;
-      max-width: 45ch;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     &:hover {
@@ -75,104 +56,116 @@
       &::before {
         border-color: $stroke-accent;
         background-color: $stroke-accent;
-        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 13L9 17L19 7' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+        background-size: 17px;
+        width: $spacing-500;
+        height: $spacing-500;
       }
     }
   }
+
+  .desc {
+    font-size: $size-font-body-default;
+    color: $text-secondary;
+    font-weight: 400;
+  }
+
+  .text {
+    font-weight: 400;
+  }
 }
 
-/******************************
-  Horizontal Checkbox Group
-******************************/
-.checkbox-group-wrapper.horizontal {
-  .checkbox-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
+.checkbox-group-wrapper {
+  &.horizontal {
+    > legend {
+      padding-left: 0;
+      padding-right: 0;
     }
 
-    @media (min-width: 744px) {
-      flex-direction: row;
-      align-items: center;
-    }
+    .checkbox-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
 
-    label {
-      width: 100%;
+      &:not(:last-child) {
+        margin-bottom: $spacing-200;
+      }
 
-      @media (max-width: 743px) {
-        padding-right: 48px;
+      @media (min-width: 744px) {
+        flex-direction: row;
+        align-items: center;
+      }
 
-        &::before {
-          right: 12px;
-          bottom: 16px;
-          top: auto;
-          transform: translateY(0);
+      label {
+        width: 100%;
+
+        @media (max-width: 743px) {
+          padding-right: $spacing-700;
+
+          &::before {
+            right: $spacing-300;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
       }
     }
   }
-}
 
-/**********************************
-  Horizontal Variant Pills Group
-**********************************/
+  &.variant-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-300;
 
-.checkbox-group-wrapper.variant-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-
-  .checkbox-wrapper {
-    input[type='checkbox'] {
-      display: none; // Hide native checkbox
-    }
-
-    label {
-      display: flex;
-      padding: var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-300, 12px)
-      var(--Spacing-Spacing-200, 8px) var(--Spacing-Spacing-450, 20px);
-      align-items: center;
-      gap: var(--Spacing-Spacing-000, 0px);
-      background-color: $color-white;
-      border-radius: $border-radius-round;
-      font-size: clamp(15px, 1.25vw, 17px); // from $size-font-body-default
-      line-height: 160%;
-      color: $text-secondary;
-      border: 1px solid $stroke-tertiary;
-      cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
-
-      &::after {
-        content: '';
-        display: block;
-        background-image: url('../../icons/icon-plus.svg');
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 16px;
-        height: 16px;
-        margin-left: 8px;
+    .checkbox-wrapper {
+      input[type='checkbox'] {
+        display: none; // Hide native checkbox
       }
 
-      &::before {
-        display: none !important;
+      label {
+        display: flex;
+        padding: $spacing-200 $spacing-300 $spacing-200 $spacing-450;
+        align-items: center;
+        gap: 0;
+        background-color: $color-white;
+        border-radius: $border-radius-round;
+        font-size: clamp(15px, 1.25vw, 17px);
+        line-height: 160%;
+        color: $text-secondary;
+        border: 1px solid $stroke-tertiary;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease,
+          border 0.2s ease;
+
+        &::after {
+          content: '';
+          display: block;
+          background-image: url('../../icons/icon-plus.svg');
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: $spacing-400;
+          height: $spacing-400;
+          margin-left: $spacing-200;
+        }
+
+        &::before {
+          display: none;
+        }
       }
-    }
 
-    input[type='checkbox']:checked + label {
-      background-color: $bg-dark;
-      color: $color-white;
-      border: 1px solid $stroke-dark;
+      input[type='checkbox']:checked + label {
+        background-color: $bg-dark;
+        color: $color-white;
+        border: 1px solid $stroke-dark;
 
-      &::after {
-        background-image: url('../../icons/icon-x.svg');
-      }
+        &::after {
+          background-image: url('../../icons/icon-x.svg');
+        }
 
-      &:hover {
-        background-color: $color-accent;
-        border-color: $color-accent;
+        &:hover {
+          background-color: $color-accent;
+          border-color: $color-accent;
+        }
       }
     }
   }

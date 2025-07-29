@@ -1,9 +1,4 @@
-@use '../settings/colors' as *;
-@use '../settings/spacings' as *;
-@use '../settings/mixins' as *;
-
 @use '../settings' as *;
-@use '../base/forms' as *;
 
 .radio-group-wrapper {
   display: flex;
@@ -62,12 +57,11 @@
           position: absolute;
           left: 1px;
           top: 1px;
-          width: 12px;
-          height: 12px;
-          border: 8px solid $stroke-accent;
+          width: 24px;
+          height: 24px;
+          border: 6px solid $stroke-accent;
         }
       }
     }
   }
 }
-

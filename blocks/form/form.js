@@ -347,10 +347,117 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  const colSpan = field['Column Span'] || field.properties?.colspan;
-  if (colSpan && element) {
-    element.classList.add(`col-${colSpan}`);
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate js file and importing it
+  // Get the default colspan
+  const defaultColSpan = field['Column Span'] || field.properties?.colspan;
+  const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
+  const defaultDisplay = field['Column Display'] || field.properties?.['display'];
+  const defaultOrder = field['Column Order'] || field.properties?.['d-order'];
+
+  // Get responsive colspans from properties
+  const responsiveColSpans = {
+    sm: field.properties?.['colspan-sm'],
+    md: field.properties?.['colspan-md'],
+    lg: field.properties?.['colspan-lg'],
+    xl: field.properties?.['colspan-xl'],
+    xxl: field.properties?.['colspan-xxl']
+  };
+
+  // Get responsive offsets from properties
+  const responsiveOffsets = {
+    sm: field.properties?.['colspan-sm-offset'],
+    md: field.properties?.['colspan-md-offset'],
+    lg: field.properties?.['colspan-lg-offset'],
+    xl: field.properties?.['colspan-xl-offset'],
+    xxl: field.properties?.['colspan-xxl-offset']
+  };
+
+  // Get the responsive display options from properties
+  const responsiveDisplayOptions = {
+    sm: field.properties?.['display-sm'],
+    md: field.properties?.['display-md'],
+    lg: field.properties?.['display-lg'],
+    xl: field.properties?.['display-xl'],
+    xxl: field.properties?.['display-xxl']
   }
+
+  // Get the responsive display orders from properties
+  const responsiveDisplayOrders = {
+    sm: field.properties?.['d-order-sm'],
+    md: field.properties?.['d-order-md'],
+    lg: field.properties?.['d-order-lg'],
+    xl: field.properties?.['d-order-xl'],
+    xxl: field.properties?.['d-order-xxl']
+  }
+
+  // Get container classes from properties
+  const containerClass = field.properties?.container;
+  const rowClass = field.properties?.row;
+  const reverseRowWrap = field.properties?.['flex-wrap-reverse']
+
+  if (element) {
+    // Add default colspan class if defined
+    if (defaultColSpan) {
+      element.classList.add(`col${defaultColSpan === 'split' ? '' : `-${defaultColSpan}`}`);
+    }
+
+    //set a default offset - ideally, we should delete the value from the jcr
+    if (defaultOffset) {
+      element.classList.add(`offset-${defaultOffset}`);
+    }
+
+    // Add the default display value
+    if (defaultDisplay) {
+      element.classList.add(`d-${defaultDisplay}`);
+    }
+
+    // Add the default order value
+    if (defaultOrder) {
+      element.classList.add(`order-${defaultOrder}`);
+    }
+
+    // Add responsive colspan classes if defined
+    Object.entries(responsiveColSpans).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`col-${size}${value === 'split' ? '' : `-${value}`}`);
+      }
+    });
+
+    // Add responsive offset classes if defined
+    Object.entries(responsiveOffsets).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`offset-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display options classes if defined
+    Object.entries(responsiveDisplayOptions).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`d-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display order classes if defined
+    Object.entries(responsiveDisplayOrders).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`order-${size}-${value}`);
+      }
+    });
+
+    // Add container class if defined
+    if (containerClass) {
+      element.classList.add(containerClass);
+    }
+
+    // Add row class if defined
+    if (rowClass === true) {
+      element.classList.add('row');
+      if (reverseRowWrap) {
+        element.classList.add('flex-wrap-reverse');
+      }
+    }
+  }
+  // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
 
 const handleFocus = (input, field) => {

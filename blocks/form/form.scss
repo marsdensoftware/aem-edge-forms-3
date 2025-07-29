@@ -1,9 +1,10 @@
 @use '../../styles/settings' as *;
+@use 'form-panel';
 
-// Fieldset reset
 fieldset {
   padding: 0;
   margin: 0;
+  border: 0;
 }
 
 // Hide debug output
@@ -17,10 +18,6 @@ form output {
   font-size: 1.625rem;
 }
 
-/*form:not(.edit-mode) [data-visible='false'] {
-  display: none !important;
-}*/
-
 form:not(.edit-mode) [data-visible='false'] {
   display: none;
   visibility: hidden;
@@ -28,48 +25,53 @@ form:not(.edit-mode) [data-visible='false'] {
   overflow: hidden;
 }
 
-main .form > div:not(:first-child) {
+.form > div:not(:first-child) {
   display: none;
 }
 
-.panel-wrapper.field-top-nav {
+.field-top-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
   max-height: $nav-height;
   height: 100%;
+  border-bottom: 1px solid $color-shade-navy-40;
+  background-color: $color-white;
 
   @include media('tablet') {
     max-height: $nav-height-tablet;
-    padding: $nav-padding-top-tablet $spacing-400 $nav-padding-bottom-tablet;
+    padding: $nav-padding-top-tablet $spacing-600 $nav-padding-bottom-tablet;
   }
 
   @include media('desktop') {
     max-height: $nav-height-desktop;
-    padding: $nav-padding-top-desktop $spacing-400 $nav-padding-bottom-desktop;
+    padding: $nav-padding-top-desktop $spacing-700 $nav-padding-bottom-desktop;
   }
 
-  .image-wrapper picture {
-    max-width: 150px;
+  .image-wrapper {
+    a {
+      line-height: 0;
+    }
 
-    @include media('desktop') {
-      max-width: 300px;
+    picture {
+      max-width: 200px;
+
+      @include media('desktop') {
+        max-width: 240px;
+      }
     }
   }
 
   .button-wrapper button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-000, 0px);
-    gap: $spacing-200;
-    font-family: $font-family;
-    font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
-    font-style: normal;
-    font-weight: $font-weight-medium;
+    padding: 0;
+    gap: 0 $spacing-200;
+    font-size: clamp(15px, 1.25vw, 17px);
+    font-weight: 500;
     line-height: 133%;
-    letter-spacing: 0px;
     color: $color-primary;
     text-decoration: none;
     background-image: none;
@@ -77,13 +79,16 @@ main .form > div:not(:first-child) {
 
     &::after {
       content: '';
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
+      display: block;
+      width: 16px;
+      height: 16px;
       background-image: url('/icons/icon-logout-exit-blue.svg');
       background-repeat: no-repeat;
       background-size: contain;
-      margin-left: 8px;
+
+      @include media('desktop') {
+        height: 18px;
+      }
     }
 
     &:hover,
@@ -94,30 +99,11 @@ main .form > div:not(:first-child) {
   }
 }
 
-.panel-formhero__picture {
-  display: block !important; // this will be removed when we have the grid system is added
-  width: 100%;
-  order: -1;
-  margin-bottom: $spacing-400;
-
-  @include media('tablet') {
-    display: block !important; // this will be removed when we have the grid system is added
-    order: -1;
-    margin-bottom: $spacing-400;
-  }
-
-  @include media('desktop') {
-    display: block !important; // this will be removed when we have the grid system is added
-    order: 1;
-    margin-bottom: 0;
-  }
-}
-
 // Remaining unchanged styles
-main .form input:disabled,
-main .form textarea:disabled,
-main .form select:disabled,
-main .form button:disabled {
+.form input:disabled,
+.form textarea:disabled,
+.form select:disabled,
+.form button:disabled {
   background-color: var(--form-input-disable-color);
 }
 
@@ -126,12 +112,6 @@ main .form button:disabled {
   padding-inline-start: 0;
   background: unset;
   color: unset;
-}
-
-.form textarea {
-  min-height: 100px;
-  font-family: $font-family;
-  font-size: $size-font-body-default;
 }
 
 .form label.required::after {
@@ -147,10 +127,6 @@ input::file-selector-button {
   text-align: center;
 }
 
-main .form button {
-  @extend %button--primary;
-}
-
 form .file-wrapper > button {
   display: flex;
 }
@@ -163,7 +139,7 @@ form .file-wrapper > button {
   }
 }
 
-main .file-wrapper.decorated input[type='file'] {
+.file-wrapper.decorated input[type='file'] {
   display: none;
 }
 
@@ -176,8 +152,8 @@ main .file-wrapper.decorated input[type='file'] {
   text-align: center;
 }
 
-main .form form fieldset.cards > .radio-wrapper > input,
-main .form form fieldset.cards > .checkbox-wrapper > input {
+.form form fieldset.cards > .radio-wrapper > input,
+.form form fieldset.cards > .checkbox-wrapper > input {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -201,7 +177,7 @@ main .form form fieldset.cards > .checkbox-wrapper > input {
   align-items: start;
 }
 
-main .form form .repeat-actions {
+.form form .repeat-actions {
   grid-column: span 12;
   order: 2;
 }
@@ -217,12 +193,12 @@ main .form form .repeat-actions {
   order: 1;
 }
 
-.form form div[data-variant='addRemoveButtons'] .item-add,
-.form form div[data-variant='addRemoveButtons'] .item-remove {
+.form div[data-variant='addRemoveButtons'] .item-add,
+.form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
-main .form .file-description {
+.form .file-description {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -266,13 +242,13 @@ main .form .file-description {
   }
 }
 
-main .form form .repeat-wrapper {
+.form form .repeat-wrapper {
   display: grid;
   grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
-main .form .form-message.success-message {
+.form .form-message.success-message {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #badbcc;
@@ -290,7 +266,7 @@ main .form .form-message.success-message {
   padding: 10px;
 }
 
-main .form .file-wrapper .file-drag-area {
+.form .file-wrapper .file-drag-area {
   border: 1px dashed var(--border-color);
   border-radius: 5px;
   padding: 10px 5px;
@@ -301,14 +277,17 @@ main .form .file-wrapper .file-drag-area {
   align-items: center;
 }
 
-main .form form:not(.edit-mode) .captcha-wrapper {
+.form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-main .form form .radio-group-wrapper.horizontal .field-description,
-main .form form .checkbox-group-wrapper.horizontal .field-description {
-  width: 100%;
-  margin-top: 0.5rem;
+.radio-group-wrapper.horizontal .field-description,
+.checkbox-group-wrapper.horizontal .field-description {
+  p {
+    font-size: $size-font-body-default;
+    color: $text-dark-primary;
+    margin-bottom: $spacing-200;
+  }
 }
 
 @media (width <= 599px) {
@@ -331,4 +310,46 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
 
 .checkbox-wrapper > label {
   order: 1;
+}
+
+// Personal details
+.field-panel-personal-details {
+  .field-fullname,
+  .field-phone,
+  .field-email,
+  .field-address {
+    label {
+      color: $text-dark;
+      font-size: $size-font-label;
+      margin-top: 0;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input,
+    textarea {
+      border: none;
+      padding: 0;
+      background: none;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: $color-shade-navy-20;
+      margin: $spacing-500 0;
+    }
+  }
+
+  .field-address {
+    &::after {
+      display: none;
+    }
+  }
 }

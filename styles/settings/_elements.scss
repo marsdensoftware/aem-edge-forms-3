@@ -1,7 +1,7 @@
 @use 'spacings' as *;
 
-@function result($nav-height, $footer-height) {
-  $result: calc(100vh - ($nav-height + $footer-height));
+@function result($nav-height) {
+  $result: calc(100vh - $nav-height);
   @return $result;
 }
 
@@ -46,9 +46,6 @@ $footer-height-desktop: (
     $footer-padding-bottom-desktop
 );
 
-$wizard-body-height: result($nav-height, $footer-height);
-$wizard-body-height-tablet: result($nav-height-tablet, $footer-height-tablet);
-$wizard-body-height-desktop: result(
-  $nav-height-desktop,
-  $footer-height-desktop
-);
+$wizard-body-height: result($nav-height);
+$wizard-body-height-tablet: result($nav-height-tablet);
+$wizard-body-height-desktop: result($nav-height-desktop);
