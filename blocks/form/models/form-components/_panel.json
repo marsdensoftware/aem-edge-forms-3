@@ -121,6 +121,36 @@
             },
             {
               "component": "text",
+              "name": "firstEntryTitle",
+              "label": "First entry title",
+              "valueType": "string",
+              "description": "Section title for the first entry",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "additionalEntriesTitle",
+              "label": "Additional entries title",
+              "valueType": "string",
+              "description": "Section title for any additional entry",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
               "name": "overviewTitle",
               "label": "Overview title",
               "valueType": "string",

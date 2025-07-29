@@ -105,8 +105,35 @@ export class RepeatablePanel {
 
         });
     }
+    
+    _ensureSectionTitles(entry){
+      if(!entry.querySelector('.first-entry-title')){
+        const firstEntryTitle = entry.dataset.firstEntryTitle;
+        
+        if (firstEntryTitle) {
+            const titleContainer = document.createElement('h4');
+            titleContainer.classList.add('first-entry-title');
+            titleContainer.innerHTML = firstEntryTitle;
+            
+            entry.prepend(titleContainer);
+        }
+      }
+      
+      if(!entry.querySelector('.additional-entries-title')){
+        const additionalEntriesTitle = entry.dataset.additionalEntriesTitle;
+        
+        if (additionalEntriesTitle) {
+            const titleContainer = document.createElement('h4');
+            titleContainer.classList.add('additional-entries-title');
+            titleContainer.innerHTML = additionalEntriesTitle;
+            
+            entry.prepend(titleContainer);
+        }
+      }
+    }
 
     _toggleEditMode(entry, visible) {
+        this._ensureSectionTitles(entry);
         const panel = entry.closest('.panel-repeatable-panel');
         if (visible) {
             entry.classList.add('current');

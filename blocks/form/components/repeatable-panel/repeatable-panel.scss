@@ -6,19 +6,19 @@
   }
   
   > fieldset[data-index="0"]{
-    .field-first-entry-title{
+    .first-entry-title{
       display: block;
     }
-    .field-additional-entries-title{
+    .additional-entries-title{
       display: none;
     }
   }
   
   > fieldset:not([data-index="0"]){
-    .field-first-entry-title{
+    .first-entry-title{
       display: none;
     }
-    .field-additional-entries-title{
+    .additional-entries-title{
       display: block;
     }
   }
