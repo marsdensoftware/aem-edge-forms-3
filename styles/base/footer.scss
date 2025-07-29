@@ -1,23 +1,27 @@
-@use '../../styles/settings' as *;
+@use "../../styles/settings" as *;
 
 /* ----------------------------- */
 /* SECTION 1 - DARK GRADIENT BACKGROUND + ICON LINKS */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) {
-  background: linear-gradient(135deg, $color-primary-dark-navy 25%, $color-primary-navy 100%);
+  background: linear-gradient(
+                  135deg,
+                  $color-primary-dark-navy 25%,
+                  $color-primary-navy 100%
+  );
   color: $color-white;
-  padding: var(--Spacing-Spacing-200, 8px) var(--Grid-Margins, 32px);
+  padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: $spacing-200;
   align-self: stretch;
 
   a {
     display: inline-flex;
     justify-content: left;
     width: 100%;
-    gap: 0.5rem;
-    color: var(--Shades-Blues-Blue-40, #99CAE9);
+    gap: $spacing-200;
+    color: var(--Shades-Blues-Blue-40, #99cae9);
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
@@ -27,11 +31,12 @@ main > .section.columns-container:nth-of-type(1) {
     text-decoration: none;
 
     &::before {
-      content: '';
+      content: "";
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      background: url('/images/footer-icon-blue-arrow-bend-right.svg') no-repeat center;
+      width: $spacing-400;
+      height: $spacing-400;
+      background: url("/images/footer-icon-blue-arrow-bend-right.svg") no-repeat
+      center;
       background-size: contain;
     }
 
@@ -51,24 +56,24 @@ main > .section.columns-container:nth-of-type(1) {
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(2) {
   background-color: $color-primary-navy;
-  background-image: url('/images/website-footer-repeating-petals.svg');
+  background-image: url("/images/website-footer-repeating-petals.svg");
   background-repeat: repeat;
   background-position: top left;
   background-size: auto;
   color: $color-white;
-  padding: var(--Spacing-Spacing-200, 8px) var(--Grid-Margins, 32px);
+  padding: $spacing-700 $spacing-600 $spacing-650 $spacing-600;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: $spacing-200;
   align-self: stretch;
 
   // Add inner shadow
-  box-shadow: inset 0 4px 8px 0 rgba(22, 44, 69, 0.6);
+  box-shadow: inset 0 $spacing-100 $spacing-200 0 rgba(22, 44, 69, 0.6);
 
   a {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: $spacing-200;
 
     color: $color-shade-blue-40;
     text-align: left;
@@ -82,11 +87,12 @@ main > .section.columns-container:nth-of-type(2) {
     text-decoration: none;
 
     &::before {
-      content: '';
+      content: "";
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      background: url('/images/footer-icon-blue-arrow-bend-right.svg') no-repeat center;
+      width: $spacing-400;
+      height: $spacing-400;
+      background: url("/images/footer-icon-blue-arrow-bend-right.svg") no-repeat
+      center;
       background-size: contain;
     }
 
@@ -103,6 +109,8 @@ main > .section.columns-container:nth-of-type(2) {
 main > .section.columns-container:nth-of-type(3) {
   background-color: $color-primary-dark-navy;
   color: $color-white;
+  padding: $spacing-200 $spacing-600;
+
 
   .columns.block.columns-1-cols > div > div {
     display: flex;
@@ -118,7 +126,6 @@ main > .section.columns-container:nth-of-type(3) {
   a {
     color: $color-shade-blue-40;
     text-align: left;
-
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
@@ -173,7 +180,8 @@ footer h5 {
 /* ----------------------------- */
 /* GLOBAL ALIGNMENT OVERRIDES FOR FOOTER */
 /* ----------------------------- */
-footer, footer * {
+footer,
+footer * {
   text-align: left !important;
 }
 
