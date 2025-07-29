@@ -263,8 +263,7 @@ main > .section.columns-container:nth-of-type(3) a::before {
   gap: 0;
 
   &.icon--right {
-    flex-direction: row-reverse;
-    justify-content: flex-start; // ← this keeps the whole thing aligned left
+   
 
     > div:first-child {
       margin-left: $spacing-200;
