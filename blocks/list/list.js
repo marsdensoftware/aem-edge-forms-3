@@ -61,7 +61,7 @@ export default async function decorate(block) {
   const config = configFromFields(block);
   console.log('extracted config', config);
   if (config.item_type) {
-    config.item_creator = await loadItem(config.item_type);
+    config.item_creator = await loadItemBuilder(config.item_type);
   }
 
   const pager = Object.create(Pager);
