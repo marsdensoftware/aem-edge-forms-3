@@ -1,37 +1,37 @@
     import { Pager, PagerConfig, makePageLoadObserver, makePositionObserver, loadPage } from './scroll.js';
 import { validUrl } from './utils.js';
 
-function dataProp(block, name) {
-  return (block.querySelector(`[data-aue-prop="${name}"]`)?.innerText || '').trim();
+function dataPropsByStructure(block) {
+  return block
+    .querySelectorAll('div > div > p')
+    .map((e) => {
+      return ((e.querySelector('a') || e)?.innerText || '').trim();
+    });
 }
 
-function dataPropFirstLink(block) {
-  return (block.querySelector('div > div:not([data-aue-prop]) > p > a')?.innerText || '').trim();
-}
-
-function dataPropSource(block) {
-  const propSrc = dataProp(block, 'source');
-  if (propSrc) {
-    return propSrc;
-  }
-  return dataPropFirstLink(block);
-}
-
+// TODO FIXME codegen parser from json fields definition
+// TODO click to load more?
 function configFromFields(block) {
+  const props = dataPropsByStructure(block);
+  const result = Object.create(PagerConfig);
+  if (props.length != 5) {
+    console.log('parsing block into config failed', block);
+    return result;
+  }
+
   // TODO validate url
-  const src = dataPropSource(block);
+  const src = props[0];
 
   // TODO check not empty
-  const offset_arg = dataProp(block, 'offset-arg');
-  const page_size_arg = dataProp(block, 'page-size-arg');
+  const offset_arg = props[1];
+  const page_size_arg = props[2];
 
   // TODO to integer
-  const page_size = dataProp(block, 'page-size');
+  const page_size = props[3];
 
   // TODO validate?
-  const item_type = dataProp(block, 'select-output');
+  const item_type = props[4];
 
-  const result = Object.create(PagerConfig);
   result.source = src;
   result.offset_arg = offset_arg;
   result.page_size_arg = page_size_arg;
