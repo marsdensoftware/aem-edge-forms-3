@@ -26,8 +26,7 @@ function configFromFields(block) {
   const offset_arg = props[1];
   const page_size_arg = props[2];
 
-  // TODO to integer
-  const page_size = props[3];
+  const page_size = toInt(props[3]);
 
   // TODO validate?
   const item_type = props[4];
