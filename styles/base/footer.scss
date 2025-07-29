@@ -264,13 +264,11 @@ main > .section.columns-container:nth-of-type(3) a::before {
 
   &.icon--right {
     flex-direction: row-reverse;
+    justify-content: flex-start; // ← this keeps the whole thing aligned left
 
-    > div {
-      // optional: adjust spacing between icon and text
-      &:first-child {
-        margin-left: $spacing-200; // or any spacing token you prefer
-        margin-right: 0;
-      }
+    > div:first-child {
+      margin-left: $spacing-200;
+      margin-right: 0;
     }
   }
 
@@ -297,4 +295,5 @@ main > .section.columns-container:nth-of-type(3) a::before {
     }
   }
 }
+
 
