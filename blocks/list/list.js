@@ -29,7 +29,7 @@ function configFromFields(block) {
   const page_size = toInt(props[3]);
 
   // TODO validate?
-  const item_type = props[4];
+  const item_type = props[4] === 'option1' ? 'person' : props[4]; // HACK to work around temporary AEM problems
 
   result.source = src;
   result.offset_arg = offset_arg;
