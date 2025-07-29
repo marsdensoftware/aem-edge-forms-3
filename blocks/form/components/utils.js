@@ -41,6 +41,11 @@ export class DefaultFieldConverter {
             const name = input.name;
 
             const type = input.type;
+            
+            // ignore text input from search-box component
+            if(type === 'text' && input.parentElement.classList.contains('search-box__input')){
+                return;
+            }
 
             if (input.tagName === 'SELECT') {
                 displayValue = input.options[input.selectedIndex]?.text.trim() || '';

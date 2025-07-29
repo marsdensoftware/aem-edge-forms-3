@@ -1,6 +1,7 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 import { isNo, DefaultFieldConverter } from '../../utils.js'
+import { updateOrCreateInvalidMsg } from '../../../../form/util.js'
 
 export class RepeatablePanel {
 
@@ -234,6 +235,8 @@ export class RepeatablePanel {
             } else {
                 input.value = '';
             }
+            
+            updateOrCreateInvalidMsg(input);
         });
     }
 

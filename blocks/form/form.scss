@@ -1,6 +1,6 @@
 @use '../../styles/settings' as *;
+@use 'form-panel';
 
-// Fieldset reset
 fieldset {
   padding: 0;
   margin: 0;
@@ -114,12 +114,6 @@ form:not(.edit-mode) [data-visible='false'] {
   color: unset;
 }
 
-.form textarea {
-  min-height: 100px;
-  font-family: $font-family;
-  font-size: $size-font-body-default;
-}
-
 .form label.required::after {
   content: '*';
   color: var(--form-label-color);
@@ -131,10 +125,6 @@ input::file-selector-button {
   background: var(--form-upload-background-color);
   font-size: var(--form-upload-font-size);
   text-align: center;
-}
-
-.form button {
-  @extend %button--primary;
 }
 
 form .file-wrapper > button {
@@ -203,8 +193,8 @@ form .file-wrapper > button {
   order: 1;
 }
 
-.form form div[data-variant='addRemoveButtons'] .item-add,
-.form form div[data-variant='addRemoveButtons'] .item-remove {
+.form div[data-variant='addRemoveButtons'] .item-add,
+.form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
@@ -294,13 +284,9 @@ form .file-wrapper > button {
 .radio-group-wrapper.horizontal .field-description,
 .checkbox-group-wrapper.horizontal .field-description {
   p {
-    font-size: 15px;
+    font-size: $size-font-body-default;
     color: $text-dark-primary;
     margin-bottom: $spacing-200;
-
-    @include media('desktop') {
-      font-size: 17px;
-    }
   }
 }
 
@@ -324,4 +310,46 @@ form .file-wrapper > button {
 
 .checkbox-wrapper > label {
   order: 1;
+}
+
+// Personal details
+.field-panel-personal-details {
+  .field-fullname,
+  .field-phone,
+  .field-email,
+  .field-address {
+    label {
+      color: $text-dark;
+      font-size: $size-font-label;
+      margin-top: 0;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input,
+    textarea {
+      border: none;
+      padding: 0;
+      background: none;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: $color-shade-navy-20;
+      margin: $spacing-500 0;
+    }
+  }
+
+  .field-address {
+    &::after {
+      display: none;
+    }
+  }
 }
