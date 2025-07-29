@@ -38,12 +38,13 @@ main > .section.columns-container:nth-of-type(1) {
   }
 
   .strap-title-small {
-    font-size: $size-font-strap-title-small;
-    color: pink;
+    font-size: clamp(14px, 2.2vw, 16px);
+    color: #D0D9E4;
   }
 
   .typography.p-large {
-    font-size: $size-font-footer-large;
+    font-size: clamp(20px, 2.75vw, 24px);
+    color: orange;
   }
 }
 
