@@ -40,16 +40,19 @@ main > .section.columns-container:nth-of-type(1) {
   .strap-title-small {
     font-size: clamp(14px, 2.2vw, 16px);
     color: $color-shade-navy-20;
+    margin-bottom: $spacing-200;
   }
 
   .typography.p-large {
     font-size: clamp(20px, 2.75vw, 24px);
     color: $color-white;
+    margin-bottom: $spacing-200;
   }
 
   .typography.p-small {
     font-size: clamp(12px, 1.1vw, 14px);
     color: $color-shade-navy-40;
+    margin-bottom: $spacing-300;
   }
 }
 
