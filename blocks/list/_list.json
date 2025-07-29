@@ -57,8 +57,7 @@
           "label": "Item type",
           "valueType": "string",
           "options": [
-            { "name": "Option 1", "value": "option1" },
-            { "name": "Option 2", "value": "option2" }
+            { "name": "Example Person Item", "value": "person" }
           ]
         },
         {

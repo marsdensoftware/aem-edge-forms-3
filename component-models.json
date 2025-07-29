@@ -31839,12 +31839,8 @@
         "valueType": "string",
         "options": [
           {
-            "name": "Option 1",
-            "value": "option1"
-          },
-          {
-            "name": "Option 2",
-            "value": "option2"
+            "name": "Example Person Item",
+            "value": "person"
           }
         ]
       },
@@ -31855,6 +31851,32 @@
         "label": "Dummy",
         "value": "",
         "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "person",
+    "fields": [
+      {
+        "component": "text",
+        "name": "firstname",
+        "value": "",
+        "label": "First Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "surname",
+        "value": "",
+        "label": "Surname",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "example_id",
+        "value": "",
+        "label": "Example ID",
+        "valueType": "number"
       }
     ]
   },

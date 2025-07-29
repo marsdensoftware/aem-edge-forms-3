@@ -1,0 +1,48 @@
+{
+  "definitions": [
+    {
+      "title": "Example Person Item",
+      "id": "person",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Example Person Item",
+              "model": "person"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "person",
+      "fields": [
+        {
+          "component": "text",
+          "name": "firstname",
+          "value": "",
+          "label": "First Name",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "surname",
+          "value": "",
+          "label": "Surname",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "example_id",
+          "value": "",
+          "label": "Example ID",
+          "valueType": "number"
+        }
+      ]
+    }
+  ],
+  "filters":[]
+}
