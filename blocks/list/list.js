@@ -35,22 +35,22 @@ function configFromFields(block) {
   result.offset_arg = offset_arg;
   result.page_size_arg = page_size_arg;
   result.set_page_size(page_size);
-  result.item_type = item_type; // TODO FIXME this is a hack
+  result.item_type = item_type;
   return result;
 }
+//ns error corrupted content cause list.js to fail to load
 
-async function loadItem(blockName) {
+async function loadItemBuilder(blockName) {
   try {
-    const mod = await import(
+    const { create } = await import(
       `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
     );
-    console.log('loaded', mod);
-    /*if (mod.default) {
-      await mod.default(block);
-      }*/
+    console.log('loaded', create);
+    return create;
   } catch (error) {
     console.log(`failed to load module for ${blockName}`, error);
   }
+  return null;
 }
 
 export default async function decorate(block) {
@@ -61,9 +61,8 @@ export default async function decorate(block) {
   const config = configFromFields(block);
   console.log('extracted config', config);
   if (config.item_type) {
-    const item_mod = await loadItem(config.item_type);
+    config.item_creator = await loadItem(config.item_type);
   }
-
 
   const pager = Object.create(Pager);
   pager.config = config;

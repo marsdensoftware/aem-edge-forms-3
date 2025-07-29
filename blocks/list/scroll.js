@@ -16,6 +16,8 @@ export const PagerConfig = {
   total: null, // TODO might not be available
 
   source: null,
+  item_type: null,
+  item_creator: null,
 
   set_offset(n) {
     this.offset = n > 0 ? n : 0;
@@ -65,8 +67,15 @@ export function pagerFromParams(params) {
   return pager;
 };
 
-function makeCards(results) {
+function makeCards(results, creator) {
   return results.map((result) => {
+    if (creator) {
+      const item = creator(result);
+      if (item) {
+        return item;
+      }
+    }
+
     const card = document.createElement('div');
     card.className = 'card';
 
@@ -123,7 +132,7 @@ export async function loadPage(container, pager, new_offset, up) {
     })
 
   pager.config.total = data.total;
-  const cards = makeCards(data.users);
+  const cards = makeCards(data.users, pager.config.item_creator);
 
   // TODO may need to avoid always loading the top when resuming? TODO FIXME try scrollIntoView on first element when first loading? TODO FIXME maybe because the loading div takes the top slot?
   if (up) {
