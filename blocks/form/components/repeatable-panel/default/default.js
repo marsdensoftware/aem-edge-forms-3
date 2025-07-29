@@ -15,11 +15,13 @@ export class RepeatablePanel {
         if (!this._repeatablePanel) {
             throw new Error('No repeatable panel found');
         }
-
-        this._overviewTitle = properties.overviewTitle;
         
-        this._addedSuccessMsg = properties.addedSuccessMsg;
-        this._cardTitle = properties.cardTitle;
+        const firstFieldset = this._repeatablePanel.querySelector(':scope>fieldset');
+
+        this._overviewTitle = firstFieldset.dataset.overviewTitle;
+        
+        this._addedSuccessMsg = firstFieldset.dataset.addedSuccessMsg;
+        this._cardTitle = firstFieldset.dataset.cardTitle;
 
         // Load css
         loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
@@ -33,10 +35,10 @@ export class RepeatablePanel {
         this.#overview.dataset.visible = false;
         this.#overview.classList.add('overview');
 
-        if (this._summaryTitle) {
+        if (this._overviewTitle) {
             const overviewTitleContainer = document.createElement('h4');
             overviewTitleContainer.classList.add('overview-title');
-            overviewTitleContainer.innerHTML = this._addedTitle;
+            overviewTitleContainer.innerHTML = this._overviewTitle;
             this.#overview.append(overviewTitleContainer);
         }
 
@@ -83,9 +85,6 @@ export class RepeatablePanel {
         // make unique
         this._makeUnique(entry);
         this._toggleEditMode(entry, true);
-        
-        // TODO make nice to show a custom alert
-        alert(this._addedSuccessMsg);
     }
 
     _makeUnique(el) {
@@ -195,6 +194,9 @@ export class RepeatablePanel {
         this._toggleEditMode(entry, false);
 
         this._entryModified(entry);
+        
+        // TODO make nice to show a custom alert
+        alert(this._addedSuccessMsg);
     }
 
     _resetChanges(entry) {

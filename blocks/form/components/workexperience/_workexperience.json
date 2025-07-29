@@ -49,7 +49,7 @@
                                 "name": "workexperience-options-content",
                                 "repeatDeleteButtonLabel": "Delete",
                                 "repeatAddButtonLabel": "Add another work experience",
-                                "addedTitle": "You added:",
+                                "overviewTitle": "You added:",
                                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                                 "jcr:title": "Work Experience Options Content",
                                 "type_of_work_experience": {

@@ -13,8 +13,6 @@
                             "jcr:title": "Driver Licence",
                             "hideTitle": true,
                             "name": "driverlicence",
-                            "cardTitle": "NZ driver licence",
-                            "addedTitle": "\u003Ch4\u003EYou added:\u003C/h4\u003E",
                             "radiogroup": {
                                 "enum": [
                                     "no",
@@ -47,6 +45,8 @@
                                 "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                                 "maxOccur": 1,
                                 "minOccur": 1,
+                                "cardTitle": "NZ driver licence",
+                                "overviewTitle": "You added:",
                                 "licence_class": {
                                     "fieldType": "checkbox-group",
                                     "orientation": "horizontal",
@@ -284,12 +284,6 @@
                             "component": "text",
                             "name": "jcr:title",
                             "label": "Title",
-                            "valueType": "string"
-                        },
-                        {
-                            "component": "richtext",
-                            "name": "addedTitle",
-                            "label": "Added title",
                             "valueType": "string"
                         },
                         {

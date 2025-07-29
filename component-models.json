@@ -11678,8 +11678,23 @@
           },
           {
             "component": "text",
+            "name": "cardTitle",
+            "label": "Card title",
+            "valueType": "string",
+            "description": "Generic title for the card in the overview section",
+            "condition": {
+              "===": [
+                {
+                  "var": "repeatable"
+                },
+                true
+              ]
+            }
+          },
+          {
+            "component": "text",
             "name": "overviewTitle",
-            "label": "Overvew title",
+            "label": "Overview title",
             "valueType": "string",
             "description": "Title for the overview section showing all added entries",
             "condition": {
@@ -18972,12 +18987,6 @@
             "component": "text",
             "name": "jcr:title",
             "label": "Title",
-            "valueType": "string"
-          },
-          {
-            "component": "richtext",
-            "name": "addedTitle",
-            "label": "Added title",
             "valueType": "string"
           },
           {

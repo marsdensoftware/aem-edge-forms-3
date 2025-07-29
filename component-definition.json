@@ -573,8 +573,6 @@
                   "jcr:title": "Driver Licence",
                   "hideTitle": true,
                   "name": "driverlicence",
-                  "cardTitle": "NZ driver licence",
-                  "addedTitle": "<h4>You added:</h4>",
                   "radiogroup": {
                     "enum": [
                       "no",
@@ -607,6 +605,8 @@
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "maxOccur": 1,
                     "minOccur": 1,
+                    "cardTitle": "NZ driver licence",
+                    "overviewTitle": "You added:",
                     "licence_class": {
                       "fieldType": "checkbox-group",
                       "orientation": "horizontal",
@@ -1477,7 +1477,7 @@
                     "name": "workexperience-options-content",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatAddButtonLabel": "Add another work experience",
-                    "addedTitle": "You added:",
+                    "overviewTitle": "You added:",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "jcr:title": "Work Experience Options Content",
                     "type_of_work_experience": {
