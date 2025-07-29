@@ -106,6 +106,36 @@
             },
             {
               "component": "number",
+              "name": "addedTitle",
+              "label": "Added title",
+              "valueType": "string",
+              "description": "Title for the section showing all added entries",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "number",
+              "name": "addedSuccessMsg",
+              "label": "Added success message",
+              "valueType": "string",
+              "description": "Success message when a new entry is added",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "number",
               "name": "minOccur",
               "label": "Minimum repetitions",
               "valueType": "number",

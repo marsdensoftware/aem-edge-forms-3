@@ -1,5 +1,4 @@
 export const FIELD_NAMES = {
-    TYPE_OF_WE: 'type-of-work-experience',
     FIELDS_CONTAINER: 'fields-container',
     START_OF_WORK_MONTH: 'startofwork-month',
     START_OF_WORK_YEAR: 'startofwork-year',

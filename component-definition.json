@@ -1476,7 +1476,8 @@
                     "minOccur": 1,
                     "name": "workexperience-options-content",
                     "repeatDeleteButtonLabel": "Delete",
-                    "repeatAddButtonLabel": "Add another",
+                    "repeatAddButtonLabel": "Add another work experience",
+                    "addedTitle": "You added:",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "jcr:title": "Work Experience Options Content",
                     "type_of_work_experience": {
@@ -1526,13 +1527,12 @@
                         "fieldType": "text-input",
                         "fd:viewType": "typeahead",
                         "datasource": "occupations",
-                        "placeholder": "Start typing",
+                        "placeholder": "Search for work type",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "required": true,
-                        "description": "<p>Match your job title to one from our standard list.</p>"
+                        "required": true
                       },
                       "employer": {
-                        "jcr:title": "Employer name/Who you did this work for",
+                        "jcr:title": "Employer name",
                         "fieldType": "text-input",
                         "required": true,
                         "name": "employer",
@@ -1541,7 +1541,7 @@
                       "startofwork": {
                         "fd:viewType": "advanceddatepicker",
                         "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                        "jcr:title": "When you started doing this work",
+                        "jcr:title": "When did you start?",
                         "fieldType": "panel",
                         "name": "startofwork",
                         "month": {
@@ -1565,15 +1565,16 @@
                         "name": "still-working",
                         "jcr:title": "Are you still doing this work?",
                         "orientation": "horizontal",
+                        "variant": "bar",
                         "enumNames": [
-                          "Yes",
-                          "No"
+                          "No",
+                          "Yes"
                         ],
                         "fieldType": "radio-group",
                         "fd:viewType": "radio-group",
                         "enum": [
-                          "1",
-                          "0"
+                          "0",
+                          "1"
                         ],
                         "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                         "required": true
@@ -1581,7 +1582,7 @@
                       "endofwork": {
                         "fd:viewType": "advanceddatepicker",
                         "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                        "jcr:title": "When you finished this work",
+                        "jcr:title": "When you finished this work?",
                         "fieldType": "panel",
                         "name": "endofwork",
                         "visible": false,
@@ -1602,17 +1603,6 @@
                           "required": true
                         }
                       },
-                      "skills": {
-                        "jcr:title": "Add skills you used in this work",
-                        "name": "skills",
-                        "fieldType": "text-input",
-                        "fd:viewType": "typeahead",
-                        "required": true,
-                        "datasource": "skills",
-                        "placeholder": "Start typing",
-                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>"
-                      },
                       "description": {
                         "multiLine": true,
                         "jcr:title": "Description",
@@ -1625,12 +1615,12 @@
                         "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                         "fieldType": "radio-group",
                         "enumNames": [
-                          "Yes",
-                          "No"
+                          "No",
+                          "Yes"
                         ],
                         "enum": [
-                          "1",
-                          "0"
+                          "0",
+                          "1"
                         ],
                         "jcr:title": "Are you still able to do this type of work?",
                         "orientation": "horizontal",

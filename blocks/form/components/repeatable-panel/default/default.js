@@ -17,6 +17,7 @@ export class RepeatablePanel {
         }
 
         this._addedTitle = properties.addedTitle;
+        this._addedSuccessMsg = properties.addedSuccessMsg;
         this._cardTitle = properties.cardTitle;
 
         // Load css
@@ -32,7 +33,7 @@ export class RepeatablePanel {
         this.#overview.classList.add('overview');
 
         if (this._addedTitle) {
-            const addedTitleContainer = document.createElement('div');
+            const addedTitleContainer = document.createElement('h4');
             addedTitleContainer.classList.add('overview-title');
             addedTitleContainer.innerHTML = this._addedTitle;
             this.#overview.append(addedTitleContainer);
@@ -81,6 +82,9 @@ export class RepeatablePanel {
         // make unique
         this._makeUnique(entry);
         this._toggleEditMode(entry, true);
+        
+        // TODO make nice to show a custom alert
+        alert(this._addedSuccessMsg);
     }
 
     _makeUnique(el) {
