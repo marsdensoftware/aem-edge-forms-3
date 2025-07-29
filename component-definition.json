@@ -960,7 +960,7 @@
         },
         {
           "title": "Extended Checkbox Container",
-          "id": "ext-checkbox-container",
+          "id": "extended-checkbox-container",
           "plugins": {
             "xwalk": {
               "page": {
@@ -968,7 +968,7 @@
                 "template": {
                   "jcr:title": "Extended Checkbox Container",
                   "fieldType": "panel",
-                  "fd:viewType": "ext-checkbox-container",
+                  "fd:viewType": "extended-checkbox-container",
                   "minOccur": 1
                 }
               }
@@ -984,7 +984,7 @@
                 "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "name": "modal-cb-container",
                 "template": {
-                  "fd:viewType": "ext-checkbox-container",
+                  "fd:viewType": "extended-checkbox-container",
                   "fieldType": "panel",
                   "jcr:title": "Modal Checkbox Container",
                   "hideTitle": true,

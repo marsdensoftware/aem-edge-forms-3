@@ -2,7 +2,7 @@
   "definitions": [
     {
       "title": "Extended Checkbox Container",
-      "id": "ext-checkbox-container",
+      "id": "extended-checkbox-container",
       "plugins": {
         "xwalk": {
           "page": {
@@ -10,7 +10,7 @@
             "template": {
               "jcr:title": "Extended Checkbox Container",
               "fieldType": "panel",
-              "fd:viewType": "ext-checkbox-container",
+              "fd:viewType": "extended-checkbox-container",
               "minOccur": 1
             }
           }
@@ -20,7 +20,7 @@
   ],
   "models": [
     {
-      "id": "ext-checkbox-container",
+      "id": "extended-checkbox-container",
       "fields": [
         {
           "component": "container",
