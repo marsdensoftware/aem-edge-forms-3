@@ -959,6 +959,23 @@
           }
         },
         {
+          "title": "Extended Checkbox Container",
+          "id": "ext-checkbox-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Extended Checkbox Container",
+                  "fieldType": "panel",
+                  "fd:viewType": "ext-checkbox-container",
+                  "minOccur": 1
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Extended Checkbox",
           "id": "extended-checkbox",
           "plugins": {

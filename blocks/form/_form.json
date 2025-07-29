@@ -205,7 +205,8 @@
         "text-input",
         "tnc",
         "wizard",
-        "icon-radio-group"
+        "icon-radio-group",
+        "ext-checkbox-container"
       ]
     }
   ]
