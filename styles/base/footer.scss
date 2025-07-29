@@ -157,7 +157,7 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* ----------------------------- */
-/* GENERAL FOOTER <a> STYLING */
+/* GENERAL FOOTER STYLING */
 /* ----------------------------- */
 footer a {
   color: $color-shade-blue-40;
@@ -178,6 +178,10 @@ footer h5 {
 footer .strap-title-small {
   font-size: $size-font-strap-title-small;
   color: pink;
+}
+
+footer .typography .p-large {
+  font-size:$size-font-footer-large;
 }
 
 /* ----------------------------- */
