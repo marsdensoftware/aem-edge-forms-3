@@ -14,6 +14,7 @@ export function create(data) {
     });
 
   return item;
-}
+};
+
 export default function decorate(block) {
 };
