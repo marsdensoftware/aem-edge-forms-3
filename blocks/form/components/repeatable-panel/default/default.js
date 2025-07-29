@@ -16,7 +16,8 @@ export class RepeatablePanel {
             throw new Error('No repeatable panel found');
         }
 
-        this._addedTitle = properties.addedTitle;
+        this._overviewTitle = properties.overviewTitle;
+        
         this._addedSuccessMsg = properties.addedSuccessMsg;
         this._cardTitle = properties.cardTitle;
 
@@ -32,11 +33,11 @@ export class RepeatablePanel {
         this.#overview.dataset.visible = false;
         this.#overview.classList.add('overview');
 
-        if (this._addedTitle) {
-            const addedTitleContainer = document.createElement('h4');
-            addedTitleContainer.classList.add('overview-title');
-            addedTitleContainer.innerHTML = this._addedTitle;
-            this.#overview.append(addedTitleContainer);
+        if (this._summaryTitle) {
+            const overviewTitleContainer = document.createElement('h4');
+            overviewTitleContainer.classList.add('overview-title');
+            overviewTitleContainer.innerHTML = this._addedTitle;
+            this.#overview.append(overviewTitleContainer);
         }
 
         const content = document.createElement('div');

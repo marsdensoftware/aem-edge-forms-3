@@ -105,11 +105,11 @@
               "valueType": "boolean"
             },
             {
-              "component": "number",
-              "name": "addedTitle",
-              "label": "Added title",
+              "component": "text",
+              "name": "overviewTitle",
+              "label": "Overvew title",
               "valueType": "string",
-              "description": "Title for the section showing all added entries",
+              "description": "Title for the overview section showing all added entries",
               "condition": {
                 "===": [
                   {
@@ -120,7 +120,7 @@
               }
             },
             {
-              "component": "number",
+              "component": "text",
               "name": "addedSuccessMsg",
               "label": "Added success message",
               "valueType": "string",
