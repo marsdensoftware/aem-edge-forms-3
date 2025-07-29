@@ -46,6 +46,11 @@ main > .section.columns-container:nth-of-type(1) {
     font-size: clamp(20px, 2.75vw, 24px);
     color: orange;
   }
+
+  .typography.p-small {
+    font-size: clamp(12px, 1.1vw, 14px);
+    color: #A1B3C8;
+  }
 }
 
 /* ----------------------------- */
