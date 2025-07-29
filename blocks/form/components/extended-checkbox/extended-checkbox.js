@@ -18,18 +18,13 @@ export default function decorate(fieldDiv, fieldJson) {
     const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
     // 2. Find the source textarea within that container using a specific attribute selector.
     const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
-    // 3. Get the value from the source textarea. Fallback to an empty string if not found.
-    // const textAreaText = sourceTextarea?.value
-    // || 'Copy here explaining an example of this skill etc over multiple lines as required.
-    // Copy here explaining an example of this skill etc over multiple lines as required.';
-    // Create the destination textarea and set its value
-    const destTextArea = document.createElement('textarea');
-    destTextArea.classList.add('checkbox-description');
-    // destTextArea.placeholder = 'Enter description here'
+    // Create the destination paragraph element and set its content
+    const destTextArea = document.createElement('p');
+    destTextArea.classList.add('extended-checkbox--description');
     // Create the divider
     const divider = document.createElement('hr');
     divider.classList.add('checkbox-divider');
-    destTextArea.value = (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) || '';
+    destTextArea.textContent = (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) || '';
     // Create the edit link container
     const editDiv = document.createElement('div');
     const editLink = document.createElement('a');
@@ -72,7 +67,7 @@ export default function decorate(fieldDiv, fieldJson) {
             console.log('Dest text area not found');
         }
         if (sourceTextarea && destTextArea) {
-            destTextArea.value = sourceTextarea.value;
+            destTextArea.textContent = sourceTextarea.value;
         }
         // console log the saveButton as soon as we get it
         const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
@@ -93,7 +88,7 @@ export default function decorate(fieldDiv, fieldJson) {
                 }
                 if (sourceTextarea && destTextArea) {
                     if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
-                        destTextArea.value = sourceTextarea.value;
+                        destTextArea.textContent = sourceTextarea.value;
                         destTextArea.style.display = 'block';
                         editLink.textContent = 'Edit description';
                     }

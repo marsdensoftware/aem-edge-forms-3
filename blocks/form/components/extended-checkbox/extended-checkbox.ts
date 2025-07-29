@@ -41,21 +41,15 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
       'textarea[name="modal-text"]',
     )
 
-  // 3. Get the value from the source textarea. Fallback to an empty string if not found.
-  // const textAreaText = sourceTextarea?.value
-  // || 'Copy here explaining an example of this skill etc over multiple lines as required.
-  // Copy here explaining an example of this skill etc over multiple lines as required.';
-
-  // Create the destination textarea and set its value
-  const destTextArea = document.createElement('textarea')
-  destTextArea.classList.add('checkbox-description')
-  // destTextArea.placeholder = 'Enter description here'
+  // Create the destination paragraph element and set its content
+  const destTextArea = document.createElement('p')
+  destTextArea.classList.add('extended-checkbox--description')
 
   // Create the divider
   const divider = document.createElement('hr')
   divider.classList.add('checkbox-divider')
 
-  destTextArea.value = sourceTextarea?.value || ''
+  destTextArea.textContent = sourceTextarea?.value || ''
 
   // Create the edit link container
   const editDiv = document.createElement('div')
@@ -106,7 +100,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     }
 
     if (sourceTextarea && destTextArea) {
-      destTextArea.value = sourceTextarea.value
+      destTextArea.textContent = sourceTextarea.value
     }
 
     // console log the saveButton as soon as we get it
@@ -131,7 +125,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
         if (sourceTextarea && destTextArea) {
           if (sourceTextarea?.value) {
-            destTextArea.value = sourceTextarea.value
+            destTextArea.textContent = sourceTextarea.value
             destTextArea.style.display = 'block'
             editLink.textContent = 'Edit description'
           } else {
