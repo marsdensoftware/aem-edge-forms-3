@@ -1,5 +1,5 @@
 import { isEditor } from '../../scripts/msd/blocks.js'
-import { authExchange } from '../../scripts/msd/auth.js'
+import { authExchange, authStatus } from '../../scripts/msd/auth.js'
 import { debug, error } from '../../scripts/msd/log.js'
 
 export default async function decorate(block) {
@@ -12,7 +12,8 @@ export default async function decorate(block) {
 
   if (queryParams.has('code')) {
     const code = queryParams.get('code')
-    await authExchange({ code })
+    const { ok } = await authExchange({ code })
+    debug('authExchange', { ok, status: authStatus() })
     window.location.href = '/auth-login'
   }
 }

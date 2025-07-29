@@ -44,7 +44,7 @@ const warn = (...args) => {
 }
 
 const debug = (...args) => {
-  console.debug(...args) // eslint-disable-line no-console
+  console.log(...args) // eslint-disable-line no-console
 }
 
 /* ──────────────────────────────────────── PKCE  ──────────────────────────────────────── */
@@ -261,10 +261,14 @@ const userInfo = {
     const raw = readCookie('user_info')
     if (!raw) return DEFAULT_INFO
     try {
-      const { cn = '', rb = 0 } = JSON.parse(atob(raw))
+      const obj = JSON.parse(atob(raw))
+      // ensure rb is number (in seconds)
+      const sec =
+        typeof obj.rb === 'number' ? obj.rb : Number.parseInt(obj.rb, 10)
+      const refreshBy = Number.isFinite(sec) ? sec * 1000 : 0
       return {
-        userID: cn,
-        refreshBy: Number.isFinite(rb) ? rb * 1000 : 0, // sec → ms
+        userID: obj.uid ?? obj.cn ?? '',
+        refreshBy,
       }
     } catch (err) {
       error('Failed to parse user_info cookie:', err)
@@ -291,6 +295,9 @@ const NO_BODY_STATUS = Object.freeze(new Set([204, 205, 304]))
 const createBackend = (origin, rootUri = '/session') => {
   assertString(origin, 'createBackend: origin is required')
 
+  const inflight = new Set()
+  const backendCtrl = new AbortController()
+
   /** Decode an HTTP Response
    * @param {Response} resp
    * @returns {Promise<{type:string, data:any, error?:Error}>}
@@ -315,19 +322,63 @@ const createBackend = (origin, rootUri = '/session') => {
     return { type: 'unhandled', data: null }
   }
 
-  /** @param {string} uri @param {unknown} body */
-  const post = async (uri, body = null) => {
-    // TODO: rm debug statement
+  // Compose multiple AbortSignals into one
+  const composeSignal = (signals) => {
+    const list = signals.filter(Boolean)
+    if (list.length === 0) return undefined
+    if (AbortSignal.any) return AbortSignal.any(list)
+    // fallback if .any isn't available
+    const ctrl = new AbortController()
+    const onAbort = () => {
+      ctrl.abort()
+    }
+    list.forEach((s) => {
+      if (s.aborted) ctrl.abort()
+      else s.addEventListener('abort', onAbort, { once: true })
+    })
+    return ctrl.signal
+  }
+
+  /** @param {string} uri @param {unknown} body @param {AbortSignal?} signal */
+  const post = async (uri, body = null, signal = undefined) => {
     debug('POST', uri, body)
 
-    const resp = await fetch(new URL(uri, origin), {
+    const ac = new AbortController()
+    inflight.add(ac)
+
+    const composed = composeSignal([ac.signal, backendCtrl.signal, signal])
+
+    const fetchOpts = {
       method: 'POST',
       keepalive: true,
       headers: { 'Content-Type': 'application/json' },
       ...(body != null && { body: JSON.stringify(body) }),
-    })
+      ...(composed && { signal: composed }),
+    }
+
+    let resp
+    try {
+      resp = await fetch(new URL(uri, origin), fetchOpts)
+    } catch (err) {
+      inflight.delete(ac)
+      const aborted =
+        (err && (err.name === 'AbortError' || err.code === 'ABORT_ERR')) ||
+        composed?.aborted === true
+      return {
+        uri,
+        status: 0,
+        ok: false,
+        body: null,
+        bodyType: 'error',
+        error: aborted ? 'aborted' : err?.message || 'fetch_failed',
+        aborted,
+      }
+    } finally {
+      inflight.delete(ac)
+    }
 
     const { data, type } = await decode(resp)
+
     return {
       uri,
       status: resp.status,
@@ -357,14 +408,26 @@ const createBackend = (origin, rootUri = '/session') => {
         { name: LOCK, ifAvailable: true },
       ),
 
-    exchangeCodeForCookies: ({ code, verifier }) =>
+    exchangeCodeForCookies: ({ code, verifier }, signal = undefined) =>
       withLock(
         async (lock) => {
           if (!lock) return undefined
-          return post(`${rootUri}/exchange`, { code, code_verifier: verifier })
+          return post(
+            `${rootUri}/exchange`,
+            { code, code_verifier: verifier },
+            signal,
+          )
         },
         { name: LOCK, maxWait: 30_000 },
       ),
+
+    teardown: () => {
+      inflight.forEach((ac) => {
+        ac.abort()
+      })
+      inflight.clear()
+      backendCtrl.abort()
+    },
   }
 }
 
@@ -381,13 +444,16 @@ const makeChannel = (channelName = 'default-channel') => {
     /* Native, modern path — Chrome 54+, Edge 79+, Firefox 38+, Safari 15.4+ */
     const id = crypto.randomUUID()
     const bc = new BroadcastChannel(channelName)
+    debug('bc-open', { id })
     const post = (msg) => {
+      debug('bc-post', { id, msg })
       bc.postMessage({ sender: id, msg })
     }
 
     const on = (fn) =>
       bc.addEventListener('message', (e) => {
-        if (e.data.sender === id) return
+        debug('bc-event', { id, data: e.data })
+        if (e.data?.sender === id) return
         fn(e.data)
       })
 
@@ -395,6 +461,7 @@ const makeChannel = (channelName = 'default-channel') => {
       post,
       on,
       close: () => {
+        debug('bc-close', { id })
         bc.close()
       },
       id,
@@ -412,8 +479,8 @@ const makeChannel = (channelName = 'default-channel') => {
  * @property {(p: {code: string}) => Promise<any>} exchange
  * @property {() => Promise<void>}              logout
  * @property {() => {isAuthenticated: boolean, userID: string, refreshBy: number}} status
- * @property {(fn: Function) => void}           onAuthenticatedChange
- * @property {(fn: Function) => void}           removeAuthenticatedChange
+ * @property {(fn: Function) => void}           onStatusChange
+ * @property {(fn: Function) => void}           removeStatusChange
  * @property {() => void}                       start
  * @property {() => void}                       stop
  */
@@ -466,6 +533,9 @@ const createAuthClient = ({
   let status = { isAuthenticated: false, userID: '', refreshBy: 0 }
   const listeners = new Set()
 
+  // Create ONE channel for the lifetime of this client
+  const channel = makeChannel('auth-status')
+
   const updateStatus = (allowChannelUpdate = true) => {
     let { userID, refreshBy } = userInfo.read()
     const isAuthenticated = refreshBy > Date.now()
@@ -478,29 +548,29 @@ const createAuthClient = ({
     }
 
     const next = {
+      isAuthenticated,
       userID,
       refreshBy,
-      isAuthenticated,
     }
 
-    const updateChannel = makeChannel('auth-status')
-
-    updateChannel.on((msg) => {
-      if (msg === 'update') {
-        updateStatus(false)
-      }
-    })
+    debug('updateStatus: ', { allowChannelUpdate, status, next })
 
     if (JSON.stringify(next) !== JSON.stringify(status)) {
       status = next
       listeners.forEach((fn) => {
         fn({ ...next })
       })
-      if (allowChannelUpdate) updateChannel.post('update')
+      if (allowChannelUpdate) channel.post('update')
     }
 
     return { ...next }
   }
+
+  const offChannel = channel.on((data) => {
+    if (data.msg === 'update') {
+      updateStatus(false)
+    }
+  })
 
   /* ---- last-check throttle (per-tab lock) ---- */
   const canCheck = async (cooldownMs = 5_000) =>
@@ -528,27 +598,93 @@ const createAuthClient = ({
     }
   }
 
+  const safeTick = () => {
+    tick().catch((err) => {
+      error('tick() failed', err)
+    })
+  }
+
+  function startTimer() {
+    if (timerId != null) return
+    timerId = setInterval(safeTick, TICK_EVERY)
+    safeTick() // run one immediately
+  }
+
+  function stopTimer() {
+    if (timerId != null) {
+      clearInterval(timerId)
+      timerId = null
+    }
+  }
+
+  const teardown = () => {
+    stopTimer()
+    backend.teardown?.()
+    offChannel?.()
+    channel.close()
+  }
+
+  const onPageShow = (e) => {
+    if (e.persisted) {
+      updateStatus()
+      startTimer()
+    }
+  }
+  window.addEventListener('pageshow', onPageShow)
+
+  // Pause on hidden, resume on visible
+  const onVisibilityChange = () => {
+    if (document.hidden || document.visibilityState === 'hidden') stopTimer()
+    else startTimer()
+  }
+  document.addEventListener('visibilitychange', onVisibilityChange)
+
+  // BFCache-aware: pause vs teardown, and resume
+  window.addEventListener('pagehide', (e) => {
+    // Going away; pause regardless
+    // Always pause timer while we're not visible
+    stopTimer()
+    if (!e.persisted) {
+      // Real unload or reload: full teardown
+      teardown()
+      // Avoid dangling listeners for this document
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      window.removeEventListener('pageshow', onPageShow)
+    }
+  })
+
   /* ---- public API ---- */
   return {
     /** subscribe / unsubscribe */
-    onAuthenticatedChange: (fn, opts = {}) => {
+    onStatusChange: (fn, opts = {}) => {
       listeners.add(fn)
+
+      const { signal } = opts
+      let onAbort
+
       const cleanup = () => {
         listeners.delete(fn)
+        if (signal && onAbort) {
+          signal.removeEventListener('abort', onAbort)
+          onAbort = undefined
+        }
       }
-      // Optional: auto-cleanup with AbortSignal
-      const { signal } = opts
+
       if (signal instanceof AbortSignal) {
         if (signal.aborted) {
           cleanup()
-        } else {
-          signal.addEventListener('abort', cleanup, { once: true })
+          return cleanup
         }
+        onAbort = () => {
+          cleanup()
+        }
+        signal.addEventListener('abort', onAbort, { once: true })
       }
+
       return cleanup
     },
 
-    removeAuthenticatedChange: (fn) => {
+    removeStatusChange: (fn) => {
       listeners.delete(fn)
     },
 
@@ -558,6 +694,7 @@ const createAuthClient = ({
     logout: async () => {
       userInfo.clear()
       await backend.logout()
+      debug('logout', { status })
       updateStatus()
     },
 
@@ -577,35 +714,24 @@ const createAuthClient = ({
     },
 
     /** claim tokens, update cookie-derived status */
-    exchange: async ({ code }) => {
+    exchange: async ({ code }, signal = undefined) => {
       const verifier = sessionStorage.getItem('ka:cv')
       sessionStorage.removeItem('ka:cv')
       if (!verifier) {
         warn('verifier already used.')
         return { ok: false }
       }
-      const res = await backend.exchangeCodeForCookies({ code, verifier })
+      const res = await backend.exchangeCodeForCookies(
+        { code, verifier },
+        signal,
+      )
       const ok = res?.status === 204 || res?.status === 200
+      debug('exchangeCodeForCookies', { status: res?.status, ok })
       if (ok) updateStatus()
-      return ok
+      return { ok }
     },
 
-    start() {
-      if (timerId != null) return
-      tick().catch((err) => {
-        error('tick() failed', err)
-      })
-      timerId = setInterval(() => {
-        tick().catch((err) => {
-          error('tick() failed', err)
-        })
-      }, TICK_EVERY)
-    },
-
-    stop() {
-      clearInterval(timerId)
-      timerId = null
-    },
+    start: startTimer,
   }
 }
 
@@ -616,8 +742,9 @@ const authClient = createAuthClient({
   authEndpoint:
     'https://identity.dev.az.msd.govt.nz/identity.dev.az.msd.govt.nz/B2C_1A_AEM/oauth2/v2.0/authorize',
   redirectUri: 'https://www.cutandpatch.com/auth-callback',
-  claims: ['uid'],
-  backendUri: '/session',
+  // claims: ['uid'],
+  claims: ['UUID'],
+  backendUri: '/bin/session',
   origin: window.location.origin,
 })
 
@@ -625,8 +752,7 @@ export const authLogout = authClient.logout.bind(authClient)
 export const authLoginUrl = authClient.loginUrl.bind(authClient)
 export const authExchange = authClient.exchange.bind(authClient)
 export const authStatus = authClient.status.bind(authClient)
-export const onAuthChange = authClient.onAuthenticatedChange.bind(authClient)
-export const removeAuthChange =
-  authClient.removeAuthenticatedChange.bind(authClient)
+export const onAuthChange = authClient.onStatusChange.bind(authClient)
+export const removeAuthChange = authClient.removeStatusChange.bind(authClient)
 export const authStartKeepAlive = authClient.start.bind(authClient)
-export const authStopKeepAlive = authClient.stop.bind(authClient)
+// export const authStopKeepAlive = authClient.stop.bind(authClient)

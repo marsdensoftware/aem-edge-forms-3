@@ -19,12 +19,12 @@
       "fragment",
       "form",
       "embed-adaptive-form",
-      "account",
+      "account-menu",
       "auth-redirect"
     ]
   },
   {
-    "id": "account",
+    "id": "account-menu",
     "components": [
       "text",
       "image",
