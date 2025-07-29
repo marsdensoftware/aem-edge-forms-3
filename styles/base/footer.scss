@@ -39,17 +39,17 @@ main > .section.columns-container:nth-of-type(1) {
 
   .strap-title-small {
     font-size: clamp(14px, 2.2vw, 16px);
-    color: #D0D9E4;
+    color: $color-shade-navy-20;
   }
 
   .typography.p-large {
     font-size: clamp(20px, 2.75vw, 24px);
-    color: orange;
+    color: $color-white;
   }
 
   .typography.p-small {
     font-size: clamp(12px, 1.1vw, 14px);
-    color: #A1B3C8;
+    color: $color-shade-navy-40;
   }
 }
 
@@ -245,15 +245,6 @@ main > .section.columns-container:nth-of-type(2) a::before,
 main > .section.columns-container:nth-of-type(3) a::before {
   content: none;
   display: none;
-}
-
-/* ----------------------------- */
-/* CUSTOM LINK BUTTON STYLES */
-/* ----------------------------- */
-main > .section.columns-container:nth-of-type(1) .button-container .link-with-icon a,
-main > .section.columns-container:nth-of-type(2) .button-container .link-with-icon a,
-main > .section.columns-container:nth-of-type(3) .button-container .link-with-icon a {
-  border: 1px solid pink;
 }
 
 /* ----------------------------- */
