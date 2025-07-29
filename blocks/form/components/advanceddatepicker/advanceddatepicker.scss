@@ -19,7 +19,7 @@
     flex: 1 1 0%;
   }
 
-  .field-wrapper:not([data-visible='false']) {
+  .field-wrapper {
     // Added specificity to override
     // Clash class from repeatable panel
     + .field-wrapper.drop-down-wrapper {

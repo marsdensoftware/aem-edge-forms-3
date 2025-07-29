@@ -87,7 +87,7 @@
       align-items: flex-start;
 
       &:not(:last-child) {
-        margin-bottom: 0;
+        margin-bottom: $spacing-200;
       }
 
       @media (min-width: 744px) {
@@ -132,7 +132,8 @@
         line-height: 160%;
         color: $text-secondary;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease,
+          border 0.2s ease;
 
         &::before {
           display: none;
