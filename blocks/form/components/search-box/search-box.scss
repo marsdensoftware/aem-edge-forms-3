@@ -69,10 +69,10 @@
   flex-wrap: wrap;
   gap: $spacing-200;
 }
+
 .selected-cards-wrapper:has(.selected-card--is-selected) {
   margin: $spacing-400 0 $spacing-600 0;
 }
-
 
 .selected-cards,
 .recommendations-cards {
