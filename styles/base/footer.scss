@@ -21,7 +21,7 @@ main > .section.columns-container:nth-of-type(1) {
     justify-content: left;
     width: 100%;
     gap: $spacing-200;
-    color: var(--Shades-Blues-Blue-40, #99cae9);
+    color: $color-shade-blue-40;
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
@@ -30,7 +30,7 @@ main > .section.columns-container:nth-of-type(1) {
     letter-spacing: $letter-spacing-default;
     text-decoration: none;
 
-    &::before {
+    /*&::before {
       content: "";
       display: inline-block;
       width: $spacing-400;
@@ -38,11 +38,11 @@ main > .section.columns-container:nth-of-type(1) {
       background: url("/images/footer-icon-blue-arrow-bend-right.svg") no-repeat
       center;
       background-size: contain;
-    }
+    }*/
 
     &:hover,
     &:focus {
-      color: lighten($color-white, 10%);
+      color:$color-white;
     }
   }
 
@@ -74,10 +74,8 @@ main > .section.columns-container:nth-of-type(2) {
     display: inline-flex;
     align-items: center;
     gap: $spacing-200;
-
     color: $color-shade-blue-40;
     text-align: left;
-
     font-family: $font-family;
     font-size: $size-font-body-default;
     font-style: normal;
@@ -98,7 +96,7 @@ main > .section.columns-container:nth-of-type(2) {
 
     &:hover,
     &:focus {
-      color: lighten($color-white, 10%);
+      color: $color-white;
     }
   }
 }
@@ -136,7 +134,7 @@ main > .section.columns-container:nth-of-type(3) {
 
     &:hover,
     &:focus {
-      color: lighten($color-shade-blue-40, 10%);
+      color: $color-shade-blue-25;
     }
   }
 }
@@ -258,6 +256,16 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* ----------------------------- */
+/* REMOVE FOOTER ICONS FROM LINKS */
+/* ----------------------------- */
+main > .section.columns-container:nth-of-type(1) a::before,
+main > .section.columns-container:nth-of-type(2) a::before,
+main > .section.columns-container:nth-of-type(3) a::before {
+  content: none;
+  display: none;
+}
+
+/* ----------------------------- */
 /* BUTTON CONTAINER RESET */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) .button-container,
@@ -265,32 +273,37 @@ main > .section.columns-container:nth-of-type(2) .button-container,
 main > .section.columns-container:nth-of-type(3) .button-container {
   all: unset;
 }
+main > .section.columns-container:nth-of-type(1) .button-container .link-with-icon a,
+main > .section.columns-container:nth-of-type(2) .button-container .link-with-icon a,
+main > .section.columns-container:nth-of-type(3) .button-container .link-with-icon a {
+  border: 1px solid pink;
+}
+
+
 .link-with-icon {
   display: flex;
   align-items: center;
-  gap: $spacing-300;
+  gap: 0; // Remove gap between icon and link
 
   > div {
-    display: flex;
-    align-items: center;
-    gap: $spacing-200;
+    margin: 0;
+    padding: 0;
 
-    picture {
+    picture,
+    img {
       display: block;
-
-      img {
-        width: 24px;
-        height: auto;
-        display: block;
-      }
+      width: 24px;
+      height: auto;
     }
 
     .button-container {
-      display: flex;
+      display: inline-block;
 
       a.button {
         display: inline-block;
-        vertical-align: middle;
+        padding-left: 0; // Remove left padding
+        text-align: left;
+        margin-left: 0; // Ensure no margin left
       }
     }
   }
