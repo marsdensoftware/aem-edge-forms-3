@@ -134,6 +134,7 @@
   &.horizontal {
     display: flex;
     flex-direction: column;
+    row-gap: $spacing-200;
 
     label {
       padding: $spacing-400;
