@@ -199,6 +199,10 @@ main > .section.columns-container:nth-of-type(2) p,
 main > .section.columns-container:nth-of-type(3) p {
   color: $color-shade-navy-20;
 }
+main > .section.columns-container:nth-of-type(2) p {
+  padding-right: 0;
+}
+
 
 /* ----------------------------- */
 /* IMAGE ALIGNMENT PER SECTION */
@@ -220,6 +224,13 @@ main > .section.columns-container:nth-of-type(2) {
     width: auto;
   }
 }
+
+main > .section.columns-container:nth-of-type(2) img,
+main > .section.columns-container:nth-of-type(2) picture,
+main > .section.columns-container:nth-of-type(2) picture > img {
+  margin-bottom: $spacing-600;
+}
+
 
 main > .section.columns-container:nth-of-type(3) {
   img,
