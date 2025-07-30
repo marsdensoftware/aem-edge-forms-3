@@ -1,7 +1,7 @@
 @use "../../styles/settings" as *;
 
-.link-ith-icon a {
-  color: $color-shade-blue-40;
+.link-with-icon a {
+  color: pink;
   text-align: left;
   font-family: $font-family;
   font-size: $size-font-body-default;
@@ -11,22 +11,22 @@
   letter-spacing: $letter-spacing-default;
 }
 
-.link-ith-icon * {
+.link-with-icon * {
   text-align: left;
 }
 
-.link-ith-icon img {
+.link-with-icon img {
   display: block;
   margin: 0;
   text-align: left;
 }
 
-.link-ith-icon img,
-.link-ith-icon picture,
-.link-ith-icon picture > img,
-.link-ith-icon .columns-img-col,
-.link-ith-icon .columns-img-col picture,
-.link-ith-icon .columns-img-col picture > img {
+.link-with-icon img,
+.link-with-icon picture,
+.link-with-icon picture > img,
+.link-with-icon .columns-img-col,
+.link-with-icon .columns-img-col picture,
+.link-with-icon .columns-img-col picture > img {
   display: block;
   margin: 0;
   text-align: left;
