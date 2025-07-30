@@ -230,6 +230,14 @@
       flex-direction: row;
       padding: $spacing-400;
       min-height: auto;
+      justify-content: flex-start;
+
+      &::before {
+        position: absolute;
+        right: $spacing-400;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
 }
