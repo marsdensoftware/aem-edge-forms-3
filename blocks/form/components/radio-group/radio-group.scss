@@ -60,16 +60,16 @@
   }
 
   .radio-group--with-icon--car-off {
-    content: url('../../../../icons/icon-car-off.svg');
+    content: url('../../../../icons/icon-have-transport-no.svg');
   }
   .radio-group--with-icon--car-on {
-    content: url('../../../../icons/icon-car-on.svg');
+    content: url('../../../../icons/icon-have-transport-yes.svg');
   }
   .radio-group--with-icon--full-time {
-    content: url('../../../../icons/icon-full-time.svg');
+    content: url('../../../../icons/icon-hours-full-time.svg');
   }
   .radio-group--with-icon--part-time {
-    content: url('../../../../icons/icon-part-time.svg');
+    content: url('../../../../icons/icon-hours-part-time.svg');
   }
   .radio-group--with-icon--list-search-1 {
     content: url('../../../../icons/icon-streamline.svg');
@@ -78,38 +78,26 @@
     content: url('../../../../icons/smiley-face.svg');
   }
   .radio-group--with-icon--no-language {
-    content: url('../../../../icons/icon-no-language.svg');
+    content: url('../../../../icons/icon-languages-no.svg');
   }
   .radio-group--with-icon--yes-language {
-    content: url('../../../../icons/icon-yes-language.svg');
+    content: url('../../../../icons/icon-languages-yes.svg');
   }
   .radio-group--with-icon--no-education {
-    content: url('../../../../icons/icon-no-education.svg');
+    content: url('../../../../icons/icon-courses-training-no.svg');
   }
   .radio-group--with-icon--yes-education {
-    content: url('../../../../icons/icon-yes-education.svg');
+    content: url('../../../../icons/icon-courses-training-yes.svg');
   }
-
-  .radio-group--with-icon--yes-language {
-    content: url('../../../../icons/icon-yes-language.svg');
-  }
-
-  .radio-group--with-icon--no-language {
-    content: url('../../../../icons/icon-no-language.svg');
-  }
-
   .radio-group--with-icon--work-non-paid {
     content: url('../../../../icons/icon-work-non-paid.svg');
   }
-
   .radio-group--with-icon--work-nothing-to-add {
     content: url('../../../../icons/icon-work-nothing-to-add.svg');
   }
-
   .radio-group--with-icon--work-paid {
     content: url('../../../../icons/icon-work-paid.svg');
   }
-
   .radio-group--with-icon--work-volunteer {
     content: url('../../../../icons/icon-work-volunteer.svg');
   }
