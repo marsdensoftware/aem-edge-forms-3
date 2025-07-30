@@ -10,7 +10,6 @@
 
 .radio-wrapper {
   display: flex;
-  margin-top: $spacing-200; //SEPD-5540 checkbox-spacing
 
   label {
     @extend %label-common-style;
