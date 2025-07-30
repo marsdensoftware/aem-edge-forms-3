@@ -74,6 +74,7 @@
       "date-input",
       "drop-down",
       "email",
+      "extended-checkbox",
       "file-input",
       "form-accordion",
       "form-button",
@@ -103,7 +104,8 @@
       "text-input",
       "tnc",
       "wizard",
-      "icon-radio-group"
+      "icon-radio-group",
+      "extended-checkbox-container"
     ]
   },
   {

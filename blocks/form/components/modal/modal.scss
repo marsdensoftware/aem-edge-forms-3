@@ -1,0 +1,47 @@
+@use '../../../../styles/settings' as *;
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal dialog {
+  --dialog-border-radius: 16px;
+  padding: 0;
+  overscroll-behavior: none;
+  border: none;
+  border-radius: $border-radius-mid;
+  width: 100%;
+  outline: none;
+}
+
+.modal dialog .modal-content {
+  max-height: calc(100dvh - 60px);
+}
+
+.modal dialog::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.modal .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  border-radius: $border-radius-mid;
+  background-color: unset;
+  text-overflow: clip;
+  margin: 0;
+  border: none;
+  padding-right: 30px;
+  background-image: url('/icons/icon-x-dark.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.modal dialog .section {
+  padding: 0;
+}
