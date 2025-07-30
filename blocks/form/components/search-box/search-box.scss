@@ -7,14 +7,13 @@
   .field-description {
     p {
       padding-bottom: 0;
-      font-size: 18px;
-      font-weight: 500;
+      font-weight: $font-weight-regular;
       line-height: 133%;
       color: $text-dark-primary;
       margin-bottom: $spacing-200;
 
       @include media('desktop') {
-        font-size: 20px;
+        font-size: $size-font-body-default;
       }
     }
   }
@@ -25,16 +24,16 @@
 
   input[type='text'] {
     width: 100%;
-    padding-right: 48px;
+    padding-right: $spacing-700;
   }
 
   &::after {
     content: url('../../../../icons/search.svg');
     display: block;
-    width: 24px;
-    height: 24px;
+    width: $spacing-500;
+    height: $spacing-500;
     position: absolute;
-    right: 16px;
+    right: $spacing-400;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -49,14 +48,14 @@
 }
 
 .selected-cards-heading {
-  font-size: 18px;
+  font-size: $size-font-button-small;
   line-height: 120%;
-  font-weight: 500;
+  font-weight: $font-weight-medium;
   margin-bottom: $spacing-400;
   color: $text-dark-primary;
 
   @include media('desktop') {
-    font-size: 20px;
+    font-size: $size-font-body-large;
     margin-bottom: $spacing-200;
   }
 }
@@ -68,8 +67,11 @@
 .selected-cards {
   display: flex;
   flex-wrap: wrap;
-  margin-top: $spacing-400;
-  gap: $spacing-400 $spacing-200;
+  gap: $spacing-200;
+}
+
+.selected-cards-wrapper:has(.selected-card--is-selected) {
+  margin: $spacing-400 0 $spacing-600 0;
 }
 
 .selected-cards,
@@ -82,8 +84,8 @@
 .recommendations-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin-bottom: 32px;
+  gap: 9px; // strange size?
+  margin-bottom: $spacing-600;
 }
 
 .selected-card {
@@ -92,7 +94,7 @@
   background-color: $color-white;
   border-radius: $border-radius-round;
   padding: $spacing-200 $spacing-300 $spacing-200 $spacing-450;
-  font-size: 15px;
+  font-size: 15px; //strange size?
   line-height: 160%;
   color: $text-secondary;
   border: 1px solid $stroke-tertiary;
@@ -105,7 +107,7 @@
   }
 
   @include media('desktop') {
-    font-size: 17px;
+    font-size: $size-font-body-default;
   }
 
   &::after {
@@ -115,9 +117,9 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 16px;
-    height: 16px;
-    margin-left: 8px;
+    width: $spacing-400;
+    height: $spacing-400;
+    margin-left: $spacing-200;
   }
 
   .selected-card__button-remove {
@@ -129,11 +131,11 @@
     padding: 0;
     border: 0;
     box-shadow: none;
-    margin-left: 8px;
+    margin-left: $spacing-200;
     cursor: pointer;
     display: block;
-    width: 16px;
-    height: 16px;
+    width: $spacing-400;
+    height: $spacing-400;
 
     &:active,
     &:hover {

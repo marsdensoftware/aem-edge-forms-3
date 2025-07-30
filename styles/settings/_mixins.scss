@@ -10,7 +10,6 @@
   Shared Placeholder Selectors
 *******************************/
 
-/* Base Input Styling (for text, number, email, textarea) */
 %input-base {
   border-radius: $border-radius-mid;
   border: $stroke-input-stroke solid $stroke-tertiary;
@@ -66,7 +65,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Primary Button */
 %button--primary {
   @extend %button;
   background-color: $color-primary;
@@ -89,7 +87,6 @@
   }
 }
 
-/* Hollow (Outline) Button */
 %button--hollow {
   @extend %button;
   background-color: transparent;
@@ -112,9 +109,34 @@
   }
 }
 
+%link-button {
+  box-shadow: none;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  color: $color-primary-dark;
+  font-weight: 500;
+  font-size: $size-font-label-subtitle;
+  padding-top: $spacing-200;
+  padding-bottom: $spacing-200;
+
+  &:hover,
+  &:active {
+    color: $color-primary-navy;
+  }
+
+  &:visited {
+    color: $color-primary;
+
+    &:hover,
+    &:active {
+      color: $color-primary-navy;
+    }
+  }
+}
+
 %state-focus {
   &:focus {
-    box-shadow: 0 0 0 2px $color-white; /*0 0 0 4px $color-focus-state;*/
+    box-shadow: 0 0 0 2px $color-white;
     outline: 3px solid transparent;
   }
 
@@ -126,16 +148,12 @@
 
 %label-common-style {
   @extend %state-focus;
-  color: $text-secondary;
+  color: $text-dark-primary;
   font-size: 20px;
   font-weight: 500;
   display: flex;
   align-items: center;
 }
-
-/******************************
-  Error State
-*******************************/
 
 /* Input Error State */
 @mixin input-error {

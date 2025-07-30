@@ -83,6 +83,36 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Account Menu",
+          "id": "account-menu",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Account Menu",
+                  "filter": "account-menu"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Auth Redirect",
+          "id": "auth-redirect",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Auth Redirect",
+                  "filter": "auth-redirect"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {
@@ -951,6 +981,100 @@
                       "required": true,
                       "type": "string",
                       "sling:resourceType": "core/fd/components/form/dropdown/v1/dropdown"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Extended Checkbox Container",
+          "id": "extended-checkbox-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Extended Checkbox Container",
+                  "fieldType": "panel",
+                  "fd:viewType": "extended-checkbox-container",
+                  "minOccur": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Extended Checkbox",
+          "id": "extended-checkbox",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "name": "modal-cb-container",
+                "template": {
+                  "fd:viewType": "extended-checkbox-container",
+                  "fieldType": "panel",
+                  "jcr:title": "Modal Checkbox Container",
+                  "hideTitle": true,
+                  "name": "modal-checkbox-container",
+                  "checkbox": {
+                    "fd:viewType": "extended-checkbox",
+                    "fieldType": "checkbox",
+                    "name": "main-checkbox",
+                    "jcr:title": "Checkbox Title",
+                    "sling:resourceType": "core/fd/components/form/checkbox/v1/checkbox",
+                    "checkedValue": "on"
+                  },
+                  "modal": {
+                    "fd:viewType": "modal",
+                    "fieldType": "panel",
+                    "name": "modal-content",
+                    "jcr:title": "Modal Title",
+                    "hideTitle": true,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "content": "Modal content goes here",
+                    "visible": false,
+                    "content-panel": {
+                      "fieldType": "panel",
+                      "hideTitle": true,
+                      "name": "modal-content-panel",
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "text": {
+                        "fieldType": "text-input",
+                        "multiLine": true,
+                        "hideTitle": true,
+                        "name": "modal-text",
+                        "jcr:title": "Modal Text",
+                        "textIsRich": true,
+                        "placeholder": "Enter description here",
+                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                      }
+                    },
+                    "buttons-panel": {
+                      "fieldType": "panel",
+                      "name": "modal-buttons",
+                      "hideTitle": true,
+                      "row": true,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "cancelButton": {
+                        "colspan": "2",
+                        "fieldType": "button",
+                        "name": "modal-cancel-button",
+                        "jcr:title": "Cancel",
+                        "buttonType": "button",
+                        "sling:resourceType": "core/fd/components/form/button/v1/button"
+                      },
+                      "saveButton": {
+                        "colspan": "2",
+                        "colspan-offset": "7",
+                        "fieldType": "button",
+                        "name": "modal-save-button",
+                        "jcr:title": "Save",
+                        "buttonType": "button",
+                        "sling:resourceType": "core/fd/components/form/button/v1/button"
+                      }
                     }
                   }
                 }

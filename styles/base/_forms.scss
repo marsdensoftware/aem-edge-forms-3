@@ -24,7 +24,6 @@
     border-radius: $border-radius-mid;
     border: 2px solid $stroke-tertiary;
     background: $bg-light-secondary;
-    font-family: $font-family;
     font-size: 20px;
     line-height: 120%;
     caret-color: $color-primary;
@@ -56,7 +55,6 @@
     font-weight: 500;
     margin-bottom: 4px;
     color: $text-secondary;
-    font-family: $font-family;
   }
 }
 
@@ -81,7 +79,6 @@ FORM required asterisk for radio and checkbox group
   padding-right: clamp(1rem, 5vw, 4rem);
   margin-top: $spacing-200;
   color: $text-dark;
-  font-family: $font-family;
   font-size: $size-font-body-small;
   font-style: normal;
   font-weight: 400;
@@ -97,4 +94,22 @@ FORM required asterisk for radio and checkbox group
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.16681 9.52825V5.86075H8.83347V9.52825H7.16681Z' fill='%23D03633'/%3E%3Cpath d='M7.16681 10.7506V11.9731H8.83347V10.7506H7.16681Z' fill='%23D03633'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.00012 0.199867L15.7105 14.3346H0.289795L8.00012 0.199867ZM8.00012 3.68025L3.09745 12.6679H12.9028L8.00012 3.68025Z' fill='%23D03633'/%3E%3C/svg%3E")
       no-repeat center / contain;
   }
+}
+
+// Base label styling including fieldsets and legends used as labels
+.form label:not(.radio-group--with-icon__label, .field-label--with-description),
+.form legend.field-label,
+.form fieldset.checkbox-group-wrapper legend,
+.form fieldset.radio-group-wrapper legend {
+  font-size: $size-font-label;
+  color: $text-primary;
+  font-weight: 500;
+  line-height: 133%;
+  margin-bottom: 8px;
+}
+
+// Don't add asterisk after radio/checkbox labels
+.form .radio-wrapper > label::after,
+.form .checkbox-wrapper > label::after {
+  content: none;
 }
