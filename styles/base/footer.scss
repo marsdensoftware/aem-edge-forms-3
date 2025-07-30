@@ -1,3 +1,4 @@
+
 @use "../../styles/settings" as *;
 
 /* ----------------------------- */
@@ -54,28 +55,18 @@ main > .section.columns-container:nth-of-type(1) {
     color: $color-shade-navy-40;
     margin-bottom: $spacing-300;
   }
-
-  .typography.p {
-    margin-bottom: $spacing-200;
-  }
 }
 
 /* ----------------------------- */
 /* SECTION 2 - NAVY + REPEATING SVG */
 /* ----------------------------- */
-
-main > .section.columns-container:nth-of-type(2) {
-  background: url("/images/website-footer-repeating-petals.svg") repeat;
-  background-color: $color-primary-navy;
-  min-height: 400px;
-}
-
 main > .section.columns-container:nth-of-type(2) {
   background-color: $color-primary-navy;
   background-image: url("/images/website-footer-repeating-petals.svg");
   background-repeat: repeat;
   background-position: top left;
   background-size: auto;
+  min-height: 400px;
   color: $color-white;
   padding: $spacing-700 $spacing-600 $spacing-650 $spacing-600;
   flex-direction: column;
@@ -143,7 +134,7 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* ----------------------------- */
-/* COLUMNS: ALIGN CONTENT TO TOP */
+/* COLUMN ALIGNMENT */
 /* ----------------------------- */
 .columns.block.columns-4-cols > div {
   display: flex;
@@ -160,7 +151,7 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* ----------------------------- */
-/* GENERAL FOOTER STYLING */
+/* GLOBAL FOOTER STYLES */
 /* ----------------------------- */
 footer a {
   color: $color-shade-blue-40;
@@ -173,9 +164,6 @@ footer a {
   letter-spacing: $letter-spacing-default;
 }
 
-/* ----------------------------- */
-/* GLOBAL ALIGNMENT OVERRIDES FOR FOOTER */
-/* ----------------------------- */
 footer,
 footer * {
   text-align: left !important;
@@ -204,7 +192,7 @@ footer .columns-img-col picture > img {
 }
 
 /* ----------------------------- */
-/* FOOTER <p> COLOR OVERRIDES */
+/* PARAGRAPH COLOR OVERRIDES */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) p,
 main > .section.columns-container:nth-of-type(2) p,
@@ -251,7 +239,7 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* ----------------------------- */
-/* REMOVE FOOTER ICONS FROM LINKS */
+/* REMOVE ICON PSEUDO-ELEMENTS */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) a::before,
 main > .section.columns-container:nth-of-type(2) a::before,
@@ -305,9 +293,7 @@ main > .section.columns-container:nth-of-type(3) a::before {
       height: auto;
     }
   }
-}
 
-.link-with-icon {
   a,
   .button-container a.button {
     font-size: clamp(12px, 1.1vw, 14px);
