@@ -223,7 +223,7 @@ export class RepeatablePanel {
         this._entryModified(entry);
         
         // TODO make nice to show a custom alert
-        alert(this._addedSuccessMsg);
+        console.log(this._addedSuccessMsg);
     }
 
     _resetChanges(entry) {
