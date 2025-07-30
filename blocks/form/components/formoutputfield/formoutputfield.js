@@ -16,9 +16,13 @@ const renderers = {
 export default function decorate(el, fd) {
   const titleEl = document.createElement('h6');
   const { fieldName, title, renderer = 'list' } = fd.properties;
-  const renderFunction = renderers['renderer'];
+  const renderFunction = renderers[renderer];
 
   titleEl.innerHTML = title;
+
+  el.append(titleEl);
+
+  const outputEl = document.createElement('div');
 
   onElementAdded(el).then((connectedEl) => {
 
@@ -39,7 +43,8 @@ export default function decorate(el, fd) {
 
       const output = renderFunction(values);
 
-      el.innerHTML = output;
+      outputEl.innerHTML = '';
+      outputEl.append(output);
     }
   });
 
