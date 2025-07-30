@@ -9,7 +9,7 @@
 
   @include media('desktop') {
     flex-direction: row;
-    gap: $spacing-200;
+    gap: $spacing-400;
     margin-bottom: $spacing-800;
   }
 
