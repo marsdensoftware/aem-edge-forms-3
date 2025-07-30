@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: $spacing-400 0;
+  gap: $spacing-200 0;
   margin-bottom: $spacing-700;
 
   @include media('desktop') {
     flex-direction: row;
-    gap: $spacing-400;
+    gap: $spacing-200;
     margin-bottom: $spacing-800;
   }
 
