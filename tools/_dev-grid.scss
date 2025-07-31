@@ -1,57 +1,16 @@
-@use "sass:color";
-
-// 12 pastel background colours
-$pastel-colors: (
-        #ffd1dc, // 1 - pink
-        #d1f7c4, // 2 - mint
-        #cce5ff, // 3 - light blue
-        #fff4b3, // 4 - light yellow
-        #e0d1ff, // 5 - lavender
-        #fcd5ce, // 6 - peach
-        #d0f0fd, // 7 - aqua
-        #ffe0ac, // 8 - beige
-        #e2f0cb, // 9 - light green
-        #f4dada, // 10 - rose
-        #e3dfff, // 11 - periwinkle
-        #daf5fa  // 12 - sky blue
-);
-
-// Enable debug colours when <main class="show-grid">
-main.show-grid {
-  .container,
-  .container-fluid {
-    .row {
-      // Find ANY descendant with a column class
-      [class*="col-"] {
-        position: relative;
-        padding: 1rem;
-        text-align: center;
-        border: 1px dashed rgba(0, 0, 0, 0.15);
-        color: #333;
-        font-family: sans-serif;
-
-        // Apply pastel backgrounds and numbered badges
-        @for $i from 1 through 12 {
-          &:nth-of-type(#{$i}) {
-            background-color: nth($pastel-colors, $i);
-
-            &::before {
-              content: "col #{$i}";
-              position: absolute;
-              top: 0.25rem;
-              left: 0.25rem;
-              font-size: 0.75rem;
-              background: rgba(0, 0, 0, 0.6);
-              color: white;
-              padding: 0.2rem 0.4rem;
-              border-radius: 4px;
-              z-index: 2;
-              pointer-events: none;
-              font-family: monospace;
-            }
-          }
-        }
-      }
-    }
+.main.show-grid {
+  .row {
+    .col-1    { background-color: #ffd1dc; }  // pastel pink
+    .col-2    { background-color: #d1f7c4; }  // mint
+    .col-3    { background-color: #cce5ff; }  // light blue
+    .col-4    { background-color: #fff4b3; }  // light yellow
+    .col-5    { background-color: #e0d1ff; }  // lavender
+    .col-6    { background-color: #fcd5ce; }  // peach
+    .col-7    { background-color: #d0f0fd; }  // aqua
+    .col-8    { background-color: #ffe0ac; }  // beige
+    .col-9    { background-color: #e2f0cb; }  // light green
+    .col-10   { background-color: #f4dada; }  // rose
+    .col-11   { background-color: #e3dfff; }  // periwinkle
+    .col-12   { background-color: #daf5fa; }  // sky blue
   }
 }
