@@ -54,6 +54,8 @@
         "fragment",
         "form",
         "embed-adaptive-form",
+        "account-menu",
+        "auth-redirect",
         "list"
       ]
     }

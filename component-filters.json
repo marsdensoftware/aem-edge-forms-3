@@ -19,7 +19,27 @@
       "fragment",
       "form",
       "embed-adaptive-form",
+      "account-menu",
+      "auth-redirect",
       "list"
+    ]
+  },
+  {
+    "id": "account-menu",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "auth-redirect",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -52,6 +72,7 @@
       "date-input",
       "drop-down",
       "email",
+      "extended-checkbox",
       "file-input",
       "form-accordion",
       "form-button",
@@ -81,7 +102,8 @@
       "text-input",
       "tnc",
       "wizard",
-      "icon-radio-group"
+      "icon-radio-group",
+      "extended-checkbox-container"
     ]
   },
   {
