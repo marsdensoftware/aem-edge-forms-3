@@ -144,35 +144,50 @@
   }
 }
 
-/*
- * --- Define each specific icon ---
- * For each possible `iconName` you might configure in the authoring dialog,
- * you add a corresponding CSS rule here to set the background image.
- */
-
-/* Example for when an author enters 'user' as the iconName */
-.extended-checkbox__icon--user {
+.extended-checkbox__icon--critical-thinking {
   &::before {
-    background-image: url('/icons/user.svg'); /* Path to your user icon */
+    background-image: url('../../../../icons/ico-critical-thinking-1--critical-thinking-nut-bolt-cog-brain-plan-head.svg');
   }
 }
 
-/* Example for when an author enters 'skill' as the iconName */
-.extended-checkbox__icon--skill {
+.extended-checkbox__icon--ear-hearing {
   &::before {
-    background-image: url('/icons/skill.svg'); /* Path to your skill icon */
+    background-image: url('../../../../icons/ico-ear-hearing-health-medical-hearing-ear.svg');
   }
 }
 
-/* Add more rules for other icons as needed */
-.extended-checkbox__icon--work {
+.extended-checkbox__icon--error-checking {
   &::before {
-    background-image: url('/icons/work.svg');
+    background-image: url('../../../../icons/ico-error-checking-warning-sign.svg');
   }
 }
 
-.extended-checkbox__icon--car-off {
+.extended-checkbox__icon--line-arrow-1 {
   &::before {
-    background-image: url('../../../../icons/icon-car-off.svg');
+    background-image: url('../../../../icons/ico-line-arrow-transfer-horizontal-circle-2.svg');
+  }
+}
+
+.extended-checkbox__icon--megaphone-2 {
+  &::before {
+    background-image: url('../../../../icons/ico-megaphone-2--bullhorn-loud-megaphone-share-speaker-transmit.svg');
+  }
+}
+
+.extended-checkbox__icon--shield-check {
+  &::before {
+    background-image: url('../../../../icons/ico-Shield-Check.svg');
+  }
+}
+
+.extended-checkbox__icon--zoom-in-area {
+  &::before {
+    background-image: url('../../../../icons/ico-zoom-in-area.svg');
+  }
+}
+
+.extended-checkbox__icon--user-group-1 {
+  &::before {
+    background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg');
   }
 }
