@@ -7,7 +7,7 @@ interface Field {
 }
 
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
-  console.log('hi from extended checkbox', fieldDiv)
+  // console.log('hi from extended checkbox', fieldDiv)
 
       //add the extended-checkbox-wrapper class to the fieldDiv
   fieldDiv.classList.add('extended-checkbox')
@@ -87,24 +87,24 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // in a timeout of 500ms to give a chance for the modal to be created:
   setTimeout(() => {
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
-    console.log('modalContainer', modalContainer)
+    // console.log('modalContainer', modalContainer)
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
         '.field-modal-text textarea',
     )
     // print out the value of the sourceTextArea as soon as we get it - gets the default value
-    if (sourceTextarea) {
-      console.log('Source textarea value:', sourceTextarea.value)
-    } else {
-      console.log('Source textarea not found')
-    }
+    // if (sourceTextarea) {
+    //   console.log('Source textarea value:', sourceTextarea.value)
+    // } else {
+    //   console.log('Source textarea not found')
+    // }
 
     // get the destTextArea value
-    if (destTextArea) {
-      console.log('Text Area: ', destTextArea)
-    } else {
-      console.log('Dest text area not found')
-    }
+    // if (destTextArea) {
+    //   console.log('Text Area: ', destTextArea)
+    // } else {
+    //   console.log('Dest text area not found')
+    // }
 
     if (sourceTextarea && destTextArea) {
       destTextArea.textContent = sourceTextarea.value
@@ -115,20 +115,20 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
       'button[name="modal-save-button"]',
     )
     if (saveButton) {
-      console.log('Save button:', saveButton)
+      // console.log('Save button:', saveButton)
       saveButton.textContent = 'Save'
 
       // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
       saveButton.addEventListener('click', () => {
-        if (sourceTextarea) {
-          console.log('Source textarea value:', sourceTextarea.value)
-        }
+        // if (sourceTextarea) {
+        //   console.log('Source textarea value:', sourceTextarea.value)
+        // }
         // get the destTextArea value
-        if (destTextArea) {
-          console.log('Text Area in eventListener: ', destTextArea)
-        } else {
-          console.log('Dest text area not found in eventListener')
-        }
+        // if (destTextArea) {
+        //   console.log('Text Area in eventListener: ', destTextArea)
+        // } else {
+        //   console.log('Dest text area not found in eventListener')
+        // }
 
         if (sourceTextarea && destTextArea) {
           if (sourceTextarea?.value) {
@@ -148,7 +148,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
         // get the closest dialog element
         const dialog = modalContainer?.closest('dialog')
         if (dialog) {
-          console.log('got the dialog', dialog)
+          // console.log('got the dialog', dialog)
           dialog.close()
         } else {
           console.log('no dialog found')
@@ -157,9 +157,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     } else {
       console.log('Save button not found')
     }
-    // change the label on the save button to be "Update"
-    // if (saveButton) {
-    // }
+
   }, 500)
 
   return fieldDiv
