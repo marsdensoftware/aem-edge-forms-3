@@ -35,7 +35,14 @@
               "value": "highlight"
             }
           ]
+        },
+        {
+          "...": "../models/_responsive-columns-component.json"
+        },
+        {
+          "...": "../models/_responsive-container-component.json"
         }
+
       ]
     }
   ],
