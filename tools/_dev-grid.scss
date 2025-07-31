@@ -20,3 +20,34 @@
     }
   }
 }
+
+
+.main.show-grid {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    .row {
+      @for $i from 1 through 12 {
+        [class*="col-#{$i}"] {
+          background-color: nth((
+                  rgba(#ffd1dc, 0.4), // 1 - pastel pink
+                  rgba(#d1f7c4, 0.4), // 2 - mint
+                  rgba(#cce5ff, 0.4), // 3 - light blue
+                  rgba(#fff4b3, 0.4), // 4 - light yellow
+                  rgba(#e0d1ff, 0.4), // 5 - lavender
+                  rgba(#fcd5ce, 0.4), // 6 - peach
+                  rgba(#d0f0fd, 0.4), // 7 - aqua
+                  rgba(#ffe0ac, 0.4), // 8 - beige
+                  rgba(#e2f0cb, 0.4), // 9 - light green
+                  rgba(#f4dada, 0.4), // 10 - rose
+                  rgba(#e3dfff, 0.4), // 11 - periwinkle
+                  rgba(#daf5fa, 0.4)  // 12 - sky blue
+          ), $i);
+        }
+      }
+    }
+  }
+}
