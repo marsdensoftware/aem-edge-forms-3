@@ -31,10 +31,16 @@ export default function decorate(fieldDiv, fieldJson) {
     editLink.classList.add('edit');
     editLink.href = '#';
     editLink.textContent = 'Add description';
-    // Add click handler to edit link that triggers the checkbox
+    // Add click handler to edit link that triggers the rules engine
     editLink.addEventListener('click', (e) => {
         e.preventDefault();
-        checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+        if (checkbox) {
+            //if the value is 'on' then trigger the click()
+            if (checkbox.checked && checkbox.value === 'on') {
+                checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+            }
+            checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+        }
     });
     editDiv.appendChild(editLink);
     // Append all new elements to the main field div
