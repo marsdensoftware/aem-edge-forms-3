@@ -1,0 +1,56 @@
+@use "sass:color";
+
+// 12 pastel colors
+$pastel-colors: (
+        #ffd1dc, // 1 - pink
+        #d1f7c4, // 2 - mint
+        #cce5ff, // 3 - light blue
+        #fff4b3, // 4 - light yellow
+        #e0d1ff, // 5 - lavender
+        #fcd5ce, // 6 - peach
+        #d0f0fd, // 7 - aqua
+        #ffe0ac, // 8 - beige
+        #e2f0cb, // 9 - light green
+        #f4dada, // 10 - rose
+        #e3dfff, // 11 - periwinkle
+        #daf5fa  // 12 - sky blue
+);
+
+body.show-grid {
+  .container,
+  .container-fluid {
+    .row {
+      > [class*="col"] {
+        position: relative;
+        padding: 1rem;
+        text-align: center;
+        border: 1px dashed rgba(0, 0, 0, 0.15);
+        color: #333;
+        font-family: sans-serif;
+
+        // Apply one of 12 pastel colors to each column
+        @for $i from 1 through 12 {
+          &:nth-child(#{$i}) {
+            background-color: nth($pastel-colors, $i);
+
+            // Add label badge with column number
+            &::before {
+              content: "col #{$i}";
+              position: absolute;
+              top: 0.25rem;
+              left: 0.25rem;
+              font-size: 0.75rem;
+              background: rgba(0, 0, 0, 0.6);
+              color: white;
+              padding: 0.2rem 0.4rem;
+              border-radius: 4px;
+              z-index: 2;
+              pointer-events: none;
+              font-family: monospace;
+            }
+          }
+        }
+      }
+    }
+  }
+}
