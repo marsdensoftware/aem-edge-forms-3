@@ -487,10 +487,10 @@ export class Summarizer {
               nameValues['days_you_can_work'].value
             ) {
               nameValues['days_you_can_work'].values = [
-                nameValues['days_you_can_work'].value,
+                nameValues['days_you_can_work'].value
               ]
               nameValues['days_you_can_work'].displayValues = [
-                nameValues['days_you_can_work'].displayValue,
+                nameValues['days_you_can_work'].displayValue
               ]
     
               delete nameValues['days_you_can_work'].value
@@ -510,10 +510,10 @@ export class Summarizer {
                 nameValues['specific_days_cb'].value
               ) {
                 nameValues['specific_days_cb'].values = [
-                  nameValues['specific_days_cb'].value,
+                  nameValues['specific_days_cb'].value
                 ]
                 nameValues['specific_days_cb'].displayValues = [
-                  nameValues['specific_days_cb'].displayValue,
+                  nameValues['specific_days_cb'].displayValue
                 ]
     
                 delete nameValues['specific_days_cb'].value

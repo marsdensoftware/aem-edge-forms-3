@@ -1,4 +1,4 @@
-import { onElementAdded } from '../utils.js'
+import { onElementAdded, DefaultFieldConverter } from '../utils.js'
 
 const renderers = {
   'list': function(values) {
@@ -39,14 +39,25 @@ export default function decorate(el, fd) {
 
     // Function to update the display
     function updateDisplay() {
-      const values = Array.from(form.querySelectorAll(`input[name="${fieldName}"]`))
-        .map(input => input.value.trim())
-        .filter(value => value !== '');
-
-      const output = renderFunction(values);
-
+      const nameValues = new DefaultFieldConverter().convert(form, fieldName);
       outputEl.innerHTML = '';
-      outputEl.append(output);
+
+      if (nameValues[fieldName] && nameValues[fieldName].value) {
+        nameValues[fieldName].values = [nameValues[fieldName].value];
+        nameValues[fieldName].displayValues = [nameValues[fieldName].displayValue];
+
+        delete nameValues[fieldName].value;
+        delete nameValues[fieldName].displayValue;
+      }
+
+      if (nameValues[fieldName].values) {
+        const output = renderFunction(nameValues[fieldName].displayValues);
+
+        outputEl.append(output);
+      }
+      else {
+        connectedEl.dataset.visible = false;
+      }
     }
   });
 

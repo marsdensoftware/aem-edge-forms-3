@@ -71,6 +71,10 @@
                 {
                   "name": "Experience Based Jobs",
                   "value": "experiencedBasedJobs"
+                },
+                {
+                  "name": "Work Related Skills",
+                  "value": "workRelatedSkills"
                 }
               ]
             },
