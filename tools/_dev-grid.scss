@@ -1,52 +1,26 @@
 .main.show-grid {
-  .row {
+  [class*="col-"] {
     @for $i from 1 through 12 {
-      [class*="col-#{$i}"] {
+      &.col-#{$i},
+      &[class*="col-sm-#{$i}"],
+      &[class*="col-md-#{$i}"],
+      &[class*="col-lg-#{$i}"],
+      &[class*="col-xl-#{$i}"],
+      &[class*="col-xxl-#{$i}"] {
         background-color: nth((
-                #ffd1dc, // 1 - pink
-                #d1f7c4, // 2 - mint
-                #cce5ff, // 3 - light blue
-                #fff4b3, // 4 - light yellow
-                #e0d1ff, // 5 - lavender
-                #fcd5ce, // 6 - peach
-                #d0f0fd, // 7 - aqua
-                #ffe0ac, // 8 - beige
-                #e2f0cb, // 9 - light green
-                #f4dada, // 10 - rose
-                #e3dfff, // 11 - periwinkle
-                #daf5fa  // 12 - sky blue
+                rgba(#ffd1dc, 0.4), // 1 - pink
+                rgba(#d1f7c4, 0.4), // 2 - mint
+                rgba(#cce5ff, 0.4), // 3 - light blue
+                rgba(#fff4b3, 0.4), // 4 - yellow
+                rgba(#e0d1ff, 0.4), // 5 - lavender
+                rgba(#fcd5ce, 0.4), // 6 - peach
+                rgba(#d0f0fd, 0.4), // 7 - aqua
+                rgba(#ffe0ac, 0.4), // 8 - beige
+                rgba(#e2f0cb, 0.4), // 9 - light green
+                rgba(#f4dada, 0.4), // 10 - rose
+                rgba(#e3dfff, 0.4), // 11 - periwinkle
+                rgba(#daf5fa, 0.4)  // 12 - sky blue
         ), $i);
-      }
-    }
-  }
-}
-
-
-.main.show-grid {
-  .container,
-  .container-sm,
-  .container-md,
-  .container-lg,
-  .container-xl,
-  .container-xxl {
-    .row {
-      @for $i from 1 through 12 {
-        [class*="col-#{$i}"] {
-          background-color: nth((
-                  rgba(#ffd1dc, 0.4), // 1 - pastel pink
-                  rgba(#d1f7c4, 0.4), // 2 - mint
-                  rgba(#cce5ff, 0.4), // 3 - light blue
-                  rgba(#fff4b3, 0.4), // 4 - light yellow
-                  rgba(#e0d1ff, 0.4), // 5 - lavender
-                  rgba(#fcd5ce, 0.4), // 6 - peach
-                  rgba(#d0f0fd, 0.4), // 7 - aqua
-                  rgba(#ffe0ac, 0.4), // 8 - beige
-                  rgba(#e2f0cb, 0.4), // 9 - light green
-                  rgba(#f4dada, 0.4), // 10 - rose
-                  rgba(#e3dfff, 0.4), // 11 - periwinkle
-                  rgba(#daf5fa, 0.4)  // 12 - sky blue
-          ), $i);
-        }
       }
     }
   }
