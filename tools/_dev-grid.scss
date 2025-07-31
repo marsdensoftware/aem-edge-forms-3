@@ -16,12 +16,13 @@ $pastel-colors: (
         #daf5fa  // 12 - sky blue
 );
 
-// Apply grid helper styles only if <main> has .show-grid
+// Enable debug colours when <main class="show-grid">
 main.show-grid {
   .container,
   .container-fluid {
     .row {
-      > [class*="col"] {
+      // Find ANY descendant with a column class
+      [class*="col-"] {
         position: relative;
         padding: 1rem;
         text-align: center;
@@ -29,8 +30,9 @@ main.show-grid {
         color: #333;
         font-family: sans-serif;
 
+        // Apply pastel backgrounds and numbered badges
         @for $i from 1 through 12 {
-          &:nth-child(#{$i}) {
+          &:nth-of-type(#{$i}) {
             background-color: nth($pastel-colors, $i);
 
             &::before {
