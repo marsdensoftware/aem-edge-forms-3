@@ -1,38 +1,43 @@
+@use "sass:map";
+
 body::before {
-  content: "✅ dev-grid loaded";
+  content: '✅ dev-grid loaded';
   position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: lime;
-  color: black;
-  padding: 0.5rem;
+  top: 0;
+  left: 0;
+  background: pink;
+  color: white;
+  padding: 0.25rem 0.5rem;
   z-index: 9999;
+  font-size: 14px;
 }
 
 
-.main.show-grid {
-  [class*="col-"] {
-    @for $i from 1 through 12 {
-      &.col-#{$i},
-      &[class*="col-sm-#{$i}"],
-      &[class*="col-md-#{$i}"],
-      &[class*="col-lg-#{$i}"],
-      &[class*="col-xl-#{$i}"],
-      &[class*="col-xxl-#{$i}"] {
-        background-color: nth((
-                rgba(#ffd1dc, 0.4), // 1 - pink
-                rgba(#d1f7c4, 0.4), // 2 - mint
-                rgba(#cce5ff, 0.4), // 3 - light blue
-                rgba(#fff4b3, 0.4), // 4 - yellow
-                rgba(#e0d1ff, 0.4), // 5 - lavender
-                rgba(#fcd5ce, 0.4), // 6 - peach
-                rgba(#d0f0fd, 0.4), // 7 - aqua
-                rgba(#ffe0ac, 0.4), // 8 - beige
-                rgba(#e2f0cb, 0.4), // 9 - light green
-                rgba(#f4dada, 0.4), // 10 - rose
-                rgba(#e3dfff, 0.4), // 11 - periwinkle
-                rgba(#daf5fa, 0.4)  // 12 - sky blue
-        ), $i);
+@mixin show-grid-overlay {
+  .main {
+    [class*="col-"] {
+      @for $i from 1 through 12 {
+        &.col-#{$i},
+        &[class*="col-sm-#{$i}"],
+        &[class*="col-md-#{$i}"],
+        &[class*="col-lg-#{$i}"],
+        &[class*="col-xl-#{$i}"],
+        &[class*="col-xxl-#{$i}"] {
+          background-color: nth((
+                  rgba(#ffd1dc, 0.4),
+                  rgba(#d1f7c4, 0.4),
+                  rgba(#cce5ff, 0.4),
+                  rgba(#fff4b3, 0.4),
+                  rgba(#e0d1ff, 0.4),
+                  rgba(#fcd5ce, 0.4),
+                  rgba(#d0f0fd, 0.4),
+                  rgba(#ffe0ac, 0.4),
+                  rgba(#e2f0cb, 0.4),
+                  rgba(#f4dada, 0.4),
+                  rgba(#e3dfff, 0.4),
+                  rgba(#daf5fa, 0.4)
+          ), $i);
+        }
       }
     }
   }
