@@ -1,132 +1,78 @@
 .main.show-grid {
+  // Highlight panel-wrapper containers
+  .panel-wrapper {
+    background-color: #f0f0f0; // light grey background
+    border: 2px dashed #999;  // dashed grey border for dev clarity
+  }
+
   // 1 - pink
-  .col-1,
-  .col-sm-1,
-  .col-md-1,
-  .col-lg-1,
-  .col-xl-1,
-  .col-xxl-1 {
+  .col-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xl-1, .col-xxl-1 {
     background-color: #ffd1dc;
     border: 2px solid #e6a5b9;
   }
 
   // 2 - mint
-  .col-2,
-  .col-sm-2,
-  .col-md-2,
-  .col-lg-2,
-  .col-xl-2,
-  .col-xxl-2 {
+  .col-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xl-2, .col-xxl-2 {
     background-color: #d1f7c4;
     border: 2px solid #a6e09a;
   }
 
   // 3 - light blue
-  .col-3,
-  .col-sm-3,
-  .col-md-3,
-  .col-lg-3,
-  .col-xl-3,
-  .col-xxl-3 {
+  .col-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xl-3, .col-xxl-3 {
     background-color: #cce5ff;
     border: 2px solid #99c2e6;
   }
 
   // 4 - yellow
-  .col-4,
-  .col-sm-4,
-  .col-md-4,
-  .col-lg-4,
-  .col-xl-4,
-  .col-xxl-4 {
+  .col-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4, .col-xxl-4 {
     background-color: #fff4b3;
     border: 2px solid #e6d98a;
   }
 
   // 5 - lavender
-  .col-5,
-  .col-sm-5,
-  .col-md-5,
-  .col-lg-5,
-  .col-xl-5,
-  .col-xxl-5 {
+  .col-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xl-5, .col-xxl-5 {
     background-color: #e0d1ff;
     border: 2px solid #bba6e6;
   }
 
   // 6 - peach
-  .col-6,
-  .col-sm-6,
-  .col-md-6,
-  .col-lg-6,
-  .col-xl-6,
-  .col-xxl-6 {
+  .col-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xl-6, .col-xxl-6 {
     background-color: #fcd5ce;
     border: 2px solid #dca29a;
   }
 
   // 7 - aqua
-  .col-7,
-  .col-sm-7,
-  .col-md-7,
-  .col-lg-7,
-  .col-xl-7,
-  .col-xxl-7 {
+  .col-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xl-7, .col-xxl-7 {
     background-color: #d0f0fd;
     border: 2px solid #9cd6e6;
   }
 
   // 8 - beige
-  .col-8,
-  .col-sm-8,
-  .col-md-8,
-  .col-lg-8,
-  .col-xl-8,
-  .col-xxl-8 {
+  .col-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xl-8, .col-xxl-8 {
     background-color: #ffe0ac;
     border: 2px solid #e6b97a;
   }
 
   // 9 - light green
-  .col-9,
-  .col-sm-9,
-  .col-md-9,
-  .col-lg-9,
-  .col-xl-9,
-  .col-xxl-9 {
+  .col-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xl-9, .col-xxl-9 {
     background-color: #e2f0cb;
     border: 2px solid #b5d89d;
   }
 
   // 10 - rose
-  .col-10,
-  .col-sm-10,
-  .col-md-10,
-  .col-lg-10,
-  .col-xl-10,
-  .col-xxl-10 {
+  .col-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xl-10, .col-xxl-10 {
     background-color: #f4dada;
     border: 2px solid #d6aaaa;
   }
 
   // 11 - periwinkle
-  .col-11,
-  .col-sm-11,
-  .col-md-11,
-  .col-lg-11,
-  .col-xl-11,
-  .col-xxl-11 {
+  .col-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xl-11, .col-xxl-11 {
     background-color: #e3dfff;
     border: 2px solid #bcb8e6;
   }
 
   // 12 - sky blue
-  .col-12,
-  .col-sm-12,
-  .col-md-12,
-  .col-lg-12,
-  .col-xl-12,
-  .col-xxl-12 {
+  .col-12, .col-sm-12, .col-md-12, .col-lg-12, .col-xl-12, .col-xxl-12 {
     background-color: #daf5fa;
     border: 2px solid #a5d6e0;
   }
