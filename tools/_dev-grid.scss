@@ -1,34 +1,14 @@
-@mixin show-grid-overlay {
-  .main {
-    [class*="col-"] {
-      @for $i from 1 through 12 {
-        &.col-#{$i},
-        &[class*="col-sm-#{$i}"],
-        &[class*="col-md-#{$i}"],
-        &[class*="col-lg-#{$i}"],
-        &[class*="col-xl-#{$i}"],
-        &[class*="col-xxl-#{$i}"] {
-          background-color: nth((
-                  rgba(#ffd1dc, 0.4), // 1 - pink
-                  rgba(#d1f7c4, 0.4), // 2 - mint
-                  rgba(#cce5ff, 0.4), // 3 - light blue
-                  rgba(#fff4b3, 0.4), // 4 - yellow
-                  rgba(#e0d1ff, 0.4), // 5 - lavender
-                  rgba(#fcd5ce, 0.4), // 6 - peach
-                  rgba(#d0f0fd, 0.4), // 7 - aqua
-                  rgba(#ffe0ac, 0.4), // 8 - beige
-                  rgba(#e2f0cb, 0.4), // 9 - light green
-                  rgba(#f4dada, 0.4), // 10 - rose
-                  rgba(#e3dfff, 0.4), // 11 - periwinkle
-                  rgba(#daf5fa, 0.4)  // 12 - sky blue
-          ), $i);
-        }
-      }
-
-      // explicitly match .col-12 to ensure it's covered
-      &.col-12 {
-        background-color: rgba(#daf5fa, 0.4); // same as 12th color
-      }
-    }
-  }
+.main.show-grid {
+  .col-1 { background-color: #ffd1dc; }   // pink
+  .col-2 { background-color: #d1f7c4; }   // mint
+  .col-3 { background-color: #cce5ff; }   // light blue
+  .col-4 { background-color: #fff4b3; }   // yellow
+  .col-5 { background-color: #e0d1ff; }   // lavender
+  .col-6 { background-color: #fcd5ce; }   // peach
+  .col-7 { background-color: #d0f0fd; }   // aqua
+  .col-8 { background-color: #ffe0ac; }   // beige
+  .col-9 { background-color: #e2f0cb; }   // light green
+  .col-10 { background-color: #f4dada; }  // rose
+  .col-11 { background-color: #e3dfff; }  // periwinkle
+  .col-12 { background-color: #daf5fa; }  // sky blue
 }
