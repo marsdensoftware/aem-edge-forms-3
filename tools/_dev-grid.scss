@@ -1,6 +1,6 @@
 @use "sass:color";
 
-// 12 pastel colors
+// 12 pastel background colours
 $pastel-colors: (
         #ffd1dc, // 1 - pink
         #d1f7c4, // 2 - mint
@@ -16,8 +16,8 @@ $pastel-colors: (
         #daf5fa  // 12 - sky blue
 );
 
-// Only apply styles when .main has the .show-grid class
-.main.show-grid {
+// Apply grid helper styles only if <main> has .show-grid
+main.show-grid {
   .container,
   .container-fluid {
     .row {
@@ -29,12 +29,10 @@ $pastel-colors: (
         color: #333;
         font-family: sans-serif;
 
-        // Apply one of 12 pastel colors to each column
         @for $i from 1 through 12 {
           &:nth-child(#{$i}) {
             background-color: nth($pastel-colors, $i);
 
-            // Add label badge with column number
             &::before {
               content: "col #{$i}";
               position: absolute;
