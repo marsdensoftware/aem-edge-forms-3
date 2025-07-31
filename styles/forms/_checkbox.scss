@@ -3,12 +3,13 @@
 .checkbox-wrapper {
   display: flex;
   align-items: center;
+  margin-top: $spacing-200; //SEPD-5540 checkbox-spacing
 
   label {
     @extend %label-common-style;
     position: relative;
     padding: $spacing-400;
-    padding-right: 48px;
+    padding-right: $spacing-700;
     border-radius: $border-radius-mid;
     border: 2px solid $stroke-tertiary;
     background-color: $color-white;
@@ -17,7 +18,7 @@
     &::before {
       content: '';
       position: absolute;
-      right: 16px;
+      right: $spacing-400;
       top: 50%;
       transform: translateY(-50%);
       display: block;
@@ -58,8 +59,8 @@
         background-color: $stroke-accent;
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
         background-size: 17px;
-        width: 24px;
-        height: 24px;
+        width: $spacing-500;
+        height: $spacing-500;
       }
     }
   }
@@ -67,12 +68,11 @@
   .desc {
     font-size: $size-font-body-default;
     color: $text-secondary;
-    font-weight: 400;
+    font-weight: $font-weight-regular;
   }
 
   .text {
-    color: $text-dark-primary;
-    font-weight: 400;
+    font-weight: $font-weight-regular;
   }
 }
 
@@ -88,7 +88,7 @@
       align-items: flex-start;
 
       &:not(:last-child) {
-        margin-bottom: 8px;
+        margin-bottom: 0;
       }
 
       @media (min-width: 744px) {
@@ -100,10 +100,10 @@
         width: 100%;
 
         @media (max-width: 743px) {
-          padding-right: 48px;
+          padding-right: $spacing-700;
 
           &::before {
-            right: 12px;
+            right: $spacing-300;
             top: 50%;
             transform: translateY(-50%);
           }
@@ -113,46 +113,47 @@
   }
 
   &.variant-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-
     .checkbox-wrapper {
+      margin: 0;
+
       input[type='checkbox'] {
-        display: none; // Hide native checkbox
+        display: none;
       }
 
       label {
         display: flex;
-        padding: var(--Spacing-Spacing-200, 8px)
-          var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-200, 8px)
-          var(--Spacing-Spacing-450, 20px);
         align-items: center;
-        gap: var(--Spacing-Spacing-000, 0px);
+        gap: 0;
+        padding: $spacing-300 $spacing-450 $spacing-300 $spacing-450;
+        margin: 0;
         background-color: $color-white;
+        border: 1px solid $stroke-tertiary;
         border-radius: $border-radius-round;
-        font-size: clamp(15px, 1.25vw, 17px); // from $size-font-body-default
+        font-size: clamp(15px, 1.25vw, 17px);
         line-height: 160%;
         color: $text-secondary;
-        border: 1px solid $stroke-tertiary;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease,
-          border 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+
+        &::before {
+          display: none;
+        }
 
         &::after {
           content: '';
           display: block;
+          width: $spacing-400;
+          height: $spacing-400;
+          margin-left: $spacing-200;
           background-image: url('../../icons/icon-plus.svg');
+          background-repeat: no-repeat;
           background-position: center;
           background-size: contain;
-          background-repeat: no-repeat;
-          width: 16px;
-          height: 16px;
-          margin-left: 8px;
         }
 
-        &::before {
-          display: none;
+        > span.text {
+          margin: 0;
+          line-height: 1;
         }
       }
 
@@ -169,6 +170,20 @@
           background-color: $color-accent;
           border-color: $color-accent;
         }
+      }
+    }
+
+    // INSERTED CODE — properly scoped override for pills + horizontal
+    &.horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-200;
+      margin: $spacing-200 0 $spacing-600 0;
+
+      .checkbox-wrapper {
+        flex: 0 1 auto;
+        min-width: max-content;
+        margin-bottom: 0;
       }
     }
   }

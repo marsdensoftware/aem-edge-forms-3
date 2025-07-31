@@ -32,7 +32,7 @@
     }
 
     legend.field-label {
-      margin-bottom: $spacing-200;
+      //margin-bottom: $spacing-200;
       font-size: 18px;
 
       @include media('desktop') {
@@ -44,13 +44,9 @@
       margin-bottom: 0;
     }
 
-    .checkbox-wrapper:not(:last-child) {
-      margin-bottom: $spacing-200;
-    }
-  }
-
-  .checkbox-group-wrapper.field-cb-english-proficiency {
-    margin-top: 32px;
+    //.checkbox-wrapper:not(:last-child) {
+    //  margin-bottom: $spacing-200;
+    //}
   }
 }
 
@@ -58,28 +54,10 @@
   padding-bottom: 120px;
 
   [class*='field-wrapper'] {
-    p.p-large p {
-      padding-bottom: 0;
-    }
-
     > p {
-      margin: 0;
-      padding: 0;
-
       h3 {
         padding-bottom: 0;
         margin-bottom: $spacing-400;
-      }
-
-      p {
-        color: $text-dark-primary;
-        margin-bottom: $spacing-600;
-        font-size: 17px;
-
-        @include media('desktop') {
-          font-size: 20px;
-          margin-bottom: $spacing-650;
-        }
       }
 
       h6 {

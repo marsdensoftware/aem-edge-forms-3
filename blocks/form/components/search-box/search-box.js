@@ -312,7 +312,6 @@ export default function decorate(element, field) {
     const inputEl = element.querySelector('input');
     const container = document.createElement('div');
     container.className = 'search-box__input';
-    container.id = 'search-box__input';
     if (inputEl) {
         container.appendChild(inputEl);
     }

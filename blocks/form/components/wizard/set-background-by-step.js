@@ -31,14 +31,26 @@ function updateBackground(wizardEl, container) {
   }
 }
 
+function updateExitButtonText(wizardEl) {
+  const currentStepEl = wizardEl.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
+
+  const exitBtn = currentStepEl.closest('form').querySelector('[name="top_nav"] [name="exitBtn"]')
+  if (!exitBtn) return
+
+  exitBtn.textContent = currentStepEl.classList.contains('wizard-intro') ? 'Exit' : 'Save & exit'
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
 
   // Set the initial background based on the default active step on page load.
   updateBackground(wizardEl, container)
+  updateExitButtonText(wizardEl)
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
     updateBackground(wizardEl, container)
+    updateExitButtonText(wizardEl)
   })
 })
