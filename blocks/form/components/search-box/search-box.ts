@@ -302,6 +302,7 @@ const datasources = {
   userLocations,
   skills,
   experiencedBasedJobs,
+  experiencedBasedSkills,
   jobTitleIndustries,
   additionalHardSkills,
   workRelatedSkills,
