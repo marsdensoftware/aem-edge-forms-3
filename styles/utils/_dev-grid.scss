@@ -1,5 +1,5 @@
 .show-grid {
-  .panel-wrapper {
+  .field-wrapper {
     background-color: #f0f0f0; // light grey background
     border: 2px dashed #999; // dashed grey border for dev clarity
   }
@@ -136,3 +136,42 @@
     border: 2px solid #a5d6e0;
   }
 }
+
+.show-grid {
+  // Container debug background colors + borders
+  .container {
+    background-color: #fff9db; // light yellow
+    border: 2px dashed #e6d273;
+  }
+
+  .container-sm {
+    background-color: #e0ffe3; // minty green
+    border: 2px dashed #a4d4a9;
+  }
+
+  .container-md {
+    background-color: #e0f7ff; // pale blue
+    border: 2px dashed #95c9d4;
+  }
+
+  .container-lg {
+    background-color: #fce0ff; // light lavender-pink
+    border: 2px dashed #d6a4d6;
+  }
+
+  .container-xl {
+    background-color: #e5ecff; // cloudy blue
+    border: 2px dashed #a6b7e0;
+  }
+
+  .container-xxl {
+    background-color: #f9e0e0; // soft red
+    border: 2px dashed #d49c9c;
+  }
+
+  .container-fluid {
+    background-color: #e7f7e7; // soft green
+    border: 2px dashed #a3d0a3;
+  }
+}
+
