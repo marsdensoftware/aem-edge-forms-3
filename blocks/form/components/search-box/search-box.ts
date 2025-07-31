@@ -261,6 +261,20 @@ const jobTitleIndustries = [
   'Goat Farmer',
 ]
 
+
+const workRelatedSkills = [
+  'Communicate effectively in English',
+  'Apply health and safety standards',
+  'Work in a team',
+  'Use digital collaboration tools',
+  'Operate machinery safely',
+  'Provide customer service',
+  'Interpret technical drawings',
+  'Manage time effectively',
+  'Use accounting software',
+  'Adapt to changing work environments',
+]
+
 const experiencedBasedJobs = [
   'Job Title 1',
   'Job Title 2',
@@ -282,6 +296,7 @@ const datasources = {
   experiencedBasedJobs,
   jobTitleIndustries,
   additionalHardSkills,
+  workRelatedSkills,
 }
 
 // --- Type definitions ---
