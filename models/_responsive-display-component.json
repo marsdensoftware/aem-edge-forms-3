@@ -1,0 +1,75 @@
+
+{
+  "component": "container",
+  "name": "responsive-display-options",
+  "label": "Responsive Display Options",
+  "collapsible": true,
+  "fields": [
+    {
+      "component": "select",
+      "name": "display",
+      "label": "Default Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    },
+    {
+      "component": "select",
+      "name": "display-sm",
+      "label": "Small Screen Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    },
+    {
+      "component": "select",
+      "name": "display-md",
+      "label": "Medium Screen Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    },
+    {
+      "component": "select",
+      "name": "display-lg",
+      "label": "Large Screen Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    },
+    {
+      "component": "select",
+      "name": "display-xl",
+      "label": "Extra Large Screen Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    },
+    {
+      "component": "select",
+      "name": "display-xxl",
+      "label": "XX-Large Screen Display Options",
+      "valueType": "string",
+      "options": [
+        {"name": "Default", "value": ""},
+        {"name": "Hide", "value": "none"},
+        {"name": "Block", "value": "block"}
+      ]
+    }
+  ]
+}
