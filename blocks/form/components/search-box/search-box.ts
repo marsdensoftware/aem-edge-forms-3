@@ -275,6 +275,14 @@ const workRelatedSkills = [
   'Adapt to changing work environments',
 ]
 
+const experiencedBasedSkills = [
+    'Curriculum objectives',
+    'Agritourism',
+    'Act reliably',
+    'Insurance market',
+    'Characteristics of services'
+]
+
 const experiencedBasedJobs = [
   'Job Title 1',
   'Job Title 2',
@@ -294,6 +302,7 @@ const datasources = {
   userLocations,
   skills,
   experiencedBasedJobs,
+  experiencedBasedSkills,
   jobTitleIndustries,
   additionalHardSkills,
   workRelatedSkills,

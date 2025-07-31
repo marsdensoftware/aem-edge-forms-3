@@ -29563,6 +29563,10 @@
                 "value": "experiencedBasedJobs"
               },
               {
+                "name": "Experience Based Skills",
+                "value": "experiencedBasedSkills"
+              },
+              {
                 "name": "Job Titles and Industries",
                 "value": "jobTitleIndustries"
               }
