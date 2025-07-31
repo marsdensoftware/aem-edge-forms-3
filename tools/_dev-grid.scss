@@ -1,16 +1,17 @@
 .main.show-grid {
   .row {
-    .col-1    { background-color: #ffd1dc; }  // pastel pink
-    .col-2    { background-color: #d1f7c4; }  // mint
-    .col-3    { background-color: #cce5ff; }  // light blue
-    .col-4    { background-color: #fff4b3; }  // light yellow
-    .col-5    { background-color: #e0d1ff; }  // lavender
-    .col-6    { background-color: #fcd5ce; }  // peach
-    .col-7    { background-color: #d0f0fd; }  // aqua
-    .col-8    { background-color: #ffe0ac; }  // beige
-    .col-9    { background-color: #e2f0cb; }  // light green
-    .col-10   { background-color: #f4dada; }  // rose
-    .col-11   { background-color: #e3dfff; }  // periwinkle
-    .col-12   { background-color: #daf5fa; }  // sky blue
+    // Target column sizes from .col-1 to .col-12
+    .col-1  { background-color: #ffd1dc; } // pastel pink
+    .col-2  { background-color: #d1f7c4; } // mint
+    .col-3  { background-color: #cce5ff; } // light blue
+    .col-4  { background-color: #fff4b3; } // light yellow
+    .col-5  { background-color: #e0d1ff; } // lavender
+    .col-6  { background-color: #fcd5ce; } // peach
+    .col-7  { background-color: #d0f0fd; } // aqua
+    .col-8  { background-color: #ffe0ac; } // beige
+    .col-9  { background-color: #e2f0cb; } // light green
+    .col-10 { background-color: #f4dada; } // rose
+    .col-11 { background-color: #e3dfff; } // periwinkle
+    .col-12 { background-color: #daf5fa; } // sky blue
   }
 }
