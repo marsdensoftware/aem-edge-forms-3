@@ -1,2 +1,66 @@
 @use '../../../../styles/settings' as *;
 
+.checkbox-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--Background-Light-Primary, #FFF);
+  color: #333;
+  padding: 10px 20px;
+  border-radius: var(--Corner-radius-Mid, 8px);
+  border-left: 8px solid var(--Stroke-Success, #388314); // Default is success state (green)
+  box-shadow: var(--Elevation-Position-X-Level-3, 0) var(--Elevation-Position-Y-Level-3, 8px) var(--Elevation-Blur-Level-3, 16px) var(--Elevation-Spread-Level-3, 0) rgba(22, 44, 69, 0.20);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &--error {
+    border-left: 8px solid var(--Stroke-Error, #D03633);
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &--success {
+      background-image: url('/icons/ico-info--circle-check.svg');
+    }
+
+    &--error {
+      background-image: url('/icons/ico-info--warning-circle.svg');
+    }
+  }
+
+  &__message-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__second-line {
+    margin-top: 5px;
+  }
+
+  &__close-button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0 5px;
+  }
+}
+

@@ -18,7 +18,7 @@ export default function decorate(fieldDiv, fieldJson) {
     const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
     // 2. Find the source textarea within that container using a specific attribute selector.
     const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
-    // Create the destination paragraph element and set its content
+    // Create the destination paragraph element
     const destTextArea = document.createElement('p');
     destTextArea.classList.add('extended-checkbox--description');
     // Create the divider
@@ -56,20 +56,7 @@ export default function decorate(fieldDiv, fieldJson) {
     setTimeout(() => {
         var _a;
         const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
-        // console.log('modalContainer', modalContainer)
         const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-text textarea');
-        // print out the value of the sourceTextArea as soon as we get it - gets the default value
-        // if (sourceTextarea) {
-        //   console.log('Source textarea value:', sourceTextarea.value)
-        // } else {
-        //   console.log('Source textarea not found')
-        // }
-        // get the destTextArea value
-        // if (destTextArea) {
-        //   console.log('Text Area: ', destTextArea)
-        // } else {
-        //   console.log('Dest text area not found')
-        // }
         if (sourceTextarea && destTextArea) {
             destTextArea.textContent = sourceTextarea.value;
         }
@@ -80,15 +67,6 @@ export default function decorate(fieldDiv, fieldJson) {
             saveButton.textContent = 'Save';
             // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
             saveButton.addEventListener('click', () => {
-                // if (sourceTextarea) {
-                //   console.log('Source textarea value:', sourceTextarea.value)
-                // }
-                // get the destTextArea value
-                // if (destTextArea) {
-                //   console.log('Text Area in eventListener: ', destTextArea)
-                // } else {
-                //   console.log('Dest text area not found in eventListener')
-                // }
                 if (sourceTextarea && destTextArea) {
                     if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
                         destTextArea.textContent = sourceTextarea.value;
