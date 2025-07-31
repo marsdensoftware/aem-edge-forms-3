@@ -4,6 +4,10 @@
 .typeahead {
   margin-top: $spacing-600;
 
+  &.has-input .typeahead__input .typeahead__icon {
+    content: url('../../../../icons/icon-x-dark.svg');
+  }
+
   .typeahead__input {
     position: relative;
 
@@ -12,9 +16,10 @@
       width: 100%;
     }
 
-    &::after {
+    .typeahead__icon {
       content: url('../../../../icons/icon-search.svg');
       display: block;
+      cursor: pointer;
       width: 24px;
       height: 24px;
       position: absolute;
@@ -22,6 +27,8 @@
       top: 50%;
       transform: translateY(-50%);
     }
+
+
 
     .suggestions {
       @extend %suggestions;
