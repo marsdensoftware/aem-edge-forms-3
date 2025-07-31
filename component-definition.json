@@ -1517,7 +1517,7 @@
                       "job_title": {
                         "jcr:title": "Job title",
                         "required": true,
-                        "name": "title",
+                        "name": "job-title",
                         "fieldType": "text-input",
                         "description": "<p>What was your job called?</p>",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"

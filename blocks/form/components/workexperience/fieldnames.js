@@ -6,7 +6,7 @@ export const FIELD_NAMES = {
     END_OF_WORK_YEAR: 'endofwork-year',
     STILL_WORKING: 'still-working',
     TYPE_OF_WORK_EXPERIENCE: 'type-of-work-experience',
-    JOB_TITLE: 'title',
+    JOB_TITLE: 'job-title',
     EMPLOYER_NAME: 'employer',
     DESCRIPTION: 'description'
 };

@@ -15,7 +15,8 @@ const renderers = {
 
 export default function decorate(el, fd) {
   const titleEl = document.createElement('h6');
-  const { fieldName, title, renderer = 'list' } = fd.properties;
+  const { fieldName, renderer = 'list' } = fd.properties;
+  const title = fd.label?.value;
   const renderFunction = renderers[renderer];
 
   titleEl.innerHTML = title;
@@ -23,6 +24,7 @@ export default function decorate(el, fd) {
   el.append(titleEl);
 
   const outputEl = document.createElement('div');
+  el.append(outputEl);
 
   onElementAdded(el).then((connectedEl) => {
 
