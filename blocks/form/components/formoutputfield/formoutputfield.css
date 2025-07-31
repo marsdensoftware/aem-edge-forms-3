@@ -1,3 +1,3 @@
-.formoutputfield{
-    background-color: yellow;
-}
+fieldset.field-formoutputfield{background-color:yellow}fieldset.field-formoutputfield > legend{display:none}
+
+/*# sourceMappingURL=formoutputfield.css.map */
