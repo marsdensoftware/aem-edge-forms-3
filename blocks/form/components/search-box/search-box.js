@@ -222,18 +222,76 @@ const experiencedBasedSkills = [
     'Insurance market',
     'Characteristics of services'
 ];
-const experiencedBasedJobs = [
-    'Job Title 1',
-    'Job Title 2',
-    'Job Title 3',
-    'Job Title 4',
-    'Job Title 5',
-    'Job Title 6',
-    'Job Title 7',
-    'Job Title 8',
-    'Job Title 9',
-    'Job Title 10',
-];
+// Function to extract job titles from the DOM element
+const getExperiencedBasedJobs = (element) => {
+    // If element exists, extract job titles from it
+    if (element && element.textContent) {
+        // Parse the element's content to extract job titles
+        // This implementation assumes job titles are separated by commas, newlines, or other delimiters
+        // Adjust the parsing logic based on the actual format of the data in the element
+        const content = element.textContent.trim();
+        if (content) {
+            // Split by commas, newlines, or other delimiters as needed
+            return content.split(/,|\n/).map(item => item.trim()).filter(item => item.length > 0);
+        }
+    }
+    // Default fallback values if the element is not found or has no content
+    return [
+        'Job Title 1',
+        'Job Title 2',
+        'Job Title 3',
+        'Job Title 4',
+        'Job Title 5',
+        'Job Title 6',
+        'Job Title 7',
+        'Job Title 8',
+        'Job Title 9',
+        'Job Title 10',
+    ];
+};
+// Function to find an element by ID and attach a MutationObserver to it
+const observeElementForJobs = (elementId) => {
+    const element = document.getElementById(elementId);
+    if (!element) {
+        console.warn(`Element with ID "${elementId}" not found. Using default job titles.`);
+        experiencedBasedJobs = getExperiencedBasedJobs();
+        return;
+    }
+    // Initial population of job titles
+    experiencedBasedJobs = getExperiencedBasedJobs(element);
+    // Create a MutationObserver to watch for changes to the element
+    const observer = new MutationObserver((mutations) => {
+        // When the element changes, update the experiencedBasedJobs array
+        experiencedBasedJobs = getExperiencedBasedJobs(element);
+        // This is the painful bit as the user may be updating the list after they had selected the experienced-based jobs.
+        // So we need to update any existing search-box components that use experiencedBasedJobs
+        document.querySelectorAll('.search-box').forEach((searchBox) => {
+            const el = searchBox;
+            if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
+                const state = componentStateMap.get(el);
+                // Get currently selected items to exclude them from the updated list
+                const selectedCardsDiv = el.querySelector('.selected-cards');
+                const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
+                // Update the recommendations with the new job titles, excluding selected items
+                state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+                // Re-populate recommendations if they're visible
+                const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
+                const searchInput = el.querySelector('input[type="text"]');
+                if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+                    populateRecommendationsDiv(el, recommendationsWrapper, selectedCardsDiv, searchInput);
+                }
+            }
+        });
+    });
+    // Start observing the element for changes to its content
+    observer.observe(element, {
+        childList: true, // Observe direct children additions or removals
+        characterData: true, // Observe changes to text content
+        subtree: true // Observe all descendants, not just direct children
+    });
+};
+// This will be populated by the MutationObserver
+let experiencedBasedJobs = getExperiencedBasedJobs();
 const datasources = {
     courses,
     languages,
@@ -319,6 +377,16 @@ export default function decorate(element, field) {
     const emptySelectionMessage = field.properties['empty-selection-message'];
     const emptyRecommendationsMessage = field.properties['empty-recommendations-message'];
     const showRecommendations = field.properties['show-recommendations'] || false;
+    // Set up the MutationObserver for the element that contains job titles
+    // This only needs to be done once when the page loads
+    // Using setTimeout to ensure the DOM has loaded the element before attaching the observer
+    if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
+        // Set the flag immediately to prevent multiple setTimeout calls
+        window.experiencedBasedJobsObserverInitialized = true;
+        setTimeout(() => {
+            observeElementForJobs('theElementToBeFound');
+        }, 500); // 500ms delay to allow the DOM to load
+    }
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
     element.dataset.recommendationsDatasource = recommendationsDatasource;
