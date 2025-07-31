@@ -41,7 +41,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
       'textarea[name="modal-text"]',
     )
 
-  // Create the destination paragraph element and set its content
+  // Create the destination paragraph element
   const destTextArea = document.createElement('p')
   destTextArea.classList.add('extended-checkbox--description')
 
@@ -87,24 +87,10 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // in a timeout of 500ms to give a chance for the modal to be created:
   setTimeout(() => {
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
-    // console.log('modalContainer', modalContainer)
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
         '.field-modal-text textarea',
     )
-    // print out the value of the sourceTextArea as soon as we get it - gets the default value
-    // if (sourceTextarea) {
-    //   console.log('Source textarea value:', sourceTextarea.value)
-    // } else {
-    //   console.log('Source textarea not found')
-    // }
-
-    // get the destTextArea value
-    // if (destTextArea) {
-    //   console.log('Text Area: ', destTextArea)
-    // } else {
-    //   console.log('Dest text area not found')
-    // }
 
     if (sourceTextarea && destTextArea) {
       destTextArea.textContent = sourceTextarea.value
@@ -120,15 +106,6 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
       // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
       saveButton.addEventListener('click', () => {
-        // if (sourceTextarea) {
-        //   console.log('Source textarea value:', sourceTextarea.value)
-        // }
-        // get the destTextArea value
-        // if (destTextArea) {
-        //   console.log('Text Area in eventListener: ', destTextArea)
-        // } else {
-        //   console.log('Dest text area not found in eventListener')
-        // }
 
         if (sourceTextarea && destTextArea) {
           if (sourceTextarea?.value) {
