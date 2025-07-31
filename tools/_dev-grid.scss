@@ -16,7 +16,8 @@ $pastel-colors: (
         #daf5fa  // 12 - sky blue
 );
 
-body.show-grid {
+// Only apply styles when .main has the .show-grid class
+.main.show-grid {
   .container,
   .container-fluid {
     .row {
