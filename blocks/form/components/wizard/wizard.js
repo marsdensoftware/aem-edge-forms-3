@@ -1,6 +1,5 @@
 import { createButton } from '../../util.js'
 import './set-background-by-step.js'
-import { createProgressBar } from './progress-bar.js'
 
 export class WizardLayout {
   inputFields = 'input,textarea,select'
@@ -203,8 +202,6 @@ export class WizardLayout {
         id: 'wizard-button-next',
       })
     }
-
-    createProgressBar()
 
     const resetBtn = panel.querySelector('.reset-wrapper')
     if (resetBtn) {
