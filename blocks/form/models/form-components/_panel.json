@@ -94,10 +94,10 @@
           "value": "1"
         },
         {
-          "...": "../form-common/_responsive-container-component.json"
+          "...": "../../../../models/_responsive-container-component.json"
         },
         {
-          "...": "../form-common/_responsive-columns-component.json"
+          "...": "../../../../models/_responsive-columns-component.json"
         },
         {
           "component": "container",

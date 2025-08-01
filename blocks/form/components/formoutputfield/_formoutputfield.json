@@ -57,11 +57,11 @@
                   "value": "list"
                 }
               ]
+            },
+            {
+              "...": "../../../../models/_responsive-columns-component.json"
             }
           ]
-        },
-        {
-          "...": "../../models/form-common/_responsive-columns-component.json"
         }
       ]
     }
