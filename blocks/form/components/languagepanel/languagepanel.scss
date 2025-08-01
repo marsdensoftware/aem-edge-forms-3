@@ -32,7 +32,7 @@
     }
 
     legend.field-label {
-      margin-bottom: $spacing-200;
+      //margin-bottom: $spacing-200;
       font-size: 18px;
 
       @include media('desktop') {
@@ -44,9 +44,9 @@
       margin-bottom: 0;
     }
 
-    .checkbox-wrapper:not(:last-child) {
-      margin-bottom: $spacing-200;
-    }
+    //.checkbox-wrapper:not(:last-child) {
+    //  margin-bottom: $spacing-200;
+    //}
   }
 }
 

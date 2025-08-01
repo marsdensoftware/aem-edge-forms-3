@@ -1,6 +1,6 @@
 export default function decorate(fieldDiv, fieldJson) {
+    // console.log('hi from extended checkbox', fieldDiv)
     var _a;
-    console.log('hi from extended checkbox', fieldDiv);
     //add the extended-checkbox-wrapper class to the fieldDiv
     fieldDiv.classList.add('extended-checkbox');
     const { iconName } = fieldJson.properties;
@@ -18,7 +18,7 @@ export default function decorate(fieldDiv, fieldJson) {
     const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
     // 2. Find the source textarea within that container using a specific attribute selector.
     const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
-    // Create the destination paragraph element and set its content
+    // Create the destination paragraph element
     const destTextArea = document.createElement('p');
     destTextArea.classList.add('extended-checkbox--description');
     // Create the divider
@@ -31,10 +31,16 @@ export default function decorate(fieldDiv, fieldJson) {
     editLink.classList.add('edit');
     editLink.href = '#';
     editLink.textContent = 'Add description';
-    // Add click handler to edit link that triggers the checkbox
+    // Add click handler to edit link that triggers the rules engine
     editLink.addEventListener('click', (e) => {
         e.preventDefault();
-        checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+        if (checkbox) {
+            //if the value is 'on' then trigger the click()
+            if (checkbox.checked && checkbox.value === 'on') {
+                checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+            }
+            checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
+        }
     });
     editDiv.appendChild(editLink);
     // Append all new elements to the main field div
@@ -50,42 +56,17 @@ export default function decorate(fieldDiv, fieldJson) {
     setTimeout(() => {
         var _a;
         const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
-        console.log('modalContainer', modalContainer);
         const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-text textarea');
-        // print out the value of the sourceTextArea as soon as we get it - gets the default value
-        if (sourceTextarea) {
-            console.log('Source textarea value:', sourceTextarea.value);
-        }
-        else {
-            console.log('Source textarea not found');
-        }
-        // get the destTextArea value
-        if (destTextArea) {
-            console.log('Text Area: ', destTextArea);
-        }
-        else {
-            console.log('Dest text area not found');
-        }
         if (sourceTextarea && destTextArea) {
             destTextArea.textContent = sourceTextarea.value;
         }
         // console log the saveButton as soon as we get it
         const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
         if (saveButton) {
-            console.log('Save button:', saveButton);
+            // console.log('Save button:', saveButton)
             saveButton.textContent = 'Save';
             // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
             saveButton.addEventListener('click', () => {
-                if (sourceTextarea) {
-                    console.log('Source textarea value:', sourceTextarea.value);
-                }
-                // get the destTextArea value
-                if (destTextArea) {
-                    console.log('Text Area in eventListener: ', destTextArea);
-                }
-                else {
-                    console.log('Dest text area not found in eventListener');
-                }
                 if (sourceTextarea && destTextArea) {
                     if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
                         destTextArea.textContent = sourceTextarea.value;
@@ -103,7 +84,7 @@ export default function decorate(fieldDiv, fieldJson) {
                 // get the closest dialog element
                 const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.closest('dialog');
                 if (dialog) {
-                    console.log('got the dialog', dialog);
+                    // console.log('got the dialog', dialog)
                     dialog.close();
                 }
                 else {
@@ -114,9 +95,6 @@ export default function decorate(fieldDiv, fieldJson) {
         else {
             console.log('Save button not found');
         }
-        // change the label on the save button to be "Update"
-        // if (saveButton) {
-        // }
     }, 500);
     return fieldDiv;
 }
