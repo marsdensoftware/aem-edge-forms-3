@@ -1,10 +1,14 @@
-@use "../../styles/settings" as *;
+@use '../settings' as *;
 
 /* ----------------------------- */
 /* SECTION 1 - DARK GRADIENT BACKGROUND + ICON LINKS */
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(1) {
-  background: linear-gradient(135deg, $color-primary-dark-navy 25%, $color-primary-navy 100%);
+  background: linear-gradient(
+    135deg,
+    $color-primary-dark-navy 25%,
+    $color-primary-navy 100%
+  );
   color: $color-white;
   padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   flex-direction: column;
@@ -61,7 +65,7 @@ main > .section.columns-container:nth-of-type(1) {
 /* ----------------------------- */
 main > .section.columns-container:nth-of-type(2) {
   background-color: $color-primary-navy;
-  background-image: url("/images/website-footer-repeating-petals.svg");
+  background-image: url('/images/website-footer-repeating-petals.svg');
   background-repeat: repeat;
   background-position: top left;
   background-size: auto;
@@ -203,9 +207,8 @@ main > .section.columns-container:nth-of-type(2) p {
 }
 
 main > .section.columns-container:nth-of-type(1) p {
-  margin:$spacing-100 0 $spacing-100 0;
+  margin: $spacing-100 0 $spacing-100 0;
 }
-
 
 /* ----------------------------- */
 /* IMAGE ALIGNMENT PER SECTION */
@@ -233,7 +236,6 @@ main > .section.columns-container:nth-of-type(2) picture,
 main > .section.columns-container:nth-of-type(2) picture > img {
   margin-bottom: $spacing-600;
 }
-
 
 main > .section.columns-container:nth-of-type(3) {
   img,
