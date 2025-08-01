@@ -103,12 +103,12 @@
   .field-wrapper:not([data-visible='false']) {
     color: $text-primary;
 
-    + .field-wrapper {
+    +.field-wrapper {
       margin-top: $spacing-600;
     }
   }
 
-  .item-remove {
+  &[data-variant=addRemoveButtons] .item-remove {
     @extend %button;
     @extend %button--primary;
     display: none;
@@ -127,6 +127,7 @@
   }
 
   &.editing {
+
     .item-add,
     .repeatable-entry__edit,
     .repeatable-entry__delete {
@@ -136,6 +137,12 @@
 
   [data-repeatable] {
     display: none;
+
+    &.saved {
+      .btn-delete {
+        display: block;
+      }
+    }
 
     .button-bar {
       display: flex;
@@ -150,6 +157,12 @@
       .btn-cancel {
         @extend %button;
         @extend %button--hollow;
+      }
+
+      .btn-delete {
+        @extend %button;
+        @extend %button--hollow;
+        display: none;
       }
 
       .btn-save,
