@@ -6,6 +6,16 @@ interface Field {
   }
 }
 
+/**
+ * Enhances the modal save button functionality by adding event listeners and updating UI elements based on user interactions.
+ *
+ * @param {Element} fieldDiv - The DOM element representing the container for the modal field.
+ * @param {HTMLParagraphElement} destTextArea - The paragraph element where the source text area's value will be displayed.
+ * @param {HTMLAnchorElement} editLink - The anchor element used to toggle the edit state of the description.
+ * @param {HTMLHRElement} divider - The horizontal rule element to be displayed or hidden based on the modal interactions.
+ * @param {HTMLDivElement} editDiv - The div element containing editing controls to be shown or hidden based on modal interactions.
+ * @return {void} Does not return anything. Modifies DOM elements and handles user interaction dynamically.
+ */
 function decorateModalSaveButton(fieldDiv: Element, destTextArea: HTMLParagraphElement, editLink: HTMLAnchorElement, divider: HTMLHRElement, editDiv: HTMLDivElement) {
   setTimeout(() => {
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
@@ -60,7 +70,16 @@ function decorateModalSaveButton(fieldDiv: Element, destTextArea: HTMLParagraphE
   }, 500)
 }
 
-function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagraphElement, editLink: HTMLAnchorElement, divider: HTMLHRElement, editDiv: HTMLDivElement) {
+/**
+ * Decorates the cancel button of a modal dialog with custom logic.
+ * This includes updating the cancel button text, synchronizing textarea content,
+ * and ensuring the modal closes upon cancellation.
+ *
+ * @param {Element} fieldDiv - The parent element containing the modal.
+ * @param {HTMLParagraphElement} destTextArea - The paragraph element containing the destination text.
+ * @return {void} This function does not return a value.
+ */
+function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagraphElement) {
   setTimeout(() => {
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
 
@@ -99,7 +118,19 @@ function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagrap
   }, 500)
 }
 
-function decorateCheckboxOnState(fieldDiv: Element, checkbox: HTMLInputElement | null, destTextArea: HTMLParagraphElement, divider: HTMLHRElement, editDiv: HTMLDivElement) {
+
+/**
+ * Configures the behavior of a checkbox such that when it is checked,
+ * specified elements are displayed, and when it is unchecked,
+ * those elements are hidden.
+ *
+ * @param {HTMLInputElement | null} checkbox - The checkbox element being observed for state changes.
+ * @param {HTMLParagraphElement} destTextArea - The text area element whose display state is toggled.
+ * @param {HTMLHRElement} divider - The horizontal divider element whose display state is toggled.
+ * @param {HTMLDivElement} editDiv - The div element whose display state is toggled.
+ * @return {void} This function does not return anything.
+ */
+function decorateCheckboxOnState(checkbox: HTMLInputElement | null, destTextArea: HTMLParagraphElement, divider: HTMLHRElement, editDiv: HTMLDivElement) {
   if (checkbox) {
     checkbox.addEventListener('click', () => {
       if (checkbox.checked && checkbox.value === 'on') {
@@ -177,8 +208,8 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   fieldDiv.append(divider, destTextArea, editDiv)
 
   decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
-  decorateModalCancelButton(fieldDiv, destTextArea, editLink, divider, editDiv);
-  decorateCheckboxOnState(fieldDiv, checkbox, destTextArea, divider, editDiv);
+  decorateModalCancelButton(fieldDiv, destTextArea);
+  decorateCheckboxOnState(checkbox, destTextArea, divider, editDiv);
 
   return fieldDiv
 }
