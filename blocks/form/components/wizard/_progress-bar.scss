@@ -10,6 +10,10 @@
   bottom: 210px;
 }
 
+.progress-bar--is-hidden {
+  display: none;
+}
+
 .progress-bar__item {
   content: '';
   background-color: $color-primary;

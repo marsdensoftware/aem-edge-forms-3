@@ -1,19 +1,9 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-// const panelCount = async (panels: number[]) => panels.length
 const initialState = 1;
 let increment = 1;
 let currentStep = 0;
-export const createProgressBar = () => __awaiter(void 0, void 0, void 0, function* () {
+export const createProgressBar = () => {
     const progressBar = document.createElement('div');
-    progressBar.classList.add('progress-bar');
+    progressBar.classList.add('progress-bar', 'progress-bar--is-hidden');
     const bar = document.createElement('span');
     progressBar.append(bar);
     bar.classList.add('progress-bar__item');
@@ -21,7 +11,7 @@ export const createProgressBar = () => __awaiter(void 0, void 0, void 0, functio
     const body = document.querySelector('body');
     // const wizardFooter = document.querySelector('.wizard-button-wrapper')
     body === null || body === void 0 ? void 0 : body.append(progressBar);
-});
+};
 export const trackProgress = () => {
     // Get steps length
     // const wizard = document.querySelector('.wizard')
@@ -29,7 +19,16 @@ export const trackProgress = () => {
     // Track where it is in the steps
     const currentWizard = document.querySelector('.current-wizard-step');
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
+    const progressBar = document.querySelector('.progress-bar');
     const bar = document.querySelector('.progress-bar__item');
+    if (wizardIdx === 0) {
+        progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');
+        currentStep = 0;
+        increment = 1;
+    }
+    else {
+        progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.remove('progress-bar--is-hidden');
+    }
     if (currentStep < wizardIdx) {
         currentStep += 1;
         increment += 1;
@@ -38,6 +37,6 @@ export const trackProgress = () => {
         currentStep -= 1;
         increment -= 1;
     }
+    console.log(wizardIdx);
     bar.style = `width: ${initialState + increment}%;`;
 };
-export default createProgressBar;

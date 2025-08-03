@@ -1,12 +1,11 @@
-// const panelCount = async (panels: number[]) => panels.length
 const initialState = 1
 let increment = 1
 let currentStep = 0
 
-export const createProgressBar = async () => {
+export const createProgressBar = () => {
   const progressBar = document.createElement('div')
 
-  progressBar.classList.add('progress-bar')
+  progressBar.classList.add('progress-bar', 'progress-bar--is-hidden')
   const bar = document.createElement('span')
   progressBar.append(bar)
   bar.classList.add('progress-bar__item')
@@ -24,8 +23,17 @@ export const trackProgress = () => {
   // Track where it is in the steps
   const currentWizard = document.querySelector('.current-wizard-step')
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
+  const progressBar = document.querySelector('.progress-bar')
 
   const bar = document.querySelector('.progress-bar__item') as HTMLElement
+
+  if (wizardIdx === 0) {
+    progressBar?.classList.add('progress-bar--is-hidden')
+    currentStep = 0
+    increment = 1
+  } else {
+    progressBar?.classList.remove('progress-bar--is-hidden')
+  }
 
   if (currentStep < wizardIdx) {
     currentStep += 1
@@ -35,7 +43,6 @@ export const trackProgress = () => {
     increment -= 1
   }
 
+  console.log(wizardIdx)
   bar.style = `width: ${initialState + increment}%;`
 }
-
-export default createProgressBar
