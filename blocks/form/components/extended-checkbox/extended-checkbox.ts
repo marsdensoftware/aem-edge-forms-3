@@ -118,6 +118,34 @@ function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagrap
   }, 500)
 }
 
+function decorateDialogCloseButton(fieldDiv: Element, destTextArea: HTMLParagraphElement) {
+  setTimeout(() => {
+    const modalDialog = fieldDiv.parentElement?.querySelector('dialog')
+
+    const sourceTextarea = modalDialog?.querySelector<HTMLTextAreaElement>(
+        '.field-modal-content-panel textarea',
+    )
+
+    // console log the saveButton as soon as we get it
+    const closeButton = modalDialog?.querySelector(
+        '.close-button',
+    )
+    if (closeButton) {
+      // add an onclick listener to the cancel button which will simply close the modal
+      closeButton.addEventListener('click', () => {
+
+        if (sourceTextarea && destTextArea) {
+          //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+          sourceTextarea.value = destTextArea.textContent || '';
+        }
+
+      })
+    } else {
+      console.log('Dialog close button not found')
+    }
+
+  }, 500)
+}
 
 /**
  * Configures the behavior of a checkbox such that when it is checked,
@@ -210,6 +238,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
   decorateModalCancelButton(fieldDiv, destTextArea);
   decorateCheckboxOnState(checkbox, destTextArea, divider, editDiv);
+  decorateDialogCloseButton(fieldDiv, destTextArea);
 
   return fieldDiv
 }

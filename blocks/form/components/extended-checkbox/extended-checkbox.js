@@ -93,6 +93,27 @@ function decorateModalCancelButton(fieldDiv, destTextArea) {
         }
     }, 500);
 }
+function decorateDialogCloseButton(fieldDiv, destTextArea) {
+    setTimeout(() => {
+        var _a;
+        const modalDialog = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('dialog');
+        const sourceTextarea = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.field-modal-content-panel textarea');
+        // console log the saveButton as soon as we get it
+        const closeButton = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.close-button');
+        if (closeButton) {
+            // add an onclick listener to the cancel button which will simply close the modal
+            closeButton.addEventListener('click', () => {
+                if (sourceTextarea && destTextArea) {
+                    //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+                    sourceTextarea.value = destTextArea.textContent || '';
+                }
+            });
+        }
+        else {
+            console.log('Dialog close button not found');
+        }
+    }, 500);
+}
 /**
  * Configures the behavior of a checkbox such that when it is checked,
  * specified elements are displayed, and when it is unchecked,
@@ -166,5 +187,6 @@ export default function decorate(fieldDiv, fieldJson) {
     decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
     decorateModalCancelButton(fieldDiv, destTextArea);
     decorateCheckboxOnState(checkbox, destTextArea, divider, editDiv);
+    decorateDialogCloseButton(fieldDiv, destTextArea);
     return fieldDiv;
 }
