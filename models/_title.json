@@ -54,6 +54,9 @@
               "value": "h6"
             }
           ]
+        },
+        {
+          "...": "../models/_responsive-columns-component.json"
         }
       ]
     }

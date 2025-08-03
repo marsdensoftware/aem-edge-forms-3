@@ -13,5 +13,9 @@
       }
     }
   ],
-  "models": []
+  "models": [
+    {
+      "...": "../models/_responsive-columns-component.json"
+    }
+  ]
 }
