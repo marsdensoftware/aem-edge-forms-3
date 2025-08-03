@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // const panelCount = async (panels: number[]) => panels.length
 const initialState = 1;
 let increment = 1;
+let currentStep = 0;
 export const createProgressBar = () => __awaiter(void 0, void 0, void 0, function* () {
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar');
@@ -18,17 +19,25 @@ export const createProgressBar = () => __awaiter(void 0, void 0, void 0, functio
     bar.classList.add('progress-bar__item');
     bar.style = `width: ${initialState}%;`;
     const body = document.querySelector('body');
+    // const wizardFooter = document.querySelector('.wizard-button-wrapper')
     body === null || body === void 0 ? void 0 : body.append(progressBar);
 });
 export const trackProgress = () => {
     // Get steps length
-    const wizard = document.querySelector('.wizard');
-    const steps = wizard === null || wizard === void 0 ? void 0 : wizard.querySelectorAll(':scope > [data-index]');
-    // TODO: track where it is in the steps
+    // const wizard = document.querySelector('.wizard')
+    // const steps = wizard?.querySelectorAll(':scope > [data-index]')
+    // Track where it is in the steps
+    const currentWizard = document.querySelector('.current-wizard-step');
+    const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
     const bar = document.querySelector('.progress-bar__item');
+    if (currentStep < wizardIdx) {
+        currentStep += 1;
+        increment += 1;
+    }
+    else if (currentStep > wizardIdx) {
+        currentStep -= 1;
+        increment -= 1;
+    }
     bar.style = `width: ${initialState + increment}%;`;
-    console.log(wizard, steps === null || steps === void 0 ? void 0 : steps.length);
-    increment += 1;
 };
-console.log('Progress bar file...');
 export default createProgressBar;
