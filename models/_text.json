@@ -8,7 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/text/v1/text",
             "template": {
-              "model": "section"
+              "model": "text"
             }
           }
         }
@@ -18,7 +18,7 @@
   "models": [
     {
       "id": "text",
-      "...": "../models/_responsive-columns-component-v2.json"
+      "...": "../models/_responsive-columns-component-v3.json"
     }
   ]
 }
