@@ -1,0 +1,20 @@
+{
+  "component": "container",
+  "name": "responsive-column-spans",
+  "label": "Responsive Column Spans",
+  "collapsible": true,
+  "fields": [
+    {
+      "component": "multiselect",
+      "name": "classes",
+      "label": "Grid",
+      "value": "",
+      "valueType": "string",
+      "options": [
+        {
+          "...": "../models/_responsive-columns-options.json"
+        }
+      ]
+    }
+  ]
+}
