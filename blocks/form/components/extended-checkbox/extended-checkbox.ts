@@ -7,9 +7,8 @@ interface Field {
 }
 
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
-  // console.log('hi from extended checkbox', fieldDiv)
 
-      //add the extended-checkbox-wrapper class to the fieldDiv
+  //add the extended-checkbox-wrapper class to the fieldDiv
   fieldDiv.classList.add('extended-checkbox')
 
   const { iconName } = fieldJson.properties
@@ -32,24 +31,15 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     label?.prepend(iconElement)
   }
 
-  // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
-  const modalContentContainer = fieldDiv.parentElement?.nextElementSibling
-
-  // 2. Find the source textarea within that container using a specific attribute selector.
-  const sourceTextarea =
-    modalContentContainer?.querySelector<HTMLTextAreaElement>(
-      'textarea[name="modal-text"]',
-    )
-
   // Create the destination paragraph element
   const destTextArea = document.createElement('p')
   destTextArea.classList.add('extended-checkbox--description')
+  destTextArea.style.display = 'none'
 
   // Create the divider
   const divider = document.createElement('hr')
   divider.classList.add('checkbox-divider')
-
-  destTextArea.textContent = sourceTextarea?.value || ''
+  divider.style.display = 'none'
 
   // Create the edit link container
   const editDiv = document.createElement('div')
@@ -72,16 +62,11 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   })
 
   editDiv.appendChild(editLink)
+  editDiv.style.display = 'none'
 
   // Append all new elements to the main field div
   fieldDiv.append(divider, destTextArea, editDiv)
 
-  // if there is no sourceTextarea.value, don't show the fieldDiv element
-  if (!sourceTextarea?.value) {
-    divider.style.display = 'none'
-    destTextArea.style.display = 'none'
-    editDiv.style.display = 'none'
-  }
 
   // get hold of the modal's 'save' button
   // in a timeout of 500ms to give a chance for the modal to be created:
@@ -89,8 +74,10 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
-        '.field-modal-text textarea',
+        '.field-modal-content-panel textarea',
     )
+
+    console.log('sourceTextarea', sourceTextarea)
 
     if (sourceTextarea && destTextArea) {
       destTextArea.textContent = sourceTextarea.value
@@ -123,7 +110,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
         }
 
         // get the closest dialog element
-        const dialog = modalContainer?.closest('dialog')
+        const dialog = saveButton?.closest('dialog')
         if (dialog) {
           // console.log('got the dialog', dialog)
           dialog.close()
