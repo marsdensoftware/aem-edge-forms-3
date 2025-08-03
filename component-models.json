@@ -20,63 +20,107 @@
         "collapsible": true,
         "fields": [
           {
-            "component": "select",
+            "component": "multiselect",
             "name": "classes",
-            "label": "Default Column Offset",
+            "label": "Column Offset",
             "value": "",
             "valueType": "string",
             "options": [
               {
-                "name": "Default",
-                "value": ""
-              },
-              {
-                "name": "1 column",
+                "name": "offset-xl-1",
                 "value": "offset-xl-1"
               },
               {
-                "name": "2 columns",
+                "name": "offset-xl-2",
                 "value": "offset-xl-2"
               },
               {
-                "name": "3 columns",
+                "name": "offset-xl-3",
                 "value": "offset-xl-3"
               },
               {
-                "name": "4 columns",
+                "name": "offset-xl-4",
                 "value": "offset-xl-4"
               },
               {
-                "name": "5 columns",
+                "name": "offset-xl-5",
                 "value": "offset-xl-5"
               },
               {
-                "name": "6 columns",
+                "name": "offset-xl-6",
                 "value": "offset-xl-6"
               },
               {
-                "name": "7 columns",
+                "name": "offset-xl-7",
                 "value": "offset-xl-7"
               },
               {
-                "name": "8 columns",
+                "name": "offset-xl-8",
                 "value": "offset-xl-8"
               },
               {
-                "name": "9 columns",
+                "name": "offset-xl-9",
                 "value": "offset-xl-9"
               },
               {
-                "name": "10 columns",
+                "name": "offset-xl-10",
                 "value": "offset-xl-10"
               },
               {
-                "name": "11 columns",
+                "name": "offset-xl-11",
                 "value": "offset-xl-11"
               },
               {
-                "name": "12 columns",
+                "name": "offset-xl-12",
                 "value": "offset-xl-12"
+              },
+              {
+                "name": "offset-lg-1",
+                "value": "offset-lg-1"
+              },
+              {
+                "name": "offset-lg-2",
+                "value": "offset-lg-2"
+              },
+              {
+                "name": "offset-lg-3",
+                "value": "offset-lg-3"
+              },
+              {
+                "name": "offset-lg-4",
+                "value": "offset-lg-4"
+              },
+              {
+                "name": "offset-lg-5",
+                "value": "offset-lg-5"
+              },
+              {
+                "name": "offset-lg-6",
+                "value": "offset-lg-6"
+              },
+              {
+                "name": "offset-lg-7",
+                "value": "offset-lg-7"
+              },
+              {
+                "name": "offset-lg-8",
+                "value": "offset-lg-8"
+              },
+              {
+                "name": "offset-lg-9",
+                "value": "offset-lg-9"
+              },
+              {
+                "name": "offset-lg-10",
+                "value": "offset-lg-10"
+              },
+              {
+                "name": "offset-lg-11",
+                "value": "offset-lg-11"
+              },
+              {
+                "name": "offset-lg-12",
+                "value": "offset-lg-12"
               }
             ]
           }
@@ -297,67 +341,6 @@
             "value": "offset-lg-12"
           }
         ]
-      },
-      {
-        "component": "select",
-        "name": "classes",
-        "label": "Xtra Large Column Offset",
-        "value": "",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Default",
-            "value": ""
-          },
-          {
-            "name": "1 column",
-            "value": "offset-xl-1"
-          },
-          {
-            "name": "2 columns",
-            "value": "offset-xl-2"
-          },
-          {
-            "name": "3 columns",
-            "value": "offset-xl-3"
-          },
-          {
-            "name": "4 columns",
-            "value": "offset-xl-4"
-          },
-          {
-            "name": "5 columns",
-            "value": "offset-xl-5"
-          },
-          {
-            "name": "6 columns",
-            "value": "offset-xl-6"
-          },
-          {
-            "name": "7 columns",
-            "value": "offset-xl-7"
-          },
-          {
-            "name": "8 columns",
-            "value": "offset-xl-8"
-          },
-          {
-            "name": "9 columns",
-            "value": "offset-xl-9"
-          },
-          {
-            "name": "10 columns",
-            "value": "offset-xl-10"
-          },
-          {
-            "name": "11 columns",
-            "value": "offset-xl-11"
-          },
-          {
-            "name": "12 columns",
-            "value": "offset-xl-12"
-          }
-        ]
       }
     ]
   },
@@ -409,63 +392,107 @@
         "collapsible": true,
         "fields": [
           {
-            "component": "select",
+            "component": "multiselect",
             "name": "classes",
-            "label": "Default Column Offset",
+            "label": "Column Offset",
             "value": "",
             "valueType": "string",
             "options": [
               {
-                "name": "Default",
-                "value": ""
-              },
-              {
-                "name": "1 column",
+                "name": "offset-xl-1",
                 "value": "offset-xl-1"
               },
               {
-                "name": "2 columns",
+                "name": "offset-xl-2",
                 "value": "offset-xl-2"
               },
               {
-                "name": "3 columns",
+                "name": "offset-xl-3",
                 "value": "offset-xl-3"
               },
               {
-                "name": "4 columns",
+                "name": "offset-xl-4",
                 "value": "offset-xl-4"
               },
               {
-                "name": "5 columns",
+                "name": "offset-xl-5",
                 "value": "offset-xl-5"
               },
               {
-                "name": "6 columns",
+                "name": "offset-xl-6",
                 "value": "offset-xl-6"
               },
               {
-                "name": "7 columns",
+                "name": "offset-xl-7",
                 "value": "offset-xl-7"
               },
               {
-                "name": "8 columns",
+                "name": "offset-xl-8",
                 "value": "offset-xl-8"
               },
               {
-                "name": "9 columns",
+                "name": "offset-xl-9",
                 "value": "offset-xl-9"
               },
               {
-                "name": "10 columns",
+                "name": "offset-xl-10",
                 "value": "offset-xl-10"
               },
               {
-                "name": "11 columns",
+                "name": "offset-xl-11",
                 "value": "offset-xl-11"
               },
               {
-                "name": "12 columns",
+                "name": "offset-xl-12",
                 "value": "offset-xl-12"
+              },
+              {
+                "name": "offset-lg-1",
+                "value": "offset-lg-1"
+              },
+              {
+                "name": "offset-lg-2",
+                "value": "offset-lg-2"
+              },
+              {
+                "name": "offset-lg-3",
+                "value": "offset-lg-3"
+              },
+              {
+                "name": "offset-lg-4",
+                "value": "offset-lg-4"
+              },
+              {
+                "name": "offset-lg-5",
+                "value": "offset-lg-5"
+              },
+              {
+                "name": "offset-lg-6",
+                "value": "offset-lg-6"
+              },
+              {
+                "name": "offset-lg-7",
+                "value": "offset-lg-7"
+              },
+              {
+                "name": "offset-lg-8",
+                "value": "offset-lg-8"
+              },
+              {
+                "name": "offset-lg-9",
+                "value": "offset-lg-9"
+              },
+              {
+                "name": "offset-lg-10",
+                "value": "offset-lg-10"
+              },
+              {
+                "name": "offset-lg-11",
+                "value": "offset-lg-11"
+              },
+              {
+                "name": "offset-lg-12",
+                "value": "offset-lg-12"
               }
             ]
           }
@@ -601,67 +628,6 @@
               {
                 "name": "offset-lg-12",
                 "value": "offset-lg-12"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "name": "classes",
-            "label": "Xtra Large Column Offset",
-            "value": "",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Default",
-                "value": ""
-              },
-              {
-                "name": "1 column",
-                "value": "offset-xl-1"
-              },
-              {
-                "name": "2 columns",
-                "value": "offset-xl-2"
-              },
-              {
-                "name": "3 columns",
-                "value": "offset-xl-3"
-              },
-              {
-                "name": "4 columns",
-                "value": "offset-xl-4"
-              },
-              {
-                "name": "5 columns",
-                "value": "offset-xl-5"
-              },
-              {
-                "name": "6 columns",
-                "value": "offset-xl-6"
-              },
-              {
-                "name": "7 columns",
-                "value": "offset-xl-7"
-              },
-              {
-                "name": "8 columns",
-                "value": "offset-xl-8"
-              },
-              {
-                "name": "9 columns",
-                "value": "offset-xl-9"
-              },
-              {
-                "name": "10 columns",
-                "value": "offset-xl-10"
-              },
-              {
-                "name": "11 columns",
-                "value": "offset-xl-11"
-              },
-              {
-                "name": "12 columns",
-                "value": "offset-xl-12"
               }
             ]
           }
@@ -875,67 +841,6 @@
               {
                 "name": "offset-lg-12",
                 "value": "offset-lg-12"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "name": "classes",
-            "label": "Xtra Large Column Offset",
-            "value": "",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Default",
-                "value": ""
-              },
-              {
-                "name": "1 column",
-                "value": "offset-xl-1"
-              },
-              {
-                "name": "2 columns",
-                "value": "offset-xl-2"
-              },
-              {
-                "name": "3 columns",
-                "value": "offset-xl-3"
-              },
-              {
-                "name": "4 columns",
-                "value": "offset-xl-4"
-              },
-              {
-                "name": "5 columns",
-                "value": "offset-xl-5"
-              },
-              {
-                "name": "6 columns",
-                "value": "offset-xl-6"
-              },
-              {
-                "name": "7 columns",
-                "value": "offset-xl-7"
-              },
-              {
-                "name": "8 columns",
-                "value": "offset-xl-8"
-              },
-              {
-                "name": "9 columns",
-                "value": "offset-xl-9"
-              },
-              {
-                "name": "10 columns",
-                "value": "offset-xl-10"
-              },
-              {
-                "name": "11 columns",
-                "value": "offset-xl-11"
-              },
-              {
-                "name": "12 columns",
-                "value": "offset-xl-12"
               }
             ]
           }
