@@ -183,8 +183,8 @@ export class Summarizer {
     static getNameValues(entry) {
         let nameValues = undefined;
         try {
-            nameValues = entry.dataset.data
-                ? JSON.parse(entry.dataset.data)
+            nameValues = entry.dataset.savedData
+                ? JSON.parse(entry.dataset.savedData)
                 : Summarizer.fieldToNameValues(entry);
         } catch (e) {
             nameValues = Summarizer.fieldToNameValues(entry);
@@ -361,7 +361,7 @@ export class Summarizer {
     }
 
     static strengths(el, properties) {
-        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_strengths', el, properties);
+        el.innerHTML = Summarizer.defaultSummarizer('panel_soft_skills', el, properties);
     }
 
     static experience(el, properties) {
