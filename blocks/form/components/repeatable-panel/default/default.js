@@ -6,36 +6,40 @@ import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
 
 class RepeatModal extends Modal {
-  constructor() {
+  constructor(yesCallback, noCallback) {
     super();
-  }
 
-  createDialog(panel) {
-    const result = super.createDialog(panel)
-
-    // Register events on yes no buttons
-
-    const btnYes = result.querySelector('button[name="btnYes"]');
-    btnYes?.addEventListener('click', () => {
-      this?._yesCallback();
-    });
-
-    const btnNo = result.querySelector('button[name="btnNo"]');
-    btnNo?.addEventListener('click', () => {
-      this?._noCallback();
-    });
-
-    return result;
-  }
-
-  showModal(yesCallback, noCallback) {
-    super.showModal();
-    this.dialog.addEventListener('close', () => {
-      this._yesCallback = undefined;
-      this._noCallback = undefined;
-    });
     this._yesCallback = yesCallback;
     this._noCallback = noCallback;
+  }
+
+  showModal() {
+    super.showModal();
+    this.panel.dataset.visible = true;
+  }
+
+  hideModal() {
+    this.dialog.close();
+    this.panel.dataset.visible = false;
+  }
+
+  decorate(panelEl) {
+    super.decorate(panelEl);
+
+    // Register events on yes no buttons if any
+    const btnYes = panelEl.querySelector('button[name="btnYes"]');
+    btnYes?.addEventListener('click', () => {
+      alert('Yes');
+      this?._yesCallback();
+      this.hideModal();
+    });
+
+    const btnNo = panelEl.querySelector('button[name="btnNo"]');
+    btnNo?.addEventListener('click', () => {
+      alert('No');
+      this?._noCallback();
+      this.hideModal();
+    });
   }
 }
 
@@ -46,8 +50,12 @@ export class RepeatablePanel {
 
   constructor(el, properties, name, converter) {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
-    this._cancelModal = this._initModal(el.querySelector('fieldset[name="cancelModal"]'));
-    this._deleteModal = this._initModal(el.querySelector('fieldset[name="deleteModal"]'));
+
+    const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
+    this._cancelModal = this._initModal(cancelModalEl, this._cancelEditing.bind(this), this._continueEditing.bind(this));
+
+    const deleteModalEl = el.querySelector('fieldset[name="deleteModal"]');
+    this._deleteModal = this._initModal(deleteModalEl, this._cancelDeleting.bind(this), this._continueDeleting.bind(this));
     this._name = name;
 
     if (!this._repeatablePanel) {
@@ -110,15 +118,38 @@ export class RepeatablePanel {
     });
   }
 
-  _initModal(panelEl) {
+  _initModal(panelEl, yesCallback, noCallback) {
     if (panelEl) {
-      const modal = new RepeatModal();
+      const modal = new RepeatModal(yesCallback, noCallback);
       modal.decorate(panelEl);
 
       return modal;
     } else {
       return null;
     }
+  }
+
+  _cancelEditing(entry) {
+    const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
+    this._resetChanges(currentEntry);
+    this._toggleEditMode(currentEntry, false);
+
+    if (!currentEntry.classList.contains('saved') && !this._isFirstEntry(currentEntry)) {
+      // Unsaved and not first one --> Delete
+      this.#triggerDeletion(currentEntry);
+    }
+  }
+
+  _continueEditing() {
+
+  }
+
+  _cancelDeleting() {
+
+  }
+
+  _continueDeleting() {
+
   }
 
   _init(entry) {
@@ -211,7 +242,6 @@ export class RepeatablePanel {
       if (valid) {
         // Save
         this._save(entry);
-
       }
     });
 
@@ -220,24 +250,12 @@ export class RepeatablePanel {
     cancelBtn.classList.add('btn-cancel', 'link');
 
     cancelBtn.addEventListener('click', () => {
-
-      if (this._cancelModal) {
-        this._cancelModal.showModal(function() {
-          alert('Yes');
-        }, function() {
-          alert('No');
-        });
+      if (this._hasChanges(entry)) {
+        this._cancelModal?.showModal();
       }
-
-      this._toggleEditMode(entry, false);
-      this._resetChanges(entry);
-
-      if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
-        // Unsaved and not first one --> Delete
-        this.#triggerDeletion(entry);
+      else {
+        this._cancelEditing(entry);
       }
-      this._renderOverview();
-
     });
 
     const deleteBtnLabel = this._repeatablePanel.dataset.repeatDeleteButtonLabel || i18n('Delete');
@@ -269,27 +287,54 @@ export class RepeatablePanel {
     this._entryModified(entry);
   }
 
+  _hasChanges(entry) {
+
+    function deepEqual(a, b) {
+      if (a === b) return true;
+
+      if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null)
+        return false;
+
+      const keysA = Object.keys(a);
+      const keysB = Object.keys(b);
+      if (keysA.length !== keysB.length) return false;
+
+      for (const key of keysA) {
+        if (!keysB.includes(key) || !deepEqual(a[key], b[key])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    const savedData = JSON.parse(entry.dataset.savedData || '{}');
+    const currentData = new DefaultFieldConverter().convert(entry);
+
+    return !deepEqual(savedData, currentData);
+  }
+
   _resetChanges(entry) {
+    if (!this._hasChanges(entry)) {
+      return;
+    }
     const inputs = entry.querySelectorAll('input, select, textarea');
 
     if (entry.classList.contains('saved')) {
-      // Save entry, reset to previous values from repeatable-entry
-      const id = entry.dataset.id;
-      const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
-      if (!repeatableEntry) {
-        // Clear fields
-        this._clearFields(entry);
-        return;
-      }
+      // Saved entry, reset to previous saved values
+      const savedData = JSON.parse(entry.dataset.savedData);
 
       inputs.forEach(input => {
-        const el = repeatableEntry.querySelector(`[data-name="${input.name}"]`);
-        const value = el ? el.data.value : undefined;
+        const savedInputData = savedData[input.name];
+        const value = savedInputData ? (savedInputData.values || savedInputData.value) : '';
 
         switch (input.type) {
           case 'checkbox':
           case 'radio':
             input.checked = input.value === value;
+            break;
+          case 'select':
+            alert('todo');
             break;
           default:
             input.value = value;
@@ -329,7 +374,7 @@ export class RepeatablePanel {
     const classPrefix = 'repeatable';
 
     // Save original values to be used later to restore
-    entry.dataset.data = JSON.stringify(new DefaultFieldConverter().convert(entry));
+    entry.dataset.savedData = JSON.stringify(new DefaultFieldConverter().convert(entry));
 
     if (this._cardTitle) {
       // Add card title as first entry
@@ -343,7 +388,7 @@ export class RepeatablePanel {
     }
 
     Object.entries(nameValues).forEach(([name, data]) => {
-      if(!data){
+      if (!data) {
         return;
       }
       const value = data.value;
@@ -540,6 +585,12 @@ export class ConditionalRepeatable extends RepeatablePanel {
       // prevent validation
       this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
     }
+  }
+  
+  _cancelEditing(entry){
+    super._cancelEditing(entry);
+    
+    this._updateCondition();
   }
 
   _entryModified(entry) {
