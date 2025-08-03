@@ -1,5 +1,5 @@
 const initialState = 1
-let increment = 1
+let increment = 0
 let currentStep = 0
 
 export const createProgressBar = () => {
@@ -30,7 +30,7 @@ export const trackProgress = () => {
   if (wizardIdx === 0) {
     progressBar?.classList.add('progress-bar--is-hidden')
     currentStep = 0
-    increment = 1
+    increment = 0
   } else {
     progressBar?.classList.remove('progress-bar--is-hidden')
   }
