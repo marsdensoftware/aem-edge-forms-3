@@ -33877,6 +33877,12 @@
         "valueType": "string"
       },
       {
+        "component": "boolean",
+        "label": "Open link in new tab",
+        "name": "linkOpenInNewTab",
+        "valueType": "boolean"
+      },
+      {
         "component": "text",
         "name": "linkText",
         "label": "Link text",
