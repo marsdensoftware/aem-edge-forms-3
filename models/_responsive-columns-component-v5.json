@@ -1,8 +1,9 @@
 {
   "component": "multiselect",
   "name": "classes",
-  "label": "Grid",
   "value": "",
+  "label": "Grid settings",
+  "description": "Choose where you want the component to be placed.",
   "valueType": "string",
   "options": [
     {
