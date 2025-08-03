@@ -74,6 +74,22 @@ function decorateModalCancelButton(fieldDiv, destTextArea, editLink, divider, ed
         }
     }, 500);
 }
+function decorateCheckboxOnState(fieldDiv, checkbox, destTextArea, divider, editDiv) {
+    if (checkbox) {
+        checkbox.addEventListener('click', () => {
+            if (checkbox.checked && checkbox.value === 'on') {
+                destTextArea.style.display = 'block';
+                divider.style.display = 'block';
+                editDiv.style.display = 'block';
+            }
+            else {
+                destTextArea.style.display = 'none';
+                divider.style.display = 'none';
+                editDiv.style.display = 'none';
+            }
+        });
+    }
+}
 export default function decorate(fieldDiv, fieldJson) {
     //add the extended-checkbox-wrapper class to the fieldDiv
     fieldDiv.classList.add('extended-checkbox');
@@ -117,9 +133,8 @@ export default function decorate(fieldDiv, fieldJson) {
     editDiv.style.display = 'none';
     // Append all new elements to the main field div
     fieldDiv.append(divider, destTextArea, editDiv);
-    // get hold of the modal's 'save' button
-    // in a timeout of 500ms to give a chance for the modal to be created:
     decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
     decorateModalCancelButton(fieldDiv, destTextArea, editLink, divider, editDiv);
+    decorateCheckboxOnState(fieldDiv, checkbox, destTextArea, divider, editDiv);
     return fieldDiv;
 }
