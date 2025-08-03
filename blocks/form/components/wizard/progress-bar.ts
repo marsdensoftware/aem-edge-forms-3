@@ -23,10 +23,11 @@ export const trackProgress = () => {
   // Track where it is in the steps
   const currentWizard = document.querySelector('.current-wizard-step')
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
+  // Progress bar element
   const progressBar = document.querySelector('.progress-bar')
-
   const bar = document.querySelector('.progress-bar__item') as HTMLElement
 
+  // Reset progress bar state
   if (wizardIdx === 0) {
     progressBar?.classList.add('progress-bar--is-hidden')
     currentStep = 0
@@ -34,7 +35,7 @@ export const trackProgress = () => {
   } else {
     progressBar?.classList.remove('progress-bar--is-hidden')
   }
-
+  // Tracking current step
   if (currentStep < wizardIdx) {
     currentStep += 1
     increment += 1
@@ -43,6 +44,5 @@ export const trackProgress = () => {
     increment -= 1
   }
 
-  console.log(wizardIdx)
   bar.style = `width: ${initialState + increment}%;`
 }
