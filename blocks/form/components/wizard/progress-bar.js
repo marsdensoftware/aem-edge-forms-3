@@ -5,7 +5,10 @@ export const createProgressBar = () => {
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar', 'progress-bar--is-hidden');
     const bar = document.createElement('span');
-    progressBar.append(bar);
+    const title = document.createElement('span');
+    title.innerText = 'STEP 1 of 3';
+    title.classList.add('strap-title-small');
+    progressBar.append(title, bar);
     bar.classList.add('progress-bar__item');
     bar.style = `width: ${initialState}%;`;
     const body = document.querySelector('body');

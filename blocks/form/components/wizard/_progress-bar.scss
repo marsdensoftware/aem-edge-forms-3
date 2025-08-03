@@ -3,11 +3,11 @@
 .progress-bar {
   padding: $spacing-400;
   background-color: $color-shade-blue-25;
-  height: 80px;
   width: 100%;
   z-index: 4;
   position: fixed;
   bottom: 210px;
+  border-radius: $border-radius-low;
 }
 
 .progress-bar--is-hidden {
@@ -19,4 +19,5 @@
   background-color: $color-primary;
   display: block;
   height: 40px;
+  border-radius: $border-radius-low;
 }
