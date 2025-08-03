@@ -1,8 +1,9 @@
 @use '../../../../styles/settings' as *;
 
 .checkbox-toast {
+  white-space: nowrap;
   position: fixed;
-  bottom: 20px;
+  bottom: 8rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--Background-Light-Primary, #FFF);
