@@ -56,7 +56,26 @@
           ]
         },
         {
-          "...": "../models/_responsive-columns-component-v2.json"
+          "component": "select",
+          "name": "classes",
+          "label": "Default Column Offset",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "1 column", "value": "offset-xl-1" },
+            { "name": "2 columns", "value": "offset-xl-2" },
+            { "name": "3 columns", "value": "offset-xl-3" },
+            { "name": "4 columns", "value": "offset-xl-4" },
+            { "name": "5 columns", "value": "offset-xl-5" },
+            { "name": "6 columns", "value": "offset-xl-6" },
+            { "name": "7 columns", "value": "offset-xl-7" },
+            { "name": "8 columns", "value": "offset-xl-8" },
+            { "name": "9 columns", "value": "offset-xl-9" },
+            { "name": "10 columns", "value": "offset-xl-10" },
+            { "name": "11 columns", "value": "offset-xl-11" },
+            { "name": "12 columns", "value": "offset-xl-12" }
+          ]
         }
       ]
     }
