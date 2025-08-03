@@ -1,6 +1,4 @@
 export default function decorate(fieldDiv, fieldJson) {
-    // console.log('hi from extended checkbox', fieldDiv)
-    var _a;
     //add the extended-checkbox-wrapper class to the fieldDiv
     fieldDiv.classList.add('extended-checkbox');
     const { iconName } = fieldJson.properties;
@@ -14,17 +12,14 @@ export default function decorate(fieldDiv, fieldJson) {
         // Insert the icon after inside label
         label === null || label === void 0 ? void 0 : label.prepend(iconElement);
     }
-    // 1. Traverse up to the parent and then to its next sibling, which contains the modal content.
-    const modalContentContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
-    // 2. Find the source textarea within that container using a specific attribute selector.
-    const sourceTextarea = modalContentContainer === null || modalContentContainer === void 0 ? void 0 : modalContentContainer.querySelector('textarea[name="modal-text"]');
     // Create the destination paragraph element
     const destTextArea = document.createElement('p');
     destTextArea.classList.add('extended-checkbox--description');
+    destTextArea.style.display = 'none';
     // Create the divider
     const divider = document.createElement('hr');
     divider.classList.add('checkbox-divider');
-    destTextArea.textContent = (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) || '';
+    divider.style.display = 'none';
     // Create the edit link container
     const editDiv = document.createElement('div');
     const editLink = document.createElement('a');
@@ -43,20 +38,16 @@ export default function decorate(fieldDiv, fieldJson) {
         }
     });
     editDiv.appendChild(editLink);
+    editDiv.style.display = 'none';
     // Append all new elements to the main field div
     fieldDiv.append(divider, destTextArea, editDiv);
-    // if there is no sourceTextarea.value, don't show the fieldDiv element
-    if (!(sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value)) {
-        divider.style.display = 'none';
-        destTextArea.style.display = 'none';
-        editDiv.style.display = 'none';
-    }
     // get hold of the modal's 'save' button
     // in a timeout of 500ms to give a chance for the modal to be created:
     setTimeout(() => {
         var _a;
         const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
-        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-text textarea');
+        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-content-panel textarea');
+        console.log('sourceTextarea', sourceTextarea);
         if (sourceTextarea && destTextArea) {
             destTextArea.textContent = sourceTextarea.value;
         }
@@ -82,7 +73,7 @@ export default function decorate(fieldDiv, fieldJson) {
                     editDiv.style.display = 'block';
                 }
                 // get the closest dialog element
-                const dialog = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.closest('dialog');
+                const dialog = saveButton === null || saveButton === void 0 ? void 0 : saveButton.closest('dialog');
                 if (dialog) {
                     // console.log('got the dialog', dialog)
                     dialog.close();
