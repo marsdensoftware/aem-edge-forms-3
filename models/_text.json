@@ -18,7 +18,11 @@
   "models": [
     {
       "id": "text",
-      "...": "../models/_responsive-columns-component-v3.json"
+      "fields": [
+        {
+          "...": "../models/_responsive-columns-component-v4.json"
+        }
+      ]
     }
   ]
 }
