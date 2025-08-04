@@ -709,6 +709,7 @@ async function loadSection(section, loadCallback) {
 function hasBootstrapClass(e) {
   for (const className of e.classList) {
     const parts = className.split('-');
+    // TODO actually, col should always be present? check bootstrap version
     if (parts.length > 0 && ['col', 'offset'].includes(parts[0])) {
       return true;
     }
