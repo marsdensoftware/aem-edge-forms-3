@@ -56,7 +56,17 @@
           ]
         },
         {
-          "...": "../models/_responsive-columns-component-v5.json"
+          "component": "multiselect",
+          "name": "style",
+          "value": "",
+          "label": "Style",
+          "description": "Choose where you want the component to be placed.",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../models/_responsive-columns-options.json"
+            }
+          ]
         }
       ]
     }

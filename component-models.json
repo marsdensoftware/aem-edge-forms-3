@@ -354,9 +354,9 @@
       },
       {
         "component": "multiselect",
-        "name": "classes",
+        "name": "style",
         "value": "",
-        "label": "Grid settings",
+        "label": "Style",
         "description": "Choose where you want the component to be placed.",
         "valueType": "string",
         "options": [
