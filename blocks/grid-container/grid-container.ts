@@ -5,5 +5,6 @@ interface Block {
 export default function decorate(block: Block) {
 
   console.log('hi from grid-container');
+  console.log('bock: ',block);
 
 }
