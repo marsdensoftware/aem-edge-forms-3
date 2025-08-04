@@ -2,7 +2,6 @@
 
 .field-formoutputfield,
 .panel-formcontextualhelp {
-  @include elevation-1;
   padding: $spacing-400 $spacing-300;
   background: $bg-primary;
   display: block;
