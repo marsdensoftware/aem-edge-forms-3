@@ -708,7 +708,7 @@ async function loadSection(section, loadCallback) {
 function hasBootstrapClass(e) {
   for (const className of e.classList) {
     const parts = className.split('-');
-    if (parts.length > 0 && ['col', 'offset'].contains(parts[0])) {
+    if (parts.length > 0 && ['col', 'offset'].includes(parts[0])) {
       return true;
     }
   }
