@@ -1,0 +1,20 @@
+@use '../../styles/settings' as *;
+
+.block {
+  &.search-bar {
+    min-height: 400px;
+
+    @include media('desktop') {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 120px 0;
+      max-width: 930px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      @include heading-level-3;
+    }
+  }
+}
