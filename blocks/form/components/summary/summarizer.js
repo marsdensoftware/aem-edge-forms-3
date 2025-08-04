@@ -360,9 +360,24 @@ export class Summarizer {
         el.innerHTML = Summarizer.defaultSummarizer('panel_personal_summary', el, properties);
     }
 
-    static strengths(el, properties) {
-        el.innerHTML = Summarizer.defaultSummarizer('panel_soft_skills', el, properties);
-    }
+  static strengths(el, properties) {
+    const form = el.closest('form');
+    const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
+
+    let strengthsContent = [];
+
+    extendedCheckboxes.forEach((e) => {
+      const container = e.closest('.extended-checkbox-container');
+      const content = Summarizer.getItemContent(container);
+      strengthsContent.push(content);
+    });
+
+    const description = properties['description'];
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
+    el.innerHTML = content;
+
+  }
 
     static experience(el, properties) {
         el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_work_experiences', el, properties);
