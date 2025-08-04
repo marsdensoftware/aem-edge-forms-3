@@ -1,5 +1,6 @@
 @use '../../../../styles/settings' as *;
 
+.field-formoutputfield,
 .panel-formcontextualhelp {
   @include elevation-1;
   padding: $spacing-400 $spacing-300;

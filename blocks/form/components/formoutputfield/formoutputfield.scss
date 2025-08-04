@@ -1,8 +1,9 @@
-fieldset.field-formoutputfield{
+@use '../../../../styles/settings' as *;
 
-  >legend {
-    display: none
+.field-formoutputfield {
+  background: $color-shade-blue-10;
+
+  > legend {
+    display: none;
   }
-
-  background-color: yellow;
 }
