@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: $spacing-200 0;
+  gap: $spacing-400 0;
   margin-bottom: $spacing-700;
 
   @include media('desktop') {
@@ -218,6 +218,9 @@
 
 .field-workexperience-selection {
   @include media('up-to-desktop') {
+
+    gap: $spacing-200 0;
+
     input[type='radio']:checked + .radio-group--with-icon__label {
       &::after {
         right: $spacing-400 + 1px;
