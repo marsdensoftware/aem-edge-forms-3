@@ -705,16 +705,55 @@ async function loadSection(section, loadCallback) {
   }
 }
 
+function hasBootstrapClass(e) {
+  for (const className of e.classList) {
+    const parts = className.split('-');
+    if (parts.length > 0 && ['col', 'offset'].contains(parts[0])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+async function injectBootstrapClasses(section) {
+  console.log('checking whether to inject bootstrap classes on', section);
+  // TODO handle nested blocks and components inside blocks
+
+  let hasBootstrapGrandchild = false;
+  for (const child of section.children) {
+    let hasBootstrapChild = false;
+    for (const grandchild of child.children) {
+      if (hasBootstrapClass(grandchild)) {
+        console.log('detected bootstrap in', grandchild);
+        hasBootstrapChild = true;
+        hasBootstrapGrandchild = true;
+        break;
+      }
+    }
+
+    if (!hasBootstrapChild) {
+      continue;
+    }
+    console.log('injecting row class to', child);
+    child.classList.add('row');
+  }
+
+  if (!hasBootstrapGrandchild) {
+    return;
+  }
+  console.log('injecting container class to section');
+  section.classList.add('container'); // TODO what about .container-fluid?
+}
+
 /**
  * Loads all sections.
  * @param {Element} element The parent element of sections to load
  */
-
 async function loadSections(element) {
   const sections = [...element.querySelectorAll('div.section')];
   for (let i = 0; i < sections.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
-    await loadSection(sections[i]);
+    await loadSection(sections[i], injectBootstrapClasses);
     if (i === 0 && sampleRUM.enhance) {
       sampleRUM.enhance();
     }
