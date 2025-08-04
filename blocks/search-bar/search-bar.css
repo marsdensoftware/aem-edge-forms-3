@@ -1,0 +1,3 @@
+.block.search-bar{min-height:25rem}@media (min-width: 1280px){.block.search-bar{display:flex;align-items:center;justify-content:space-between;padding:7.5rem 0;max-width:58.125rem;margin:0 auto}}.block.search-bar h2{font-size:clamp(2rem, 4.5vw, 2.5rem);line-height:115%}
+
+/*# sourceMappingURL=search-bar.css.map */
