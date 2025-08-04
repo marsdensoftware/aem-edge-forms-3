@@ -1,0 +1,193 @@
+@use '../../../../styles/settings' as *;
+
+.extended-checkbox-container {
+  .modal {
+    dialog {
+      max-width: 696px;
+    }
+
+    .close-button {
+      right: $spacing-500;
+      top: $spacing-500;
+    }
+  }
+
+  .modal-content {
+    background-color: $color-shade-blue-04;
+
+    > legend {
+      @include heading-level-4;
+      padding: $spacing-450;
+      color: $color-primary-navy;
+      font-weight: 700;
+      border-bottom: 2px solid $color-shade-navy-20;
+      margin-bottom: $spacing-500;
+      background-color: $color-white;
+    }
+
+    > fieldset:not(.field-modal-buttons),
+    fieldset.formtabs {
+      padding: 0 $spacing-500;
+    }
+  }
+}
+
+/* Target labels that have a description to apply flex layout. */
+.form .extended-checkbox {
+  border-radius: $border-radius-mid;
+  border: 2px solid $color-shade-navy-40;
+  display: flex;
+  flex-direction: column; /* Stacks the text and description vertically */
+  align-items: flex-start; /* Aligns items to the start of the cross axis */
+  gap: 4px; /* Adds a small space between the label text and description */
+  padding: $spacing-400;
+
+  label {
+    font-weight: 400;
+    border: 0;
+    background: transparent;
+    order: 0;
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+    color: $text-dark-primary;
+    margin-bottom: 0;
+  }
+
+  label,
+  textarea {
+    padding: 0;
+  }
+
+  .edit {
+    @extend %link-button;
+    background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: block;
+    padding-left: 28px;
+    text-decoration: none;
+  }
+
+  input[type='checkbox']:checked + label {
+    background-color: transparent;
+  }
+
+  .checkbox-divider {
+    height: 1px;
+    width: 100%;
+    border-width: 0;
+    background-color: $color-primary;
+    margin: $spacing-400 0 $spacing-300;
+  }
+
+  textarea {
+    border: 0;
+    background: transparent;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: $size-font-label-subtitle;
+  }
+}
+
+.field-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-white;
+  padding: $spacing-500;
+  border-top: 2px solid $color-shade-navy-20;
+
+  button[name='modal-cancel-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--hollow;
+  }
+
+  button[name='modal-save-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--primary;
+  }
+}
+
+/* Style the main text span of the checkbox label. */
+.form .field-main-checkbox .field-label .text {
+  font-weight: normal;
+}
+
+/* Use flexbox on the label for easy alignment of the icon and text */
+.extended-checkbox .field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Adjust the space between the icon and the label text */
+}
+
+/*
+ * This creates the "icon holder" for any checkbox that has an icon class.
+ * The [class*="..."] selector is a flexible way to target any element
+ * whose class contains "extended-checkbox--icon-".
+ */
+.extended-checkbox__icon {
+  display: block;
+  margin-right: $spacing-400;
+
+  &::before {
+    content: ''; /* This is required for a pseudo-element to be displayed */
+    display: block;
+    // Override size for each icon if needed below
+    width: 29px;
+    height: 29px;
+    background-repeat: no-repeat;
+    background-size: 29px;
+    background-position: center;
+    flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+  }
+}
+
+.extended-checkbox__icon--critical-thinking {
+  &::before {
+    background-image: url('../../../../icons/ico-critical-thinking-1--critical-thinking-nut-bolt-cog-brain-plan-head.svg');
+  }
+}
+
+.extended-checkbox__icon--ear-hearing {
+  &::before {
+    background-image: url('../../../../icons/ico-ear-hearing-health-medical-hearing-ear.svg');
+  }
+}
+
+.extended-checkbox__icon--error-checking {
+  &::before {
+    background-image: url('../../../../icons/ico-error-checking-warning-sign.svg');
+  }
+}
+
+.extended-checkbox__icon--line-arrow-1 {
+  &::before {
+    background-image: url('../../../../icons/ico-line-arrow-transfer-horizontal-circle-2.svg');
+  }
+}
+
+.extended-checkbox__icon--megaphone-2 {
+  &::before {
+    background-image: url('../../../../icons/ico-megaphone-2--bullhorn-loud-megaphone-share-speaker-transmit.svg');
+  }
+}
+
+.extended-checkbox__icon--shield-check {
+  &::before {
+    background-image: url('../../../../icons/ico-Shield-Check.svg');
+  }
+}
+
+.extended-checkbox__icon--zoom-in-area {
+  &::before {
+    background-image: url('../../../../icons/ico-zoom-in-area.svg');
+  }
+}
+
+.extended-checkbox__icon--user-group-leader {
+  &::before {
+    background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg');
+  }
+}

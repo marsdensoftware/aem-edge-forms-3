@@ -272,7 +272,7 @@ form .file-wrapper > button {
   padding: 10px 5px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: $spacing-450;
   justify-content: center;
   align-items: center;
 }
@@ -297,7 +297,7 @@ form .file-wrapper > button {
 
   .form form .wizard {
     .wizard-menu-items {
-      gap: 20px;
+      gap: $spacing-450;
     }
 
     margin: 0;
