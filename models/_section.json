@@ -43,6 +43,7 @@
     {
       "id": "section",
       "components": [
+        "grid-container",
         "text",
         "typography",
         "image",

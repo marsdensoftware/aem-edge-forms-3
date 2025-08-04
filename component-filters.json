@@ -8,6 +8,7 @@
   {
     "id": "section",
     "components": [
+      "grid-container",
       "text",
       "typography",
       "image",
@@ -103,6 +104,24 @@
       "wizard",
       "icon-radio-group",
       "extended-checkbox-container"
+    ]
+  },
+  {
+    "id": "grid-container",
+    "components": [
+      "text",
+      "typography",
+      "image",
+      "button",
+      "title",
+      "hero",
+      "cards",
+      "columns",
+      "fragment",
+      "form",
+      "embed-adaptive-form",
+      "account-menu",
+      "auth-redirect"
     ]
   },
   {

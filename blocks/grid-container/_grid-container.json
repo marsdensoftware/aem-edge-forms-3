@@ -1,0 +1,76 @@
+{
+  "definitions": [
+    {
+      "title": "Grid Container",
+      "id": "grid-container",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "columns": "2",
+              "rows": "1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "grid-container",
+      "fields": [
+        {
+          "component": "select",
+          "name": "container",
+          "label": "Container Type",
+          "valueType": "string",
+          "options": [
+            {"name": "None", "value": ""},
+            {"name": "Default Container", "value": "container"},
+            {"name": "Small Container", "value": "container-sm"},
+            {"name": "Medium Container", "value": "container-md"},
+            {"name": "Large Container", "value": "container-lg"},
+            {"name": "Extra Large Container", "value": "container-xl"},
+            {"name": "XX-Large Container", "value": "container-xxl"},
+            {"name": "Fluid Container", "value": "container-fluid"}
+          ]
+        },
+        {
+          "component": "boolean",
+          "name": "row",
+          "label": "Add Row Class",
+          "valueType": "boolean",
+          "value": false
+        },
+        {
+          "component": "boolean",
+          "name": "flex-wrap-reverse",
+          "label": "Reverse Wrap Direction",
+          "valueType": "boolean",
+          "value": false
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "grid-container",
+      "components": [
+        "text",
+        "typography",
+        "image",
+        "button",
+        "title",
+        "hero",
+        "cards",
+        "columns",
+        "fragment",
+        "form",
+        "embed-adaptive-form",
+        "account-menu",
+        "auth-redirect"
+      ]
+    }
+  ]
+}
