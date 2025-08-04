@@ -9,8 +9,7 @@ export const createProgressBar = () => {
   const bar = document.createElement('span')
   const title = document.createElement('span')
 
-  title.innerText = 'STEP 1 of 3'
-  title.classList.add('strap-title-small')
+  title.classList.add('progress-bar__title', 'strap-title-small')
 
   progressBar.append(title, bar)
 
@@ -24,11 +23,16 @@ export const createProgressBar = () => {
 
 export const trackProgress = () => {
   // Get steps length
-  // const wizard = document.querySelector('.wizard')
-  // const steps = wizard?.querySelectorAll(':scope > [data-index]')
+  const wizard = document.querySelector('.wizard')
+  const steps = wizard?.querySelectorAll(':scope > [data-index]')
   // Track where it is in the steps
   const currentWizard = document.querySelector('.current-wizard-step')
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
+  // Set title
+  const title = document.querySelector('.progress-bar__title') as HTMLElement
+  title.innerText = steps?.length
+    ? `STEP ${wizardIdx} of ${steps.length - 1}`
+    : 'STEP 1 of 3'
   // Progress bar element
   const progressBar = document.querySelector('.progress-bar')
   const bar = document.querySelector('.progress-bar__item') as HTMLElement
