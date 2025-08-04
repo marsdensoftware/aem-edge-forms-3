@@ -700,6 +700,7 @@ async function loadSection(section, loadCallback) {
       await loadBlock(blocks[i]);
     }
     if (loadCallback) await loadCallback(section);
+    injectBootstrapClasses(section);
     section.dataset.sectionStatus = 'loaded';
     section.style.display = null;
   }
@@ -715,8 +716,7 @@ function hasBootstrapClass(e) {
   return false;
 }
 
-async function injectBootstrapClasses(section) {
-  console.log('checking whether to inject bootstrap classes on', section);
+function injectBootstrapClasses(section) {
   // TODO handle nested blocks and components inside blocks
 
   let hasBootstrapGrandchild = false;
@@ -753,7 +753,7 @@ async function loadSections(element) {
   const sections = [...element.querySelectorAll('div.section')];
   for (let i = 0; i < sections.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
-    await loadSection(sections[i], injectBootstrapClasses);
+    await loadSection(sections[i]);
     if (i === 0 && sampleRUM.enhance) {
       sampleRUM.enhance();
     }
