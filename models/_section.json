@@ -35,6 +35,21 @@
               "value": "highlight"
             }
           ]
+        },
+        {
+          "component": "multiselect",
+          "name": "grid",
+          "label": "Grid",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../models/_responsive-columns-options.json"
+            }
+          ]
+        },
+        {
+          "...": "../models/_responsive-container-component.json"
         }
       ]
     }

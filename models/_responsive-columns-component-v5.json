@@ -1,0 +1,13 @@
+{
+  "component": "multiselect",
+  "name": "classes",
+  "value": "",
+  "label": "Grid settings",
+  "description": "Choose where you want the component to be placed.",
+  "valueType": "string",
+  "options": [
+    {
+      "...": "../models/_responsive-columns-options.json"
+    }
+  ]
+}
