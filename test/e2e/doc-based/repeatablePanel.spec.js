@@ -20,8 +20,8 @@ test.describe('Repeatability test in Doc-based forms', () => {
       await expect(panel.nth(i)).toBeVisible();
     }
     await expect(addButton).toBeHidden();
-    await expect(deleteButton).toBeVisible();
-    await deleteButton.click();
+    await expect((deleteButton).last()).toBeVisible();
+    await deleteButton.last().click();
     await expect(addButton).toBeVisible();
     await expect(panel).toHaveCount(1);
   });
