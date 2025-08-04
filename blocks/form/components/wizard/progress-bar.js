@@ -14,6 +14,10 @@ export const createProgressBar = () => {
     // const wizardFooter = document.querySelector('.wizard-button-wrapper')
     body === null || body === void 0 ? void 0 : body.append(progressBar);
 };
+const progressLength = (stepsLength) => {
+    const result = 100 / stepsLength;
+    return result;
+};
 export const trackProgress = () => {
     // Get steps length
     const wizard = document.querySelector('.wizard');
@@ -23,12 +27,12 @@ export const trackProgress = () => {
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
     // Set title
     const title = document.querySelector('.progress-bar__title');
-    title.innerText = (steps === null || steps === void 0 ? void 0 : steps.length)
-        ? `STEP ${wizardIdx} of ${steps.length - 1}`
-        : 'STEP 1 of 3';
+    const stepsLength = (steps === null || steps === void 0 ? void 0 : steps.length) ? steps.length - 1 : 0;
+    title.innerText = `STEP ${wizardIdx} of ${stepsLength}`;
     // Progress bar element
     const progressBar = document.querySelector('.progress-bar');
     const bar = document.querySelector('.progress-bar__item');
+    const inc = progressLength(stepsLength);
     // Reset progress bar state
     if (wizardIdx === 0) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');
@@ -41,11 +45,11 @@ export const trackProgress = () => {
     // Tracking current step
     if (currentStep < wizardIdx) {
         currentStep += 1;
-        increment += 1;
+        increment += inc;
     }
     else if (currentStep > wizardIdx) {
         currentStep -= 1;
-        increment -= 1;
+        increment -= inc;
     }
     bar.style = `width: ${initialState + increment}%;`;
 };

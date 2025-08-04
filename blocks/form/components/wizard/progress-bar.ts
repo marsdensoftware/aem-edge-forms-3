@@ -21,6 +21,11 @@ export const createProgressBar = () => {
   body?.append(progressBar)
 }
 
+const progressLength = (stepsLength: number): number => {
+  const result = 100 / stepsLength
+  return result
+}
+
 export const trackProgress = () => {
   // Get steps length
   const wizard = document.querySelector('.wizard')
@@ -30,12 +35,14 @@ export const trackProgress = () => {
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
   // Set title
   const title = document.querySelector('.progress-bar__title') as HTMLElement
-  title.innerText = steps?.length
-    ? `STEP ${wizardIdx} of ${steps.length - 1}`
-    : 'STEP 1 of 3'
+  const stepsLength = steps?.length ? steps.length - 1 : 0
+  title.innerText = `STEP ${wizardIdx} of ${stepsLength}`
+
   // Progress bar element
   const progressBar = document.querySelector('.progress-bar')
   const bar = document.querySelector('.progress-bar__item') as HTMLElement
+
+  const inc = progressLength(stepsLength)
 
   // Reset progress bar state
   if (wizardIdx === 0) {
@@ -48,10 +55,10 @@ export const trackProgress = () => {
   // Tracking current step
   if (currentStep < wizardIdx) {
     currentStep += 1
-    increment += 1
+    increment += inc
   } else if (currentStep > wizardIdx) {
     currentStep -= 1
-    increment -= 1
+    increment -= inc
   }
 
   bar.style = `width: ${initialState + increment}%;`
