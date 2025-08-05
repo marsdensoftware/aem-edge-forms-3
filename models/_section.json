@@ -26,15 +26,38 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "multiselect",
+          "component": "select",
           "name": "style",
           "label": "Style",
           "options": [
             {
-              "name": "Highlight",
-              "value": "highlight"
+              "name": "None",
+              "value": ""
+            },
+            {
+              "name": "Bootstrap container",
+              "value": "container"
+            },
+            {
+              "name": "Bootstrap fluid container",
+              "value": "container-fluid"
             }
           ]
+        },
+        {
+          "component": "multiselect",
+          "name": "grid",
+          "label": "Grid",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../models/_responsive-columns-options.json"
+            }
+          ]
+        },
+        {
+          "...": "../models/_responsive-container-component.json"
         }
       ]
     }
@@ -56,7 +79,8 @@
         "form",
         "embed-adaptive-form",
         "account-menu",
-        "auth-redirect"
+        "auth-redirect",
+        "grid-test-block"
       ]
     }
   ]
