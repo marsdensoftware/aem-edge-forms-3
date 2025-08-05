@@ -1,10 +1,37 @@
 @use '../../../../styles/settings' as *;
 
+.form dialog {
+  .close-button{
+    display: none;
+  }
+  
+  fieldset[name="button-wrapper"] {
+    display: flex;
+    button {
+      @extend %button;
+
+      &[name="btnYes"],
+      &[name="btnNo"] {
+
+        @include elevation-1;
+      }
+
+      &[name="btnNo"] {
+        @extend %button--primary;
+      }
+
+      &[name="btnYes"] {
+        @extend %button--hollow;
+      }
+    }
+  }
+}
+
 .form .panel-repeatable-panel {
   &[data-max='1'] button.item-add {
     display: none;
   }
-
+  
   .repeatable-entries {
     .repeatable-entry {
       padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
@@ -137,6 +164,12 @@
 
   [data-repeatable] {
     display: none;
+    
+    .btn-delete {
+      @extend %button;
+      @extend %button--hollow;
+      display: none;
+    }
 
     &.saved {
       .btn-delete {
@@ -157,12 +190,6 @@
       .btn-cancel {
         @extend %button;
         @extend %button--hollow;
-      }
-
-      .btn-delete {
-        @extend %button;
-        @extend %button--hollow;
-        display: none;
       }
 
       .btn-save,

@@ -29,14 +29,12 @@ class RepeatModal extends Modal {
     // Register events on yes no buttons if any
     const btnYes = panelEl.querySelector('button[name="btnYes"]');
     btnYes?.addEventListener('click', () => {
-      alert('Yes');
       this?._yesCallback();
       this.hideModal();
     });
 
     const btnNo = panelEl.querySelector('button[name="btnNo"]');
     btnNo?.addEventListener('click', () => {
-      alert('No');
       this?._noCallback();
       this.hideModal();
     });
@@ -52,10 +50,10 @@ export class RepeatablePanel {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
-    this._cancelModal = this._initModal(cancelModalEl, this._cancelEditing.bind(this), this._continueEditing.bind(this));
+    this._cancelModal = this._initModal(cancelModalEl, this._yesCancel.bind(this), this._noCancel.bind(this));
 
     const deleteModalEl = el.querySelector('fieldset[name="deleteModal"]');
-    this._deleteModal = this._initModal(deleteModalEl, this._cancelDeleting.bind(this), this._continueDeleting.bind(this));
+    this._deleteModal = this._initModal(deleteModalEl, this._yesDelete.bind(this), this._noDelete.bind(this));
     this._name = name;
 
     if (!this._repeatablePanel) {
@@ -129,7 +127,7 @@ export class RepeatablePanel {
     }
   }
 
-  _cancelEditing(entry) {
+  _yesCancel(entry) {
     const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
     this._resetChanges(currentEntry);
     this._toggleEditMode(currentEntry, false);
@@ -140,16 +138,25 @@ export class RepeatablePanel {
     }
   }
 
-  _continueEditing() {
+  _noCancel() {
 
   }
 
-  _cancelDeleting() {
+  _yesDelete(entry) {
+    const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
 
+    alert('Yes button from delete modal');
+    this._toggleEditMode(currentEntry, false);
+
+    if (!this._isFirstEntry(currentEntry)) {
+      // Unsaved and not first one --> Delete
+      this.#triggerDeletion(entry);
+    }
+    this._renderOverview();
   }
 
-  _continueDeleting() {
-
+  _noDelete() {
+    alert('No button from delete modal');
   }
 
   _init(entry) {
@@ -251,10 +258,10 @@ export class RepeatablePanel {
 
     cancelBtn.addEventListener('click', () => {
       if (this._hasChanges(entry)) {
-        this._cancelModal?.showModal();
+        this._cancelModal ? this._cancelModal.showModal() : this._yesCancel(entry);
       }
       else {
-        this._cancelEditing(entry);
+        this._yesCancel(entry);
       }
     });
 
@@ -263,16 +270,7 @@ export class RepeatablePanel {
     deleteBtn.classList.add('btn-delete', 'link');
 
     deleteBtn.addEventListener('click', () => {
-
-      this._toggleEditMode(entry, false);
-      this._resetChanges(entry);
-
-      if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
-        // Unsaved and not first one --> Delete
-        this.#triggerDeletion(entry);
-      }
-      this._renderOverview();
-
+      this._deleteModal ? this._deleteModal.showModal() : this._yesDelete(entry);
     });
 
     buttonBar.appendChild(cancelBtn);
@@ -438,33 +436,6 @@ export class RepeatablePanel {
       e.preventDefault();
     });
 
-    const deleteLink = document.createElement('a');
-    deleteLink.classList.add('repeatable-entry__delete');
-    deleteLink.textContent = 'Delete';
-    deleteLink.href = '#';
-    //result.append(deleteLink);
-
-    // TODO Implement deletion
-    deleteLink.addEventListener('click', (e) => {
-      alert('Coming soon...');
-      /*
-      if (this._isFirstEntry(entry)) {
-          // First one --> Remove from overview
-          result.remove();
-          // Clear changes
-          this.#clearFields(entry);
-          // Remove saved flag
-          entry.classList.remove('saved');
-          this._renderOverview();
-      }
-      else {
-          this.#triggerDeletion(entry);
-      }
-      */
-
-      e.preventDefault();
-    });
-
     readable.forEach(r => {
       result.append(r);
     });
@@ -586,10 +557,10 @@ export class ConditionalRepeatable extends RepeatablePanel {
       this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
     }
   }
-  
-  _cancelEditing(entry){
-    super._cancelEditing(entry);
-    
+
+  _yesCancel(entry) {
+    super._yesCancel(entry);
+
     this._updateCondition();
   }
 
