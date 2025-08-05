@@ -174,6 +174,27 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
    }
  };
 
+ const setupWizardCloseButtonListener = () => {
+   // find the wizard
+   const wizardPanel = fieldDiv.closest('.wizard');
+   if (!wizardPanel) return;
+
+   //get the wizard-button-wrapper
+   const wizardButtonWrapper = wizardPanel.querySelector('.wizard-button-wrapper');
+   if (!wizardButtonWrapper) return;
+
+   //attach a listener to the wizard-button-next and wizard-button-prev so we hide the toast when they are clicked
+   wizardButtonWrapper.addEventListener('click', (event) => {
+     const target = event.target as HTMLElement;
+     if (target.id === 'wizard-button-next' || target.id === 'wizard-button-prev') {
+       if (toastElement) {
+         toastElement.classList.add('checkbox-toast--hidden');
+       }
+     }
+   });
+
+ };
+
  // Set up a MutationObserver to detect when a checkbox is added to this container
  const observer = new MutationObserver((mutations) => {
    mutations.forEach((mutation) => {
@@ -205,6 +226,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
  // Use setTimeout to ensure all checkboxes are rendered
  setTimeout(() => {
    setupCheckboxListeners();
+   setupWizardCloseButtonListener();
  }, 500);
 
  return fieldDiv;
