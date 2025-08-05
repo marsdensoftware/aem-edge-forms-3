@@ -10831,6 +10831,13 @@
         ]
       },
       {
+        "component": "text",
+        "name": "stepgroup",
+        "label": "Step group",
+        "valueType": "string",
+        "value": "1"
+      },
+      {
         "component": "container",
         "name": "responsive-container",
         "label": "Responsive Container",
