@@ -1,4 +1,8 @@
 .link-with-icon {
+  &.no-icon .icon {
+    display: none;
+  }
+
   >div:nth-child(3) {
     display: none;
   }
