@@ -10,6 +10,7 @@
     "components": [
       "text",
       "typography",
+      "link-with-icon",
       "image",
       "button",
       "title",
@@ -56,6 +57,8 @@
   {
     "id": "column",
     "components": [
+      "typography",
+      "link-with-icon",
       "text",
       "image",
       "button",
@@ -104,10 +107,6 @@
       "icon-radio-group",
       "extended-checkbox-container"
     ]
-  },
-  {
-    "id": "iconwithtext",
-    "components": null
   },
   {
     "id": "jobseekerintro",
