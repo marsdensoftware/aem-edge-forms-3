@@ -7,7 +7,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: $spacing-400;
+  padding: $spacing-400 $spacing-400 $spacing-500;
   background-color: $bg-light-primary;
   z-index: 3;
   border-top: 1px solid $color-shade-navy-20;
@@ -16,10 +16,12 @@
 
   @include media('tablet') {
     max-height: $footer-height-tablet;
+    padding: $spacing-400 $spacing-400 $spacing-600;
   }
 
   @include media('desktop') {
     max-height: $footer-height-desktop;
+    padding: $spacing-450 $spacing-700 $spacing-600;
   }
 
   .wizard-button-next {
