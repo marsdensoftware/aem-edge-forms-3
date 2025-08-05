@@ -96,6 +96,42 @@
             "value": "buttonLink"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "linkSize",
+        "label": "Size",
+        "options": [
+          {
+            "name": "Small",
+            "value": ""
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "linkIcon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "select",
+        "name": "linkIconPosition",
+        "label": "Icon position",
+        "options": [
+          {
+            "name": "Left",
+            "value": ""
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
       }
     ]
   },
@@ -33839,46 +33875,6 @@
     ]
   },
   {
-    "id": "iconwithtext",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Logo",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Logo alt text",
-        "required": true
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "iconwithtextText_title",
-        "label": "Title",
-        "required": true
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "iconwithtextText_description",
-        "label": "Description",
-        "required": true
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "iconwithtextText2_description",
-        "label": "Description",
-        "required": true
-      }
-    ]
-  },
-  {
     "id": "jobseekerintro",
     "fields": [
       {
@@ -33908,6 +33904,68 @@
         "name": "jobseekerintroText_description",
         "label": "Description",
         "required": true
+      }
+    ]
+  },
+  {
+    "id": "link-with-icon",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon alt text",
+        "required": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Open link in new tab",
+        "name": "linkOpenInNewTab",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "value": "",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Small with icon on left",
+            "value": ""
+          },
+          {
+            "name": "Small with icon on right",
+            "value": "icon--right"
+          },
+          {
+            "name": "Large with icon on left",
+            "value": "large"
+          },
+          {
+            "name": "Large with icon on right",
+            "value": "large icon--right"
+          }
+        ]
       }
     ]
   },
@@ -33950,7 +34008,7 @@
       {
         "component": "richtext",
         "name": "text",
-        "value": "Typography",
+        "value": "Text",
         "label": "Text",
         "valueType": "string"
       }
