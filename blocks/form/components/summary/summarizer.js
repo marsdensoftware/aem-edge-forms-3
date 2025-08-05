@@ -183,8 +183,8 @@ export class Summarizer {
     static getNameValues(entry) {
         let nameValues = undefined;
         try {
-            nameValues = entry.dataset.data
-                ? JSON.parse(entry.dataset.data)
+            nameValues = entry.dataset.savedData
+                ? JSON.parse(entry.dataset.savedData)
                 : Summarizer.fieldToNameValues(entry);
         } catch (e) {
             nameValues = Summarizer.fieldToNameValues(entry);
@@ -263,7 +263,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `<{{summaryEntryTag}} class="row summary-entry">{{content}}</{{summaryEntryTag}}>`;
+    static itemContentTemplate = `<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -360,9 +360,24 @@ export class Summarizer {
         el.innerHTML = Summarizer.defaultSummarizer('panel_personal_summary', el, properties);
     }
 
-    static strengths(el, properties) {
-        el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_strengths', el, properties);
-    }
+  static strengths(el, properties) {
+    const form = el.closest('form');
+    const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
+
+    let strengthsContent = [];
+
+    extendedCheckboxes.forEach((e) => {
+      const container = e.closest('.extended-checkbox-container');
+      const content = Summarizer.getItemContent(container);
+      strengthsContent.push(content);
+    });
+
+    const description = properties['description'];
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
+    el.innerHTML = content;
+
+  }
 
     static experience(el, properties) {
         el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_work_experiences', el, properties);
