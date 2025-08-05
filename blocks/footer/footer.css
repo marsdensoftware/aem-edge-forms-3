@@ -1,7 +1,4 @@
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
-}
+
 
 footer .footer > div {
   margin: auto;
@@ -18,3 +15,4 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
+
