@@ -80,7 +80,8 @@
         "embed-adaptive-form",
         "account-menu",
         "auth-redirect",
-        "main-menu"
+        "main-menu",
+        "gridblock"
       ]
     }
   ]
