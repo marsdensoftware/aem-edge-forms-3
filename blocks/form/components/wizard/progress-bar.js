@@ -9,21 +9,23 @@ export const createProgressBar = () => {
     progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar', 'progress-bar--is-hidden');
     barEl = document.createElement('span');
+    const barContainer = document.createElement('span');
     const title = document.createElement('span');
     title.classList.add('progress-bar__title', 'strap-title-small');
-    progressBar.append(title, barEl);
+    barContainer.classList.add('progress-bar__container');
     barEl.classList.add('progress-bar__item');
     barEl.style = `width: ${initialState}%;`;
-    const body = document.querySelector('body');
-    // const wizardFooter = document.querySelector('.wizard-button-wrapper')
-    body === null || body === void 0 ? void 0 : body.append(progressBar);
+    barContainer.append(barEl);
+    progressBar.append(title, barContainer);
+    const wizardFooter = document.querySelector('.wizard-button-wrapper');
+    wizardFooter === null || wizardFooter === void 0 ? void 0 : wizardFooter.prepend(progressBar);
     // Get steps length
     const wizard = document.querySelector('.wizard');
     const steps = wizard === null || wizard === void 0 ? void 0 : wizard.querySelectorAll(':scope > [data-index]');
     if (!(steps === null || steps === void 0 ? void 0 : steps.length))
         return;
-    stepsLength = steps.length;
-    barLength = 100 / (stepsLength - 1);
+    stepsLength = steps.length - 1;
+    barLength = 100 / stepsLength;
 };
 export const trackProgress = () => {
     // Track where it is in the steps
@@ -31,7 +33,7 @@ export const trackProgress = () => {
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
     // Set title
     const title = document.querySelector('.progress-bar__title');
-    title.innerText = `STEP ${wizardIdx} of ${stepsLength}`;
+    title.innerHTML = `STEP <b>${wizardIdx}</b> of <b>${stepsLength}</b>`;
     // Reset progress bar state
     if (wizardIdx === 0) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');

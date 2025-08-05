@@ -2,11 +2,7 @@
 
 .progress-bar {
   padding: $spacing-400;
-  background-color: $color-shade-blue-25;
   width: 100%;
-  z-index: 4;
-  position: fixed;
-  bottom: 210px;
   border-radius: $border-radius-low;
 }
 
@@ -14,10 +10,24 @@
   display: none;
 }
 
+.progress-bar__title {
+  color: $text-secondary;
+}
+
+.progress-bar__container,
 .progress-bar__item {
-  content: '';
+  border-radius: $border-radius-low;
+}
+
+.progress-bar__container {
+  background-color: $color-shade-blue-25;
+  width: 100%;
+  display: block;
+  margin: $spacing-300 0 $spacing-400;
+}
+
+.progress-bar__item {
   background-color: $color-primary;
   display: block;
-  height: 40px;
-  border-radius: $border-radius-low;
+  height: 6px;
 }

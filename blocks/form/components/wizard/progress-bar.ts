@@ -8,29 +8,31 @@ let barEl: HTMLElement
 
 export const createProgressBar = () => {
   progressBar = document.createElement('div')
-
   progressBar.classList.add('progress-bar', 'progress-bar--is-hidden')
-  barEl = document.createElement('span')
-  const title = document.createElement('span')
 
+  barEl = document.createElement('span')
+  const barContainer = document.createElement('span')
+
+  const title = document.createElement('span')
   title.classList.add('progress-bar__title', 'strap-title-small')
 
-  progressBar.append(title, barEl)
-
+  barContainer.classList.add('progress-bar__container')
   barEl.classList.add('progress-bar__item')
   barEl.style = `width: ${initialState}%;`
 
-  const body = document.querySelector('body')
-  // const wizardFooter = document.querySelector('.wizard-button-wrapper')
-  body?.append(progressBar)
+  barContainer.append(barEl)
+  progressBar.append(title, barContainer)
+
+  const wizardFooter = document.querySelector('.wizard-button-wrapper')
+  wizardFooter?.prepend(progressBar)
 
   // Get steps length
   const wizard = document.querySelector('.wizard')
   const steps = wizard?.querySelectorAll(':scope > [data-index]')
 
   if (!steps?.length) return
-  stepsLength = steps.length
-  barLength = 100 / (stepsLength - 1)
+  stepsLength = steps.length - 1
+  barLength = 100 / stepsLength
 }
 
 export const trackProgress = () => {
@@ -39,7 +41,7 @@ export const trackProgress = () => {
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
   // Set title
   const title = document.querySelector('.progress-bar__title') as HTMLElement
-  title.innerText = `STEP ${wizardIdx} of ${stepsLength}`
+  title.innerHTML = `STEP <b>${wizardIdx}</b> of <b>${stepsLength}</b>`
 
   // Reset progress bar state
   if (wizardIdx === 0) {
