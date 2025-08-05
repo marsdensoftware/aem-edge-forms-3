@@ -7,24 +7,26 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: $spacing-400;
+  padding: $spacing-400 $spacing-400 $spacing-500;
   background-color: $bg-light-primary;
   z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  gap: $spacing-300;
   border-top: 1px solid $color-shade-navy-20;
+  display: grid;
+  grid-template-areas: 'left . right';
 
   @include media('tablet') {
     max-height: $footer-height-tablet;
+    padding: $spacing-400 $spacing-400 $spacing-600;
   }
 
   @include media('desktop') {
     max-height: $footer-height-desktop;
+    padding: $spacing-450 $spacing-700 $spacing-600;
   }
 
   .wizard-button-next {
     margin-left: auto;
+    grid-area: right;
   }
 
   .button[name='next'],
@@ -58,11 +60,27 @@
   .button[name='back'] {
     @extend %button;
     @extend %button--hollow;
+    grid-area: left;
 
     &::before {
       background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
       margin-right: 8px;
     }
+  }
+}
+
+.wizard-button-wrapper--progress-start {
+  max-height: $footer-height-progress-start;
+  grid-template-areas:
+    'header header header'
+    'left . right';
+
+  @include media('tablet') {
+    max-height: $footer-height-tablet-progress-start;
+  }
+
+  @include media('desktop') {
+    max-height: $footer-height-desktop-progress-start;
   }
 }
 
