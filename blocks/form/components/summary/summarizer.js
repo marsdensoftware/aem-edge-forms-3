@@ -263,7 +263,7 @@ export class Summarizer {
     </div>
     `;
 
-    static itemContentTemplate = `<{{summaryEntryTag}} class="row summary-entry">{{content}}</{{summaryEntryTag}}>`;
+    static itemContentTemplate = `<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>`;
 
     static replace(template, params) {
         return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
