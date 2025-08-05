@@ -5,25 +5,26 @@ let stepsLength = 0
 let barLength = 0
 let progressBar: HTMLElement
 let barEl: HTMLElement
+let wizardFooter: HTMLElement | null
 
 export const createProgressBar = () => {
   progressBar = document.createElement('div')
   progressBar.classList.add('progress-bar', 'progress-bar--is-hidden')
-
+  // Container and element colour
   barEl = document.createElement('span')
   const barContainer = document.createElement('span')
-
+  // Step title
   const title = document.createElement('span')
   title.classList.add('progress-bar__title', 'strap-title-small')
 
   barContainer.classList.add('progress-bar__container')
   barEl.classList.add('progress-bar__item')
   barEl.style = `width: ${initialState}%;`
-
+  // Add into progress bar
   barContainer.append(barEl)
   progressBar.append(title, barContainer)
-
-  const wizardFooter = document.querySelector('.wizard-button-wrapper')
+  // Add into footer
+  wizardFooter = document.querySelector('.wizard-button-wrapper')
   wizardFooter?.prepend(progressBar)
 
   // Get steps length
@@ -31,7 +32,7 @@ export const createProgressBar = () => {
   const steps = wizard?.querySelectorAll(':scope > [data-index]')
 
   if (!steps?.length) return
-  stepsLength = steps.length - 1
+  stepsLength = steps.length - 2 // Exclude first two steps from the journey
   barLength = 100 / stepsLength
 }
 
@@ -44,13 +45,20 @@ export const trackProgress = () => {
   title.innerHTML = `STEP <b>${wizardIdx}</b> of <b>${stepsLength}</b>`
 
   // Reset progress bar state
-  if (wizardIdx === 0) {
+  if (wizardIdx === 0 || wizardIdx === 1) {
     progressBar?.classList.add('progress-bar--is-hidden')
     currentStep = 0
     increment = 0
   } else {
     progressBar?.classList.remove('progress-bar--is-hidden')
   }
+
+  if (wizardIdx > 1) {
+    wizardFooter?.classList.add('wizard-button-wrapper--progress-start')
+  } else {
+    wizardFooter?.classList.remove('wizard-button-wrapper--progress-start')
+  }
+
   // Tracking current step
   if (currentStep < wizardIdx) {
     currentStep += 1

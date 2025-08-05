@@ -124,7 +124,7 @@ export class RepeatablePanel {
         }
         if (visible) {
             // show wizard buttons
-            wizardButtonWrapper.style.display = 'flex';
+            wizardButtonWrapper.style.display = 'grid';
         }
         else {
             // hide wizard buttons
