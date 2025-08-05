@@ -48,6 +48,12 @@
                 },
                 {
                     "component": "text",
+                    "label": "ID",
+                    "name": "id",
+                    "valueType": "string"
+                },
+                {
+                    "component": "text",
                     "name": "linkText",
                     "label": "Link text",
                     "valueType": "string"
