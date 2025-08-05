@@ -35681,7 +35681,7 @@
     ]
   },
   {
-    "id": "gridblock",
+    "id": "grid-test-block",
     "fields": [
       {
         "component": "text",
