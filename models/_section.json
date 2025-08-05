@@ -68,6 +68,7 @@
       "components": [
         "text",
         "typography",
+        "link-with-icon",
         "image",
         "button",
         "title",

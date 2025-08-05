@@ -47,7 +47,14 @@
     },
     {
       "id": "column",
-      "components": ["text", "image", "button", "title"]
+      "components": [
+        "typography",
+        "link-with-icon",
+        "text",
+        "image",
+        "button",
+        "title"
+      ]
     }
   ]
 }

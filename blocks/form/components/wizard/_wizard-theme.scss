@@ -5,67 +5,48 @@ main {
 
   &.wizard--bg-dark {
     background: linear-gradient(
-      135deg,
-      $color-accent 25%,
-      $color-primary-navy 100%
+                    135deg,
+                    $color-accent 25%,
+                    $color-primary-navy 100%
     );
-
-    &::before {
-      @include media('tablet') {
-        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
-        background-position: top right;
-      }
-
-      @include media('desktop') {
-        background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
-        background-position: bottom left;
-      }
-    }
   }
 
   &.wizard--bg-mid {
     background: linear-gradient(
-      135deg,
-      $color-shade-blue-10 25%,
-      $color-shade-blue-25 100%
+                    135deg,
+                    $color-shade-blue-10 25%,
+                    $color-shade-blue-25 100%
     );
   }
 
-  &.wizard--bg-dark,
-  &.wizard--bg-mid,
   &.wizard--bg-light {
+    background: $color-shade-blue-04;
+  }
+
+  &.wizard--bg-dark,
+  &.wizard--bg-mid {
     &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 360px;
+      height: 388px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
+
       @include media('tablet') {
-        content: '';
-        position: absolute;
-        display: block;
-        top: 0;
+        top: 90px;
         right: 0;
-        width: 360px;
-        height: 388px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        z-index: 0;
+        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
+        background-position: top right;
       }
 
       @include media('desktop') {
         top: auto;
         right: auto;
         left: 0;
-        bottom: 0;
-      }
-    }
-  }
-
-  &.wizard--bg-dark,
-  &.wizard--bg-mid {
-    &::before {
-      @include media('tablet') {
-        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
-        background-position: top right;
-      }
-
-      @include media('desktop') {
+        bottom: 90px;
         background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
         background-position: bottom left;
       }
@@ -73,13 +54,28 @@ main {
   }
 
   &.wizard--bg-light {
-    background: $color-shade-blue-04;
-
     &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 360px;
+      height: 388px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
+
+      @include media('tablet') {
+        top: 122px;
+        right: 0;
+      }
+
       @include media('desktop') {
+        top: 122px;
+        right: 0;
+        bottom: auto;
+        left: auto;
         background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
-        background-position: left bottom;
-        transform: rotate(180deg);
+        background-position: top right;
       }
     }
   }
