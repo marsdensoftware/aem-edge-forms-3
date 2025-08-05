@@ -66,7 +66,8 @@
 .drop-down-wrapper {
   position: relative;
   display: inline-block;
-  width: 100%;
+  /*width: 100%; made auto for grid system */
+  width: auto;
 
   label {
     @extend %label-common-style;
