@@ -3,7 +3,8 @@
     display: none;
   }
 
-  >div:nth-child(3) {
+  >div:nth-child(3),
+  >div:nth-child(4) {
     display: none;
   }
 }
