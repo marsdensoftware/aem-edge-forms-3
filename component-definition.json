@@ -160,6 +160,20 @@
           }
         },
         {
+          "title": "Container Section",
+          "id": "container-section",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "model": "container-section"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Embed Adaptive Form",
           "id": "embed-adaptive-form",
           "plugins": {
