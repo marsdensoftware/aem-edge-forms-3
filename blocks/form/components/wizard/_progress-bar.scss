@@ -21,8 +21,10 @@
 
 .progress-bar__container {
   background-color: $color-shade-blue-25;
-  width: 100%;
-  display: block;
+  width: 33.33%;
+  display: flex;
+  gap: $spacing-100 0;
+  flex-wrap: wrap;
   margin: $spacing-300 0 $spacing-400;
 }
 
