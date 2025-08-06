@@ -1593,6 +1593,72 @@
                     "hideTitle": true,
                     "required": true
                   },
+                  "cancelModal": {
+                    "fieldType": "panel",
+                    "name": "cancelModal",
+                    "jcr:title": "Cancel this work experience?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>If you cancel now these changes will be lost</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "keep adding work experience"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Lose changes"
+                      }
+                    }
+                  },
+                  "deleteModal": {
+                    "fieldType": "panel",
+                    "name": "deleteModal",
+                    "jcr:title": "Delete this work experience?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>Are you sure you want to remove this from your profile?</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "Cancel"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Delete"
+                      }
+                    }
+                  },
                   "repeatable-panel": {
                     "hideTitle": true,
                     "fieldType": "panel",
