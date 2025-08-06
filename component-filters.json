@@ -67,6 +67,10 @@
     ]
   },
   {
+    "id": "container-section",
+    "components": []
+  },
+  {
     "id": "form",
     "components": [
       "captcha",

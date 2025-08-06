@@ -1,0 +1,48 @@
+{
+  "definitions": [
+    {
+      "title": "Container Section",
+      "id": "container-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "model": "container-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "container-section",
+      "fields": [
+        {
+          "component": "text",
+          "name": "name",
+          "label": "Section Name",
+          "description": "The label shown for this section in the Content Tree"
+        },
+        {
+          "component": "select",
+          "name": "Style",
+          "label": "Container Type",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../../models/_responsive-container-class-component.json"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "container-section",
+      "components": []
+    }
+  ]
+}
