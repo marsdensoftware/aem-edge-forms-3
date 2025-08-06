@@ -180,6 +180,9 @@ function createFieldSet(fd) {
     if (fd.properties?.panelrole) {
       wrapper.classList.add(fd.properties.panelrole);
     }
+    if (fd.properties?.stepgroup) {
+      wrapper.dataset.stepgroup = fd.properties.stepgroup;
+    }
     //###GKW END
   }
   if (fd.repeatable === true) {
