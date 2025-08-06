@@ -26,7 +26,15 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "...": "../models/_responsive-container-class-component.json"
+          "component": "select",
+          "name": "container",
+          "label": "Container Type",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../models/_responsive-container-class-component.json"
+            }
+          ]
         }
       ]
     }
