@@ -112,11 +112,7 @@
     ]
   },
   {
-    "id": "grid-test-block",
-    "components": null
-  },
-  {
-    "id": "col-test-block",
+    "id": "grid-col-block",
     "components": null
   },
   {
