@@ -87,6 +87,13 @@
           ]
         },
         {
+          "component": "text",
+          "name": "stepgroup",
+          "label": "Step group",
+          "valueType": "string",
+          "value": "1"
+        },
+        {
           "...": "../form-common/_responsive-container-component.json"
         },
         {
