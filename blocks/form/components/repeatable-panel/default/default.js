@@ -145,13 +145,16 @@ export class RepeatablePanel {
   _yesDelete(entry) {
     const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
 
-    alert('Yes button from delete modal');
-    this._toggleEditMode(currentEntry, false);
-
-    if (!this._isFirstEntry(currentEntry)) {
-      // Unsaved and not first one --> Delete
-      this.#triggerDeletion(entry);
+    if (this._isFirstEntry(currentEntry)) {
+      this._clearFields(currentEntry);
+      this._toggleEditMode(currentEntry, false);
+      // Remove saved flag
+      currentEntry.classList.remove('saved');
     }
+    else {
+      this.#triggerDeletion(currentEntry);
+    }
+
     this._renderOverview();
   }
 

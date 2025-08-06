@@ -5,7 +5,7 @@
     display: none;
   }
   
-  fieldset[name="button-wrapper"] {
+  fieldset[name="buttons-wrapper"] {
     display: flex;
     button {
       @extend %button;
