@@ -1746,7 +1746,8 @@
         "component": "text",
         "name": "name",
         "label": "Section Name",
-        "description": "The label shown for this section in the Content Tree"
+        "description": "The label shown for this section in the Content Tree",
+        "value": "Container Section"
       },
       {
         "component": "select",
