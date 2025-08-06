@@ -111,7 +111,10 @@
       "extended-checkbox-container"
     ]
   },
-  "grid-test-block",
+  {
+    "id": "grid-test-block",
+    "components": null
+  },
   {
     "id": "jobseekerintro",
     "components": null
