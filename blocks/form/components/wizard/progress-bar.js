@@ -25,21 +25,13 @@ const groupLength = (wizardEl) => {
         totalSteps,
     };
 };
-export const createProgressBar = () => {
-    progressBar = document.createElement('div');
-    progressBar.classList.add('progress-bar', 'progress-bar--is-hidden');
-    // Container and element colour
+const createProgressBarElements = () => {
     barEl1 = document.createElement('span');
     barEl2 = document.createElement('span');
     barEl3 = document.createElement('span');
     const barContainer = document.createElement('span');
     const barContainer2 = document.createElement('span');
     const barContainer3 = document.createElement('span');
-    const progressBarInner = document.createElement('div');
-    progressBarInner.classList.add('progress-bar__inner');
-    // Step title
-    const title = document.createElement('span');
-    title.classList.add('progress-bar__title', 'strap-title-small');
     barContainer.classList.add('progress-bar__container');
     barContainer2.classList.add('progress-bar__container');
     barContainer3.classList.add('progress-bar__container');
@@ -47,13 +39,29 @@ export const createProgressBar = () => {
     barEl2.classList.add('progress-bar__item');
     barEl3.classList.add('progress-bar__item');
     barEl1.style = `width: ${initialState}%;`;
-    // Add into progress bar
     barContainer.append(barEl1);
     barContainer2.append(barEl2);
     barContainer3.append(barEl3);
+    return {
+        barContainer,
+        barContainer2,
+        barContainer3,
+    };
+};
+export const createProgressBar = () => {
+    progressBar = document.createElement('div');
+    progressBar.classList.add('progress-bar', 'progress-bar--is-hidden');
+    // Container
+    const progressBarInner = document.createElement('div');
+    progressBarInner.classList.add('progress-bar__inner');
+    // Step title
+    const title = document.createElement('span');
+    title.classList.add('progress-bar__title', 'strap-title-small');
+    // Added into progress bar
+    const { barContainer, barContainer2, barContainer3 } = createProgressBarElements();
     progressBarInner.append(barContainer, barContainer2, barContainer3);
     progressBar.append(title, progressBarInner);
-    // Add into footer
+    // Added into footer
     wizardFooter = document.querySelector('.wizard-button-wrapper');
     if (!wizardFooter) {
         throw new Error('Can not find wizard footer element');
@@ -61,8 +69,9 @@ export const createProgressBar = () => {
     wizardFooter.prepend(progressBar);
     // Get steps length
     wizard = document.querySelector('.wizard');
-    if (!wizard)
-        return;
+    if (!wizard) {
+        throw new Error('Can not find wizard element');
+    }
     const { step1GroupLength, step2GroupLength, step3GroupLength } = groupLength(wizard);
     barLength = 100 / step1GroupLength;
     barLength2 = 100 / step2GroupLength;
