@@ -35833,6 +35833,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "Name",
+        "value": "",
+        "label": "Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "Some text",
         "value": "",
         "label": "Some Text"
