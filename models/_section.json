@@ -81,7 +81,8 @@
         "account-menu",
         "auth-redirect",
         "main-menu",
-        "grid-test-block"
+        "grid-test-block",
+        "col-test-item"
       ]
     }
   ]

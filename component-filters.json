@@ -23,7 +23,8 @@
       "account-menu",
       "auth-redirect",
       "main-menu",
-      "grid-test-block"
+      "grid-test-block",
+      "col-test-item"
     ]
   },
   {
@@ -51,7 +52,7 @@
     ]
   },
   {
-    "id": "col-test-block",
+    "id": "col-test-item",
     "components": null
   },
   {
