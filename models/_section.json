@@ -27,7 +27,7 @@
         },
         {
           "component": "select",
-          "name": "style",
+          "name": "Style",
           "label": "Container Type",
           "valueType": "string",
           "options": [
