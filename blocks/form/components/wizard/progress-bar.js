@@ -1,4 +1,3 @@
-const initialState = 0;
 let increment = 0;
 let increment2 = 0;
 let increment3 = 0;
@@ -12,17 +11,27 @@ let barEl2;
 let barEl3;
 let wizard;
 let wizardFooter;
-const groupLength = (wizardEl) => {
+let text;
+const groupingSteps = (wizardEl) => {
     // Check how many step groups available
-    const step1Group = wizardEl === null || wizardEl === void 0 ? void 0 : wizardEl.querySelectorAll(':scope > [data-stepgroup="1"]');
-    const step2Group = wizardEl === null || wizardEl === void 0 ? void 0 : wizardEl.querySelectorAll(':scope > [data-stepgroup="2"]');
-    const step3Group = wizardEl === null || wizardEl === void 0 ? void 0 : wizardEl.querySelectorAll(':scope > [data-stepgroup="3"]');
-    const totalSteps = step1Group.length + step2Group.length + step3Group.length;
+    const stepsGroup = wizardEl === null || wizardEl === void 0 ? void 0 : wizardEl.querySelectorAll(':scope > [data-stepgroup]');
+    // Grouped all steps that are in the same group
+    const grouped = {};
+    stepsGroup.forEach((step) => {
+        const groupVal = step.getAttribute('data-stepgroup');
+        if (!groupVal) {
+            throw new Error('No step group');
+        }
+        const numberValue = Number(groupVal);
+        if (!grouped[numberValue]) {
+            grouped[numberValue] = [];
+        }
+        grouped[numberValue].push(step);
+    });
     return {
-        step1GroupLength: step1Group.length,
-        step2GroupLength: step2Group.length,
-        step3GroupLength: step3Group.length,
-        totalSteps,
+        step1GroupLength: grouped[1].length,
+        step2GroupLength: grouped[2].length,
+        step3GroupLength: grouped[3].length,
     };
 };
 const createProgressBarElements = () => {
@@ -38,7 +47,6 @@ const createProgressBarElements = () => {
     barEl1.classList.add('progress-bar__item');
     barEl2.classList.add('progress-bar__item');
     barEl3.classList.add('progress-bar__item');
-    barEl1.style = `width: ${initialState}%;`;
     barContainer.append(barEl1);
     barContainer2.append(barEl2);
     barContainer3.append(barEl3);
@@ -72,7 +80,9 @@ export const createProgressBar = () => {
     if (!wizard) {
         throw new Error('Can not find wizard element');
     }
-    const { step1GroupLength, step2GroupLength, step3GroupLength } = groupLength(wizard);
+    // Grab the title element
+    text = document.querySelector('.progress-bar__title');
+    const { step1GroupLength, step2GroupLength, step3GroupLength } = groupingSteps(wizard);
     barLength = 100 / step1GroupLength;
     barLength2 = 100 / step2GroupLength;
     barLength3 = 100 / step3GroupLength;
@@ -81,8 +91,6 @@ export const trackProgress = () => {
     // Track where it is in the steps
     const currentWizard = document.querySelector('.current-wizard-step');
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
-    // Set title
-    const title = document.querySelector('.progress-bar__title');
     // Reset progress bar state
     if (wizardIdx === 0 || wizardIdx === 1) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');
@@ -103,10 +111,9 @@ export const trackProgress = () => {
     if (wizardIdx === 0 || wizardIdx === 1)
         return;
     const currentStepGroupIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-stepgroup'));
-    title.innerHTML = `STEP <b>${currentStepGroupIdx}</b> of <b>3</b>`;
-    /**
-     * Set step for each group
-     */
+    // Set title
+    text.innerHTML = `STEP <b>${currentStepGroupIdx > 3 ? 3 : currentStepGroupIdx}</b> of <b>3</b>`;
+    // Set step for each group
     // First group
     if (currentStepGroupIdx === 1) {
         // First step
@@ -153,26 +160,30 @@ export const trackProgress = () => {
     // Setting colour and resetting step when
     // Switching between group
     if (currentStepGroupIdx > 1 && currentStep === 7) {
-        // Step one finished
+        // Group ONE finished
         increment = 100;
         barEl1.style = `width: ${increment}%; background-color: #388314;`;
     }
     else if (currentStepGroupIdx < 2 && currentStep === 6) {
+        // Last step on group ONE
         increment = 100;
         increment2 = 0;
         barEl1.style = `width: ${increment}%; background-color: #017AC9;`;
         barEl2.style = `width: ${increment2}%; background-color: #017AC9;`;
     }
     else if (currentStepGroupIdx < 3 && currentStep === 12) {
+        // Last step on group TWO
         increment2 = 100;
         increment3 = 0;
         barEl2.style = `width: ${increment2}%; background-color: #017AC9;`;
         barEl3.style = `width: ${increment3}%; background-color: #017AC9;`;
     }
+    // Group TWO finished
     if (currentStepGroupIdx > 2) {
         increment2 = 100;
         barEl2.style = `width: ${increment2}%; background-color: #388314;`;
     }
+    // Group THREE finished
     if (currentStepGroupIdx > 3) {
         increment3 = 100;
         barEl3.style = `width: ${increment3}%; background-color: #388314;`;
