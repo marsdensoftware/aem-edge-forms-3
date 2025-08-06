@@ -51,6 +51,10 @@
     ]
   },
   {
+    "id": "col-test-block",
+    "components": null
+  },
+  {
     "id": "columns",
     "components": [
       "column"
