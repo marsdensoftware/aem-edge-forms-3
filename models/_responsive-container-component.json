@@ -5,7 +5,15 @@
   "collapsible": true,
   "fields": [
     {
-      "...": "../models/_responsive-container-class-component.json"
+      "component": "select",
+      "name": "container",
+      "label": "Container Type",
+      "valueType": "string",
+      "options": [
+        {
+          "...": "../models/_responsive-container-class-component.json"
+        }
+      ]
     },
     {
       "component": "boolean",
