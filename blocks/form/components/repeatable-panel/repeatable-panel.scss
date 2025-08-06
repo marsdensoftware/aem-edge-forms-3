@@ -1,26 +1,69 @@
 @use '../../../../styles/settings' as *;
 
 .form dialog {
-  .close-button{
-    display: none;
+  width: 100%;
+  max-width: 744px;
+  border: none;
+  border-radius: $border-radius-mid;
+  padding: 0;
+  position: relative;
+
+  .modal-content {
+    background-color: $color-shade-blue-04;
+
+    > legend {
+      @include heading-level-4;
+      padding: $spacing-450;
+      color: $color-primary-navy;
+      font-weight: 700;
+      border-bottom: 2px solid $color-shade-navy-20;
+      background-color: $color-white;
+    }
+
+    .plain-text-wrapper {
+      padding: $spacing-450;
+
+      * {
+        font-size: $size-font-body-large;
+      }
+    }
+
+    .field-buttons-wrapper {
+      background-color: $color-white;
+      border-top: 2px solid $color-shade-navy-20;
+      padding: $spacing-450;
+      display: flex;
+      justify-content: space-between;
+    }
   }
-  
-  fieldset[name="buttons-wrapper"] {
+
+  .close-button {
+    right: $spacing-500;
+    top: $spacing-500;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-image: url('/icons/icon-x-dark.svg');
+    background-size: contain;
+    background-position: center;
+  }
+
+  fieldset[name='buttons-wrapper'] {
     display: flex;
+
     button {
       @extend %button;
 
-      &[name="btnYes"],
-      &[name="btnNo"] {
-
+      &[name='btnYes'],
+      &[name='btnNo'] {
         @include elevation-1;
       }
 
-      &[name="btnNo"] {
+      &[name='btnNo'] {
         @extend %button--primary;
       }
 
-      &[name="btnYes"] {
+      &[name='btnYes'] {
         @extend %button--hollow;
       }
     }
@@ -31,7 +74,7 @@
   &[data-max='1'] button.item-add {
     display: none;
   }
-  
+
   .repeatable-entries {
     .repeatable-entry {
       padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
@@ -130,12 +173,12 @@
   .field-wrapper:not([data-visible='false']) {
     color: $text-primary;
 
-    +.field-wrapper {
+    + .field-wrapper {
       margin-top: $spacing-600;
     }
   }
 
-  &[data-variant=addRemoveButtons] .item-remove {
+  &[data-variant='addRemoveButtons'] .item-remove {
     @extend %button;
     @extend %button--primary;
     display: none;
@@ -154,7 +197,6 @@
   }
 
   &.editing {
-
     .item-add,
     .repeatable-entry__edit,
     .repeatable-entry__delete {
@@ -164,7 +206,7 @@
 
   [data-repeatable] {
     display: none;
-    
+
     .btn-delete {
       @extend %button;
       @extend %button--hollow;
