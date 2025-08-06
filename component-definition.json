@@ -145,6 +145,22 @@
           }
         },
         {
+          "title": "Col Test Item",
+          "id": "col-test-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/item",
+                "template": {
+                  "name": "Col Test Item",
+                  "model": "col-test-item",
+                  "filter": "col-test-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {

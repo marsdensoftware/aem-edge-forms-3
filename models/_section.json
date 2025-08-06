@@ -80,7 +80,8 @@
         "embed-adaptive-form",
         "account-menu",
         "auth-redirect",
-        "grid-test-block"
+        "grid-test-block",
+        "col-test-item"
       ]
     }
   ]

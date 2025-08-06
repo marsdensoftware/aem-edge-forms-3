@@ -1,0 +1,50 @@
+{
+  "definitions": [
+    {
+      "title": "Col Test Item",
+      "id": "col-test-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/item",
+            "template": {
+              "name": "Col Test Item",
+              "model": "col-test-item",
+              "filter":  "col-test-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "col-test-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "Name",
+          "value": "",
+          "label": "Name"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "Some text",
+          "value": "",
+          "label": "Some Text"
+        },
+        {
+          "...": "../../models/_responsive-columns-component-v5.json"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "col-test-item",
+      "components": null
+    }
+  ]
+}
