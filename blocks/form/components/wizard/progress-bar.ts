@@ -123,7 +123,6 @@ export const trackProgress = () => {
     wizardFooter?.classList.remove('wizard-button-wrapper--progress-start')
   }
 
-  // debugger
   // Skipping first two steps
   if (wizardIdx === 0 || wizardIdx === 1) return
 
@@ -132,6 +131,10 @@ export const trackProgress = () => {
   )
   title.innerHTML = `STEP <b>${currentStepGroupIdx}</b> of <b>3</b>`
 
+  /**
+   * Set step for each group
+   */
+  // First group
   if (currentStepGroupIdx === 1) {
     // First step
     if (wizardIdx === 2) {
@@ -151,7 +154,7 @@ export const trackProgress = () => {
 
     barEl1.style = `width: ${increment}%; background-color: #017AC9;`
   }
-
+  // Second group
   if (currentStepGroupIdx === 2) {
     if (currentStep < wizardIdx) {
       currentStep += 1
@@ -163,7 +166,7 @@ export const trackProgress = () => {
 
     barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
   }
-
+  // Third group
   if (currentStepGroupIdx === 3) {
     if (currentStep < wizardIdx) {
       currentStep += 1
@@ -176,7 +179,8 @@ export const trackProgress = () => {
     barEl3.style = `width: ${increment3}%; background-color: #017AC9;`
   }
 
-  // Step one
+  // Setting colour and resetting step when
+  // Switching between group
   if (currentStepGroupIdx > 1 && currentStep === 7) {
     // Step one finished
     increment = 100
