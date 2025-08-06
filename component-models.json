@@ -1427,327 +1427,6 @@
     ]
   },
   {
-    "id": "col-test-block",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "Name",
-        "value": "",
-        "label": "Name"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "Some text",
-        "value": "",
-        "label": "Some Text"
-      },
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "value": "",
-        "label": "Grid settings",
-        "description": "Choose where you want the component to be placed.",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "offset-1",
-            "value": "offset-1"
-          },
-          {
-            "name": "offset-2",
-            "value": "offset-2"
-          },
-          {
-            "name": "offset-3",
-            "value": "offset-3"
-          },
-          {
-            "name": "offset-4",
-            "value": "offset-4"
-          },
-          {
-            "name": "offset-5",
-            "value": "offset-5"
-          },
-          {
-            "name": "offset-6",
-            "value": "offset-6"
-          },
-          {
-            "name": "offset-7",
-            "value": "offset-7"
-          },
-          {
-            "name": "offset-8",
-            "value": "offset-8"
-          },
-          {
-            "name": "offset-9",
-            "value": "offset-9"
-          },
-          {
-            "name": "offset-10",
-            "value": "offset-10"
-          },
-          {
-            "name": "offset-11",
-            "value": "offset-11"
-          },
-          {
-            "name": "offset-12",
-            "value": "offset-12"
-          },
-          {
-            "name": "offset-md-1",
-            "value": "offset-md-1"
-          },
-          {
-            "name": "offset-md-2",
-            "value": "offset-md-2"
-          },
-          {
-            "name": "offset-md-3",
-            "value": "offset-md-3"
-          },
-          {
-            "name": "offset-md-4",
-            "value": "offset-md-4"
-          },
-          {
-            "name": "offset-md-5",
-            "value": "offset-md-5"
-          },
-          {
-            "name": "offset-md-6",
-            "value": "offset-md-6"
-          },
-          {
-            "name": "offset-md-7",
-            "value": "offset-md-7"
-          },
-          {
-            "name": "offset-md-8",
-            "value": "offset-md-8"
-          },
-          {
-            "name": "offset-md-9",
-            "value": "offset-md-9"
-          },
-          {
-            "name": "offset-md-10",
-            "value": "offset-md-10"
-          },
-          {
-            "name": "offset-md-11",
-            "value": "offset-md-11"
-          },
-          {
-            "name": "offset-md-12",
-            "value": "offset-md-12"
-          },
-          {
-            "name": "offset-lg-1",
-            "value": "offset-lg-1"
-          },
-          {
-            "name": "offset-lg-2",
-            "value": "offset-lg-2"
-          },
-          {
-            "name": "offset-lg-3",
-            "value": "offset-lg-3"
-          },
-          {
-            "name": "offset-lg-4",
-            "value": "offset-lg-4"
-          },
-          {
-            "name": "offset-lg-5",
-            "value": "offset-lg-5"
-          },
-          {
-            "name": "offset-lg-6",
-            "value": "offset-lg-6"
-          },
-          {
-            "name": "offset-lg-7",
-            "value": "offset-lg-7"
-          },
-          {
-            "name": "offset-lg-8",
-            "value": "offset-lg-8"
-          },
-          {
-            "name": "offset-lg-9",
-            "value": "offset-lg-9"
-          },
-          {
-            "name": "offset-lg-10",
-            "value": "offset-lg-10"
-          },
-          {
-            "name": "offset-lg-11",
-            "value": "offset-lg-11"
-          },
-          {
-            "name": "offset-lg-12",
-            "value": "offset-lg-12"
-          },
-          {
-            "name": "col-1",
-            "value": "col-1"
-          },
-          {
-            "name": "col-2",
-            "value": "col-2"
-          },
-          {
-            "name": "col-3",
-            "value": "col-3"
-          },
-          {
-            "name": "col-4",
-            "value": "col-4"
-          },
-          {
-            "name": "col-5",
-            "value": "col-5"
-          },
-          {
-            "name": "col-6",
-            "value": "col-6"
-          },
-          {
-            "name": "col-7",
-            "value": "col-7"
-          },
-          {
-            "name": "col-8",
-            "value": "col-8"
-          },
-          {
-            "name": "col-9",
-            "value": "col-9"
-          },
-          {
-            "name": "col-10",
-            "value": "col-10"
-          },
-          {
-            "name": "col-11",
-            "value": "col-11"
-          },
-          {
-            "name": "col-12",
-            "value": "col-12"
-          },
-          {
-            "name": "col-md-1",
-            "value": "col-md-1"
-          },
-          {
-            "name": "col-md-2",
-            "value": "col-md-2"
-          },
-          {
-            "name": "col-md-3",
-            "value": "col-md-3"
-          },
-          {
-            "name": "col-md-4",
-            "value": "col-md-4"
-          },
-          {
-            "name": "col-md-5",
-            "value": "col-md-5"
-          },
-          {
-            "name": "col-md-6",
-            "value": "col-md-6"
-          },
-          {
-            "name": "col-md-7",
-            "value": "col-md-7"
-          },
-          {
-            "name": "col-md-8",
-            "value": "col-md-8"
-          },
-          {
-            "name": "col-md-9",
-            "value": "col-md-9"
-          },
-          {
-            "name": "col-md-10",
-            "value": "col-md-10"
-          },
-          {
-            "name": "col-md-11",
-            "value": "col-md-11"
-          },
-          {
-            "name": "col-md-12",
-            "value": "col-md-12"
-          },
-          {
-            "name": "col-lg-1",
-            "value": "col-lg-1"
-          },
-          {
-            "name": "col-lg-2",
-            "value": "col-lg-2"
-          },
-          {
-            "name": "col-lg-3",
-            "value": "col-lg-3"
-          },
-          {
-            "name": "col-lg-4",
-            "value": "col-lg-4"
-          },
-          {
-            "name": "col-lg-5",
-            "value": "col-lg-5"
-          },
-          {
-            "name": "col-lg-6",
-            "value": "col-lg-6"
-          },
-          {
-            "name": "col-lg-7",
-            "value": "col-lg-7"
-          },
-          {
-            "name": "col-lg-8",
-            "value": "col-lg-8"
-          },
-          {
-            "name": "col-lg-9",
-            "value": "col-lg-9"
-          },
-          {
-            "name": "col-lg-10",
-            "value": "col-lg-10"
-          },
-          {
-            "name": "col-lg-11",
-            "value": "col-lg-11"
-          },
-          {
-            "name": "col-lg-12",
-            "value": "col-lg-12"
-          },
-          {
-            "name": "lightblue",
-            "value": "lightblue"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "columns",
     "fields": [
       {
@@ -35856,6 +35535,327 @@
   },
   {
     "id": "grid-test-block",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Name",
+        "value": "",
+        "label": "Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Some text",
+        "value": "",
+        "label": "Some Text"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Grid settings",
+        "description": "Choose where you want the component to be placed.",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "offset-1",
+            "value": "offset-1"
+          },
+          {
+            "name": "offset-2",
+            "value": "offset-2"
+          },
+          {
+            "name": "offset-3",
+            "value": "offset-3"
+          },
+          {
+            "name": "offset-4",
+            "value": "offset-4"
+          },
+          {
+            "name": "offset-5",
+            "value": "offset-5"
+          },
+          {
+            "name": "offset-6",
+            "value": "offset-6"
+          },
+          {
+            "name": "offset-7",
+            "value": "offset-7"
+          },
+          {
+            "name": "offset-8",
+            "value": "offset-8"
+          },
+          {
+            "name": "offset-9",
+            "value": "offset-9"
+          },
+          {
+            "name": "offset-10",
+            "value": "offset-10"
+          },
+          {
+            "name": "offset-11",
+            "value": "offset-11"
+          },
+          {
+            "name": "offset-12",
+            "value": "offset-12"
+          },
+          {
+            "name": "offset-md-1",
+            "value": "offset-md-1"
+          },
+          {
+            "name": "offset-md-2",
+            "value": "offset-md-2"
+          },
+          {
+            "name": "offset-md-3",
+            "value": "offset-md-3"
+          },
+          {
+            "name": "offset-md-4",
+            "value": "offset-md-4"
+          },
+          {
+            "name": "offset-md-5",
+            "value": "offset-md-5"
+          },
+          {
+            "name": "offset-md-6",
+            "value": "offset-md-6"
+          },
+          {
+            "name": "offset-md-7",
+            "value": "offset-md-7"
+          },
+          {
+            "name": "offset-md-8",
+            "value": "offset-md-8"
+          },
+          {
+            "name": "offset-md-9",
+            "value": "offset-md-9"
+          },
+          {
+            "name": "offset-md-10",
+            "value": "offset-md-10"
+          },
+          {
+            "name": "offset-md-11",
+            "value": "offset-md-11"
+          },
+          {
+            "name": "offset-md-12",
+            "value": "offset-md-12"
+          },
+          {
+            "name": "offset-lg-1",
+            "value": "offset-lg-1"
+          },
+          {
+            "name": "offset-lg-2",
+            "value": "offset-lg-2"
+          },
+          {
+            "name": "offset-lg-3",
+            "value": "offset-lg-3"
+          },
+          {
+            "name": "offset-lg-4",
+            "value": "offset-lg-4"
+          },
+          {
+            "name": "offset-lg-5",
+            "value": "offset-lg-5"
+          },
+          {
+            "name": "offset-lg-6",
+            "value": "offset-lg-6"
+          },
+          {
+            "name": "offset-lg-7",
+            "value": "offset-lg-7"
+          },
+          {
+            "name": "offset-lg-8",
+            "value": "offset-lg-8"
+          },
+          {
+            "name": "offset-lg-9",
+            "value": "offset-lg-9"
+          },
+          {
+            "name": "offset-lg-10",
+            "value": "offset-lg-10"
+          },
+          {
+            "name": "offset-lg-11",
+            "value": "offset-lg-11"
+          },
+          {
+            "name": "offset-lg-12",
+            "value": "offset-lg-12"
+          },
+          {
+            "name": "col-1",
+            "value": "col-1"
+          },
+          {
+            "name": "col-2",
+            "value": "col-2"
+          },
+          {
+            "name": "col-3",
+            "value": "col-3"
+          },
+          {
+            "name": "col-4",
+            "value": "col-4"
+          },
+          {
+            "name": "col-5",
+            "value": "col-5"
+          },
+          {
+            "name": "col-6",
+            "value": "col-6"
+          },
+          {
+            "name": "col-7",
+            "value": "col-7"
+          },
+          {
+            "name": "col-8",
+            "value": "col-8"
+          },
+          {
+            "name": "col-9",
+            "value": "col-9"
+          },
+          {
+            "name": "col-10",
+            "value": "col-10"
+          },
+          {
+            "name": "col-11",
+            "value": "col-11"
+          },
+          {
+            "name": "col-12",
+            "value": "col-12"
+          },
+          {
+            "name": "col-md-1",
+            "value": "col-md-1"
+          },
+          {
+            "name": "col-md-2",
+            "value": "col-md-2"
+          },
+          {
+            "name": "col-md-3",
+            "value": "col-md-3"
+          },
+          {
+            "name": "col-md-4",
+            "value": "col-md-4"
+          },
+          {
+            "name": "col-md-5",
+            "value": "col-md-5"
+          },
+          {
+            "name": "col-md-6",
+            "value": "col-md-6"
+          },
+          {
+            "name": "col-md-7",
+            "value": "col-md-7"
+          },
+          {
+            "name": "col-md-8",
+            "value": "col-md-8"
+          },
+          {
+            "name": "col-md-9",
+            "value": "col-md-9"
+          },
+          {
+            "name": "col-md-10",
+            "value": "col-md-10"
+          },
+          {
+            "name": "col-md-11",
+            "value": "col-md-11"
+          },
+          {
+            "name": "col-md-12",
+            "value": "col-md-12"
+          },
+          {
+            "name": "col-lg-1",
+            "value": "col-lg-1"
+          },
+          {
+            "name": "col-lg-2",
+            "value": "col-lg-2"
+          },
+          {
+            "name": "col-lg-3",
+            "value": "col-lg-3"
+          },
+          {
+            "name": "col-lg-4",
+            "value": "col-lg-4"
+          },
+          {
+            "name": "col-lg-5",
+            "value": "col-lg-5"
+          },
+          {
+            "name": "col-lg-6",
+            "value": "col-lg-6"
+          },
+          {
+            "name": "col-lg-7",
+            "value": "col-lg-7"
+          },
+          {
+            "name": "col-lg-8",
+            "value": "col-lg-8"
+          },
+          {
+            "name": "col-lg-9",
+            "value": "col-lg-9"
+          },
+          {
+            "name": "col-lg-10",
+            "value": "col-lg-10"
+          },
+          {
+            "name": "col-lg-11",
+            "value": "col-lg-11"
+          },
+          {
+            "name": "col-lg-12",
+            "value": "col-lg-12"
+          },
+          {
+            "name": "lightblue",
+            "value": "lightblue"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "col-test-block",
     "fields": [
       {
         "component": "text",

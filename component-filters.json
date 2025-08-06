@@ -51,10 +51,6 @@
     ]
   },
   {
-    "id": "col-test-block",
-    "components": null
-  },
-  {
     "id": "columns",
     "components": [
       "column"
@@ -117,6 +113,10 @@
   },
   {
     "id": "grid-test-block",
+    "components": null
+  },
+  {
+    "id": "col-test-block",
     "components": null
   },
   {
