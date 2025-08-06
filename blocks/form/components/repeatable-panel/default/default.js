@@ -144,22 +144,24 @@ export class RepeatablePanel {
 
   _yesDelete(entry) {
     const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
+    this._clearFields(currentEntry);
+    this._toggleEditMode(currentEntry, false);
 
     if (this._isFirstEntry(currentEntry)) {
-      this._clearFields(currentEntry);
-      this._toggleEditMode(currentEntry, false);
-      // Remove saved flag
+      // Remove saved flag. We do not delete the first entry
       currentEntry.classList.remove('saved');
+      // Disable to prevent validation
+      currentEntry.disabled = true;
+      currentEntry.dataset.savedData = '';
+      this._renderOverview();
     }
     else {
       this.#triggerDeletion(currentEntry);
     }
-
-    this._renderOverview();
   }
 
   _noDelete() {
-    alert('No button from delete modal');
+
   }
 
   _init(entry) {
@@ -195,6 +197,8 @@ export class RepeatablePanel {
   _toggleEditMode(entry, visible) {
     const panel = entry.closest('.panel-repeatable-panel');
     if (visible) {
+      // Remove disable flag to enable validation
+      entry.disabled = false;
       entry.classList.add('current');
       panel.classList.add('editing');
     }

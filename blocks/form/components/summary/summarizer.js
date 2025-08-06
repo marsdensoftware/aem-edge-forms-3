@@ -17,7 +17,7 @@ class WorkExperienceConverter {
         let employmentDetails = result[WorkExperienceFieldNames.EMPLOYER_NAME].displayValue;
 
         let endYear;
-        if (stillWorking.value == '0') {
+        if (stillWorking?.value == '0') {
             // No longer working
             endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
             employmentDetails += `, ${startYear} - ${endYear}`;
