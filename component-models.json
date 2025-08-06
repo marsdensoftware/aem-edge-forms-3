@@ -1761,7 +1761,7 @@
     ]
   },
   {
-    "id": "col-test-block",
+    "id": "col-test-item",
     "fields": [
       {
         "component": "text",

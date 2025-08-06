@@ -1,16 +1,16 @@
 {
   "definitions": [
     {
-      "title": "Col Test Block",
-      "id": "col-test-block",
+      "title": "Col Test Item",
+      "id": "col-test-item",
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/block/v1/item",
             "template": {
-              "name": "Col Test Block",
-              "model": "col-test-block",
-              "filter":  "col-test-block"
+              "name": "Col Test Item",
+              "model": "col-test-item",
+              "filter":  "col-test-item"
             }
           }
         }
@@ -19,7 +19,7 @@
   ],
   "models": [
     {
-      "id": "col-test-block",
+      "id": "col-test-item",
       "fields": [
         {
           "component": "text",
@@ -43,7 +43,7 @@
   ],
   "filters": [
     {
-      "id": "col-test-block",
+      "id": "col-test-item",
       "components": null
     }
   ]
