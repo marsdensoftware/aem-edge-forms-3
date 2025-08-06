@@ -1,8 +1,12 @@
 const initialState = 0
 let increment = 0
+let increment2 = 0
+let increment3 = 0
 let currentStep = 0
-let stepsLength = 0
+
 let barLength = 0
+let barLength2 = 0
+let barLength3 = 0
 let progressBar: HTMLElement
 let barEl1: HTMLElement
 let barEl2: HTMLElement
@@ -13,26 +17,19 @@ let wizardFooter: HTMLElement | null
 const groupLength = (
   wizardEl: Element,
 ): {
-  step1GroupItems: NodeListOf<Element>
   step1GroupLength: number
   step2GroupLength: number
   step3GroupLength: number
   totalSteps: number
 } => {
   // Check how many step groups available
-
   const step1Group = wizardEl?.querySelectorAll(':scope > [data-stepgroup="1"]')
   const step2Group = wizardEl?.querySelectorAll(':scope > [data-stepgroup="2"]')
   const step3Group = wizardEl?.querySelectorAll(':scope > [data-stepgroup="3"]')
 
-  console.log(step1Group?.length)
-  console.log(step2Group?.length)
-  console.log(step3Group?.length)
-
   const totalSteps = step1Group.length + step2Group.length + step3Group.length
 
   return {
-    step1GroupItems: step1Group,
     step1GroupLength: step1Group.length,
     step2GroupLength: step2Group.length,
     step3GroupLength: step3Group.length,
@@ -48,18 +45,27 @@ export const createProgressBar = () => {
   barEl2 = document.createElement('span')
   barEl3 = document.createElement('span')
   const barContainer = document.createElement('span')
+  const barContainer2 = document.createElement('span')
+  const barContainer3 = document.createElement('span')
+  const progressBarInner = document.createElement('div')
+  progressBarInner.classList.add('progress-bar__inner')
   // Step title
   const title = document.createElement('span')
   title.classList.add('progress-bar__title', 'strap-title-small')
 
   barContainer.classList.add('progress-bar__container')
+  barContainer2.classList.add('progress-bar__container')
+  barContainer3.classList.add('progress-bar__container')
   barEl1.classList.add('progress-bar__item')
-  // barEl2.classList.add('progress-bar__item')
-  // barEl3.classList.add('progress-bar__item')
+  barEl2.classList.add('progress-bar__item')
+  barEl3.classList.add('progress-bar__item')
   barEl1.style = `width: ${initialState}%;`
   // Add into progress bar
   barContainer.append(barEl1)
-  progressBar.append(title, barContainer)
+  barContainer2.append(barEl2)
+  barContainer3.append(barEl3)
+  progressBarInner.append(barContainer, barContainer2, barContainer3)
+  progressBar.append(title, progressBarInner)
   // Add into footer
   wizardFooter = document.querySelector('.wizard-button-wrapper')
 
@@ -73,10 +79,12 @@ export const createProgressBar = () => {
   wizard = document.querySelector('.wizard')
   if (!wizard) return
 
-  const { step1GroupLength, totalSteps } = groupLength(wizard)
+  const { step1GroupLength, step2GroupLength, step3GroupLength } =
+    groupLength(wizard)
 
-  stepsLength = totalSteps
   barLength = 100 / step1GroupLength
+  barLength2 = 100 / step2GroupLength
+  barLength3 = 100 / step3GroupLength
 }
 
 export const trackProgress = () => {
@@ -102,7 +110,7 @@ export const trackProgress = () => {
   }
 
   // debugger
-
+  // Skipping first two steps
   if (wizardIdx === 0 || wizardIdx === 1) return
 
   const currentStepGroupIdx = Number(
@@ -110,29 +118,74 @@ export const trackProgress = () => {
   )
   title.innerHTML = `STEP <b>${currentStepGroupIdx}</b> of <b>3</b>`
 
-  // first step
-  if (wizardIdx === 2) {
-    barEl1.style = `width: ${barLength}%;`
-    increment = barLength
-    currentStep = 2
-    return
+  if (currentStepGroupIdx === 1) {
+    // First step
+    if (wizardIdx === 2) {
+      barEl1.style = `width: ${barLength}%;`
+      increment = barLength
+      currentStep = 2
+      return
+    }
+
+    if (currentStep < wizardIdx) {
+      currentStep += 1
+      increment += barLength
+    } else if (currentStep > wizardIdx) {
+      currentStep -= 1
+      increment -= barLength
+    }
+
+    barEl1.style = `width: ${increment}%; background-color: #017AC9;`
   }
 
-  // Tracking current step
-  if (currentStep < wizardIdx) {
-    currentStep += 1
-    increment += barLength
-  } else if (currentStep > wizardIdx) {
-    currentStep -= 1
-    increment -= barLength
+  if (currentStepGroupIdx === 2) {
+    if (currentStep < wizardIdx) {
+      currentStep += 1
+      increment2 += barLength2
+    } else if (currentStep > wizardIdx) {
+      currentStep -= 1
+      increment2 -= barLength2
+    }
+
+    barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
   }
 
-  barEl1.style = `width: ${increment}%;`
+  if (currentStepGroupIdx === 3) {
+    if (currentStep < wizardIdx) {
+      currentStep += 1
+      increment3 += barLength3
+    } else if (currentStep > wizardIdx) {
+      currentStep -= 1
+      increment3 -= barLength3
+    }
 
-  // if (!wizard) return
+    barEl3.style = `width: ${increment3}%; background-color: #017AC9;`
+  }
 
-  // const { step1GroupItems, step1GroupLength } = groupLength(wizard)
+  // Step one
+  if (currentStepGroupIdx > 1 && currentStep === 7) {
+    // Step one finished
+    increment = 100
+    barEl1.style = `width: ${increment}%; background-color: #388314;`
+  } else if (currentStepGroupIdx < 2 && currentStep === 6) {
+    increment = 100
+    increment2 = 0
+    barEl1.style = `width: ${increment}%; background-color: #017AC9;`
+    barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
+  } else if (currentStepGroupIdx < 3 && currentStep === 12) {
+    increment2 = 100
+    increment3 = 0
+    barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
+    barEl3.style = `width: ${increment3}%; background-color: #017AC9;`
+  }
 
-  // console.log(step1GroupItems[step1GroupLength - 1])
-  // console.log(step1GroupLength)
+  if (currentStepGroupIdx > 2) {
+    increment2 = 100
+    barEl2.style = `width: ${increment2}%; background-color: #388314;`
+  }
+
+  if (currentStepGroupIdx > 3) {
+    increment3 = 100
+    barEl3.style = `width: ${increment3}%; background-color: #388314;`
+  }
 }
