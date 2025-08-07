@@ -22,6 +22,7 @@ export default function decorate(el, fd) {
   titleEl.innerHTML = title;
 
   el.append(titleEl);
+  el.classList.add('formoutputfield');
 
   const outputEl = document.createElement('div');
   el.append(outputEl);
