@@ -509,6 +509,10 @@ function decorateSections(main) {
       sectionMeta.parentNode.remove();
     }
   });
+  setBootstrapContainerType(main);
+}
+
+function setBootstrapContainerType(main) {
   const containerTypeKey = 'container-type';
   // only use the value from the first row
   const firstRow = main.querySelector(`div.section.row`);
