@@ -25,7 +25,8 @@
       "account-menu",
       "auth-redirect",
       "main-menu",
-      "grid-col-block"
+      "grid-col-block",
+      "grid-footer-summary"
     ]
   },
   {
