@@ -318,32 +318,22 @@ const observeElementForJobs = (): void => {
   // console.log('[DEBUG_LOG] observeElementForJobs initialized');
 
   // Initial population of job titles
-  //   experiencedBasedJobs = getExperiencedBasedJobs(element);
   experiencedBasedJobs = getExperiencedBasedJobs();
-  // console.log('[DEBUG_LOG] Initial experiencedBasedJobs:', experiencedBasedJobs);
 
   // Add event listener for repeatableChanged event
-  // console.log('[DEBUG_LOG] Adding event listener for repeatableChanged event');
-  // console.log('[DEBUG_LOG] document object:', document);
   document.addEventListener('repeatableChanged', (event: Event) => {
-    // console.log('[DEBUG_LOG] repeatableChanged event triggered', event);
-    // console.log('[DEBUG_LOG] Event target:', event.target);
-    // console.log('[DEBUG_LOG] Event type:', event.type);
 
     // Verify this is a CustomEvent with detail
     if (!(event instanceof CustomEvent)) {
-      // console.error('[DEBUG_LOG] Event is not a CustomEvent:', event);
+      console.error('[DEBUG_LOG] Event is not a CustomEvent:', event);
       return;
     }
 
     const customEvent = event as CustomEvent<RepeatableEvent>;
     const detail = customEvent.detail;
-    // console.log('[DEBUG_LOG] Event detail:', detail);
 
     // Check if the event is for workexperience
     if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
-      // console.log('[DEBUG_LOG] Event is for workexperience with entries:', detail.entries);
-      // console.log('[DEBUG_LOG] Entries structure:', JSON.stringify(detail.entries, null, 2));
 
       // Extract type values from all entries
       let jobTypes: string[] = [];
@@ -356,24 +346,20 @@ const observeElementForJobs = (): void => {
           typeof entry.type.displayValue === 'string'
         );
 
-        // console.log('[DEBUG_LOG] Has valid entries structure:', hasValidEntries);
-
         jobTypes = (detail as RepeatableEvent).entries
           .map(entry => {
-            // console.log('[DEBUG_LOG] Processing entry:', entry);
             if (!entry.type) {
-              // console.log('[DEBUG_LOG] Entry missing type property:', entry);
+              console.log('[DEBUG_LOG] Entry missing type property:', entry);
               return null;
             }
             if (!entry.type.displayValue) {
-              // console.log('[DEBUG_LOG] Entry missing type.displayValue:', entry.type);
+              console.log('[DEBUG_LOG] Entry missing type.displayValue:', entry.type);
               return null;
             }
             return entry.type.displayValue;
           })
           .filter(Boolean) as string[];
 
-        // console.log('[DEBUG_LOG] Extracted job types:', jobTypes);
       } catch (error) {
         console.error('[DEBUG_LOG] Error extracting job types:', error);
         // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
@@ -382,22 +368,17 @@ const observeElementForJobs = (): void => {
       // Update experiencedBasedJobs with the extracted job types
       if (jobTypes.length > 0) {
         experiencedBasedJobs = jobTypes;
-        // console.log('[DEBUG_LOG] Updated experiencedBasedJobs:', experiencedBasedJobs);
 
         // Also update the datasources object to ensure it's using the latest values
         datasources.experiencedBasedJobs = experiencedBasedJobs;
-        // console.log('[DEBUG_LOG] Updated datasources.experiencedBasedJobs:', datasources.experiencedBasedJobs);
 
         // Update any existing search-box components that use experiencedBasedJobs
         const searchBoxes = document.querySelectorAll('.search-box');
-        // console.log('[DEBUG_LOG] Found search boxes:', searchBoxes.length);
 
         searchBoxes.forEach((searchBox) => {
           const el = searchBox as El;
-          // console.log('[DEBUG_LOG] Processing search box with dataset:', el.dataset);
 
           if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
-            // console.log('[DEBUG_LOG] Found search box using experiencedBasedJobs');
             const state = componentStateMap.get(el)!;
 
             // Get currently selected items to exclude them from the updated list
@@ -406,11 +387,8 @@ const observeElementForJobs = (): void => {
               selectedCardsDiv?.querySelectorAll('.selected-card input[type="hidden"]') || []
             ).map((input) => (input as HTMLInputElement).value);
 
-            // console.log('[DEBUG_LOG] Selected items to exclude:', selectedItems);
-
             // Update the recommendations with the new job types, excluding selected items
             state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
-            // console.log('[DEBUG_LOG] Updated recommendations:', state.recommendations);
 
             // Re-populate recommendations if they're visible
             const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper') as HTMLDivElement;
