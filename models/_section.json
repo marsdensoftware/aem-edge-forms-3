@@ -57,7 +57,8 @@
         "embed-adaptive-form",
         "account-menu",
         "auth-redirect",
-        "grid-col-block"
+        "grid-col-block",
+        "grid-footer-summary"
       ]
     }
   ]
