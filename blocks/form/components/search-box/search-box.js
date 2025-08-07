@@ -223,18 +223,7 @@ const experiencedBasedSkills = [
     'Characteristics of services'
 ];
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = (element) => {
-    // If element exists, extract job titles from it
-    if (element && element.textContent) {
-        // Parse the element's content to extract job titles
-        // This implementation assumes job titles are separated by commas, newlines, or other delimiters
-        // Adjust the parsing logic based on the actual format of the data in the element
-        const content = element.textContent.trim();
-        if (content) {
-            // Split by commas, newlines, or other delimiters as needed
-            return content.split(/,|\n/).map(item => item.trim()).filter(item => item.length > 0);
-        }
-    }
+const getExperiencedBasedJobs = () => {
     // Default fallback values if the element is not found or has no content
     return [
         'Job Title 1',
@@ -249,48 +238,104 @@ const getExperiencedBasedJobs = (element) => {
         'Job Title 10',
     ];
 };
-// Function to find an element by ID and attach a MutationObserver to it
-const observeElementForJobs = (elementId) => {
-    const element = document.getElementById(elementId);
-    if (!element) {
-        console.warn(`Element with ID "${elementId}" not found. Using default job titles.`);
-        experiencedBasedJobs = getExperiencedBasedJobs();
-        return;
-    }
+// Function to listen for repeatableChanged event and update job types
+const observeElementForJobs = () => {
+    // console.log('[DEBUG_LOG] observeElementForJobs initialized');
     // Initial population of job titles
-    experiencedBasedJobs = getExperiencedBasedJobs(element);
-    // Create a MutationObserver to watch for changes to the element
-    const observer = new MutationObserver((mutations) => {
-        // When the element changes, update the experiencedBasedJobs array
-        experiencedBasedJobs = getExperiencedBasedJobs(element);
-        // This is the painful bit as the user may be updating the list after they had selected the experienced-based jobs.
-        // So we need to update any existing search-box components that use experiencedBasedJobs
-        document.querySelectorAll('.search-box').forEach((searchBox) => {
-            const el = searchBox;
-            if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
-                const state = componentStateMap.get(el);
-                // Get currently selected items to exclude them from the updated list
-                const selectedCardsDiv = el.querySelector('.selected-cards');
-                const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
-                // Update the recommendations with the new job titles, excluding selected items
-                state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
-                // Re-populate recommendations if they're visible
-                const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
-                const searchInput = el.querySelector('input[type="text"]');
-                if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
-                    populateRecommendationsDiv(el, recommendationsWrapper, selectedCardsDiv, searchInput);
-                }
+    //   experiencedBasedJobs = getExperiencedBasedJobs(element);
+    experiencedBasedJobs = getExperiencedBasedJobs();
+    // console.log('[DEBUG_LOG] Initial experiencedBasedJobs:', experiencedBasedJobs);
+    // Add event listener for repeatableChanged event
+    // console.log('[DEBUG_LOG] Adding event listener for repeatableChanged event');
+    // console.log('[DEBUG_LOG] document object:', document);
+    document.addEventListener('repeatableChanged', (event) => {
+        // console.log('[DEBUG_LOG] repeatableChanged event triggered', event);
+        // console.log('[DEBUG_LOG] Event target:', event.target);
+        // console.log('[DEBUG_LOG] Event type:', event.type);
+        // Verify this is a CustomEvent with detail
+        if (!(event instanceof CustomEvent)) {
+            // console.error('[DEBUG_LOG] Event is not a CustomEvent:', event);
+            return;
+        }
+        const customEvent = event;
+        const detail = customEvent.detail;
+        // console.log('[DEBUG_LOG] Event detail:', detail);
+        // Check if the event is for workexperience
+        if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
+            // console.log('[DEBUG_LOG] Event is for workexperience with entries:', detail.entries);
+            // console.log('[DEBUG_LOG] Entries structure:', JSON.stringify(detail.entries, null, 2));
+            // Extract type values from all entries
+            let jobTypes = [];
+            try {
+                // First check if entries have the expected structure
+                const hasValidEntries = detail.entries.some(entry => entry && typeof entry === 'object' && entry.type &&
+                    typeof entry.type === 'object' &&
+                    'displayValue' in entry.type &&
+                    typeof entry.type.displayValue === 'string');
+                // console.log('[DEBUG_LOG] Has valid entries structure:', hasValidEntries);
+                jobTypes = detail.entries
+                    .map(entry => {
+                    // console.log('[DEBUG_LOG] Processing entry:', entry);
+                    if (!entry.type) {
+                        // console.log('[DEBUG_LOG] Entry missing type property:', entry);
+                        return null;
+                    }
+                    if (!entry.type.displayValue) {
+                        // console.log('[DEBUG_LOG] Entry missing type.displayValue:', entry.type);
+                        return null;
+                    }
+                    return entry.type.displayValue;
+                })
+                    .filter(Boolean);
+                // console.log('[DEBUG_LOG] Extracted job types:', jobTypes);
             }
-        });
-    });
-    // Start observing the element for changes to its content
-    observer.observe(element, {
-        childList: true, // Observe direct children additions or removals
-        characterData: true, // Observe changes to text content
-        subtree: true // Observe all descendants, not just direct children
+            catch (error) {
+                console.error('[DEBUG_LOG] Error extracting job types:', error);
+                // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
+            }
+            // Update experiencedBasedJobs with the extracted job types
+            if (jobTypes.length > 0) {
+                experiencedBasedJobs = jobTypes;
+                // console.log('[DEBUG_LOG] Updated experiencedBasedJobs:', experiencedBasedJobs);
+                // Also update the datasources object to ensure it's using the latest values
+                datasources.experiencedBasedJobs = experiencedBasedJobs;
+                // console.log('[DEBUG_LOG] Updated datasources.experiencedBasedJobs:', datasources.experiencedBasedJobs);
+                // Update any existing search-box components that use experiencedBasedJobs
+                const searchBoxes = document.querySelectorAll('.search-box');
+                // console.log('[DEBUG_LOG] Found search boxes:', searchBoxes.length);
+                searchBoxes.forEach((searchBox) => {
+                    const el = searchBox;
+                    // console.log('[DEBUG_LOG] Processing search box with dataset:', el.dataset);
+                    if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
+                        // console.log('[DEBUG_LOG] Found search box using experiencedBasedJobs');
+                        const state = componentStateMap.get(el);
+                        // Get currently selected items to exclude them from the updated list
+                        const selectedCardsDiv = el.querySelector('.selected-cards');
+                        const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
+                        // console.log('[DEBUG_LOG] Selected items to exclude:', selectedItems);
+                        // Update the recommendations with the new job types, excluding selected items
+                        state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+                        // console.log('[DEBUG_LOG] Updated recommendations:', state.recommendations);
+                        // Re-populate recommendations if they're visible
+                        const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
+                        const searchInput = el.querySelector('input[type="text"]');
+                        if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+                            console.log('[DEBUG_LOG] Re-populating recommendations div');
+                            populateRecommendationsDiv(el, recommendationsWrapper, selectedCardsDiv, searchInput);
+                        }
+                    }
+                });
+            }
+            else {
+                console.log('[DEBUG_LOG] No job types extracted from entries');
+            }
+        }
+        else {
+            console.log('[DEBUG_LOG] Event is not for workexperience or has invalid format');
+        }
     });
 };
-// This will be populated by the MutationObserver
+// This will be populated by the repeatableChanged event listener
 let experiencedBasedJobs = getExperiencedBasedJobs();
 const datasources = {
     courses,
@@ -370,6 +415,7 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     }
 }
 export default function decorate(element, field) {
+    console.log('[DEBUG_LOG] search-box decorate function called');
     const { datasource } = field.properties;
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
@@ -377,14 +423,23 @@ export default function decorate(element, field) {
     const emptySelectionMessage = field.properties['empty-selection-message'];
     const emptyRecommendationsMessage = field.properties['empty-recommendations-message'];
     const showRecommendations = field.properties['show-recommendations'] || false;
-    // Set up the MutationObserver for the element that contains job titles
+    console.log('[DEBUG_LOG] search-box properties:', {
+        datasource,
+        recommendationsDatasource,
+        selectionLabel,
+        recommendationsLabel,
+        showRecommendations
+    });
+    // Set up the event listener for repeatableChanged events
     // This only needs to be done once when the page loads
-    // Using setTimeout to ensure the DOM has loaded the element before attaching the observer
+    // Using setTimeout to ensure the DOM has loaded before attaching the event listener
     if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
+        console.log('[DEBUG_LOG] Setting up experiencedBasedJobs observer');
         // Set the flag immediately to prevent multiple setTimeout calls
         window.experiencedBasedJobsObserverInitialized = true;
         setTimeout(() => {
-            observeElementForJobs('theElementToBeFound');
+            console.log('[DEBUG_LOG] Calling observeElementForJobs after timeout');
+            observeElementForJobs();
         }, 500); // 500ms delay to allow the DOM to load
     }
     element.classList.add('search-box');
