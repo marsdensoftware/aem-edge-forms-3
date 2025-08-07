@@ -20,7 +20,7 @@ class Converter extends DefaultFieldConverter {
         let endYear;
         let workperiod = `${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
         let endofwork;
-        if (stillWorking.value == '0') {
+        if (stillWorking?.value == '0') {
             // No longer working
             endofwork = `${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
             endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;

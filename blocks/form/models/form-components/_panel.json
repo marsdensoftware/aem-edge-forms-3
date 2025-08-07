@@ -87,6 +87,13 @@
           ]
         },
         {
+          "component": "text",
+          "name": "stepgroup",
+          "label": "Step group",
+          "valueType": "string",
+          "value": "1"
+        },
+        {
           "...": "../form-common/_responsive-container-component.json"
         },
         {
@@ -268,10 +275,64 @@
             },
             {
               "component": "text",
+              "name": "repeatSaveButtonLabel",
+              "label": "Save Button Label",
+              "valueType": "string",
+              "value": "Save",
+              "condition": {
+                "and": [
+                  {
+                    "===": [
+                      {
+                        "var": "variant"
+                      },
+                      "addRemoveButtons"
+                    ]
+                  },
+                  {
+                    "===": [
+                      {
+                        "var": "repeatable"
+                      },
+                      true
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "component": "text",
               "name": "repeatDeleteButtonLabel",
               "label": "Delete Button Label",
               "valueType": "string",
               "value": "Delete",
+              "condition": {
+                "and": [
+                  {
+                    "===": [
+                      {
+                        "var": "variant"
+                      },
+                      "addRemoveButtons"
+                    ]
+                  },
+                  {
+                    "===": [
+                      {
+                        "var": "repeatable"
+                      },
+                      true
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "repeatCancelButtonLabel",
+              "label": "Cancel Button Label",
+              "valueType": "string",
+              "value": "Cancel",
               "condition": {
                 "and": [
                   {

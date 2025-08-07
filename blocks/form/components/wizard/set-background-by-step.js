@@ -1,4 +1,5 @@
 import { onElementsAddedByClassName } from '../utils.js'
+import { createProgressBar, trackProgress } from './progress-bar.js'
 
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
@@ -35,10 +36,14 @@ function updateExitButtonText(wizardEl) {
   const currentStepEl = wizardEl.querySelector('.current-wizard-step')
   if (!currentStepEl) return
 
-  const exitBtn = currentStepEl.closest('form').querySelector('[name="top_nav"] [name="exitBtn"]')
+  const exitBtn = currentStepEl
+    .closest('form')
+    .querySelector('[name="top_nav"] [name="exitBtn"]')
   if (!exitBtn) return
 
-  exitBtn.textContent = currentStepEl.classList.contains('wizard-intro') ? 'Exit' : 'Save & exit'
+  exitBtn.textContent = currentStepEl.classList.contains('wizard-intro')
+    ? 'Exit'
+    : 'Save & exit'
 }
 
 onElementsAddedByClassName('wizard', (wizardEl) => {
@@ -47,10 +52,12 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   // Set the initial background based on the default active step on page load.
   updateBackground(wizardEl, container)
   updateExitButtonText(wizardEl)
+  createProgressBar()
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
     updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
+    trackProgress()
   })
 })

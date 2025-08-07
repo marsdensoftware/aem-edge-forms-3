@@ -73,19 +73,28 @@
 }
 
 .section-intro {
-  padding-top: $spacing-600;
-  padding-left: 16px;
-  padding-right: 16px;
+  height: $wizard-body-height;
+  min-height: $wizard-body-height;
+  padding: $spacing-600 16px 120px; // more spacing at the bottom to be able to scroll through past the last content
   color: $text-primary;
 
+  @media (min-height: 1000px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   @include media('tablet') {
+    height: $wizard-body-height-tablet;
+    min-height: $wizard-body-height-tablet;
     padding-top: $spacing-700;
     padding-left: 0;
     padding-right: 0;
   }
 
   @include media('desktop') {
-    padding-top: 96px;
+    height: $wizard-body-height-desktop;
+    min-height: $wizard-body-height-desktop;
   }
 
   picture {
@@ -108,5 +117,13 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  // Center aligned content
+  fieldset {
+    > fieldset {
+      // Text
+      align-items: center;
+    }
   }
 }
