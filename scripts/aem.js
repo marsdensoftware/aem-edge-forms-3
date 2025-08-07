@@ -525,19 +525,19 @@ function setBootstrapContainerType(main) {
 }
 
 function liftBootstrapColumns(main) {
-  // TODO check how classes are set on default content types - .section > div.wrapper > xyz?
-  const firstLevelBlocks = main.querySelectorAll('div.section.row > div > div.block');
+  // includes both blocks and default content components
+  const firstLevelComponents = main.querySelectorAll('div.section.row > div > *');
   console.log('trying to lift columns on', main.innerHTML);
   console.log('lift candidates', firstLevelBlocks);
-  for (const block of firstLevelBlocks) {
-    console.log('checking block', block.innerHTML);
-    const bootstrapClasses = extractBootstrapColumnClasses(block);
+  for (const component of firstLevelComponents) {
+    console.log('checking component', component.innerHTML);
+    const bootstrapClasses = extractBootstrapColumnClasses(component);
     if (!bootstrapClasses.length) {
       continue;
     }
     for (const className of bootstrapClasses) {
       block.classList.remove(className);
-      block.parentElement.classList.add(className);
+      block.parentElement.classList.add(className); // parent should be a -wrapper element
     }
   }
 }
