@@ -331,15 +331,21 @@ export class RepeatablePanel {
 
       inputs.forEach(input => {
         const savedInputData = savedData[input.name];
-        const value = savedInputData ? (savedInputData.values || savedInputData.value) : '';
+        if (!savedInputData) {
+          return;
+        }
+        const value = savedInputData.value ? savedInputData.value : undefined;
+        const values = savedInputData.values ? savedInputData.values : [];
 
         switch (input.type) {
           case 'checkbox':
           case 'radio':
-            input.checked = input.value === value;
+            input.checked = values.includes(input.value) || input.value == value;
             break;
           case 'select':
-            alert('todo');
+            for (const option of input.options) {
+              option.selected = values.includes(option.value) || option.value == value;
+            }
             break;
           default:
             input.value = value;
