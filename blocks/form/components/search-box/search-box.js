@@ -226,16 +226,16 @@ const experiencedBasedSkills = [
 const getExperiencedBasedJobs = () => {
     // Default fallback values if the element is not found or has no content
     return [
-        'Job Title 1',
-        'Job Title 2',
-        'Job Title 3',
-        'Job Title 4',
-        'Job Title 5',
-        'Job Title 6',
-        'Job Title 7',
-        'Job Title 8',
-        'Job Title 9',
-        'Job Title 10',
+    // 'Job Title 1',
+    // 'Job Title 2',
+    // 'Job Title 3',
+    // 'Job Title 4',
+    // 'Job Title 5',
+    // 'Job Title 6',
+    // 'Job Title 7',
+    // 'Job Title 8',
+    // 'Job Title 9',
+    // 'Job Title 10',
     ];
 };
 // Function to listen for repeatableChanged event and update job types
