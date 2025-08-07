@@ -17,7 +17,12 @@
       }
     }
   ],
-  "models": [],
+  "models": [
+    {
+      "id": "grid-footer-summary",
+      "fields": []
+    }
+  ],
   "filters": [
     {
       "id": "grid-footer-summary",
