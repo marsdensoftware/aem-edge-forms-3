@@ -122,6 +122,15 @@
     "components": null
   },
   {
+    "id": "grid-footer-summary",
+    "components": [
+      "image",
+      "richtext",
+      "text",
+      "link-with-icon"
+    ]
+  },
+  {
     "id": "jobseekerintro",
     "components": null
   },
