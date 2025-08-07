@@ -536,8 +536,8 @@ function liftBootstrapColumns(main) {
       continue;
     }
     for (const className of bootstrapClasses) {
-      block.classList.remove(className);
-      block.parentElement.classList.add(className); // parent should be a -wrapper element
+      component.classList.remove(className);
+      component.parentElement.classList.add(className); // parent should be a -wrapper element
     }
   }
 }
