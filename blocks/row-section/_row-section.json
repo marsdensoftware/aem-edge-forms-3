@@ -1,14 +1,14 @@
 {
   "definitions": [
     {
-      "title": "Container Section",
-      "id": "container-section",
+      "title": "Row Section",
+      "id": "row-section",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/section/v1/section",
             "template": {
-              "model": "container-section"
+              "model": "row-section"
             }
           }
         }
@@ -17,44 +17,48 @@
   ],
   "models": [
     {
-      "id": "container-section",
+      "id": "row-section",
       "fields": [
         {
           "component": "text",
           "name": "name",
           "label": "Section Name",
           "description": "The label shown for this section in the Content Tree",
-          "value": "Container Section"
+          "value": "Row Section"
         },
         {
           "component": "select",
           "name": "Style",
+          "label": "Row config",
+          "valueType": "string",
+          "options": [
+            {"name": "Row", "value": "row"}
+          ]
+        },
+        {
+          "component": "text",
+          "name": "cols-config",
+          "label": "Columns Config",
+          "description": "Array containing column configs for this row, e.g. {3,2}"
+        },
+        {
+          "component": "select",
+          "name": "container-type",
           "label": "Container Type",
+          "description": "Container type to apply to main. Only the type from the first row section in the document will take effect.",
           "valueType": "string",
           "options": [
             {
               "...": "../../models/_responsive-container-class-component.json"
             }
           ]
-        },
-        {
-          "component": "text",
-          "name": "rows-config",
-          "label": "Rows Config",
-          "description": "Array containing the number of components in each row, e.g. [3,2]"
-        },
-        {
-          "component": "text",
-          "name": "cols-config",
-          "label": "Columns Config",
-          "description": "Array containing the size of  in each row, e.g. [{3,2}]"
         }
       ]
     }
   ],
   "filters": [
     {
-      "id": "container-section",
+      "id": "row-section",
       "components": []
     }
   ]

@@ -2152,6 +2152,20 @@
           }
         },
         {
+          "title": "Row Section",
+          "id": "row-section",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "model": "row-section"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Typography",
           "id": "typography",
           "plugins": {

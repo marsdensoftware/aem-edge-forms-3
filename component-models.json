@@ -1788,6 +1788,18 @@
             "value": "container-fluid"
           }
         ]
+      },
+      {
+        "component": "text",
+        "name": "rows-config",
+        "label": "Rows Config",
+        "description": "Array containing the number of components in each row, e.g. [3,2]"
+      },
+      {
+        "component": "text",
+        "name": "cols-config",
+        "label": "Columns Config",
+        "description": "Array containing the size of  in each row, e.g. [{3,2}]"
       }
     ]
   },
@@ -36295,6 +36307,77 @@
           {
             "name": "Large with icon on right",
             "value": "large icon--right"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "row-section",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Section Name",
+        "description": "The label shown for this section in the Content Tree",
+        "value": "Row Section"
+      },
+      {
+        "component": "select",
+        "name": "Style",
+        "label": "Row config",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Row",
+            "value": "row"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "cols-config",
+        "label": "Columns Config",
+        "description": "Array containing column configs for this row, e.g. {3,2}"
+      },
+      {
+        "component": "select",
+        "name": "container-type",
+        "label": "Container Type",
+        "description": "Container type to apply to main. Only the type from the first row section in the document will take effect.",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Default Container",
+            "value": "container"
+          },
+          {
+            "name": "Small Container",
+            "value": "container-sm"
+          },
+          {
+            "name": "Medium Container",
+            "value": "container-md"
+          },
+          {
+            "name": "Large Container",
+            "value": "container-lg"
+          },
+          {
+            "name": "Extra Large Container",
+            "value": "container-xl"
+          },
+          {
+            "name": "XX-Large Container",
+            "value": "container-xxl"
+          },
+          {
+            "name": "Fluid Container",
+            "value": "container-fluid"
           }
         ]
       }
