@@ -358,9 +358,9 @@
       },
       {
         "component": "multiselect",
-        "name": "style",
+        "name": "classes",
         "value": "",
-        "label": "Style",
+        "label": "Classes",
         "description": "Choose where you want the component to be placed.",
         "valueType": "string",
         "options": [
