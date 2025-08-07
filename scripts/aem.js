@@ -510,7 +510,6 @@ function decorateSections(main) {
     }
   });
   setBootstrapContainerType(main);
-  liftBootstrapColumns(main);
 }
 
 function setBootstrapContainerType(main) {
@@ -681,6 +680,7 @@ function decorateBlock(block) {
  */
 function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
+  liftBootstrapColumns(main);
 }
 
 /**
