@@ -528,7 +528,10 @@ function setBootstrapContainerType(main) {
 function liftBootstrapColumns(main) {
   // TODO check how classes are set on default content types - .section > div.wrapper > xyz?
   const firstLevelBlocks = main.querySelectorAll('div.section.row > div > div.block');
+  console.log('trying to lift columns on', main.innerHTML);
+  console.log('lift candidates', firstLevelBlocks);
   for (const block of firstLevelBlocks) {
+    console.log('checking block', block.innerHTML);
     const bootstrapClasses = extractBootstrapColumnClasses(block);
     if (!bootstrapClasses.length) {
       continue;
