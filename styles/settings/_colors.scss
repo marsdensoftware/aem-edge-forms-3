@@ -54,6 +54,7 @@ $color-shade-navy-20: #d0d9e4;
 $color-shade-blue-60: #67afdf;
 $color-shade-blue-40: #99cae9;
 $color-shade-blue-25: #bfdef1;
+$color-shade-blue-15: #d9ebf7;
 $color-shade-blue-10: #e6f2fa;
 $color-shade-blue-04: #f5fafd;
 
@@ -66,27 +67,27 @@ $color-shade-red-05: #fdf5f5;
 *************************/
 
 $color-gradient-blue: linear-gradient(
-  135deg,
-  $color-primary 25%,
-  $color-primary-navy 100%
+                135deg,
+                $color-primary 25%,
+                $color-primary-navy 100%
 );
 
 $color-gradient-green: linear-gradient(
-  135deg,
-  $color-secondary-teal 25%,
-  $color-secondary-accessible-teal 100%
+                135deg,
+                $color-secondary-teal 25%,
+                $color-secondary-accessible-teal 100%
 );
 
 $color-gradient-light: linear-gradient(
-  135deg,
-  $color-grey-black-20 25%,
-  $color-grey-black-40 100%
+                135deg,
+                $color-grey-black-20 25%,
+                $color-grey-black-40 100%
 );
 
 $color-gradient-grey-dark: linear-gradient(
-  135deg,
-  $color-grey-black-60 25%,
-  $color-grey-black-80 100%
+                135deg,
+                $color-grey-black-60 25%,
+                $color-grey-black-80 100%
 );
 
 /************************
@@ -144,6 +145,6 @@ $stroke-focus: $color-feedback-pink;
 $stroke-input-stroke: 2px;
 $stroke-hover-stroke: 2px;
 
-// input field background colour
+// Input field background colour
 $bg-light-primary: $color-white;
 $bg-light-secondary: $color-shade-blue-04;

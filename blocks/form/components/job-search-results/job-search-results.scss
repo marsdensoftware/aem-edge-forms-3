@@ -2,28 +2,36 @@
 @use 'sass:meta';
 @use '../../../../styles/settings' as *;
 
+fieldset.panel-wrapper.field-job-search-results-container.field-wrapper.form-panel-content.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: var(--Spacing-Spacing-600, 32px);
+  border-radius: 24px 0 48px 0;
+
+  background-color: transparent;
+  background-image: linear-gradient(
+                  135deg,
+                  $color-shade-blue-04 25%,
+                  $color-shade-blue-15 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include elevation-2;
+}
+
 /* -----------------------------
-   Job Search Results Panel
+   Responsive Layout for Job Search Results
 ----------------------------- */
 
-.panel-wrapper.field-job-search-results {
+.panel-wrapper.job-search-results-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   gap: $spacing-400;
-  padding: var(--Spacing-Spacing-600, 32px);
-  border-radius: 24px 0 48px 0;
-  background: linear-gradient(
-                  135deg,
-                  var(--Shades-Blues-Blue-04, #F5FAFD) 25%,
-                  var(--Shades-Blues-Blue-15, #D9EBF7) 100%
-  );
-
-  box-shadow: var(--Elevation-Position-X-Level-2, 0)
-  var(--Elevation-Position-Y-Level-2, 4px)
-  var(--Elevation-Blur-Level-2, 8px)
-  var(--Elevation-Spread-Level-2, 0)
-  rgba(22, 44, 69, 0.20);
 
   .text-wrapper,
   .drop-down-wrapper,
@@ -43,13 +51,11 @@
     }
   }
 
-  // Tablet breakpoint (≥744px)
   @include media('tablet') {
     flex-direction: row;
 
     .text-wrapper {
       flex: 1 1 100%;
-      max-width: 100%;
     }
 
     .drop-down-wrapper {
@@ -62,7 +68,6 @@
     }
   }
 
-  // Desktop breakpoint (≥1280px)
   @include media('desktop') {
     .text-wrapper {
       flex: 1 1 30%;
