@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-section"
+      "container-section",
+      "row-section"
     ]
   },
   {
@@ -125,5 +126,9 @@
   {
     "id": "jobseekerintro",
     "components": null
+  },
+  {
+    "id": "row-section",
+    "components": []
   }
 ]
