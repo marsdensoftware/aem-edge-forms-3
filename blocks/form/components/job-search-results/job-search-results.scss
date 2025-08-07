@@ -2,16 +2,16 @@
 @use 'sass:meta';
 @use '../../../../styles/settings' as *;
 
-// --------------------------------------------
-// Main panel container — background and layout
-// --------------------------------------------
+/* --------------------------------------------
+   Job Search Panel Background + Elevation
+--------------------------------------------- */
 fieldset.panel-wrapper.field-job-search-results-container.field-wrapper.form-panel-content.container {
   position: relative;
   width: 100%;
   padding: $spacing-600;
-  border-radius: $spacing-500 0 $spacing-650 0;
-
+  border-radius: 24px 0 48px 0;
   background-color: transparent;
+
   background-image: linear-gradient(
                   135deg,
                   $color-shade-blue-04 25%,
@@ -23,32 +23,9 @@ fieldset.panel-wrapper.field-job-search-results-container.field-wrapper.form-pan
   @include elevation-2;
 }
 
-.panel-wrapper.field-job-search-results-container {
-  .drop-down-wrapper {
-    select {
-      width: 100%;
-      padding: $spacing-400;
-      border-radius: $spacing-400;
-      background: $color-white;
-      appearance: none;
-      transition: all 0.2s ease;
-
-      @include elevation-2;
-
-      &:focus {
-        outline: none;
-        border: $spacing-050 solid $color-primary;
-        background-color: $color-white;
-        @include elevation-3; // stronger shadow on click/focus
-      }
-    }
-  }
-}
-
-
-// --------------------------------------------
-// Responsive Layout for Job Search Results
-// --------------------------------------------
+/* --------------------------------------------
+   Base layout + wrappers
+--------------------------------------------- */
 .panel-wrapper.field-job-search-results-container {
   display: flex;
   flex-wrap: wrap;
@@ -107,6 +84,67 @@ fieldset.panel-wrapper.field-job-search-results-container.field-wrapper.form-pan
 
     .submit-wrapper {
       flex: 1 1 15%;
+    }
+  }
+}
+
+/* --------------------------------------------
+   Location Dropdown (Single Select)
+--------------------------------------------- */
+.drop-down-wrapper.select-location-dropdown {
+  select {
+    display: flex;
+    width: 305px;
+    padding: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: var(--Corner-radius-Mid, 8px);
+    background: var(--Background-Light-Primary, #FFF);
+    appearance: none;
+
+    box-shadow: var(--Elevation-Position-X-Level-2, 0)
+    var(--Elevation-Position-Y-Level-2, 4px)
+    var(--Elevation-Blur-Level-2, 8px)
+    var(--Elevation-Spread-Level-2, 0)
+    rgba(22, 44, 69, 0.20);
+  }
+}
+
+/* --------------------------------------------
+   Job Type Dropdown (Multi Select with Choices.js)
+--------------------------------------------- */
+.drop-down-wrapper.job-type-multiselect {
+  .choices {
+    border-radius: $border-radius-mid;
+    background: $bg-light-primary;
+    padding: $spacing-400;
+    @include elevation-2;
+
+    .choices__list--dropdown,
+    .choices__list[aria-expanded] {
+      padding: $spacing-400;
+      border-radius: $border-radius-mid;
+      box-shadow: 0 4px 8px rgba($color-primary-dark-navy, 0.2);
+    }
+
+    .choices__item--selectable {
+      display: flex;
+      align-items: center;
+      gap: $spacing-300;
+      padding: $spacing-300;
+
+      &::before {
+        content: '';
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .choices__item.is-selected {
+      font-weight: 600;
     }
   }
 }
