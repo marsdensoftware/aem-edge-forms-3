@@ -34,17 +34,21 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
         summaryComponents.forEach(summary => {
             if (step.contains(summary.el)) {
                 // Render summary
+                
+                try{
+                  summary.summarizer(summary.el, summary.properties);
 
-                summary.summarizer(summary.el, summary.properties);
-
-                // Register click on edit
-                summary.el.querySelectorAll('.edit').forEach(a => {
-                    a.addEventListener('click', () => {
-                        Summarizer.gotoWizardStep(a);
-                        wizardEl.classList.add('from-review')
-                    });
-                });
-
+                  // Register click on edit
+                  summary.el.querySelectorAll('.edit').forEach(a => {
+                      a.addEventListener('click', () => {
+                          Summarizer.gotoWizardStep(a);
+                          wizardEl.classList.add('from-review')
+                      });
+                  });
+                }
+                catch(e){
+                  console.log(`Could not render summary ${summary.summaryType}`);
+                }
             };
         });
     });
@@ -68,6 +72,7 @@ export default function decorate(el, field) {
     properties.description = field?.description;
 
     summaryComponents.push({
+        summaryType,
         summarizer,
         el,
         properties
