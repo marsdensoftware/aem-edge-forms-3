@@ -115,4 +115,12 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  // Center aligned content
+  fieldset {
+    > fieldset {
+      // Text
+      align-items: center;
+    }
+  }
 }
