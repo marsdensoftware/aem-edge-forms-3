@@ -511,11 +511,14 @@ function decorateSections(main) {
     }
   });
   const containerTypeKey = 'container-type';
-  // TODO iterate to ensure we take the first non-empty
-  const firstRow = main.querySelector(`div.section.row[data-${containerTypeKey}]`);
-  console.log('got first row', firstRow, firstRow.dataset[toCamelCase(containerTypeKey)]);
-  main.classList.add(firstRow.dataset[toCamelCase(containerTypeKey)]);
-  main.classList.add('container'); // TODO do this properly
+  // only use the value from the first row
+  const firstRow = main.querySelector(`div.section.row`);
+  if (!firstRow) {
+    return;
+  }
+  const containerType = firstRow.dataset[toCamelCase(containerTypeKey)];
+  // default to plain container if the value is empty
+  main.classList.add(containerType || 'container');
 }
 
 /**
