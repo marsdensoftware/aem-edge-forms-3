@@ -493,7 +493,7 @@ function decorateSections(main) {
 
     // Process section metadata
     const sectionMeta = section.querySelector('div.section-metadata');
-    console.log('section meta', JSON.stringify(main), JSON.stringify(section), JSON.stringify(sectionMeta));
+    console.log('section meta', JSON.stringify(main), main.outerHTML, JSON.stringify(section), section.outerHTML, JSON.stringify(sectionMeta));
     if (sectionMeta) {
       const meta = readBlockConfig(sectionMeta);
       Object.keys(meta).forEach((key) => {
@@ -701,6 +701,7 @@ async function loadSection(section, loadCallback) {
       // eslint-disable-next-line no-await-in-loop
       await loadBlock(blocks[i]);
     }
+    console.log('loading section', JSON.stringify(section), section, section.outerHTML);
     if (loadCallback) await loadCallback(section);
     injectBootstrapClasses(section);
     section.dataset.sectionStatus = 'loaded';
