@@ -493,6 +493,7 @@ function decorateSections(main) {
 
     // Process section metadata
     const sectionMeta = section.querySelector('div.section-metadata');
+    console.log('section meta', sectionMeta);
     if (sectionMeta) {
       const meta = readBlockConfig(sectionMeta);
       Object.keys(meta).forEach((key) => {
@@ -509,6 +510,7 @@ function decorateSections(main) {
       sectionMeta.parentNode.remove();
     }
   });
+  main.classList.add('container'); // TODO do this properly
 }
 
 /**
