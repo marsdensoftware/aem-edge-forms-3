@@ -510,6 +510,11 @@ function decorateSections(main) {
       sectionMeta.parentNode.remove();
     }
   });
+  const containerTypeKey = 'container-type';
+  // TODO iterate to ensure we take the first non-empty
+  const firstRow = main.querySelector(`div.section.row[data-${containerTypeKey}]`);
+  console.log('got first row', firstRow, firstRow.dataset[toCamelCase(containerTypeKey)]);
+  main.classList.add(firstRow.dataset[toCamelCase(containerTypeKey)]);
   main.classList.add('container'); // TODO do this properly
 }
 
