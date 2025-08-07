@@ -1,0 +1,79 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../../../styles/settings' as *;
+
+/* -----------------------------
+   Job Search Results Panel
+----------------------------- */
+
+.panel-wrapper.field-job-search-results {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: $spacing-400;
+  padding: var(--Spacing-Spacing-600, 32px);
+  border-radius: 24px 0 48px 0;
+  background: linear-gradient(
+                  135deg,
+                  var(--Shades-Blues-Blue-04, #F5FAFD) 25%,
+                  var(--Shades-Blues-Blue-15, #D9EBF7) 100%
+  );
+
+  box-shadow: var(--Elevation-Position-X-Level-2, 0)
+  var(--Elevation-Position-Y-Level-2, 4px)
+  var(--Elevation-Blur-Level-2, 8px)
+  var(--Elevation-Spread-Level-2, 0)
+  rgba(22, 44, 69, 0.20);
+
+  .text-wrapper,
+  .drop-down-wrapper,
+  .submit-wrapper {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 200px;
+    align-self: stretch;
+  }
+
+  .submit-wrapper {
+    display: flex;
+    align-items: flex-end;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  // Tablet breakpoint (≥744px)
+  @include media('tablet') {
+    flex-direction: row;
+
+    .text-wrapper {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .drop-down-wrapper {
+      flex: 1 1 45%;
+    }
+
+    .submit-wrapper {
+      flex: 0 0 auto;
+      min-width: 100px;
+    }
+  }
+
+  // Desktop breakpoint (≥1280px)
+  @include media('desktop') {
+    .text-wrapper {
+      flex: 1 1 30%;
+    }
+
+    .drop-down-wrapper {
+      flex: 1 1 25%;
+    }
+
+    .submit-wrapper {
+      flex: 1 1 15%;
+    }
+  }
+}
