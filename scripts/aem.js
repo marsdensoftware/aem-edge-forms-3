@@ -525,12 +525,9 @@ function setBootstrapContainerType(main) {
 }
 
 function liftBootstrapColumns(main) {
-  // includes both blocks and default content components
+  // includes both blocks and default content components, although there is no way to add classes to default content components yet
   const firstLevelComponents = main.querySelectorAll('div.section.row > div > *');
-  console.log('trying to lift columns on', main.innerHTML);
-  console.log('lift candidates', firstLevelComponents);
   for (const component of firstLevelComponents) {
-    console.log('checking component', component.innerHTML);
     const bootstrapClasses = extractBootstrapColumnClasses(component);
     if (!bootstrapClasses.length) {
       continue;
