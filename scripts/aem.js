@@ -493,7 +493,6 @@ function decorateSections(main) {
 
     // Process section metadata
     const sectionMeta = section.querySelector('div.section-metadata');
-    console.log('section meta', JSON.stringify(main), main.outerHTML, JSON.stringify(section), section.outerHTML, JSON.stringify(sectionMeta));
     if (sectionMeta) {
       const meta = readBlockConfig(sectionMeta);
       Object.keys(meta).forEach((key) => {
@@ -709,52 +708,10 @@ async function loadSection(section, loadCallback) {
       // eslint-disable-next-line no-await-in-loop
       await loadBlock(blocks[i]);
     }
-    console.log('loading section', JSON.stringify(section), section, section.outerHTML);
     if (loadCallback) await loadCallback(section);
-    injectBootstrapClasses(section);
     section.dataset.sectionStatus = 'loaded';
     section.style.display = null;
   }
-}
-
-function hasBootstrapClass(e) {
-  for (const className of e.classList) {
-    const parts = className.split('-');
-    // TODO actually, col should always be present? check bootstrap version
-    if (parts.length > 0 && ['col', 'offset'].includes(parts[0])) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function injectBootstrapClasses(section) {
-  // TODO handle nested blocks and components inside blocks
-
-  let hasBootstrapGrandchild = false;
-  for (const child of section.children) {
-    let hasBootstrapChild = false;
-    for (const grandchild of child.children) {
-      if (hasBootstrapClass(grandchild)) {
-        console.log('detected bootstrap in', grandchild);
-        hasBootstrapChild = true;
-        hasBootstrapGrandchild = true;
-        break;
-      }
-    }
-
-    if (!hasBootstrapChild) {
-      continue;
-    }
-    console.log('injecting row class to', child);
-    child.classList.add('row');
-  }
-
-  if (!hasBootstrapGrandchild) {
-    return;
-  }
-  console.log('injecting container class to section');
-  section.classList.add('container'); // TODO what about .container-fluid?
 }
 
 /**
