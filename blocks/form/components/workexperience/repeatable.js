@@ -63,7 +63,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     }
 
     _init(entry) {
-        const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WE}"]`);
+        const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
 
         const isFirst = this._isFirstEntry(entry);
 
@@ -115,7 +115,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             if (selectedRadio) {
                 const value = selectedRadio.value;
                 // Copy radio value into type of work field. Because it is not visible initially for the first entry
-                const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WE}"]`);
+                const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
                 typeOfWorkExperience.value = value;
             }
         }

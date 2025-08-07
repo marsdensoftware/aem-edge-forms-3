@@ -203,26 +203,130 @@ const jobTitleIndustries = [
     'Deer Farmer',
     'Goat Farmer',
 ];
-const experiencedBasedJobs = [
-    'Job Title 1',
-    'Job Title 2',
-    'Job Title 3',
-    'Job Title 4',
-    'Job Title 5',
-    'Job Title 6',
-    'Job Title 7',
-    'Job Title 8',
-    'Job Title 9',
-    'Job Title 10',
+const workRelatedSkills = [
+    'Communicate effectively in English',
+    'Apply health and safety standards',
+    'Work in a team',
+    'Use digital collaboration tools',
+    'Operate machinery safely',
+    'Provide customer service',
+    'Interpret technical drawings',
+    'Manage time effectively',
+    'Use accounting software',
+    'Adapt to changing work environments',
 ];
+const experiencedBasedSkills = [
+    'Curriculum objectives',
+    'Agritourism',
+    'Act reliably',
+    'Insurance market',
+    'Characteristics of services'
+];
+// Function to extract job titles from the DOM element
+const getExperiencedBasedJobs = () => {
+    // Default fallback values if the element is not found or has no content
+    return [
+        'Job Title 1',
+        'Job Title 2',
+        'Job Title 3',
+        'Job Title 4',
+        'Job Title 5',
+        'Job Title 6',
+        'Job Title 7',
+        'Job Title 8',
+        'Job Title 9',
+        'Job Title 10',
+    ];
+};
+// Function to listen for repeatableChanged event and update job types
+const observeElementForJobs = () => {
+    // console.log('[DEBUG_LOG] observeElementForJobs initialized');
+    // Initial population of job titles
+    experiencedBasedJobs = getExperiencedBasedJobs();
+    // Add event listener for repeatableChanged event
+    document.addEventListener('repeatableChanged', (event) => {
+        // Verify this is a CustomEvent with detail
+        if (!(event instanceof CustomEvent)) {
+            console.error('[DEBUG_LOG] Event is not a CustomEvent:', event);
+            return;
+        }
+        const customEvent = event;
+        const detail = customEvent.detail;
+        // Check if the event is for workexperience
+        if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
+            // Extract type values from all entries
+            let jobTypes = [];
+            try {
+                // First check if entries have the expected structure
+                const hasValidEntries = detail.entries.some(entry => entry && typeof entry === 'object' && entry.type &&
+                    typeof entry.type === 'object' &&
+                    'displayValue' in entry.type &&
+                    typeof entry.type.displayValue === 'string');
+                jobTypes = detail.entries
+                    .map(entry => {
+                    if (!entry.type) {
+                        console.log('[DEBUG_LOG] Entry missing type property:', entry);
+                        return null;
+                    }
+                    if (!entry.type.displayValue) {
+                        console.log('[DEBUG_LOG] Entry missing type.displayValue:', entry.type);
+                        return null;
+                    }
+                    return entry.type.displayValue;
+                })
+                    .filter(Boolean);
+            }
+            catch (error) {
+                console.error('[DEBUG_LOG] Error extracting job types:', error);
+                // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
+            }
+            // Update experiencedBasedJobs with the extracted job types
+            if (jobTypes.length > 0) {
+                experiencedBasedJobs = jobTypes;
+                // Also update the datasources object to ensure it's using the latest values
+                datasources.experiencedBasedJobs = experiencedBasedJobs;
+                // Update any existing search-box components that use experiencedBasedJobs
+                const searchBoxes = document.querySelectorAll('.search-box');
+                searchBoxes.forEach((searchBox) => {
+                    const el = searchBox;
+                    if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
+                        const state = componentStateMap.get(el);
+                        // Get currently selected items to exclude them from the updated list
+                        const selectedCardsDiv = el.querySelector('.selected-cards');
+                        const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
+                        // Update the recommendations with the new job types, excluding selected items
+                        state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+                        // Re-populate recommendations if they're visible
+                        const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
+                        const searchInput = el.querySelector('input[type="text"]');
+                        if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+                            console.log('[DEBUG_LOG] Re-populating recommendations div');
+                            populateRecommendationsDiv(el, recommendationsWrapper, selectedCardsDiv, searchInput);
+                        }
+                    }
+                });
+            }
+            else {
+                console.log('[DEBUG_LOG] No job types extracted from entries');
+            }
+        }
+        else {
+            console.log('[DEBUG_LOG] Event is not for workexperience or has invalid format');
+        }
+    });
+};
+// This will be populated by the repeatableChanged event listener
+let experiencedBasedJobs = getExperiencedBasedJobs();
 const datasources = {
     courses,
     languages,
     userLocations,
     skills,
     experiencedBasedJobs,
+    experiencedBasedSkills,
     jobTitleIndustries,
     additionalHardSkills,
+    workRelatedSkills,
 };
 // --- Global Event Listeners ---
 // Close suggestions when clicking outside
@@ -291,6 +395,7 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     }
 }
 export default function decorate(element, field) {
+    console.log('[DEBUG_LOG] search-box decorate function called');
     const { datasource } = field.properties;
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
@@ -298,6 +403,25 @@ export default function decorate(element, field) {
     const emptySelectionMessage = field.properties['empty-selection-message'];
     const emptyRecommendationsMessage = field.properties['empty-recommendations-message'];
     const showRecommendations = field.properties['show-recommendations'] || false;
+    console.log('[DEBUG_LOG] search-box properties:', {
+        datasource,
+        recommendationsDatasource,
+        selectionLabel,
+        recommendationsLabel,
+        showRecommendations
+    });
+    // Set up the event listener for repeatableChanged events
+    // This only needs to be done once when the page loads
+    // Using setTimeout to ensure the DOM has loaded before attaching the event listener
+    if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
+        console.log('[DEBUG_LOG] Setting up experiencedBasedJobs observer');
+        // Set the flag immediately to prevent multiple setTimeout calls
+        window.experiencedBasedJobsObserverInitialized = true;
+        setTimeout(() => {
+            console.log('[DEBUG_LOG] Calling observeElementForJobs after timeout');
+            observeElementForJobs();
+        }, 500); // 500ms delay to allow the DOM to load
+    }
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
     element.dataset.recommendationsDatasource = recommendationsDatasource;

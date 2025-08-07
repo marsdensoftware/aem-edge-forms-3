@@ -158,6 +158,9 @@ export class RepeatablePanel {
     else {
       this.#triggerDeletion(currentEntry);
     }
+
+    // trigger change
+    this.#triggerChange();
   }
 
   _noDelete() {
@@ -290,6 +293,19 @@ export class RepeatablePanel {
     this._toggleEditMode(entry, false);
 
     this._entryModified(entry);
+
+    this.#triggerChange();
+  }
+
+  #triggerChange() {
+    // Trigger event with name of the repeatable as parameter and values
+    const entries = this.#getSavedEntries();
+    const params = { detail: { name: this._name, entries: entries } };
+    const event = new CustomEvent('repeatableChanged', params);
+
+    const form = this._repeatablePanel.closest('form');
+
+    form.dispatchEvent(event);
   }
 
   _hasChanges(entry) {
@@ -481,6 +497,20 @@ export class RepeatablePanel {
       // Update
       e.replaceWith(content);
     }
+
+
+  }
+
+  #getSavedEntries() {
+    const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+    const result = [];
+
+    savedEntries.forEach((entry) => {
+      const data = new DefaultFieldConverter().convert(entry);
+      result.push(data);
+    });
+
+    return result;
   }
 
   _renderOverview() {

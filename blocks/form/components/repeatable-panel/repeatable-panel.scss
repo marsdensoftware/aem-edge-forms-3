@@ -74,6 +74,24 @@
   &[data-max='1'] button.item-add {
     display: none;
   }
+  
+  > fieldset[data-index="0"]{
+    .first-entry-title{
+      display: block;
+    }
+    .additional-entries-title{
+      display: none;
+    }
+  }
+  
+  > fieldset:not([data-index="0"]){
+    .first-entry-title{
+      display: none;
+    }
+    .additional-entries-title{
+      display: block;
+    }
+  }
 
   .repeatable-entries {
     .repeatable-entry {
@@ -181,7 +199,7 @@
   &[data-variant='addRemoveButtons'] .item-remove {
     @extend %button;
     @extend %button--primary;
-    display: none;
+    display: none !important;
     margin-top: 21px;
   }
 

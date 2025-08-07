@@ -477,11 +477,11 @@ export class Summarizer {
     el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_educations', el, properties);
   }
 
-  static work_skills(el, properties) {
+  static work_related_skills(el, properties) {
     properties.summaryEntryTag = 'ul';
     properties.summaryEntryItemsTag = 'li';
 
-    el.innerHTML = Summarizer.defaultSummarizer('panel_work_skills', el, properties);
+    el.innerHTML = Summarizer.defaultSummarizer('panel_work_related_skills', el, properties);
   }
 
   static skills(el, properties) {

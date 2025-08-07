@@ -153,7 +153,7 @@
                   "job_title": {
                     "jcr:title": "Job title",
                     "required": true,
-                    "name": "title",
+                    "name": "job-title",
                     "fieldType": "text-input",
                     "description": "\u003Cp\u003EWhat was your job called?\u003C/p\u003E",
                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
@@ -164,13 +164,13 @@
                     "fieldType": "text-input",
                     "fd:viewType": "typeahead",
                     "datasource": "occupations",
-                    "placeholder": "Start typing",
+                    "placeholder": "Search for work type",
                     "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
                     "required": true,
                     "description": "\u003Cp\u003EMatch your job title to one from our standard list.\u003C/p\u003E"
                   },
                   "employer": {
-                    "jcr:title": "Employer name/Who you did this work for",
+                    "jcr:title": "Employer name",
                     "fieldType": "text-input",
                     "required": true,
                     "name": "employer",
@@ -179,7 +179,7 @@
                   "startofwork": {
                     "fd:viewType": "advanceddatepicker",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                    "jcr:title": "When you started doing this work",
+                    "jcr:title": "When did you start?",
                     "fieldType": "panel",
                     "name": "startofwork",
                     "month": {
@@ -203,6 +203,7 @@
                     "name": "still-working",
                     "jcr:title": "Are you still doing this work?",
                     "orientation": "horizontal",
+					"variant": "bar",
                     "enumNames": [
                       "Yes",
                       "No"
@@ -251,6 +252,7 @@
                   "still_able": {
                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                     "fieldType": "radio-group",
+					"variant": "bar",
                     "enumNames": [
                       "Yes",
                       "No"
