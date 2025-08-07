@@ -510,6 +510,7 @@ function decorateSections(main) {
     }
   });
   setBootstrapContainerType(main);
+  liftBootstrapColumns(main);
 }
 
 function setBootstrapContainerType(main) {
@@ -522,6 +523,28 @@ function setBootstrapContainerType(main) {
   const containerType = firstRow.dataset[toCamelCase(containerTypeKey)];
   // default to plain container if the value is empty
   main.classList.add(containerType || 'container');
+}
+
+function liftBootstrapColumns(main) {
+  // TODO check how classes are set on default content types - .section > div.wrapper > xyz?
+  const firstLevelBlocks = main.querySelectorAll('div.section.row > div > div.block');
+  for (const block of firstLevelBlocks) {
+    const bootstrapClasses = extractBootstrapColumnClasses(block);
+    if (!bootstrapClasses.length) {
+      continue;
+    }
+    for (const className of bootstrapClasses) {
+      block.classList.remove(className);
+      block.parentElement.classList.add(className);
+    }
+  }
+}
+
+function extractBootstrapColumnClasses(e) {
+  return [...e.classList].filter((className) => {
+    const parts = className.split('-');
+    return parts.length > 0 && ['col', 'offset'].includes(parts[0]);
+  });
 }
 
 /**
