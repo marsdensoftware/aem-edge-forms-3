@@ -77,9 +77,12 @@
   min-height: $wizard-body-height;
   padding: $spacing-600 16px 120px; // more spacing at the bottom to be able to scroll through past the last content
   color: $text-primary;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  @media (min-height: 1000px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   @include media('tablet') {
     height: $wizard-body-height-tablet;
@@ -114,5 +117,13 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  // Center aligned content
+  fieldset {
+    > fieldset {
+      // Text
+      align-items: center;
+    }
   }
 }

@@ -201,15 +201,19 @@ export const trackProgress = () => {
     barEl1.style = `width: ${increment}%; background-color: #388314;`
   } else if (currentStepGroupIdx < 2 && currentStep === 6) {
     // Last step on group ONE
-    increment = 100
+    increment = 95
     increment2 = 0
     barEl1.style = `width: ${increment}%; background-color: #017AC9;`
     barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
   } else if (currentStepGroupIdx < 3 && currentStep === 12) {
     // Last step on group TWO
-    increment2 = 100
+    increment2 = 95
     increment3 = 0
     barEl2.style = `width: ${increment2}%; background-color: #017AC9;`
+    barEl3.style = `width: ${increment3}%; background-color: #017AC9;`
+  } else if (currentStepGroupIdx < 4 && currentStep === 17) {
+    // Last step on group THREE
+    increment3 = 95
     barEl3.style = `width: ${increment3}%; background-color: #017AC9;`
   }
 

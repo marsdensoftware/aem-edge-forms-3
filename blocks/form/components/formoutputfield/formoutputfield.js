@@ -1,34 +1,66 @@
+import { onElementAdded, DefaultFieldConverter } from '../utils.js'
 
-function waitForWindowObject(key) {
-    return new Promise((resolve) => {
-        const check = () => {
-            if (window[key]) {
-                resolve(window[key]);
-            } else {
-                setTimeout(check, 100); // check again in 100ms
-            }
-        };
-
-        check();
-    });
-}
-
-export default function decorate(fieldDiv, fieldJson) {
-    // get the input element from the fieldDiv
-    waitForWindowObject('myForm').then((form) => {
-        console.log('Form is available:', form);
-        const field = form.getElement(fieldJson.id);
-        if (field) {
-            // Subscribe to field change event
-            field.subscribe((payload) => {
-                const { changes, field: fieldModel } = payload;
-                const {
-                    id, name, fieldType, ':type': componentType, readOnly, type, displayValue, displayFormat, displayValueExpression,
-                    activeChild,
-                } = fieldModel;
-            }, 'fieldChanged');
-        }
+const renderers = {
+  'list': function(values) {
+    const result = document.createElement('ul');
+    values.forEach(value => {
+      const li = document.createElement('li');
+      li.textContent = value;
+      result.appendChild(li);
     });
 
-    return fieldDiv;
+    return result;
+  }
+};
+
+export default function decorate(el, fd) {
+  const titleEl = document.createElement('h6');
+  const { fieldName, renderer = 'list' } = fd.properties;
+  const title = fd.label?.value;
+  const renderFunction = renderers[renderer];
+
+  titleEl.innerHTML = title;
+
+  el.append(titleEl);
+
+  const outputEl = document.createElement('div');
+  el.append(outputEl);
+
+  onElementAdded(el).then((connectedEl) => {
+
+    const form = connectedEl.closest('form');
+
+    // Listen for input events on the form (event delegation)
+    form.addEventListener('change', function(e) {
+      if (e.target.name == fieldName) {
+        updateDisplay();
+      }
+    });
+
+    // Function to update the display
+    function updateDisplay() {
+      const nameValues = new DefaultFieldConverter().convert(form, fieldName);
+      outputEl.innerHTML = '';
+
+      if (nameValues[fieldName] && nameValues[fieldName].value) {
+        nameValues[fieldName].values = [nameValues[fieldName].value];
+        nameValues[fieldName].displayValues = [nameValues[fieldName].displayValue];
+
+        delete nameValues[fieldName].value;
+        delete nameValues[fieldName].displayValue;
+      }
+
+      if (nameValues[fieldName].values) {
+        const output = renderFunction(nameValues[fieldName].displayValues);
+
+        outputEl.append(output);
+      }
+      else {
+        connectedEl.dataset.visible = false;
+      }
+    }
+  });
+
+  return el;
 }
+

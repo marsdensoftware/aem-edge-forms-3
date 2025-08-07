@@ -603,8 +603,6 @@
                   "jcr:title": "Driver Licence",
                   "hideTitle": true,
                   "name": "driverlicence",
-                  "cardTitle": "NZ driver licence",
-                  "addedTitle": "<h4>You added:</h4>",
                   "radiogroup": {
                     "enum": [
                       "no",
@@ -627,6 +625,72 @@
                     "required": true,
                     "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton"
                   },
+                  "cancelModal": {
+                    "fieldType": "panel",
+                    "name": "cancelModal",
+                    "jcr:title": "Cancel your changes to this driver licence?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>If you cancel now these changes will be lost</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "keep editing"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Lose changes"
+                      }
+                    }
+                  },
+                  "deleteModal": {
+                    "fieldType": "panel",
+                    "name": "deleteModal",
+                    "jcr:title": "Delete this driver licence?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>Are you sure you want to remove this from your profile?</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "Cancel"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Delete"
+                      }
+                    }
+                  },
                   "repeatable-panel": {
                     "hideTitle": true,
                     "repeatable": true,
@@ -637,6 +701,8 @@
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "maxOccur": 1,
                     "minOccur": 1,
+                    "cardTitle": "NZ driver licence",
+                    "overviewTitle": "You added:",
                     "licence_class": {
                       "fieldType": "checkbox-group",
                       "orientation": "horizontal",
@@ -882,12 +948,78 @@
                     "withIcon": true,
                     "required": true
                   },
+                  "cancelModal": {
+                    "fieldType": "panel",
+                    "name": "cancelModal",
+                    "jcr:title": "Cancel this course or training?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>If you cancel now these changes will be lost</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "keep editing"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Lose changes"
+                      }
+                    }
+                  },
+                  "deleteModal": {
+                    "fieldType": "panel",
+                    "name": "deleteModal",
+                    "jcr:title": "Delete this work experience?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>Are you sure you want to remove this from your profile?</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "Cancel"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Delete"
+                      }
+                    }
+                  },
                   "repeatable-panel": {
                     "jcr:title": "Education Options Content",
                     "fieldType": "panel",
                     "hideTitle": true,
                     "name": "education-options-content",
-                    "repeatAddButtonLabel": "Add another",
+                    "repeatAddButtonLabel": "Add another course or training",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatable": true,
                     "minOccur": 1,
@@ -1149,11 +1281,12 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                 "template": {
                   "jcr:title": "Form Output Field",
-                  "fieldType": "text-input",
-                  "fd:viewType": "formoutputfield"
+                  "fieldType": "panel",
+                  "fd:viewType": "formoutputfield",
+                  "minOccur": 1
                 }
               }
             }
@@ -1325,12 +1458,78 @@
                     "withIcon": true,
                     "required": true
                   },
+                  "cancelModal": {
+                    "fieldType": "panel",
+                    "name": "cancelModal",
+                    "jcr:title": "Cancel this language?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>If you cancel now these changes will be lost</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "keep editing"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Lose changes"
+                      }
+                    }
+                  },
+                  "deleteModal": {
+                    "fieldType": "panel",
+                    "name": "deleteModal",
+                    "jcr:title": "Delete this language?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>Are you sure you want to remove this from your profile?</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "Cancel"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Delete"
+                      }
+                    }
+                  },
                   "repeatable-panel": {
                     "jcr:title": "Language Options Content",
                     "fieldType": "panel",
                     "hideTitle": true,
                     "name": "languagepanel-options-content",
-                    "repeatAddButtonLabel": "Add another",
+                    "repeatAddButtonLabel": "Add another language",
                     "repeatDeleteButtonLabel": "Delete",
                     "repeatable": true,
                     "minOccur": 1,
@@ -1593,6 +1792,72 @@
                     "hideTitle": true,
                     "required": true
                   },
+                  "cancelModal": {
+                    "fieldType": "panel",
+                    "name": "cancelModal",
+                    "jcr:title": "Cancel this work experience?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>If you cancel now these changes will be lost</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "keep editing"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Lose changes"
+                      }
+                    }
+                  },
+                  "deleteModal": {
+                    "fieldType": "panel",
+                    "name": "deleteModal",
+                    "jcr:title": "Delete this work experience?",
+                    "minOccur": 1,
+                    "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                    "text": {
+                      "textIsRich": true,
+                      "fieldType": "plain-text",
+                      "name": "text1754436201712",
+                      "value": "<p>Are you sure you want to remove this from your profile?</p>",
+                      "sling:resourceType": "core/fd/components/form/text/v1/text"
+                    },
+                    "buttons_wrapper": {
+                      "hideTitle": true,
+                      "fieldType": "panel",
+                      "name": "buttons-wrapper",
+                      "minOccur": 1,
+                      "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                      "btnNo": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnNo",
+                        "fieldType": "button",
+                        "jcr:title": "Cancel"
+                      },
+                      "btnYes": {
+                        "sling:resourceType": "core/fd/components/form/button/v1/button",
+                        "name": "btnYes",
+                        "fieldType": "button",
+                        "jcr:title": "Delete"
+                      }
+                    }
+                  },
                   "repeatable-panel": {
                     "hideTitle": true,
                     "fieldType": "panel",
@@ -1600,7 +1865,7 @@
                     "minOccur": 1,
                     "name": "workexperience-options-content",
                     "repeatDeleteButtonLabel": "Delete",
-                    "repeatAddButtonLabel": "Add another",
+                    "repeatAddButtonLabel": "Add another work experience",
                     "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
                     "jcr:title": "Work Experience Options Content",
                     "type_of_work_experience": {
@@ -1639,7 +1904,7 @@
                       "job_title": {
                         "jcr:title": "Job title",
                         "required": true,
-                        "name": "title",
+                        "name": "job-title",
                         "fieldType": "text-input",
                         "description": "<p>What was your job called?</p>",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
@@ -1650,13 +1915,13 @@
                         "fieldType": "text-input",
                         "fd:viewType": "typeahead",
                         "datasource": "occupations",
-                        "placeholder": "Start typing",
+                        "placeholder": "Search for work type",
                         "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
                         "required": true,
                         "description": "<p>Match your job title to one from our standard list.</p>"
                       },
                       "employer": {
-                        "jcr:title": "Employer name/Who you did this work for",
+                        "jcr:title": "Employer name",
                         "fieldType": "text-input",
                         "required": true,
                         "name": "employer",
@@ -1665,7 +1930,7 @@
                       "startofwork": {
                         "fd:viewType": "advanceddatepicker",
                         "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
-                        "jcr:title": "When you started doing this work",
+                        "jcr:title": "When did you start?",
                         "fieldType": "panel",
                         "name": "startofwork",
                         "month": {
@@ -1689,6 +1954,7 @@
                         "name": "still-working",
                         "jcr:title": "Are you still doing this work?",
                         "orientation": "horizontal",
+                        "variant": "bar",
                         "enumNames": [
                           "Yes",
                           "No"
@@ -1726,17 +1992,6 @@
                           "required": true
                         }
                       },
-                      "skills": {
-                        "jcr:title": "Add skills you used in this work",
-                        "name": "skills",
-                        "fieldType": "text-input",
-                        "fd:viewType": "typeahead",
-                        "required": true,
-                        "datasource": "skills",
-                        "placeholder": "Start typing",
-                        "sling:resourceType": "core/fd/components/form/textinput/v1/textinput",
-                        "description": "<p>Sharing your skills helps match you with the right jobs.</p>"
-                      },
                       "description": {
                         "multiLine": true,
                         "jcr:title": "Description",
@@ -1748,6 +2003,7 @@
                       "still_able": {
                         "sling:resourceType": "core/fd/components/form/radiobutton/v1/radiobutton",
                         "fieldType": "radio-group",
+                        "variant": "bar",
                         "enumNames": [
                           "Yes",
                           "No"

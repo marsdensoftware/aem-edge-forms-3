@@ -20,7 +20,7 @@ class Converter extends DefaultFieldConverter {
         let endYear;
         let workperiod = `${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
         let endofwork;
-        if (stillWorking.value == '0') {
+        if (stillWorking?.value == '0') {
             // No longer working
             endofwork = `${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
             endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
@@ -63,7 +63,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     }
 
     _init(entry) {
-        const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WE}"]`);
+        const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
 
         const isFirst = this._isFirstEntry(entry);
 
@@ -115,7 +115,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
             if (selectedRadio) {
                 const value = selectedRadio.value;
                 // Copy radio value into type of work field. Because it is not visible initially for the first entry
-                const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WE}"]`);
+                const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
                 typeOfWorkExperience.value = value;
             }
         }

@@ -93,6 +93,7 @@
       "summary",
       "formwelcome",
       "formcontextualhelp",
+      "formoutputfield",
       "formtabs",
       "number-input",
       "panel",
