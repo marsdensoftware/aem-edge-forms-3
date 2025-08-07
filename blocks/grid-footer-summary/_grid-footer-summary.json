@@ -20,13 +20,21 @@
   "models": [
     {
       "id": "grid-footer-summary",
-      "fields": []
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "icon",
+          "label": "Icon",
+          "multi": false
+        }
+      ]
     }
   ],
   "filters": [
     {
       "id": "grid-footer-summary",
-      "components": ["image", "richtext", "text", "link-with-icon"]
+      "components": ["link-with-icon"]
     }
   ]
 }
