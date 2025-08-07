@@ -35735,6 +35735,10 @@
     ]
   },
   {
+    "id": "grid-footer-summary",
+    "fields": []
+  },
+  {
     "id": "hero",
     "fields": [
       {
