@@ -295,6 +295,8 @@ export class RepeatablePanel {
     this._entryModified(entry);
 
     this.#triggerChange();
+    
+    this._renderOverview();
   }
 
   #triggerChange() {
