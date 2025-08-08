@@ -29,21 +29,3 @@ export default function decorate(block) {
     block.appendChild(subcol);
   }
 }
-
-/*
-TODO need a way to hide all but the top link at certain breakpoints?
-TODO also need a way for the first link to be styled larger?
-
-Summary:
-all links are small
-
-Links:
-First link is large
-Rest are small and collapse
-
-Split:
-First link is large
-link-with-icon at top
-then
-splits - subgrid?
- */
