@@ -19,7 +19,7 @@ export default function decorate(block) {
 
   for (const config of configs) {
     block.removeChild(config);
-    console.log("subcol has config", configs.outerHTML);
+    console.log("subcol has config", config.outerHTML, config.querySelector('p').innerText);
   }
 
   for (const subcol of subcols) {
