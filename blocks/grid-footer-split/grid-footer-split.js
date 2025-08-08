@@ -17,15 +17,16 @@ export default function decorate(block) {
     link.classList.add('col-12');
   }
 
-  for (const config of configs) {
+  for (const [index, config] of configs.entries()) {
     block.removeChild(config);
-    console.log("subcol has config", config.outerHTML, config.querySelector('p').innerText);
+    const values = config.querySelector('p').innerText;
+    for (const value of values.split(',')) {
+      subcol[index].classList.add(value)
+    }
   }
 
   for (const subcol of subcols) {
     block.appendChild(subcol);
-    //block.classList.add();
-    // TODO inject config
   }
 }
 
