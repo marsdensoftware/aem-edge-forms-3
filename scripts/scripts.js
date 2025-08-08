@@ -13,7 +13,7 @@ import {
 } from './aem.js';
 
 /**
- * Moves all the attributes from a given elmenet to another given element.
+ * Moves all the attributes from a given element to another given element.
  * @param {Element} from the element to copy attributes from
  * @param {Element} to the element to copy attributes to
  */
@@ -86,6 +86,18 @@ export function decorateMain(main) {
 }
 
 /**
+ * Enable spellcheck for all text inputs, textareas, and contenteditable fields.
+ */
+function enableGlobalSpellcheck() {
+  const fields = document.querySelectorAll(
+    'input[type="text"], input[type="search"], textarea, [contenteditable="true"]'
+  );
+  fields.forEach(field => {
+    field.setAttribute("spellcheck", "true");
+  });
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -107,6 +119,9 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+
+  // Enable spellcheck after main content is ready
+  enableGlobalSpellcheck();
 }
 
 /**
