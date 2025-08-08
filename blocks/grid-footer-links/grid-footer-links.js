@@ -18,9 +18,3 @@ export default function decorate(block) {
     }
   }
 }
-
-/*
-TODO
-strip out grid col block
-tidy TODO/FIXME comments
- */

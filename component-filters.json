@@ -24,7 +24,6 @@
       "account-menu",
       "auth-redirect",
       "main-menu",
-      "grid-col-block",
       "grid-footer-summary",
       "grid-footer-links",
       "grid-footer-split"
@@ -114,10 +113,6 @@
       "icon-radio-group",
       "extended-checkbox-container"
     ]
-  },
-  {
-    "id": "grid-col-block",
-    "components": null
   },
   {
     "id": "grid-footer-links",
