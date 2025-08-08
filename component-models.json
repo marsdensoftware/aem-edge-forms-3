@@ -35887,8 +35887,15 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "icon",
-        "label": "Icon",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "summary",
+        "label": "Summary",
         "multi": false
       }
     ]
