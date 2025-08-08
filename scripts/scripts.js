@@ -142,9 +142,10 @@ function escapeHtml(s) {
 
 /** Render text with <span class="spell-err"> wrappers for given ranges */
 function renderWithRanges(text, ranges) {
-  if (!ranges || !ranges.length) return escapeHtml(text);
+  const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if (!ranges || !ranges.length) return esc(text);
 
-  // Merge overlapping/adjacent ranges
+  // Merge overlapping/adjacent ranges first
   ranges.sort((a,b)=>a.start-b.start);
   const merged = [];
   for (const r of ranges) {
@@ -153,16 +154,32 @@ function renderWithRanges(text, ranges) {
     else merged.push({ ...r });
   }
 
+  // Helper: shrink a range so it doesn't include whitespace/punctuation
+  const shrink = (t, s, e) => {
+    // trim whitespace
+    while (s < e && /\s/.test(t[s])) s++;
+    while (e > s && /\s/.test(t[e-1])) e--;
+    // trim leading/trailing punctuation (keep word chars, digits, apostrophes, hyphens)
+    while (s < e && /[^\w'-]/.test(t[s])) s++;
+    while (e > s && /[^\w'-]/.test(t[e-1])) e--;
+    return { start: s, end: e };
+  };
+
   let out = '';
   let idx = 0;
+
   for (const r of merged) {
-    if (idx < r.start) out += escapeHtml(text.slice(idx, r.start));
-    out += `<span class="spell-err">${escapeHtml(text.slice(r.start, r.end))}</span>`;
-    idx = r.end;
+    let { start, end } = shrink(text, r.start, r.end);
+    if (start >= end) continue; // nothing visible to underline
+
+    if (idx < start) out += esc(text.slice(idx, start));
+    out += `<span class="spell-err">${esc(text.slice(start, end))}</span>`;
+    idx = end;
   }
-  if (idx < text.length) out += escapeHtml(text.slice(idx));
+  if (idx < text.length) out += esc(text.slice(idx));
   return out;
 }
+
 
 function copyTextStyles(fromEl, toEl) {
   const cs = getComputedStyle(fromEl);

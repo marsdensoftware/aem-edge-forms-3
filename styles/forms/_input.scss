@@ -135,5 +135,8 @@ textarea {
 
 .spell-err {
   text-decoration: underline wavy;
-  text-decoration-color: $color-secondary-salmon;
+  text-decoration-color: red;
+  color: transparent;            /* show only underline, not overlay text */
+  text-shadow: none;             /* prevent ghosting on Safari */
 }
+
