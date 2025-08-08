@@ -21,7 +21,7 @@ export default function decorate(block) {
     block.removeChild(config);
     const values = config.querySelector('p').innerText;
     for (const value of values.split(',')) {
-      subcol[index].classList.add(value)
+      subcols[index].classList.add(value)
     }
   }
 
