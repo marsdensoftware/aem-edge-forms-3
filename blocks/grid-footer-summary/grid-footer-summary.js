@@ -16,14 +16,12 @@ export function purgeLinkWithIconBug(block) {
 
 export function injectLinkWithIconClass(elements) {
   for (const e of elements) {
-    console.log('adding link-with-icon class to', e.outerHTML);
     e.classList.add('link-with-icon');
     purgeLinkWithIconBug(e);
   }
 }
 
 export default function decorate(block) {
-  console.log('decorate footer summary', block.outerHTML);
   const children = [...block.children];
   if (children.length < 3) {
     return;
