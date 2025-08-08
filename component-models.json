@@ -34629,24 +34629,24 @@
             "value": "d-xl-none"
           },
           {
-            "name": "d-block",
-            "value": "d-block"
+            "name": "d-flex",
+            "value": "d-flex"
           },
           {
-            "name": "d-sm-block",
-            "value": "d-sm-block"
+            "name": "d-sm-flex",
+            "value": "d-sm-flex"
           },
           {
-            "name": "d-md-block",
-            "value": "d-md-block"
+            "name": "d-md-flex",
+            "value": "d-md-flex"
           },
           {
-            "name": "d-lg-block",
-            "value": "d-lg-block"
+            "name": "d-lg-flex",
+            "value": "d-lg-flex"
           },
           {
-            "name": "d-xl-block",
-            "value": "d-xl-block"
+            "name": "d-xl-flex",
+            "value": "d-xl-flex"
           }
         ]
       },
