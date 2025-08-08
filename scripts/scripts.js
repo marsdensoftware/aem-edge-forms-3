@@ -85,44 +85,89 @@ export function decorateMain(main) {
 }
 
 /* ============================================================
-   PERSISTENT SPELLCHECK OVERLAY (stays after blur)
-   ------------------------------------------------------------
-   - Requires CSS (updated below).
-   - Extend dictionary via: window.SPELLCHECK_EXTRA_WORDS = ['Aotearoa','Auckland']
+   PERSISTENT SPELLCHECK OVERLAY — API-backed (LanguageTool)
+   Stays visible after blur. Works on inputs, textareas,
+   and contenteditable fields. Make sure to include CSS below.
 ============================================================ */
 
-const DEMO_DICT = new Set([
-  'a','about','and','are','as','at','be','can','do','for','from','have','i',
-  'in','is','it','my','of','on','or','our','please','that','the','this',
-  'to','we','with','you','your','search','work','experience','form','name',
-]);
+const LT_ENDPOINT = 'https://api.languagetool.org/v2/check'; // public instance (rate-limited)
+const LT_LANG = 'en-NZ'; // change to 'en-GB' or 'en-US' if you prefer
 
-function isWordLikelyWrong(word) {
-  if (!word) return false;
-  if (word.length < 3) return false;
-  if (/\d/.test(word)) return false;
-  const base = word.toLowerCase();
-  if (DEMO_DICT.has(base)) return false;
-  if (Array.isArray(window.SPELLCHECK_EXTRA_WORDS)
-    && window.SPELLCHECK_EXTRA_WORDS.map(w => String(w).toLowerCase()).includes(base)) {
-    return false;
+// Simple debounce so we don’t hammer the API while typing
+function debounce(fn, delay = 350) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Per-field cache to avoid refetching same text
+const spellCache = new WeakMap(); // field -> { txt, ranges }
+
+/**
+ * Ask LanguageTool for spelling errors.
+ * Returns an array of { start, end } character ranges to underline.
+ */
+async function fetchSpellingRanges(text) {
+  if (!text || !text.trim()) return [];
+  const params = new URLSearchParams();
+  params.set('language', LT_LANG);
+  params.set('text', text);
+
+  const res = await fetch(LT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+
+  if (!res.ok) throw new Error('Spell API error: ' + res.status);
+  const data = await res.json();
+
+  // Keep only spelling-type matches
+  const ranges = [];
+  if (data && Array.isArray(data.matches)) {
+    for (const m of data.matches) {
+      const isSpelling =
+        (m.rule && m.rule.issueType === 'misspelling') ||
+        (m.rule && m.rule.category && /TYPOS|MISSPELLING/i.test(m.rule.category.id || ''));
+      if (isSpelling && typeof m.offset === 'number' && typeof m.length === 'number') {
+        ranges.push({ start: m.offset, end: m.offset + m.length });
+      }
+    }
   }
-  return true;
+  return ranges;
 }
 
 function escapeHtml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function highlightText(text) {
-  // Split into word tokens while preserving spaces/punctuation
-  const parts = text.split(/(\b[A-Za-z']+\b)/g);
-  return parts.map(tok => {
-    if (/^\b[A-Za-z']+\b$/.test(tok) && isWordLikelyWrong(tok)) {
-      return `<span class="spell-err">${escapeHtml(tok)}</span>`;
+/** Render text with <span class="spell-err"> wrappers for given ranges */
+function renderWithRanges(text, ranges) {
+  if (!ranges || !ranges.length) return escapeHtml(text);
+
+  // Merge overlapping/adjacent ranges
+  ranges.sort((a,b)=>a.start-b.start);
+  const merged = [];
+  for (const r of ranges) {
+    const last = merged[merged.length-1];
+    if (last && r.start <= last.end) {
+      last.end = Math.max(last.end, r.end);
+    } else {
+      merged.push({ ...r });
     }
-    return escapeHtml(tok);
-  }).join('');
+  }
+
+  let out = '';
+  let idx = 0;
+  for (const r of merged) {
+    if (idx < r.start) out += escapeHtml(text.slice(idx, r.start));
+    out += `<span class="spell-err">${escapeHtml(text.slice(r.start, r.end))}</span>`;
+    idx = r.end;
+  }
+  if (idx < text.length) out += escapeHtml(text.slice(idx));
+  return out;
 }
 
 function copyTextStyles(fromEl, toEl) {
@@ -146,12 +191,12 @@ function attachPersistentSpellcheck(field) {
   const wrap = document.createElement('div');
   wrap.className = 'spellwrap';
 
-  // 👉 Keep the wrapper behaving like the original field in flex/grid layouts
+  // Keep the wrapper behaving like the original field in flex/grid layouts
   const csField = getComputedStyle(field);
-  wrap.style.flex = csField.flex;          // inherit flex sizing
+  wrap.style.flex = csField.flex;
   wrap.style.alignSelf = csField.alignSelf;
-  wrap.style.width = '100%';               // stretch full width
-  wrap.style.minWidth = '0';               // fix flex overflow/clipping
+  wrap.style.width = '100%';
+  wrap.style.minWidth = '0';
 
   field.parentNode.insertBefore(wrap, field);
   wrap.appendChild(field);
@@ -166,23 +211,49 @@ function attachPersistentSpellcheck(field) {
     ghost.style.height = `${field.offsetHeight}px`;
   };
 
-  const render = () => {
-    const val = field.matches('[contenteditable="true"]')
-      ? (field.innerText || '')
-      : (field.value || '');
-    ghost.innerHTML = highlightText(val);
+  // pull text from input/textarea/contenteditable
+  const getText = () =>
+    field.matches('[contenteditable="true"]') ? (field.innerText || '') : (field.value || '');
+
+  // Render using cached or freshly fetched ranges
+  const render = async () => {
+    const txt = getText();
+
+    // use cache if unchanged
+    const cached = spellCache.get(field);
+    if (cached && cached.txt === txt) {
+      ghost.innerHTML = renderWithRanges(txt, cached.ranges);
+      return;
+    }
+
+    try {
+      const ranges = await fetchSpellingRanges(txt);
+      spellCache.set(field, { txt, ranges });
+      ghost.innerHTML = renderWithRanges(txt, ranges);
+    } catch (e) {
+      // On error, just show plain text (no underline)
+      ghost.innerHTML = renderWithRanges(txt, []);
+    }
   };
 
-  const update = () => { syncStyles(); render(); };
+  // Debounced renderer while typing; immediate on blur/focus/resize
+  const debouncedRender = debounce(render, 350);
+
+  const update = () => { syncStyles(); debouncedRender(); };
+  const updateImmediate = () => { syncStyles(); render(); };
 
   // Initial paint
-  update();
+  updateImmediate();
 
   // Keep in sync with user actions and layout changes
-  ['input','change','blur','focus','keyup'].forEach(e => field.addEventListener(e, update));
-  window.addEventListener('resize', update);
+  field.addEventListener('input', update);
+  field.addEventListener('keyup', update);
+  field.addEventListener('change', updateImmediate);
+  field.addEventListener('blur', updateImmediate);
+  field.addEventListener('focus', updateImmediate);
+  window.addEventListener('resize', updateImmediate);
 
-  // For contenteditable where mutations may not fire standard input events
+  // For contenteditable mutations
   if (field.isContentEditable || field.matches('[contenteditable="true"]')) {
     const mo = new MutationObserver(update);
     mo.observe(field, { characterData: true, subtree: true, childList: true });
