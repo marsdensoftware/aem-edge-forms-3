@@ -27,13 +27,13 @@
           "value": "Row Section"
         },
         {
-          "component": "select",
+          "component": "multiselect",
           "name": "Style",
           "label": "Row config",
           "valueType": "string",
           "options": [
             {"name": "Row", "value": "row"},
-            {"name": "Row + Hide until loaded", "value": "row,hide-until-loaded"}
+            {"name": "Row + Hide until loaded", "value": "hide-until-loaded"}
           ]
         },
         {

@@ -36032,7 +36032,7 @@
         "value": "Row Section"
       },
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "Style",
         "label": "Row config",
         "valueType": "string",
@@ -36043,7 +36043,7 @@
           },
           {
             "name": "Row + Hide until loaded",
-            "value": "row,hide-until-loaded"
+            "value": "hide-until-loaded"
           }
         ]
       },
