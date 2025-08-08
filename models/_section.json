@@ -59,7 +59,8 @@
         "auth-redirect",
         "grid-col-block",
         "grid-footer-summary",
-        "grid-footer-links"
+        "grid-footer-links",
+        "grid-footer-split"
       ]
     }
   ]
