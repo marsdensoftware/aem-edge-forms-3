@@ -299,29 +299,30 @@ const getExperiencedBasedJobs = (): string[] => {
 
   // Default fallback values if the element is not found or has no content
   return [
-    'Job Title 1',
-    'Job Title 2',
-    'Job Title 3',
-    'Job Title 4',
-    'Job Title 5',
-    'Job Title 6',
-    'Job Title 7',
-    'Job Title 8',
-    'Job Title 9',
-    'Job Title 10',
+    // 'Job Title 1',
+    // 'Job Title 2',
+    // 'Job Title 3',
+    // 'Job Title 4',
+    // 'Job Title 5',
+    // 'Job Title 6',
+    // 'Job Title 7',
+    // 'Job Title 8',
+    // 'Job Title 9',
+    // 'Job Title 10',
   ]
 }
 
 // Function to listen for repeatableChanged event and update job types
-const observeElementForJobs = (): void => {
-
-  // console.log('[DEBUG_LOG] observeElementForJobs initialized');
+const observeElementForJobs = (element: El): void => {
 
   // Initial population of job titles
-  experiencedBasedJobs = getExperiencedBasedJobs();
+    experiencedBasedJobs = getExperiencedBasedJobs();
+
+  //get the containing form
+    const form = element.closest('form') as HTMLFormElement;
 
   // Add event listener for repeatableChanged event
-  document.addEventListener('repeatableChanged', (event: Event) => {
+    form.addEventListener('repeatableChanged', (event: Event) => {
 
     // Verify this is a CustomEvent with detail
     if (!(event instanceof CustomEvent)) {
@@ -533,7 +534,6 @@ function populateRecommendationsDiv(
 }
 
 export default function decorate(element: El, field: Field) {
-  console.log('[DEBUG_LOG] search-box decorate function called');
   const { datasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
@@ -542,25 +542,15 @@ export default function decorate(element: El, field: Field) {
   const emptyRecommendationsMessage = field.properties['empty-recommendations-message']
   const showRecommendations = field.properties['show-recommendations'] || false
 
-  console.log('[DEBUG_LOG] search-box properties:', {
-    datasource,
-    recommendationsDatasource,
-    selectionLabel,
-    recommendationsLabel,
-    showRecommendations
-  });
-
   // Set up the event listener for repeatableChanged events
   // This only needs to be done once when the page loads
   // Using setTimeout to ensure the DOM has loaded before attaching the event listener
   if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
-    console.log('[DEBUG_LOG] Setting up experiencedBasedJobs observer');
     // Set the flag immediately to prevent multiple setTimeout calls
     window.experiencedBasedJobsObserverInitialized = true;
 
     setTimeout(() => {
-      console.log('[DEBUG_LOG] Calling observeElementForJobs after timeout');
-      observeElementForJobs();
+      observeElementForJobs(element);
     }, 500); // 500ms delay to allow the DOM to load
   }
 
