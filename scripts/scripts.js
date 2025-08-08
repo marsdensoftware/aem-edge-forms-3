@@ -77,7 +77,6 @@ function buildAutoBlocks() {
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
-  // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -88,10 +87,7 @@ export function decorateMain(main) {
 /* ============================================================
    PERSISTENT SPELLCHECK OVERLAY (stays after blur)
    ------------------------------------------------------------
-   - Requires CSS:
-      .spellwrap{position:relative;display:inline-block;width:100%}
-      .spell-ghost{position:absolute;inset:0;pointer-events:none;white-space:pre-wrap;overflow:hidden;color:transparent}
-      .spell-err{ text-decoration: underline wavy; text-decoration-color: red; }
+   - Requires CSS (updated below).
    - Extend dictionary via: window.SPELLCHECK_EXTRA_WORDS = ['Aotearoa','Auckland']
 ============================================================ */
 
@@ -149,6 +145,14 @@ function attachPersistentSpellcheck(field) {
   // Wrap field so overlay can sit on top
   const wrap = document.createElement('div');
   wrap.className = 'spellwrap';
+
+  // 👉 Keep the wrapper behaving like the original field in flex/grid layouts
+  const csField = getComputedStyle(field);
+  wrap.style.flex = csField.flex;          // inherit flex sizing
+  wrap.style.alignSelf = csField.alignSelf;
+  wrap.style.width = '100%';               // stretch full width
+  wrap.style.minWidth = '0';               // fix flex overflow/clipping
+
   field.parentNode.insertBefore(wrap, field);
   wrap.appendChild(field);
 
@@ -163,7 +167,9 @@ function attachPersistentSpellcheck(field) {
   };
 
   const render = () => {
-    const val = field.matches('[contenteditable="true"]') ? (field.innerText || '') : (field.value || '');
+    const val = field.matches('[contenteditable="true"]')
+      ? (field.innerText || '')
+      : (field.value || '');
     ghost.innerHTML = highlightText(val);
   };
 

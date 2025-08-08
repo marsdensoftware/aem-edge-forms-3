@@ -111,21 +111,29 @@ textarea {
 /* Persistent spellcheck overlay */
 .spellwrap {
   position: relative;
-  display: inline-block; /* lets overlay sit exactly over the field */
+  display: block;
   width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .spell-ghost {
   position: absolute;
-  inset: 0;              /* top/right/bottom/left: 0 */
-  pointer-events: none;  /* clicks go to the real input */
-  white-space: pre-wrap; /* respect newlines for textareas */
+  inset: 0;
+  pointer-events: none;
+  white-space: pre-wrap;
   overflow: hidden;
-  color: transparent;    /* hide the overlay text itself */
+  color: transparent;
 }
 
-/* Our misspelling decoration */
+.spellwrap > input,
+.spellwrap > textarea,
+.spellwrap > [contenteditable="true"] {
+  display: block;
+  width: 100%;
+}
+
 .spell-err {
   text-decoration: underline wavy;
-  text-decoration-color: red;
+  text-decoration-color: $color-secondary-salmon;
 }
