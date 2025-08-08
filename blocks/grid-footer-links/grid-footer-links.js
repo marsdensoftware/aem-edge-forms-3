@@ -8,7 +8,7 @@ export default function decorate(block) {
   }
   const config = children[0];
   console.log('found config', config.outerHTML);
-  //block.removeChild(config);
+  block.removeChild(config);
 
   const links = children.slice(1)
   injectLinkWithIconClass(links);
@@ -19,7 +19,6 @@ export default function decorate(block) {
       link.classList.add(configClass);
     }
   }
-
 }
 
 /*
