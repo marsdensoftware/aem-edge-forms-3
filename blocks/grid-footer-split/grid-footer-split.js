@@ -19,7 +19,7 @@ export default function decorate(block) {
 
   for (const [index, config] of configs.entries()) {
     block.removeChild(config);
-    const values = config.querySelector('p').innerText;
+    const values = config.querySelector('p')?.innerText || '';
     for (const value of values.split(',')) {
       subcols[index].classList.add(value)
     }

@@ -6,7 +6,17 @@ export default function decorate(block) {
   if (!children.length) {
     return;
   }
-  injectLinkWithIconClass(children);
+  const config = children[0];
+  block.removeChild(config);
+
+  const links = children.slice(1)
+  injectLinkWithIconClass(links);
+
+  const configClass = config.querySelector('p')?.innerText || '';
+  for (const link of links.slice(1)) {
+    link.classList.add(configClass);
+  }
+
 }
 
 /*
