@@ -22,47 +22,7 @@
       "id": "grid-footer-links",
       "fields": [
         {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "subcolumn1",
-          "label": "Subcolumn 1",
-          "multi": false
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "subcolumn2",
-          "label": "Column 2",
-          "multi": false
-        },
-        {
           "...": "../../models/_responsive-columns-component-v5.json"
-        },
-        {
-          "component": "multiselect",
-          "name": "subcolumn1-classes",
-          "value": "",
-          "label": "Subcolumn 1 grid settings",
-          "description": "Choose where you want subcolumn 1 to be placed.",
-          "valueType": "string",
-          "options": [
-            {
-              "...": "../../models/_responsive-columns-options.json"
-            }
-          ]
-        },
-        {
-          "component": "multiselect",
-          "name": "subcolumn2-classes",
-          "value": "",
-          "label": "Subcolumn 2 grid settings",
-          "description": "Choose where you want subcolumn 2 to be placed.",
-          "valueType": "string",
-          "options": [
-            {
-              "...": "../../models/_responsive-columns-options.json"
-            }
-          ]
         }
       ]
     }
