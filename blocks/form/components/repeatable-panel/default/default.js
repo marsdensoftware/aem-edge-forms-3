@@ -21,6 +21,8 @@ class RepeatModal extends Modal {
     });
 
     this.panel.dataset.visible = true;
+
+    this.dialog.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   hideModal() {
