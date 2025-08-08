@@ -3,6 +3,7 @@
 .main-menu {
   padding: $spacing-400 $spacing-450;
   background-color: $color-white;
+  border-bottom: 1px solid $color-shade-navy-40;
 }
 
 .main-menu__inner {
@@ -40,4 +41,13 @@
   background-position: center;
   background-size: 16px;
   background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.main-menu__account-menu {
+  display: none;
+}
+
+.main-menu__account-menu--is-visible {
+  display: block;
 }
