@@ -86,14 +86,14 @@ export function decorateMain(main) {
 
 /* ============================================================
    PERSISTENT SPELLCHECK OVERLAY — API-backed (LanguageTool)
-   Stays visible after blur. Works on inputs, textareas,
-   and contenteditable fields. CSS is in _input.scss.
+   Shows native underlines while typing (focus), and our
+   persistent underlines after blur.
 ============================================================ */
 
 const LT_ENDPOINT = 'https://api.languagetool.org/v2/check'; // public instance (rate-limited)
-const LT_LANG = 'en-GB'; // using GB vs NZ as it has a larger library
+const LT_LANG = 'en-GB'; // change to en-US/en-AU/etc if desired
 
-// Simple debounce so we don’t hammer the API while typing
+// Debounce to avoid spamming the API while typing
 function debounce(fn, delay = 350) {
   let t;
   return (...args) => {
@@ -102,9 +102,10 @@ function debounce(fn, delay = 350) {
   };
 }
 
-// Per-field cache to avoid refetching same text
-const spellCache = new WeakMap(); // field -> { txt, ranges }
+// Cache per field: { txt, ranges }
+const spellCache = new WeakMap();
 
+/** Call LanguageTool for spelling errors; returns [{start,end}, ...] */
 async function fetchSpellingRanges(text) {
   if (!text || !text.trim()) return [];
   const params = new URLSearchParams();
@@ -123,12 +124,10 @@ async function fetchSpellingRanges(text) {
   const ranges = [];
   if (data && Array.isArray(data.matches)) {
     for (const m of data.matches) {
-      // include misspellings AND confusion pairs (e.g., shinning → shining)
+      // spelling-only to keep noise low
       const isSpelling =
         (m.rule && m.rule.issueType === 'misspelling') ||
-        (m.rule && (m.rule.id === 'CONFUSION_RULE' || m.rule.subId === 'CONFUSION_RULE')) ||
         (m.rule && m.rule.category && /TYPOS|MISSPELLING/i.test(m.rule.category.id || ''));
-
       if (isSpelling && typeof m.offset === 'number' && typeof m.length === 'number') {
         ranges.push({ start: m.offset, end: m.offset + m.length });
       }
@@ -136,7 +135,6 @@ async function fetchSpellingRanges(text) {
   }
   return ranges;
 }
-
 
 function escapeHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -151,11 +149,8 @@ function renderWithRanges(text, ranges) {
   const merged = [];
   for (const r of ranges) {
     const last = merged[merged.length-1];
-    if (last && r.start <= last.end) {
-      last.end = Math.max(last.end, r.end);
-    } else {
-      merged.push({ ...r });
-    }
+    if (last && r.start <= last.end) last.end = Math.max(last.end, r.end);
+    else merged.push({ ...r });
   }
 
   let out = '';
@@ -171,14 +166,13 @@ function renderWithRanges(text, ranges) {
 
 function copyTextStyles(fromEl, toEl) {
   const cs = getComputedStyle(fromEl);
-  const props = [
+  [
     'font','fontSize','fontFamily','fontWeight','lineHeight','letterSpacing',
     'textTransform','textAlign',
     'paddingTop','paddingRight','paddingBottom','paddingLeft',
     'borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth',
     'boxSizing',
-  ];
-  props.forEach(p => { toEl.style[p] = cs[p]; });
+  ].forEach(p => { toEl.style[p] = cs[p]; });
   toEl.style.borderRadius = cs.borderRadius;
 }
 
@@ -186,11 +180,11 @@ function attachPersistentSpellcheck(field) {
   if (!field || field.__spellAttached) return;
   field.__spellAttached = true;
 
-  // Wrap field so overlay can sit on top
+  // Wrap the field so overlay can sit on top
   const wrap = document.createElement('div');
   wrap.className = 'spellwrap';
 
-  // Keep the wrapper behaving like the original field in flex/grid layouts
+  // Keep wrapper behaving in flex/grid layouts
   const csField = getComputedStyle(field);
   wrap.style.flex = csField.flex;
   wrap.style.alignSelf = csField.alignSelf;
@@ -204,52 +198,59 @@ function attachPersistentSpellcheck(field) {
   ghost.className = 'spell-ghost';
   wrap.appendChild(ghost);
 
+  const showOverlay = (show) => { ghost.style.display = show ? 'block' : 'none'; };
+
+  // Let the browser show its native underlines while typing
+  field.setAttribute('spellcheck', 'true');
+
   const syncStyles = () => {
     copyTextStyles(field, ghost);
     ghost.style.width = `${field.offsetWidth}px`;
     ghost.style.height = `${field.offsetHeight}px`;
   };
 
-  // pull text from input/textarea/contenteditable
   const getText = () =>
     field.matches('[contenteditable="true"]') ? (field.innerText || '') : (field.value || '');
 
-  // Render using cached or freshly fetched ranges
+  // Fetch-and-render with caching
   const render = async () => {
     const txt = getText();
-
-    // use cache if unchanged
     const cached = spellCache.get(field);
     if (cached && cached.txt === txt) {
       ghost.innerHTML = renderWithRanges(txt, cached.ranges);
       return;
     }
-
     try {
       const ranges = await fetchSpellingRanges(txt);
       spellCache.set(field, { txt, ranges });
       ghost.innerHTML = renderWithRanges(txt, ranges);
-    } catch (e) {
-      // On error, just show plain text (no underline)
+    } catch {
       ghost.innerHTML = renderWithRanges(txt, []);
     }
   };
 
-  // Debounced renderer while typing; immediate on blur/focus/resize
   const debouncedRender = debounce(render, 350);
-
   const update = () => { syncStyles(); debouncedRender(); };
   const updateImmediate = () => { syncStyles(); render(); };
 
-  // Initial paint
+  // Initial paint — show overlay only if not focused
   updateImmediate();
+  showOverlay(document.activeElement !== field);
 
-  // Keep in sync with user actions and layout changes
+  // Toggle overlay vs native based on focus
+  field.addEventListener('focus', () => {
+    showOverlay(false);                 // hide our overlay
+    field.setAttribute('spellcheck', 'true'); // native on
+  });
+  field.addEventListener('blur', () => {
+    updateImmediate();                  // fetch latest
+    showOverlay(true);                  // show persistent overlay
+  });
+
+  // Keep in sync with edits and layout changes
   field.addEventListener('input', update);
   field.addEventListener('keyup', update);
   field.addEventListener('change', updateImmediate);
-  field.addEventListener('blur', updateImmediate);
-  field.addEventListener('focus', updateImmediate);
   window.addEventListener('resize', updateImmediate);
 
   // For contenteditable mutations
@@ -263,7 +264,7 @@ function enablePersistentSpellcheck(root = document) {
   const sel = 'input[type="text"], input[type="search"], textarea, [contenteditable="true"]';
   root.querySelectorAll(sel).forEach(attachPersistentSpellcheck);
 
-  // Also catch fields added later (Universal Author can inject content dynamically)
+  // Catch fields added later (Universal Author can inject dynamically)
   const mo = new MutationObserver((mutations) => {
     mutations.forEach((m) => {
       m.addedNodes.forEach((n) => {
