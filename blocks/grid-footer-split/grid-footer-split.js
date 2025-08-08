@@ -1,7 +1,6 @@
 import { injectLinkWithIconClass } from '../../blocks/grid-footer-summary/grid-footer-summary.js';
 
 export default function decorate(block) {
-  console.log('decorate footer split', block.outerHTML);
   block.classList.add('row');
 
   const children = [...block.children];
