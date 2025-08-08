@@ -34454,11 +34454,11 @@
     "id": "grid-footer-links",
     "fields": [
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "link-classes",
         "value": "",
         "label": "Subsequent link settings",
-        "description": "Choose a display class for links after the first.",
+        "description": "Choose display classes for links after the first.",
         "valueType": "string",
         "options": [
           {
@@ -34480,6 +34480,26 @@
           {
             "name": "d-xl-none",
             "value": "d-xl-none"
+          },
+          {
+            "name": "d-block",
+            "value": "d-block"
+          },
+          {
+            "name": "d-sm-block",
+            "value": "d-sm-block"
+          },
+          {
+            "name": "d-md-block",
+            "value": "d-md-block"
+          },
+          {
+            "name": "d-lg-block",
+            "value": "d-lg-block"
+          },
+          {
+            "name": "d-xl-block",
+            "value": "d-xl-block"
           }
         ]
       },

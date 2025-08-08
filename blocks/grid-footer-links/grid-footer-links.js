@@ -7,14 +7,17 @@ export default function decorate(block) {
     return;
   }
   const config = children[0];
-  block.removeChild(config);
+  console.log('found config', config.outerHTML);
+  //block.removeChild(config);
 
   const links = children.slice(1)
   injectLinkWithIconClass(links);
 
-  const configClass = config.querySelector('p')?.innerText || '';
+  const configClasses = (config.querySelector('p')?.innerText || '').split(',');
   for (const link of links.slice(1)) {
-    link.classList.add(configClass);
+    for (const configClass of configClasses) {
+      link.classList.add(configClass);
+    }
   }
 
 }
