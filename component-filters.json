@@ -27,7 +27,8 @@
       "main-menu",
       "grid-col-block",
       "grid-footer-summary",
-      "grid-footer-links"
+      "grid-footer-links",
+      "grid-footer-split"
     ]
   },
   {
@@ -128,6 +129,10 @@
     "components": [
       "link-with-icon"
     ]
+  },
+  {
+    "id": "grid-footer-split",
+    "components": null
   },
   {
     "id": "grid-footer-summary",
