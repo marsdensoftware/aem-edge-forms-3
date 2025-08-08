@@ -85,17 +85,124 @@ export function decorateMain(main) {
   decorateBlocks(main);
 }
 
-/**
- * Enable spellcheck for all text inputs, textareas, and contenteditable fields.
- */
-function enableGlobalSpellcheck() {
-  const fields = document.querySelectorAll(
-    'input[type="text"], input[type="search"], textarea, [contenteditable="true"]'
-  );
-  fields.forEach(field => {
-    field.setAttribute("spellcheck", "true");
-  });
+/* ============================================================
+   PERSISTENT SPELLCHECK OVERLAY (stays after blur)
+   ------------------------------------------------------------
+   - Requires CSS:
+      .spellwrap{position:relative;display:inline-block;width:100%}
+      .spell-ghost{position:absolute;inset:0;pointer-events:none;white-space:pre-wrap;overflow:hidden;color:transparent}
+      .spell-err{ text-decoration: underline wavy; text-decoration-color: red; }
+   - Extend dictionary via: window.SPELLCHECK_EXTRA_WORDS = ['Aotearoa','Auckland']
+============================================================ */
+
+const DEMO_DICT = new Set([
+  'a','about','and','are','as','at','be','can','do','for','from','have','i',
+  'in','is','it','my','of','on','or','our','please','that','the','this',
+  'to','we','with','you','your','search','work','experience','form','name',
+]);
+
+function isWordLikelyWrong(word) {
+  if (!word) return false;
+  if (word.length < 3) return false;
+  if (/\d/.test(word)) return false;
+  const base = word.toLowerCase();
+  if (DEMO_DICT.has(base)) return false;
+  if (Array.isArray(window.SPELLCHECK_EXTRA_WORDS)
+    && window.SPELLCHECK_EXTRA_WORDS.map(w => String(w).toLowerCase()).includes(base)) {
+    return false;
+  }
+  return true;
 }
+
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightText(text) {
+  // Split into word tokens while preserving spaces/punctuation
+  const parts = text.split(/(\b[A-Za-z']+\b)/g);
+  return parts.map(tok => {
+    if (/^\b[A-Za-z']+\b$/.test(tok) && isWordLikelyWrong(tok)) {
+      return `<span class="spell-err">${escapeHtml(tok)}</span>`;
+    }
+    return escapeHtml(tok);
+  }).join('');
+}
+
+function copyTextStyles(fromEl, toEl) {
+  const cs = getComputedStyle(fromEl);
+  const props = [
+    'font','fontSize','fontFamily','fontWeight','lineHeight','letterSpacing',
+    'textTransform','textAlign',
+    'paddingTop','paddingRight','paddingBottom','paddingLeft',
+    'borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth',
+    'boxSizing',
+  ];
+  props.forEach(p => { toEl.style[p] = cs[p]; });
+  toEl.style.borderRadius = cs.borderRadius;
+}
+
+function attachPersistentSpellcheck(field) {
+  if (!field || field.__spellAttached) return;
+  field.__spellAttached = true;
+
+  // Wrap field so overlay can sit on top
+  const wrap = document.createElement('div');
+  wrap.className = 'spellwrap';
+  field.parentNode.insertBefore(wrap, field);
+  wrap.appendChild(field);
+
+  const ghost = document.createElement('div');
+  ghost.className = 'spell-ghost';
+  wrap.appendChild(ghost);
+
+  const syncStyles = () => {
+    copyTextStyles(field, ghost);
+    ghost.style.width = `${field.offsetWidth}px`;
+    ghost.style.height = `${field.offsetHeight}px`;
+  };
+
+  const render = () => {
+    const val = field.matches('[contenteditable="true"]') ? (field.innerText || '') : (field.value || '');
+    ghost.innerHTML = highlightText(val);
+  };
+
+  const update = () => { syncStyles(); render(); };
+
+  // Initial paint
+  update();
+
+  // Keep in sync with user actions and layout changes
+  ['input','change','blur','focus','keyup'].forEach(e => field.addEventListener(e, update));
+  window.addEventListener('resize', update);
+
+  // For contenteditable where mutations may not fire standard input events
+  if (field.isContentEditable || field.matches('[contenteditable="true"]')) {
+    const mo = new MutationObserver(update);
+    mo.observe(field, { characterData: true, subtree: true, childList: true });
+  }
+}
+
+function enablePersistentSpellcheck(root = document) {
+  const sel = 'input[type="text"], input[type="search"], textarea, [contenteditable="true"]';
+  root.querySelectorAll(sel).forEach(attachPersistentSpellcheck);
+
+  // Also catch fields added later (Universal Author can inject content dynamically)
+  const mo = new MutationObserver((mutations) => {
+    mutations.forEach((m) => {
+      m.addedNodes.forEach((n) => {
+        if (!(n instanceof Element)) return;
+        if (n.matches?.(sel)) attachPersistentSpellcheck(n);
+        n.querySelectorAll?.(sel).forEach(attachPersistentSpellcheck);
+      });
+    });
+  });
+  mo.observe(root.body || root, { childList: true, subtree: true });
+}
+
+/* ============================================================
+   PAGE LIFECYCLE
+============================================================ */
 
 /**
  * Loads everything needed to get to LCP.
@@ -112,16 +219,13 @@ async function loadEager(doc) {
   }
 
   try {
-    /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
+    // if desktop (proxy for fast connection) or fonts already loaded, load fonts.css
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
       loadFonts();
     }
   } catch (e) {
     // do nothing
   }
-
-  // Enable spellcheck after main content is ready
-  enableGlobalSpellcheck();
 }
 
 /**
@@ -155,6 +259,8 @@ function loadDelayed() {
 
 async function loadPage() {
   await loadEager(document);
+  // Turn on our persistent spellcheck overlay for all existing + future fields
+  enablePersistentSpellcheck(document);
   await loadLazy(document);
   loadDelayed();
 }

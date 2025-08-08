@@ -107,3 +107,25 @@ textarea {
     background-color: $color-shade-blue-10;
   }
 }
+
+/* Persistent spellcheck overlay */
+.spellwrap {
+  position: relative;
+  display: inline-block; /* lets overlay sit exactly over the field */
+  width: 100%;
+}
+
+.spell-ghost {
+  position: absolute;
+  inset: 0;              /* top/right/bottom/left: 0 */
+  pointer-events: none;  /* clicks go to the real input */
+  white-space: pre-wrap; /* respect newlines for textareas */
+  overflow: hidden;
+  color: transparent;    /* hide the overlay text itself */
+}
+
+/* Our misspelling decoration */
+.spell-err {
+  text-decoration: underline wavy;
+  text-decoration-color: red;
+}
