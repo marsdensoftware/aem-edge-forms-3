@@ -33,7 +33,7 @@
           "valueType": "string",
           "options": [
             {"name": "Row", "value": "row"},
-            {"name": "Row + Hide until loaded", "value": "hide-until-loaded"}
+            {"name": "Hide until loaded", "value": "hide-until-loaded"}
           ]
         },
         {
