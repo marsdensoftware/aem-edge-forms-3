@@ -26,7 +26,8 @@
       "auth-redirect",
       "main-menu",
       "grid-col-block",
-      "grid-footer-summary"
+      "grid-footer-summary",
+      "grid-footer-links"
     ]
   },
   {
@@ -121,6 +122,12 @@
   {
     "id": "grid-col-block",
     "components": null
+  },
+  {
+    "id": "grid-footer-links",
+    "components": [
+      "link-with-icon"
+    ]
   },
   {
     "id": "grid-footer-summary",

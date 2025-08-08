@@ -34,6 +34,9 @@
           "name": "summary",
           "label": "Summary",
           "multi": false
+        },
+        {
+          "...": "../../models/_responsive-columns-component-v5.json"
         }
       ]
     }

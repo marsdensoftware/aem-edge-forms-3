@@ -1,4 +1,4 @@
-function purgeLinkWithIconBug(block) {
+export function purgeLinkWithIconBug(block) {
   const children = [...block.children];
   if (children.length != 4) {
     return;
@@ -14,15 +14,19 @@ function purgeLinkWithIconBug(block) {
   block.removeChild(last);
 }
 
+export function injectLinkWithIconClass(elements) {
+  for (const e of elements) {
+    console.log('adding link-with-icon class to', e.outerHTML);
+    e.classList.add('link-with-icon');
+    purgeLinkWithIconBug(e);
+  }
+}
+
 export default function decorate(block) {
   console.log('decorate footer summary', block.outerHTML);
   const children = [...block.children];
   if (children.length < 3) {
     return;
   }
-  for (const child of children.slice(2)) {
-    console.log('adding link-with-icon class to', child.outerHTML);
-    child.classList.add('link-with-icon');
-    purgeLinkWithIconBug(child);
-  }
+  injectLinkWithIconClass(children.slice(2));
 }
