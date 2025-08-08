@@ -1,0 +1,43 @@
+@use '../../styles/settings' as *;
+
+.main-menu {
+  padding: $spacing-400 $spacing-450;
+  background-color: $color-white;
+}
+
+.main-menu__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // !!! Why AEM need to add extra div?
+  div:first-child {
+    display: none;
+  }
+}
+
+.main-menu__logo {
+  display: block;
+  width: 200px;
+  height: 32px;
+  background-image: url('/images/msd-logo-new.svg');
+  background-position: left top;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  span {
+    @extend %visually-hidden;
+  }
+}
+
+.main-menu__user-button {
+  @include elevation-1;
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 2px solid $color-shade-navy-40;
+  border-radius: $border-radius-round;
+  background-image: url('/icons/icon-user.svg');
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+}
