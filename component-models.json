@@ -35898,13 +35898,8 @@
             "name": "Hide until loaded",
             "value": "hide-until-loaded"
           }
-        ]
-      },
-      {
-        "component": "text",
-        "name": "cols-config",
-        "label": "Columns Config",
-        "description": "Array containing column configs for this row, e.g. {3,2}"
+        ],
+        "description": "Classes to apply to the row section. Row must be selected for bootstrap to work."
       },
       {
         "component": "select",
