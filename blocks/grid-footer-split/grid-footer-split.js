@@ -22,18 +22,11 @@ export default function decorate(block) {
     console.log("subcol has config", configs.outerHTML);
   }
 
-
-  const innerRow = document.createElement('div');
   for (const subcol of subcols) {
-    block.removeChild(subcol);
-    innerRow.appendChild(subcol);
+    block.appendChild(subcol);
+    //block.classList.add();
     // TODO inject config
   }
-
-  // TODO if the block classes get hoist to the wrapper, then the block should be the row
-  // and in that case, the links need to be col? or col-12? or col-{parent-width}????
-  block.append(innerRow); // wrap and move subcolumns to the end
-  // TODO decorate sub grid? maybe need to wrap in a row?
 }
 
 /*
