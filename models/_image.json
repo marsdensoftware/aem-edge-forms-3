@@ -27,9 +27,6 @@
           "component": "text",
           "name": "imageAlt",
           "label": "Alt Text"
-        },
-        {
-          "...": "../models/_responsive-columns-component-v5.json"
         }
       ]
     }

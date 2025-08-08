@@ -92,20 +92,6 @@
               "value": "right"
             }
           ]
-        },
-        {
-          "component": "select",
-          "name": "Style",
-          "label": "Style",
-          "options": [
-            {
-              "name": "test-style",
-              "value": "test-style"
-            }
-          ]
-        },
-        {
-          "...": "../models/_responsive-columns-component-v5.json"
         }
       ]
     }

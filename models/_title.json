@@ -54,19 +54,6 @@
               "value": "h6"
             }
           ]
-        },
-        {
-          "component": "multiselect",
-          "name": "classes",
-          "value": "",
-          "label": "Classes",
-          "description": "Choose where you want the component to be placed.",
-          "valueType": "string",
-          "options": [
-            {
-              "...": "../models/_responsive-columns-options.json"
-            }
-          ]
         }
       ]
     }
