@@ -3,7 +3,6 @@
     "id": "main",
     "components": [
       "section",
-      "container-section",
       "row-section"
     ]
   },
@@ -70,10 +69,6 @@
       "button",
       "title"
     ]
-  },
-  {
-    "id": "container-section",
-    "components": []
   },
   {
     "id": "form",
