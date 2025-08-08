@@ -91,7 +91,7 @@ export function decorateMain(main) {
 ============================================================ */
 
 const LT_ENDPOINT = 'https://api.languagetool.org/v2/check'; // public instance (rate-limited)
-const LT_LANG = 'en-NZ'; 
+const LT_LANG = 'en-GB'; // using GB vs NZ as it has a larger library
 
 // Simple debounce so we don’t hammer the API while typing
 function debounce(fn, delay = 350) {
@@ -105,10 +105,6 @@ function debounce(fn, delay = 350) {
 // Per-field cache to avoid refetching same text
 const spellCache = new WeakMap(); // field -> { txt, ranges }
 
-/**
- * Ask LanguageTool for spelling errors.
- * Returns an array of { start, end } character ranges to underline.
- */
 async function fetchSpellingRanges(text) {
   if (!text || !text.trim()) return [];
   const params = new URLSearchParams();
@@ -124,13 +120,15 @@ async function fetchSpellingRanges(text) {
   if (!res.ok) throw new Error('Spell API error: ' + res.status);
   const data = await res.json();
 
-  // Keep only spelling-type matches
   const ranges = [];
   if (data && Array.isArray(data.matches)) {
     for (const m of data.matches) {
+      // include misspellings AND confusion pairs (e.g., shinning → shining)
       const isSpelling =
         (m.rule && m.rule.issueType === 'misspelling') ||
+        (m.rule && (m.rule.id === 'CONFUSION_RULE' || m.rule.subId === 'CONFUSION_RULE')) ||
         (m.rule && m.rule.category && /TYPOS|MISSPELLING/i.test(m.rule.category.id || ''));
+
       if (isSpelling && typeof m.offset === 'number' && typeof m.length === 'number') {
         ranges.push({ start: m.offset, end: m.offset + m.length });
       }
@@ -138,6 +136,7 @@ async function fetchSpellingRanges(text) {
   }
   return ranges;
 }
+
 
 function escapeHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
