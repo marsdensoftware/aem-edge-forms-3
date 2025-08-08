@@ -87,11 +87,11 @@ export function decorateMain(main) {
 /* ============================================================
    PERSISTENT SPELLCHECK OVERLAY — API-backed (LanguageTool)
    Stays visible after blur. Works on inputs, textareas,
-   and contenteditable fields. Make sure to include CSS below.
+   and contenteditable fields. CSS is in _input.scss.
 ============================================================ */
 
 const LT_ENDPOINT = 'https://api.languagetool.org/v2/check'; // public instance (rate-limited)
-const LT_LANG = 'en-NZ'; // change to 'en-GB' or 'en-US' if you prefer
+const LT_LANG = 'en-NZ'; 
 
 // Simple debounce so we don’t hammer the API while typing
 function debounce(fn, delay = 350) {
