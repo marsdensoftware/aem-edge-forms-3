@@ -35895,7 +35895,7 @@
             "value": "row"
           },
           {
-            "name": "Row + Hide until loaded",
+            "name": "Hide until loaded",
             "value": "hide-until-loaded"
           }
         ]
