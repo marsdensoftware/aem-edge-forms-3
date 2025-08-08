@@ -542,7 +542,7 @@ function liftBootstrapColumns(main) {
 function extractBootstrapColumnClasses(e) {
   return [...e.classList].filter((className) => {
     const parts = className.split('-');
-    return parts.length > 0 && ['col', 'offset'].includes(parts[0]);
+    return parts.length > 0 && ['col', 'offset', 'order'].includes(parts[0]);
   });
 }
 
