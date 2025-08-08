@@ -34647,7 +34647,7 @@
         "component": "richtext",
         "valueType": "string",
         "name": "subcolumn2",
-        "label": "Column 2",
+        "label": "Subcolumn 2",
         "multi": false
       },
       {
