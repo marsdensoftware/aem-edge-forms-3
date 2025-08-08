@@ -15,6 +15,11 @@ class RepeatModal extends Modal {
 
   showModal() {
     super.showModal();
+
+    this.dialog.addEventListener('close', () => {
+      this.panel.dataset.visible = false;
+    });
+
     this.panel.dataset.visible = true;
   }
 
@@ -295,7 +300,7 @@ export class RepeatablePanel {
     this._entryModified(entry);
 
     this.#triggerChange();
-    
+
     this._renderOverview();
   }
 
