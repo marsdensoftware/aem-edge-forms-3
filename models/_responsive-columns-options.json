@@ -75,7 +75,5 @@
   { "name": "col-lg-9", "value": "col-lg-9" },
   { "name": "col-lg-10", "value": "col-lg-10" },
   { "name": "col-lg-11", "value": "col-lg-11" },
-  { "name": "col-lg-12", "value": "col-lg-12" },
-
-  {"name": "lightblue", "value": "lightblue"}
+  { "name": "col-lg-12", "value": "col-lg-12" }
 ]
