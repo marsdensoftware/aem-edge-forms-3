@@ -70,10 +70,12 @@ const handleAccountMenu = (triggerEl: Event) => {
   isAccountMenuOpen = !isAccountMenuOpen
 
   if (isAccountMenuOpen) {
+    el.classList.add('main-menu__user-button--is-active')
     accountMenu.classList.add('main-menu__account-menu--is-visible')
     return
   }
 
+  el.classList.remove('main-menu__user-button--is-active')
   accountMenu.classList.remove('main-menu__account-menu--is-visible')
 }
 

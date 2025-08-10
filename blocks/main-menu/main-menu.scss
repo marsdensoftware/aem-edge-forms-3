@@ -69,6 +69,11 @@
   }
 }
 
+.main-menu__user-button--is-active {
+  background-image: url('/icons/icon-delete-active.svg');
+  border-color: $color-primary-navy;
+}
+
 .main-menu__account-menu {
   display: none;
   list-style: none;
