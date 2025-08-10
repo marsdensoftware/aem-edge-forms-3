@@ -5,6 +5,12 @@
   background-color: $color-white;
   border-bottom: 1px solid $color-shade-navy-40;
   position: relative;
+  max-height: 76px;
+
+  @include media('desktop') {
+    padding: $spacing-650 $spacing-600 $spacing-600;
+    max-height: 117px;
+  }
 }
 
 .main-menu__inner {
@@ -31,6 +37,10 @@
   background-size: contain;
   background-repeat: no-repeat;
 
+  @include media('desktop') {
+    width: 241px;
+  }
+
   span {
     @extend %visually-hidden;
   }
@@ -49,6 +59,11 @@
   background-repeat: no-repeat;
   flex-shrink: 0;
 
+  @include media('desktop') {
+    width: 44px;
+    height: 44px;
+  }
+
   span {
     @extend %visually-hidden;
   }
@@ -63,8 +78,10 @@
   padding: 0;
   width: 100%;
   margin: 0;
+  background-color: $color-white;
 
   @include media('desktop') {
+    top: 117px;
     max-width: 343px;
     border-left: 1px solid $color-shade-navy-40;
     border-bottom: 1px solid $color-shade-navy-40;
@@ -84,12 +101,22 @@
       border-bottom: 2px solid $color-shade-navy-20;
     }
   }
+
+  &:first-child {
+    .main-menu__account-menu-link {
+      color: $color-primary-navy;
+
+      @include media('desktop') {
+        font-size: 20px;
+      }
+    }
+  }
 }
 
 .main-menu__account-menu-link {
   display: flex;
   align-items: center;
-  padding: $spacing-400;
+  padding: $spacing-400 $spacing-200;
   color: $color-accent;
   font-weight: 500;
   text-decoration: none;
@@ -97,6 +124,7 @@
 
   @include media('desktop') {
     font-size: 17px;
+    padding: $spacing-300 $spacing-200;
   }
 }
 
