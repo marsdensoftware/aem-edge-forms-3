@@ -23,7 +23,7 @@
               "valueType": "boolean"
             },
             {
-              "component": "select",
+              "component": "multiselect",
               "valueType": "string",
               "name": "classes",
               "label": "Class Name",
