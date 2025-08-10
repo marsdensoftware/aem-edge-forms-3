@@ -87,6 +87,13 @@
           ]
         },
         {
+          "component": "text",
+          "name": "stepgroup",
+          "label": "Step group",
+          "valueType": "string",
+          "value": "1"
+        },
+        {
           "...": "../../../../models/_responsive-container-component.json"
         },
         {
@@ -103,6 +110,81 @@
               "name": "repeatable",
               "label": "Make panel repeatable",
               "valueType": "boolean"
+            },
+            {
+              "component": "text",
+              "name": "cardTitle",
+              "label": "Card title",
+              "valueType": "string",
+              "description": "Generic title for the card in the overview section",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "firstEntryTitle",
+              "label": "First entry title",
+              "valueType": "string",
+              "description": "Section title for the first entry",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "additionalEntriesTitle",
+              "label": "Additional entries title",
+              "valueType": "string",
+              "description": "Section title for any additional entry",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "overviewTitle",
+              "label": "Overview title",
+              "valueType": "string",
+              "description": "Title for the overview section showing all added entries",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "addedSuccessMsg",
+              "label": "Added success message",
+              "valueType": "string",
+              "description": "Success message when a new entry is added",
+              "condition": {
+                "===": [
+                  {
+                    "var": "repeatable"
+                  },
+                  true
+                ]
+              }
             },
             {
               "component": "number",
@@ -193,10 +275,64 @@
             },
             {
               "component": "text",
+              "name": "repeatSaveButtonLabel",
+              "label": "Save Button Label",
+              "valueType": "string",
+              "value": "Save",
+              "condition": {
+                "and": [
+                  {
+                    "===": [
+                      {
+                        "var": "variant"
+                      },
+                      "addRemoveButtons"
+                    ]
+                  },
+                  {
+                    "===": [
+                      {
+                        "var": "repeatable"
+                      },
+                      true
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "component": "text",
               "name": "repeatDeleteButtonLabel",
               "label": "Delete Button Label",
               "valueType": "string",
               "value": "Delete",
+              "condition": {
+                "and": [
+                  {
+                    "===": [
+                      {
+                        "var": "variant"
+                      },
+                      "addRemoveButtons"
+                    ]
+                  },
+                  {
+                    "===": [
+                      {
+                        "var": "repeatable"
+                      },
+                      true
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "component": "text",
+              "name": "repeatCancelButtonLabel",
+              "label": "Cancel Button Label",
+              "valueType": "string",
+              "value": "Cancel",
               "condition": {
                 "and": [
                   {

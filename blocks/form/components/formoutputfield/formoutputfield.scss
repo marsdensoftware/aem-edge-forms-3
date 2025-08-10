@@ -1,0 +1,9 @@
+@use '../../../../styles/settings' as *;
+
+form fieldset.formoutputfield {
+  background: $color-shade-blue-10;
+
+  > legend {
+    display: none;
+  }
+}

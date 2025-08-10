@@ -71,6 +71,10 @@
                 {
                   "name": "Experience Based Jobs",
                   "value": "experiencedBasedJobs"
+                },
+                {
+                  "name": "Work Related Skills",
+                  "value": "workRelatedSkills"
                 }
               ]
             },
@@ -120,6 +124,10 @@
                 {
                   "name": "Experience Based Jobs",
                   "value": "experiencedBasedJobs"
+                },
+                {
+                  "name": "Experience Based Skills",
+                  "value": "experiencedBasedSkills"
                 },
                 {
                   "name": "Job Titles and Industries",

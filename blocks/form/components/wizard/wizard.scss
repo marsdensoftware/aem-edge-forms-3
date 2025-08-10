@@ -1,6 +1,7 @@
 @use '../../../../styles/settings' as *;
 @use 'wizard-theme';
 @use 'wizard-intro';
+@use 'progress-bar';
 
 .wizard {
   min-height: $wizard-body-height;
