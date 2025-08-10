@@ -21,6 +21,23 @@
               "name": "multiLine",
               "label": "Allow multiple lines",
               "valueType": "boolean"
+            },
+            {
+              "component": "select",
+              "valueType": "string",
+              "name": "classes",
+              "label": "Class Name",
+              "value": "",
+              "options": [
+                {
+                  "name": "None",
+                  "value": ""
+                },
+                {
+                  "name": "Spelling checking",
+                  "value": "spellcheck=\"true\""
+                }
+              ]
             }
           ]
         },

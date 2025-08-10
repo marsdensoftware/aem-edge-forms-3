@@ -59,10 +59,6 @@
             {
               "name": "Small paragraph",
               "value": "p-small"
-            },
-            {
-              "name": "Spelling checking",
-              "value": "spellcheck=\"true\""
             }
           ]
         },
