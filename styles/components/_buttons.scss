@@ -4,6 +4,11 @@
   @extend %button;
 }
 
+.button--hollow {
+  @extend %button;
+  @extend %button--hollow;
+}
+
 .link {
   color: $color-primary;
   box-shadow: none;
