@@ -114,7 +114,7 @@
     ]
   },
   {
-    "id": "grid-footer-links",
+    "id": "grid-column-links",
     "components": [
       "link-with-icon"
     ]
