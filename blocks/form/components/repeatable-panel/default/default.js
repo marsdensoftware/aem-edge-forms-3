@@ -52,8 +52,9 @@ export class RepeatablePanel {
 
   #overview;
   #converter;
+  #sorterFn;
 
-  constructor(el, properties, name, converter) {
+  constructor(el, properties, name, converter, sorterFn) {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
@@ -76,6 +77,7 @@ export class RepeatablePanel {
     this._repeatablePanel.classList.add('panel-repeatable-panel');
 
     this.#converter = converter || new DefaultFieldConverter();
+    this.#sorterFn = sorterFn;
 
     // create overview
     this.#overview = document.createElement('div');
@@ -112,8 +114,7 @@ export class RepeatablePanel {
       const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
       if (repeatableEntry) {
         // Find matching overview entry and remove
-        repeatableEntry.remove();
-        this._renderOverview();
+        this._delete(repeatableEntry);
       }
     });
 
@@ -167,7 +168,7 @@ export class RepeatablePanel {
     }
 
     // trigger change
-    this.#triggerChange();
+    this.#dispatchChange();
   }
 
   _noDelete() {
@@ -295,18 +296,25 @@ export class RepeatablePanel {
     buttonBar.appendChild(saveBtn);
   }
 
+  /**
+   * Remove a repeatable entry from the overview
+   */
+  _delete(repeatableEntry) {
+    repeatableEntry.remove();
+  }
+
   _save(entry) {
     entry.classList.add('saved');
     this._toggleEditMode(entry, false);
 
     this._entryModified(entry);
 
-    this.#triggerChange();
+    this.#dispatchChange();
 
     this._renderOverview();
   }
 
-  #triggerChange() {
+  #dispatchChange() {
     // Trigger event with name of the repeatable as parameter and values
     const entries = this.#getSavedEntries();
     const params = { detail: { name: this._name, entries: entries } };
@@ -506,8 +514,6 @@ export class RepeatablePanel {
       // Update
       e.replaceWith(content);
     }
-
-
   }
 
   #getSavedEntries() {
@@ -523,9 +529,13 @@ export class RepeatablePanel {
   }
 
   _renderOverview() {
-    const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+    let savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
 
     if (savedEntries.length > 0) {
+      if (this.#sorterFn) {
+        savedEntries = Array.from(savedEntries).sort(this.#sorterFn);
+      }
+      
       const content = this.#overview.querySelector('.repeatable-entries');
 
       // Clear content
@@ -560,8 +570,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
   // A field with many options with one that yields no,0,false as value
   _conditionField;
 
-  constructor(el, properties, name, converter) {
-    super(el, properties, name, converter);
+  constructor(el, properties, name, converter, sorterFn) {
+    super(el, properties, name, converter, sorterFn);
 
     // Add class
     this._repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
@@ -616,8 +626,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
     this._updateCondition();
   }
 
-  _entryModified(entry) {
-    super._entryModified(entry);
+  _save(entry) {
+    super._save(entry);
 
     this._updateCondition();
   }
@@ -640,9 +650,8 @@ export class ConditionalRepeatable extends RepeatablePanel {
     }
   }
 
-  _renderOverview() {
-    super._renderOverview();
-
+  _delete(repeatableEntry) {
+    super._delete(repeatableEntry);
     this._updateCondition();
   }
 }
