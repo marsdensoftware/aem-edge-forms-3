@@ -1,4 +1,4 @@
-import { injectLinkWithIconClass } from '../../scripts/msd/link-with-icon.js';
+import { injectNestingBugClasses } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
   const children = [...block.children];
@@ -9,7 +9,7 @@ export default function decorate(block) {
   block.removeChild(config);
 
   const links = children.slice(1);
-  injectLinkWithIconClass(links, 'link-with-icon-item');
+  injectNestingBugClasses(links, 'link-with-icon-item');
 
   const configClasses = (config.querySelector('p')?.innerText || '').split(',');
   for (const link of links.slice(1)) {

@@ -54,7 +54,7 @@
                 },
                 {
                     "component": "select",
-                    "name": "custom-classes",
+                    "name": "classes",
                     "value": "",
                     "label": "Options",
                     "valueType": "string",

@@ -1,4 +1,4 @@
-import { injectLinkWithIconClass } from '../../scripts/msd/link-with-icon.js';
+import { injectNestingBugClasses } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
   block.classList.add('row');
@@ -19,7 +19,7 @@ export default function decorate(block) {
   const inactiveConfigs = children.slice(5+nCols, 9);
   const links = children.slice(9);
 
-  injectLinkWithIconClass(links, 'link-with-icon-item');
+  injectNestingBugClasses(links, 'link-with-icon-item');
   for (const link of links) {
     link.classList.add('col-12');
   }
