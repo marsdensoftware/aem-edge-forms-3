@@ -43,7 +43,7 @@
   "filters": [
     {
       "id": "grid-column-image-text-and-links",
-      "components": ["link-with-icon"]
+      "components": ["link-with-icon", "link-with-icon-item"]
     }
   ]
 }

@@ -117,18 +117,23 @@
   {
     "id": "grid-column-image-text-and-links",
     "components": [
-      "link-with-icon"
+      "link-with-icon",
+      "link-with-icon-item"
     ]
   },
   {
     "id": "grid-column-links",
     "components": [
-      "link-with-icon"
+      "link-with-icon",
+      "link-with-icon-item"
     ]
   },
   {
     "id": "grid-column-text-subcolumns",
-    "components": null
+    "components": [
+      "link-with-icon",
+      "link-with-icon-item"
+    ]
   },
   {
     "id": "jobseekerintro",
