@@ -48,6 +48,13 @@
               "...": "../../models/_responsive-container-class-component.json"
             }
           ]
+        },
+         {
+          "component": "text",
+          "name": "additional-classes",
+          "label": "Additional classes",
+          "valueType": "string",
+          "description": "Additional custom lasses to apply to the row section. Use a comma-separated list for multiple values."
         }
       ]
     }
