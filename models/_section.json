@@ -26,13 +26,13 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "select",
-          "name": "Style",
-          "label": "Container Type",
-          "valueType": "string",
+          "component": "multiselect",
+          "name": "style",
+          "label": "Style",
           "options": [
             {
-              "...": "../models/_responsive-container-class-component.json"
+              "name": "Highlight",
+              "value": "highlight"
             }
           ]
         }
@@ -57,9 +57,7 @@
         "embed-adaptive-form",
         "account-menu",
         "auth-redirect",
-        "grid-footer-summary",
-        "grid-footer-links",
-        "grid-footer-split"
+        "main-menu"
       ]
     }
   ]
