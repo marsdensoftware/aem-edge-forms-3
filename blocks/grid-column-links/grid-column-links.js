@@ -1,4 +1,4 @@
-import { injectLinkWithIconClass } from '../../blocks/grid-footer-summary/grid-footer-summary.js';
+import { injectLinkWithIconClass } from '../../blocks/grid-column-image-text-and-links/grid-column-image-text-and-links.js';
 
 export default function decorate(block) {
   const children = [...block.children];
