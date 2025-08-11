@@ -1,6 +1,6 @@
 import { i18n } from '../../../../i18n/index.js';
-import { FIELD_NAMES as WorkExperienceFieldNames } from '../workexperience/fieldnames.js';
-import { FIELD_NAMES as EducationFieldNames } from '../education/fieldnames.js';
+import { FIELD_NAMES as WorkExperienceFieldNames, sorter as workExperienceSorter, STILL_WORKING_STATUS } from '../workexperience/fieldnames.js';
+import { FIELD_NAMES as EducationFieldNames, sorter as educationSorter, COMPLETION_STATUS } from '../education/fieldnames.js';
 import { FIELD_NAMES as DriverLicenceFieldNames } from '../driverlicence/fieldnames.js';
 import { DefaultFieldConverter, isNo } from '../utils.js'
 
@@ -17,7 +17,7 @@ class WorkExperienceConverter {
     let employmentDetails = result[WorkExperienceFieldNames.EMPLOYER_NAME].displayValue;
 
     let endYear;
-    if (stillWorking?.value == '0') {
+    if (stillWorking?.value == STILL_WORKING_STATUS.NO) {
       // No longer working
       endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
       employmentDetails += `, ${startYear} - ${endYear}`;
@@ -57,18 +57,18 @@ class EducationConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[EducationFieldNames.COMPLETION_STATUS];
-    if (completionStatus?.value == 0) {
+    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
       // Completed
       const endYear = result[EducationFieldNames.FINISH_YEAR];
       summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
     }
-    else if (completionStatus?.value == 1) {
+    else if (completionStatus?.value == COMPLETION_STATUS.IN_PROGRESS) {
       // In progress, partially completed
       summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
     }
     else {
       // Not completed
-      summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${completionStatus.displayValue}`);
+      summary.push(`${i18n('Started')} ${startYear?.displayValue}`, `${completionStatus?.displayValue}`);
     }
 
     const value = summary?.length ? `${summary.join(', ')}.` : '';
@@ -318,12 +318,17 @@ export class Summarizer {
     return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
   }
 
-  static defaultRepeatableSummarizer(stepName, el, properties) {
+  static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
     const form = el.closest('form');
 
     let contents = [];
 
-    const entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
+    let entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
+
+    if (sorterFn) {
+      entries = Array.from(entries).sort(sorterFn);
+    }
+
     entries.forEach(entry => {
       let content = Summarizer.getItemContent(entry, stepName);
       contents.push(content);
@@ -380,7 +385,11 @@ export class Summarizer {
   }
 
   static experience(el, properties) {
-    el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_work_experiences', el, properties);
+    el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_work_experiences', el, properties, workExperienceSorter);
+  }
+
+  static education(el, properties) {
+    el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_educations', el, properties, educationSorter);
   }
 
   static languages(el, properties) {
@@ -471,10 +480,6 @@ export class Summarizer {
 
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     el.innerHTML = content;
-  }
-
-  static education(el, properties) {
-    el.innerHTML = Summarizer.defaultRepeatableSummarizer('panel_educations', el, properties);
   }
 
   static work_related_skills(el, properties) {
