@@ -119,7 +119,7 @@
   "filters": [
     {
       "id": "grid-column-text-subcolumns",
-      "components": null
+      "components": ["link-with-icon", "link-with-icon-item"]
     }
   ]
 }
