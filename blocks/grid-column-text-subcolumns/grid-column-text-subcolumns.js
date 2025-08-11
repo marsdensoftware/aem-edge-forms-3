@@ -11,6 +11,7 @@ export default function decorate(block) {
   if (!Number.isSafeInteger(nCols) || nCols < 1 || 4 < nCols) {
     return;
   }
+  block.removeChild(children[4]);
   const activeSubcols = children.slice(0, nCols);
   const inactiveSubcols = children.slice(nCols, 4);
 
