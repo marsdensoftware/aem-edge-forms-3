@@ -19,7 +19,7 @@ export default function decorate(block) {
   const inactiveConfigs = children.slice(5+nCols, 9);
   const links = children.slice(9);
 
-  injectNestingBugClasses(links, 'link-with-icon-item');
+  injectNestingBugClasses(links, 'link-with-icon');
   for (const link of links) {
     link.classList.add('col-12');
   }

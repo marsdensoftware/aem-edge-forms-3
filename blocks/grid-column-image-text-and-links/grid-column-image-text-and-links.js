@@ -5,5 +5,5 @@ export default function decorate(block) {
   if (children.length < 3) {
     return;
   }
-  injectNestingBugClasses(children.slice(2), 'link-with-icon-item');
+  injectNestingBugClasses(children.slice(2), 'link-with-icon');
 }
