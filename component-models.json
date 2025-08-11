@@ -34273,7 +34273,7 @@
     ]
   },
   {
-    "id": "grid-footer-links",
+    "id": "grid-column-links",
     "fields": [
       {
         "component": "multiselect",
