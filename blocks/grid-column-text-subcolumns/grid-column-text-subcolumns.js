@@ -2,14 +2,12 @@ import { injectLinkWithIconClass } from '../../blocks/grid-column-image-text-and
 
 export default function decorate(block) {
   block.classList.add('row');
-  console.log("got block", block.outerHTML);
 
   const children = [...block.children];
   if (children.length < 9) {
     return;
   }
   let nCols = parseInt(children[4]?.innerText, 10);
-  console.log('got nCols', nCols, typeof(nCols));
   if (!Number.isSafeInteger(nCols) || nCols < 1 || 4 < nCols) {
     return;
   }
@@ -37,7 +35,7 @@ export default function decorate(block) {
 
     const values = config.querySelector('p')?.innerText || '';
     for (const value of values.split(',')) {
-      subcols[index].classList.add(value)
+      activeSubcols[index].classList.add(value)
     }
   }
 
