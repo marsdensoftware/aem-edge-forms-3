@@ -2,15 +2,16 @@ import { injectLinkWithIconClass } from '../../blocks/grid-column-image-text-and
 
 export default function decorate(block) {
   block.classList.add('row');
+  console.log("got block", block.outerHTML);
 
   const children = [...block.children];
   if (children.length < 9) {
     return;
   }
-  let nCols = children[4]; // TODO does this come out as an integer?
+  let nCols = parseInt(children[4]?.innerText, 10);
   console.log('got nCols', nCols, typeof(nCols));
-  if (nCols < 1 || 4 < nCols) {
-    nCols = 2;
+  if (!Number.isSafeInteger(nCols) || nCols < 1 || 4 < nCols) {
+    return;
   }
   const activeSubcols = children.slice(0, nCols);
   const inactiveSubcols = children.slice(nCols, 4);
