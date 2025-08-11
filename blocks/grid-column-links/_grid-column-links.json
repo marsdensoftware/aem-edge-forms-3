@@ -50,7 +50,7 @@
   "filters": [
     {
       "id": "grid-column-links",
-      "components": ["link-with-icon", "link-with-icon-item"]
+      "components": ["link-with-icon-item"]
     }
   ]
 }

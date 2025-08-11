@@ -36570,7 +36570,7 @@
       },
       {
         "component": "select",
-        "name": "classes",
+        "name": "custom-classes",
         "value": "",
         "label": "Options",
         "valueType": "string",
