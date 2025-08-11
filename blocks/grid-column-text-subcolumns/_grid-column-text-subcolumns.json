@@ -36,6 +36,29 @@
           "multi": false
         },
         {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "subcolumn3",
+          "label": "Subcolumn 3",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "subcolumn4",
+          "label": "Subcolumn 4",
+          "multi": false
+        },
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "active-columns",
+          "label": "Active columns",
+          "multi": false,
+          "value": 2,
+          "description": "How many columns to use. Values outside the range 1-4 will be ignored."
+        },
+        {
           "...": "../../models/_responsive-columns-component-v5.json"
         },
         {
@@ -57,6 +80,32 @@
           "value": "",
           "label": "Subcolumn 2 grid settings",
           "description": "Choose where you want subcolumn 2 to be placed.",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../../models/_responsive-columns-options.json"
+            }
+          ]
+        },
+        {
+          "component": "multiselect",
+          "name": "subcolumn3-classes",
+          "value": "",
+          "label": "Subcolumn 3 grid settings",
+          "description": "Choose where you want subcolumn 3 to be placed.",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../../models/_responsive-columns-options.json"
+            }
+          ]
+        },
+        {
+          "component": "multiselect",
+          "name": "subcolumn4-classes",
+          "value": "",
+          "label": "Subcolumn 4 grid settings",
+          "description": "Choose where you want subcolumn 4 to be placed.",
           "valueType": "string",
           "options": [
             {
