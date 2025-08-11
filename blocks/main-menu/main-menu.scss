@@ -1,15 +1,18 @@
 @use '../../styles/settings' as *;
 
+$nav-height-mobile: 76px;
+$nav-height-desktop: 117px;
+
 .main-menu {
   padding: $spacing-400 $spacing-450;
   background-color: $color-white;
   border-bottom: 1px solid $color-shade-navy-40;
   position: relative;
-  max-height: 76px;
+  max-height: $nav-height-mobile;
 
   @include media('desktop') {
     padding: $spacing-650 $spacing-600 $spacing-600;
-    max-height: 117px;
+    max-height: $nav-height-desktop;
   }
 }
 
@@ -79,14 +82,14 @@
   list-style: none;
   position: absolute;
   right: 0;
-  top: 76px;
+  top: $nav-height-mobile;
   padding: 0;
   width: 100%;
   margin: 0;
   background-color: $color-white;
 
   @include media('desktop') {
-    top: 117px;
+    top: $nav-height-desktop;
     max-width: 343px;
     border-left: 1px solid $color-shade-navy-40;
     border-bottom: 1px solid $color-shade-navy-40;
