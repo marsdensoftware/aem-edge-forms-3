@@ -34931,7 +34931,7 @@
     ]
   },
   {
-    "id": "grid-footer-split",
+    "id": "grid-column-text-subcolumns",
     "fields": [
       {
         "component": "richtext",
