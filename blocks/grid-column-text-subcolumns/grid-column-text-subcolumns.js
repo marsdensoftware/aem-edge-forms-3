@@ -1,4 +1,4 @@
-import { injectLinkWithIconClass } from '../../blocks/grid-column-image-text-and-links/grid-column-image-text-and-links.js';
+import { injectLinkWithIconClass } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
   block.classList.add('row');
@@ -17,9 +17,9 @@ export default function decorate(block) {
 
   const activeConfigs = children.slice(5, 5+nCols);
   const inactiveConfigs = children.slice(5+nCols, 9);
-  const links = children.slice(9)
+  const links = children.slice(9);
 
-  injectLinkWithIconClass(links);
+  injectLinkWithIconClass(links, 'link-with-icon-item');
   for (const link of links) {
     link.classList.add('col-12');
   }
