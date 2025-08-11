@@ -115,6 +115,12 @@
     ]
   },
   {
+    "id": "grid-column-image-text-and-links",
+    "components": [
+      "link-with-icon"
+    ]
+  },
+  {
     "id": "grid-column-links",
     "components": [
       "link-with-icon"
@@ -123,12 +129,6 @@
   {
     "id": "grid-footer-split",
     "components": null
-  },
-  {
-    "id": "grid-footer-summary",
-    "components": [
-      "link-with-icon"
-    ]
   },
   {
     "id": "jobseekerintro",
