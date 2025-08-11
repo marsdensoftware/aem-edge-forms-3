@@ -493,12 +493,11 @@ function decorateSections(main) {
 
     // Process section metadata
     const sectionMeta = section.querySelector('div.section-metadata');
-    console.log('got meta' + sectionMeta.outerHTML);
     if (sectionMeta) {
       const meta = readBlockConfig(sectionMeta);
       Object.keys(meta).forEach((key) => {
-        if (key === 'style') {
-          const styles = meta.style
+        if (['style', 'additional-classes'].includes(key)) {
+          const styles = meta[key]
             .split(',')
             .filter((style) => style)
             .map((style) => toClassName(style.trim()));
