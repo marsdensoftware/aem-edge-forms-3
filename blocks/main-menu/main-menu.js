@@ -117,6 +117,27 @@ function decorate(block) {
         list.append(link);
         accountMenu.append(list);
     });
+    const logoutButton = document.createElement('button');
+    logoutButton.classList.add('main-menu__account-menu-logout', 'button--hollow');
+    logoutButton.innerText = 'Log out';
+    const listLogout = document.createElement('li');
+    listLogout.classList.add('main-menu__account-menu-item');
+    listLogout.setAttribute('viewbox', '0 0 24 24');
+    listLogout.setAttribute('height', '24');
+    listLogout.setAttribute('width', '24');
+    const logoutIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    logoutIcon.classList.add('main-menu__account-menu-logout-icon');
+    logoutIcon.innerHTML = `<g clip-path="url(#clip0_3635_3348)">
+<path d="M3.83366 4.50008C3.83366 2.08693 5.81972 0.666748 8.00033 0.666748C10.1809 0.666748 12.167 2.08693 12.167 4.50008H10.5003C10.5003 3.23134 9.50161 2.33341 8.00033 2.33341C6.49903 2.33341 5.50033 3.23134 5.50033 4.50008V7.00008H14.8337V16.6667H1.16699V7.00008H3.83366V4.50008ZM2.83366 15.0001H13.167V8.66675H2.83366V15.0001ZM8.83366 10.5001V13.1667H7.16699V10.5001H8.83366Z" fill="#333333"/>
+</g>
+<defs>
+<clipPath id="clip0_3635_3348">
+<rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>`;
+    logoutButton.prepend(logoutIcon);
+    listLogout.appendChild(logoutButton);
+    accountMenu.append(listLogout);
     userButton.addEventListener('click', handleAccountMenu);
     mainMenuInner.append(mainAction, userButton, accountMenu);
 }

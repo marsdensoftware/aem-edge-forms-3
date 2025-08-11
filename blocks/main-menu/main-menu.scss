@@ -159,3 +159,17 @@
     }
   }
 }
+
+.main-menu__account-menu-logout {
+  @include elevation-1;
+  margin: $spacing-450 0;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+}
+
+.main-menu__account-menu-logout-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: $spacing-200;
+}
