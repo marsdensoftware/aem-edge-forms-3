@@ -56,7 +56,8 @@
         "form",
         "embed-adaptive-form",
         "account-menu",
-        "auth-redirect"
+        "auth-redirect",
+        "main-menu"
       ]
     }
   ]
