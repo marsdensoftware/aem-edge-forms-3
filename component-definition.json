@@ -2124,21 +2124,6 @@
           }
         },
         {
-          "title": "Link with icon item",
-          "id": "link-with-icon-item",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/blockitem",
-                "template": {
-                  "name": "Link with icon item",
-                  "model": "link-with-icon-item"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Link with icon",
           "id": "link-with-icon",
           "plugins": {

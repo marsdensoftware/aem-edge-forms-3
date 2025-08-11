@@ -117,19 +117,19 @@
   {
     "id": "grid-column-image-text-and-links",
     "components": [
-      "link-with-icon-item"
+      "link-with-icon"
     ]
   },
   {
     "id": "grid-column-links",
     "components": [
-      "link-with-icon-item"
+      "link-with-icon"
     ]
   },
   {
     "id": "grid-column-text-subcolumns",
     "components": [
-      "link-with-icon-item"
+      "link-with-icon"
     ]
   },
   {

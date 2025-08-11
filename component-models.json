@@ -36534,68 +36534,6 @@
     ]
   },
   {
-    "id": "link-with-icon-item",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "icon",
-        "label": "Icon",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "iconAlt",
-        "label": "Icon alt text",
-        "required": true
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link",
-        "valueType": "string"
-      },
-      {
-        "component": "boolean",
-        "label": "Open link in new tab",
-        "name": "linkOpenInNewTab",
-        "valueType": "boolean"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link text",
-        "valueType": "string"
-      },
-      {
-        "component": "select",
-        "name": "classes",
-        "value": "",
-        "label": "Options",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Small with icon on left",
-            "value": ""
-          },
-          {
-            "name": "Small with icon on right",
-            "value": "icon--right"
-          },
-          {
-            "name": "Large with icon on left",
-            "value": "large"
-          },
-          {
-            "name": "Large with icon on right",
-            "value": "large icon--right"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "link-with-icon",
     "fields": [
       {
