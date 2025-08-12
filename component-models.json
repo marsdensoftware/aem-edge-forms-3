@@ -354,6 +354,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -34471,6 +34479,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -34828,6 +34844,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -35172,6 +35196,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -35472,6 +35504,14 @@
           {
             "name": "col",
             "value": "col"
+          },
+          {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
           },
           {
             "name": "col-1",
@@ -35776,6 +35816,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -36078,6 +36126,14 @@
             "value": "col"
           },
           {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -36378,6 +36434,14 @@
           {
             "name": "col",
             "value": "col"
+          },
+          {
+            "name": "col-md",
+            "value": "col-md"
+          },
+          {
+            "name": "col-lg",
+            "value": "col-lg"
           },
           {
             "name": "col-1",
