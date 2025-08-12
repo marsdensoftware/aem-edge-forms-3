@@ -350,6 +350,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -34413,6 +34417,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -34766,6 +34774,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -35106,6 +35118,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -35402,6 +35418,10 @@
           {
             "name": "offset-lg-12",
             "value": "offset-lg-12"
+          },
+          {
+            "name": "col",
+            "value": "col"
           },
           {
             "name": "col-1",
@@ -35702,6 +35722,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -36000,6 +36024,10 @@
             "value": "offset-lg-12"
           },
           {
+            "name": "col",
+            "value": "col"
+          },
+          {
             "name": "col-1",
             "value": "col-1"
           },
@@ -36296,6 +36324,10 @@
           {
             "name": "offset-lg-12",
             "value": "offset-lg-12"
+          },
+          {
+            "name": "col",
+            "value": "col"
           },
           {
             "name": "col-1",
