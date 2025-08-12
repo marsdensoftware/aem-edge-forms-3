@@ -35,6 +35,19 @@
           "multi": false
         },
         {
+          "component": "multiselect",
+          "name": "wrap-links-classes",
+          "value": "",
+          "label": "Display classes for links",
+          "description": "Choose display classes for links. If nothing is selected, they will not be grouped in a container div.",
+          "valueType": "string",
+          "options": [
+            {
+              "...": "../../models/_responsive-display-options.json"
+            }
+          ]
+        },
+        {
           "...": "../../models/_responsive-columns-component-v5.json"
         }
       ]
