@@ -88,14 +88,8 @@ export const createProgressBar = () => {
     barLength3 = 100 / step3GroupLength;
 };
 export const trackProgress = () => {
-    // Track where it is in the steps
-    // Utility to parse ints safely with a fallback
-    const toInt = (val, fallback = -1) => {
-        const n = Number.parseInt(String(val !== null && val !== void 0 ? val : ''), 10);
-        return Number.isFinite(n) ? n : fallback;
-    };
     const currentWizard = document.querySelector('.current-wizard-step');
-    const wizardIdx = toInt(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'), -1);
+    const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
     const mainWizard = document.querySelector('fieldset.wizard');
     const fromReview = (mainWizard === null || mainWizard === void 0 ? void 0 : mainWizard.classList.contains('from-review')) || false;
     const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1;

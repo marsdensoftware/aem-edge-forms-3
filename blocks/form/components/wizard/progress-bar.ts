@@ -117,20 +117,12 @@ export const createProgressBar = () => {
 }
 
 export const trackProgress = () => {
-  // Track where it is in the steps
-  // Utility to parse ints safely with a fallback
-  const toInt = (val: string | null | undefined, fallback = -1): number => {
-    const n = Number.parseInt(String(val ?? ''), 10)
-    return Number.isFinite(n) ? n : fallback
-  }
-
   const currentWizard = document.querySelector<HTMLElement>(
     '.current-wizard-step',
   )
-  const wizardIdx = toInt(currentWizard?.getAttribute('data-index'), -1)  
+  const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'))
   const mainWizard = document.querySelector<HTMLElement>('fieldset.wizard')
   const fromReview = mainWizard?.classList.contains('from-review') || false
-
   const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1
 
   // Reset progress bar state
