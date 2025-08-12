@@ -30,5 +30,21 @@ function injectNestingBugClasses(elements, blockName) {
   }
 }
 
+function handleOpenInNewTab(block) {
+  const children = [...block.children];
+  if (children.length != 3) {
+    return;
+  }
+  const openInNewTab = children[2];
+  if ((openInNewTab.querySelector('p')?.innerText || '').trim() === 'true') {
+    const link = children[1].querySelector('a');
+    if (link) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  }
+  block.removeChild(openInNewTab);
+}
+
 /* eslint-disable-next-line object-curly-newline */
-export { extractNestingBugClasses, injectNestingBugClasses }
+export { extractNestingBugClasses, injectNestingBugClasses, handleOpenInNewTab }

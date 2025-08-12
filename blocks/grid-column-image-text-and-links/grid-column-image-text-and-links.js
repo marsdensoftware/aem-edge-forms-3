@@ -1,4 +1,4 @@
-import { injectNestingBugClasses } from '../../scripts/msd/link-with-icon.js';
+import { injectNestingBugClasses, handleOpenInNewTab } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
   const children = [...block.children];
@@ -7,6 +7,9 @@ export default function decorate(block) {
   }
   const links = children.slice(3);
   injectNestingBugClasses(links, 'link-with-icon');
+  for (const link of links) {
+    handleOpenInNewTab(link);
+  }
 
   const config = (children[2].querySelector('p')?.innerText || '').trim();
   if (!config) {
