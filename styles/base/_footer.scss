@@ -22,9 +22,9 @@ picture {
 /* =========================================================
    GLOBAL TEXT STYLES (shared across footer sections)
 ========================================================= */
-.grid-footer-links-container,
-.grid-footer-summary-container,
-.grid-footer-split-container {
+.grid-column-links-container,
+.grid-column-image-text-and-links-container,
+.grid-column-text-subcolumns-container {
   a {
     display: inline-flex;
     align-items: center;
@@ -60,7 +60,7 @@ picture {
    FOOTER SPLIT — COLUMN PARAGRAPH TIERS
    (first, second, and remaining <p> in each column)
 ========================================================= */
-.grid-footer-split-wrapper {
+.grid-column-text-subcolumns-wrapper {
   .col-6.col-lg-12 {
     > div {
       p {
@@ -90,7 +90,7 @@ picture {
 }
 
 /* =========================================================
-   JUST the second column inside .grid-footer-split
+   JUST the second column inside .grid-column-text-subcolumns
    Your structure is:
    - child 1: .link-with-icon
    - child 2: .col-6.col-lg-12 (FOR CLIENTS)
@@ -98,7 +98,7 @@ picture {
 ========================================================= */
 
 /* Fallback based on actual sibling order */
-.grid-footer-split {
+.grid-column-text-subcolumns {
   > div.col-6.col-lg-12:nth-of-type(3) {
     margin-top: 20px;
   }
@@ -106,7 +106,7 @@ picture {
 
 /* Modern, robust selector (only if supported by browser) */
 @supports selector(.x:nth-of-type(2 of .y)) {
-  .grid-footer-split {
+  .grid-column-text-subcolumns {
     > .col-6.col-lg-12:nth-of-type(2 of .col-6.col-lg-12) {
       margin-top: 20px;
     }
