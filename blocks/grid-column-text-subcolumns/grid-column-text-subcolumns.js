@@ -36,6 +36,9 @@ export default function decorate(block) {
 
     const values = config.querySelector('p')?.innerText || '';
     for (const value of values.split(',')) {
+      if (!value) {
+        continue;
+      }
       activeSubcols[index].classList.add(value)
     }
   }

@@ -14,6 +14,9 @@ export default function decorate(block) {
   const configClasses = (config.querySelector('p')?.innerText || '').split(',');
   for (const link of links.slice(1)) {
     for (const configClass of configClasses) {
+      if (!configClass) {
+        continue;
+      }
       link.classList.add(configClass);
     }
   }
