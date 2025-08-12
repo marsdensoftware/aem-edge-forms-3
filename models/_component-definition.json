@@ -11,12 +11,7 @@
           "...": "./_title.json#/definitions"
         },
         {
-          "...": "./_image.json#/definitions",
-          "template": {
-            "name": "Image",
-            "filter": "image",
-            "model": "image"
-          }
+          "...": "./_image.json#/definitions"
         },
         {
           "...": "./_button.json#/definitions"
@@ -37,28 +32,13 @@
       "id": "blocks",
       "components": [
         {
-          "...": "../blocks/account-menu/_account-menu.json#/definitions",
-          "template": {
-            "name": "Account Menu",
-            "filter": "account-menu",
-            "model": "account-menu"
-          }
+          "...": "../blocks/account-menu/_account-menu.json#/definitions"
         },
         {
-          "...": "../blocks/auth-redirect/_auth-redirect.json#/definitions",
-          "template": {
-            "name": "Auth Redirect",
-            "filter": "auth-redirect",
-            "model": "auth-redirect"
-          }
+          "...": "../blocks/auth-redirect/_auth-redirect.json#/definitions"
         },
         {
-          "...": "../blocks/cards/_cards.json#/definitions",
-          "template": {
-            "name": "Cards",
-            "filter": "cards",
-            "model": "cards"
-          }
+          "...": "../blocks/cards/_cards.json#/definitions"
         }
       ]
     }
