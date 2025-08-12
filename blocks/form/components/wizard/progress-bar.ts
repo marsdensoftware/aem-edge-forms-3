@@ -120,7 +120,7 @@ export const trackProgress = () => {
   const currentWizard = document.querySelector<HTMLElement>(
     '.current-wizard-step',
   )
-  const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'))
+  const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
   const mainWizard = document.querySelector<HTMLElement>('fieldset.wizard')
   const fromReview = mainWizard?.classList.contains('from-review') || false
   const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1
