@@ -13,7 +13,8 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     };
 
     const saveBtn = createButton(def);
-    saveBtn.classList.add('wizard-button-save-changes');
+    // this is to match how addButton() works in wizard.js
+    saveBtn.classList.add(def.id);
 
     wizardEl.querySelector('.wizard-button-wrapper').append(saveBtn);
 
