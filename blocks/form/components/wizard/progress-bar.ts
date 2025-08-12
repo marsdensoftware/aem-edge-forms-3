@@ -117,12 +117,16 @@ export const createProgressBar = () => {
 }
 
 export const trackProgress = () => {
-  // Track where it is in the steps
-  const currentWizard = document.querySelector('.current-wizard-step')
+  const currentWizard = document.querySelector<HTMLElement>(
+    '.current-wizard-step',
+  )
   const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
+  const mainWizard = document.querySelector<HTMLElement>('fieldset.wizard')
+  const fromReview = mainWizard?.classList.contains('from-review') || false
+  const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1
 
   // Reset progress bar state
-  if (wizardIdx === 0 || wizardIdx === 1) {
+  if (!showBar) {
     progressBar?.classList.add('progress-bar--is-hidden')
     currentStep = 0
     increment = 0
@@ -130,14 +134,14 @@ export const trackProgress = () => {
     progressBar?.classList.remove('progress-bar--is-hidden')
   }
   // Initiate the indicator
-  if (wizardIdx > 1 && wizardFooter) {
+  if (showBar && wizardFooter) {
     wizardFooter.classList.add('wizard-button-wrapper--progress-start')
   } else {
     wizardFooter?.classList.remove('wizard-button-wrapper--progress-start')
   }
 
   // Skipping first two steps
-  if (wizardIdx === 0 || wizardIdx === 1) return
+  if (!showBar) return
 
   const currentStepGroupIdx = Number(
     currentWizard?.getAttribute('data-stepgroup'),
