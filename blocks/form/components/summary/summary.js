@@ -24,8 +24,8 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
 
         if (validateContainer(stepEl)) {
             const index = wizardEl.querySelector('[name="panel_review"]')?.dataset.index;
-            Summarizer.navigate(wizardEl, index);
             wizardEl.classList.remove('from-review');
+            Summarizer.navigate(wizardEl, index);
         }
     });
 
@@ -42,7 +42,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
                   // Register click on edit
                   summary.el.querySelectorAll('.edit').forEach(a => {
                       a.addEventListener('click', () => {
-                        wizardEl.classList.add('from-review')
+                        wizardEl.classList.add('from-review');
                         Summarizer.gotoWizardStep(a);
                       });
                   });
