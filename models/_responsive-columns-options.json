@@ -39,6 +39,9 @@
   { "name": "offset-lg-12", "value": "offset-lg-12" },
 
   {"name": "col", "value": "col"},
+  {"name": "col-md", "value": "col-md"},
+  {"name": "col-lg", "value": "col-lg"},
+
   { "name": "col-1", "value": "col-1" },
   { "name": "col-2", "value": "col-2" },
   { "name": "col-3", "value": "col-3" },
