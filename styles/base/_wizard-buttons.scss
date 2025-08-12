@@ -24,6 +24,16 @@
     padding: $spacing-450 $spacing-700 $spacing-600;
   }
 
+  .wizard-button-save-changes {
+    margin-left: auto;
+    grid-area: right;
+  }
+
+  .button[name='save-changes'] {
+    @extend %button;
+    @extend %button--primary;
+  }
+
   .wizard-button-next {
     margin-left: auto;
     grid-area: right;
