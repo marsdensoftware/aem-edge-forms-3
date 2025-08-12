@@ -1,0 +1,12 @@
+[
+  {"name": "d-none", "value": "d-none"},
+  {"name": "d-sm-none", "value": "d-sm-none"},
+  {"name": "d-md-none", "value": "d-md-none"},
+  {"name": "d-lg-none", "value": "d-lg-none"},
+  {"name": "d-xl-none", "value": "d-xl-none"},
+  {"name": "d-flex", "value": "d-flex"},
+  {"name": "d-sm-flex", "value": "d-sm-flex"},
+  {"name": "d-md-flex", "value": "d-md-flex"},
+  {"name": "d-lg-flex", "value": "d-lg-flex"},
+  {"name": "d-xl-flex", "value": "d-xl-flex"}
+]

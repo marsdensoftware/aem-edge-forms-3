@@ -34295,6 +34295,56 @@
       },
       {
         "component": "multiselect",
+        "name": "wrap-links-classes",
+        "value": "",
+        "label": "Display classes for links",
+        "description": "Choose display classes for links. If nothing is selected, they will not be grouped in a container div.",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "d-none",
+            "value": "d-none"
+          },
+          {
+            "name": "d-sm-none",
+            "value": "d-sm-none"
+          },
+          {
+            "name": "d-md-none",
+            "value": "d-md-none"
+          },
+          {
+            "name": "d-lg-none",
+            "value": "d-lg-none"
+          },
+          {
+            "name": "d-xl-none",
+            "value": "d-xl-none"
+          },
+          {
+            "name": "d-flex",
+            "value": "d-flex"
+          },
+          {
+            "name": "d-sm-flex",
+            "value": "d-sm-flex"
+          },
+          {
+            "name": "d-md-flex",
+            "value": "d-md-flex"
+          },
+          {
+            "name": "d-lg-flex",
+            "value": "d-lg-flex"
+          },
+          {
+            "name": "d-xl-flex",
+            "value": "d-xl-flex"
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
         "name": "classes",
         "value": "",
         "label": "Grid settings",
