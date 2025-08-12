@@ -172,73 +172,90 @@ main > .section.columns-container:nth-of-type(3) {
   }
 }
 
-
 /* =========================================================
-   LINK-WITH-ICON STYLES
+   LINK-WITH-ICON — shared styles for all 3 footer sections
 ========================================================= */
-.link-with-icon {
-  display: flex;
-  align-items: center;
-  gap: 0;
+.footer-section-1,
+.footer-section-2,
+.footer-section-3 {
+  .link-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0;
 
-  &.icon--right {
-    flex-direction: row;
-    justify-content: flex-start;
-    font-size: 19px;
-    color: pink;
+    /* icon wrapper + image sizing */
+    > div {
+      margin: 0;
+      padding: 0;
 
-    > div:first-child {
-      order: 2;
-      margin-left: $spacing-200;
-      margin-right: 0;
-    }
-
-    > div:last-child {
-      order: 1;
-    }
-
-    .button-container {
-      text-align: left;
-
-      a.button {
-        text-align: left;
-        padding-left: 0;
-        margin-left: 0;
-        display: inline-block;
+      picture,
+      img {
+        display: block;
+        width: 24px;
+        height: auto;
       }
     }
-  }
 
-  > div {
-    margin: 0;
-    padding: 0;
-
-    picture,
-    img {
-      display: block;
-      width: 24px;
-      height: auto;
-    }
-  }
-
-  a,
-  .button-container a.button {
-    font-size: clamp(12px, 1.1vw, 14px);
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
-
-  &.large {
+    /* link text */
     a,
     .button-container a.button {
-      font-size: clamp(14px, 2.2vw, 16px);
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-200;
+      font-family: $font-family;
+      font-size: clamp(12px, 1.1vw, 14px); // default
+      font-weight: $font-weight-medium;
+      line-height: 133%;
+      letter-spacing: $letter-spacing-default;
+      color: $color-shade-blue-40;
+      text-decoration: none;
 
       &:hover,
       &:focus {
         text-decoration: underline;
+      }
+    }
+
+    /* size variant — large links */
+    &.large {
+      a,
+      .button-container a.button {
+        font-size: $size-font-label-title; // clamp(17px, 1.5vw, 20px)
+      }
+    }
+
+    /* size variant — small links */
+    &.small {
+      a,
+      .button-container a.button {
+        font-size: $size-font-label-subtitle; // clamp(15px, 1.25vw, 17px)
+      }
+    }
+
+    /* right-icon variant */
+    &.icon--right {
+      flex-direction: row;
+      justify-content: flex-start;
+
+      > div:first-child {
+        order: 2;
+        margin-left: $spacing-200;
+        margin-right: 0;
+      }
+
+      > div:last-child {
+        order: 1;
+      }
+
+      .button-container {
+        text-align: left;
+
+        a.button {
+          text-align: left;
+          padding-left: 0;
+          margin-left: 0;
+          display: inline-flex;
+        }
       }
     }
   }
