@@ -91,8 +91,13 @@ export const trackProgress = () => {
     // Track where it is in the steps
     const currentWizard = document.querySelector('.current-wizard-step');
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
+    const mainWizard = document.querySelector('fieldset.wizard')
+    const isComplete = !!mainWizard?.classList.contains('is-complete');
+    const lastStepIndex = Number(getComputedStyle(mainWizard).getPropertyValue('--wizard-step-count').trim() || 0) - 1;
+    const showBar = (!isComplete || wizardIdx === lastStepIndex) && wizardIdx !== 0 && wizardIdx !== 1;
+
     // Reset progress bar state
-    if (wizardIdx === 0 || wizardIdx === 1) {
+    if (!showBar) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');
         currentStep = 0;
         increment = 0;
@@ -101,14 +106,14 @@ export const trackProgress = () => {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.remove('progress-bar--is-hidden');
     }
     // Initiate the indicator
-    if (wizardIdx > 1 && wizardFooter) {
+    if (showBar && wizardFooter) {
         wizardFooter.classList.add('wizard-button-wrapper--progress-start');
     }
     else {
         wizardFooter === null || wizardFooter === void 0 ? void 0 : wizardFooter.classList.remove('wizard-button-wrapper--progress-start');
     }
     // Skipping first two steps
-    if (wizardIdx === 0 || wizardIdx === 1)
+    if (!showBar)
         return;
     const currentStepGroupIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-stepgroup'));
     // Set title
