@@ -32,14 +32,10 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     wizardEl.addEventListener('wizard:navigate', (e) => {
         const stepId = e.detail.currStep.id;
         const step = document.getElementById(stepId);
-
-        const lastStepIndex = wizardEl ? Number(getComputedStyle(wizardEl).getPropertyValue('--wizard-step-count').trim()) - 1 : null;
-
-        // we could also use from-review, but this won't work in the
-        // future when we are loading from Saleforce. So addeding a
-        // another class to test againts.
-        if (e.detail.currStep.index === lastStepIndex) {
-            wizardEl.classList.add('is-complete')
+        const isLastStep = step?.name === 'panel_review'
+        
+        if (isLastStep) {
+            wizardEl.setAttribute('data-wizard-complete', 'true')
         }
 
         summaryComponents.forEach(summary => {

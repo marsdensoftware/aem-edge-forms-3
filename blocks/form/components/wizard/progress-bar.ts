@@ -118,11 +118,25 @@ export const createProgressBar = () => {
 
 export const trackProgress = () => {
   // Track where it is in the steps
-  const currentWizard = document.querySelector('.current-wizard-step')
-  const wizardIdx = Number(currentWizard?.getAttribute('data-index'))
+  // Utility to parse ints safely with a fallback
+  const toInt = (val: string | null | undefined, fallback = -1): number => {
+    const n = Number.parseInt(String(val ?? ''), 10)
+    return Number.isFinite(n) ? n : fallback
+  }
+
+  const currentWizard = document.querySelector<HTMLElement>(
+    '.current-wizard-step',
+  )
+  const wizardIdx = toInt(currentWizard?.getAttribute('data-index'), -1)  
+  const isLastStep = currentWizard?.getAttribute('name') === 'panel_review'
+  const mainWizard = document.querySelector<HTMLElement>('fieldset.wizard')
+  const isComplete = mainWizard?.getAttribute('data-wizard-complete') ?? false
+
+  const showBar =
+    (!isComplete || isLastStep) && wizardIdx !== 0 && wizardIdx !== 1
 
   // Reset progress bar state
-  if (wizardIdx === 0 || wizardIdx === 1) {
+  if (!showBar) {
     progressBar?.classList.add('progress-bar--is-hidden')
     currentStep = 0
     increment = 0
@@ -130,14 +144,14 @@ export const trackProgress = () => {
     progressBar?.classList.remove('progress-bar--is-hidden')
   }
   // Initiate the indicator
-  if (wizardIdx > 1 && wizardFooter) {
+  if (showBar && wizardFooter) {
     wizardFooter.classList.add('wizard-button-wrapper--progress-start')
   } else {
     wizardFooter?.classList.remove('wizard-button-wrapper--progress-start')
   }
 
   // Skipping first two steps
-  if (wizardIdx === 0 || wizardIdx === 1) return
+  if (!showBar) return
 
   const currentStepGroupIdx = Number(
     currentWizard?.getAttribute('data-stepgroup'),
