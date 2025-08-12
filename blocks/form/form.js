@@ -58,7 +58,7 @@ function createInput(fd) {
   input.type = getHTMLRenderType(fd);
   
   //###NJ Start Added spellcheck
-  if(fd.properties.spellcheck){
+  if(fd.properties?.spellcheck){
     input.setAttribute('spellcheck', true);
   }
   //###NJ End Added spellcheck
@@ -72,7 +72,7 @@ const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
   
   //###NJ Start Added spellcheck
-  if(fd.properties.spellcheck){
+  if(fd.properties?.spellcheck){
     input.setAttribute('spellcheck', true);
   }
   //###NJ End Added spellcheck
