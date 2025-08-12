@@ -9195,6 +9195,12 @@
             "name": "multiLine",
             "label": "Allow multiple lines",
             "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "valueType": "boolean",
+            "name": "spellcheck",
+            "label": "Enable spellcheck"
           }
         ]
       },
@@ -15988,6 +15994,12 @@
             "name": "multiLine",
             "label": "Allow multiple lines",
             "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "valueType": "boolean",
+            "name": "spellcheck",
+            "label": "Enable spellcheck"
           }
         ]
       },
