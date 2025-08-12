@@ -88,7 +88,6 @@ export const createProgressBar = () => {
     barLength3 = 100 / step3GroupLength;
 };
 export const trackProgress = () => {
-    var _a;
     // Track where it is in the steps
     // Utility to parse ints safely with a fallback
     const toInt = (val, fallback = -1) => {
@@ -97,10 +96,9 @@ export const trackProgress = () => {
     };
     const currentWizard = document.querySelector('.current-wizard-step');
     const wizardIdx = toInt(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'), -1);
-    const isLastStep = (currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('name')) === 'panel_review';
     const mainWizard = document.querySelector('fieldset.wizard');
-    const isComplete = (_a = mainWizard === null || mainWizard === void 0 ? void 0 : mainWizard.getAttribute('data-wizard-complete')) !== null && _a !== void 0 ? _a : false;
-    const showBar = (!isComplete || isLastStep) && wizardIdx !== 0 && wizardIdx !== 1;
+    const fromReview = (mainWizard === null || mainWizard === void 0 ? void 0 : mainWizard.classList.contains('from-review')) || false;
+    const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1;
     // Reset progress bar state
     if (!showBar) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');

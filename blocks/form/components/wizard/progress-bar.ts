@@ -128,12 +128,10 @@ export const trackProgress = () => {
     '.current-wizard-step',
   )
   const wizardIdx = toInt(currentWizard?.getAttribute('data-index'), -1)  
-  const isLastStep = currentWizard?.getAttribute('name') === 'panel_review'
   const mainWizard = document.querySelector<HTMLElement>('fieldset.wizard')
-  const isComplete = mainWizard?.getAttribute('data-wizard-complete') ?? false
+  const fromReview = mainWizard?.classList.contains('from-review') || false
 
-  const showBar =
-    (!isComplete || isLastStep) && wizardIdx !== 0 && wizardIdx !== 1
+  const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1
 
   // Reset progress bar state
   if (!showBar) {

@@ -32,24 +32,18 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     wizardEl.addEventListener('wizard:navigate', (e) => {
         const stepId = e.detail.currStep.id;
         const step = document.getElementById(stepId);
-        const isLastStep = step?.name === 'panel_review'
-        
-        if (isLastStep) {
-            wizardEl.setAttribute('data-wizard-complete', 'true')
-        }
-
         summaryComponents.forEach(summary => {
             if (step.contains(summary.el)) {
                 // Render summary
-                
+
                 try{
                   summary.summarizer(summary.el, summary.properties);
 
                   // Register click on edit
                   summary.el.querySelectorAll('.edit').forEach(a => {
                       a.addEventListener('click', () => {
-                          Summarizer.gotoWizardStep(a);
-                          wizardEl.classList.add('from-review')
+                        wizardEl.classList.add('from-review')
+                        Summarizer.gotoWizardStep(a);
                       });
                   });
                 }
