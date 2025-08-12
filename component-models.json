@@ -149,42 +149,13 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "select",
-        "name": "Style",
-        "label": "Container Type",
-        "valueType": "string",
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
         "options": [
           {
-            "name": "None",
-            "value": ""
-          },
-          {
-            "name": "Default Container",
-            "value": "container"
-          },
-          {
-            "name": "Small Container",
-            "value": "container-sm"
-          },
-          {
-            "name": "Medium Container",
-            "value": "container-md"
-          },
-          {
-            "name": "Large Container",
-            "value": "container-lg"
-          },
-          {
-            "name": "Extra Large Container",
-            "value": "container-xl"
-          },
-          {
-            "name": "XX-Large Container",
-            "value": "container-xxl"
-          },
-          {
-            "name": "Fluid Container",
-            "value": "container-fluid"
+            "name": "Highlight",
+            "value": "highlight"
           }
         ]
       }
