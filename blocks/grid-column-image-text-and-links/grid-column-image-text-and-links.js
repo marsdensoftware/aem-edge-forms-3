@@ -12,6 +12,7 @@ export default function decorate(block) {
   if (!config) {
     return;
   }
+  block.removeChild(config);
   const wrapper = document.createElement('div');
   const configClasses = config.split(',');
   for (const configClass of configClasses) {
