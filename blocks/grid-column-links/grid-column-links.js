@@ -1,7 +1,6 @@
 import { injectNestingBugClasses } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
-  console.log("decorate block", block.outerHTML);
   const children = [...block.children];
   if (!children.length) {
     return;
@@ -15,7 +14,6 @@ export default function decorate(block) {
   const configClasses = (config.querySelector('p')?.innerText || '').split(',');
   for (const link of links.slice(1)) {
     for (const configClass of configClasses) {
-      console.log("trying to add", configClass)
       if (!configClass) {
         continue;
       }
