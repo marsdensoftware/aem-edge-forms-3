@@ -1,4 +1,4 @@
-import { injectNestingBugClasses } from '../../scripts/msd/link-with-icon.js';
+import { injectNestingBugClasses, handleOpenInNewTab } from '../../scripts/msd/link-with-icon.js';
 
 export default function decorate(block) {
   block.classList.add('row');
@@ -22,6 +22,7 @@ export default function decorate(block) {
   injectNestingBugClasses(links, 'link-with-icon');
   for (const link of links) {
     link.classList.add('col-12');
+    handleOpenInNewTab(link);
   }
 
   for (const config of inactiveConfigs) {
