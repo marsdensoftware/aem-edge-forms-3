@@ -28,6 +28,18 @@
           "multi": false
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image alt text"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link",
+          "valueType": "string"
+        },
+        {
           "component": "richtext",
           "valueType": "string",
           "name": "summary",
