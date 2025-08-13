@@ -28,7 +28,7 @@ picture {
   a {
     display: inline-flex;
     align-items: center;
-    gap: $spacing-200;
+    /*gap: $spacing-200;*/
     color: $color-shade-blue-40;
     text-align: left;
     font-family: $font-family;
@@ -126,7 +126,7 @@ main > .section.columns-container:nth-of-type(1) {
   color: $color-white;
   padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   align-items: flex-start;
-  gap: $spacing-200;
+  /*gap: $spacing-200;*/
   align-self: stretch;
 }
 
