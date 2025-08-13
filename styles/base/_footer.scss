@@ -1,5 +1,8 @@
 @use "../settings" as *;
 
+/* Adjustable cap for footer images */
+$footer-img-cap: 300px !default;
+
 /* =========================================================
    GLOBAL WRAPPER
 ========================================================= */
@@ -9,18 +12,41 @@
 
 /* =========================================================
    BASE IMAGE BEHAVIOUR
+   (global safety: images default to left and won’t overflow)
 ========================================================= */
 img,
 picture {
-  max-width: 300px; /* adjust as needed */
+  max-width: $footer-img-cap; /* cap globally */
   width: auto;
   display: block;
   margin-left: 0;
   margin-right: auto; /* hug left side */
 }
 
+.grid-column-image-text-and-links.block {
+  /* wrappers don’t constrain */
+  > div:first-child,
+  > div:first-child > div {
+    inline-size: auto;
+    max-inline-size: 100%;
+  }
+
+  picture {
+    display: block;
+    inline-size: auto;
+    max-inline-size: 100%;
+  }
+
+  img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-inline-size: min(100%, $footer-img-cap);
+  }
+}
+
 /* =========================================================
-   GLOBAL TEXT STYLES (shared across footer sections)
+   GLOBAL TEXT STYLES
 ========================================================= */
 .grid-column-links-container,
 .grid-column-image-text-and-links-container,
@@ -58,27 +84,23 @@ picture {
 
 /* =========================================================
    FOOTER SPLIT — COLUMN PARAGRAPH TIERS
-   (first, second, and remaining <p> in each column)
 ========================================================= */
 .grid-column-text-subcolumns-wrapper {
   .col-6.col-lg-12 {
     > div {
       p {
-        // First <p> in each column
         &:nth-of-type(1) {
           font-size: clamp(12px, 1.1vw, 14px);
           color: $color-shade-navy-40;
           margin-bottom: $spacing-300;
         }
 
-        // Second <p> in each column
         &:nth-of-type(2) {
           font-size: clamp(20px, 2.75vw, 24px);
           color: $color-white;
           margin-bottom: $spacing-200;
         }
 
-        // All <p> from the third onward
         &:nth-of-type(n + 3) {
           font-size: clamp(14px, 2.2vw, 16px);
           color: $color-shade-navy-20;
@@ -91,20 +113,14 @@ picture {
 
 /* =========================================================
    JUST the second column inside .grid-column-text-subcolumns
-   Your structure is:
-   - child 1: .link-with-icon
-   - child 2: .col-6.col-lg-12 (FOR CLIENTS)
-   - child 3: .col-6.col-lg-12 (FOR EMPLOYERS)
 ========================================================= */
 
-/* Fallback based on actual sibling order */
 .grid-column-text-subcolumns {
   > div.col-6.col-lg-12:nth-of-type(3) {
     margin-top: 20px;
   }
 }
 
-/* Modern, robust selector (only if supported by browser) */
 @supports selector(.x:nth-of-type(2 of .y)) {
   .grid-column-text-subcolumns {
     > .col-6.col-lg-12:nth-of-type(2 of .col-6.col-lg-12) {
@@ -118,11 +134,7 @@ picture {
 ========================================================= */
 .footer-section-1,
 main > .section.columns-container:nth-of-type(1) {
-  background: linear-gradient(
-                  135deg,
-                  $color-primary-dark-navy 25%,
-                  $color-primary-navy 100%
-  );
+  background: linear-gradient(135deg, $color-primary-dark-navy 25%, $color-primary-navy 100%);
   color: $color-white;
   padding: $spacing-650 $spacing-600 $spacing-600 $spacing-600;
   align-items: flex-start;
@@ -171,7 +183,24 @@ main > .section.columns-container:nth-of-type(3) {
 }
 
 /* =========================================================
-   LINK-WITH-ICON — shared styles for all 3 footer sections
+   SECTION IMAGE ALIGNMENT (works with the cap above)
+========================================================= */
+.footer-section-1 picture,
+.footer-section-1 img,
+.footer-section-2 picture,
+.footer-section-2 img {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.footer-section-3 picture,
+.footer-section-3 img {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* =========================================================
+   LINK-WITH-ICON — this will be moved into its own file soon
 ========================================================= */
 .footer-section-1,
 .footer-section-2,
@@ -197,14 +226,13 @@ main > .section.columns-container:nth-of-type(3) {
       }
     }
 
-    /* link text */
     a,
     .button-container a.button {
       display: inline-flex;
       align-items: center;
       gap: $spacing-200;
       font-family: $font-family;
-      font-size: clamp(12px, 1.1vw, 14px); // default
+      font-size: $size-font-body-default;
       font-weight: $font-weight-medium;
       line-height: 133%;
       letter-spacing: $letter-spacing-default;
@@ -217,7 +245,6 @@ main > .section.columns-container:nth-of-type(3) {
       }
     }
 
-    /* size variant — large links */
     &.large {
       a,
       .button-container a.button {
@@ -225,7 +252,6 @@ main > .section.columns-container:nth-of-type(3) {
       }
     }
 
-    /* size variant — small links */
     &.small {
       a,
       .button-container a.button {
@@ -233,7 +259,6 @@ main > .section.columns-container:nth-of-type(3) {
       }
     }
 
-    /* right-icon variant */
     &.icon--right {
       flex-direction: row;
       justify-content: flex-start;
