@@ -3,6 +3,18 @@
 /* Adjustable cap for footer images */
 $footer-img-cap: 300px !default;
 
+/* Strip left padding from the image and its immediate wrappers */
+.grid-column-image-text-and-links.block {
+  /* first content column and its inner wrapper */
+  > div:first-child,
+  > div:first-child > div,
+  picture,
+  img {
+    padding-left: 0;  /* remove any left padding */
+  }
+}
+
+
 /* =========================================================
    GLOBAL WRAPPER
 ========================================================= */
@@ -152,8 +164,6 @@ main > .section.columns-container:nth-of-type(1) {
   --bs-gutter-y: $spacing-300; /* 1.25rem */
 }
 
-
-
 /* =========================================================
    SECTION 2 — Navy + pattern, LEFT aligned images
 ========================================================= */
@@ -168,7 +178,7 @@ main > .section.columns-container:nth-of-type(2) {
   color: $color-white;
   padding: $spacing-700 $spacing-600 $spacing-650 $spacing-600;
   align-items: flex-start;
- /* gap: $spacing-200;*/
+  /* gap: $spacing-200;*/
   align-self: stretch;
   box-shadow: inset 0 $spacing-100 $spacing-200 0 rgba(22, 44, 69, 0.6);
 }
@@ -209,6 +219,55 @@ main > .section.columns-container:nth-of-type(3) {
 .footer-section-3 img {
   margin-left: auto;
   margin-right: 0;
+}
+
+/* =========================================================
+   Footer links row: 5 links + 1 image, even across, image far-right
+   Targets your exact wrapper: .section.row.footer-section-3.grid-column-links-container
+========================================================= */
+.section.row.footer-section-3.grid-column-links-container {
+  /* turn the row into a grid with equal columns */
+  display: grid;
+  align-items: center;
+  column-gap: $spacing-400;
+  row-gap: $spacing-200;
+
+  /* responsive: auto-fit stacks as needed; force perfect 6-up on wide */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(6, 1fr); /* 5 link cells + 1 image cell */
+  }
+
+  /* neutralize column gutters/width set by .col-* on grid items */
+  > .grid-column-links-wrapper,
+  > .default-content-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    width: auto;
+    max-width: none;
+  }
+
+  /* final image cell sits far-right */
+  > .default-content-wrapper {
+    justify-self: end;  /* right edge of its grid column */
+    text-align: right;
+
+    > p {
+      margin: 0;
+      padding: 0;
+    }
+
+    picture,
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: 0;
+      max-inline-size: min(100%, $footer-img-cap);
+      height: auto;
+    }
+  }
 }
 
 /* =========================================================
