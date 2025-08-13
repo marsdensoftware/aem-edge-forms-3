@@ -1,5 +1,5 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
-import { FIELD_NAMES } from './fieldnames.js'
+import { FIELD_NAMES, sorter, COMPLETION_STATUS } from './fieldnames.js'
 import { DefaultFieldConverter } from '../utils.js'
 
 class Converter extends DefaultFieldConverter {
@@ -8,7 +8,7 @@ class Converter extends DefaultFieldConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[FIELD_NAMES.COMPLETION_STATUS]
-    if (completionStatus?.value == '0') {
+    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
       // Completed
       const year = result[FIELD_NAMES.FINISH_YEAR]
       completionStatus.displayValue += ` ${year.displayValue}`
@@ -26,7 +26,7 @@ class Converter extends DefaultFieldConverter {
 
 export class EducationRepeatable extends ConditionalRepeatable {
   constructor(repeatablePanel, properties) {
-    super(repeatablePanel, properties, 'education', new Converter())
+    super(repeatablePanel, properties, 'education', new Converter(), sorter)
   }
 
   _init(entry) {

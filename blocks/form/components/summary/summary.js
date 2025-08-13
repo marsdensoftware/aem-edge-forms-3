@@ -13,6 +13,8 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     };
 
     const saveBtn = createButton(def);
+    // this is to match how addButton() works in wizard.js
+    saveBtn.classList.add(def.id);
 
     wizardEl.querySelector('.wizard-button-wrapper').append(saveBtn);
 
@@ -22,29 +24,32 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
 
         if (validateContainer(stepEl)) {
             const index = wizardEl.querySelector('[name="panel_review"]')?.dataset.index;
-            Summarizer.navigate(wizardEl, index);
             wizardEl.classList.remove('from-review');
+            Summarizer.navigate(wizardEl, index);
         }
     });
 
     wizardEl.addEventListener('wizard:navigate', (e) => {
         const stepId = e.detail.currStep.id;
         const step = document.getElementById(stepId);
-
         summaryComponents.forEach(summary => {
             if (step.contains(summary.el)) {
                 // Render summary
 
-                summary.summarizer(summary.el, summary.properties);
+                try{
+                  summary.summarizer(summary.el, summary.properties);
 
-                // Register click on edit
-                summary.el.querySelectorAll('.edit').forEach(a => {
-                    a.addEventListener('click', () => {
+                  // Register click on edit
+                  summary.el.querySelectorAll('.edit').forEach(a => {
+                      a.addEventListener('click', () => {
+                        wizardEl.classList.add('from-review');
                         Summarizer.gotoWizardStep(a);
-                        wizardEl.classList.add('from-review')
-                    });
-                });
-
+                      });
+                  });
+                }
+                catch(e){
+                  console.log(`Could not render summary ${summary.summaryType}`);
+                }
             };
         });
     });
@@ -68,6 +73,7 @@ export default function decorate(el, field) {
     properties.description = field?.description;
 
     summaryComponents.push({
+        summaryType,
         summarizer,
         el,
         properties

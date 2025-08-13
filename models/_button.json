@@ -56,6 +56,42 @@
               "value": "buttonLink"
             }
           ]
+        },
+        {
+          "component": "select",
+          "name": "linkSize",
+          "label": "Size",
+          "options": [
+            {
+              "name": "Small",
+              "value": ""
+            },
+            {
+              "name": "Large",
+              "value": "large"
+            }
+          ]
+        },
+        {
+          "component": "reference",
+          "name": "linkIcon",
+          "label": "Icon",
+          "multi": false
+        },
+        {
+          "component": "select",
+          "name": "linkIconPosition",
+          "label": "Icon position",
+          "options": [
+            {
+              "name": "Left",
+              "value": ""
+            },
+            {
+              "name": "Right",
+              "value": "right"
+            }
+          ]
         }
       ]
     }

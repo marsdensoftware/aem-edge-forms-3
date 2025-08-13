@@ -1,11 +1,11 @@
 @use '../../../../styles/settings' as *;
 @use 'wizard-theme';
 @use 'wizard-intro';
+@use 'progress-bar';
 
 .wizard {
   min-height: $wizard-body-height;
   height: 100%;
-  padding-bottom: 120px; // more spacing at the bottom to be able to scroll through past the last content
   position: relative;
   z-index: 1; // needed for background
 

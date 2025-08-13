@@ -10,6 +10,7 @@
     "components": [
       "text",
       "typography",
+      "link-with-icon",
       "image",
       "button",
       "title",
@@ -20,7 +21,8 @@
       "form",
       "embed-adaptive-form",
       "account-menu",
-      "auth-redirect"
+      "auth-redirect",
+      "main-menu"
     ]
   },
   {
@@ -56,6 +58,8 @@
   {
     "id": "column",
     "components": [
+      "typography",
+      "link-with-icon",
       "text",
       "image",
       "button",
@@ -89,6 +93,7 @@
       "summary",
       "formwelcome",
       "formcontextualhelp",
+      "formoutputfield",
       "formtabs",
       "number-input",
       "panel",
@@ -104,10 +109,6 @@
       "icon-radio-group",
       "extended-checkbox-container"
     ]
-  },
-  {
-    "id": "iconwithtext",
-    "components": null
   },
   {
     "id": "jobseekerintro",

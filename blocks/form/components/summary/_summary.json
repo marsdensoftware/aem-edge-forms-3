@@ -63,8 +63,8 @@
                                     "value": "education"
                                 },
                                 {
-                                    "name": "Work skills",
-                                    "value": "work_skills"
+                                    "name": "Work related skills",
+                                    "value": "work_related_skills"
                                 },
                                 {
                                     "name": "Skills",

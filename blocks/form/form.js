@@ -56,6 +56,13 @@ function setConstraints(element, fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = getHTMLRenderType(fd);
+  
+  //###NJ Start Added spellcheck
+  if(fd.properties?.spellcheck){
+    input.setAttribute('spellcheck', true);
+  }
+  //###NJ End Added spellcheck
+  
   setPlaceholder(input, fd);
   setConstraints(input, fd);
   return input;
@@ -63,6 +70,13 @@ function createInput(fd) {
 
 const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
+  
+  //###NJ Start Added spellcheck
+  if(fd.properties?.spellcheck){
+    input.setAttribute('spellcheck', true);
+  }
+  //###NJ End Added spellcheck
+  
   setPlaceholder(input, fd);
   return input;
 });
@@ -179,6 +193,9 @@ function createFieldSet(fd) {
     }
     if (fd.properties?.panelrole) {
       wrapper.classList.add(fd.properties.panelrole);
+    }
+    if (fd.properties?.stepgroup) {
+      wrapper.dataset.stepgroup = fd.properties.stepgroup;
     }
     //###GKW END
   }
