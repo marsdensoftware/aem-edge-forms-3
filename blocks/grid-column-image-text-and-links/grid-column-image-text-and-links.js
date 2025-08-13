@@ -15,7 +15,7 @@ export default function decorate(block) {
   const imgWrapper = children[0];
   const img = imgWrapper.querySelector('picture');
   if (imgLink && img) {
-    imgLink.appendChild(img);
+    imgLink.replaceChildren(img);
     block.replaceChild(imgLinkWrapper, imgWrapper);
   }
 
