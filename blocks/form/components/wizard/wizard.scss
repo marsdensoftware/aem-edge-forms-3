@@ -49,10 +49,7 @@
 
   > .current-wizard-step.panel-wrapper:first-of-type
     ~ .wizard-button-wrapper
-    > .wizard-button-prev,
-  > .current-wizard-step.panel-wrapper:last-of-type
-    ~ .wizard-button-wrapper
-    > .wizard-button-next {
+    > .wizard-button-prev {
     display: none;
   }
 
