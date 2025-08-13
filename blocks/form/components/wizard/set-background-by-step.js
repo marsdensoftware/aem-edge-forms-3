@@ -70,6 +70,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
       if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
         if (mutation.target.classList.contains('current-wizard-step')) {
           updateBackground(wizardEl, container);
+          trackProgress();
         }
       }
     });
@@ -93,6 +94,6 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     // updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
     updateWizardNextButton(container)
-    trackProgress()
+    // trackProgress()
   })
 })
