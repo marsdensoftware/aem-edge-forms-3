@@ -4,6 +4,7 @@ import { createProgressBar, trackProgress } from './progress-bar.js'
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
 const DEFAULT_BG_CLASS = 'wizard--bg-light'
+const FINAL_STEP_GROUP = '4';
 
 /**
  * Finds the background class on the current wizard step and applies it to the container,
@@ -46,6 +47,21 @@ function updateExitButtonText(wizardEl) {
     : 'Save & exit'
 }
 
+function updateWizardNextButton(container) {
+  //if the current wizard step has a data-stepgroup of '4' set the value of the Net button to Finish
+  const currentStepEl = container.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
+  const nextBtn = currentStepEl
+    .closest('form')
+    .querySelector('#wizard-button-next')
+  if (!nextBtn) return
+  if (currentStepEl.dataset.stepgroup === FINAL_STEP_GROUP) {
+    nextBtn.textContent = 'Finish'
+  } else {
+    nextBtn.textContent = 'Next'
+  }
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
 
@@ -58,6 +74,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   wizardEl.addEventListener('wizard:navigate', () => {
     updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
+    updateWizardNextButton(container)
     trackProgress()
   })
 })
