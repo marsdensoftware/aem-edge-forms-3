@@ -6,10 +6,7 @@ export default function decorate(block) {
     return;
   }
   const links = children.slice(4);
-  injectNestingBugClasses(links, 'link-with-icon');
-  for (const link of links) {
-    handleOpenInNewTab(link);
-  }
+  injectNestingBugClasses(links, 'link-with-icon', handleOpenInNewTab);
   const imgLinkWrapper = children[1];
   const imgLink = imgLinkWrapper.querySelector('a');
   const imgWrapper = children[0];

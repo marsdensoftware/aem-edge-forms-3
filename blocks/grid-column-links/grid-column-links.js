@@ -9,11 +9,10 @@ export default function decorate(block) {
   block.removeChild(config);
 
   const links = children.slice(1);
-  injectNestingBugClasses(links, 'link-with-icon');
+  injectNestingBugClasses(links, 'link-with-icon', handleOpenInNewTab);
 
   const configClasses = (config.querySelector('p')?.innerText || '').split(',');
   for (const link of links.slice(1)) {
-    handleOpenInNewTab(link);
     for (const configClass of configClasses) {
       if (!configClass) {
         continue;
