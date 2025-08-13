@@ -176,8 +176,11 @@ main > .section.columns-container:nth-of-type(3) {
 .footer-section-1,
 .footer-section-2,
 .footer-section-3 {
-  .link-with-icon {
+  .link-with-icon:not(.d-none) {
     display: flex;
+  }
+
+  .link-with-icon {
     align-items: center;
     gap: 0;
 
