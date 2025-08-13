@@ -46,6 +46,21 @@ function updateExitButtonText(wizardEl) {
     : 'Save & exit'
 }
 
+function updateWizardNextButton(container) {
+  //if the current wizard step has a data-stepgroup of '4' set the value of the Net button to Finish
+  const currentStepEl = container.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
+  const nextBtn = currentStepEl
+    .closest('form')
+    .querySelector('#wizard-button-next')
+  if (!nextBtn) return
+  if (currentStepEl.dataset.stepgroup === '4') {
+    nextBtn.textContent = 'Finish'
+  } else {
+    nextBtn.textContent = 'Next'
+  }
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
 
@@ -58,6 +73,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   wizardEl.addEventListener('wizard:navigate', () => {
     updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
+    updateWizardNextButton(container)
     trackProgress()
   })
 })
