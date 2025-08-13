@@ -20,12 +20,15 @@ function extractNestingBugClasses(block, blockName) {
   return classes;
 }
 
-function injectNestingBugClasses(elements, blockName) {
+function injectNestingBugClasses(elements, blockName, cb) {
   for (const e of elements) {
     e.classList.add(blockName);
     const classes = extractNestingBugClasses(e, blockName).slice(1);
     for (const className of classes) {
       e.classList.add(className);
+    }
+    if (cb) {
+      cb(e);
     }
   }
 }
