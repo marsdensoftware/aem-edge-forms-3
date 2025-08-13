@@ -65,8 +65,26 @@ function updateWizardNextButton(container) {
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
 
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (mutation.target.classList.contains('current-wizard-step')) {
+          updateBackground(wizardEl, container);
+        }
+      }
+    });
+  });
+
+  const wizardChildren = wizardEl.children;
+  for (const child of wizardChildren) {
+    observer.observe(child, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+
   // Set the initial background based on the default active step on page load.
-  // updateBackground(wizardEl, container)
+  updateBackground(wizardEl, container)
   updateExitButtonText(wizardEl)
   createProgressBar()
 
@@ -77,9 +95,4 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
     updateWizardNextButton(container)
     trackProgress()
   })
-})
-
-onElementsAddedByClassName('current-wizard-step', (wizardStepEl) => {
-  const container = wizardStepEl.closest('main')
-  updateBackground(wizardStepEl, container)
 })
