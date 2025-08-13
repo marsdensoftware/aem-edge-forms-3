@@ -66,15 +66,20 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
 
   // Set the initial background based on the default active step on page load.
-  updateBackground(wizardEl, container)
+  // updateBackground(wizardEl, container)
   updateExitButtonText(wizardEl)
   createProgressBar()
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
-    updateBackground(wizardEl, container)
+    // updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
     updateWizardNextButton(container)
     trackProgress()
   })
+})
+
+onElementsAddedByClassName('current-wizard-step', (wizardStepEl) => {
+  const container = wizardStepEl.closest('main')
+  updateBackground(wizardStepEl, container)
 })
