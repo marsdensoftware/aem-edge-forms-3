@@ -4,6 +4,7 @@ import { createProgressBar, trackProgress } from './progress-bar.js'
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
 const DEFAULT_BG_CLASS = 'wizard--bg-light'
+const FINAL_STEP_GROUP = '4';
 
 /**
  * Finds the background class on the current wizard step and applies it to the container,
@@ -54,7 +55,7 @@ function updateWizardNextButton(container) {
     .closest('form')
     .querySelector('#wizard-button-next')
   if (!nextBtn) return
-  if (currentStepEl.dataset.stepgroup === '4') {
+  if (currentStepEl.dataset.stepgroup === FINAL_STEP_GROUP) {
     nextBtn.textContent = 'Finish'
   } else {
     nextBtn.textContent = 'Next'
