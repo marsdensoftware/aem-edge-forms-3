@@ -1,0 +1,160 @@
+{
+  "definitions": [
+    {
+      "title": "Extended Checkbox",
+      "id": "extended-checkbox",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "name": "modal-cb-container",
+            "template": {
+              "fd:viewType": "extended-checkbox-container",
+              "fieldType": "panel",
+              "jcr:title": "Modal Checkbox Container",
+              "hideTitle": true,
+              "name": "modal-checkbox-container",
+
+              "checkbox": {
+                "fd:viewType": "extended-checkbox",
+                "fieldType": "checkbox",
+                "name": "main-checkbox",
+                "jcr:title": "Checkbox Title",
+                "sling:resourceType": "core/fd/components/form/checkbox/v1/checkbox",
+                "checkedValue": "on"
+              },
+              "modal": {
+                "fd:viewType": "modal",
+                "fieldType": "panel",
+                "name": "modal-content",
+                "jcr:title": "Modal Title",
+                "hideTitle": true,
+                "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "content": "Modal content goes here",
+                "visible": false,
+                "content-panel": {
+                  "fieldType": "panel",
+                  "hideTitle": true,
+                  "name": "modal-content-panel",
+                  "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                  "text": {
+                    "fieldType": "text-input",
+                    "multiLine": true,
+                    "hideTitle": true,
+                    "name": "modal-text",
+                    "jcr:title": "Modal Text",
+                    "textIsRich": true,
+                    "placeholder": "Enter description here",
+                    "sling:resourceType": "core/fd/components/form/textinput/v1/textinput"
+                  }
+                },
+
+                "buttons-panel": {
+                  "fieldType": "panel",
+                  "name": "modal-buttons",
+                  "hideTitle": true,
+                  "row": true,
+                  "sling:resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                  "cancelButton": {
+                    "colspan": "2",
+                    "fieldType": "button",
+                    "name": "modal-cancel-button",
+                    "jcr:title": "Cancel",
+                    "buttonType": "button",
+                    "sling:resourceType": "core/fd/components/form/button/v1/button"
+                  },
+                  "saveButton": {
+                    "colspan": "2",
+                    "colspan-offset": "7",
+                    "fieldType": "button",
+                    "name": "modal-save-button",
+                    "jcr:title": "Save",
+                    "buttonType": "button",
+                    "sling:resourceType": "core/fd/components/form/button/v1/button"
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "extended-checkbox",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "...": "../../models/form-common/_basic-input-fields.json#/fields"
+            },
+            {
+              "component": "text",
+              "name": "iconName",
+              "label": "Icon",
+              "description": "Enter the name of the icon. list-search",
+              "value": ""
+            },
+            {
+              "component": "select",
+              "label": "Data type of submitted value",
+              "name": "type",
+              "valueType": "string",
+              "options": [
+                {
+                  "name": "String",
+                  "value": "string"
+                },
+                {
+                  "name": "Boolean",
+                  "value": "boolean"
+                },
+                {
+                  "name": "Number",
+                  "value": "number"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "name": "checkedValue",
+              "label": "When Checked, return value",
+              "valueType": "string"
+            },
+            {
+              "component": "boolean",
+              "name": "enableUncheckedValue",
+              "label": "Preserve Uncheck state value.",
+              "valueType": "boolean"
+            },
+            {
+              "component": "text",
+              "name": "default",
+              "label": "Default Value",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
+        },
+        {
+          "component": "container",
+          "name": "validation",
+          "label": "Validation",
+          "collapsible": true,
+          "...": "../../models/form-common/_basic-validation-fields.json"
+        }
+      ]
+    }
+  ]
+}

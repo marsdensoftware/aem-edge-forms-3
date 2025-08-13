@@ -5,7 +5,7 @@ export class DefaultFieldConverter {
     constructor() {
     }
 
-    convert(entry) {
+    convert(entry, fieldName) {
         function getDisplayText(input) {
             const labelEl = input.parentElement.querySelector('label');
             let result = '';
@@ -32,7 +32,11 @@ export class DefaultFieldConverter {
             return result;
         }
 
-        const inputs = entry.querySelectorAll('input, select, textarea');
+        let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
+        if(fieldName){
+          inputs = inputs.filter(el => el.name === fieldName);
+        }
+        
         const result = {};
 
         inputs.forEach(input => {

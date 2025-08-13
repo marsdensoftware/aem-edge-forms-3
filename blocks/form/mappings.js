@@ -5,6 +5,7 @@ let customComponents = [
   'formhero',
   'formwelcome',
   'formcontextualhelp',
+  'formoutputfield',
   'typeahead',
   'repeatable-panel',
   'formtabs',
@@ -16,6 +17,8 @@ let customComponents = [
   'summary',
   'search-box',
   'icon-radio-group',
+  'extended-checkbox',
+  'extended-checkbox-container'
 ]
 
 const OOTBComponentDecorators = [

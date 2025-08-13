@@ -8,6 +8,17 @@ interface ComponentState {
 }
 const componentStateMap = new WeakMap<Element, ComponentState>()
 
+interface WorkExperienceEntry {
+    type: {
+        value: string;
+        displayValue: string;
+    };
+}
+interface RepeatableEvent {
+    name: string;
+    entries: WorkExperienceEntry[];
+}
+
 // --- Helper functions to create DOM elements ---
 
 function addSuggestionDiv() {
@@ -261,18 +272,145 @@ const jobTitleIndustries = [
   'Goat Farmer',
 ]
 
-const experiencedBasedJobs = [
-  'Job Title 1',
-  'Job Title 2',
-  'Job Title 3',
-  'Job Title 4',
-  'Job Title 5',
-  'Job Title 6',
-  'Job Title 7',
-  'Job Title 8',
-  'Job Title 9',
-  'Job Title 10',
+
+const workRelatedSkills = [
+  'Communicate effectively in English',
+  'Apply health and safety standards',
+  'Work in a team',
+  'Use digital collaboration tools',
+  'Operate machinery safely',
+  'Provide customer service',
+  'Interpret technical drawings',
+  'Manage time effectively',
+  'Use accounting software',
+  'Adapt to changing work environments',
 ]
+
+const experiencedBasedSkills = [
+    'Curriculum objectives',
+    'Agritourism',
+    'Act reliably',
+    'Insurance market',
+    'Characteristics of services'
+]
+
+// Function to extract job titles from the DOM element
+const getExperiencedBasedJobs = (): string[] => {
+
+  // Default fallback values if the element is not found or has no content
+  return [
+    // 'Job Title 1',
+    // 'Job Title 2',
+    // 'Job Title 3',
+    // 'Job Title 4',
+    // 'Job Title 5',
+    // 'Job Title 6',
+    // 'Job Title 7',
+    // 'Job Title 8',
+    // 'Job Title 9',
+    // 'Job Title 10',
+  ]
+}
+
+// Function to listen for repeatableChanged event and update job types
+const observeElementForJobs = (element: El): void => {
+
+  // Initial population of job titles
+    experiencedBasedJobs = getExperiencedBasedJobs();
+
+  //get the containing form
+    const form = element.closest('form') as HTMLFormElement;
+
+  // Add event listener for repeatableChanged event
+    form.addEventListener('repeatableChanged', (event: Event) => {
+
+    // Verify this is a CustomEvent with detail
+    if (!(event instanceof CustomEvent)) {
+      console.error('[DEBUG_LOG] Event is not a CustomEvent:', event);
+      return;
+    }
+
+    const customEvent = event as CustomEvent<RepeatableEvent>;
+    const detail = customEvent.detail;
+
+    // Check if the event is for workexperience
+    if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
+
+      // Extract type values from all entries
+      let jobTypes: string[] = [];
+      try {
+        // First check if entries have the expected structure
+        const hasValidEntries = detail.entries.some(entry =>
+          entry && typeof entry === 'object' && entry.type &&
+          typeof entry.type === 'object' &&
+          'displayValue' in entry.type &&
+          typeof entry.type.displayValue === 'string'
+        );
+
+        jobTypes = (detail as RepeatableEvent).entries
+          .map(entry => {
+            if (!entry.type) {
+              console.log('[DEBUG_LOG] Entry missing type property:', entry);
+              return null;
+            }
+            if (!entry.type.displayValue) {
+              console.log('[DEBUG_LOG] Entry missing type.displayValue:', entry.type);
+              return null;
+            }
+            return entry.type.displayValue;
+          })
+          .filter(Boolean) as string[];
+
+      } catch (error) {
+        console.error('[DEBUG_LOG] Error extracting job types:', error);
+        // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
+      }
+
+      // Update experiencedBasedJobs with the extracted job types
+      if (jobTypes.length > 0) {
+        experiencedBasedJobs = jobTypes;
+
+        // Also update the datasources object to ensure it's using the latest values
+        datasources.experiencedBasedJobs = experiencedBasedJobs;
+
+        // Update any existing search-box components that use experiencedBasedJobs
+        const searchBoxes = document.querySelectorAll('.search-box');
+
+        searchBoxes.forEach((searchBox) => {
+          const el = searchBox as El;
+
+          if (el.dataset.recommendationsDatasource === 'experiencedBasedJobs' && componentStateMap.has(el)) {
+            const state = componentStateMap.get(el)!;
+
+            // Get currently selected items to exclude them from the updated list
+            const selectedCardsDiv = el.querySelector('.selected-cards') as HTMLDivElement;
+            const selectedItems = Array.from(
+              selectedCardsDiv?.querySelectorAll('.selected-card input[type="hidden"]') || []
+            ).map((input) => (input as HTMLInputElement).value);
+
+            // Update the recommendations with the new job types, excluding selected items
+            state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+
+            // Re-populate recommendations if they're visible
+            const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper') as HTMLDivElement;
+            const searchInput = el.querySelector('input[type="text"]') as HTMLInputElement;
+            if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
+              console.log('[DEBUG_LOG] Re-populating recommendations div');
+              populateRecommendationsDiv(el, recommendationsWrapper, selectedCardsDiv, searchInput);
+            }
+          }
+        });
+      } else {
+        console.log('[DEBUG_LOG] No job types extracted from entries');
+      }
+    } else {
+      console.log('[DEBUG_LOG] Event is not for workexperience or has invalid format');
+    }
+  });
+}
+
+// This will be populated by the repeatableChanged event listener
+let experiencedBasedJobs = getExperiencedBasedJobs();
 
 const datasources = {
   courses,
@@ -280,11 +418,20 @@ const datasources = {
   userLocations,
   skills,
   experiencedBasedJobs,
+  experiencedBasedSkills,
   jobTitleIndustries,
   additionalHardSkills,
+  workRelatedSkills,
 }
 
 // --- Type definitions ---
+
+// A handy way to check this only runs once: extend the Window interface to include a global flag
+declare global {
+  interface Window {
+    experiencedBasedJobsObserverInitialized?: boolean;
+  }
+}
 
 interface El extends Element {
   dataset: {
@@ -394,6 +541,18 @@ export default function decorate(element: El, field: Field) {
   const emptySelectionMessage = field.properties['empty-selection-message']
   const emptyRecommendationsMessage = field.properties['empty-recommendations-message']
   const showRecommendations = field.properties['show-recommendations'] || false
+
+  // Set up the event listener for repeatableChanged events
+  // This only needs to be done once when the page loads
+  // Using setTimeout to ensure the DOM has loaded before attaching the event listener
+  if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
+    // Set the flag immediately to prevent multiple setTimeout calls
+    window.experiencedBasedJobsObserverInitialized = true;
+
+    setTimeout(() => {
+      observeElementForJobs(element);
+    }, 500); // 500ms delay to allow the DOM to load
+  }
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource

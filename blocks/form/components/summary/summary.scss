@@ -118,6 +118,21 @@
   &.field-summary-work-preferences .p-small {
     color: $text-dark-primary;
   }
+  
+  &.field-summary-strengths{
+    .summary-entry{
+      >div{
+        color: $text-dark-primary;
+        font-style: normal;
+        line-height: 160%;
+        font-size: $size-font-body-default;
+      }
+      >div:first-child{
+        font-weight: 700;
+        margin-bottom: $spacing-100;
+      }
+    }
+  }
 
   .row.item {
     display: flex;

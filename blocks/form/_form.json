@@ -175,6 +175,7 @@
         "date-input",
         "drop-down",
         "email",
+        "extended-checkbox",
         "file-input",
         "form-accordion",
         "form-button",
@@ -192,6 +193,7 @@
         "summary",
         "formwelcome",
         "formcontextualhelp",
+        "formoutputfield",
         "formtabs",
         "number-input",
         "panel",
@@ -204,7 +206,8 @@
         "text-input",
         "tnc",
         "wizard",
-        "icon-radio-group"
+        "icon-radio-group",
+        "extended-checkbox-container"
       ]
     }
   ]

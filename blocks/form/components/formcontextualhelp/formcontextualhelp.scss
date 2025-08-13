@@ -1,7 +1,7 @@
 @use '../../../../styles/settings' as *;
 
+.formoutputfield,
 .panel-formcontextualhelp {
-  @include elevation-1;
   padding: $spacing-400 $spacing-300;
   background: $bg-primary;
   display: block;
@@ -143,7 +143,7 @@
     }
 
     .panel-formcontextualhelp__footer__link::after {
-      background-image: url('/icons/icon-contextual-help-primary-info-link-arrow.svg');
+      background-image: url('/icons/icon-contextual-help-primary-edit.svg');
     }
 
     .panel-formcontextualhelp__footer__link:hover,
