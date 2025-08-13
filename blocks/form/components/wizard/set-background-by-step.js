@@ -91,9 +91,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
-    // updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
     updateWizardNextButton(container)
-    // trackProgress()
   })
 })
