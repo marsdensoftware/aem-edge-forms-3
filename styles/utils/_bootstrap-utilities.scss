@@ -1,6 +1,6 @@
 @use "sass:map";
-@use "mixins/breakpoints";
-@use "variables";
+@use "../bootstrap/mixins/breakpoints";
+@use "../bootstrap/variables";
 
 // Utility classes for flexbox
 // https://getbootstrap.com/docs/5.3/utilities/flex/
