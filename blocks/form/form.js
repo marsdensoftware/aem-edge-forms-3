@@ -410,7 +410,12 @@ export async function createForm(formDef, data, source = 'aem') {
     handleSubmit(e, form, captcha);
   });
 
-  return form;
+  return {
+    form,
+    captcha,
+    generateFormRendition,
+    data,
+  };
 }
 
 function cleanUp(content) {
