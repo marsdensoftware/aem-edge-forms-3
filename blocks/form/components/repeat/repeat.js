@@ -36,7 +36,8 @@ function updateSelectFieldNames(instance, index) {
 }
 
 /**
- * Updates a fieldset instance with proper IDs, labels, and select field names (radio buttons and checkboxes).
+ * Updates a fieldset instance with proper IDs, labels,
+ * and select field names (radio buttons and checkboxes).
  * @param {HTMLElement} fieldset - The fieldset element to update
  * @param {number} index - The index of the instance
  * @param {string} labelTemplate - Template for the label text (uses '#' as placeholder)
