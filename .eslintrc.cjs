@@ -4,6 +4,7 @@ module.exports = {
     'airbnb-base',
     'plugin:json/recommended',
     'plugin:xwalk/recommended',
+    'prettier',
   ],
   env: {
     browser: true,
