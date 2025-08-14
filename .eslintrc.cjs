@@ -29,7 +29,7 @@ module.exports = {
       'checkbox-group': 20,
       checkbox: 19,
       'date-input': 21,
-      'drop-down': 19,
+      'drop-down': 20,
       email: 22,
       'file-input': 20,
       'form-fragment': 16,
@@ -47,6 +47,7 @@ module.exports = {
       rating: 18,
       password: 20,
       tnc: 12,
+      range: 19
     }],
     'xwalk/no-orphan-collapsible-fields': 'off', // Disable until enhancement is done for Forms properties
   },
