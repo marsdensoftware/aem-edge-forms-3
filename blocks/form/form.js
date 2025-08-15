@@ -56,13 +56,13 @@ function setConstraints(element, fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = getHTMLRenderType(fd);
-  
-  //###NJ Start Added spellcheck
+
+  // ###NJ Start Added spellcheck
   if(fd.properties?.spellcheck){
     input.setAttribute('spellcheck', true);
   }
-  //###NJ End Added spellcheck
-  
+  // ###NJ End Added spellcheck
+
   setPlaceholder(input, fd);
   setConstraints(input, fd);
   return input;
@@ -70,13 +70,13 @@ function createInput(fd) {
 
 const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
-  
-  //###NJ Start Added spellcheck
+
+  // ###NJ Start Added spellcheck
   if(fd.properties?.spellcheck){
     input.setAttribute('spellcheck', true);
   }
-  //###NJ End Added spellcheck
-  
+  // ###NJ End Added spellcheck
+
   setPlaceholder(input, fd);
   return input;
 });
@@ -187,7 +187,7 @@ function createFieldSet(fd) {
   wrapper.name = fd.name;
   if (fd.fieldType === 'panel') {
     wrapper.classList.add('panel-wrapper');
-    //###GKW Added option to add a theme class
+    // ###GKW Added option to add a theme class
     if (fd.properties?.wizardtheme) {
       wrapper.classList.add(fd.properties.wizardtheme);
     }
@@ -197,7 +197,7 @@ function createFieldSet(fd) {
     if (fd.properties?.stepgroup) {
       wrapper.dataset.stepgroup = fd.properties.stepgroup;
     }
-    //###GKW END
+    // ###GKW END
   }
   if (fd.repeatable === true) {
     createRepeatablePanel(wrapper, fd);
@@ -226,7 +226,7 @@ function createRadioOrCheckboxGroup(fd) {
       required: fd.required,
     });
 
-    //###SEP-NJ START Display description below field label
+    // ###SEP-NJ START Display description below field label
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
@@ -249,14 +249,14 @@ function createRadioOrCheckboxGroup(fd) {
       labelEl.appendChild(descSpan);
       labelEl.classList.add('field-label--with-description');
     }
-    //###SEP-NJ END Display description
+    // ###SEP-NJ END Display description
 
     const { variant, 'afs:layout': layout } = fd.properties;
-    //###SEP-NJ START Always show variant if defined
+    // ###SEP-NJ START Always show variant if defined
     if (variant) {
       wrapper.classList.add(`variant-${variant}`);
     }
-    //###SEP-NJ END
+    // ###SEP-NJ END
     if (layout?.orientation === 'horizontal') {
       wrapper.classList.add('horizontal');
     }
@@ -278,7 +278,7 @@ function createRadioOrCheckboxGroup(fd) {
     wrapper.appendChild(field);
   });
 
-  //###SEP-NJ START Wrap radios in a container if bar display
+  // ###SEP-NJ START Wrap radios in a container if bar display
   if(wrapper.classList.contains('variant-bar')){
     const wrappers = wrapper.querySelectorAll('.radio-wrapper');
 
@@ -291,7 +291,7 @@ function createRadioOrCheckboxGroup(fd) {
     // Move the all elements inside the new wrapper
     wrappers.forEach(el => radiosWrapper.appendChild(el));
   }
-  //###SEP-NJ END
+  // ###SEP-NJ END
 
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
@@ -308,7 +308,7 @@ function createPlainText(fd) {
   } else {
     paragraph.textContent = fd.value;
   }
-  //###SEF-NJ Added option to render a class
+  // ###SEF-NJ Added option to render a class
   if (fd.properties?.classes) {
     paragraph.classList.add(fd.properties.classes);
   }
@@ -320,20 +320,20 @@ function createPlainText(fd) {
 }
 
 function addLinkSupport(field, fd) {
-    if (fd.properties.url) {
-        const picture = field.querySelector('picture');
+  if (fd.properties.url) {
+    const picture = field.querySelector('picture');
 
-        if (picture) {
-            const link = document.createElement('a');
-            link.href = `${fd.properties.url}`;
-            link.className = 'image-link';
-            link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
+    if (picture) {
+      const link = document.createElement('a');
+      link.href = `${fd.properties.url}`;
+      link.className = 'image-link';
+      link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
 
-            // Move the picture inside the new anchor element
-            picture.parentNode.insertBefore(link, picture);
-            link.appendChild(picture);
-        }
+      // Move the picture inside the new anchor element
+      picture.parentNode.insertBefore(link, picture);
+      link.appendChild(picture);
     }
+  }
 }
 
 function createImage(fd) {
@@ -343,9 +343,9 @@ function createImage(fd) {
   const altText = fd.altText || fd.name;
   field.append(createOptimizedPicture(imagePath, altText));
 
-  //###SEP-NJ START Add support for link url
+  // ###SEP-NJ START Add support for link url
   addLinkSupport(field, fd);
-  //###SEP-NJ END
+  // ###SEP-NJ END
   return field;
 }
 
@@ -368,7 +368,7 @@ function colSpanDecorator(field, element) {
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
-  const defaultDisplay = field['Column Display'] || field.properties?.['display'];
+  const defaultDisplay = field['Column Display'] || field.properties?.display;
   const defaultOrder = field['Column Order'] || field.properties?.['d-order'];
 
   // Get responsive colspans from properties
@@ -418,7 +418,7 @@ function colSpanDecorator(field, element) {
       element.classList.add(`col${defaultColSpan === 'split' ? '' : `-${defaultColSpan}`}`);
     }
 
-    //set a default offset - ideally, we should delete the value from the jcr
+    // set a default offset - ideally, we should delete the value from the jcr
     if (defaultOffset) {
       element.classList.add(`offset-${defaultOffset}`);
     }
@@ -561,14 +561,14 @@ function renderField(fd) {
   if (fd.description) {
     const helpEl = createHelpText(fd);
 
-    //###SEP-NJ START: add help text below label / legend
+    // ###SEP-NJ START: add help text below label / legend
     const labelEl = field.querySelector('label, legend');
     if (labelEl && labelEl.nextSibling) {
       field.insertBefore(helpEl, labelEl.nextSibling);
     } else {
       field.append(helpEl);
     }
-    //###SEP-NJ END: add help text below label / legend
+    // ###SEP-NJ END: add help text below label / legend
     field.dataset.description = fd.description; // In case overriden by error message
   }
   if (fd.fieldType !== 'radio-group' && fd.fieldType !== 'checkbox-group' && fd.fieldType !== 'captcha') {
