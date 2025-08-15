@@ -16,10 +16,8 @@ module.exports = {
     requireConfigFile: false,
   },
   rules: {
-    semi: [2, 'never'],
     quotes: [2, 'single'],
     indent: ['error', 2],
-    'implicit-arrow-linebreak': ['error', 'below'],
     devDependencies: [0, false],
     'operator-linebreak': [0, 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
