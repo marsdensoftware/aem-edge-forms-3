@@ -1,3 +1,10 @@
+declare global {
+  interface Window {
+    searchInput?: HTMLInputElement;
+    suggestionsDiv?: HTMLElement;
+  }
+}
+
 interface El extends Element {
   dataset: {
     datasource: string[]
@@ -57,30 +64,32 @@ const datasources = {
     'Use accounting software',
     'Adapt to changing work environments',
   ],
-}
+};
 
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-  if (window.searchInput && !window.searchInput.contains(e.target)) {
+  if (window.searchInput && !window.searchInput.contains(e.target as Element) && window.suggestionsDiv) {
     window.suggestionsDiv.innerHTML = ''
     window.suggestionsDiv.style.display = 'none'
   }
 
-  const el = e.target;
+  const el = e.target as HTMLElement;
 
-  if (el.classList.contains('typeahead__icon') && el.closest('.typeahead').classList.contains('has-input')) {
-    const inputEl = el.closest('.typeahead').querySelector('input[type="text"]')
-    inputEl.value = '';
-    el.closest('.typeahead').classList.remove('has-input')
+  if (el.classList.contains('typeahead__icon') && el.closest('.typeahead')?.classList.contains('has-input')) {
+    const inputEl = el.closest('.typeahead')?.querySelector('input[type="text"]') as HTMLInputElement
+    if (inputEl) {
+      inputEl.value = ''
+    }
+    el.closest('.typeahead')?.classList.remove('has-input')
   }
 })
 
 document.addEventListener('change', (event) => {
-  const element = event.target.closest('.typeahead')
+  const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
     const { datasource } = element.dataset
-    const entries = datasources[datasource]
-    const searchInput = element.querySelector('input[type="text"]')
+    const entries = datasources[datasource as keyof typeof datasources]
+    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
     const { value } = searchInput
 
     if (!entries.includes(value)) {
@@ -111,9 +120,9 @@ document.addEventListener('change', (event) => {
 })
 
 document.addEventListener('input', (event) => {
-  const element = event.target.closest('.typeahead')
+  const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
-    const searchInput = element.querySelector('input[type="text"]')
+    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
     window.searchInput = searchInput
     const query = searchInput.value.toLowerCase()
 
@@ -122,12 +131,15 @@ document.addEventListener('input', (event) => {
       return
     }
 
-    const suggestionsDiv = element.querySelector('.suggestions')
+    const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
+    if (!suggestionsDiv) {
+      return
+    }
     window.suggestionsDiv = suggestionsDiv
     suggestionsDiv.innerHTML = ''
 
     const { datasource } = element.dataset
-    const entries = datasources[datasource]
+    const entries = datasources[datasource as keyof typeof datasources]
 
     const filtered = entries.filter((entry) =>
       entry.toLowerCase().includes(query),
