@@ -38,7 +38,7 @@ const makeSASSPipeline = (target, headers, {doSrcMap}) => () =>{
     .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
-    .pipe(gulpif(true, header(headers)))
+    .pipe(gulpif(headers ? true : false, header(headers)))
     .pipe(gulpif(doSrcMap, sourcemaps.write('.'))) // ✅ Write .map file next to .css
     .pipe(dest('./'))
 }
@@ -46,7 +46,7 @@ const makeSASSPipeline = (target, headers, {doSrcMap}) => () =>{
 const makeTSPipeline = (target, headers) => () =>
   src(target, { base: './' })
     .pipe(tsProject()).js
-    .pipe(gulpif(headers, header(headers)))
+    .pipe(gulpif(headers ? true : false, header(headers)))
     .pipe(dest('./'))
 
 const styleFolders = ['styles/**/*.scss', 'blocks/**/*.scss']
@@ -61,7 +61,7 @@ const watchSASS = () => {
 const tsFolders = ['scripts/**/*.ts', 'blocks/**/*.ts']
 const lintTSHeaders = ['eslint-disable']
 
-const buildTS = makePipeline(tsFolders, makeTSPipeline)
+const buildTS = makePipeline(tsFolders, makeTSPipeline, lintTSHeaders)
 const watchTS = () => {
   watch(tsFolders, buildTS)
 }
