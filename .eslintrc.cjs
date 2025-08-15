@@ -1,5 +1,8 @@
 module.exports = {
   root: true,
+  plugins: [
+    '@stylistic'
+  ],
   extends: [
     'airbnb-base',
     'plugin:json/recommended',
@@ -19,6 +22,8 @@ module.exports = {
     quotes: [2, 'single'],
     indent: ['error', 2],
     devDependencies: [0, false],
+    '@stylistic/no-tabs': ['error', {}],
+    'no-trailing-spaces': ['error', {}],
     'operator-linebreak': [0, 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
