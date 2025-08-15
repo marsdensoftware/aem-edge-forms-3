@@ -19,7 +19,7 @@ function waitForTinyMCE(callback) {
 waitForTinyMCE(() => {
   console.log('TinyMCE is available!');
 
-  tinymce.on('AddEditor', function(e) {
+  window.tinymce.on('AddEditor', function(e) {
     const editor = e.editor;
 
     editor.on('init', function() {
