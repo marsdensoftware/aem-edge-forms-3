@@ -10,3 +10,6 @@ scripts/editor-support-rte.js
 # todo add these back in at some point.
 blocks/form/**/*.js
 component-models.json
+
+!blocks/form/models/**
+!blocks/form/integrations/**
