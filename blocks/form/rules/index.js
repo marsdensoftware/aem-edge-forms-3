@@ -70,138 +70,138 @@ async function fieldChanged(payload, form, generateFormRendition) {
   changes.forEach((change) => {
     const { propertyName, currentValue, prevValue } = change;
     switch (propertyName) {
-      case 'required':
-        if (currentValue === true) {
-          fieldWrapper.dataset.required = '';
-        } else {
-          fieldWrapper.removeAttribute('data-required');
-        }
-        break;
-      case 'validationMessage':
-        {
-          const { validity } = payload.field;
-          if (field.setCustomValidity
+    case 'required':
+      if (currentValue === true) {
+        fieldWrapper.dataset.required = '';
+      } else {
+        fieldWrapper.removeAttribute('data-required');
+      }
+      break;
+    case 'validationMessage':
+      {
+        const { validity } = payload.field;
+        if (field.setCustomValidity
           && (validity?.expressionMismatch || validity?.customConstraint)) {
-            field.setCustomValidity(currentValue);
-            updateOrCreateInvalidMsg(field, currentValue);
-          }
+          field.setCustomValidity(currentValue);
+          updateOrCreateInvalidMsg(field, currentValue);
         }
-        break;
-      case 'value':
-        if (['number', 'date', 'text', 'email'].includes(field.type) && (displayFormat || displayValueExpression)) {
-          field.setAttribute('edit-value', currentValue);
-          field.setAttribute('display-value', displayValue);
-          if (document.activeElement !== field) {
-            field.value = displayValue;
-          }
-        } else if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
-          field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-            const exists = (Array.isArray(currentValue)
+      }
+      break;
+    case 'value':
+      if (['number', 'date', 'text', 'email'].includes(field.type) && (displayFormat || displayValueExpression)) {
+        field.setAttribute('edit-value', currentValue);
+        field.setAttribute('display-value', displayValue);
+        if (document.activeElement !== field) {
+          field.value = displayValue;
+        }
+      } else if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
+          const exists = (Array.isArray(currentValue)
               && currentValue.some((x) => compare(x, el.value, type.replace('[]', ''))))
               || compare(currentValue, el.value, type);
-            el.checked = exists;
-          });
-        } else if (fieldType === 'checkbox') {
-          field.checked = compare(currentValue, field.value, type);
-        } else if (fieldType === 'plain-text') {
-          field.innerHTML = currentValue;
-        } else if (fieldType === 'image') {
-          const altText = field?.querySelector('img')?.alt || '';
-          field.querySelector('picture')?.replaceWith(createOptimizedPicture(field, currentValue, altText));
-        } else if (field.type !== 'file') {
-          field.value = currentValue;
+          el.checked = exists;
+        });
+      } else if (fieldType === 'checkbox') {
+        field.checked = compare(currentValue, field.value, type);
+      } else if (fieldType === 'plain-text') {
+        field.innerHTML = currentValue;
+      } else if (fieldType === 'image') {
+        const altText = field?.querySelector('img')?.alt || '';
+        field.querySelector('picture')?.replaceWith(createOptimizedPicture(field, currentValue, altText));
+      } else if (field.type !== 'file') {
+        field.value = currentValue;
+      }
+      break;
+    case 'visible':
+      fieldWrapper.dataset.visible = currentValue;
+      if (fieldType === 'panel' && fieldWrapper.querySelector('dialog')) {
+        const dialog = fieldWrapper.querySelector('dialog');
+        if (currentValue === false && dialog.open) {
+          dialog.close(); // close triggers the event listener that removes the dialog overlay
         }
-        break;
-      case 'visible':
-        fieldWrapper.dataset.visible = currentValue;
-        if (fieldType === 'panel' && fieldWrapper.querySelector('dialog')) {
-          const dialog = fieldWrapper.querySelector('dialog');
-          if (currentValue === false && dialog.open) {
-            dialog.close(); // close triggers the event listener that removes the dialog overlay
-          }
-        }
-        break;
-      case 'enabled':
-        // If checkboxgroup/radiogroup/drop-down is readOnly then it should remain disabled.
-        if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
-          if (readOnly === false) {
-            field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-              disableElement(el, !currentValue);
-            });
-          }
-        } else if (fieldType === 'drop-down') {
-          if (readOnly === false) {
-            disableElement(field, !currentValue);
-          }
-        } else if (componentType === 'rating') {
-          if (readOnly === false) {
-            fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', !currentValue);
-          }
-        } else {
-          field.toggleAttribute('disabled', currentValue === false);
-        }
-        break;
-      case 'readOnly':
-        if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+      }
+      break;
+    case 'enabled':
+      // If checkboxgroup/radiogroup/drop-down is readOnly then it should remain disabled.
+      if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        if (readOnly === false) {
           field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-            disableElement(el, currentValue);
+            disableElement(el, !currentValue);
           });
-        } else if (fieldType === 'drop-down') {
-          disableElement(field, currentValue);
-        } else if (componentType === 'rating') {
-          fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', currentValue === true);
-        } else {
-          field.toggleAttribute('disabled', currentValue === true);
         }
-        break;
-      case 'label':
-        if (fieldWrapper) {
-          let labelEl = fieldWrapper.querySelector('.field-label');
-          if (labelEl) {
-            labelEl.textContent = currentValue.value;
-            labelEl.setAttribute('data-visible', currentValue.visible);
-          } else if (fieldType === 'button') {
-            field.textContent = currentValue.value;
-          } else if (currentValue.value !== '') {
-            labelEl = createLabel({
-              id,
-              label: currentValue,
-            });
-            fieldWrapper.prepend(labelEl);
-          }
+      } else if (fieldType === 'drop-down') {
+        if (readOnly === false) {
+          disableElement(field, !currentValue);
         }
-        break;
-      case 'description':
-        if (fieldWrapper) {
-          let descriptionEl = fieldWrapper.querySelector('.field-description');
-          if (descriptionEl) {
-            descriptionEl.innerHTML = currentValue;
-          } else if (currentValue !== '') {
-            descriptionEl = createHelpText({
-              id,
-              description: currentValue,
-            });
-            fieldWrapper.append(descriptionEl);
-          }
+      } else if (componentType === 'rating') {
+        if (readOnly === false) {
+          fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', !currentValue);
         }
-        break;
-      case 'items':
-        if (currentValue === null) {
-          const removeId = prevValue.id;
-          field?.querySelector(`#${removeId}`)?.remove();
-        } else {
-          generateFormRendition({ items: [currentValue] }, field?.querySelector('.repeat-wrapper'));
+      } else {
+        field.toggleAttribute('disabled', currentValue === false);
+      }
+      break;
+    case 'readOnly':
+      if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
+          disableElement(el, currentValue);
+        });
+      } else if (fieldType === 'drop-down') {
+        disableElement(field, currentValue);
+      } else if (componentType === 'rating') {
+        fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', currentValue === true);
+      } else {
+        field.toggleAttribute('disabled', currentValue === true);
+      }
+      break;
+    case 'label':
+      if (fieldWrapper) {
+        let labelEl = fieldWrapper.querySelector('.field-label');
+        if (labelEl) {
+          labelEl.textContent = currentValue.value;
+          labelEl.setAttribute('data-visible', currentValue.visible);
+        } else if (fieldType === 'button') {
+          field.textContent = currentValue.value;
+        } else if (currentValue.value !== '') {
+          labelEl = createLabel({
+            id,
+            label: currentValue,
+          });
+          fieldWrapper.prepend(labelEl);
         }
-        break;
-      case 'activeChild': handleActiveChild(activeChild, form);
-        break;
-      case 'valid':
-        if (currentValue === true) {
-          updateOrCreateInvalidMsg(field, '');
+      }
+      break;
+    case 'description':
+      if (fieldWrapper) {
+        let descriptionEl = fieldWrapper.querySelector('.field-description');
+        if (descriptionEl) {
+          descriptionEl.innerHTML = currentValue;
+        } else if (currentValue !== '') {
+          descriptionEl = createHelpText({
+            id,
+            description: currentValue,
+          });
+          fieldWrapper.append(descriptionEl);
         }
-        break;
-      default:
-        break;
+      }
+      break;
+    case 'items':
+      if (currentValue === null) {
+        const removeId = prevValue.id;
+        field?.querySelector(`#${removeId}`)?.remove();
+      } else {
+        generateFormRendition({ items: [currentValue] }, field?.querySelector('.repeat-wrapper'));
+      }
+      break;
+    case 'activeChild': handleActiveChild(activeChild, form);
+      break;
+    case 'valid':
+      if (currentValue === true) {
+        updateOrCreateInvalidMsg(field, '');
+      }
+      break;
+    default:
+      break;
     }
   });
   if (fieldWrapper?.dataset?.subscribe) {
@@ -214,10 +214,10 @@ function formChanged(payload, form) {
   changes.forEach((change) => {
     const { propertyName, currentValue } = change;
     switch (propertyName) {
-      case 'activeChild': handleActiveChild(currentValue?.id, form);
-        break;
-      default:
-        break;
+    case 'activeChild': handleActiveChild(currentValue?.id, form);
+      break;
+    default:
+      break;
     }
   });
 }
