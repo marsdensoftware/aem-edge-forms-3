@@ -1,5 +1,5 @@
 const { series, src, dest, watch } = require('gulp')
-const header = require('gulp-header');
+const header = require('gulp-header')
 const dartSass = require('sass')
 const gulpSass = require('gulp-sass')
 const postcss = require('gulp-postcss')
@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 const postcssMinify = require('@csstools/postcss-minify')
 const sourcemaps = require('gulp-sourcemaps') // RW added
-const gulpif = require('gulp-if');
+const gulpif = require('gulp-if')
 
 const sass = gulpSass(dartSass)
 
@@ -26,29 +26,26 @@ const plugin = [
   postcssMinify(),
 ]
 
-const styleFolder = 'styles/**/*.scss'
-const blocksStyleFolder = 'blocks/**/*.scss'
-const styleFolders = [blocksStyleFolder, styleFolder]
-const lintHeaders = ['stylelint-disable']
+const styleFolders = ['styles/**/*.scss', 'blocks/**/*.scss']
+const lintSASSHeaders = ['stylelint-disable']
       .map((s)=>`/*${s}*/\n`)
-      .join('');
+      .join('')
 
-const makeTaskPipeline = (target, doSrcMap) => () =>
+const makeSASSPipeline = (target, doSrcMap) => () =>
   src(target, { base: './' })
+    .pipe(debug({title: 'Processing file:'}))
     .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
     .pipe(header(lintHeaders))
     .pipe(gulpif(doSrcMap, sourcemaps.write('.'))) // ✅ Write .map file next to .css
-    .pipe(dest('./'));
+    .pipe(dest('./'))
 
-const style = makeTaskPipeline(styleFolders, true);
-
-const watching = () => {
-  watch(styleFolders, series(style))
+const watch_sass = () => {
+  watch(styleFolders, series(makeSASSPipeline(styleFolders, true)))
 }
 
-const build = makeTaskPipeline(styleFolders, true);
+const build_sass = makeSASSPipeline(styleFolders, true)
 
-exports.default = watching;
-exports.build = series(build);
+exports.default = watch_sass
+exports.build = series(build_sass)
