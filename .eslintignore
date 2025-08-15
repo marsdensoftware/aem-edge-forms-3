@@ -8,16 +8,5 @@ scripts/editor-support-rte.js
 /test
 
 # todo add these back in at some point.
-blocks/**/*.js
+blocks/form/**/*.js
 component-models.json
-
-# reinclude some specific blocks
-!blocks/auth-redirect/**
-!blocks/account-menu/**
-!blocks/cards/**
-!blocks/embed-adaptive-form/**
-!blocks/columns/**
-!blocks/fragment/**
-!blocks/hero/**
-!blocks/link-with-icon/**
-!blocks/typography/**
