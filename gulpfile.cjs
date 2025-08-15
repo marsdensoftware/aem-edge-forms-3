@@ -7,6 +7,7 @@ const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 const postcssMinify = require('@csstools/postcss-minify')
 const sourcemaps = require('gulp-sourcemaps') // RW added
+const gulpif = require('gulp-if');
 
 const sass = gulpSass(dartSass)
 
@@ -32,28 +33,22 @@ const lintHeaders = ['stylelint-disable']
       .map((s)=>`/*${s}*/\n`)
       .join('');
 
-const style = () =>
-  src(styleFolders, { base: './' })
-    .pipe(sourcemaps.init()) // ✅ Start source map tracking
+const makeTaskPipeline = (target, doSrcMap) => () =>
+  src(target, { base: './' })
+    .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
     .pipe(header(lintHeaders))
-    .pipe(sourcemaps.write('.')) // ✅ Write .map file next to .css
-    .pipe(dest('./'))
+    .pipe(gulpif(doSrcMap, sourcemaps.write('.'))) // ✅ Write .map file next to .css
+    .pipe(dest('./'));
+
+const style = makeTaskPipeline(styleFolders, true);
 
 const watching = () => {
   watch(styleFolders, series(style))
 }
 
-const build = (done) => {
-  src(styleFolders, { base: './' })
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss(plugin))
-    .pipe(header(lintHeaders))
-    .pipe(dest('./'))
+const build = makeTaskPipeline(styleFolders, true);
 
-  done()
-}
-
-exports.default = watching
-exports.build = series(build)
+exports.default = watching;
+exports.build = series(build);
