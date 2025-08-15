@@ -19,12 +19,11 @@ function waitForTinyMCE(callback) {
 waitForTinyMCE(() => {
   console.log('TinyMCE is available!');
 
-  window.tinymce.on('AddEditor', function(e) {
+  window.tinymce.on('AddEditor', (e) => {
     const editor = e.editor;
 
-    editor.on('init', function() {
+    editor.on('init', () => {
       console.log(`Editor ${editor.id} initialized from global listener`);
-
     });
   });
 });
