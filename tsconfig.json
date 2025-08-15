@@ -1,5 +1,5 @@
 {
-  "include": ["blocks/**/*"],
+  "include": ["blocks/**/*", "scripts/**/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
     "target": "ES6",

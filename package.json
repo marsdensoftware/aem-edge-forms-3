@@ -5,7 +5,8 @@
   "description": "Starter project for Adobe Helix",
   "type": "module",
   "scripts": {
-    "build:css": "npm run gulp build",
+    "build:css": "npm run gulp buildSASS",
+    "build:ts": "npm run gulp buildTS",
     "lint:js": "eslint . --ext .json,.js,.mjs",
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
     "lint": "npm run lint:js",
@@ -20,9 +21,10 @@
     "update:formatters": "rollup -c rollup/af-formatters.rollup.config.js",
     "update:functions": "cp node_modules/@aemforms/af-custom-functions/src/index.js blocks/form/rules/functions.js",
     "update": "npm run update:core && npm run update:formula && npm run update:formatters",
-    "watch:ts": "tsc --watch",
+    "watch:sass": "npm run gulp watchSASS",
+    "watch:ts": "npm run gulp watchTS",
     "gulp": "gulp",
-    "dev": "concurrently --kill-others \"aem up\" \"npm run watch:ts\" \"npm run gulp\""
+    "dev": "concurrently --kill-others \"aem up\" \"npm run gulp\""
   },
   "c8": {
     "exclude": [
@@ -83,6 +85,7 @@
     "gulp-postcss": "^10.0.0",
     "gulp-sass": "^6.0.1",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "husky": "9.1.1",
     "jsdom": "24.0.0",
     "jsdom-global": "3.0.2",
