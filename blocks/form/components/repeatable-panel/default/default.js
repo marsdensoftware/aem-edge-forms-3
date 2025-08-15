@@ -371,18 +371,18 @@ export class RepeatablePanel {
         const values = savedInputData.values ? savedInputData.values : [];
 
         switch (input.type) {
-          case 'checkbox':
-          case 'radio':
-            input.checked = values.includes(input.value) || input.value == value;
-            break;
-          case 'select':
-            for (const option of input.options) {
-              option.selected = values.includes(option.value) || option.value == value;
-            }
-            break;
-          default:
-            input.value = value;
-            break;
+        case 'checkbox':
+        case 'radio':
+          input.checked = values.includes(input.value) || input.value == value;
+          break;
+        case 'select':
+          for (const option of input.options) {
+            option.selected = values.includes(option.value) || option.value == value;
+          }
+          break;
+        default:
+          input.value = value;
+          break;
         }
       });
     }
