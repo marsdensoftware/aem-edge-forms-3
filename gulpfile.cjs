@@ -33,7 +33,7 @@ const makePipeline = (target, builder, headers, options) => {
   return builder(target, headerString, options)
 }
 
-const makeSASSPipeline = (target, headers, {doSrcMap}) => () =>{
+const makeSASSPipeline = (target, headers, {doSrcMap}) => () => {
   return src(target, { base: './' })
     .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
     .pipe(sass().on('error', sass.logError))
