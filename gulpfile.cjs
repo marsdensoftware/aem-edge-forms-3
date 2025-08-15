@@ -46,7 +46,7 @@ const watching = () => {
 }
 
 const build = (done) => {
-  src(styleFolder, { base: './' })
+  src(styleFolders, { base: './' })
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
     .pipe(header(lintHeaders))
