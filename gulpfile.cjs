@@ -1,4 +1,5 @@
 const { series, src, dest, watch } = require('gulp')
+const header = require('gulp-header');
 const dartSass = require('sass')
 const gulpSass = require('gulp-sass')
 const postcss = require('gulp-postcss')
@@ -27,12 +28,16 @@ const plugin = [
 const styleFolder = 'styles/**/*.scss'
 const blocksStyleFolder = 'blocks/**/*.scss'
 const styleFolders = [blocksStyleFolder, styleFolder]
+const lintHeaders = ['stylelint-disable']
+      .map((s)=>`/*${s}*/\n`)
+      .join('');
 
 const style = () =>
   src(styleFolders, { base: './' })
     .pipe(sourcemaps.init()) // ✅ Start source map tracking
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
+    .pipe(header(lintHeaders))
     .pipe(sourcemaps.write('.')) // ✅ Write .map file next to .css
     .pipe(dest('./'))
 
@@ -44,6 +49,7 @@ const build = (done) => {
   src(styleFolder, { base: './' })
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugin))
+    .pipe(header(lintHeaders))
     .pipe(dest('./'))
 
   done()
