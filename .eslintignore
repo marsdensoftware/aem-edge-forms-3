@@ -12,5 +12,12 @@ blocks/**/*.js
 component-models.json
 
 # reinclude some specific blocks
-!blocks/account/*
-!blocks/auth-redirect/*
+!blocks/auth-redirect/**
+!blocks/account-menu/**
+!blocks/cards/**
+!blocks/embed-adaptive-form/**
+!blocks/columns/**
+!blocks/fragment/**
+!blocks/hero/**
+!blocks/link-with-icon/**
+!blocks/typography/**
