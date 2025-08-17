@@ -130,9 +130,9 @@ export class RepeatablePanel {
       modal.decorate(panelEl);
 
       return modal;
-    } else {
-      return null;
     }
+    return null;
+
   }
 
   _yesCancel(entry) {

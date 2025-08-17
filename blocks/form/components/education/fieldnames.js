@@ -43,23 +43,8 @@ export function sorter(a, b) {
     if (bCompletionStatus != aCompletionStatus) {
       return 1;
     }
-    else {
-      // both in progress, use start date
-      // Compare year first, then month
-      if (startYearA != startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
 
-      if (startMonthB != startMonthA) {
-        return startMonthB - startMonthA;
-      }
-
-      // Sort alphabetically
-      return courseA.localeCompare(courseB);
-    }
-  }
-  else {
-    // Not completed, compare start date
+    // both in progress, use start date
     // Compare year first, then month
     if (startYearA != startYearB) {
       return startYearB - startYearA; // recent year first
@@ -71,5 +56,20 @@ export function sorter(a, b) {
 
     // Sort alphabetically
     return courseA.localeCompare(courseB);
+
   }
+
+  // Not completed, compare start date
+  // Compare year first, then month
+  if (startYearA != startYearB) {
+    return startYearB - startYearA; // recent year first
+  }
+
+  if (startMonthB != startMonthA) {
+    return startMonthB - startMonthA;
+  }
+
+  // Sort alphabetically
+  return courseA.localeCompare(courseB);
+
 }
