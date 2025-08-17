@@ -13,7 +13,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     // Register typeahead valid listener
     document.addEventListener('typeahead:valid', (event) => {
       // Check if the change happens on language field within this repeatable
-      const target = event.target;
+      const {target} = event;
       if (this._repeatablePanel.contains(target)) {
         const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
         if (proficiency) {
@@ -25,7 +25,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     // Register typeahead invalid listener
     document.addEventListener('typeahead:invalid', (event) => {
       // Check if the change happens on language field within this repeatable
-      const target = event.target;
+      const {target} = event;
       if (this._repeatablePanel.contains(target)) {
         const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
         if (proficiency) {

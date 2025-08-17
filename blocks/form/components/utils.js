@@ -15,12 +15,12 @@ export class DefaultFieldConverter {
       }
 
       // First check text inside label
-      let textEl = labelEl.querySelector(':scope>.text');
+      const textEl = labelEl.querySelector(':scope>.text');
       if (textEl) {
         result = textEl.textContent.trim();
 
         // Check description
-        let descEl = labelEl.querySelector(':scope>.desc');
+        const descEl = labelEl.querySelector(':scope>.desc');
         if (descEl) {
           result += ' - ' + descEl.textContent.trim();
         }

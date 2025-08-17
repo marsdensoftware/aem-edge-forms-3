@@ -285,7 +285,7 @@ export class Summarizer {
   }
 
   static createSummaryFromMarkupObjects(markupObjects) {
-    let summaryEntryItemsTag = 'div';
+    const summaryEntryItemsTag = 'div';
 
     const result = document.createElement(summaryEntryItemsTag);
 
@@ -321,7 +321,7 @@ export class Summarizer {
   static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
     const form = el.closest('form');
 
-    let contents = [];
+    const contents = [];
 
     let entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
 
@@ -330,7 +330,7 @@ export class Summarizer {
     }
 
     entries.forEach(entry => {
-      let content = Summarizer.getItemContent(entry, stepName);
+      const content = Summarizer.getItemContent(entry, stepName);
       contents.push(content);
     });
 
@@ -369,7 +369,7 @@ export class Summarizer {
     const form = el.closest('form');
     const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
-    let strengthsContent = [];
+    const strengthsContent = [];
 
     extendedCheckboxes.forEach((e) => {
       const container = e.closest('.extended-checkbox-container');
@@ -395,7 +395,7 @@ export class Summarizer {
   static languages(el, properties) {
     const form = el.closest('form');
 
-    let languagesContent = [];
+    const languagesContent = [];
     let languageContent = '';
 
     // Read english language
@@ -408,7 +408,7 @@ export class Summarizer {
       };
 
       // English content
-      let languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
+      const languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
       languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
       languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName: 'panel_english_skills', content: languageContent })
 
@@ -574,8 +574,8 @@ export class Summarizer {
       }
 
       // Content
-      let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
-      let content =
+      const contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
+      const content =
         Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects)
 
       return Summarizer.replace(Summarizer.itemContentEditTemplate, {

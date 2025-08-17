@@ -30,8 +30,8 @@ class AdvancedDatepickerField {
     this.panel.dataset.yearMin = this.model.properties.yearMin;
     this.panel.dataset.required = this.yearDD.required || this.monthDD.required;
 
-    let yearMinS = this.model.properties.yearMin;
-    let yearMaxS = this.model.properties.yearMax;
+    const yearMinS = this.model.properties.yearMin;
+    const yearMaxS = this.model.properties.yearMax;
 
     let yearMin = this.parseNumber(yearMinS, this.defaultYearMin);
     let yearMax = this.parseNumber(yearMaxS, this.defaultYearMax);
