@@ -181,7 +181,7 @@ export class Summarizer {
   }
 
   static getNameValues(entry) {
-    let nameValues = undefined;
+    let nameValues;
     try {
       nameValues = entry.dataset.savedData
         ? JSON.parse(entry.dataset.savedData)
