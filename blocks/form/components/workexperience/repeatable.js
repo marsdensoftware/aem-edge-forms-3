@@ -1,4 +1,4 @@
-import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
+import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
 import { FIELD_NAMES, sorter, STILL_WORKING_STATUS } from './fieldnames.js';

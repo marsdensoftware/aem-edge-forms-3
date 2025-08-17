@@ -22,7 +22,7 @@ class RepeatModal extends Modal {
 
     this.panel.dataset.visible = true;
 
-    this.dialog.scrollIntoView({ behavior: "smooth", block: "center" });
+    this.dialog.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   hideModal() {
@@ -574,7 +574,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
     super(el, properties, name, converter, sorterFn);
 
     // Add class
-    this._repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
+    this._repeatablePanel.classList.add('panel-repeatable-panel__conditional');
 
     // Add class
     this._repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);

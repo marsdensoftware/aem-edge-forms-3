@@ -263,7 +263,7 @@ export class Summarizer {
     </div>
     `;
 
-  static itemContentTemplate = `<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>`;
+  static itemContentTemplate = '<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>';
 
   static replace(template, params) {
     return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -313,7 +313,7 @@ export class Summarizer {
     }
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
   }
@@ -336,7 +336,7 @@ export class Summarizer {
 
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
   }
@@ -378,7 +378,7 @@ export class Summarizer {
     });
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
     el.innerHTML = content;
 
@@ -427,7 +427,7 @@ export class Summarizer {
     });
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
     el.innerHTML = content;
   }
@@ -476,7 +476,7 @@ export class Summarizer {
     }
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     el.innerHTML = content;
@@ -564,7 +564,7 @@ export class Summarizer {
       ) {
         if (isNo(nameValues['reliable-transport'])) {
           nameValues['reliable-transport'].displayValue = i18n(
-            "I don't have reliable transport to get to work",
+            'I don\'t have reliable transport to get to work',
           )
         } else {
           nameValues['reliable-transport'].displayValue = i18n(
@@ -608,7 +608,7 @@ export class Summarizer {
     });
 
     const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
   }
