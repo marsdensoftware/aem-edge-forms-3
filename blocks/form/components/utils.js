@@ -1,9 +1,7 @@
+/* eslint-disable class-methods-use-this */
 import { i18n } from '../../../i18n/index.js';
 
 export class DefaultFieldConverter {
-
-  constructor() {
-  }
 
   convert(entry, fieldName) {
     function getDisplayText(input) {
@@ -173,4 +171,5 @@ export function isNo(field) {
     const normalized = value.trim().toLowerCase();
     return normalized === 'no' || normalized === 'false' || normalized === '0';
   }
+  return false;
 }
