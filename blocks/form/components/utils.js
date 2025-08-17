@@ -36,7 +36,7 @@ export class DefaultFieldConverter {
     if(fieldName){
       inputs = inputs.filter(el => el.name === fieldName);
     }
-        
+
     const result = {};
 
     inputs.forEach(input => {
@@ -45,7 +45,7 @@ export class DefaultFieldConverter {
       const name = input.name;
 
       const type = input.type;
-            
+
       // ignore text input from search-box component
       if(type === 'text' && input.parentElement.classList.contains('search-box__input')){
         return;

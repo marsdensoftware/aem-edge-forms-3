@@ -535,7 +535,7 @@ export class RepeatablePanel {
       if (this.#sorterFn) {
         savedEntries = Array.from(savedEntries).sort(this.#sorterFn);
       }
-      
+
       const content = this.#overview.querySelector('.repeatable-entries');
 
       // Clear content
