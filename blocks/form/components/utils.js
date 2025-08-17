@@ -40,11 +40,11 @@ export class DefaultFieldConverter {
     const result = {};
 
     inputs.forEach(input => {
-      const value = input.value;;
+      const {value} = input;
       let displayValue = value;
-      const name = input.name;
+      const {name} = input;
 
-      const type = input.type;
+      const {type} = input;
 
       // ignore text input from search-box component
       if(type === 'text' && input.parentElement.classList.contains('search-box__input')){
@@ -167,7 +167,7 @@ export function getDurationString(startMonthStr, startYearStr, endMonthStr, endY
 
 
 export function isNo(field) {
-  const value = field.value;
+  const {value} = field;
   if (!value) return true;
   if (typeof value === 'string') {
     const normalized = value.trim().toLowerCase();

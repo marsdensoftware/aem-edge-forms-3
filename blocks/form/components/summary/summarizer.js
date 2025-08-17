@@ -152,8 +152,8 @@ export class Summarizer {
 
     Object.entries(nameValues).forEach(([name, data]) => {
       if (!data) return;
-      const value = data.value;
-      const displayValue = data.displayValue;
+      const {value} = data;
+      const {displayValue} = data;
 
       if (value) {
         const result = document.createElement(tagName);
@@ -165,8 +165,8 @@ export class Summarizer {
         entries.push(result);
       }
 
-      const values = data.values;
-      const displayValues = data.displayValues;
+      const {values} = data;
+      const {displayValues} = data;
       if (values) {
         const result = document.createElement(tagName);
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -211,14 +211,14 @@ export class Summarizer {
   }
 
   static gotoWizardStep(el) {
-    const stepName = el.dataset.stepName;
-    const entryId = el.dataset.entryId;
+    const {dataset: {stepName}} = el;
+    const {dataset: {entryId}} = el;
 
     const form = el.closest('form');
 
     const panelEl = form.querySelector(`[name="${stepName}"]`);
     const wizardEl = panelEl.closest('.wizard');
-    const index = panelEl.dataset.index;
+    const {index} = panelEl.dataset;
 
     Summarizer.navigate(wizardEl, index);
 
@@ -276,7 +276,7 @@ export class Summarizer {
     let summaryEntryTag = 'div';
 
     if (properties && properties.summaryEntryTag) {
-      summaryEntryTag = properties.summaryEntryTag;
+      ({summaryEntryTag} = properties);
     }
 
     const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
@@ -312,7 +312,7 @@ export class Summarizer {
       content = Summarizer.getItemContent(entry, stepName, properties);
     }
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
@@ -335,7 +335,7 @@ export class Summarizer {
     });
 
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
@@ -377,7 +377,7 @@ export class Summarizer {
       strengthsContent.push(content);
     });
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
     el.innerHTML = content;
@@ -426,7 +426,7 @@ export class Summarizer {
       }
     });
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
     el.innerHTML = content;
@@ -475,7 +475,7 @@ export class Summarizer {
       });
     }
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
@@ -596,8 +596,7 @@ export class Summarizer {
     const contents = [];
 
     childrenNames.forEach(step => {
-      const stepName = step[0];
-      const title = step[1];
+      const [stepName, title]  = step;
 
       const entry = form.querySelector(`[name="${stepName}"]`);
 
@@ -607,7 +606,7 @@ export class Summarizer {
       }
     });
 
-    const description = properties['description'];
+    const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });

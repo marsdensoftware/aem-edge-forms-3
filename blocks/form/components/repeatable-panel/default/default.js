@@ -110,7 +110,7 @@ export class RepeatablePanel {
     form.addEventListener('item:remove', (event) => {
       const removed = event.detail.item.el;
       // At this point the element is no longer in the dom
-      const id = removed.dataset.id;
+      const {id} = removed.dataset;
       const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
       if (repeatableEntry) {
         // Find matching overview entry and remove
@@ -435,8 +435,8 @@ export class RepeatablePanel {
       if (!data) {
         return;
       }
-      const value = data.value;
-      const displayValue = data.displayValue;
+      const {value} = data;
+      const {displayValue} = data;
 
       if (value) {
         const result = document.createElement('div');
@@ -448,8 +448,8 @@ export class RepeatablePanel {
         entries.push(result);
       }
 
-      const values = data.values;
-      const displayValues = data.displayValues;
+      const {values} = data;
+      const {displayValues} = data;
       if (values) {
         const result = document.createElement('div');
         result.classList.add(`${classPrefix}-entry__${name}`);

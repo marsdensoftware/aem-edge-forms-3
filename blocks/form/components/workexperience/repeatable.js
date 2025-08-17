@@ -113,7 +113,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     if (this._isFirstEntry(entry)) {
       const selectedRadio = this._conditionField.querySelector('input[type="radio"]:checked');
       if (selectedRadio) {
-        const value = selectedRadio.value;
+        const {value} = selectedRadio;
         // Copy radio value into type of work field. Because it is not visible initially for the first entry
         const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
         typeOfWorkExperience.value = value;
