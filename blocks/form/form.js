@@ -230,24 +230,26 @@ function createRadioOrCheckboxGroup(fd) {
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
-    const textContent = labelEl.textContent.trim();
-    labelEl.textContent = '';
+    if(labelEl){
+      const textContent = labelEl.textContent.trim();
+      labelEl.textContent = '';
 
-    // Create and append the span.text
-    const textSpan = document.createElement('span');
-    textSpan.className = 'text';
-    textSpan.textContent = textContent;
-    labelEl.appendChild(textSpan);
+      // Create and append the span.text
+      const textSpan = document.createElement('span');
+      textSpan.className = 'text';
+      textSpan.textContent = textContent;
+      labelEl.appendChild(textSpan);
 
-    const description = fd.properties?.enumDescriptions?.[index];
+      const description = fd.properties?.enumDescriptions?.[index];
 
-    if(description){
-      // Create and append the span.desc
-      const descSpan = document.createElement('span');
-      descSpan.className = 'desc';
-      descSpan.textContent = description;
-      labelEl.appendChild(descSpan);
-      labelEl.classList.add('field-label--with-description');
+      if(description){
+        // Create and append the span.desc
+        const descSpan = document.createElement('span');
+        descSpan.className = 'desc';
+        descSpan.textContent = description;
+        labelEl.appendChild(descSpan);
+        labelEl.classList.add('field-label--with-description');
+      }
     }
     // ###SEP-NJ END Display description
 
