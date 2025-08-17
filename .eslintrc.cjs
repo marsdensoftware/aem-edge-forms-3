@@ -24,6 +24,7 @@ module.exports = {
     devDependencies: [0, false],
     '@stylistic/no-tabs': ['error', {}],
     'no-trailing-spaces': ['error', {}],
+    'no-underscore-dangle': ['off'], // we probably won't use EC22, so _ convention is ok
     'operator-linebreak': [0, 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
