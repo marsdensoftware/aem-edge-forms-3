@@ -1,7 +1,6 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { FIELD_NAMES } from './fieldnames.js'
-import { isNo } from '../utils.js'
-import { DefaultFieldConverter } from '../utils.js'
+import { isNo , DefaultFieldConverter } from '../utils.js'
 
 class Converter extends DefaultFieldConverter {
 
