@@ -51,7 +51,9 @@ class RepeatModal extends Modal {
 export class RepeatablePanel {
 
   #overview;
+
   #converter;
+
   #sorterFn;
 
   constructor(el, properties, name, converter, sorterFn) {
