@@ -32,7 +32,7 @@ export default function decorate(el, fd) {
     const form = connectedEl.closest('form');
 
     // Listen for input events on the form (event delegation)
-    form.addEventListener('change', function(e) {
+    form.addEventListener('change', (e) => {
       if (e.target.name == fieldName) {
         updateDisplay();
       }
