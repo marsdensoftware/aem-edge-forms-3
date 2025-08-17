@@ -47,7 +47,7 @@ class Converter extends DefaultFieldConverter {
       // Not paid work
       newResult[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
     }
-    newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+    newResult.workperiod = { 'value': workperiod, 'displayValue': workperiod };
 
     return newResult;
   }

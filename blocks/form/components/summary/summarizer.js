@@ -506,55 +506,55 @@ export class Summarizer {
 
       if (stepName == 'panel_work_availability') {
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].value
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.value
         ) {
-          nameValues['days_you_can_work'].values = [
-            nameValues['days_you_can_work'].value,
+          nameValues.days_you_can_work.values = [
+            nameValues.days_you_can_work.value,
           ]
-          nameValues['days_you_can_work'].displayValues = [
-            nameValues['days_you_can_work'].displayValue,
+          nameValues.days_you_can_work.displayValues = [
+            nameValues.days_you_can_work.displayValue,
           ]
 
-          delete nameValues['days_you_can_work'].value
-          delete nameValues['days_you_can_work'].displayValue
+          delete nameValues.days_you_can_work.value
+          delete nameValues.days_you_can_work.displayValue
         }
 
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].values &&
-          nameValues['days_you_can_work'].values.indexOf('3') > -1
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.values &&
+          nameValues.days_you_can_work.values.indexOf('3') > -1
         ) {
           // Specific days
-          const index = nameValues['days_you_can_work'].values.indexOf('3')
+          const index = nameValues.days_you_can_work.values.indexOf('3')
 
           if (
-            nameValues['specific_days_cb'] &&
-            nameValues['specific_days_cb'].value
+            nameValues.specific_days_cb &&
+            nameValues.specific_days_cb.value
           ) {
-            nameValues['specific_days_cb'].values = [
-              nameValues['specific_days_cb'].value,
+            nameValues.specific_days_cb.values = [
+              nameValues.specific_days_cb.value,
             ]
-            nameValues['specific_days_cb'].displayValues = [
-              nameValues['specific_days_cb'].displayValue,
+            nameValues.specific_days_cb.displayValues = [
+              nameValues.specific_days_cb.displayValue,
             ]
 
-            delete nameValues['specific_days_cb'].value
-            delete nameValues['specific_days_cb'].displayValue
+            delete nameValues.specific_days_cb.value
+            delete nameValues.specific_days_cb.displayValue
           }
 
-          if (nameValues['specific_days_cb']) {
-            nameValues['days_you_can_work'].displayValues[index] =
-              nameValues['specific_days_cb'].displayValues.join(', ')
+          if (nameValues.specific_days_cb) {
+            nameValues.days_you_can_work.displayValues[index] =
+              nameValues.specific_days_cb.displayValues.join(', ')
 
-            delete nameValues['specific_days_cb']
+            delete nameValues.specific_days_cb
           }
           else {
-            delete nameValues['days_you_can_work'].displayValues[index];
+            delete nameValues.days_you_can_work.displayValues[index];
           }
         }
         else {
-          delete nameValues['specific_days_cb'];
+          delete nameValues.specific_days_cb;
         }
       }
 
