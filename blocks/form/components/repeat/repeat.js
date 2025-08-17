@@ -48,7 +48,7 @@ export function insertRemoveButton(fieldset, wrapper, form) {
       update(el, index, wrapper['#repeat-template-label']);
     });
     const event = new CustomEvent('item:remove', {
-      //### SEP-NJ Added new element as payload
+      // ### SEP-NJ Added new element as payload
       detail: { item: { el: fieldset, name: fieldset.name, id: fieldset.id } },
       bubbles: false,
     });
@@ -73,7 +73,7 @@ export const add = (wrapper, form, actions) => (e) => {
   }
   actions.insertAdjacentElement('beforebegin', newFieldset);
   const event = new CustomEvent('item:add', {
-    //### SEP-NJ Added new element as payload
+    // ### SEP-NJ Added new element as payload
     detail: { item: { el: newFieldset, name: newFieldset.name, id: newFieldset.id } },
     bubbles: false,
   });
