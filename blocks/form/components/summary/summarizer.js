@@ -315,7 +315,7 @@ export class Summarizer {
     const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content });
   }
 
   static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
@@ -338,7 +338,7 @@ export class Summarizer {
     const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
   }
 
   static personal_details(el) {
@@ -470,7 +470,7 @@ export class Summarizer {
       entries.forEach(entryNameValues => {
         const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
         let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
-        content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content, summaryEntryTag: 'div' })
+        content = Summarizer.replace(Summarizer.itemContentTemplate, { content, summaryEntryTag: 'div' })
         contents.push(content);
       });
     }
@@ -478,7 +478,7 @@ export class Summarizer {
     const {description} = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     el.innerHTML = content;
   }
 

@@ -319,7 +319,7 @@ export class RepeatablePanel {
   #dispatchChange() {
     // Trigger event with name of the repeatable as parameter and values
     const entries = this.#getSavedEntries();
-    const params = { detail: { name: this._name, entries: entries } };
+    const params = { detail: { name: this._name, entries } };
     const event = new CustomEvent('repeatableChanged', params);
 
     const form = this._repeatablePanel.closest('form');
