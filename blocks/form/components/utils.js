@@ -22,7 +22,7 @@ export class DefaultFieldConverter {
         // Check description
         const descEl = labelEl.querySelector(':scope>.desc');
         if (descEl) {
-          result += ' - ' + descEl.textContent.trim();
+          result += ` - ${descEl.textContent.trim()}`;
         }
       }
       else {

@@ -191,12 +191,12 @@ export class RepeatablePanel {
   _makeUnique(el) {
     // TODO NJ: Remove after bug fixed by Adobe
     const index = new Date().getTime();// Array.from(el.parentNode.children).indexOf(el);
-    el.dataset.id = el.dataset.id + '-' + index;
+    el.dataset.id = `${el.dataset.id}-${index}`;
     // Update IDs and labels
     const inputs = el.querySelectorAll('[data-id]');
 
     inputs.forEach((input) => {
-      input.dataset.id = input.dataset.id + '-' + index;
+      input.dataset.id = `${input.dataset.id}-${index}`;
       if (input.querySelector('input')) {
         input.querySelector('input').id = input.dataset.id;
       }
