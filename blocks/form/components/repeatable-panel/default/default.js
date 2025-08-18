@@ -1,7 +1,8 @@
+/* eslint-disable max-classes-per-file, class-methods-use-this */
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 import { isNo, DefaultFieldConverter } from '../../utils.js'
-import { updateOrCreateInvalidMsg } from '../../../../form/util.js'
+import { updateOrCreateInvalidMsg } from '../../../util.js'
 import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
 
@@ -22,7 +23,7 @@ class RepeatModal extends Modal {
 
     this.panel.dataset.visible = true;
 
-    this.dialog.scrollIntoView({ behavior: "smooth", block: "center" });
+    this.dialog.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   hideModal() {
@@ -51,7 +52,9 @@ class RepeatModal extends Modal {
 export class RepeatablePanel {
 
   #overview;
+
   #converter;
+
   #sorterFn;
 
   constructor(el, properties, name, converter, sorterFn) {
@@ -110,7 +113,7 @@ export class RepeatablePanel {
     form.addEventListener('item:remove', (event) => {
       const removed = event.detail.item.el;
       // At this point the element is no longer in the dom
-      const id = removed.dataset.id;
+      const {id} = removed.dataset;
       const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
       if (repeatableEntry) {
         // Find matching overview entry and remove
@@ -130,9 +133,9 @@ export class RepeatablePanel {
       modal.decorate(panelEl);
 
       return modal;
-    } else {
-      return null;
     }
+    return null;
+
   }
 
   _yesCancel(entry) {
@@ -188,13 +191,13 @@ export class RepeatablePanel {
 
   _makeUnique(el) {
     // TODO NJ: Remove after bug fixed by Adobe
-    const index = new Date().getTime();//Array.from(el.parentNode.children).indexOf(el);
-    el.dataset.id = el.dataset.id + '-' + index;
+    const index = new Date().getTime();// Array.from(el.parentNode.children).indexOf(el);
+    el.dataset.id = `${el.dataset.id}-${index}`;
     // Update IDs and labels
     const inputs = el.querySelectorAll('[data-id]');
 
     inputs.forEach((input) => {
-      input.dataset.id = input.dataset.id + '-' + index;
+      input.dataset.id = `${input.dataset.id}-${index}`;
       if (input.querySelector('input')) {
         input.querySelector('input').id = input.dataset.id;
       }
@@ -317,7 +320,7 @@ export class RepeatablePanel {
   #dispatchChange() {
     // Trigger event with name of the repeatable as parameter and values
     const entries = this.#getSavedEntries();
-    const params = { detail: { name: this._name, entries: entries } };
+    const params = { detail: { name: this._name, entries } };
     const event = new CustomEvent('repeatableChanged', params);
 
     const form = this._repeatablePanel.closest('form');
@@ -371,18 +374,18 @@ export class RepeatablePanel {
         const values = savedInputData.values ? savedInputData.values : [];
 
         switch (input.type) {
-          case 'checkbox':
-          case 'radio':
-            input.checked = values.includes(input.value) || input.value == value;
-            break;
-          case 'select':
-            for (const option of input.options) {
-              option.selected = values.includes(option.value) || option.value == value;
-            }
-            break;
-          default:
-            input.value = value;
-            break;
+        case 'checkbox':
+        case 'radio':
+          input.checked = values.includes(input.value) || input.value == value;
+          break;
+        case 'select':
+          for (const option of input.options) {
+            option.selected = values.includes(option.value) || option.value == value;
+          }
+          break;
+        default:
+          input.value = value;
+          break;
         }
       });
     }
@@ -435,8 +438,8 @@ export class RepeatablePanel {
       if (!data) {
         return;
       }
-      const value = data.value;
-      const displayValue = data.displayValue;
+      const {value} = data;
+      const {displayValue} = data;
 
       if (value) {
         const result = document.createElement('div');
@@ -448,8 +451,8 @@ export class RepeatablePanel {
         entries.push(result);
       }
 
-      const values = data.values;
-      const displayValues = data.displayValues;
+      const {values} = data;
+      const {displayValues} = data;
       if (values) {
         const result = document.createElement('div');
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -574,7 +577,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
     super(el, properties, name, converter, sorterFn);
 
     // Add class
-    this._repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
+    this._repeatablePanel.classList.add('panel-repeatable-panel__conditional');
 
     // Add class
     this._repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);

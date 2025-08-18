@@ -1,3 +1,4 @@
+/*eslint-disable*/
 // Constants and helpers
 const COLOR_ACTIVE = '#017AC9'; // active group color
 const COLOR_COMPLETE = '#388314'; // completed group color

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 export default function decorate(element, field) {
     const { withIcon, enumIconNames } = field.properties;
     if (withIcon) {

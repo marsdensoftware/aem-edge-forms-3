@@ -105,33 +105,33 @@ export default class Parser {
     let node;
     let args;
     switch (token.type) {
-      case TOK_LITERAL:
-        return { type: 'Literal', value: token.value };
-      case TOK_NUMBER:
-        return { type: 'Number', value: token.value };
-      case TOK_UNQUOTEDIDENTIFIER:
-        return { type: 'Field', name: token.value };
-      case TOK_QUOTEDIDENTIFIER:
-        node = { type: 'Field', name: token.value };
-        if (this.lookahead(0) === TOK_LPAREN) {
-          throw new Error('Quoted identifier not allowed for function names.');
-        }
-        return node;
-      case TOK_UNARY_MINUS:
-        right = this.expression(bindingPower.UnaryMinus);
-        return { type: 'UnaryMinusExpression', children: [right] };
-      case TOK_FIELD:
-        return { type: TOK_FIELD };
-      case TOK_LPAREN:
-        args = [];
-        while (this.lookahead(0) !== TOK_RPAREN) {
-          expression = this.expression(0);
-          args.push(expression);
-        }
-        this.match(TOK_RPAREN);
-        return args[0];
-      default:
-        this.errorToken(token);
+    case TOK_LITERAL:
+      return { type: 'Literal', value: token.value };
+    case TOK_NUMBER:
+      return { type: 'Number', value: token.value };
+    case TOK_UNQUOTEDIDENTIFIER:
+      return { type: 'Field', name: token.value };
+    case TOK_QUOTEDIDENTIFIER:
+      node = { type: 'Field', name: token.value };
+      if (this.lookahead(0) === TOK_LPAREN) {
+        throw new Error('Quoted identifier not allowed for function names.');
+      }
+      return node;
+    case TOK_UNARY_MINUS:
+      right = this.expression(bindingPower.UnaryMinus);
+      return { type: 'UnaryMinusExpression', children: [right] };
+    case TOK_FIELD:
+      return { type: TOK_FIELD };
+    case TOK_LPAREN:
+      args = [];
+      while (this.lookahead(0) !== TOK_RPAREN) {
+        expression = this.expression(0);
+        args.push(expression);
+      }
+      this.match(TOK_RPAREN);
+      return args[0];
+    default:
+      this.errorToken(token);
     }
   }
 
@@ -144,47 +144,47 @@ export default class Parser {
     let node;
     let rbp;
     switch (tokenName) {
-      case TOK_SHEET_ACCESS:
-        rbp = bindingPower.Sheet;
-        right = this.parseSheetRHS(rbp);
-        return { type: 'Subexpression', children: [left, right] };
-      case TOK_CONCATENATE:
-        right = this.expression(bindingPower.Concatenate);
-        return { type: 'ConcatenateExpression', children: [left, right] };
-      case TOK_ADD:
-        right = this.expression(bindingPower.Add);
-        return { type: 'AddExpression', children: [left, right] };
-      case TOK_SUBTRACT:
-        right = this.expression(bindingPower.Subtract);
-        return { type: 'SubtractExpression', children: [left, right] };
-      case TOK_MULTIPLY:
-        right = this.expression(bindingPower.Multiply);
-        return { type: 'MultiplyExpression', children: [left, right] };
-      case TOK_DIVIDE:
-        right = this.expression(bindingPower.Divide);
-        return { type: 'DivideExpression', children: [left, right] };
-      case TOK_LPAREN:
-        name = left.name;
-        args = [];
-        while (this.lookahead(0) !== TOK_RPAREN) {
-          expression = this.expression(0);
-          if (this.lookahead(0) === TOK_COMMA) {
-            this.match(TOK_COMMA);
-          }
-          args.push(expression);
+    case TOK_SHEET_ACCESS:
+      rbp = bindingPower.Sheet;
+      right = this.parseSheetRHS(rbp);
+      return { type: 'Subexpression', children: [left, right] };
+    case TOK_CONCATENATE:
+      right = this.expression(bindingPower.Concatenate);
+      return { type: 'ConcatenateExpression', children: [left, right] };
+    case TOK_ADD:
+      right = this.expression(bindingPower.Add);
+      return { type: 'AddExpression', children: [left, right] };
+    case TOK_SUBTRACT:
+      right = this.expression(bindingPower.Subtract);
+      return { type: 'SubtractExpression', children: [left, right] };
+    case TOK_MULTIPLY:
+      right = this.expression(bindingPower.Multiply);
+      return { type: 'MultiplyExpression', children: [left, right] };
+    case TOK_DIVIDE:
+      right = this.expression(bindingPower.Divide);
+      return { type: 'DivideExpression', children: [left, right] };
+    case TOK_LPAREN:
+      name = left.name;
+      args = [];
+      while (this.lookahead(0) !== TOK_RPAREN) {
+        expression = this.expression(0);
+        if (this.lookahead(0) === TOK_COMMA) {
+          this.match(TOK_COMMA);
         }
-        this.match(TOK_RPAREN);
-        node = { type: 'Function', name, children: args };
-        return node;
-      case TOK_EQ:
-      case TOK_NE:
-      case TOK_GT:
-      case TOK_GTE:
-      case TOK_LT:
-      case TOK_LTE:
-        return this.parseComparator(left, tokenName);
-      default:
-        this.errorToken(this.lookaheadToken(0));
+        args.push(expression);
+      }
+      this.match(TOK_RPAREN);
+      node = { type: 'Function', name, children: args };
+      return node;
+    case TOK_EQ:
+    case TOK_NE:
+    case TOK_GT:
+    case TOK_GTE:
+    case TOK_LT:
+    case TOK_LTE:
+      return this.parseComparator(left, tokenName);
+    default:
+      this.errorToken(this.lookaheadToken(0));
     }
   }
 

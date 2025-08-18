@@ -1,9 +1,13 @@
 module.exports = {
   root: true,
+  plugins: [
+    '@stylistic'
+  ],
   extends: [
     'airbnb-base',
     'plugin:json/recommended',
     'plugin:xwalk/recommended',
+    'prettier',
   ],
   env: {
     browser: true,
@@ -15,15 +19,19 @@ module.exports = {
     requireConfigFile: false,
   },
   rules: {
-    semi: [2, 'never'],
-    quotes: [2, 'single'],
+    quotes: [2, 'single'], // WARNING: DO NOT run --fix on .json files
     indent: ['error', 2],
-    'implicit-arrow-linebreak': ['error', 'below'],
     devDependencies: [0, false],
+    '@stylistic/no-tabs': ['error', {}],
+    'no-trailing-spaces': ['error', {}],
+    'no-underscore-dangle': ['off'], // we probably won't use EC22, so _ convention is ok
+    'no-restricted-syntax': ['off', 'ForOfStatement'],
+    'no-unused-expressions': [2, {'allowTernary': true}],
     'operator-linebreak': [0, 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
+    'import/prefer-default-export': ['off'],
     'import/no-extraneous-dependencies': [
       'error',
       {

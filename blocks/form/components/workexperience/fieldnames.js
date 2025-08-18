@@ -20,11 +20,11 @@ export function sorter(a, b) {
   const aData = JSON.parse(a.dataset.savedData);
   const bData = JSON.parse(b.dataset.savedData);
 
-  let yearA = parseInt(aData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
-  let monthA = parseInt(aData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
+  const yearA = parseInt(aData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
+  const monthA = parseInt(aData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
 
-  let yearB = parseInt(bData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
-  let monthB = parseInt(bData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
+  const yearB = parseInt(bData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
+  const monthB = parseInt(bData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
 
   const aStillWorking = aData[FIELD_NAMES.STILL_WORKING]?.value;
   const bStillWorking = bData[FIELD_NAMES.STILL_WORKING]?.value;

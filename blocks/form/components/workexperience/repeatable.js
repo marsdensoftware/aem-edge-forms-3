@@ -1,4 +1,5 @@
-import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
+/* eslint-disable max-classes-per-file */
+import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
 import { FIELD_NAMES, sorter, STILL_WORKING_STATUS } from './fieldnames.js';
@@ -47,7 +48,7 @@ class Converter extends DefaultFieldConverter {
       // Not paid work
       newResult[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
     }
-    newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+    newResult.workperiod = { 'value': workperiod, 'displayValue': workperiod };
 
     return newResult;
   }
@@ -93,6 +94,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     super._onItemAdded(entry);
   }
 
+  /* eslint-disable class-methods-use-this */
   _bindEvents(el) {
     // Register change on still-working field to show hide endofwork
     const stillWorkingRadios = el.querySelectorAll(`input[name="${FIELD_NAMES.STILL_WORKING}"]`);
@@ -107,13 +109,14 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
       });
     });
   }
+  /* eslint-enable-next class-methods-use-this */
 
   _save(entry) {
     // Before save
     if (this._isFirstEntry(entry)) {
       const selectedRadio = this._conditionField.querySelector('input[type="radio"]:checked');
       if (selectedRadio) {
-        const value = selectedRadio.value;
+        const {value} = selectedRadio;
         // Copy radio value into type of work field. Because it is not visible initially for the first entry
         const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
         typeOfWorkExperience.value = value;

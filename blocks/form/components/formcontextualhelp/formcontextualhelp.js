@@ -1,3 +1,4 @@
+/*eslint-disable*/
 export default function decorate(panelEl, model) {
     var _a;
     const { properties } = model;

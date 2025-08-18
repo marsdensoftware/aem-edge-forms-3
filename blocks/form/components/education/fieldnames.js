@@ -20,20 +20,22 @@ export function sorter(a, b) {
   const aData = JSON.parse(a.dataset.savedData);
   const bData = JSON.parse(b.dataset.savedData);
 
-  let finishYearA = parseInt(aData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
-  let finishMonthA = parseInt(aData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
+  /* eslint-disable no-unused-vars */
+  const finishYearA = parseInt(aData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
+  const finishMonthA = parseInt(aData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
 
-  let finishYearB = parseInt(bData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
-  let finishMonthB = parseInt(bData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
+  const finishYearB = parseInt(bData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
+  const finishMonthB = parseInt(bData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
+  /* eslint-enable no-unused-vars */
 
-  let startYearA = parseInt(aData[FIELD_NAMES.START_YEAR]?.value, 10) || 0;
-  let startMonthA = parseInt(aData[FIELD_NAMES.START_MONTH]?.value, 10) || 0;
+  const startYearA = parseInt(aData[FIELD_NAMES.START_YEAR]?.value, 10) || 0;
+  const startMonthA = parseInt(aData[FIELD_NAMES.START_MONTH]?.value, 10) || 0;
 
-  let startYearB = parseInt(bData[FIELD_NAMES.START_YEAR]?.value, 10) || 0;
-  let startMonthB = parseInt(bData[FIELD_NAMES.START_MONTH]?.value, 10) || 0;
+  const startYearB = parseInt(bData[FIELD_NAMES.START_YEAR]?.value, 10) || 0;
+  const startMonthB = parseInt(bData[FIELD_NAMES.START_MONTH]?.value, 10) || 0;
 
-  let courseA = aData[FIELD_NAMES.COURSE]?.value;
-  let courseB = bData[FIELD_NAMES.COURSE]?.value;
+  const courseA = aData[FIELD_NAMES.COURSE]?.value;
+  const courseB = bData[FIELD_NAMES.COURSE]?.value;
 
   // Compare completion status
   const aCompletionStatus = aData[FIELD_NAMES.COMPLETION_STATUS]?.value;
@@ -43,23 +45,8 @@ export function sorter(a, b) {
     if (bCompletionStatus != aCompletionStatus) {
       return 1;
     }
-    else {
-      // both in progress, use start date
-      // Compare year first, then month
-      if (startYearA != startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
 
-      if (startMonthB != startMonthA) {
-        return startMonthB - startMonthA;
-      }
-
-      // Sort alphabetically
-      return courseA.localeCompare(courseB);
-    }
-  }
-  else {
-    // Not completed, compare start date
+    // both in progress, use start date
     // Compare year first, then month
     if (startYearA != startYearB) {
       return startYearB - startYearA; // recent year first
@@ -71,5 +58,20 @@ export function sorter(a, b) {
 
     // Sort alphabetically
     return courseA.localeCompare(courseB);
+
   }
+
+  // Not completed, compare start date
+  // Compare year first, then month
+  if (startYearA != startYearB) {
+    return startYearB - startYearA; // recent year first
+  }
+
+  if (startMonthB != startMonthA) {
+    return startMonthB - startMonthA;
+  }
+
+  // Sort alphabetically
+  return courseA.localeCompare(courseB);
+
 }

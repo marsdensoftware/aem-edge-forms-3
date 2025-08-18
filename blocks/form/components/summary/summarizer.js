@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { i18n } from '../../../../i18n/index.js';
 import { FIELD_NAMES as WorkExperienceFieldNames, sorter as workExperienceSorter, STILL_WORKING_STATUS } from '../workexperience/fieldnames.js';
 import { FIELD_NAMES as EducationFieldNames, sorter as educationSorter, COMPLETION_STATUS } from '../education/fieldnames.js';
@@ -152,8 +153,8 @@ export class Summarizer {
 
     Object.entries(nameValues).forEach(([name, data]) => {
       if (!data) return;
-      const value = data.value;
-      const displayValue = data.displayValue;
+      const {value} = data;
+      const {displayValue} = data;
 
       if (value) {
         const result = document.createElement(tagName);
@@ -165,8 +166,8 @@ export class Summarizer {
         entries.push(result);
       }
 
-      const values = data.values;
-      const displayValues = data.displayValues;
+      const {values} = data;
+      const {displayValues} = data;
       if (values) {
         const result = document.createElement(tagName);
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -181,7 +182,7 @@ export class Summarizer {
   }
 
   static getNameValues(entry) {
-    let nameValues = undefined;
+    let nameValues;
     try {
       nameValues = entry.dataset.savedData
         ? JSON.parse(entry.dataset.savedData)
@@ -211,14 +212,14 @@ export class Summarizer {
   }
 
   static gotoWizardStep(el) {
-    const stepName = el.dataset.stepName;
-    const entryId = el.dataset.entryId;
+    const {dataset: {stepName}} = el;
+    const {dataset: {entryId}} = el;
 
     const form = el.closest('form');
 
     const panelEl = form.querySelector(`[name="${stepName}"]`);
     const wizardEl = panelEl.closest('.wizard');
-    const index = panelEl.dataset.index;
+    const {index} = panelEl.dataset;
 
     Summarizer.navigate(wizardEl, index);
 
@@ -263,7 +264,7 @@ export class Summarizer {
     </div>
     `;
 
-  static itemContentTemplate = `<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>`;
+  static itemContentTemplate = '<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>';
 
   static replace(template, params) {
     return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -276,7 +277,7 @@ export class Summarizer {
     let summaryEntryTag = 'div';
 
     if (properties && properties.summaryEntryTag) {
-      summaryEntryTag = properties.summaryEntryTag;
+      ({summaryEntryTag} = properties);
     }
 
     const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
@@ -285,7 +286,7 @@ export class Summarizer {
   }
 
   static createSummaryFromMarkupObjects(markupObjects) {
-    let summaryEntryItemsTag = 'div';
+    const summaryEntryItemsTag = 'div';
 
     const result = document.createElement(summaryEntryItemsTag);
 
@@ -312,16 +313,16 @@ export class Summarizer {
       content = Summarizer.getItemContent(entry, stepName, properties);
     }
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content });
   }
 
   static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
     const form = el.closest('form');
 
-    let contents = [];
+    const contents = [];
 
     let entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
 
@@ -330,15 +331,15 @@ export class Summarizer {
     }
 
     entries.forEach(entry => {
-      let content = Summarizer.getItemContent(entry, stepName);
+      const content = Summarizer.getItemContent(entry, stepName);
       contents.push(content);
     });
 
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
   }
 
   static personal_details(el) {
@@ -369,7 +370,7 @@ export class Summarizer {
     const form = el.closest('form');
     const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
-    let strengthsContent = [];
+    const strengthsContent = [];
 
     extendedCheckboxes.forEach((e) => {
       const container = e.closest('.extended-checkbox-container');
@@ -377,8 +378,8 @@ export class Summarizer {
       strengthsContent.push(content);
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
     el.innerHTML = content;
 
@@ -395,7 +396,7 @@ export class Summarizer {
   static languages(el, properties) {
     const form = el.closest('form');
 
-    let languagesContent = [];
+    const languagesContent = [];
     let languageContent = '';
 
     // Read english language
@@ -408,7 +409,7 @@ export class Summarizer {
       };
 
       // English content
-      let languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
+      const languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
       languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
       languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName: 'panel_english_skills', content: languageContent })
 
@@ -426,8 +427,8 @@ export class Summarizer {
       }
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
     el.innerHTML = content;
   }
@@ -470,15 +471,15 @@ export class Summarizer {
       entries.forEach(entryNameValues => {
         const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
         let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
-        content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content, summaryEntryTag: 'div' })
+        content = Summarizer.replace(Summarizer.itemContentTemplate, { content, summaryEntryTag: 'div' })
         contents.push(content);
       });
     }
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
     el.innerHTML = content;
   }
 
@@ -506,55 +507,55 @@ export class Summarizer {
 
       if (stepName == 'panel_work_availability') {
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].value
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.value
         ) {
-          nameValues['days_you_can_work'].values = [
-            nameValues['days_you_can_work'].value,
+          nameValues.days_you_can_work.values = [
+            nameValues.days_you_can_work.value,
           ]
-          nameValues['days_you_can_work'].displayValues = [
-            nameValues['days_you_can_work'].displayValue,
+          nameValues.days_you_can_work.displayValues = [
+            nameValues.days_you_can_work.displayValue,
           ]
 
-          delete nameValues['days_you_can_work'].value
-          delete nameValues['days_you_can_work'].displayValue
+          delete nameValues.days_you_can_work.value
+          delete nameValues.days_you_can_work.displayValue
         }
 
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].values &&
-          nameValues['days_you_can_work'].values.indexOf('3') > -1
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.values &&
+          nameValues.days_you_can_work.values.indexOf('3') > -1
         ) {
           // Specific days
-          const index = nameValues['days_you_can_work'].values.indexOf('3')
+          const index = nameValues.days_you_can_work.values.indexOf('3')
 
           if (
-            nameValues['specific_days_cb'] &&
-            nameValues['specific_days_cb'].value
+            nameValues.specific_days_cb &&
+            nameValues.specific_days_cb.value
           ) {
-            nameValues['specific_days_cb'].values = [
-              nameValues['specific_days_cb'].value,
+            nameValues.specific_days_cb.values = [
+              nameValues.specific_days_cb.value,
             ]
-            nameValues['specific_days_cb'].displayValues = [
-              nameValues['specific_days_cb'].displayValue,
+            nameValues.specific_days_cb.displayValues = [
+              nameValues.specific_days_cb.displayValue,
             ]
 
-            delete nameValues['specific_days_cb'].value
-            delete nameValues['specific_days_cb'].displayValue
+            delete nameValues.specific_days_cb.value
+            delete nameValues.specific_days_cb.displayValue
           }
 
-          if (nameValues['specific_days_cb']) {
-            nameValues['days_you_can_work'].displayValues[index] =
-              nameValues['specific_days_cb'].displayValues.join(', ')
+          if (nameValues.specific_days_cb) {
+            nameValues.days_you_can_work.displayValues[index] =
+              nameValues.specific_days_cb.displayValues.join(', ')
 
-            delete nameValues['specific_days_cb']
+            delete nameValues.specific_days_cb
           }
           else {
-            delete nameValues['days_you_can_work'].displayValues[index];
+            delete nameValues.days_you_can_work.displayValues[index];
           }
         }
         else {
-          delete nameValues['specific_days_cb'];
+          delete nameValues.specific_days_cb;
         }
       }
 
@@ -564,7 +565,7 @@ export class Summarizer {
       ) {
         if (isNo(nameValues['reliable-transport'])) {
           nameValues['reliable-transport'].displayValue = i18n(
-            "I don't have reliable transport to get to work",
+            'I don\'t have reliable transport to get to work',
           )
         } else {
           nameValues['reliable-transport'].displayValue = i18n(
@@ -574,8 +575,8 @@ export class Summarizer {
       }
 
       // Content
-      let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
-      let content =
+      const contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
+      const content =
         Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects)
 
       return Summarizer.replace(Summarizer.itemContentEditTemplate, {
@@ -596,8 +597,7 @@ export class Summarizer {
     const contents = [];
 
     childrenNames.forEach(step => {
-      const stepName = step[0];
-      const title = step[1];
+      const [stepName, title]  = step;
 
       const entry = form.querySelector(`[name="${stepName}"]`);
 
@@ -607,8 +607,8 @@ export class Summarizer {
       }
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const {description} = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
   }

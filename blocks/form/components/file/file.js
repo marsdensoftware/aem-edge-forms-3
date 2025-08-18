@@ -32,8 +32,10 @@ function getSizeInBytes(str) {
 function matchMediaType(mediaType, accepts) {
   return !mediaType || accepts.some((accept) => {
     const trimmedAccept = accept.trim();
+    /* eslint-disable prefer-destructuring */
     const prefixAccept = trimmedAccept.split('/')[0];
     const suffixAccept = trimmedAccept.split('.')[1];
+    /* eslint-disable prefer-destructuring */
     return ((trimmedAccept.includes('*') && mediaType.startsWith(prefixAccept))
       || (trimmedAccept.includes('.') && mediaType.endsWith(suffixAccept))
       || (trimmedAccept === mediaType));

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 function addSuggestionDiv() {
     const el = document.createElement('div');
     el.classList.add('suggestions');
@@ -44,15 +45,18 @@ const datasources = {
 };
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-    if (window.searchInput && !window.searchInput.contains(e.target)) {
+    var _a, _b, _c;
+    if (window.searchInput && !window.searchInput.contains(e.target) && window.suggestionsDiv) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
     }
     const el = e.target;
-    if (el.classList.contains('typeahead__icon') && el.closest('.typeahead').classList.contains('has-input')) {
-        const inputEl = el.closest('.typeahead').querySelector('input[type="text"]');
-        inputEl.value = '';
-        el.closest('.typeahead').classList.remove('has-input');
+    if (el.classList.contains('typeahead__icon') && ((_a = el.closest('.typeahead')) === null || _a === void 0 ? void 0 : _a.classList.contains('has-input'))) {
+        const inputEl = (_b = el.closest('.typeahead')) === null || _b === void 0 ? void 0 : _b.querySelector('input[type="text"]');
+        if (inputEl) {
+            inputEl.value = '';
+        }
+        (_c = el.closest('.typeahead')) === null || _c === void 0 ? void 0 : _c.classList.remove('has-input');
     }
 });
 document.addEventListener('change', (event) => {
@@ -98,6 +102,9 @@ document.addEventListener('input', (event) => {
             return;
         }
         const suggestionsDiv = element.querySelector('.suggestions');
+        if (!suggestionsDiv) {
+            return;
+        }
         window.suggestionsDiv = suggestionsDiv;
         suggestionsDiv.innerHTML = '';
         const { datasource } = element.dataset;

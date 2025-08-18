@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
 import { FIELD_NAMES, sorter, COMPLETION_STATUS } from './fieldnames.js'
 import { DefaultFieldConverter } from '../utils.js'

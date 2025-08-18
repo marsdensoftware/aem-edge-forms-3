@@ -48,7 +48,7 @@ function updateExitButtonText(wizardEl) {
 }
 
 function updateWizardNextButton(container) {
-  //if the current wizard step has a data-stepgroup of '4' set the value of the Net button to Finish
+  // if the current wizard step has a data-stepgroup of '4' set the value of the Net button to Finish
   const currentStepEl = container.querySelector('.current-wizard-step')
   if (!currentStepEl) return
   const nextBtn = currentStepEl

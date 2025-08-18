@@ -7,6 +7,7 @@ async function decorate(block: Element) {
   const navPath = navMeta
     ? new URL(navMeta, window.location.href).pathname
     : '/nav'
+  // eslint-disable-next-line no-unused-vars
   const fragment = await loadFragment(navPath)
 
   block.textContent = ''

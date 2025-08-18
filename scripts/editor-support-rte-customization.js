@@ -7,24 +7,21 @@
 // and any block being loaded
 
 function waitForTinyMCE(callback) {
-    const interval = setInterval(() => {
-        if (window.tinymce) {
-            clearInterval(interval);
-            callback();
-        }
-    }, 50);
+  const interval = setInterval(() => {
+    if (window.tinymce) {
+      clearInterval(interval);
+      callback();
+    }
+  }, 50);
 }
 
 // Usage:
 waitForTinyMCE(() => {
-    console.log('TinyMCE is available!');
+  console.log('TinyMCE is available!');
 
-    tinymce.on('AddEditor', function(e) {
-        const editor = e.editor;
-
-        editor.on('init', function() {
-            console.log(`Editor ${editor.id} initialized from global listener`);
-            
-        });
+  window.tinymce.on('AddEditor', ({editor}) => {
+    editor.on('init', () => {
+      console.log(`Editor ${editor.id} initialized from global listener`);
     });
+  });
 });
