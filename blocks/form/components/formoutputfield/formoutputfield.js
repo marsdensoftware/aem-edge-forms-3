@@ -56,7 +56,7 @@ export default function decorate(el, fd) {
 
     // Listen for input events on the form (event delegation)
     form.addEventListener('change', (e) => {
-      if (e.target.name == fieldName) {
+      if (e.target.name === fieldName) {
         updateDisplay();
       }
     });

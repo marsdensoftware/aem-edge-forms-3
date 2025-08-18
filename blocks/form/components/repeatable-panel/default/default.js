@@ -241,7 +241,7 @@ export class RepeatablePanel {
   }
 
   _isFirstEntry(entry) {
-    return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
+    return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) === 0;
   }
 
   _validate(entry) {
