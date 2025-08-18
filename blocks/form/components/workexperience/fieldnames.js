@@ -30,16 +30,16 @@ export function sorter(a, b) {
   const bStillWorking = bData[FIELD_NAMES.STILL_WORKING]?.value;
 
   // Compare still working
-  if (bStillWorking == STILL_WORKING_STATUS.YES && (bStillWorking != aStillWorking)) {
+  if (bStillWorking === STILL_WORKING_STATUS.YES && (bStillWorking !== aStillWorking)) {
     return 1;
   }
 
   // Compare year first, then month
-  if (yearA != yearB) {
+  if (yearA !== yearB) {
     return yearB - yearA; // recent year first
   }
 
-  if (monthA != monthB) {
+  if (monthA !== monthB) {
     return monthB - monthA; // recent month first
   }
 
