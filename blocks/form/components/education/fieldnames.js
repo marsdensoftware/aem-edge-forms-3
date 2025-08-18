@@ -41,18 +41,18 @@ export function sorter(a, b) {
   const aCompletionStatus = aData[FIELD_NAMES.COMPLETION_STATUS]?.value;
   const bCompletionStatus = bData[FIELD_NAMES.COMPLETION_STATUS]?.value;
 
-  if (bCompletionStatus == COMPLETION_STATUS.IN_PROGRESS) {
-    if (bCompletionStatus != aCompletionStatus) {
+  if (bCompletionStatus === COMPLETION_STATUS.IN_PROGRESS) {
+    if (bCompletionStatus !== aCompletionStatus) {
       return 1;
     }
 
     // both in progress, use start date
     // Compare year first, then month
-    if (startYearA != startYearB) {
+    if (startYearA !== startYearB) {
       return startYearB - startYearA; // recent year first
     }
 
-    if (startMonthB != startMonthA) {
+    if (startMonthB !== startMonthA) {
       return startMonthB - startMonthA;
     }
 
@@ -63,11 +63,11 @@ export function sorter(a, b) {
 
   // Not completed, compare start date
   // Compare year first, then month
-  if (startYearA != startYearB) {
+  if (startYearA !== startYearB) {
     return startYearB - startYearA; // recent year first
   }
 
-  if (startMonthB != startMonthA) {
+  if (startMonthB !== startMonthA) {
     return startMonthB - startMonthA;
   }
 
