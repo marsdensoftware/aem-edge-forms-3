@@ -20,14 +20,6 @@ export function sorter(a, b) {
   const aData = JSON.parse(a.dataset.savedData);
   const bData = JSON.parse(b.dataset.savedData);
 
-  /* eslint-disable no-unused-vars */
-  const finishYearA = parseInt(aData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
-  const finishMonthA = parseInt(aData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
-
-  const finishYearB = parseInt(bData[FIELD_NAMES.FINISH_YEAR]?.value, 10) || 0;
-  const finishMonthB = parseInt(bData[FIELD_NAMES.FINISH_MONTH]?.value, 10) || 0;
-  /* eslint-enable no-unused-vars */
-
   const startYearA = parseInt(aData[FIELD_NAMES.START_YEAR]?.value, 10) || 0;
   const startMonthA = parseInt(aData[FIELD_NAMES.START_MONTH]?.value, 10) || 0;
 
