@@ -7,6 +7,7 @@ import { DefaultFieldConverter, isNo } from '../utils.js'
 
 class WorkExperienceConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="workexperience"]') != undefined;
   }
 
@@ -42,6 +43,7 @@ class WorkExperienceConverter {
 
 class EducationConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="education"]') != undefined;
   }
 
