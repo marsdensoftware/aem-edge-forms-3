@@ -5,6 +5,7 @@ interface Field {
  }
 }
 
+/* eslint-disable-next-line no-unused-vars */
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
   console.log('hi from extended-checkbox-container')
   fieldDiv.classList.add('extended-checkbox-container')
@@ -124,7 +125,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     containers.forEach((container) => {
       const checkbox = container.querySelector('input[type="checkbox"]');
       if (checkbox && (checkbox as HTMLInputElement).checked) {
-        count++;
+        count += 1;
       }
     });
 
@@ -152,9 +153,9 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             target.checked = false;
 
             // Show toast with max selection message (error state)
-            showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, `Deselect a skill to select a new one`, true);
+            showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, 'Deselect a skill to select a new one', true);
 
-            return false;
+            return;
           }
 
           // Show toast with current selection count (success state)
