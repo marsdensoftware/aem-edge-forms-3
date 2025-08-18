@@ -21,7 +21,7 @@ function decorateModalSaveButton(fieldDiv: Element, destTextArea: HTMLParagraphE
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
-        '.field-modal-content-panel textarea',
+      '.field-modal-content-panel textarea',
     )
 
     if (sourceTextarea && destTextArea) {
@@ -30,7 +30,7 @@ function decorateModalSaveButton(fieldDiv: Element, destTextArea: HTMLParagraphE
 
     // console log the saveButton as soon as we get it
     const saveButton = modalContainer?.querySelector(
-        'button[name="modal-save-button"]',
+      'button[name="modal-save-button"]',
     )
     if (saveButton) {
       // console.log('Save button:', saveButton)
@@ -84,12 +84,12 @@ function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagrap
     const modalContainer = fieldDiv.parentElement?.querySelector('.modal-content')
 
     const sourceTextarea = modalContainer?.querySelector<HTMLTextAreaElement>(
-        '.field-modal-content-panel textarea',
+      '.field-modal-content-panel textarea',
     )
 
     // console log the saveButton as soon as we get it
     const cancelButton = modalContainer?.querySelector(
-        'button[name="modal-cancel-button"]',
+      'button[name="modal-cancel-button"]',
     )
     if (cancelButton) {
       // console.log('Save button:', saveButton)
@@ -123,12 +123,12 @@ function decorateDialogCloseButton(fieldDiv: Element, destTextArea: HTMLParagrap
     const modalDialog = fieldDiv.parentElement?.querySelector('dialog')
 
     const sourceTextarea = modalDialog?.querySelector<HTMLTextAreaElement>(
-        '.field-modal-content-panel textarea',
+      '.field-modal-content-panel textarea',
     )
 
     // console log the saveButton as soon as we get it
     const closeButton = modalDialog?.querySelector(
-        '.close-button',
+      '.close-button',
     )
     if (closeButton) {
       // add an onclick listener to the cancel button which will simply close the modal

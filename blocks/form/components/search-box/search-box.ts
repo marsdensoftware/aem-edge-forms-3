@@ -72,10 +72,10 @@ function addRecommendationsCardsDiv(headingText: string, emptySelectionMessage: 
 // --- Card creation and management functions ---
 
 function createSelectedCard(
-    item: string,
-    selectedCardsDiv: HTMLDivElement,
-    searchInput: HTMLInputElement,
-    source: 'main' | 'recommendation',
+  item: string,
+  selectedCardsDiv: HTMLDivElement,
+  searchInput: HTMLInputElement,
+  source: 'main' | 'recommendation',
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card', 'selected-card--is-selected')
@@ -105,7 +105,7 @@ function createSelectedCard(
 
       // 1. Get all items that are *still* selected.
       const remainingSelectedItems = Array.from(
-          selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]'),
+        selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]'),
       ).map((input) => (input as HTMLInputElement).value)
 
       // 2. Get the original, ordered datasources.
@@ -139,10 +139,10 @@ function createSelectedCard(
 }
 
 function createRecommendationCard(
-    item: string,
-    recommendationsCardsDiv: HTMLDivElement,
-    selectedCardsDiv: HTMLDivElement,
-    searchInput: HTMLInputElement,
+  item: string,
+  recommendationsCardsDiv: HTMLDivElement,
+  selectedCardsDiv: HTMLDivElement,
+  searchInput: HTMLInputElement,
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card')
@@ -287,11 +287,11 @@ const workRelatedSkills = [
 ]
 
 const experiencedBasedSkills = [
-    'Curriculum objectives',
-    'Agritourism',
-    'Act reliably',
-    'Insurance market',
-    'Characteristics of services'
+  'Curriculum objectives',
+  'Agritourism',
+  'Act reliably',
+  'Insurance market',
+  'Characteristics of services'
 ]
 
 // Function to extract job titles from the DOM element
@@ -316,13 +316,13 @@ const getExperiencedBasedJobs = (): string[] => {
 const observeElementForJobs = (element: El): void => {
 
   // Initial population of job titles
-    experiencedBasedJobs = getExperiencedBasedJobs();
+  experiencedBasedJobs = getExperiencedBasedJobs();
 
   //get the containing form
-    const form = element.closest('form') as HTMLFormElement;
+  const form = element.closest('form') as HTMLFormElement;
 
   // Add event listener for repeatableChanged event
-    form.addEventListener('repeatableChanged', (event: Event) => {
+  form.addEventListener('repeatableChanged', (event: Event) => {
 
     // Verify this is a CustomEvent with detail
     if (!(event instanceof CustomEvent)) {
@@ -480,7 +480,7 @@ document.addEventListener('input', (event) => {
 
     // Filter main datasource entries from the component's state
     const filtered = state.main.filter(
-        (entry) => entry.toLowerCase().includes(query),
+      (entry) => entry.toLowerCase().includes(query),
     )
 
     // Add suggestions from main datasource
@@ -512,10 +512,10 @@ document.addEventListener('input', (event) => {
 // --- Component Logic ---
 
 function populateRecommendationsDiv(
-    element: El,
-    recommendationsCardsWrapper: HTMLDivElement,
-    selectedCardsDiv: HTMLDivElement,
-    inputEl: HTMLInputElement,
+  element: El,
+  recommendationsCardsWrapper: HTMLDivElement,
+  selectedCardsDiv: HTMLDivElement,
+  inputEl: HTMLInputElement,
 ) {
   const recommendationsCards = recommendationsCardsWrapper.querySelector('.recommendations-cards') as HTMLDivElement
   if (!recommendationsCards) return
