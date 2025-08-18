@@ -657,4 +657,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
     super._delete(repeatableEntry);
     this._updateCondition();
   }
+
+  _renderOverview(){
+    super._renderOverview();
+    this._updateCondition();
+  }
 }
