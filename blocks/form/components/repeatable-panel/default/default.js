@@ -377,11 +377,11 @@ export class RepeatablePanel {
         switch (input.type) {
         case 'checkbox':
         case 'radio':
-          input.checked = values.includes(input.value) || input.value == value;
+          input.checked = values.includes(input.value) || input.value === value;
           break;
         case 'select':
           for (const option of input.options) {
-            option.selected = values.includes(option.value) || option.value == value;
+            option.selected = values.includes(option.value) || option.value === value;
           }
           break;
         default:
