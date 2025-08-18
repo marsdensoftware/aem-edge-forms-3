@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /**
  * A WeakMap to hold the state for each search-box instance.
  * This prevents memory leaks if a search-box element is removed from the DOM.
@@ -295,22 +296,20 @@ const experiencedBasedSkills = [
 ]
 
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = (): string[] => {
-
+const getExperiencedBasedJobs = (): string[] => [
   // Default fallback values if the element is not found or has no content
-  return [
-    // 'Job Title 1',
-    // 'Job Title 2',
-    // 'Job Title 3',
-    // 'Job Title 4',
-    // 'Job Title 5',
-    // 'Job Title 6',
-    // 'Job Title 7',
-    // 'Job Title 8',
-    // 'Job Title 9',
-    // 'Job Title 10',
-  ]
-}
+
+  // 'Job Title 1',
+  // 'Job Title 2',
+  // 'Job Title 3',
+  // 'Job Title 4',
+  // 'Job Title 5',
+  // 'Job Title 6',
+  // 'Job Title 7',
+  // 'Job Title 8',
+  // 'Job Title 9',
+  // 'Job Title 10',
+]
 
 // Function to listen for repeatableChanged event and update job types
 const observeElementForJobs = (element: El): void => {
@@ -318,7 +317,7 @@ const observeElementForJobs = (element: El): void => {
   // Initial population of job titles
   experiencedBasedJobs = getExperiencedBasedJobs();
 
-  //get the containing form
+  // get the containing form
   const form = element.closest('form') as HTMLFormElement;
 
   // Add event listener for repeatableChanged event
@@ -331,7 +330,7 @@ const observeElementForJobs = (element: El): void => {
     }
 
     const customEvent = event as CustomEvent<RepeatableEvent>;
-    const detail = customEvent.detail;
+    const {detail} = customEvent;
 
     // Check if the event is for workexperience
     if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
@@ -340,6 +339,7 @@ const observeElementForJobs = (element: El): void => {
       let jobTypes: string[] = [];
       try {
         // First check if entries have the expected structure
+        /* eslint-disable-next-line no-unused-vars */
         const hasValidEntries = detail.entries.some(entry =>
           entry && typeof entry === 'object' && entry.type &&
           typeof entry.type === 'object' &&
@@ -428,6 +428,7 @@ const datasources = {
 
 // A handy way to check this only runs once: extend the Window interface to include a global flag
 declare global {
+  /* eslint-disable-next-line no-unused-vars */
   interface Window {
     experiencedBasedJobsObserverInitialized?: boolean;
   }
@@ -528,7 +529,7 @@ function populateRecommendationsDiv(
   const availableRecommendations = state.recommendations
 
   // Add up to 8 recommendations to the recommendations div
-  for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
+  for (let i = 0; i < 8 && i < availableRecommendations.length; i += 1) {
     createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl)
   }
 }
