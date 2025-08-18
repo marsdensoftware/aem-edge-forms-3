@@ -224,26 +224,24 @@ const experiencedBasedSkills = [
     'Characteristics of services'
 ];
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = () => {
-    // Default fallback values if the element is not found or has no content
-    return [
-    // 'Job Title 1',
-    // 'Job Title 2',
-    // 'Job Title 3',
-    // 'Job Title 4',
-    // 'Job Title 5',
-    // 'Job Title 6',
-    // 'Job Title 7',
-    // 'Job Title 8',
-    // 'Job Title 9',
-    // 'Job Title 10',
-    ];
-};
+const getExperiencedBasedJobs = () => [
+// Default fallback values if the element is not found or has no content
+// 'Job Title 1',
+// 'Job Title 2',
+// 'Job Title 3',
+// 'Job Title 4',
+// 'Job Title 5',
+// 'Job Title 6',
+// 'Job Title 7',
+// 'Job Title 8',
+// 'Job Title 9',
+// 'Job Title 10',
+];
 // Function to listen for repeatableChanged event and update job types
 const observeElementForJobs = (element) => {
     // Initial population of job titles
     experiencedBasedJobs = getExperiencedBasedJobs();
-    //get the containing form
+    // get the containing form
     const form = element.closest('form');
     // Add event listener for repeatableChanged event
     form.addEventListener('repeatableChanged', (event) => {
@@ -253,13 +251,14 @@ const observeElementForJobs = (element) => {
             return;
         }
         const customEvent = event;
-        const detail = customEvent.detail;
+        const { detail } = customEvent;
         // Check if the event is for workexperience
         if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
             // Extract type values from all entries
             let jobTypes = [];
             try {
                 // First check if entries have the expected structure
+                /* eslint-disable-next-line no-unused-vars */
                 const hasValidEntries = detail.entries.some(entry => entry && typeof entry === 'object' && entry.type &&
                     typeof entry.type === 'object' &&
                     'displayValue' in entry.type &&
@@ -392,7 +391,7 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     // Use available recommendations from the component's state
     const availableRecommendations = state.recommendations;
     // Add up to 8 recommendations to the recommendations div
-    for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
+    for (let i = 0; i < 8 && i < availableRecommendations.length; i += 1) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
     }
 }
