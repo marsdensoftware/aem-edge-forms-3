@@ -80,7 +80,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
       cb.addEventListener('change', () => {
         // class stage visibility
         const classStage = entry.querySelector(`fieldset[name="class${cb.value}-stage"]`);
-        const visible = cb.checked == true;
+        const visible = cb.checked === true;
 
         classStage.dataset.visible = visible;
 

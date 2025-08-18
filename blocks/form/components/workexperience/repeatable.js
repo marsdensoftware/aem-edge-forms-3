@@ -21,7 +21,7 @@ class Converter extends DefaultFieldConverter {
     let endYear;
     let workperiod = `${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
     let endofwork;
-    if (stillWorking?.value == STILL_WORKING_STATUS.NO) {
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
       // No longer working
       endofwork = `${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
       endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
@@ -44,7 +44,7 @@ class Converter extends DefaultFieldConverter {
     const newResult = {};
     newResult[FIELD_NAMES.JOB_TITLE] = result[FIELD_NAMES.JOB_TITLE];
     newResult[FIELD_NAMES.EMPLOYER_NAME] = result[FIELD_NAMES.EMPLOYER_NAME];
-    if (result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value != FIELD_NAMES.PAID_WORK) {
+    if (result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value !== FIELD_NAMES.PAID_WORK) {
       // Not paid work
       newResult[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
     }
