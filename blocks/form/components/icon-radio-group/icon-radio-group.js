@@ -1,3 +1,3 @@
-export default function decorate(fieldDiv, fieldJson) {
+export default function decorate() {
   console.log('hi from icon radio group');
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { FIELD_NAMES } from './fieldnames.js'
 import { isNo , DefaultFieldConverter } from '../utils.js'
@@ -65,6 +66,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
 
   }
 
+  /* eslint-disable class-methods-use-this */
   _bindEvents(entry) {
     // Register change on licence class to show/hide the relevant class stage and endorsements
     const licenceClass = entry.querySelectorAll(`input[name="${FIELD_NAMES.LICENCE_CLASS}"]`);
@@ -110,9 +112,9 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
       });
     });
   }
+  /* eslint-enable class-methods-use-this */
 
   _fieldToNameValues(entry) {
-    const result = super._fieldToNameValues(entry);
-
+    super._fieldToNameValues(entry);
   }
 }

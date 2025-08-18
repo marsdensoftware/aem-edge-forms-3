@@ -1,7 +1,8 @@
+/* eslint-disable max-classes-per-file, class-methods-use-this */
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 import { isNo, DefaultFieldConverter } from '../../utils.js'
-import { updateOrCreateInvalidMsg } from '../../../../form/util.js'
+import { updateOrCreateInvalidMsg } from '../../../util.js'
 import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
@@ -93,6 +94,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     super._onItemAdded(entry);
   }
 
+  /* eslint-disable class-methods-use-this */
   _bindEvents(el) {
     // Register change on still-working field to show hide endofwork
     const stillWorkingRadios = el.querySelectorAll(`input[name="${FIELD_NAMES.STILL_WORKING}"]`);
@@ -107,6 +109,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
       });
     });
   }
+  /* eslint-enable-next class-methods-use-this */
 
   _save(entry) {
     // Before save

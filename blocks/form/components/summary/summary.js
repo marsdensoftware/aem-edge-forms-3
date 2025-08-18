@@ -47,7 +47,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
             });
           });
         }
-        catch(e){
+        catch {
           console.log(`Could not render summary ${summary.summaryType}`);
         }
       };

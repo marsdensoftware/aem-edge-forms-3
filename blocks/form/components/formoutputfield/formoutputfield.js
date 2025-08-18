@@ -1,7 +1,7 @@
 import { onElementAdded, DefaultFieldConverter } from '../utils.js'
 
 const renderers = {
-  'list': function(values) {
+  list: (values) => {
     const result = document.createElement('ul');
     values.forEach(value => {
       const li = document.createElement('li');
@@ -31,13 +31,6 @@ export default function decorate(el, fd) {
 
     const form = connectedEl.closest('form');
 
-    // Listen for input events on the form (event delegation)
-    form.addEventListener('change', (e) => {
-      if (e.target.name == fieldName) {
-        updateDisplay();
-      }
-    });
-
     // Function to update the display
     function updateDisplay() {
       const nameValues = new DefaultFieldConverter().convert(form, fieldName);
@@ -60,8 +53,14 @@ export default function decorate(el, fd) {
         connectedEl.dataset.visible = false;
       }
     }
+
+    // Listen for input events on the form (event delegation)
+    form.addEventListener('change', (e) => {
+      if (e.target.name == fieldName) {
+        updateDisplay();
+      }
+    });
   });
 
   return el;
 }
-

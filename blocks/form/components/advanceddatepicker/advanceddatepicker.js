@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { i18n } from '../../../../i18n/index.js';
 
 class AdvancedDatepickerField {
@@ -16,7 +17,7 @@ class AdvancedDatepickerField {
 
   parseNumber(str, defaultValue = 0) {
     const num = Number(str);
-    return isNaN(num) ? defaultValue : num;
+    return Number.isNaN(num) ? defaultValue : num;
   }
 
   plusMinus(str) {
@@ -36,11 +37,11 @@ class AdvancedDatepickerField {
     let yearMax = this.parseNumber(yearMaxS, this.defaultYearMax);
 
     if (this.plusMinus(yearMinS)) {
-      yearMin = this.currentYear + parseInt(yearMinS);
+      yearMin = this.currentYear + parseInt(yearMinS, 10);
     }
 
     if (this.plusMinus(yearMaxS)) {
-      yearMax = this.currentYear + parseInt(yearMaxS);
+      yearMax = this.currentYear + parseInt(yearMaxS, 10);
     }
 
     this.populateYears(yearMin, yearMax);
@@ -50,7 +51,7 @@ class AdvancedDatepickerField {
   populateYears(yearMin, yearMax) {
     const options = this.yearDD.querySelectorAll('option:not([disabled])');
     if (options.length === 0) {
-      for (let year = yearMin; year <= yearMax; year++) {
+      for (let year = yearMin; year <= yearMax; year += 1) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year;
@@ -62,7 +63,7 @@ class AdvancedDatepickerField {
   populateMonths() {
     const options = this.monthDD.querySelectorAll('option:not([disabled])');
     if (options.length === 0) {
-      for (let month = 1; month <= 12; month++) {
+      for (let month = 1; month <= 12; month += 1) {
         const option = document.createElement('option');
         option.value = month;
         option.textContent = i18n(`month_${month}`);

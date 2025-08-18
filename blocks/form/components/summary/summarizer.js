@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { i18n } from '../../../../i18n/index.js';
 import { FIELD_NAMES as WorkExperienceFieldNames, sorter as workExperienceSorter, STILL_WORKING_STATUS } from '../workexperience/fieldnames.js';
 import { FIELD_NAMES as EducationFieldNames, sorter as educationSorter, COMPLETION_STATUS } from '../education/fieldnames.js';
