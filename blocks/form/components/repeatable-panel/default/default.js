@@ -535,7 +535,7 @@ export class RepeatablePanel {
       if (this.#sorterFn) {
         savedEntries = Array.from(savedEntries).sort(this.#sorterFn);
       }
-      
+
       const content = this.#overview.querySelector('.repeatable-entries');
 
       // Clear content
@@ -652,6 +652,11 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
   _delete(repeatableEntry) {
     super._delete(repeatableEntry);
+    this._updateCondition();
+  }
+
+  _renderOverview(){
+    super._renderOverview();
     this._updateCondition();
   }
 }
