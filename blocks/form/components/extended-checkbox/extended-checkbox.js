@@ -76,7 +76,7 @@ function decorateModalCancelButton(fieldDiv, destTextArea) {
             // add an onclick listener to the cancel button which will simply close the modal
             cancelButton.addEventListener('click', () => {
                 if (sourceTextarea && destTextArea) {
-                    //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+                    // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
                     sourceTextarea.value = destTextArea.textContent || '';
                 }
                 // get the closest dialog element
@@ -105,7 +105,7 @@ function decorateDialogCloseButton(fieldDiv, destTextArea) {
             // add an onclick listener to the cancel button which will simply close the modal
             closeButton.addEventListener('click', () => {
                 if (sourceTextarea && destTextArea) {
-                    //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+                    // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
                     sourceTextarea.value = destTextArea.textContent || '';
                 }
             });
@@ -143,7 +143,7 @@ function decorateCheckboxOnState(checkbox, destTextArea, divider, editDiv) {
     }
 }
 export default function decorate(fieldDiv, fieldJson) {
-    //add the extended-checkbox-wrapper class to the fieldDiv
+    // add the extended-checkbox-wrapper class to the fieldDiv
     fieldDiv.classList.add('extended-checkbox');
     const { iconName } = fieldJson.properties;
     // Find the checkbox input
@@ -174,7 +174,7 @@ export default function decorate(fieldDiv, fieldJson) {
     editLink.addEventListener('click', (e) => {
         e.preventDefault();
         if (checkbox) {
-            //if the value is 'on' then trigger the click()
+            // if the value is 'on' then trigger the click()
             if (checkbox.checked && checkbox.value === 'on') {
                 checkbox === null || checkbox === void 0 ? void 0 : checkbox.click();
             }
