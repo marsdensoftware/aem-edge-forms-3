@@ -17,6 +17,7 @@ function decorate(block) {
         const navPath = navMeta
             ? new URL(navMeta, window.location.href).pathname
             : '/nav';
+        // eslint-disable-next-line no-unused-vars
         const fragment = yield loadFragment(navPath);
         block.textContent = '';
         const nav = document.createElement('nav');
