@@ -99,7 +99,7 @@ function decorateModalCancelButton(fieldDiv: Element, destTextArea: HTMLParagrap
       cancelButton.addEventListener('click', () => {
 
         if (sourceTextarea && destTextArea) {
-          //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+          // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
           sourceTextarea.value = destTextArea.textContent || '';
         }
 
@@ -135,7 +135,7 @@ function decorateDialogCloseButton(fieldDiv: Element, destTextArea: HTMLParagrap
       closeButton.addEventListener('click', () => {
 
         if (sourceTextarea && destTextArea) {
-          //copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+          // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
           sourceTextarea.value = destTextArea.textContent || '';
         }
 
@@ -176,7 +176,7 @@ function decorateCheckboxOnState(checkbox: HTMLInputElement | null, destTextArea
 
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
-  //add the extended-checkbox-wrapper class to the fieldDiv
+  // add the extended-checkbox-wrapper class to the fieldDiv
   fieldDiv.classList.add('extended-checkbox')
 
   const { iconName } = fieldJson.properties
@@ -220,7 +220,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   editLink.addEventListener('click', (e) => {
     e.preventDefault()
     if (checkbox) {
-      //if the value is 'on' then trigger the click()
+      // if the value is 'on' then trigger the click()
       if (checkbox.checked && checkbox.value === 'on') {
         checkbox?.click()
       }
