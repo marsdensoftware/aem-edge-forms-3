@@ -246,7 +246,7 @@ export class RepeatablePanel {
 
   _validate(entry) {
     // Can be used in subclasses to perform custom validations
-    return entry != undefined;
+    return entry !== undefined;
   }
 
   _ensureButtonBar(entry) {
