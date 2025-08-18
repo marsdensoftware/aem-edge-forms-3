@@ -2,8 +2,12 @@ import { exec } from 'node:child_process';
 
 const run = (cmd) => new Promise((resolve, reject) => exec(
   cmd,
-  (error, stdout) => {
-    if (error) reject(error);
+  (error, stdout, stderr) => {
+    if (error) {
+      if (stdout) console.log(stdout);
+      if (stderr) console.log(stderr);
+      reject(error);
+    }
     else resolve(stdout);
   }
 ));
@@ -55,3 +59,6 @@ await processIfModified(/(^|\/).*\.scss/, 'npm run build:css --silent', 'git add
 
 // check if there are any TypeScript files staged
 await processIfModified(/(^|\/).*\.ts/, 'npm run build:ts --silent', async(matches) => await commitGenerated(matches, 'js'))
+
+// TODO FIXME ideally we should run on the repo in the staged state
+await run('npm run lint');
