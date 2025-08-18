@@ -333,6 +333,7 @@ export class RepeatablePanel {
     function deepEqual(a, b) {
       if (a === b) return true;
 
+      /* eslint-disable-next-line eqeqeq */
       if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null)
         return false;
 
