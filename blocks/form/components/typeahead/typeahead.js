@@ -68,20 +68,20 @@ document.addEventListener('change', (event) => {
         const { value } = searchInput;
         if (!entries.includes(value)) {
             // Dispatch custom event
-            const event = new CustomEvent('typeahead:invalid', {
+            const customEvent = new CustomEvent('typeahead:invalid', {
                 detail: {},
                 bubbles: true,
             });
-            searchInput.dispatchEvent(event);
-            event.preventDefault();
+            searchInput.dispatchEvent(customEvent);
+            customEvent.preventDefault();
         }
         else {
             // Dispatch custom event
-            const event = new CustomEvent('typeahead:valid', {
+            const customEvent = new CustomEvent('typeahead:valid', {
                 detail: {},
                 bubbles: true,
             });
-            searchInput.dispatchEvent(event);
+            searchInput.dispatchEvent(customEvent);
         }
         if (value && value.trim().length > 0) {
             element.classList.add('has-input');
@@ -118,8 +118,8 @@ document.addEventListener('input', (event) => {
                 searchInput.value = item;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
-                const event = new Event('change', { bubbles: true });
-                searchInput.dispatchEvent(event);
+                const customEvent = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(customEvent);
             });
             suggestionsDiv.appendChild(div);
         });
