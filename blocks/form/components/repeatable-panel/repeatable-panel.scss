@@ -75,22 +75,14 @@
     display: none;
   }
 
-  > fieldset[data-index="0"]{
-    .first-entry-title{
-      display: block;
-    }
-    .additional-entries-title{
-      display: none;
-    }
+  > fieldset[data-index='0'] {
+    .first-entry-title { display: block; }
+    .additional-entries-title { display: none; }
   }
 
-  > fieldset:not([data-index="0"]){
-    .first-entry-title{
-      display: none;
-    }
-    .additional-entries-title{
-      display: block;
-    }
+  > fieldset:not([data-index='0']) {
+    .first-entry-title { display: none; }
+    .additional-entries-title { display: block; }
   }
 
   .repeatable-entries {
@@ -98,14 +90,12 @@
       padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
       border-radius: 8px;
 
-      // Borders and background
       border-top: 8px solid $color-shade-blue-40;
       border-right: 2px solid $color-shade-blue-40;
       border-bottom: 2px solid $color-shade-blue-40;
       border-left: 2px solid $color-shade-blue-40;
       background: $bg-light-primary;
 
-      // Shadow
       box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
       position: relative;
       margin-bottom: $spacing-600;
@@ -151,9 +141,16 @@
 
         &:hover,
         &:focus,
-        &:visited {
-          color: $text-dark;
-        }
+        &:visited { color: $text-dark; }
+      }
+      /* Explicit top margin for multiline field */
+      .form .repeat-wrapper.panel-repeatable-panel .multiline-wrapper {
+        margin-top: 2rem;
+      }
+
+      /* If your multiline element is also a field-wrapper, keep it at 2rem */
+      .form .repeat-wrapper.panel-repeatable-panel .field-wrapper.multiline-wrapper {
+        margin-top: 2rem;
       }
     }
   }
@@ -179,15 +176,12 @@
 
     &:hover,
     &:focus,
-    &:visited {
-      color: $text-dark;
-    }
+    &:visited { color: $text-dark; }
   }
 
-  &__conditional {
-    display: none;
-  }
+  &__conditional { display: none; }
 
+  /* Global spacing between visible fields */
   .field-wrapper:not([data-visible='false']) {
     color: $text-primary;
 
@@ -195,6 +189,28 @@
       margin-top: $spacing-600;
     }
   }
+
+  /* EXCLUSIONS: remove top margin for specific next fields
+     - Standalone Start Year dropdown (.field-start-year)
+     - Start of work Month/Year within the fieldset (.field-startofwork-*)
+     - Also zero any adjacent spacing inside the Start of work panel wrapper
+  */
+  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-year,
+  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-month,
+  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-year {
+    margin-top: 0;
+  }
+
+  .panel-wrapper.field-startofwork .field-wrapper:not([data-visible='false']) + .field-wrapper {
+    margin-top: 0;
+  }
+
+  /* (Optional exact-target overrides by data-id; keep if needed)
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-30fbfa8192'], // Start Year
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-ea0d045f7b'], // Start of work - Month
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-4734d75674']  // Start of work - Year
+  { margin-top: 0; }
+  */
 
   &[data-variant='addRemoveButtons'] .item-remove {
     @extend %button;
@@ -231,11 +247,7 @@
       display: none;
     }
 
-    &.saved {
-      .btn-delete {
-        display: block;
-      }
-    }
+    &.saved { .btn-delete { display: block; } }
 
     .button-bar {
       display: flex;
@@ -253,13 +265,9 @@
       }
 
       .btn-save,
-      .btn-cancel {
-        @include elevation-1;
-      }
+      .btn-cancel { @include elevation-1; }
     }
 
-    &.current {
-      display: block;
-    }
+    &.current { display: block; }
   }
 }

@@ -1,4 +1,3 @@
-/*eslint-disable*/
 export function handleTabNavigation(panel, index) {
     const tabs = panel.querySelectorAll(':scope > fieldset');
     const navItems = panel.querySelectorAll(':scope > .navitems > li');

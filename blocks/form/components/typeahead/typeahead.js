@@ -1,4 +1,3 @@
-/*eslint-disable*/
 function addSuggestionDiv() {
     const el = document.createElement('div');
     el.classList.add('suggestions');

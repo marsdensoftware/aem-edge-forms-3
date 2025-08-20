@@ -1,4 +1,3 @@
-/*eslint-disable*/
 /**
  * Enhances the modal save button functionality by adding event listeners and updating UI elements based on user interactions.
  *

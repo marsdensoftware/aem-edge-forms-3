@@ -1,4 +1,3 @@
-/*eslint-disable*/
 export default function decorate(panel, field) {
     var _a, _b;
     panel.classList.add('panel-formwelcome');

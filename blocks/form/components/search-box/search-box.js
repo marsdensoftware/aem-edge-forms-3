@@ -1,4 +1,3 @@
-/*eslint-disable*/
 const componentStateMap = new WeakMap();
 // --- Helper functions to create DOM elements ---
 function addSuggestionDiv() {

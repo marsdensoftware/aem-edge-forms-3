@@ -1,4 +1,3 @@
-/*eslint-disable*/
 const dropdownMenu = [
     {
         title: 'Kia Ora, Matariki!',
