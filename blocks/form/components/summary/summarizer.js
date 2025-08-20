@@ -1,7 +1,15 @@
 /* eslint-disable max-classes-per-file */
 import { i18n } from '../../../../i18n/index.js';
-import { FIELD_NAMES as WorkExperienceFieldNames, sorter as workExperienceSorter, STILL_WORKING_STATUS } from '../workexperience/fieldnames.js';
-import { FIELD_NAMES as EducationFieldNames, sorter as educationSorter, COMPLETION_STATUS } from '../education/fieldnames.js';
+import {
+  FIELD_NAMES as WorkExperienceFieldNames,
+  sorter as workExperienceSorter,
+  STILL_WORKING_STATUS,
+} from '../workexperience/fieldnames.js';
+import {
+  FIELD_NAMES as EducationFieldNames,
+  sorter as educationSorter,
+  COMPLETION_STATUS,
+} from '../education/fieldnames.js';
 import { FIELD_NAMES as DriverLicenceFieldNames } from '../driverlicence/fieldnames.js';
 import { DefaultFieldConverter, isNo } from '../utils.js'
 
@@ -370,7 +378,8 @@ export class Summarizer {
 
   static strengths(el, properties) {
     const form = el.closest('form');
-    const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
+    const extendedCheckboxes =
+      form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
     const strengthsContent = [];
 
@@ -414,7 +423,13 @@ export class Summarizer {
       // English content
       const languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
       languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
-      languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName: 'panel_english_skills', content: languageContent })
+      languageContent = Summarizer.replace(
+        Summarizer.itemContentEditTemplate,
+        {
+          stepName: 'panel_english_skills',
+          content: languageContent,
+        },
+      )
 
       languagesContent.push(languageContent);
     }
@@ -431,7 +446,14 @@ export class Summarizer {
 
     const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
-    const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
+    const content = Summarizer.replace(
+      Summarizer.summaryTemplate,
+      {
+        title: properties.title,
+        description: descriptionHtml,
+        content: languagesContent.join(''),
+      },
+    );
     el.innerHTML = content;
   }
 
@@ -610,6 +632,13 @@ export class Summarizer {
     const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
+    el.innerHTML = Summarizer.replace(
+      Summarizer.summaryTemplate,
+      {
+        title: properties.title,
+        description: descriptionHtml,
+        content: contents.join(''),
+      },
+    );
   }
 }
