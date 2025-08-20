@@ -9,13 +9,3 @@ scripts/editor-support-rte.js
 
 # TODO add these back in at some point.
 component-models.json
-blocks/form/components/driverlicence
-blocks/form/components/education
-blocks/form/components/formoutputfield
-blocks/form/components/formtabs
-blocks/form/components/icon-radio-group
-blocks/form/components/repeatable-panel
-blocks/form/components/summary
-blocks/form/components/workexperience
-blocks/form/components/extended-checkbox-container
-blocks/form/components/extended-checkbox
