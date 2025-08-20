@@ -1,8 +1,8 @@
 interface Field {
- [key: string]: any
- properties: {
   [key: string]: any
- }
+  properties: {
+    [key: string]: any
+  }
 }
 
 /* eslint-disable-next-line no-unused-vars */
@@ -102,13 +102,13 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
     // Apply the appropriate styling based on isError
     if (isError) {
-     toastElement!.classList.add('checkbox-toast--error');
+      toastElement!.classList.add('checkbox-toast--error');
     } else {
-     toastElement!.classList.remove('checkbox-toast--error');
+      toastElement!.classList.remove('checkbox-toast--error');
     }
 
-   // Make sure toast is visible
-   toastElement!.classList.remove('checkbox-toast--hidden');
+    // Make sure toast is visible
+    toastElement!.classList.remove('checkbox-toast--hidden');
   };
 
   // Function to count the number of enabled checkboxes across all sibling containers
@@ -153,7 +153,11 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             target.checked = false;
 
             // Show toast with max selection message (error state)
-            showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, 'Deselect a skill to select a new one', true);
+            showToast(
+              `${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`,
+              'Deselect a skill to select a new one',
+              true,
+            );
 
             return;
           }
@@ -184,7 +188,8 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     const wizardButtonWrapper = wizardPanel.querySelector('.wizard-button-wrapper');
     if (!wizardButtonWrapper) return;
 
-    // attach a listener to the wizard-button-next and wizard-button-prev so we hide the toast when they are clicked
+    // attach a listener to the wizard-button-next and wizard-button-prev so we hide the toast
+    // when they are clicked
     wizardButtonWrapper.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
       if (target.id === 'wizard-button-next' || target.id === 'wizard-button-prev') {
@@ -193,7 +198,6 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
         }
       }
     });
-
   };
 
   // Set up a MutationObserver to detect when a checkbox is added to this container

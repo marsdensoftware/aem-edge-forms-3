@@ -7,8 +7,7 @@ export function handleTabNavigation(panel, index) {
     if (i === index) {
       otherTab.classList.add('formtab-current');
       navItems[i].classList.add('navitem-current');
-    }
-    else {
+    } else {
       otherTab.classList.remove('formtab-current');
       navItems[i].classList.remove('navitem-current');
     }

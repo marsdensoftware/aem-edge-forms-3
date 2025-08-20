@@ -1,10 +1,9 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 
 export class LanguagePanelRepeatable extends ConditionalRepeatable {
-
   static FIELD_NAMES = {
     PROFICIENCY: 'proficiency',
-    LANGUAGE: 'language'
+    LANGUAGE: 'language',
   };
 
   constructor(repeatablePanel, properties) {
@@ -13,9 +12,10 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     // Register typeahead valid listener
     document.addEventListener('typeahead:valid', (event) => {
       // Check if the change happens on language field within this repeatable
-      const {target} = event;
+      const { target } = event;
       if (this._repeatablePanel.contains(target)) {
-        const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
+        const proficiency = target.closest('fieldset')
+          .querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
         if (proficiency) {
           proficiency.style.display = 'block';
         }
@@ -25,9 +25,10 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     // Register typeahead invalid listener
     document.addEventListener('typeahead:invalid', (event) => {
       // Check if the change happens on language field within this repeatable
-      const {target} = event;
+      const { target } = event;
       if (this._repeatablePanel.contains(target)) {
-        const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
+        const proficiency = target.closest('fieldset')
+          .querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
         if (proficiency) {
           proficiency.style.display = 'none';
         }
@@ -50,7 +51,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
 
     // Register typeahead valid listener
     languageField?.addEventListener('typeahead:valid', (event) => {
-      const {target} = event;
+      const { target } = event;
       const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
       if (proficiency) {
         proficiency.style.display = 'block';
@@ -60,7 +61,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
     // Register typeahead invalid listener
     languageField?.addEventListener('typeahead:invalid', (event) => {
       // Check if the change happens on language field within this repeatable
-      const {target} = event;
+      const { target } = event;
       const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
       if (proficiency) {
         proficiency.style.display = 'none';

@@ -39,17 +39,17 @@ export default function decorate(panelEl: Element, model: Model) {
   panelEl.prepend(infoHeader)
   legendEl?.remove()
 
-  const {helpType = 'info'} = properties
-  const {hideIcon} = properties
-  const {variant} = properties
+  const { helpType = 'info' } = properties
+  const { hideIcon } = properties
+  const { variant } = properties
 
   panelEl.classList.add(`${className}--${helpType}`)
 
-  if(variant){
+  if (variant) {
     panelEl.classList.add(`${className}--${variant}`)
   }
 
-  if(hideIcon){
+  if (hideIcon) {
     panelEl.classList.add(`${className}--no-icon`)
   }
 

@@ -8,12 +8,12 @@ export const FIELD_NAMES = {
   TYPE_OF_WORK_EXPERIENCE: 'type-of-work-experience',
   JOB_TITLE: 'job-title',
   EMPLOYER_NAME: 'employer',
-  DESCRIPTION: 'description'
+  DESCRIPTION: 'description',
 };
 
 export const STILL_WORKING_STATUS = {
   YES: '1',
-  NO: '0'
+  NO: '0',
 };
 
 export function sorter(a, b) {
@@ -47,5 +47,5 @@ export function sorter(a, b) {
   const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
   const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
 
-  return jobtitleA.localeCompare(jobtitleB);;
+  return jobtitleA.localeCompare(jobtitleB);
 }
