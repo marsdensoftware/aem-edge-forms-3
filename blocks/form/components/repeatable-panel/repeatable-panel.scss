@@ -23,7 +23,9 @@
     .plain-text-wrapper {
       padding: $spacing-450;
 
-      * { font-size: $size-font-body-large; }
+      * {
+        font-size: $size-font-body-large;
+      }
     }
 
     .field-buttons-wrapper {
@@ -53,7 +55,9 @@
       @extend %button;
 
       &[name='btnYes'],
-      &[name='btnNo'] { @include elevation-1; }
+      &[name='btnNo'] {
+        @include elevation-1;
+      }
 
       &[name='btnNo'] { @extend %button--primary; }
       &[name='btnYes'] { @extend %button--hollow; }
@@ -64,29 +68,25 @@
 .form .repeat-wrapper.panel-repeatable-panel {
   &[data-max='1'] button.item-add { display: none; }
 
-  > fieldset[data-index='0']{
-    .first-entry-title { display: block; }
-    .additional-entries-title { display: none; }
+  > fieldset[data-index="0"]{
+    .first-entry-title{ display: block; }
+    .additional-entries-title{ display: none; }
   }
 
-  > fieldset:not([data-index='0']){
-    .first-entry-title { display: none; }
-    .additional-entries-title { display: block; }
+  > fieldset:not([data-index="0"]){
+    .first-entry-title{ display: none; }
+    .additional-entries-title{ display: block; }
   }
 
   .repeatable-entries {
     .repeatable-entry {
       padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
       border-radius: 8px;
-
-      /* Borders and background */
       border-top: 8px solid $color-shade-blue-40;
       border-right: 2px solid $color-shade-blue-40;
       border-bottom: 2px solid $color-shade-blue-40;
       border-left: 2px solid $color-shade-blue-40;
       background: $bg-light-primary;
-
-      /* Shadow */
       box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
       position: relative;
       margin-bottom: $spacing-600;
@@ -163,45 +163,15 @@
 
   &__conditional { display: none; }
 
-  /* Global spacing between visible fields */
   .field-wrapper:not([data-visible='false']) {
     color: $text-primary;
 
-    + .field-wrapper {
-      margin-top: $spacing-600;
-    }
+    + .field-wrapper { margin-top: $spacing-600; }
   }
 
-  /* =========================================
-     EXCLUSIONS for adjacent spacing:
-     - Standalone Start Year dropdown (.field-start-year)
-     - Advanced datepicker Month/Year (.field-start-month / .field-start-year)
-     - Start of work Month/Year (.field-startofwork-month / .field-startofwork-year)
-     - Also remove spacing within either panel wrapper to keep Month/Year inline
-  ========================================= */
-  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-year,
-  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-month,
-  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-month,
-  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-year {
+  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-year {
     margin-top: 0;
   }
-
-  .panel-wrapper.field-advanceddatepicker .field-wrapper:not([data-visible='false']) + .field-wrapper,
-  .panel-wrapper.field-startofwork       .field-wrapper:not([data-visible='false']) + .field-wrapper {
-    margin-top: 0;
-  }
-
-  /* Optional exact-target overrides by data-id (keep if needed)
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-30fbfa8192'], // Start Year
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-9374462f1a'], // Advanced datepicker - Month
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-4734d75674'], // Start of work - Year
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-ea0d045f7b']  // Start of work - Month
-  { margin-top: 0; }
-  */
-
-  /* Explicit top margin for multiline blocks (if present) */
-  .multiline-wrapper,
-  .field-wrapper.multiline-wrapper { margin-top: 2rem; }
 
   &[data-variant='addRemoveButtons'] .item-remove {
     @extend %button;
@@ -254,29 +224,136 @@
   }
 }
 
-/* ---------------------------------------------------------
-   Start-of-work panel: align select chevrons (Month/Year)
-   Scoped so the first advanced datepicker remains unchanged
---------------------------------------------------------- */
+$chevron-offset-x: $spacing-300;
+
 .form .repeat-wrapper.panel-repeatable-panel
-.panel-wrapper.field-startofwork .field-wrapper select {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: border-box;
-
-  /* keep space for the chevron and center contents */
-  padding-right: $spacing-700;
-  padding-block: $spacing-300;
-
-  /* position the background chevron in the vertical middle */
-  background-repeat: no-repeat;
-  background-origin: content-box;
-  background-position: right $spacing-350 center !important;
-  background-size: 1rem auto; /* tweak if your icon size differs */
+.panel-wrapper.field-advanceddatepicker,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork {
+  display: flex;
+  gap: $spacing-400;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
-/* Hide IE’s native dropdown arrow if any legacy styles apply */
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-month,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-year {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  position: relative;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker .field-wrapper + .field-wrapper,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork .field-wrapper + .field-wrapper {
+  margin-top: 0;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month select,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year select,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-month select,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-year select {
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: $spacing-700;
+  padding-block: $spacing-300;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: right $chevron-offset-x center;
+  background-size: 1rem auto;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month::after,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year::after,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-month::after,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork > .drop-down-wrapper.field-startofwork-year::after {
+  position: absolute;
+  right: $chevron-offset-x;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker .field-wrapper select::-ms-expand,
 .form .repeat-wrapper.panel-repeatable-panel
 .panel-wrapper.field-startofwork .field-wrapper select::-ms-expand {
   display: none;
+}
+
+$chevron-offset-x: $spacing-300 !default;
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker {
+  display: flex;
+  gap: $spacing-400;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  position: relative;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker .field-wrapper + .field-wrapper {
+  margin-top: 0;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-year,
+.form .repeat-wrapper.panel-repeatable-panel
+.field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-month {
+  margin-top: 0;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month select,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year select {
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: $spacing-700;
+  padding-block: $spacing-300;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: right $chevron-offset-x center;
+  background-size: 1rem auto;
+}
+
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-month::after,
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-advanceddatepicker > .drop-down-wrapper.field-start-year::after {
+  position: absolute;
+  right: $chevron-offset-x;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
