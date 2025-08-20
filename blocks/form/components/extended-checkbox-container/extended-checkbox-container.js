@@ -1,4 +1,5 @@
 /*eslint-disable*/
+/* eslint-disable-next-line no-unused-vars */
 export default function decorate(fieldDiv, fieldJson) {
     console.log('hi from extended-checkbox-container');
     fieldDiv.classList.add('extended-checkbox-container');
@@ -99,7 +100,7 @@ export default function decorate(fieldDiv, fieldJson) {
         containers.forEach((container) => {
             const checkbox = container.querySelector('input[type="checkbox"]');
             if (checkbox && checkbox.checked) {
-                count++;
+                count += 1;
             }
         });
         return count;
@@ -121,8 +122,8 @@ export default function decorate(fieldDiv, fieldJson) {
                         event.preventDefault();
                         target.checked = false;
                         // Show toast with max selection message (error state)
-                        showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, `Deselect a skill to select a new one`, true);
-                        return false;
+                        showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, 'Deselect a skill to select a new one', true);
+                        return;
                     }
                     // Show toast with current selection count (success state)
                     showToast(`${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`, undefined, false);

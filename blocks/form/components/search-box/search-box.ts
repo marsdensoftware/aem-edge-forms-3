@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /**
  * A WeakMap to hold the state for each search-box instance.
  * This prevents memory leaks if a search-box element is removed from the DOM.
@@ -72,10 +73,10 @@ function addRecommendationsCardsDiv(headingText: string, emptySelectionMessage: 
 // --- Card creation and management functions ---
 
 function createSelectedCard(
-    item: string,
-    selectedCardsDiv: HTMLDivElement,
-    searchInput: HTMLInputElement,
-    source: 'main' | 'recommendation',
+  item: string,
+  selectedCardsDiv: HTMLDivElement,
+  searchInput: HTMLInputElement,
+  source: 'main' | 'recommendation',
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card', 'selected-card--is-selected')
@@ -105,7 +106,7 @@ function createSelectedCard(
 
       // 1. Get all items that are *still* selected.
       const remainingSelectedItems = Array.from(
-          selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]'),
+        selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]'),
       ).map((input) => (input as HTMLInputElement).value)
 
       // 2. Get the original, ordered datasources.
@@ -139,10 +140,10 @@ function createSelectedCard(
 }
 
 function createRecommendationCard(
-    item: string,
-    recommendationsCardsDiv: HTMLDivElement,
-    selectedCardsDiv: HTMLDivElement,
-    searchInput: HTMLInputElement,
+  item: string,
+  recommendationsCardsDiv: HTMLDivElement,
+  selectedCardsDiv: HTMLDivElement,
+  searchInput: HTMLInputElement,
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card')
@@ -287,42 +288,40 @@ const workRelatedSkills = [
 ]
 
 const experiencedBasedSkills = [
-    'Curriculum objectives',
-    'Agritourism',
-    'Act reliably',
-    'Insurance market',
-    'Characteristics of services'
+  'Curriculum objectives',
+  'Agritourism',
+  'Act reliably',
+  'Insurance market',
+  'Characteristics of services'
 ]
 
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = (): string[] => {
-
+const getExperiencedBasedJobs = (): string[] => [
   // Default fallback values if the element is not found or has no content
-  return [
-    // 'Job Title 1',
-    // 'Job Title 2',
-    // 'Job Title 3',
-    // 'Job Title 4',
-    // 'Job Title 5',
-    // 'Job Title 6',
-    // 'Job Title 7',
-    // 'Job Title 8',
-    // 'Job Title 9',
-    // 'Job Title 10',
-  ]
-}
+
+  // 'Job Title 1',
+  // 'Job Title 2',
+  // 'Job Title 3',
+  // 'Job Title 4',
+  // 'Job Title 5',
+  // 'Job Title 6',
+  // 'Job Title 7',
+  // 'Job Title 8',
+  // 'Job Title 9',
+  // 'Job Title 10',
+]
 
 // Function to listen for repeatableChanged event and update job types
 const observeElementForJobs = (element: El): void => {
 
   // Initial population of job titles
-    experiencedBasedJobs = getExperiencedBasedJobs();
+  experiencedBasedJobs = getExperiencedBasedJobs();
 
-  //get the containing form
-    const form = element.closest('form') as HTMLFormElement;
+  // get the containing form
+  const form = element.closest('form') as HTMLFormElement;
 
   // Add event listener for repeatableChanged event
-    form.addEventListener('repeatableChanged', (event: Event) => {
+  form.addEventListener('repeatableChanged', (event: Event) => {
 
     // Verify this is a CustomEvent with detail
     if (!(event instanceof CustomEvent)) {
@@ -331,7 +330,7 @@ const observeElementForJobs = (element: El): void => {
     }
 
     const customEvent = event as CustomEvent<RepeatableEvent>;
-    const detail = customEvent.detail;
+    const {detail} = customEvent;
 
     // Check if the event is for workexperience
     if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
@@ -340,6 +339,7 @@ const observeElementForJobs = (element: El): void => {
       let jobTypes: string[] = [];
       try {
         // First check if entries have the expected structure
+        /* eslint-disable-next-line no-unused-vars */
         const hasValidEntries = detail.entries.some(entry =>
           entry && typeof entry === 'object' && entry.type &&
           typeof entry.type === 'object' &&
@@ -428,6 +428,7 @@ const datasources = {
 
 // A handy way to check this only runs once: extend the Window interface to include a global flag
 declare global {
+  /* eslint-disable-next-line no-unused-vars */
   interface Window {
     experiencedBasedJobsObserverInitialized?: boolean;
   }
@@ -480,7 +481,7 @@ document.addEventListener('input', (event) => {
 
     // Filter main datasource entries from the component's state
     const filtered = state.main.filter(
-        (entry) => entry.toLowerCase().includes(query),
+      (entry) => entry.toLowerCase().includes(query),
     )
 
     // Add suggestions from main datasource
@@ -512,10 +513,10 @@ document.addEventListener('input', (event) => {
 // --- Component Logic ---
 
 function populateRecommendationsDiv(
-    element: El,
-    recommendationsCardsWrapper: HTMLDivElement,
-    selectedCardsDiv: HTMLDivElement,
-    inputEl: HTMLInputElement,
+  element: El,
+  recommendationsCardsWrapper: HTMLDivElement,
+  selectedCardsDiv: HTMLDivElement,
+  inputEl: HTMLInputElement,
 ) {
   const recommendationsCards = recommendationsCardsWrapper.querySelector('.recommendations-cards') as HTMLDivElement
   if (!recommendationsCards) return
@@ -528,7 +529,7 @@ function populateRecommendationsDiv(
   const availableRecommendations = state.recommendations
 
   // Add up to 8 recommendations to the recommendations div
-  for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
+  for (let i = 0; i < 8 && i < availableRecommendations.length; i += 1) {
     createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl)
   }
 }
