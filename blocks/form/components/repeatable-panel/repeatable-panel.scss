@@ -23,9 +23,7 @@
     .plain-text-wrapper {
       padding: $spacing-450;
 
-      * {
-        font-size: $size-font-body-large;
-      }
+      * { font-size: $size-font-body-large; }
     }
 
     .field-buttons-wrapper {
@@ -55,32 +53,23 @@
       @extend %button;
 
       &[name='btnYes'],
-      &[name='btnNo'] {
-        @include elevation-1;
-      }
+      &[name='btnNo'] { @include elevation-1; }
 
-      &[name='btnNo'] {
-        @extend %button--primary;
-      }
-
-      &[name='btnYes'] {
-        @extend %button--hollow;
-      }
+      &[name='btnNo'] { @extend %button--primary; }
+      &[name='btnYes'] { @extend %button--hollow; }
     }
   }
 }
 
 .form .repeat-wrapper.panel-repeatable-panel {
-  &[data-max='1'] button.item-add {
-    display: none;
-  }
+  &[data-max='1'] button.item-add { display: none; }
 
-  > fieldset[data-index='0'] {
+  > fieldset[data-index='0']{
     .first-entry-title { display: block; }
     .additional-entries-title { display: none; }
   }
 
-  > fieldset:not([data-index='0']) {
+  > fieldset:not([data-index='0']){
     .first-entry-title { display: none; }
     .additional-entries-title { display: block; }
   }
@@ -90,12 +79,14 @@
       padding: $spacing-400 $spacing-900 $spacing-400 $spacing-400;
       border-radius: 8px;
 
+      /* Borders and background */
       border-top: 8px solid $color-shade-blue-40;
       border-right: 2px solid $color-shade-blue-40;
       border-bottom: 2px solid $color-shade-blue-40;
       border-left: 2px solid $color-shade-blue-40;
       background: $bg-light-primary;
 
+      /* Shadow */
       box-shadow: 0px 4px 8px 0px rgba(22, 44, 69, 0.18);
       position: relative;
       margin-bottom: $spacing-600;
@@ -143,15 +134,6 @@
         &:focus,
         &:visited { color: $text-dark; }
       }
-      /* Explicit top margin for multiline field */
-      .form .repeat-wrapper.panel-repeatable-panel .multiline-wrapper {
-        margin-top: 2rem;
-      }
-
-      /* If your multiline element is also a field-wrapper, keep it at 2rem */
-      .form .repeat-wrapper.panel-repeatable-panel .field-wrapper.multiline-wrapper {
-        margin-top: 2rem;
-      }
     }
   }
 
@@ -190,27 +172,36 @@
     }
   }
 
-  /* EXCLUSIONS: remove top margin for specific next fields
+  /* =========================================
+     EXCLUSIONS for adjacent spacing:
      - Standalone Start Year dropdown (.field-start-year)
-     - Start of work Month/Year within the fieldset (.field-startofwork-*)
-     - Also zero any adjacent spacing inside the Start of work panel wrapper
-  */
+     - Advanced datepicker Month/Year (.field-start-month / .field-start-year)
+     - Start of work Month/Year (.field-startofwork-month / .field-startofwork-year)
+     - Also remove spacing within either panel wrapper to keep Month/Year inline
+  ========================================= */
   .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-year,
+  .field-wrapper:not([data-visible='false']) + .field-wrapper.field-start-month,
   .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-month,
   .field-wrapper:not([data-visible='false']) + .field-wrapper.field-startofwork-year {
     margin-top: 0;
   }
 
-  .panel-wrapper.field-startofwork .field-wrapper:not([data-visible='false']) + .field-wrapper {
+  .panel-wrapper.field-advanceddatepicker .field-wrapper:not([data-visible='false']) + .field-wrapper,
+  .panel-wrapper.field-startofwork       .field-wrapper:not([data-visible='false']) + .field-wrapper {
     margin-top: 0;
   }
 
-  /* (Optional exact-target overrides by data-id; keep if needed)
+  /* Optional exact-target overrides by data-id (keep if needed)
   .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-30fbfa8192'], // Start Year
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-ea0d045f7b'], // Start of work - Month
-  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-4734d75674']  // Start of work - Year
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-9374462f1a'], // Advanced datepicker - Month
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-4734d75674'], // Start of work - Year
+  .field-wrapper:not([data-visible='false']) + .field-wrapper[data-id='dropdown-ea0d045f7b']  // Start of work - Month
   { margin-top: 0; }
   */
+
+  /* Explicit top margin for multiline blocks (if present) */
+  .multiline-wrapper,
+  .field-wrapper.multiline-wrapper { margin-top: 2rem; }
 
   &[data-variant='addRemoveButtons'] .item-remove {
     @extend %button;
@@ -233,9 +224,7 @@
   &.editing {
     .item-add,
     .repeatable-entry__edit,
-    .repeatable-entry__delete {
-      display: none;
-    }
+    .repeatable-entry__delete { display: none; }
   }
 
   [data-repeatable] {
@@ -254,15 +243,8 @@
       gap: 20px;
       margin-top: 65px;
 
-      .btn-save {
-        @extend %button;
-        @extend %button--primary;
-      }
-
-      .btn-cancel {
-        @extend %button;
-        @extend %button--hollow;
-      }
+      .btn-save   { @extend %button; @extend %button--primary; }
+      .btn-cancel { @extend %button; @extend %button--hollow;  }
 
       .btn-save,
       .btn-cancel { @include elevation-1; }
@@ -270,4 +252,31 @@
 
     &.current { display: block; }
   }
+}
+
+/* ---------------------------------------------------------
+   Start-of-work panel: align select chevrons (Month/Year)
+   Scoped so the first advanced datepicker remains unchanged
+--------------------------------------------------------- */
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork .field-wrapper select {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+
+  /* keep space for the chevron and center contents */
+  padding-right: $spacing-700;
+  padding-block: $spacing-300;
+
+  /* position the background chevron in the vertical middle */
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: right $spacing-350 center !important;
+  background-size: 1rem auto; /* tweak if your icon size differs */
+}
+
+/* Hide IE’s native dropdown arrow if any legacy styles apply */
+.form .repeat-wrapper.panel-repeatable-panel
+.panel-wrapper.field-startofwork .field-wrapper select::-ms-expand {
+  display: none;
 }
