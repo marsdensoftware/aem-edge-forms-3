@@ -12,7 +12,6 @@ class WorkExperienceConverter {
   }
 
   static process(result) {
-
     // Customize rendering for completion-year, completion status
     const stillWorking = result[WorkExperienceFieldNames.STILL_WORKING];
     const startYear = result[WorkExperienceFieldNames.START_OF_WORK_YEAR].value;
@@ -23,8 +22,7 @@ class WorkExperienceConverter {
       // No longer working
       endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
       employmentDetails += `, ${startYear} - ${endYear}`;
-    }
-    else {
+    } else {
       // Still working
       employmentDetails += `, ${i18n('Started')} ${startYear}`;
     }
@@ -33,7 +31,7 @@ class WorkExperienceConverter {
     newResult[WorkExperienceFieldNames.JOB_TITLE] = result[WorkExperienceFieldNames.JOB_TITLE];
     newResult.employmentDetails = {
       value: employmentDetails,
-      displayValue: employmentDetails
+      displayValue: employmentDetails,
     };
     newResult[WorkExperienceFieldNames.DESCRIPTION] = result[WorkExperienceFieldNames.DESCRIPTION];
 
@@ -64,12 +62,10 @@ class EducationConverter {
       // Completed
       const endYear = result[EducationFieldNames.FINISH_YEAR];
       summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
-    }
-    else if (completionStatus?.value === COMPLETION_STATUS.IN_PROGRESS) {
+    } else if (completionStatus?.value === COMPLETION_STATUS.IN_PROGRESS) {
       // In progress, partially completed
       summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
-    }
-    else {
+    } else {
       // Not completed
       summary.push(`${i18n('Started')} ${startYear?.displayValue}`, `${completionStatus?.displayValue}`);
     }
@@ -95,7 +91,8 @@ class DriverLicenceConverter {
     newResult[DriverLicenceFieldNames.LICENCE_CLASS] = { values: [], displayValues: [] };
     const hasEndorsements = !isNo(result[DriverLicenceFieldNames.ENDORSEMENTS_AVAILABLE]);
     if (hasEndorsements) {
-      newResult[DriverLicenceFieldNames.ENDORSEMENTS] = result[DriverLicenceFieldNames.ENDORSEMENTS];
+      newResult[DriverLicenceFieldNames.ENDORSEMENTS]
+        = result[DriverLicenceFieldNames.ENDORSEMENTS];
     }
 
     licenceClass.values.forEach((value, index) => {
@@ -111,11 +108,10 @@ class DriverLicenceConverter {
 }
 
 export class Summarizer {
-
   // List of converters
   static fieldConverters = [
     WorkExperienceConverter,
-    EducationConverter
+    EducationConverter,
   ];
 
   static navigate(wizardEl, index) {
@@ -145,7 +141,6 @@ export class Summarizer {
   }
 
   static markupFromNameValues(nameValues, properties) {
-
     const classPrefix = 'summary';
     const entries = [];
     let tagName = 'div';
@@ -155,8 +150,8 @@ export class Summarizer {
 
     Object.entries(nameValues).forEach(([name, data]) => {
       if (!data) return;
-      const {value} = data;
-      const {displayValue} = data;
+      const { value } = data;
+      const { displayValue } = data;
 
       if (value) {
         const result = document.createElement(tagName);
@@ -168,8 +163,8 @@ export class Summarizer {
         entries.push(result);
       }
 
-      const {values} = data;
-      const {displayValues} = data;
+      const { values } = data;
+      const { displayValues } = data;
       if (values) {
         const result = document.createElement(tagName);
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -200,7 +195,7 @@ export class Summarizer {
     let nameValues = Summarizer.getNameValues(entry);
 
     // Apply converters
-    Summarizer.fieldConverters.forEach(fieldConverter => {
+    Summarizer.fieldConverters.forEach((fieldConverter) => {
       if (fieldConverter.canProcess(entry)) {
         nameValues = fieldConverter.process(nameValues);
       }
@@ -214,14 +209,14 @@ export class Summarizer {
   }
 
   static gotoWizardStep(el) {
-    const {dataset: {stepName}} = el;
-    const {dataset: {entryId}} = el;
+    const { dataset: { stepName } } = el;
+    const { dataset: { entryId } } = el;
 
     const form = el.closest('form');
 
     const panelEl = form.querySelector(`[name="${stepName}"]`);
     const wizardEl = panelEl.closest('.wizard');
-    const {index} = panelEl.dataset;
+    const { index } = panelEl.dataset;
 
     Summarizer.navigate(wizardEl, index);
 
@@ -279,12 +274,14 @@ export class Summarizer {
     let summaryEntryTag = 'div';
 
     if (properties && properties.summaryEntryTag) {
-      ({summaryEntryTag} = properties);
+      ({ summaryEntryTag } = properties);
     }
 
     const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
 
-    return Summarizer.replace(template, { content, stepName, entryId, summaryEntryTag })
+    return Summarizer.replace(template, {
+      content, stepName, entryId, summaryEntryTag,
+    })
   }
 
   static createSummaryFromMarkupObjects(markupObjects) {
@@ -292,7 +289,7 @@ export class Summarizer {
 
     const result = document.createElement(summaryEntryItemsTag);
 
-    markupObjects.forEach(mo => {
+    markupObjects.forEach((mo) => {
       result.append(mo);
     });
 
@@ -315,10 +312,12 @@ export class Summarizer {
       content = Summarizer.getItemContent(entry, stepName, properties);
     }
 
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content,
+    });
   }
 
   static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
@@ -332,16 +331,17 @@ export class Summarizer {
       entries = Array.from(entries).sort(sorterFn);
     }
 
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const content = Summarizer.getItemContent(entry, stepName);
       contents.push(content);
     });
 
-
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content: contents.join(''),
+    });
   }
 
   static personal_details(el) {
@@ -380,11 +380,12 @@ export class Summarizer {
       strengthsContent.push(content);
     });
 
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, {
+      title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join(''),
+    });
     el.innerHTML = content;
-
   }
 
   static experience(el, properties) {
@@ -407,7 +408,7 @@ export class Summarizer {
     if (englishFieldset) {
       const nameValues = {
         language: { value: 'english', displayValue: i18n('English') },
-        ...Summarizer.fieldToNameValues(englishFieldset)
+        ...Summarizer.fieldToNameValues(englishFieldset),
       };
 
       // English content
@@ -418,18 +419,17 @@ export class Summarizer {
       languagesContent.push(languageContent);
     }
 
-
     // Read other languages
     const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
     properties.showEdit = true;
-    otherLanguages.forEach(otherLanguage => {
+    otherLanguages.forEach((otherLanguage) => {
       languageContent = Summarizer.getItemContent(otherLanguage, 'panel_other_languages', properties);
       if (languageContent) {
         languagesContent.push(languageContent);
       }
     });
 
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
     const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
     el.innerHTML = content;
@@ -448,29 +448,28 @@ export class Summarizer {
 
       const entries = [
         {
-          'licenceClassTitle': {
+          licenceClassTitle: {
             value: 'licence-class-title',
-            displayValue: i18n('Classes')
-          }
-          ,
-          'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
-        }
+            displayValue: i18n('Classes'),
+          },
+          'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS],
+        },
       ];
 
       if (nameValues[DriverLicenceFieldNames.ENDORSEMENTS]) {
         entries.push(
           {
-            'endorsementsTitle': {
+            endorsementsTitle: {
               value: 'endorsements-title',
-              displayValue: i18n('Endorsements')
+              displayValue: i18n('Endorsements'),
             },
 
-            'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
-          }
+            endorsements: nameValues[DriverLicenceFieldNames.ENDORSEMENTS],
+          },
         );
       }
 
-      entries.forEach(entryNameValues => {
+      entries.forEach((entryNameValues) => {
         const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
         let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
         content = Summarizer.replace(Summarizer.itemContentTemplate, { content, summaryEntryTag: 'div' })
@@ -478,10 +477,12 @@ export class Summarizer {
       });
     }
 
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content: contents.join(''),
+    });
     el.innerHTML = content;
   }
 
@@ -500,7 +501,6 @@ export class Summarizer {
   }
 
   static work_preferences(el, properties) {
-
     function getContent(workEntryFieldset, stepName, title) {
       const nameValues = {
         title: { value: stepName, displayValue: title },
@@ -551,12 +551,10 @@ export class Summarizer {
               nameValues.specific_days_cb.displayValues.join(', ')
 
             delete nameValues.specific_days_cb
-          }
-          else {
+          } else {
             delete nameValues.days_you_can_work.displayValues[index];
           }
-        }
-        else {
+        } else {
           delete nameValues.specific_days_cb;
         }
       }
@@ -594,12 +592,12 @@ export class Summarizer {
       ['panel_jobs', i18n('Work you’re interested in')],
       ['panel_hours', i18n('Hours you’re looking for')],
       ['panel_work_availability', i18n('Work availability')],
-      ['panel_working_locations', i18n('Work location')]
+      ['panel_working_locations', i18n('Work location')],
     ];
     const contents = [];
 
-    childrenNames.forEach(step => {
-      const [stepName, title]  = step;
+    childrenNames.forEach((step) => {
+      const [stepName, title] = step;
 
       const entry = form.querySelector(`[name="${stepName}"]`);
 
@@ -609,7 +607,7 @@ export class Summarizer {
       }
     });
 
-    const {description} = properties;
+    const { description } = properties;
     const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
     el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });

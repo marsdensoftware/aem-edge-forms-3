@@ -13,7 +13,7 @@ export const FIELD_NAMES = {
 export const COMPLETION_STATUS = {
   COMPLETED: '0',
   IN_PROGRESS: '1',
-  NOT_COMPLETED: '2'
+  NOT_COMPLETED: '2',
 };
 
 export function sorter(a, b) {
@@ -50,7 +50,6 @@ export function sorter(a, b) {
 
     // Sort alphabetically
     return courseA.localeCompare(courseB);
-
   }
 
   // Not completed, compare start date
@@ -65,5 +64,4 @@ export function sorter(a, b) {
 
   // Sort alphabetically
   return courseA.localeCompare(courseB);
-
 }

@@ -58,7 +58,7 @@ function createInput(fd) {
   input.type = getHTMLRenderType(fd);
 
   // ###NJ Start Added spellcheck
-  if(fd.properties?.spellcheck){
+  if (fd.properties?.spellcheck) {
     input.setAttribute('spellcheck', true);
   }
   // ###NJ End Added spellcheck
@@ -72,7 +72,7 @@ const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
 
   // ###NJ Start Added spellcheck
-  if(fd.properties?.spellcheck){
+  if (fd.properties?.spellcheck) {
     input.setAttribute('spellcheck', true);
   }
   // ###NJ End Added spellcheck
@@ -117,7 +117,7 @@ const createSelect = withFieldWrapper((fd) => {
     const optionsUrl = new URL(options?.[0]);
     // using async to avoid rendering
     if (optionsUrl.hostname.endsWith('hlx.page')
-    || optionsUrl.hostname.endsWith('hlx.live')) {
+      || optionsUrl.hostname.endsWith('hlx.live')) {
       fetch(`${optionsUrl.pathname}${optionsUrl.search}`)
         .then(async (response) => {
           const json = await response.json();
@@ -230,7 +230,7 @@ function createRadioOrCheckboxGroup(fd) {
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
-    if(labelEl){
+    if (labelEl) {
       const textContent = labelEl.textContent.trim();
       labelEl.textContent = '';
 
@@ -242,7 +242,7 @@ function createRadioOrCheckboxGroup(fd) {
 
       const description = fd.properties?.enumDescriptions?.[index];
 
-      if(description){
+      if (description) {
         // Create and append the span.desc
         const descSpan = document.createElement('span');
         descSpan.className = 'desc';
@@ -281,7 +281,7 @@ function createRadioOrCheckboxGroup(fd) {
   });
 
   // ###SEP-NJ START Wrap radios in a container if bar display
-  if(wrapper.classList.contains('variant-bar')){
+  if (wrapper.classList.contains('variant-bar')) {
     const wrappers = wrapper.querySelectorAll('.radio-wrapper');
 
     const radiosWrapper = document.createElement('div');
@@ -291,7 +291,7 @@ function createRadioOrCheckboxGroup(fd) {
     wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
 
     // Move the all elements inside the new wrapper
-    wrappers.forEach(el => radiosWrapper.appendChild(el));
+    wrappers.forEach((el) => radiosWrapper.appendChild(el));
   }
   // ###SEP-NJ END
 
@@ -366,7 +366,8 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate js file and importing it
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate
+  // js file and importing it.
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
@@ -379,7 +380,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['colspan-md'],
     lg: field.properties?.['colspan-lg'],
     xl: field.properties?.['colspan-xl'],
-    xxl: field.properties?.['colspan-xxl']
+    xxl: field.properties?.['colspan-xxl'],
   };
 
   // Get responsive offsets from properties
@@ -388,7 +389,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['colspan-md-offset'],
     lg: field.properties?.['colspan-lg-offset'],
     xl: field.properties?.['colspan-xl-offset'],
-    xxl: field.properties?.['colspan-xxl-offset']
+    xxl: field.properties?.['colspan-xxl-offset'],
   };
 
   // Get the responsive display options from properties
@@ -397,7 +398,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['display-md'],
     lg: field.properties?.['display-lg'],
     xl: field.properties?.['display-xl'],
-    xxl: field.properties?.['display-xxl']
+    xxl: field.properties?.['display-xxl'],
   }
 
   // Get the responsive display orders from properties
@@ -406,7 +407,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['d-order-md'],
     lg: field.properties?.['d-order-lg'],
     xl: field.properties?.['d-order-xl'],
-    xxl: field.properties?.['d-order-xxl']
+    xxl: field.properties?.['d-order-xxl'],
   }
 
   // Get container classes from properties

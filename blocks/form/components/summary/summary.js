@@ -32,25 +32,22 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   wizardEl.addEventListener('wizard:navigate', (e) => {
     const stepId = e.detail.currStep.id;
     const step = document.getElementById(stepId);
-    summaryComponents.forEach(summary => {
+    summaryComponents.forEach((summary) => {
       if (step.contains(summary.el)) {
         // Render summary
-
-        try{
+        try {
           summary.summarizer(summary.el, summary.properties);
-
           // Register click on edit
-          summary.el.querySelectorAll('.edit').forEach(a => {
+          summary.el.querySelectorAll('.edit').forEach((a) => {
             a.addEventListener('click', () => {
               wizardEl.classList.add('from-review');
               Summarizer.gotoWizardStep(a);
             });
           });
-        }
-        catch {
+        } catch {
           console.log(`Could not render summary ${summary.summaryType}`);
         }
-      };
+      }
     });
   });
 });
@@ -76,7 +73,7 @@ export default function decorate(el, field) {
     summaryType,
     summarizer,
     el,
-    properties
+    properties,
   });
 
   return el;

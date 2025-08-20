@@ -18,7 +18,7 @@ let customComponents = [
   'search-box',
   'icon-radio-group',
   'extended-checkbox',
-  'extended-checkbox-container'
+  'extended-checkbox-container',
 ]
 
 const OOTBComponentDecorators = [
@@ -36,15 +36,15 @@ const OOTBComponentDecorators = [
 ]
 
 export function setCustomComponents(components) {
-  customComponents = components
+  customComponents = components;
 }
 
 export function getOOTBComponents() {
-  return OOTBComponentDecorators
+  return OOTBComponentDecorators;
 }
 
 export function getCustomComponents() {
-  return customComponents
+  return customComponents;
 }
 
 /**
@@ -52,40 +52,36 @@ export function getCustomComponents() {
  * @param {Element} block The block element
  */
 async function loadComponent(componentName, element, fd, container) {
-  const status = element.dataset.componentStatus
+  const status = element.dataset.componentStatus;
   if (status !== 'loading' && status !== 'loaded') {
-    element.dataset.componentStatus = 'loading'
-    const { blockName } = element.dataset
+    element.dataset.componentStatus = 'loading';
+    const { blockName } = element.dataset;
     try {
-      loadCSS(
-        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`,
-      )
+      loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
       const decorationComplete = new Promise((resolve) => {
-        ;(async () => {
+        (async () => {
           try {
             const mod = await import(
               `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
-            )
+            );
             if (mod.default) {
-              await mod.default(element, fd, container)
+              await mod.default(element, fd, container);
             }
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(`failed to load component for ${blockName}`, error)
-            console.log('component details: ', {componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items})
+            console.log(`failed to load component for ${blockName}`, error);
           }
-          resolve()
-        })()
-      })
-      await Promise.all([decorationComplete])
+          resolve();
+        })();
+      });
+      await Promise.all([decorationComplete]);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(`failed to load component ${blockName}`, error)
-      console.log('component details: ', {componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items})
+      console.log(`failed to load component ${blockName}`, error);
     }
-    element.dataset.componentStatus = 'loaded'
+    element.dataset.componentStatus = 'loaded';
   }
-  return element
+  return element;
 }
 
 /**
@@ -93,21 +89,18 @@ async function loadComponent(componentName, element, fd, container) {
  *
  * */
 export default async function componentDecorator(element, fd, container) {
-  const { ':type': type = '', fieldType } = fd
+  const { ':type': type = '', fieldType } = fd;
   if (fieldType === 'file-input') {
-    await loadComponent('file', element, fd, container)
+    await loadComponent('file', element, fd, container);
   }
 
   if (type.endsWith('wizard')) {
-    await loadComponent('wizard', element, fd, container)
+    await loadComponent('wizard', element, fd, container);
   }
 
-  if (
-    getCustomComponents().includes(type) ||
-    getOOTBComponents().includes(type)
-  ) {
-    await loadComponent(type, element, fd, container)
+  if (getCustomComponents().includes(type) || getOOTBComponents().includes(type)) {
+    await loadComponent(type, element, fd, container);
   }
 
-  return null
+  return null;
 }

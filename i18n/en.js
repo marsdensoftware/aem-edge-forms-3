@@ -15,5 +15,5 @@ export const en = {
   month_9: 'September',
   month_10: 'October',
   month_11: 'November',
-  month_12: 'December'
+  month_12: 'December',
 };

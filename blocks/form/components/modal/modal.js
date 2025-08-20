@@ -35,7 +35,7 @@ export class Modal {
     dialog.addEventListener('click', (event) => {
       const dialogDimensions = dialog.getBoundingClientRect();
       if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right
-          || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
+        || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
         dialog.close();
       }
     });

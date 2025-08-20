@@ -1,13 +1,10 @@
 module.exports = {
   root: true,
-  plugins: [
-    '@stylistic'
-  ],
+  plugins: ['@stylistic'],
   extends: [
     'airbnb-base',
     'plugin:json/recommended',
     'plugin:xwalk/recommended',
-    'prettier',
   ],
   env: {
     browser: true,
@@ -19,6 +16,7 @@ module.exports = {
     requireConfigFile: false,
   },
   rules: {
+    semi: 'off',
     quotes: ['error', 'single'], // WARNING: DO NOT run --fix on .json files
     indent: ['error', 2],
     devDependencies: [0, false],
@@ -26,7 +24,7 @@ module.exports = {
     'no-trailing-spaces': ['error', {}],
     'no-underscore-dangle': ['off'], // we probably won't use EC22, so _ convention is ok
     'no-restricted-syntax': ['off', 'ForOfStatement'],
-    'no-unused-expressions': ['error', {'allowTernary': true}],
+    'no-unused-expressions': ['error', { allowTernary: true }],
     'no-nested-ternary': ['off'],
     'operator-linebreak': ['off', 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
@@ -75,4 +73,4 @@ module.exports = {
     ],
     'xwalk/no-orphan-collapsible-fields': 'off', // Disable until enhancement is done for Forms properties
   },
-}
+};

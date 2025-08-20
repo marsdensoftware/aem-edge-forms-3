@@ -137,7 +137,10 @@ export const trackProgress = () => {
         3: currentGroup > 3 ? 100 : currentGroup === 3 ? currentWidth : 0,
     };
     // Colors: completed = green, active = blue, future = default
-    setBar(barEl1, widths[1], currentGroup === 1 ? COLOR_ACTIVE : widths[1] === 100 ? COLOR_COMPLETE : undefined);
-    setBar(barEl2, widths[2], currentGroup === 2 ? COLOR_ACTIVE : widths[2] === 100 ? COLOR_COMPLETE : undefined);
-    setBar(barEl3, widths[3], currentGroup === 3 ? COLOR_ACTIVE : widths[3] === 100 ? COLOR_COMPLETE : undefined);
+    setBar(barEl1, widths[1], currentGroup === 1 ? COLOR_ACTIVE
+        : widths[1] === 100 ? COLOR_COMPLETE : undefined);
+    setBar(barEl2, widths[2], currentGroup === 2 ? COLOR_ACTIVE
+        : widths[2] === 100 ? COLOR_COMPLETE : undefined);
+    setBar(barEl3, widths[3], currentGroup === 3 ? COLOR_ACTIVE
+        : widths[3] === 100 ? COLOR_COMPLETE : undefined);
 };
