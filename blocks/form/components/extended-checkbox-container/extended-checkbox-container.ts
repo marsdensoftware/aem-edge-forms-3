@@ -153,7 +153,11 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             target.checked = false;
 
             // Show toast with max selection message (error state)
-            showToast(`${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`, 'Deselect a skill to select a new one', true);
+            showToast(
+              `${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`,
+              'Deselect a skill to select a new one',
+              true,
+            );
 
             return;
           }
