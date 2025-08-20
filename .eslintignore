@@ -9,7 +9,6 @@ scripts/editor-support-rte.js
 
 # TODO add these back in at some point.
 component-models.json
-blocks/form/components/advanceddatepicker
 blocks/form/components/driverlicence
 blocks/form/components/education
 blocks/form/components/formoutputfield
