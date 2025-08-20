@@ -7,6 +7,7 @@ import { DefaultFieldConverter, isNo } from '../utils.js'
 
 class WorkExperienceConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="workexperience"]') != undefined;
   }
 
@@ -18,7 +19,7 @@ class WorkExperienceConverter {
     let employmentDetails = result[WorkExperienceFieldNames.EMPLOYER_NAME].displayValue;
 
     let endYear;
-    if (stillWorking?.value == STILL_WORKING_STATUS.NO) {
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
       // No longer working
       endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
       employmentDetails += `, ${startYear} - ${endYear}`;
@@ -42,6 +43,7 @@ class WorkExperienceConverter {
 
 class EducationConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="education"]') != undefined;
   }
 
@@ -58,12 +60,12 @@ class EducationConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[EducationFieldNames.COMPLETION_STATUS];
-    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
+    if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
       // Completed
       const endYear = result[EducationFieldNames.FINISH_YEAR];
       summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
     }
-    else if (completionStatus?.value == COMPLETION_STATUS.IN_PROGRESS) {
+    else if (completionStatus?.value === COMPLETION_STATUS.IN_PROGRESS) {
       // In progress, partially completed
       summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
     }
@@ -505,7 +507,7 @@ export class Summarizer {
         ...Summarizer.fieldToNameValues(workEntryFieldset),
       }
 
-      if (stepName == 'panel_work_availability') {
+      if (stepName === 'panel_work_availability') {
         if (
           nameValues.days_you_can_work &&
           nameValues.days_you_can_work.value
@@ -560,7 +562,7 @@ export class Summarizer {
       }
 
       if (
-        stepName == 'panel_working_locations' &&
+        stepName === 'panel_working_locations' &&
         nameValues['reliable-transport']
       ) {
         if (isNo(nameValues['reliable-transport'])) {

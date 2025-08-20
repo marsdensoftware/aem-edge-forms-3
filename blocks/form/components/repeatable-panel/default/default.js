@@ -241,12 +241,12 @@ export class RepeatablePanel {
   }
 
   _isFirstEntry(entry) {
-    return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
+    return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) === 0;
   }
 
   _validate(entry) {
     // Can be used in subclasses to perform custom validations
-    return entry != undefined;
+    return entry !== undefined;
   }
 
   _ensureButtonBar(entry) {
@@ -333,6 +333,7 @@ export class RepeatablePanel {
     function deepEqual(a, b) {
       if (a === b) return true;
 
+      /* eslint-disable-next-line eqeqeq */
       if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null)
         return false;
 
@@ -376,11 +377,11 @@ export class RepeatablePanel {
         switch (input.type) {
         case 'checkbox':
         case 'radio':
-          input.checked = values.includes(input.value) || input.value == value;
+          input.checked = values.includes(input.value) || input.value === value;
           break;
         case 'select':
           for (const option of input.options) {
-            option.selected = values.includes(option.value) || option.value == value;
+            option.selected = values.includes(option.value) || option.value === value;
           }
           break;
         default:
