@@ -365,8 +365,8 @@ function matchType(actuals, expectedList, argValue, context, toNumber, toString)
   if (expected === -1) [expected] = expectedList;
   if (expected === TYPE_ANY$1) return argValue;
   if (expected === TYPE_ARRAY_STRING$1
-    || expected === TYPE_ARRAY_NUMBER
-    || expected === TYPE_ARRAY$1) {
+      || expected === TYPE_ARRAY_NUMBER
+      || expected === TYPE_ARRAY$1) {
     if (expected === TYPE_ARRAY$1) {
       if (actual === TYPE_ARRAY_NUMBER || actual === TYPE_ARRAY_STRING$1) return argValue;
       return argValue === null ? [] : [argValue];
@@ -535,7 +535,7 @@ class TreeInterpreter {
               this.debug.push(`Failed to find: '${node.name}'`);
               const available = Object.keys(value).map(a => `'${a}'`).toString();
               if (available.length) this.debug.push(`Available fields: ${available}`);
-            } catch (e) { }
+            } catch (e) {}
             return null;
           }
           return field;
@@ -887,9 +887,9 @@ function isNum(ch) {
 }
 function isAlphaNum(ch) {
   return (ch >= 'a' && ch <= 'z')
-    || (ch >= 'A' && ch <= 'Z')
-    || (ch >= '0' && ch <= '9')
-    || ch === '_';
+           || (ch >= 'A' && ch <= 'Z')
+           || (ch >= '0' && ch <= '9')
+           || ch === '_';
 }
 function isIdentifier(stream, pos) {
   const ch = stream[pos];
@@ -897,8 +897,8 @@ function isIdentifier(stream, pos) {
     return stream.length > pos && isAlphaNum(stream[pos + 1]);
   }
   return (ch >= 'a' && ch <= 'z')
-    || (ch >= 'A' && ch <= 'Z')
-    || ch === '_';
+          || (ch >= 'A' && ch <= 'Z')
+          || ch === '_';
 }
 class Lexer {
   constructor(allowedGlobalNames = [], debug = []) {
@@ -1049,7 +1049,7 @@ class Lexer {
       let current = this._current;
       if (!isAlphaNum(stream[current])) foundNonAlpha = true;
       if (stream[current] === '\\' && (stream[current + 1] === '\\'
-        || stream[current + 1] === '"')) {
+                                             || stream[current + 1] === '"')) {
         current += 2;
       } else {
         current += 1;
@@ -1063,7 +1063,7 @@ class Lexer {
         this.debug.push(`Suspicious quotes: ${val}`);
         this.debug.push(`Did you intend a literal? '${val.replace(/"/g, '')}'?`);
       }
-    } catch (e) { }
+    } catch (e) {}
     return JSON.parse(val);
   }
   _consumeRawStringLiteral(stream) {
@@ -1073,7 +1073,7 @@ class Lexer {
     while (stream[this._current] !== "'" && this._current < maxLength) {
       let current = this._current;
       if (stream[current] === '\\' && (stream[current + 1] === '\\'
-        || stream[current + 1] === "'")) {
+                                             || stream[current + 1] === "'")) {
         current += 2;
       } else {
         current += 1;
@@ -1193,7 +1193,7 @@ class Lexer {
         if (stream[current] === '"') inQuotes = !inQuotes;
         if (inQuotes && stream[current + 1] === '`') current += 2;
         else if (stream[current] === '\\' && (stream[current + 1] === '\\'
-          || stream[current + 1] === '`')) {
+                                              || stream[current + 1] === '`')) {
           current += 2;
         } else {
           current += 1;
@@ -1387,7 +1387,7 @@ class Parser {
         return { type: 'Projection', children: [left, right] };
       case TOK_LBRACKET:
         if (this._lookahead(0) === TOK_STAR
-          && this._lookahead(1) === TOK_RBRACKET) {
+            && this._lookahead(1) === TOK_RBRACKET) {
           this._advance();
           this._advance();
           right = this._parseProjectionRHS(bindingPower.Star);
@@ -1503,7 +1503,7 @@ class Parser {
         return this._parseComparator(left, tokenName);
       case TOK_LBRACKET:
         if (this._lookahead(0) === TOK_STAR
-          && this._lookahead(1) === TOK_RBRACKET) {
+            && this._lookahead(1) === TOK_RBRACKET) {
           this._advance();
           this._advance();
           right = this._parseProjectionRHS(bindingPower.Star);
@@ -1526,7 +1526,9 @@ class Parser {
     }
   }
   _errorToken(token) {
-    const error = new Error(`Invalid token (${token.type}): "${token.value}"`);
+    const error = new Error(`Invalid token (${
+      token.type}): "${
+      token.value}"`);
     error.name = 'ParserError';
     throw error;
   }
@@ -1597,7 +1599,8 @@ class Parser {
         parts[index] = this.expression(0);
         const t = this._lookahead(0);
         if (t !== TOK_COLON && t !== TOK_RBRACKET) {
-          const error = new Error(`Syntax error, unexpected token: ${t.value}(${t.type})`);
+          const error = new Error(`Syntax error, unexpected token: ${
+            t.value}(${t.type})`);
           error.name = 'Parsererror';
           throw error;
         }
@@ -1642,7 +1645,8 @@ class Parser {
       right = this._parseDotRHS(rbp);
     } else {
       const t = this._lookaheadToken(0);
-      const error = new Error(`Sytanx error, unexpected token: ${t.value}(${t.type})`);
+      const error = new Error(`Sytanx error, unexpected token: ${
+        t.value}(${t.type})`);
       error.name = 'ParserError';
       throw error;
     }
@@ -1672,10 +1676,11 @@ class Parser {
       this._advance();
       return { type: 'MultiSelectHash', children: [] };
     }
-    for (; ;) {
+    for (;;) {
       keyToken = this._lookaheadToken(0);
       if (identifierTypes.indexOf(keyToken.type) < 0) {
-        throw new Error(`Expecting an identifier token, got: ${keyToken.type}`);
+        throw new Error(`Expecting an identifier token, got: ${
+          keyToken.type}`);
       }
       keyName = keyToken.value;
       this._advance();
@@ -2051,7 +2056,7 @@ function openFormulaFunctions(valueOf, toString, toNumber, debug = []) {
         const text = toString(args[0]);
         const words = text.split(' ');
         const properWords = words.map(word => word.charAt(0).toUpperCase()
-          + word.slice(1).toLowerCase());
+            + word.slice(1).toLowerCase());
         return properWords.join(' ');
       },
       _signature: [
@@ -2431,7 +2436,7 @@ function functions(
       const current = runtime.interpreter.visit(exprefNode, x);
       if (allowedTypes.indexOf(getTypeName(current)) < 0) {
         const msg = `TypeError: expected one of ${allowedTypes
-          }, received ${getTypeName(current)}`;
+        }, received ${getTypeName(current)}`;
         throw new Error(msg);
       }
       return current;
@@ -2460,7 +2465,7 @@ function functions(
     contains: {
       _func: resolvedArgs => valueOf(resolvedArgs[0]).indexOf(valueOf(resolvedArgs[1])) >= 0,
       _signature: [{ types: [TYPE_STRING, TYPE_ARRAY] },
-      { types: [TYPE_ANY] }],
+        { types: [TYPE_ANY] }],
     },
     endsWith: {
       _func: resolvedArgs => {
@@ -2698,11 +2703,13 @@ function functions(
           const exprB = runtime.interpreter.visit(exprefNode, b[1]);
           if (getTypeName(exprA) !== requiredType) {
             throw new Error(
-              `TypeError: expected ${requiredType}, received ${getTypeName(exprA)}`,
+              `TypeError: expected ${requiredType}, received ${
+                getTypeName(exprA)}`,
             );
           } else if (getTypeName(exprB) !== requiredType) {
             throw new Error(
-              `TypeError: expected ${requiredType}, received ${getTypeName(exprB)}`,
+              `TypeError: expected ${requiredType}, received ${
+                getTypeName(exprB)}`,
             );
           }
           if (exprA > exprB) {
@@ -2872,14 +2879,14 @@ class Runtime {
       if (args.length < signature.length) {
         pluralized = signature.length === 1 ? ' argument' : ' arguments';
         throw new Error(`ArgumentError: ${argName}() `
-          + `takes at least${signature.length}${pluralized
-          } but received ${args.length}`);
+        + `takes at least${signature.length}${pluralized
+        } but received ${args.length}`);
       }
     } else if (args.length < argsNeeded || args.length > signature.length) {
       pluralized = signature.length === 1 ? ' argument' : ' arguments';
       throw new Error(`ArgumentError: ${argName}() `
-        + `takes ${signature.length}${pluralized
-        } but received ${args.length}`);
+      + `takes ${signature.length}${pluralized
+      } but received ${args.length}`);
     }
     if (!bResolved) return;
     let currentSpec;
