@@ -134,6 +134,7 @@ form .file-wrapper > button {
 .submit-wrapper {
   button {
     @extend %button--hollow;
+
     display: block;
     margin-left: auto;
   }
@@ -212,7 +213,6 @@ form .file-wrapper > button {
 }
 
 .file-wrapper .file-description button {
-  --form-button-padding: 15px;
   width: 12px;
   height: 12px;
   border: none;
@@ -221,6 +221,8 @@ form .file-wrapper > button {
   cursor: pointer;
   position: relative;
   border-radius: 3px;
+
+  --form-button-padding: 15px;
 
   &::after {
     content: 'X';

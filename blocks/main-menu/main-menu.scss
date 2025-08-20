@@ -20,6 +20,7 @@ $nav-height-desktop: 117px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   // !!! Why AEM need to add extra div?
   div:first-child {
     display: none;
@@ -51,6 +52,7 @@ $nav-height-desktop: 117px;
 
 .main-menu__user-button {
   @include elevation-1;
+
   display: block;
   width: 42px;
   height: 42px;
@@ -165,6 +167,7 @@ $nav-height-desktop: 117px;
 
 .main-menu__account-menu-logout {
   @include elevation-1;
+
   margin: $spacing-450 0;
   font-size: 17px;
   display: flex;
