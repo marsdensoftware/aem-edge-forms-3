@@ -34,11 +34,13 @@ const withFieldWrapper = (element) => (fd) => {
   return wrapper;
 };
 
-function setPlaceholder(element, fd) {
-  if (fd.placeholder) {
-    element.setAttribute('placeholder', fd.placeholder);
-  }
-}
+
+//NONO TO CHECK AS THIS IS NOW IMPORTED
+// function setPlaceholder(element, fd) {
+//   if (fd.placeholder) {
+//     element.setAttribute('placeholder', fd.placeholder);
+//   }
+// }
 
 //NONO TO CHECK AS THIS IS NOW IMPORTED
 // const constraintsDef = Object.entries({
@@ -63,20 +65,21 @@ function setPlaceholder(element, fd) {
 //   }
 // }
 
-function createInput(fd) {
-  const input = document.createElement('input');
-  input.type = getHTMLRenderType(fd);
-
-  // ###NJ Start Added spellcheck
-  if(fd.properties?.spellcheck){
-    input.setAttribute('spellcheck', true);
-  }
-  // ###NJ End Added spellcheck
-
-  setPlaceholder(input, fd);
-  setConstraints(input, fd);
-  return input;
-}
+//NONO TO CHECK AS THIS IS NOW IMPORTED
+// function createInput(fd) {
+//   const input = document.createElement('input');
+//   input.type = getHTMLRenderType(fd);
+//
+//   // ###NJ Start Added spellcheck
+//   if(fd.properties?.spellcheck){
+//     input.setAttribute('spellcheck', true);
+//   }
+//   // ###NJ End Added spellcheck
+//
+//   setPlaceholder(input, fd);
+//   setConstraints(input, fd);
+//   return input;
+// }
 
 const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
@@ -160,17 +163,18 @@ function createHeading(fd) {
   return wrapper;
 }
 
-function createRadioOrCheckbox(fd) {
-  const wrapper = createFieldWrapper(fd);
-  const input = createInput(fd);
-  const [value, uncheckedValue] = fd.enum || [];
-  input.value = value;
-  if (typeof uncheckedValue !== 'undefined') {
-    input.dataset.uncheckedValue = uncheckedValue;
-  }
-  wrapper.insertAdjacentElement('afterbegin', input);
-  return wrapper;
-}
+//NONO TO CHECK AS THIS IS NOW IMPORTED
+// function createRadioOrCheckbox(fd) {
+//   const wrapper = createFieldWrapper(fd);
+//   const input = createInput(fd);
+//   const [value, uncheckedValue] = fd.enum || [];
+//   input.value = value;
+//   if (typeof uncheckedValue !== 'undefined') {
+//     input.dataset.uncheckedValue = uncheckedValue;
+//   }
+//   wrapper.insertAdjacentElement('afterbegin', input);
+//   return wrapper;
+// }
 
 function createLegend(fd) {
   return createLabel(fd, 'legend');
@@ -226,7 +230,7 @@ function setConstraintsMessage(field, messages = {}) {
 function createRadioOrCheckboxGroup(fd) {
   const wrapper = createFieldSet({ ...fd });
   createRadioOrCheckboxUsingEnum(fd, wrapper);
-  //NONO TO CHECK
+  //NONO TO CHECK - GKW HAS COPIED IT ACROSS
   // const type = fd.fieldType.split('-')[0];
   // fd?.enum?.forEach((value, index) => {
   //   const label = (typeof fd?.enumNames?.[index] === 'object' && fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
@@ -293,21 +297,21 @@ function createRadioOrCheckboxGroup(fd) {
   //   }
   //   wrapper.appendChild(field);
   // });
-  //
-  // // ###SEP-NJ START Wrap radios in a container if bar display
-  // if(wrapper.classList.contains('variant-bar')){
-  //   const wrappers = wrapper.querySelectorAll('.radio-wrapper');
-  //
-  //   const radiosWrapper = document.createElement('div');
-  //   radiosWrapper.className = 'radios-wrapper';
-  //
-  //   // Insert before the first .radio-wrapper
-  //   wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
-  //
-  //   // Move the all elements inside the new wrapper
-  //   wrappers.forEach(el => radiosWrapper.appendChild(el));
-  // }
-  // // ###SEP-NJ END
+
+  // ###SEP-NJ START Wrap radios in a container if bar display
+  if(wrapper.classList.contains('variant-bar')){
+    const wrappers = wrapper.querySelectorAll('.radio-wrapper');
+
+    const radiosWrapper = document.createElement('div');
+    radiosWrapper.className = 'radios-wrapper';
+
+    // Insert before the first .radio-wrapper
+    wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
+
+    // Move the all elements inside the new wrapper
+    wrappers.forEach(el => radiosWrapper.appendChild(el));
+  }
+  // ###SEP-NJ END
 
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
