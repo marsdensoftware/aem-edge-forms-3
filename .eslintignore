@@ -5,6 +5,8 @@ blocks/form/rules/model/*
 blocks/form/rules/functions.js
 scripts/editor-support.js
 scripts/editor-support-rte.js
+tools/forms-scaffolder.js
+tools/update-mappings.js
 /test
 
 # TODO add these back in at some point.

@@ -102,7 +102,7 @@ export default class Lexer {
       } else if (isNum(stream[this.current])) {
         token = this.consumeNumber(stream);
         tokens.push(token);
-      } else if (stream[this.current] === '\'') {
+      } else if (stream[this.current] === "'") {
         start = this.current;
         identifier = this.consumeQuotedIdentifier(stream);
         tokens.push({
@@ -161,12 +161,12 @@ export default class Lexer {
     this.current += 1;
     const maxLength = stream.length;
     let foundNonAlpha = !isIdentifier(stream, start + 1);
-    while (stream[this.current] !== '\'' && this.current < maxLength) {
+    while (stream[this.current] !== "'" && this.current < maxLength) {
       // You can escape a quote and you can escape an escape.
       let { current } = this;
       if (!isAlphaNum(stream[current])) foundNonAlpha = true;
       if (stream[current] === '\\' && (stream[current + 1] === '\\'
-        || stream[current + 1] === '\'')) {
+        || stream[current + 1] === "'")) {
         current += 2;
       } else {
         current += 1;

@@ -244,7 +244,7 @@
           }
         },
         {
-          "title": "Date Picker",
+          "title": "Date Input",
           "id": "date-input",
           "plugins": {
             "xwalk": {
@@ -1610,6 +1610,24 @@
           }
         },
         {
+          "title": "Range",
+          "id": "range",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/numberinput/v1/numberinput",
+                "template": {
+                  "jcr:title": "Range",
+                  "fieldType": "number-input",
+                  "fd:viewType": "range",
+                  "enabled": true,
+                  "visible": true
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Rating",
           "id": "rating",
           "plugins": {
@@ -2114,6 +2132,30 @@
                   "name": "Typography",
                   "model": "typography",
                   "text": "<p>Text</p>"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Custom Form Components",
+      "id": "custom-components",
+      "components": [
+        {
+          "title": "Range",
+          "id": "range",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/numberinput/v1/numberinput",
+                "template": {
+                  "jcr:title": "Range",
+                  "fieldType": "number-input",
+                  "fd:viewType": "range",
+                  "enabled": true,
+                  "visible": true
                 }
               }
             }
