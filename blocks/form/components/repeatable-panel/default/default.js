@@ -100,31 +100,45 @@ export class RepeatablePanel {
 
     this._repeatablePanel.prepend(this.#overview);
 
-    const form = this._repeatablePanel.closest('form');
-
-    form.addEventListener('item:add', (event) => {
-      const added = event.detail.item.el;
-      // Check that added belongs to the current repeatable
-      if (this._repeatablePanel.contains(added)) {
-        this._onItemAdded(added);
-      }
-    });
-
-    form.addEventListener('item:remove', (event) => {
-      const removed = event.detail.item.el;
-      // At this point the element is no longer in the dom
-      const {id} = removed.dataset;
-      const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
-      if (repeatableEntry) {
-        // Find matching overview entry and remove
-        this._delete(repeatableEntry);
-      }
-    });
+    this.#watchForItemsModified();
 
     const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
     entries.forEach(entry => {
       this._init(entry);
     });
+  }
+
+  #watchForItemsModified() {
+    // Callback function to run when changes occur
+    const t = this;
+
+    const callback = function(mutationsList) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === "childList") {
+
+          // Check for added nodes
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeName.toLowerCase() === "fieldset") {
+              t._onItemAdded(node);
+            }
+          });
+
+          // Check for removed nodes
+          mutation.removedNodes.forEach(node => {
+            if (node.nodeName.toLowerCase() === "fieldset") {
+              console.log("A fieldset was removed!", node);
+              t._onItemRemoved(node);
+            }
+          });
+        }
+      }
+    };
+
+    // Create observer instance
+    const observer = new MutationObserver(callback);
+
+    // Start observing direct children of the div
+    observer.observe(this._repeatablePanel, { childList: true });
   }
 
   _initModal(panelEl, yesCallback, noCallback) {
@@ -189,7 +203,19 @@ export class RepeatablePanel {
     this._toggleEditMode(entry, true);
   }
 
+  _onItemRemoved(entry) {
+    const removed = entry;
+    // At this point the element is no longer in the dom
+    const { id } = removed.dataset;
+    const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
+    if (repeatableEntry) {
+      // Find matching overview entry and remove
+      this._delete(repeatableEntry);
+    }
+  }
+
   _makeUnique(el) {
+    /*
     // TODO NJ: Remove after bug fixed by Adobe
     const index = new Date().getTime();// Array.from(el.parentNode.children).indexOf(el);
     el.dataset.id = `${el.dataset.id}-${index}`;
@@ -206,6 +232,7 @@ export class RepeatablePanel {
       }
 
     });
+    */
   }
 
   _toggleEditMode(entry, visible) {
@@ -375,18 +402,18 @@ export class RepeatablePanel {
         const values = savedInputData.values ? savedInputData.values : [];
 
         switch (input.type) {
-        case 'checkbox':
-        case 'radio':
-          input.checked = values.includes(input.value) || input.value === value;
-          break;
-        case 'select':
-          for (const option of input.options) {
-            option.selected = values.includes(option.value) || option.value === value;
-          }
-          break;
-        default:
-          input.value = value;
-          break;
+          case 'checkbox':
+          case 'radio':
+            input.checked = values.includes(input.value) || input.value === value;
+            break;
+          case 'select':
+            for (const option of input.options) {
+              option.selected = values.includes(option.value) || option.value === value;
+            }
+            break;
+          default:
+            input.value = value;
+            break;
         }
       });
     }
@@ -439,8 +466,8 @@ export class RepeatablePanel {
       if (!data) {
         return;
       }
-      const {value} = data;
-      const {displayValue} = data;
+      const { value } = data;
+      const { displayValue } = data;
 
       if (value) {
         const result = document.createElement('div');
@@ -452,8 +479,8 @@ export class RepeatablePanel {
         entries.push(result);
       }
 
-      const {values} = data;
-      const {displayValues} = data;
+      const { values } = data;
+      const { displayValues } = data;
       if (values) {
         const result = document.createElement('div');
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -659,7 +686,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
     this._updateCondition();
   }
 
-  _renderOverview(){
+  _renderOverview() {
     super._renderOverview();
     this._updateCondition();
   }
