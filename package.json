@@ -61,11 +61,12 @@
   "devDependencies": {
     "@adobe/aem-cli": "^16.10.19",
     "@adobe/json-formula": "0.1.50",
-    "@aemforms/af-core": "0.22.121",
+    "@aemforms/af-core": "0.22.150",
+    "@aemforms/af-formatters": "0.22.150",
     "@aemforms/af-custom-functions": "1.0.14",
-    "@aemforms/af-formatters": "0.22.121",
     "@babel/eslint-parser": "7.25.9",
     "@csstools/postcss-minify": "^2.0.3",
+    "@playwright/test": "^1.43.1",
     "@stylistic/eslint-plugin": "^3.0.0",
     "@testing-library/dom": "9.3.4",
     "@testing-library/user-event": "14.3.0",
@@ -120,12 +121,7 @@
     "stylelint-config-standard": "36.0.1",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-scss": "6.12.1",
-    "typescript": "^5.8.3",
-    "@adobe/json-formula": "0.1.50",
-    "@aemforms/af-core": "0.22.150",
-    "@aemforms/af-formatters": "0.22.150",
-    "@aemforms/af-custom-functions": "1.0.14",
-    "@playwright/test": "^1.43.1"
+    "typescript": "^5.8.3"
   },
   "mocha": {
     "spec": "test/**/*.test.js",
