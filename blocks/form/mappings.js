@@ -59,11 +59,23 @@ export function getCustomComponents() {
  * @param {string} formId - The form ID
  * @returns {Promise<HTMLElement>} The decorated element
  */
+//### SEP-NJ: Map to keep track of loaded scripts
+const map = {};
+
 async function loadComponent(componentName, element, fd, container, formId) {
   const status = element.dataset.componentStatus;
   if (status !== 'loading' && status !== 'loaded') {
     element.dataset.componentStatus = 'loading';
     const { blockName } = element.dataset;
+    
+    //### SEP-NJ: Start load script only once
+    if(map[componentName]){
+      await map[componentName](element, fd, container, formId);
+      element.dataset.componentStatus = 'loaded';
+      return;
+    }
+    //### SEP-NJ: End
+    
     try {
       loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
       const decorationComplete = new Promise((resolve) => {
@@ -73,6 +85,7 @@ async function loadComponent(componentName, element, fd, container, formId) {
               `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
             );
             if (mod.default) {
+              map[componentName] = mod.default;
               await mod.default(element, fd, container, formId);
             }
           } catch (error) {
