@@ -74,15 +74,6 @@ async function loadComponent(componentName, element, fd, container, formId) {
         (async () => {
           try {
             //### SEP-NJ: don't call import multiple times for the same component
-            //ADOBE CODE START:
-            // const mod = await import(
-            //   `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
-            //   );
-            // if (mod.default) {
-            //   await mod.default(element, fd, container, formId);
-            // }
-            //ADOBE CODE END:
-
             // Load (or reuse) the component function
             if (!simplifiedFixMap[componentName]) {
               const mod = await import(
