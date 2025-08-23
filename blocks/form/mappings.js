@@ -59,35 +59,41 @@ export function getCustomComponents() {
  * @param {string} formId - The form ID
  * @returns {Promise<HTMLElement>} The decorated element
  */
-//### SEP-NJ: Map to keep track of loaded scripts
-const map = {};
+
+const simplifiedFixMap = {}; //### SEP-NJ: Map to keep track of loaded scripts
 
 async function loadComponent(componentName, element, fd, container, formId) {
   const status = element.dataset.componentStatus;
   if (status !== 'loading' && status !== 'loaded') {
     element.dataset.componentStatus = 'loading';
     const { blockName } = element.dataset;
-    
-    //### SEP-NJ: Start load script only once
-    if(map[componentName]){
-      await map[componentName](element, fd, container, formId);
-      element.dataset.componentStatus = 'loaded';
-      return;
-    }
-    //### SEP-NJ: End
-    
+
     try {
-      loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
+      await loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);//###GKW added the await here
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {
-            const mod = await import(
-              `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
-            );
-            if (mod.default) {
-              map[componentName] = mod.default;
-              await mod.default(element, fd, container, formId);
+            //### SEP-NJ: don't call import multiple times for the same component
+            //ADOBE CODE START:
+            // const mod = await import(
+            //   `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
+            //   );
+            // if (mod.default) {
+            //   await mod.default(element, fd, container, formId);
+            // }
+            //ADOBE CODE END:
+
+            // Load (or reuse) the component function
+            if (!simplifiedFixMap[componentName]) {
+              const mod = await import(
+                `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
+                );
+              mod.default && (simplifiedFixMap[componentName] = mod.default); // use short-circuit evaluation :)
             }
+            // Run it
+            await simplifiedFixMap[componentName](element, fd, container, formId);
+            //### END SEP-NJ: don't call import multiple times for the same component
+
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log(`failed to load component for ${blockName}`, error);
