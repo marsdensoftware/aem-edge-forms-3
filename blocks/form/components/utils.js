@@ -32,6 +32,9 @@ export class DefaultFieldConverter {
   convertSingle(item) {
     const { name, value, enumNames, type } = item;
 
+    //return early if there is no value
+    if (!value) return undefined;
+
     let displayValues = [];
     let values;
 
