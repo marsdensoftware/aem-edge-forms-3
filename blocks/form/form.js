@@ -85,7 +85,7 @@ const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
 
   // ###NJ Start Added spellcheck
-  if(fd.properties?.spellcheck){
+  if (fd.properties?.spellcheck) {
     input.setAttribute('spellcheck', true);
   }
   // ###NJ End Added spellcheck
@@ -299,7 +299,7 @@ function createRadioOrCheckboxGroup(fd) {
   // });
 
   // ###SEP-NJ START Wrap radios in a container if bar display
-  if(wrapper.classList.contains('variant-bar')){
+  if (wrapper.classList.contains('variant-bar')) {
     const wrappers = wrapper.querySelectorAll('.radio-wrapper');
 
     const radiosWrapper = document.createElement('div');
@@ -309,7 +309,7 @@ function createRadioOrCheckboxGroup(fd) {
     wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
 
     // Move the all elements inside the new wrapper
-    wrappers.forEach(el => radiosWrapper.appendChild(el));
+    wrappers.forEach((el) => radiosWrapper.appendChild(el));
   }
   // ###SEP-NJ END
 
@@ -384,7 +384,8 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate js file and importing it
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate
+  // js file and importing it.
   // Get the default colspan
   const defaultColSpan = field['Column Span'] || field.properties?.colspan;
   const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
@@ -397,7 +398,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['colspan-md'],
     lg: field.properties?.['colspan-lg'],
     xl: field.properties?.['colspan-xl'],
-    xxl: field.properties?.['colspan-xxl']
+    xxl: field.properties?.['colspan-xxl'],
   };
 
   // Get responsive offsets from properties
@@ -406,7 +407,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['colspan-md-offset'],
     lg: field.properties?.['colspan-lg-offset'],
     xl: field.properties?.['colspan-xl-offset'],
-    xxl: field.properties?.['colspan-xxl-offset']
+    xxl: field.properties?.['colspan-xxl-offset'],
   };
 
   // Get the responsive display options from properties
@@ -415,7 +416,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['display-md'],
     lg: field.properties?.['display-lg'],
     xl: field.properties?.['display-xl'],
-    xxl: field.properties?.['display-xxl']
+    xxl: field.properties?.['display-xxl'],
   }
 
   // Get the responsive display orders from properties
@@ -424,7 +425,7 @@ function colSpanDecorator(field, element) {
     md: field.properties?.['d-order-md'],
     lg: field.properties?.['d-order-lg'],
     xl: field.properties?.['d-order-xl'],
-    xxl: field.properties?.['d-order-xxl']
+    xxl: field.properties?.['d-order-xxl'],
   }
 
   // Get container classes from properties

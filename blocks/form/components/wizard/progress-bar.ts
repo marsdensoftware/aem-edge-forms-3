@@ -1,12 +1,13 @@
 // Constants and helpers
-const COLOR_ACTIVE = '#017AC9'   // active group color
+const COLOR_ACTIVE = '#017AC9' // active group color
 const COLOR_COMPLETE = '#388314' // completed group color
-const LAST_STEP_CAP = 95         // last step is shown as 95% until next group loads
+const LAST_STEP_CAP = 95 // last step is shown as 95% until next group loads
 
 const clamp = (val: number, min = 0, max = 100) => Math.min(max, Math.max(min, val))
 
-const getGroupSteps = (root: Element, group: number): HTMLElement[] =>
-    Array.from(root.querySelectorAll(`:scope > [data-stepgroup="${group}"]`)) as HTMLElement[]
+const getGroupSteps = (root: Element, group: number): HTMLElement[] => Array.from(
+  root.querySelectorAll(`:scope > [data-stepgroup="${group}"]`),
+) as HTMLElement[]
 
 const setBar = (el: HTMLElement, widthPct: number, color?: string) => {
   el.style.width = `${clamp(widthPct)}%`
@@ -89,7 +90,7 @@ export const createProgressBar = () => {
 
   // Added into progress bar
   const { barContainer, barContainer2, barContainer3 } =
-        createProgressBarElements()
+    createProgressBarElements()
   progressBarInner.append(barContainer, barContainer2, barContainer3)
   progressBar.append(title, progressBarInner)
   // Added into footer
@@ -159,7 +160,10 @@ export const trackProgress = () => {
   }
 
   // Colors: completed = green, active = blue, future = default
-  setBar(barEl1, widths[1], currentGroup === 1 ? COLOR_ACTIVE : widths[1] === 100 ? COLOR_COMPLETE : undefined)
-  setBar(barEl2, widths[2], currentGroup === 2 ? COLOR_ACTIVE : widths[2] === 100 ? COLOR_COMPLETE : undefined)
-  setBar(barEl3, widths[3], currentGroup === 3 ? COLOR_ACTIVE : widths[3] === 100 ? COLOR_COMPLETE : undefined)
+  setBar(barEl1, widths[1], currentGroup === 1 ? COLOR_ACTIVE
+    : widths[1] === 100 ? COLOR_COMPLETE : undefined)
+  setBar(barEl2, widths[2], currentGroup === 2 ? COLOR_ACTIVE
+    : widths[2] === 100 ? COLOR_COMPLETE : undefined)
+  setBar(barEl3, widths[3], currentGroup === 3 ? COLOR_ACTIVE
+    : widths[3] === 100 ? COLOR_COMPLETE : undefined)
 }

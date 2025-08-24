@@ -46,7 +46,9 @@ const datasources = {
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
     var _a, _b, _c;
-    if (window.searchInput && !window.searchInput.contains(e.target) && window.suggestionsDiv) {
+    if (window.searchInput
+        && !window.searchInput.contains(e.target)
+        && window.suggestionsDiv) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
     }

@@ -1,13 +1,19 @@
 /*eslint-disable*/
 /**
- * Enhances the modal save button functionality by adding event listeners and updating UI elements based on user interactions.
+ * Enhances the modal save button functionality by adding event listeners and updating UI elements
+ * based on user interactions.
  *
  * @param {Element} fieldDiv - The DOM element representing the container for the modal field.
- * @param {HTMLParagraphElement} destTextArea - The paragraph element where the source text area's value will be displayed.
- * @param {HTMLAnchorElement} editLink - The anchor element used to toggle the edit state of the description.
- * @param {HTMLHRElement} divider - The horizontal rule element to be displayed or hidden based on the modal interactions.
- * @param {HTMLDivElement} editDiv - The div element containing editing controls to be shown or hidden based on modal interactions.
- * @return {void} Does not return anything. Modifies DOM elements and handles user interaction dynamically.
+ * @param {HTMLParagraphElement} destTextArea - The paragraph element where the source text
+ area's value will be displayed.
+ * @param {HTMLAnchorElement} editLink - The anchor element used to toggle the edit state of
+ the description.
+ * @param {HTMLHRElement} divider - The horizontal rule element to be displayed or hidden based
+ on the modal interactions.
+ * @param {HTMLDivElement} editDiv - The div element containing editing controls to be shown or
+ hidden based on modal interactions.
+ * @return {void} Does not return anything. Modifies DOM elements and handles user interaction
+ dynamically.
  */
 function decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv) {
     setTimeout(() => {
@@ -22,7 +28,8 @@ function decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, edit
         if (saveButton) {
             // console.log('Save button:', saveButton)
             saveButton.textContent = 'Save';
-            // add an onclick listener to the save button which will simply console log the value from the sourceTextArea
+            // add an onclick listener to the save button which will simply console
+            // log the value from the sourceTextArea
             saveButton.addEventListener('click', () => {
                 if (sourceTextarea && destTextArea) {
                     if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
@@ -60,7 +67,8 @@ function decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, edit
  * and ensuring the modal closes upon cancellation.
  *
  * @param {Element} fieldDiv - The parent element containing the modal.
- * @param {HTMLParagraphElement} destTextArea - The paragraph element containing the destination text.
+ * @param {HTMLParagraphElement} destTextArea - The paragraph element containing
+ the destination text.
  * @return {void} This function does not return a value.
  */
 function decorateModalCancelButton(fieldDiv, destTextArea) {
@@ -76,7 +84,8 @@ function decorateModalCancelButton(fieldDiv, destTextArea) {
             // add an onclick listener to the cancel button which will simply close the modal
             cancelButton.addEventListener('click', () => {
                 if (sourceTextarea && destTextArea) {
-                    // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+                    // copy the text from the destTextArea (which is a <p> element) into the
+                    // sourceTextArea.value
                     sourceTextarea.value = destTextArea.textContent || '';
                 }
                 // get the closest dialog element
@@ -105,7 +114,8 @@ function decorateDialogCloseButton(fieldDiv, destTextArea) {
             // add an onclick listener to the cancel button which will simply close the modal
             closeButton.addEventListener('click', () => {
                 if (sourceTextarea && destTextArea) {
-                    // copy the text from the destTextArea (which is a <p> element) into the sourceTextArea.value
+                    // copy the text from the destTextArea (which is a <p> element) into the
+                    // sourceTextArea.value
                     sourceTextarea.value = destTextArea.textContent || '';
                 }
             });
@@ -120,8 +130,10 @@ function decorateDialogCloseButton(fieldDiv, destTextArea) {
  * specified elements are displayed, and when it is unchecked,
  * those elements are hidden.
  *
- * @param {HTMLInputElement | null} checkbox - The checkbox element being observed for state changes.
- * @param {HTMLParagraphElement} destTextArea - The text area element whose display state is toggled.
+ * @param {HTMLInputElement | null} checkbox - The checkbox element being observed for
+ * state changes.
+ * @param {HTMLParagraphElement} destTextArea - The text area element whose display state
+ * is toggled.
  * @param {HTMLHRElement} divider - The horizontal divider element whose display state is toggled.
  * @param {HTMLDivElement} editDiv - The div element whose display state is toggled.
  * @return {void} This function does not return anything.
@@ -143,8 +155,7 @@ function decorateCheckboxOnState(checkbox, destTextArea, divider, editDiv) {
     }
 }
 export default function decorate(fieldDiv, fieldJson) {
-    // add the extended-checkbox-wrapper class to the fieldDiv
-    fieldDiv.classList.add('extended-checkbox');
+    fieldDiv.classList.add('extended-checkbox'); // add the extended-checkbox-wrapper class to the fieldDiv
     const { iconName } = fieldJson.properties;
     // Find the checkbox input
     const checkbox = fieldDiv.querySelector('input[type="checkbox"]');

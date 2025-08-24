@@ -69,7 +69,9 @@ const datasources = {
 
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-  if (window.searchInput && !window.searchInput.contains(e.target as Element) && window.suggestionsDiv) {
+  if (window.searchInput
+    && !window.searchInput.contains(e.target as Element)
+    && window.suggestionsDiv) {
     window.suggestionsDiv.innerHTML = ''
     window.suggestionsDiv.style.display = 'none'
   }
@@ -113,8 +115,7 @@ document.addEventListener('change', (event) => {
 
     if (value && value.trim().length > 0) {
       element.classList.add('has-input');
-    }
-    else {
+    } else {
       element.classList.remove('has-input');
     }
   }
@@ -142,9 +143,7 @@ document.addEventListener('input', (event) => {
     const { datasource } = element.dataset
     const entries = datasources[datasource as keyof typeof datasources]
 
-    const filtered = entries.filter((entry) =>
-      entry.toLowerCase().includes(query),
-    )
+    const filtered = entries.filter((entry) => entry.toLowerCase().includes(query))
 
     filtered.forEach((item) => {
       const div = document.createElement('div')
@@ -177,7 +176,6 @@ export default function decorate(element: El, field: Field) {
   const container = document.createElement('div')
   const iconEl = document.createElement('span');
   iconEl.classList.add('typeahead__icon')
-
 
   container.className = 'typeahead__input'
 

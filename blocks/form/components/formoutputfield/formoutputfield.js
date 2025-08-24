@@ -3,14 +3,14 @@ import { onElementAdded, DefaultFieldConverter } from '../utils.js'
 const renderers = {
   list: (values) => {
     const result = document.createElement('ul');
-    values.forEach(value => {
+    values.forEach((value) => {
       const li = document.createElement('li');
       li.textContent = value;
       result.appendChild(li);
     });
 
     return result;
-  }
+  },
 };
 
 export default function decorate(el, fd) {
@@ -28,7 +28,6 @@ export default function decorate(el, fd) {
   el.append(outputEl);
 
   onElementAdded(el).then((connectedEl) => {
-
     const form = connectedEl.closest('form');
     const values = {};
 
@@ -45,8 +44,7 @@ export default function decorate(el, fd) {
         const output = renderFunction(displayValues);
 
         outputEl.append(output);
-      }
-      else {
+      } else {
         connectedEl.dataset.visible = false;
       }
     }

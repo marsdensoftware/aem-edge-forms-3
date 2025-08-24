@@ -1,8 +1,8 @@
 interface Field {
-    properties: {
-        withIcon: boolean
-        enumIconNames: string[]
-    }
+  properties: {
+    withIcon: boolean
+    enumIconNames: string[]
+  }
 }
 
 export default function decorate(element: Element, field: Field) {

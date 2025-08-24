@@ -65,7 +65,7 @@ export class DefaultFieldConverter {
   }
 
   _convertSearchBox(item) {
-    
+
     function getDisplayText(input) {
       const labelEl = input.parentElement.querySelector('label');
       let result = '';
@@ -90,7 +90,7 @@ export class DefaultFieldConverter {
 
       return result;
     }
-    
+
     const entry = document.getElementById(item.id).closest('.search-box');
 
     let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
@@ -185,7 +185,7 @@ export function onElementAdded(el) {
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   });
 }
@@ -195,7 +195,7 @@ export function onElementsAddedByClassName(className, callback) {
   const seen = new WeakSet();
 
   // Call callback on any existing matching elements
-  document.querySelectorAll(`.${className}`).forEach(el => {
+  document.querySelectorAll(`.${className}`).forEach((el) => {
     if (!seen.has(el)) {
       seen.add(el);
       callback(el);
@@ -203,17 +203,17 @@ export function onElementsAddedByClassName(className, callback) {
   });
 
   // Set up the MutationObserver
-  const observer = new MutationObserver(mutationsList => {
+  const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
+        mutation.addedNodes.forEach((node) => {
           if (node.nodeType === 1) {
             // Check if node matches or contains matching elements
             if (node.classList.contains(className) && !seen.has(node)) {
               seen.add(node);
               callback(node);
             }
-            node.querySelectorAll?.(`.${className}`)?.forEach(el => {
+            node.querySelectorAll?.(`.${className}`)?.forEach((el) => {
               if (!seen.has(el)) {
                 seen.add(el);
                 callback(el);
@@ -227,7 +227,6 @@ export function onElementsAddedByClassName(className, callback) {
 
   observer.observe(document.body, { childList: true, subtree: true });
 }
-
 
 export function getDurationString(startMonthStr, startYearStr, endMonthStr, endYearStr) {
   const startMonth = parseInt(startMonthStr, 10);
@@ -245,7 +244,6 @@ export function getDurationString(startMonthStr, startYearStr, endMonthStr, endY
   if (yearStr && monthStr) return `${yearStr} ${monthStr}`;
   return yearStr || monthStr || `0 ${i18n('months')}`;
 }
-
 
 export function isNo(field) {
   const { value } = field;

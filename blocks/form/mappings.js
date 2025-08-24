@@ -67,7 +67,7 @@ async function loadComponent(componentName, element, fd, container, formId) {
   if (status !== 'loading' && status !== 'loaded') {
     element.dataset.componentStatus = 'loading';
     const { blockName } = element.dataset;
-    
+
     //### SEP-NJ: Start load script only once
     if(map[componentName]){
       await map[componentName](element, fd, container, formId);
@@ -75,7 +75,7 @@ async function loadComponent(componentName, element, fd, container, formId) {
       return;
     }
     //### SEP-NJ: End
-    
+
     try {
       loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
       const decorationComplete = new Promise((resolve) => {

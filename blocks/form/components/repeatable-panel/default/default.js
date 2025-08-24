@@ -50,7 +50,6 @@ class RepeatModal extends Modal {
 }
 
 export class RepeatablePanel {
-
   #overview;
 
   #converter;
@@ -61,10 +60,18 @@ export class RepeatablePanel {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
-    this._cancelModal = this._initModal(cancelModalEl, this._yesCancel.bind(this), this._noCancel.bind(this));
+    this._cancelModal = this._initModal(
+      cancelModalEl,
+      this._yesCancel.bind(this),
+      this._noCancel.bind(this),
+    );
 
     const deleteModalEl = el.querySelector('fieldset[name="deleteModal"]');
-    this._deleteModal = this._initModal(deleteModalEl, this._yesDelete.bind(this), this._noDelete.bind(this));
+    this._deleteModal = this._initModal(
+      deleteModalEl,
+      this._yesDelete.bind(this),
+      this._noDelete.bind(this),
+    );
     this._name = name;
 
     if (!this._repeatablePanel) {
@@ -103,7 +110,7 @@ export class RepeatablePanel {
     this.#watchForItemsModified();
 
     const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       this._init(entry);
     });
   }
@@ -149,7 +156,6 @@ export class RepeatablePanel {
       return modal;
     }
     return null;
-
   }
 
   _yesCancel(entry) {
@@ -179,8 +185,7 @@ export class RepeatablePanel {
       currentEntry.disabled = true;
       currentEntry.dataset.savedData = '';
       this._renderOverview();
-    }
-    else {
+    } else {
       this.#triggerDeletion(currentEntry);
     }
 
@@ -230,7 +235,6 @@ export class RepeatablePanel {
       if (input.querySelector('label')) {
         input.querySelector('label').htmlFor = input.dataset.id;
       }
-
     });
     */
   }
@@ -242,8 +246,7 @@ export class RepeatablePanel {
       entry.disabled = false;
       entry.classList.add('current');
       panel.classList.add('editing');
-    }
-    else {
+    } else {
       entry.classList.remove('current');
       panel.classList.remove('editing');
     }
@@ -260,8 +263,7 @@ export class RepeatablePanel {
     if (visible) {
       // show wizard buttons
       wizardButtonWrapper.style.display = 'grid';
-    }
-    else {
+    } else {
       // hide wizard buttons
       wizardButtonWrapper.style.display = 'none';
     }
@@ -307,8 +309,7 @@ export class RepeatablePanel {
     cancelBtn.addEventListener('click', () => {
       if (this._hasChanges(entry)) {
         this._cancelModal ? this._cancelModal.showModal() : this._yesCancel(entry);
-      }
-      else {
+      } else {
         this._yesCancel(entry);
       }
     });
@@ -356,13 +357,11 @@ export class RepeatablePanel {
   }
 
   _hasChanges(entry) {
-
     function deepEqual(a, b) {
       if (a === b) return true;
 
       /* eslint-disable-next-line eqeqeq */
-      if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null)
-        return false;
+      if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false;
 
       const keysA = Object.keys(a);
       const keysB = Object.keys(b);
@@ -393,7 +392,7 @@ export class RepeatablePanel {
       // Saved entry, reset to previous saved values
       const savedData = JSON.parse(entry.dataset.savedData);
 
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         const savedInputData = savedData[input.name];
         if (!savedInputData) {
           return;
@@ -401,23 +400,17 @@ export class RepeatablePanel {
         const value = savedInputData.value ? savedInputData.value : undefined;
         const values = savedInputData.values ? savedInputData.values : [];
 
-        switch (input.type) {
-          case 'checkbox':
-          case 'radio':
-            input.checked = values.includes(input.value) || input.value === value;
-            break;
-          case 'select':
-            for (const option of input.options) {
-              option.selected = values.includes(option.value) || option.value === value;
-            }
-            break;
-          default:
-            input.value = value;
-            break;
+        if (input.type === 'checkbox' || input.type === 'radio') {
+          input.checked = values.includes(input.value) || input.value === value;
+        } else if (input.type === 'select') {
+          for (const option of input.options) {
+            option.selected = values.includes(option.value) || option.value === value;
+          }
+        } else {
+          input.value = value;
         }
       });
-    }
-    else {
+    } else {
       // Unsaved --> Clear all fields
       this._clearFields(entry);
     }
@@ -426,7 +419,7 @@ export class RepeatablePanel {
   _clearFields(entry) {
     const inputs = entry.querySelectorAll('input, select, textarea');
 
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       if (input.type === 'checkbox' || input.type === 'radio') {
         input.checked = false;
       } else {
@@ -455,10 +448,10 @@ export class RepeatablePanel {
       // Add card title as first entry
       nameValues = {
         cardTitle: {
-          'value': this._cardTitle,
-          'displayValue': this._cardTitle
+          value: this._cardTitle,
+          displayValue: this._cardTitle,
         },
-        ...nameValues
+        ...nameValues,
       };
     }
 
@@ -513,7 +506,7 @@ export class RepeatablePanel {
       e.preventDefault();
     });
 
-    readable.forEach(r => {
+    readable.forEach((r) => {
       result.append(r);
     });
 
@@ -540,8 +533,7 @@ export class RepeatablePanel {
       // Create
       this.#overview.querySelector('.repeatable-entries').append(content);
       this.#overview.dataset.visible = true;
-    }
-    else {
+    } else {
       // Update
       e.replaceWith(content);
     }
@@ -576,8 +568,7 @@ export class RepeatablePanel {
         content.append(this._renderEntry(entry));
       });
       this.#overview.dataset.visible = true;
-    }
-    else {
+    } else {
       this.#overview.dataset.visible = false;
     }
   }
@@ -615,7 +606,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
       const radios = this._conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
       // register click on radios
-      radios.forEach(radio => {
+      radios.forEach((radio) => {
         radio.addEventListener('change', () => {
           const entry = this._repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
 
@@ -632,8 +623,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
             // prevent validation
             this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-          }
-          else {
+          } else {
             // show repeatable panel
             this._repeatablePanel.style.display = 'block';
             // enable validation
@@ -668,12 +658,11 @@ export class ConditionalRepeatable extends RepeatablePanel {
     if (savedEntries.length > 0) {
       // Hide question
       this._conditionField.setAttribute('data-visible', false);
-    }
-    else {
+    } else {
       // reset selection & condition field
       const radios = this._conditionField.querySelectorAll('input[type="radio"]');
 
-      radios?.forEach(radio => { radio.checked = false; });
+      radios?.forEach((radio) => { radio.checked = false; });
       // Show condition field
       this._conditionField.setAttribute('data-visible', true);
       // hide repeatable panel
