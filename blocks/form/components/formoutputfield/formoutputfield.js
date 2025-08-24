@@ -30,22 +30,19 @@ export default function decorate(el, fd) {
   onElementAdded(el).then((connectedEl) => {
 
     const form = connectedEl.closest('form');
+    const values = {};
 
     // Function to update the display
     function updateDisplay() {
-      const nameValues = new DefaultFieldConverter().convert(form, fieldName);
       outputEl.innerHTML = '';
+      const displayValues = [];
 
-      if (nameValues[fieldName] && nameValues[fieldName].value) {
-        nameValues[fieldName].values = [nameValues[fieldName].value];
-        nameValues[fieldName].displayValues = [nameValues[fieldName].displayValue];
-
-        delete nameValues[fieldName].value;
-        delete nameValues[fieldName].displayValue;
+      for (const key in values) {
+        displayValues.push(values[key].displayValue || values[key].displayValues);
       }
 
-      if (nameValues[fieldName].values) {
-        const output = renderFunction(nameValues[fieldName].displayValues);
+      if (displayValues.length > 0) {
+        const output = renderFunction(displayValues);
 
         outputEl.append(output);
       }
@@ -54,12 +51,31 @@ export default function decorate(el, fd) {
       }
     }
 
-    // Listen for input events on the form (event delegation)
-    form.addEventListener('change', (e) => {
-      if (e.target.name === fieldName) {
-        updateDisplay();
-      }
-    });
+    function waitForVar(name, interval = 50) {
+      return new Promise((resolve) => {
+        const check = setInterval(() => {
+          if (typeof window[name] !== "undefined") {
+            clearInterval(check);
+            resolve(window[name]);
+          }
+        }, interval);
+      });
+    }
+
+    (async () => {
+      const myForm = await waitForVar("myForm");
+      // Listen for input events on the form (event delegation)
+      myForm.subscribe((e) => {
+        const field = e.payload.field;
+        if (field.name === fieldName) {
+          const dataModel = window.myForm.getElement(field.id);
+          values[field.id] = new DefaultFieldConverter().convertSingle(dataModel);
+          updateDisplay();
+        }
+      }, 'fieldChanged');
+    })();
+
+
   });
 
   return el;

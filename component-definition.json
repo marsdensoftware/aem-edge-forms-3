@@ -540,6 +540,7 @@
                   "jcr:title": "Advanced Date Picker",
                   "fieldType": "panel",
                   "fd:viewType": "advanceddatepicker",
+                  "minOccur": 1,
                   "name": "advanceddatepicker",
                   "month": {
                     "name": "month",

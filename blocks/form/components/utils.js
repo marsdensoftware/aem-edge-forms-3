@@ -3,83 +3,75 @@ import { i18n } from '../../../i18n/index.js';
 
 export class DefaultFieldConverter {
 
-  convert(entry, fieldName) {
-    function getDisplayText(input) {
-      const labelEl = input.parentElement.querySelector('label');
-      let result = '';
+  _collectFields(root) {
+    const result = [];
 
-      if (!labelEl) {
-        return result;
-      }
+    function traverse(node) {
+      if (!node.items || !Array.isArray(node.items)) return;
 
-      // First check text inside label
-      const textEl = labelEl.querySelector(':scope>.text');
-      if (textEl) {
-        result = textEl.textContent.trim();
-
-        // Check description
-        const descEl = labelEl.querySelector(':scope>.desc');
-        if (descEl) {
-          result += ` - ${descEl.textContent.trim()}`;
+      for (const child of node.items) {
+        if (child.isContainer) {
+          traverse(child); // go deeper
+        } else {
+          result.push(child); // collect non-container
         }
+      }
+    }
+
+    traverse(root);
+    return result;
+  }
+
+  convert(entry, fieldName) {
+    const dataModel = myForm.getElement(entry.id);
+    const fields = this._collectFields(dataModel);
+
+    return this._convertInternal(fields, fieldName);
+  }
+
+  convertSingle(item) {
+    const { name, value, enumNames, type } = item;
+
+    let displayValues = [];
+    let values;
+
+    let displayValue = '';
+
+    if (enumNames) {
+      if (type.endsWith('[]')) {
+        values = value;
+        values.forEach(val => {
+          const index = item.enum.indexOf(val);
+          displayValues.push(enumNames[index]);
+        });
+
+        result[name] = { values, displayValues };
       }
       else {
-        result = labelEl.textContent.trim();
+        const index = item.enum.indexOf(value);
+        displayValue = enumNames[index];
+        return { value, displayValue };
       }
 
-      return result;
     }
-
-    let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
-    if(fieldName){
-      inputs = inputs.filter(el => el.name === fieldName);
+    else if (value) {
+      displayValue = value;
+      return { value, displayValue };
     }
+  }
 
+  _convertInternal(items, fieldName) {
     const result = {};
 
-    inputs.forEach(input => {
-      const {value} = input;
-      let displayValue = value;
-      const {name} = input;
+    if (fieldName) {
+      items = items.filter(item => item.name == fieldName);
+    }
 
-      const {type} = input;
+    // ignore plain-text, search-box component
+    items = items.filter(item => item[':type'] != 'search-box' && item.fieldType != 'plain-text');
 
-      // ignore text input from search-box component
-      if(type === 'text' && input.parentElement.classList.contains('search-box__input')){
-        return;
-      }
-
-      if (input.tagName === 'SELECT') {
-        displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-      }
-      else if (type === 'checkbox' || type === 'radio') {
-        // Ignore not checked
-        if (!input.checked) {
-          return;
-        }
-
-        displayValue = input.checked ? getDisplayText(input) : '';
-      }
-
-      if (value) {
-        if (result[name]) {
-          // multi values
-          const e = result[name];
-          if (!e.values) {
-            e.values = [];
-            e.values.push(e.value);
-            delete e.value;
-            e.displayValues = [];
-            e.displayValues.push(e.displayValue);
-            delete e.displayValue;
-          }
-          e.values.push(value);
-          e.displayValues.push(displayValue);
-        }
-        else {
-          result[name] = { 'value': value, 'displayValue': displayValue };
-        }
-      }
+    items.forEach(item => {
+      result[item.name] = this.convertSingle(item);
     });
 
     return result;
@@ -165,7 +157,7 @@ export function getDurationString(startMonthStr, startYearStr, endMonthStr, endY
 
 
 export function isNo(field) {
-  const {value} = field;
+  const { value } = field;
   if (!value) return true;
   if (typeof value === 'string') {
     const normalized = value.trim().toLowerCase();
