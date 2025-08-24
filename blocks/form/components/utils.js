@@ -45,7 +45,7 @@ export class DefaultFieldConverter {
           displayValues.push(enumNames[index]);
         });
 
-        result[name] = { values, displayValues };
+        return { values, displayValues };
       }
       else {
         const index = item.enum.indexOf(value);
@@ -57,6 +57,9 @@ export class DefaultFieldConverter {
     else if (value) {
       displayValue = value;
       return { value, displayValue };
+    }
+    else {
+      return undefined;
     }
   }
 
