@@ -37,8 +37,12 @@ export class DefaultFieldConverter {
 
     let displayValue = '';
 
+    if (!value) {
+      return { value: '', displayValue: '' };
+    }
+
     if (enumNames) {
-      if (type.endsWith('[]') && value) {
+      if (type.endsWith('[]')) {
         values = value;
         values.forEach(val => {
           const index = item.enum.indexOf(val);
@@ -49,17 +53,14 @@ export class DefaultFieldConverter {
       }
       else {
         const index = item.enum.indexOf(value);
-        displayValue = enumNames[index];
+        displayValue = item?.label.value || enumNames[index];
         return { value, displayValue };
       }
 
     }
-    else if (value) {
+    else {
       displayValue = value;
       return { value, displayValue };
-    }
-    else {
-      return undefined;
     }
   }
 

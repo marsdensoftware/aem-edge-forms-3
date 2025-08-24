@@ -372,6 +372,7 @@ export class Summarizer {
     const form = el.closest('form');
     const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
+    const data = new DefaultFieldConverter().convert(form.querySelector('[name="panel_soft_skills"]'));
     const strengthsContent = [];
 
     extendedCheckboxes.forEach((e) => {
