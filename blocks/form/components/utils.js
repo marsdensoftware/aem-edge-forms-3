@@ -73,8 +73,8 @@ export class DefaultFieldConverter {
       items = items.filter(item => item.name == fieldName);
     }
 
-    // ignore plain-text, search-box component
-    items = items.filter(item => item[':type'] != 'search-box' && item.fieldType != 'plain-text');
+    // ignore plain-text, search-box, image component
+    items = items.filter(item => item[':type'] != 'search-box' && item.fieldType != 'plain-text' && item.fieldType != 'image');
 
     items.forEach(item => {
       result[item.name] = this.convertSingle(item);
