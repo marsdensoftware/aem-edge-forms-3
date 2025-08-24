@@ -19,11 +19,11 @@ class Converter extends DefaultFieldConverter {
     const startYear = result[FIELD_NAMES.START_OF_WORK_YEAR].value;
     let endMonth;
     let endYear;
-    let workperiod = `${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
+    let workperiod = `${i18n('month_'+result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue)} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
     let endofwork;
     if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
       // No longer working
-      endofwork = `${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
+      endofwork = `${i18n('month_'+result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue)} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
       endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
       endYear = result[FIELD_NAMES.END_OF_WORK_YEAR].value;
     }

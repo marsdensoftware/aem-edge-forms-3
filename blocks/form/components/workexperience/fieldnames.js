@@ -20,22 +20,80 @@ export function sorter(a, b) {
   const aData = JSON.parse(a.dataset.savedData);
   const bData = JSON.parse(b.dataset.savedData);
 
-  const yearA = parseInt(aData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
-  const monthA = parseInt(aData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
+  const startYearA = parseInt(aData[FIELD_NAMES.START_OF_WORK_YEAR]?.value, 10) || 0;
+  const startMonthA = parseInt(aData[FIELD_NAMES.START_OF_WORK_MONTH]?.value, 10) || 0;
 
-  const yearB = parseInt(bData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
-  const monthB = parseInt(bData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
+  const startYearB = parseInt(bData[FIELD_NAMES.START_OF_WORK_YEAR]?.value, 10) || 0;
+  const startMonthB = parseInt(bData[FIELD_NAMES.START_OF_WORK_MONTH]?.value, 10) || 0;
+
+  const endYearA = parseInt(aData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
+  const endMonthA = parseInt(aData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
+
+  const endYearB = parseInt(bData[FIELD_NAMES.END_OF_WORK_YEAR]?.value, 10) || 0;
+  const endMonthB = parseInt(bData[FIELD_NAMES.END_OF_WORK_MONTH]?.value, 10) || 0;
 
   const aStillWorking = aData[FIELD_NAMES.STILL_WORKING]?.value;
   const bStillWorking = bData[FIELD_NAMES.STILL_WORKING]?.value;
 
   // Compare still working
-  if (bStillWorking === STILL_WORKING_STATUS.YES && (bStillWorking !== aStillWorking)) {
-    return 1;
+  if (bStillWorking === STILL_WORKING_STATUS.YES) {
+    if (bStillWorking == aStillWorking) {
+      // both still working, compare start then name
+      // Compare year first, then month
+      if (startYearA !== startYearB) {
+        return startYearB - startYearA; // recent year first
+      }
+
+      if (startMonthA !== startMonthB) {
+        return startMonthB - startMonthA; // recent month first
+      }
+
+      // Alphabetically by job title
+      const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
+      const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
+
+      return jobtitleA.localeCompare(jobtitleB);
+    }
+    else {
+      // no longer working
+      return 1;
+    }
+  }
+  else {
+    // No longer working
+    if (aStillWorking == STILL_WORKING_STATUS.YES) {
+      return -1;
+    }
+    else {
+      // both no longer working
+      // Compare end year first, then month
+      if (endYearA !== endYearB) {
+        return endYearB - endYearA; // recent year first
+      }
+
+      if (endMonthA !== endMonthB) {
+        return endMonthB - endMonthA; // recent month first
+      }
+
+      // Compare start year first, then month
+      if (startYearA !== startYearB) {
+        return startYearB - startYearA; // recent year first
+      }
+
+      if (startMonthA !== startMonthB) {
+        return startMonthB - startMonthA; // recent month first
+      }
+
+      // Alphabetically by job title
+      const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
+      const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
+
+      return jobtitleA.localeCompare(jobtitleB);
+    }
   }
 
   // Compare year first, then month
-  if (yearA !== yearB) {
+  if (startYearA !== startYearB) {
     return yearB - yearA; // recent year first
   }
 
@@ -47,5 +105,5 @@ export function sorter(a, b) {
   const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
   const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
 
-  return jobtitleA.localeCompare(jobtitleB);;
+  return jobtitleA.localeCompare(jobtitleB);
 }
