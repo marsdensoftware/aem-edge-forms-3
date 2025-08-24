@@ -53,7 +53,7 @@ export class DefaultFieldConverter {
       }
       else {
         const index = item.enum.indexOf(value);
-        displayValue = item?.label.value || enumNames[index];
+        displayValue = item.fieldType == 'checkbox' ? item?.label.value : enumNames[index];
         return { value, displayValue };
       }
 
