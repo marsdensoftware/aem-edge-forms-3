@@ -32,16 +32,13 @@ export class DefaultFieldConverter {
   convertSingle(item) {
     const { name, value, enumNames, type } = item;
 
-    //return early if there is no value
-    if (!value) return undefined;
-
     let displayValues = [];
     let values;
 
     let displayValue = '';
 
     if (enumNames) {
-      if (type.endsWith('[]')) {
+      if (type.endsWith('[]') && value) {
         values = value;
         values.forEach(val => {
           const index = item.enum.indexOf(val);
