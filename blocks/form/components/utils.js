@@ -64,6 +64,85 @@ export class DefaultFieldConverter {
     }
   }
 
+  _convertSearchBox(item) {
+    
+    function getDisplayText(input) {
+      const labelEl = input.parentElement.querySelector('label');
+      let result = '';
+
+      if (!labelEl) {
+        return result;
+      }
+
+      // First check text inside label
+      const textEl = labelEl.querySelector(':scope>.text');
+      if (textEl) {
+        result = textEl.textContent.trim();
+
+        // Check description
+        const descEl = labelEl.querySelector(':scope>.desc');
+        if (descEl) {
+          result += ` - ${descEl.textContent.trim()}`;
+        }
+      } else {
+        result = labelEl.textContent.trim();
+      }
+
+      return result;
+    }
+    
+    const entry = document.getElementById(item.id).closest('.search-box');
+
+    let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
+
+    const result = {};
+
+    inputs.forEach((input) => {
+      const { value } = input;
+      let displayValue = value;
+      const { name } = input;
+
+      const { type } = input;
+
+      // ignore text input from search-box component
+      if (type === 'text' && input.parentElement.classList.contains('search-box__input')) {
+        return;
+      }
+
+      if (input.tagName === 'SELECT') {
+        displayValue = input.options[input.selectedIndex]?.text.trim() || '';
+      } else if (type === 'checkbox' || type === 'radio') {
+        // Ignore not checked
+        if (!input.checked) {
+          return;
+        }
+
+        displayValue = input.checked ? getDisplayText(input) : '';
+      }
+
+      if (value) {
+        if (result[name]) {
+          // multi values
+          const e = result[name];
+          if (!e.values) {
+            e.values = [];
+            e.values.push(e.value);
+            delete e.value;
+            e.displayValues = [];
+            e.displayValues.push(e.displayValue);
+            delete e.displayValue;
+          }
+          e.values.push(value);
+          e.displayValues.push(displayValue);
+        } else {
+          result[name] = { value, displayValue };
+        }
+      }
+    });
+
+    return result;
+  }
+
   _convertInternal(items, fieldName) {
     const result = {};
 
@@ -71,11 +150,19 @@ export class DefaultFieldConverter {
       items = items.filter(item => item.name == fieldName);
     }
 
-    // ignore plain-text, search-box, image component
-    items = items.filter(item => item[':type'] != 'search-box' && item.fieldType != 'plain-text' && item.fieldType != 'image');
+    // ignore plain-text, image component
+    items = items.filter(item => item.fieldType != 'plain-text' && item.fieldType != 'image');
 
     items.forEach(item => {
-      result[item.name] = this.convertSingle(item);
+
+      if (item[':type'] == 'search-box') {
+        // convert search box
+        Object.assign(result, this._convertSearchBox(item));
+      }
+
+      else {
+        result[item.name] = this.convertSingle(item);
+      }
     });
 
     return result;
