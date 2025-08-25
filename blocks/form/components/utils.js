@@ -30,7 +30,7 @@ export class DefaultFieldConverter {
 
   convertSingle(item) {
     const {
-      name, value, enumNames, type,
+      value, enumNames, type,
     } = item;
 
     const displayValues = [];
@@ -53,7 +53,7 @@ export class DefaultFieldConverter {
         return { values, displayValues };
       }
       const index = item.enum.indexOf(value);
-      displayValue = item.fieldType == 'checkbox' ? item?.label.value : enumNames[index];
+      displayValue = item.fieldType === 'checkbox' ? item?.label.value : enumNames[index];
       return { value, displayValue };
     }
     displayValue = value;
@@ -143,15 +143,15 @@ export class DefaultFieldConverter {
 
     /* eslint-disable no-param-reassign */
     if (fieldName) {
-      items = items.filter((item) => item.name == fieldName);
+      items = items.filter((item) => item.name === fieldName);
     }
 
     // ignore plain-text, image component
-    items = items.filter((item) => item.fieldType != 'plain-text' && item.fieldType != 'image');
+    items = items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');
     /* eslint-enable no-param-reassign */
 
     items.forEach((item) => {
-      if (item[':type'] == 'search-box') {
+      if (item[':type'] === 'search-box') {
         // convert search box
         Object.assign(result, this._convertSearchBox(item));
       } else {
