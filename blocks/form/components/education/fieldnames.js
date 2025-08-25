@@ -40,7 +40,7 @@ export function sorter(a, b) {
   const bCompletionStatus = bData[FIELD_NAMES.COMPLETION_STATUS]?.value;
 
   if (bCompletionStatus === COMPLETION_STATUS.COMPLETED) {
-    if (bCompletionStatus == aCompletionStatus) {
+    if (bCompletionStatus === aCompletionStatus) {
       // Both completed, compare finish year/month
       // Compare year first, then month
       if (finishYearA !== finishYearB) {
@@ -64,29 +64,24 @@ export function sorter(a, b) {
       // Sort alphabetically
       return courseA.localeCompare(courseB);
     }
-    else {
-      return 1;
-    }
+
+    return 1;
   }
 
-  else {
-    if (aCompletionStatus == COMPLETION_STATUS.COMPLETED) {
-      return -1;
-    }
-    else {
-      // both not completed, use start date
-      // Compare year first, then month
-      if (startYearA !== startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
-
-      if (startMonthB !== startMonthA) {
-        return startMonthB - startMonthA;
-      }
-
-      // Sort alphabetically
-      return courseA.localeCompare(courseB);
-    }
+  if (aCompletionStatus === COMPLETION_STATUS.COMPLETED) {
+    return -1;
   }
 
+  // both not completed, use start date
+  // Compare year first, then month
+  if (startYearA !== startYearB) {
+    return startYearB - startYearA; // recent year first
+  }
+
+  if (startMonthB !== startMonthA) {
+    return startMonthB - startMonthA;
+  }
+
+  // Sort alphabetically
+  return courseA.localeCompare(courseB);
 }
