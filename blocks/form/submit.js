@@ -81,14 +81,17 @@ async function prepareRequest(form) {
   const headers = {
     'Content-Type': 'application/json',
     'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,
+    // eslint-disable-next-line comma-dangle
+    'x-adobe-form-hostname': window?.location?.hostname
   };
   const body = { data: payload };
   let url;
   let baseUrl = getSubmitBaseUrl();
   if (!baseUrl && org && site) {
+    // eslint-disable-next-line prefer-template
     baseUrl = 'https://forms.adobe.com/adobe/forms/af/submit/';
     headers['x-adobe-routing'] = `tier=${tier},bucket=${branch}--${site}--${org}`;
-    url = baseUrl + btoa(form.dataset.action);
+    url = baseUrl + btoa(`${form.dataset.action}.json`);
   } else {
     url = form.dataset.action;
   }

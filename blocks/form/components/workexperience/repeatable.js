@@ -8,29 +8,22 @@ class Converter extends DefaultFieldConverter {
   convert(element) {
     const result = super.convert(element)
 
-    const {
-      [FIELD_NAMES.START_OF_WORK_MONTH]: startMonthF,
-      [FIELD_NAMES.START_OF_WORK_YEAR]: startYearF,
-      [FIELD_NAMES.END_OF_WORK_MONTH]: endMonthF,
-      [FIELD_NAMES.END_OF_WORK_YEAR]: endYearF,
-      [FIELD_NAMES.STILL_WORKING]: stillWorkingF,
-    } = result;
-
-    const startMonth = startMonthF?.value;
-    const startYear = startYearF?.value;
-
-    // If we don't have a start month (or year), keep the original result.
-    if (!startMonth || !startYear) return result;
-
+    // Customize rendering for completion-year, completion status
+    const startMonth = result[FIELD_NAMES.START_OF_WORK_MONTH]?.value;
+    if (!startMonth) {
+      return result;
+    }
+    const stillWorking = result[FIELD_NAMES.STILL_WORKING];
+    const startYear = result[FIELD_NAMES.START_OF_WORK_YEAR].value;
     let endMonth;
     let endYear;
-    let workperiod = `${startMonthF.displayValue} ${startYearF.displayValue}`;
+    let workperiod = `${i18n(`month_${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue}`)} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
     let endofwork;
-    if (stillWorkingF?.value === STILL_WORKING_STATUS.NO) {
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
       // No longer working
-      endofwork = `${endMonthF.displayValue} ${endYearF.displayValue}`;
-      endMonth = endMonthF.value;
-      endYear = endYearF.value;
+      endofwork = `${i18n(`month_${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue}`)} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
+      endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
+      endYear = result[FIELD_NAMES.END_OF_WORK_YEAR].value;
     } else {
       // Still working
       const now = new Date();

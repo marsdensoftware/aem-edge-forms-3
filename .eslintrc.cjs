@@ -19,9 +19,15 @@ module.exports = {
     semi: 'off',
     quotes: ['error', 'single'], // WARNING: DO NOT run --fix on .json files
     indent: ['error', 2],
-    devDependencies: [0, false],
-    '@stylistic/max-len': [2, {
-      code: 130, comments: 130, ignoreRegExpLiterals: true, ignorePattern: 'replaceAll\\\(\'', ignoreTrailingComments: true,
+    devDependencies: ['off', false],
+    'max-len': ['off', {}],
+    '@stylistic/max-len': ['error', {
+      code: 130,
+      comments: 130,
+      ignoreRegExpLiterals: true,
+      ignoreTemplateLiterals: true,
+      ignorePattern: 'replaceAll\\(\'',
+      ignoreTrailingComments: true,
     }],
     '@stylistic/no-tabs': ['error', {}],
     'no-trailing-spaces': ['error', {}],
@@ -48,16 +54,16 @@ module.exports = {
       'error',
       {
         '*': 4, // default limit for all models
-        form: 15,
+        form: 16,
         wizard: 12,
         'form-button': 7,
         'checkbox-group': 20,
-        checkbox: 18,
+        checkbox: 19,
         'date-input': 21,
-        'drop-down': 19,
+        'drop-down': 20,
         email: 22,
         'file-input': 20,
-        'form-fragment': 15,
+        'form-fragment': 16,
         'form-image': 7,
         'multiline-input': 23,
         'number-input': 22,
@@ -72,6 +78,7 @@ module.exports = {
         rating: 18,
         password: 20,
         tnc: 12,
+        range: 19,
       },
     ],
     'xwalk/no-orphan-collapsible-fields': 'off', // Disable until enhancement is done for Forms properties

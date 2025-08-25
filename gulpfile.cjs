@@ -1,4 +1,7 @@
-const { series, src, dest, watch, parallel } = require('gulp')
+/* eslint-disable import/no-extraneous-dependencies */
+const {
+  src, dest, watch, parallel,
+} = require('gulp')
 const header = require('gulp-header')
 const dartSass = require('sass')
 const gulpSass = require('gulp-sass')
@@ -8,9 +11,9 @@ const pxtorem = require('postcss-pxtorem')
 const postcssMinify = require('@csstools/postcss-minify')
 const sourcemaps = require('gulp-sourcemaps') // RW added
 const gulpif = require('gulp-if')
-const ts = require("gulp-typescript")
-const tsProject = ts.createProject("tsconfig.json")
+const ts = require('gulp-typescript')
 
+const tsProject = ts.createProject('tsconfig.json')
 const sass = gulpSass(dartSass)
 
 const plugin = [
@@ -29,31 +32,28 @@ const plugin = [
 ]
 
 const makePipeline = (target, builder, headers, options) => {
-  const headerString = headers?.map((s)=>`/*${s}*/\n`)?.join('')
+  const headerString = headers?.map((s) => `/*${s}*/\n`)?.join('')
   return builder(target, headerString, options)
 }
 
-const makeSASSPipeline = (target, headers, {doSrcMap}) => () => {
-  return src(target, { base: './' })
-    .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss(plugin))
-    .pipe(gulpif(headers ? true : false, header(headers)))
-    .pipe(gulpif(doSrcMap, sourcemaps.write('.'))) // ✅ Write .map file next to .css
-    .pipe(dest('./'))
-}
+const makeSASSPipeline = (target, headers, { doSrcMap }) => () => src(target, { base: './' })
+  .pipe(gulpif(doSrcMap, sourcemaps.init())) // ✅ Start source map tracking
+  .pipe(sass().on('error', sass.logError))
+  .pipe(postcss(plugin))
+// eslint-disable-next-line no-unneeded-ternary
+  .pipe(gulpif(headers ? true : false, header(headers)))
+  .pipe(gulpif(doSrcMap, sourcemaps.write('.'))) // ✅ Write .map file next to .css
+  .pipe(dest('./'))
 
-const makeTSPipeline = (target, headers) => () =>
-  src(target, { base: './' })
-    .pipe(tsProject()).js
-    .pipe(gulpif(headers ? true : false, header(headers)))
-    .pipe(dest('./'))
+const makeTSPipeline = (target, headers) => () => src(target, { base: './' })
+  .pipe(tsProject()).js
+// eslint-disable-next-line no-unneeded-ternary
+  .pipe(gulpif(headers ? true : false, header(headers)))
+  .pipe(dest('./'))
 
 const styleFolders = ['styles/**/*.scss', 'blocks/**/*.scss']
 const lintSASSHeaders = ['stylelint-disable']
-const buildSASS = makePipeline(
-  styleFolders, makeSASSPipeline, lintSASSHeaders, {doSrcMap: true}
-)
+const buildSASS = makePipeline(styleFolders, makeSASSPipeline, lintSASSHeaders, { doSrcMap: true })
 const watchSASS = () => {
   watch(styleFolders, buildSASS)
 }

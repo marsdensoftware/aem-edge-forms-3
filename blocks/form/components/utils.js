@@ -2,7 +2,64 @@
 import { i18n } from '../../../i18n/index.js';
 
 export class DefaultFieldConverter {
+  _collectFields(root) {
+    const result = [];
+
+    function traverse(node) {
+      if (!node.items || !Array.isArray(node.items)) return;
+
+      for (const child of node.items) {
+        if (child.isContainer) {
+          traverse(child); // go deeper
+        } else {
+          result.push(child); // collect non-container
+        }
+      }
+    }
+
+    traverse(root);
+    return result;
+  }
+
   convert(entry, fieldName) {
+    const dataModel = window.myForm.getElement(entry.id);
+    const fields = this._collectFields(dataModel);
+    return this._convertInternal(fields, fieldName);
+  }
+
+  convertSingle(item) {
+    const {
+      value, enumNames, type,
+    } = item;
+
+    const displayValues = [];
+    let values;
+
+    let displayValue = '';
+
+    if (!value) {
+      return { value: '', displayValue: '' };
+    }
+
+    if (enumNames) {
+      if (type.endsWith('[]')) {
+        values = value;
+        values.forEach((val) => {
+          const index = item.enum.indexOf(val);
+          displayValues.push(enumNames[index]);
+        });
+
+        return { values, displayValues };
+      }
+      const index = item.enum.indexOf(value);
+      displayValue = item.fieldType === 'checkbox' ? item?.label.value : enumNames[index];
+      return { value, displayValue };
+    }
+    displayValue = value;
+    return { value, displayValue };
+  }
+
+  _convertSearchBox(item) {
     function getDisplayText(input) {
       const labelEl = input.parentElement.querySelector('label');
       let result = '';
@@ -28,10 +85,9 @@ export class DefaultFieldConverter {
       return result;
     }
 
-    let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
-    if (fieldName) {
-      inputs = inputs.filter((el) => el.name === fieldName);
-    }
+    const entry = document.getElementById(item.id).closest('.search-box');
+
+    const inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
 
     const result = {};
 
@@ -75,6 +131,30 @@ export class DefaultFieldConverter {
         } else {
           result[name] = { value, displayValue };
         }
+      }
+    });
+
+    return result;
+  }
+
+  _convertInternal(items, fieldName) {
+    const result = {};
+
+    /* eslint-disable no-param-reassign */
+    if (fieldName) {
+      items = items.filter((item) => item.name === fieldName);
+    }
+
+    // ignore plain-text, image component
+    items = items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');
+    /* eslint-enable no-param-reassign */
+
+    items.forEach((item) => {
+      if (item[':type'] === 'search-box') {
+        // convert search box
+        Object.assign(result, this._convertSearchBox(item));
+      } else {
+        result[item.name] = this.convertSingle(item);
       }
     });
 
