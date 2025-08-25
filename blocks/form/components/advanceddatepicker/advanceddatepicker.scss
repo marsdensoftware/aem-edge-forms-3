@@ -1,6 +1,6 @@
 @use '../../../../styles/settings' as *;
 
-.form .advanceddatepicker {
+.form .panel-repeatable-panel .advanceddatepicker {
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-400;
