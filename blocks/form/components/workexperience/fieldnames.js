@@ -37,61 +37,59 @@ export function sorter(a, b) {
 
   // Compare still working
   if (bStillWorking === STILL_WORKING_STATUS.YES) {
-    if (bStillWorking == aStillWorking) {
-      // both still working, compare start then name
-      // Compare year first, then month
-      if (startYearA !== startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
-
-      if (startMonthA !== startMonthB) {
-        return startMonthB - startMonthA; // recent month first
-      }
-
-      // Alphabetically by job title
-      const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
-      const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
-
-      return jobtitleA.localeCompare(jobtitleB);
-    }
-    else {
+    if (bStillWorking !== aStillWorking) {
       // no longer working
       return 1;
     }
-  }
-  else {
-    // No longer working
-    if (aStillWorking == STILL_WORKING_STATUS.YES) {
-      return -1;
+
+    // both still working, compare start then name
+    // Compare year first, then month
+    if (startYearA !== startYearB) {
+      return startYearB - startYearA; // recent year first
     }
-    else {
-      // both no longer working
-      // Compare end year first, then month
-      if (endYearA !== endYearB) {
-        return endYearB - endYearA; // recent year first
-      }
 
-      if (endMonthA !== endMonthB) {
-        return endMonthB - endMonthA; // recent month first
-      }
-
-      // Compare start year first, then month
-      if (startYearA !== startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
-
-      if (startMonthA !== startMonthB) {
-        return startMonthB - startMonthA; // recent month first
-      }
-
-      // Alphabetically by job title
-      const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
-      const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
-
-      return jobtitleA.localeCompare(jobtitleB);
+    if (startMonthA !== startMonthB) {
+      return startMonthB - startMonthA; // recent month first
     }
+
+    // Alphabetically by job title
+    const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
+    const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
+
+    return jobtitleA.localeCompare(jobtitleB);
   }
 
+  if (aStillWorking === STILL_WORKING_STATUS.YES) {
+    return -1;
+  }
+
+  // both no longer working
+  // Compare end year first, then month
+  if (endYearA !== endYearB) {
+    return endYearB - endYearA; // recent year first
+  }
+
+  if (endMonthA !== endMonthB) {
+    return endMonthB - endMonthA; // recent month first
+  }
+
+  // Compare start year first, then month
+  if (startYearA !== startYearB) {
+    return startYearB - startYearA; // recent year first
+  }
+
+  if (startMonthA !== startMonthB) {
+    return startMonthB - startMonthA; // recent month first
+  }
+
+  // Alphabetically by job title
+  const jobtitleA = aData[FIELD_NAMES.JOB_TITLE]?.value || '';
+  const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
+
+  return jobtitleA.localeCompare(jobtitleB);
+
+  // TODO: Nono check as this code is unreachable.
+  /*
   // Compare year first, then month
   if (startYearA !== startYearB) {
     return yearB - yearA; // recent year first
@@ -106,4 +104,5 @@ export function sorter(a, b) {
   const jobtitleB = bData[FIELD_NAMES.JOB_TITLE]?.value || '';
 
   return jobtitleA.localeCompare(jobtitleB);
+   */
 }
