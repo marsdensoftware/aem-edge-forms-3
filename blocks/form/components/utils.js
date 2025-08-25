@@ -2,7 +2,6 @@
 import { i18n } from '../../../i18n/index.js';
 
 export class DefaultFieldConverter {
-
   _collectFields(root) {
     const result = [];
 
@@ -30,9 +29,11 @@ export class DefaultFieldConverter {
   }
 
   convertSingle(item) {
-    const { name, value, enumNames, type } = item;
+    const {
+      name, value, enumNames, type,
+    } = item;
 
-    let displayValues = [];
+    const displayValues = [];
     let values;
 
     let displayValue = '';
@@ -44,28 +45,22 @@ export class DefaultFieldConverter {
     if (enumNames) {
       if (type.endsWith('[]')) {
         values = value;
-        values.forEach(val => {
+        values.forEach((val) => {
           const index = item.enum.indexOf(val);
           displayValues.push(enumNames[index]);
         });
 
         return { values, displayValues };
       }
-      else {
-        const index = item.enum.indexOf(value);
-        displayValue = item.fieldType == 'checkbox' ? item?.label.value : enumNames[index];
-        return { value, displayValue };
-      }
-
-    }
-    else {
-      displayValue = value;
+      const index = item.enum.indexOf(value);
+      displayValue = item.fieldType == 'checkbox' ? item?.label.value : enumNames[index];
       return { value, displayValue };
     }
+    displayValue = value;
+    return { value, displayValue };
   }
 
   _convertSearchBox(item) {
-
     function getDisplayText(input) {
       const labelEl = input.parentElement.querySelector('label');
       let result = '';
@@ -93,7 +88,7 @@ export class DefaultFieldConverter {
 
     const entry = document.getElementById(item.id).closest('.search-box');
 
-    let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
+    const inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
 
     const result = {};
 
@@ -146,21 +141,20 @@ export class DefaultFieldConverter {
   _convertInternal(items, fieldName) {
     const result = {};
 
+    /* eslint-disable no-param-reassign */
     if (fieldName) {
-      items = items.filter(item => item.name == fieldName);
+      items = items.filter((item) => item.name == fieldName);
     }
 
     // ignore plain-text, image component
-    items = items.filter(item => item.fieldType != 'plain-text' && item.fieldType != 'image');
+    items = items.filter((item) => item.fieldType != 'plain-text' && item.fieldType != 'image');
+    /* eslint-enable no-param-reassign */
 
-    items.forEach(item => {
-
+    items.forEach((item) => {
       if (item[':type'] == 'search-box') {
         // convert search box
         Object.assign(result, this._convertSearchBox(item));
-      }
-
-      else {
+      } else {
         result[item.name] = this.convertSingle(item);
       }
     });
