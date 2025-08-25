@@ -88,158 +88,156 @@ async function fieldChanged(payload, form, generateFormRendition) {
   const fieldWrapper = field?.closest('.field-wrapper');
   changes.forEach((change) => {
     const { propertyName, currentValue, prevValue } = change;
-    /* eslint-disable indent */
     switch (propertyName) {
-      case 'required':
-        if (currentValue === true) {
-          fieldWrapper.dataset.required = '';
-        } else {
-          fieldWrapper.removeAttribute('data-required');
+    case 'required':
+      if (currentValue === true) {
+        fieldWrapper.dataset.required = '';
+      } else {
+        fieldWrapper.removeAttribute('data-required');
+      }
+      break;
+    case 'validationMessage':
+      {
+        const { validity } = payload.field;
+        if (field.setCustomValidity
+          && (validity?.expressionMismatch || validity?.customConstraint)) {
+          field.setCustomValidity(currentValue);
+          updateOrCreateInvalidMsg(field, currentValue);
         }
-        break;
-      case 'validationMessage':
-        {
-          const { validity } = payload.field;
-          if (field.setCustomValidity
-            && (validity?.expressionMismatch || validity?.customConstraint)) {
-            field.setCustomValidity(currentValue);
-            updateOrCreateInvalidMsg(field, currentValue);
-          }
-        }
-        break;
-      case 'value':
-        // Handle undefined currentValue to prevent "undefined" appearing in form fields
-        // eslint-disable-next-line no-case-declarations
-        const valueToSet = currentValue === undefined ? '' : currentValue;
+      }
+      break;
+    case 'value':
+      // Handle undefined currentValue to prevent "undefined" appearing in form fields
+      // eslint-disable-next-line no-case-declarations
+      const valueToSet = currentValue === undefined ? '' : currentValue;
 
-        if (['number', 'date', 'text', 'email'].includes(field.type) && (displayFormat || displayValueExpression)) {
-          field.setAttribute('edit-value', valueToSet);
-          field.setAttribute('display-value', displayValue);
-          if (document.activeElement !== field) {
-            field.value = displayValue;
-          }
-        } else if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+      if (['number', 'date', 'text', 'email'].includes(field.type) && (displayFormat || displayValueExpression)) {
+        field.setAttribute('edit-value', valueToSet);
+        field.setAttribute('display-value', displayValue);
+        if (document.activeElement !== field) {
+          field.value = displayValue;
+        }
+      } else if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
+          const exists = (Array.isArray(valueToSet)
+            && valueToSet.some((x) => compare(x, el.value, type.replace('[]', ''))))
+            || compare(valueToSet, el.value, type);
+          el.checked = exists;
+        });
+      } else if (fieldType === 'checkbox') {
+        field.checked = compare(valueToSet, field.value, type);
+      } else if (fieldType === 'plain-text') {
+        field.innerHTML = valueToSet;
+      } else if (fieldType === 'image') {
+        const altText = field?.querySelector('img')?.alt || '';
+        field.querySelector('picture')?.replaceWith(createOptimizedPicture(valueToSet, altText));
+      } else if (field.type !== 'file') {
+        field.value = valueToSet;
+      }
+      break;
+    case 'visible':
+      fieldWrapper.dataset.visible = currentValue;
+      if (fieldType === 'panel' && fieldWrapper.querySelector('dialog')) {
+        const dialog = fieldWrapper.querySelector('dialog');
+        if (currentValue === false && dialog.open) {
+          dialog.close(); // close triggers the event listener that removes the dialog overlay
+        }
+      }
+      break;
+    case 'enabled':
+      // If checkboxgroup/radiogroup/drop-down is readOnly then it should remain disabled.
+      if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        if (readOnly === false) {
           field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-            const exists = (Array.isArray(valueToSet)
-              && valueToSet.some((x) => compare(x, el.value, type.replace('[]', ''))))
-              || compare(valueToSet, el.value, type);
-            el.checked = exists;
+            disableElement(el, !currentValue);
           });
-        } else if (fieldType === 'checkbox') {
-          field.checked = compare(valueToSet, field.value, type);
-        } else if (fieldType === 'plain-text') {
-          field.innerHTML = valueToSet;
-        } else if (fieldType === 'image') {
-          const altText = field?.querySelector('img')?.alt || '';
-          field.querySelector('picture')?.replaceWith(createOptimizedPicture(valueToSet, altText));
-        } else if (field.type !== 'file') {
-          field.value = valueToSet;
         }
-        break;
-      case 'visible':
-        fieldWrapper.dataset.visible = currentValue;
-        if (fieldType === 'panel' && fieldWrapper.querySelector('dialog')) {
-          const dialog = fieldWrapper.querySelector('dialog');
-          if (currentValue === false && dialog.open) {
-            dialog.close(); // close triggers the event listener that removes the dialog overlay
-          }
+      } else if (fieldType === 'drop-down') {
+        if (readOnly === false) {
+          disableElement(field, !currentValue);
         }
-        break;
-      case 'enabled':
-        // If checkboxgroup/radiogroup/drop-down is readOnly then it should remain disabled.
-        if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
-          if (readOnly === false) {
-            field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-              disableElement(el, !currentValue);
-            });
-          }
-        } else if (fieldType === 'drop-down') {
-          if (readOnly === false) {
-            disableElement(field, !currentValue);
-          }
-        } else if (componentType === 'rating') {
-          if (readOnly === false) {
-            fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', !currentValue);
-          }
-        } else {
-          field.toggleAttribute('disabled', currentValue === false);
+      } else if (componentType === 'rating') {
+        if (readOnly === false) {
+          fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', !currentValue);
         }
-        break;
-      case 'readOnly':
-        if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
-          field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
-            disableElement(el, currentValue);
+      } else {
+        field.toggleAttribute('disabled', currentValue === false);
+      }
+      break;
+    case 'readOnly':
+      if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        field.querySelectorAll(`input[name=${name}]`).forEach((el) => {
+          disableElement(el, currentValue);
+        });
+      } else if (fieldType === 'drop-down') {
+        disableElement(field, currentValue);
+      } else if (componentType === 'rating') {
+        fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', currentValue === true);
+      } else {
+        field.toggleAttribute('disabled', currentValue === true);
+      }
+      break;
+    case 'label':
+      if (fieldWrapper) {
+        let labelEl = fieldWrapper.querySelector('.field-label');
+        if (labelEl) {
+          labelEl.textContent = currentValue.value;
+          labelEl.setAttribute('data-visible', currentValue.visible);
+        } else if (fieldType === 'button') {
+          field.textContent = currentValue.value;
+        } else if (currentValue.value !== '') {
+          labelEl = createLabel({
+            id,
+            label: currentValue,
           });
-        } else if (fieldType === 'drop-down') {
-          disableElement(field, currentValue);
-        } else if (componentType === 'rating') {
-          fieldWrapper.querySelector('.rating')?.classList.toggle('disabled', currentValue === true);
-        } else {
-          field.toggleAttribute('disabled', currentValue === true);
+          fieldWrapper.prepend(labelEl);
         }
-        break;
-      case 'label':
-        if (fieldWrapper) {
-          let labelEl = fieldWrapper.querySelector('.field-label');
-          if (labelEl) {
-            labelEl.textContent = currentValue.value;
-            labelEl.setAttribute('data-visible', currentValue.visible);
-          } else if (fieldType === 'button') {
-            field.textContent = currentValue.value;
-          } else if (currentValue.value !== '') {
-            labelEl = createLabel({
-              id,
-              label: currentValue,
-            });
-            fieldWrapper.prepend(labelEl);
-          }
+      }
+      break;
+    case 'description':
+      if (fieldWrapper) {
+        let descriptionEl = fieldWrapper.querySelector('.field-description');
+        if (descriptionEl) {
+          descriptionEl.innerHTML = currentValue;
+        } else if (currentValue !== '') {
+          descriptionEl = createHelpText({
+            id,
+            description: currentValue,
+          });
+          fieldWrapper.append(descriptionEl);
         }
-        break;
-      case 'description':
-        if (fieldWrapper) {
-          let descriptionEl = fieldWrapper.querySelector('.field-description');
-          if (descriptionEl) {
-            descriptionEl.innerHTML = currentValue;
-          } else if (currentValue !== '') {
-            descriptionEl = createHelpText({
-              id,
-              description: currentValue,
-            });
-            fieldWrapper.append(descriptionEl);
-          }
-        }
-        break;
-      case 'items':
-        if (currentValue === null) {
-          const removeId = prevValue.id;
-          field?.querySelector(`#${removeId}`)?.remove();
-        } else {
-          const promise = generateFormRendition(
-            { items: [currentValue] },
-            field?.querySelector('.repeat-wrapper'),
-            form.dataset?.id,
-          );
-          renderPromises[currentValue?.qualifiedName] = promise;
-        }
-        break;
-      case 'activeChild': handleActiveChild(activeChild, form);
-        break;
-      case 'valid':
-        if (currentValue === true) {
-          updateOrCreateInvalidMsg(field, '');
-        }
-        break;
-      case 'enum':
-      case 'enumNames':
-        if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
-          createRadioOrCheckboxUsingEnum(fieldModel, field);
-        } else if (fieldType === 'drop-down') {
-          createDropdownUsingEnum(fieldModel, field);
-        }
-        break;
-      default:
-        break;
-      /* eslint-enable indent */
+      }
+      break;
+    case 'items':
+      if (currentValue === null) {
+        const removeId = prevValue.id;
+        field?.querySelector(`#${removeId}`)?.remove();
+      } else {
+        const promise = generateFormRendition(
+          { items: [currentValue] },
+          field?.querySelector('.repeat-wrapper'),
+          form.dataset?.id,
+        );
+        renderPromises[currentValue?.qualifiedName] = promise;
+      }
+      break;
+    case 'activeChild': handleActiveChild(activeChild, form);
+      break;
+    case 'valid':
+      if (currentValue === true) {
+        updateOrCreateInvalidMsg(field, '');
+      }
+      break;
+    case 'enum':
+    case 'enumNames':
+      if (fieldType === 'radio-group' || fieldType === 'checkbox-group') {
+        createRadioOrCheckboxUsingEnum(fieldModel, field);
+      } else if (fieldType === 'drop-down') {
+        createDropdownUsingEnum(fieldModel, field);
+      }
+      break;
+    default:
+      break;
     }
   });
 }
