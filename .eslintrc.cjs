@@ -21,7 +21,7 @@ module.exports = {
     indent: ['error', 2],
     devDependencies: [0, false],
     '@stylistic/max-len': [2, {
-      code: 130, comments: 130, ignoreRegExpLiterals: true, ignorePattern: 'replaceAll\\\(\'', ignoreTrailingComments: true,
+      code: 130, comments: 130, ignoreRegExpLiterals: true, ignorePattern: 'replaceAll\\(\'', ignoreTrailingComments: true,
     }],
     '@stylistic/no-tabs': ['error', {}],
     'no-trailing-spaces': ['error', {}],
@@ -72,7 +72,7 @@ module.exports = {
         rating: 18,
         password: 20,
         tnc: 12,
-        range: 19
+        range: 19,
       },
     ],
     'xwalk/no-orphan-collapsible-fields': 'off', // Disable until enhancement is done for Forms properties
