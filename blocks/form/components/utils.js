@@ -22,9 +22,8 @@ export class DefaultFieldConverter {
   }
 
   convert(entry, fieldName) {
-    const dataModel = myForm.getElement(entry.id);
+    const dataModel = window.myForm.getElement(entry.id);
     const fields = this._collectFields(dataModel);
-
     return this._convertInternal(fields, fieldName);
   }
 
