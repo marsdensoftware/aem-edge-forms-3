@@ -299,7 +299,7 @@ export function createInput(fd) {
   }
 
   // ###NJ Start Added spellcheck
-  if(fd.properties?.spellcheck){
+  if (fd.properties?.spellcheck) {
     input.setAttribute('spellcheck', true);
   }
   // ###NJ End Added spellcheck
@@ -343,7 +343,9 @@ export function createRadioOrCheckboxUsingEnum(fd, wrapper) {
     if (!isSameLength) {
       labelValues = fd?.enum;
     }
-    const label = (typeof labelValues?.[index] === 'object' && labelValues?.[index] !== null) ? labelValues[index].value : labelValues?.[index] || value;
+    const label = (typeof labelValues?.[index] === 'object' && labelValues?.[index] !== null)
+      ? labelValues[index].value
+      : labelValues?.[index] || value;
     const id = getId(fd.name);
     const field = createRadioOrCheckbox({
       name: fd.name,
@@ -358,7 +360,7 @@ export function createRadioOrCheckboxUsingEnum(fd, wrapper) {
     // Wrap text inside label into a span
     // Get the original text content and clear the label
     const labelEl = field.querySelector('label');
-    if(labelEl){
+    if (labelEl) {
       const textContent = labelEl.textContent.trim();
       labelEl.textContent = '';
 
@@ -370,7 +372,7 @@ export function createRadioOrCheckboxUsingEnum(fd, wrapper) {
 
       const description = fd.properties?.enumDescriptions?.[index];
 
-      if(description){
+      if (description) {
         // Create and append the span.desc
         const descSpan = document.createElement('span');
         descSpan.className = 'desc';
