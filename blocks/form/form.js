@@ -1,11 +1,14 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import transferRepeatableDOM, { insertAddButton, insertRemoveButton, createButton as createRepeatButton } from './components/repeat/repeat.js';
+import transferRepeatableDOM, {
+  insertAddButton, insertRemoveButton, createButton as createRepeatButton,
+} from './components/repeat/repeat.js';
 import { emailPattern, getSubmitBaseUrl, SUBMISSION_SERVICE } from './constant.js';
 import GoogleReCaptcha from './integrations/recaptcha.js';
 import componentDecorator from './mappings.js';
 import { handleSubmit } from './submit.js';
 import DocBasedFormToAF from './transform.js';
 import {
+  /* eslint-disable no-unused-vars */ // getId is used in commented-out code for NJ to review
   getId,
   checkValidation,
   createButton,
@@ -34,15 +37,14 @@ const withFieldWrapper = (element) => (fd) => {
   return wrapper;
 };
 
-
-//NONO TO CHECK AS THIS IS NOW IMPORTED
+// NONO TO CHECK AS THIS IS NOW IMPORTED
 // function setPlaceholder(element, fd) {
 //   if (fd.placeholder) {
 //     element.setAttribute('placeholder', fd.placeholder);
 //   }
 // }
 
-//NONO TO CHECK AS THIS IS NOW IMPORTED
+// NONO TO CHECK AS THIS IS NOW IMPORTED
 // const constraintsDef = Object.entries({
 //   'password|tel|email|text': [['maxLength', 'maxlength'], ['minLength', 'minlength'], 'pattern'],
 //   'number|range|date': [['maximum', 'Max'], ['minimum', 'Min'], 'step'],
@@ -65,7 +67,7 @@ const withFieldWrapper = (element) => (fd) => {
 //   }
 // }
 
-//NONO TO CHECK AS THIS IS NOW IMPORTED
+// NONO TO CHECK AS THIS IS NOW IMPORTED
 // function createInput(fd) {
 //   const input = document.createElement('input');
 //   input.type = getHTMLRenderType(fd);
@@ -97,7 +99,7 @@ const createTextArea = withFieldWrapper((fd) => {
 const createSelect = withFieldWrapper((fd) => {
   const select = document.createElement('select');
   createDropdownUsingEnum(fd, select);
-  //NONO TO CHECK
+  // NONO TO CHECK
   // select.required = fd.required;
   // select.title = fd.tooltip ? stripTags(fd.tooltip, '') : '';
   // select.readOnly = fd.readOnly;
@@ -163,7 +165,7 @@ function createHeading(fd) {
   return wrapper;
 }
 
-//NONO TO CHECK AS THIS IS NOW IMPORTED
+// NONO TO CHECK AS THIS IS NOW IMPORTED
 // function createRadioOrCheckbox(fd) {
 //   const wrapper = createFieldWrapper(fd);
 //   const input = createInput(fd);
@@ -230,10 +232,11 @@ function setConstraintsMessage(field, messages = {}) {
 function createRadioOrCheckboxGroup(fd) {
   const wrapper = createFieldSet({ ...fd });
   createRadioOrCheckboxUsingEnum(fd, wrapper);
-  //NONO TO CHECK - GKW HAS COPIED IT ACROSS
+  // NONO TO CHECK - GKW HAS COPIED IT ACROSS
   // const type = fd.fieldType.split('-')[0];
   // fd?.enum?.forEach((value, index) => {
-  //   const label = (typeof fd?.enumNames?.[index] === 'object' && fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
+  // const label = (typeof fd?.enumNames?.[index] === 'object' &&
+  //   fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
   //   const id = getId(fd.name);
   //   const field = createRadioOrCheckbox({
   //     name: fd.name,
