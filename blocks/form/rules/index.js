@@ -88,6 +88,7 @@ async function fieldChanged(payload, form, generateFormRendition) {
   const fieldWrapper = field?.closest('.field-wrapper');
   changes.forEach((change) => {
     const { propertyName, currentValue, prevValue } = change;
+    /* eslint-disable indent */
     switch (propertyName) {
       case 'required':
         if (currentValue === true) {
@@ -213,7 +214,11 @@ async function fieldChanged(payload, form, generateFormRendition) {
           const removeId = prevValue.id;
           field?.querySelector(`#${removeId}`)?.remove();
         } else {
-          const promise = generateFormRendition({ items: [currentValue] }, field?.querySelector('.repeat-wrapper'), form.dataset?.id);
+          const promise = generateFormRendition(
+            { items: [currentValue] },
+            field?.querySelector('.repeat-wrapper'),
+            form.dataset?.id,
+          );
           renderPromises[currentValue?.qualifiedName] = promise;
         }
         break;
@@ -234,6 +239,7 @@ async function fieldChanged(payload, form, generateFormRendition) {
         break;
       default:
         break;
+      /* eslint-enable indent */
     }
   });
 }
@@ -242,12 +248,7 @@ function formChanged(payload, form) {
   const { changes } = payload;
   changes.forEach((change) => {
     const { propertyName, currentValue } = change;
-    switch (propertyName) {
-      case 'activeChild': handleActiveChild(currentValue?.id, form);
-        break;
-      default:
-        break;
-    }
+    if (propertyName === 'activeChild') handleActiveChild(currentValue?.id, form);
   });
 }
 
