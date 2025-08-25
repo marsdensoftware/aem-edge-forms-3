@@ -119,21 +119,20 @@ export class RepeatablePanel {
     // Callback function to run when changes occur
     const t = this;
 
-    const callback = function(mutationsList) {
+    const callback = (mutationsList) => {
       for (const mutation of mutationsList) {
-        if (mutation.type === "childList") {
-
+        if (mutation.type === 'childList') {
           // Check for added nodes
-          mutation.addedNodes.forEach(node => {
-            if (node.nodeName.toLowerCase() === "fieldset") {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeName.toLowerCase() === 'fieldset') {
               t._onItemAdded(node);
             }
           });
 
           // Check for removed nodes
-          mutation.removedNodes.forEach(node => {
-            if (node.nodeName.toLowerCase() === "fieldset") {
-              console.log("A fieldset was removed!", node);
+          mutation.removedNodes.forEach((node) => {
+            if (node.nodeName.toLowerCase() === 'fieldset') {
+              console.log('A fieldset was removed!', node);
               t._onItemRemoved(node);
             }
           });
@@ -219,6 +218,7 @@ export class RepeatablePanel {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   _makeUnique(el) {
     /*
     // TODO NJ: Remove after bug fixed by Adobe
