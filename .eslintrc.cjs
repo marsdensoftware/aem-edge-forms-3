@@ -19,9 +19,15 @@ module.exports = {
     semi: 'off',
     quotes: ['error', 'single'], // WARNING: DO NOT run --fix on .json files
     indent: ['error', 2],
-    devDependencies: [0, false],
-    '@stylistic/max-len': [2, {
-      code: 130, comments: 130, ignoreRegExpLiterals: true, ignorePattern: 'replaceAll\\(\'', ignoreTrailingComments: true,
+    devDependencies: ['off', false],
+    'max-len': ['off', {}],
+    '@stylistic/max-len': ['error', {
+      code: 130,
+      comments: 130,
+      ignoreRegExpLiterals: true,
+      ignoreTemplateLiterals: true,
+      ignorePattern: 'replaceAll\\(\'',
+      ignoreTrailingComments: true,
     }],
     '@stylistic/no-tabs': ['error', {}],
     'no-trailing-spaces': ['error', {}],
