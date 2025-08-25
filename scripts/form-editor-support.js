@@ -136,6 +136,7 @@ function annotateItems(items, formDefinition, formFieldMap) {
               }
               /* Check if this panel is in an accordion
                 and should be expanded in authoring after a change */
+              /* eslint-disable @stylistic/max-len */
               if (activeAccordionPanel === fieldWrapper.dataset.id && fieldWrapper.parentElement.classList.contains('accordion')) {
                 handleAccordionNavigationInEditor(fieldWrapper.parentElement, fieldWrapper);
               }
