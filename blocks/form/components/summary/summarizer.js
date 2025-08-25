@@ -381,7 +381,11 @@ export class Summarizer {
     const extendedCheckboxes =
       form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
-    const data = new DefaultFieldConverter().convert(form.querySelector('[name="panel_soft_skills"]'));
+    // TODO: Nono review, this was "const data = new DefaultFieldConverter()" and data was not
+    // used, but I'm not sure if .convert(form.querySelector('[name="panel_soft_skills"]'));
+    // is doing anything?
+    new DefaultFieldConverter().convert(form.querySelector('[name="panel_soft_skills"]'));
+
     const strengthsContent = [];
 
     extendedCheckboxes.forEach((e) => {
