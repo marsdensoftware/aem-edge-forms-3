@@ -50,23 +50,23 @@ let ruleEngine; let initPayload;
 onmessage = async (e) => {
   async function handleMessageEvent(event) {
     switch (event.data.name) {
-      case 'init': {
-        const { search, ...formDef } = event.data.payload;
-        initPayload = event.data.payload;
-        ruleEngine = new RuleEngine(formDef);
-        const state = ruleEngine.getState();
-        // Informing the main thread that the form is initialized
-        postMessage({
-          name: 'init',
-          payload: state,
-        });
-        ruleEngine.dispatch = (msg) => {
-          postMessage(msg);
-        };
-        break;
-      }
-      default:
-        break;
+    case 'init': {
+      const { search, ...formDef } = event.data.payload;
+      initPayload = event.data.payload;
+      ruleEngine = new RuleEngine(formDef);
+      const state = ruleEngine.getState();
+      // Informing the main thread that the form is initialized
+      postMessage({
+        name: 'init',
+        payload: state,
+      });
+      ruleEngine.dispatch = (msg) => {
+        postMessage(msg);
+      };
+      break;
+    }
+    default:
+      break;
     }
   }
   // prefills form data, waits for all async operations
