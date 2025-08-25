@@ -28,17 +28,16 @@ export default function decorate(el, fd) {
   el.append(outputEl);
 
   onElementAdded(el).then((connectedEl) => {
-    const form = connectedEl.closest('form');
+    connectedEl.closest('form');
     const values = {};
 
     // Function to update the display
     function updateDisplay() {
       outputEl.innerHTML = '';
-      const displayValues = [];
 
-      for (const key in values) {
-        displayValues.push(values[key].displayValue || values[key].displayValues);
-      }
+      const displayValues = Object.values(values).map(
+        (val) => val.displayValue || val.displayValues,
+      );
 
       if (displayValues.length > 0) {
         const output = renderFunction(displayValues);
@@ -52,7 +51,7 @@ export default function decorate(el, fd) {
     function waitForVar(name, interval = 50) {
       return new Promise((resolve) => {
         const check = setInterval(() => {
-          if (typeof window[name] !== "undefined") {
+          if (typeof window[name] !== 'undefined') {
             clearInterval(check);
             resolve(window[name]);
           }
@@ -61,10 +60,10 @@ export default function decorate(el, fd) {
     }
 
     (async () => {
-      const myForm = await waitForVar("myForm");
+      const myForm = await waitForVar('myForm');
       // Listen for input events on the form (event delegation)
       myForm.subscribe((e) => {
-        const field = e.payload.field;
+        const { field } = e.payload;
         if (field.name === fieldName) {
           const dataModel = window.myForm.getElement(field.id);
           values[field.id] = new DefaultFieldConverter().convertSingle(dataModel);
@@ -72,8 +71,6 @@ export default function decorate(el, fd) {
         }
       }, 'fieldChanged');
     })();
-
-
   });
 
   return el;
