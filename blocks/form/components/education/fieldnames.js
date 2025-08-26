@@ -39,8 +39,31 @@ export function sorter(a, b) {
   const aCompletionStatus = aData[FIELD_NAMES.COMPLETION_STATUS]?.value;
   const bCompletionStatus = bData[FIELD_NAMES.COMPLETION_STATUS]?.value;
 
-  if (bCompletionStatus === COMPLETION_STATUS.COMPLETED) {
-    if (bCompletionStatus === aCompletionStatus) {
+  function compareStartDateThenCourse() {
+    if (startYearA !== startYearB) {
+      return startYearB - startYearA; // recent year first
+    }
+
+    if (startMonthB !== startMonthA) {
+      return startMonthB - startMonthA;
+    }
+
+    // Sort alphabetically
+    return courseA.localeCompare(courseB);
+  }
+
+  if (bCompletionStatus === COMPLETION_STATUS.IN_PROGRESS) {
+    if (aCompletionStatus === COMPLETION_STATUS.IN_PROGRESS) {
+      // both in progress, compare start date then course
+      return compareStartDateThenCourse();
+    }
+    else {
+      // In progress, always comes first
+      return 1;
+    }
+  }
+  else if (bCompletionStatus === COMPLETION_STATUS.COMPLETED) {
+    if (aCompletionStatus === COMPLETION_STATUS.COMPLETED) {
       // Both completed, compare finish year/month
       // Compare year first, then month
       if (finishYearA !== finishYearB) {
@@ -51,37 +74,23 @@ export function sorter(a, b) {
         return finishMonthB - finishMonthA;
       }
 
-      // finish same year/data, compare start
-      // Compare year first, then month
-      if (startYearA !== startYearB) {
-        return startYearB - startYearA; // recent year first
-      }
-
-      if (startMonthB !== startMonthA) {
-        return startMonthB - startMonthA;
-      }
-
-      // Sort alphabetically
-      return courseA.localeCompare(courseB);
+      return compareStartDateThenCourse();
     }
-
-    return 1;
+    else if (aCompletionStatus === COMPLETION_STATUS.IN_PROGRESS) {
+      return -1;
+    }
+    else {
+      // Not completed
+      return 1;
+    }
   }
-
-  if (aCompletionStatus === COMPLETION_STATUS.COMPLETED) {
-    return -1;
+  else if (bCompletionStatus === COMPLETION_STATUS.NOT_COMPLETED) {
+    if (aCompletionStatus === COMPLETION_STATUS.NOT_COMPLETED) {
+      // Both not completed, compare start year/month
+      return compareStartDateThenCourse();
+    }
+    else {
+      return -1;
+    }
   }
-
-  // both not completed, use start date
-  // Compare year first, then month
-  if (startYearA !== startYearB) {
-    return startYearB - startYearA; // recent year first
-  }
-
-  if (startMonthB !== startMonthA) {
-    return startMonthB - startMonthA;
-  }
-
-  // Sort alphabetically
-  return courseA.localeCompare(courseB);
 }

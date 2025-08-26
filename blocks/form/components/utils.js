@@ -139,17 +139,21 @@ export class DefaultFieldConverter {
 
   _convertInternal(items, fieldName) {
     const result = {};
-
+    let _items = items;
+    
     /* eslint-disable no-param-reassign */
     if (fieldName) {
-      items = items.filter((item) => item.name === fieldName);
+      _items = _items.filter((item) => item.name === fieldName);
     }
+    
+    // ignore items without value
+    _items = _items.filter(item => item.value);
 
     // ignore plain-text, image component
-    items = items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');
+    _items = _items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');
     /* eslint-enable no-param-reassign */
 
-    items.forEach((item) => {
+    _items.forEach((item) => {
       if (item[':type'] === 'search-box') {
         // convert search box
         Object.assign(result, this._convertSearchBox(item));
