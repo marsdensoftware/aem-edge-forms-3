@@ -357,6 +357,12 @@
                             "name": "cardTitle",
                             "label": "Card title",
                             "valueType": "string"
+                        },
+                        {
+                            "component": "richtext",
+                            "name": "addedTitle",
+                            "label": "Added title",
+                            "valueType": "string"
                         }
                     ]
                 },

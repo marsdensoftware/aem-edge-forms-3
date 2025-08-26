@@ -19183,6 +19183,12 @@
             "name": "cardTitle",
             "label": "Card title",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
           }
         ]
       },
@@ -28141,6 +28147,12 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
           }
         ]
       },
@@ -34142,6 +34154,12 @@
             "component": "text",
             "name": "jcr:title",
             "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
             "valueType": "string"
           }
         ]
