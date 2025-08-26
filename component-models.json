@@ -19986,6 +19986,12 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
           }
         ]
       },
