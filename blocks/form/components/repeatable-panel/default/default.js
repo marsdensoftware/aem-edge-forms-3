@@ -399,28 +399,10 @@ export class RepeatablePanel {
         }
         const value = savedInputData.value ? savedInputData.value : undefined;
         const values = savedInputData.values ? savedInputData.values : [];
+        const val = value || values;
 
-        let item;
-        if (input.type === 'checkbox' || input.type === 'radio') {
-          item = myForm.getElement(input.closest('fieldset').id);
-        }
-        else {
-          item = myForm.getElement(input.id);
-        }
+        this._resetSingleValue(input, val);
 
-
-        item.value = value || values;
-        /*
-                if (input.type === 'checkbox' || input.type === 'radio') {
-                  input.checked = values.includes(input.value) || input.value === value;
-                } else if (input.type === 'select') {
-                  for (const option of input.options) {
-                    option.selected = values.includes(option.value) || option.value === value;
-                  }
-                } else {
-                  input.value = value;
-                }
-                */
       });
     } else {
       // Unsaved --> Clear all fields
@@ -428,15 +410,23 @@ export class RepeatablePanel {
     }
   }
 
+  _resetSingleValue(input, value) {
+    let item;
+    if (input.type === 'checkbox' || input.type === 'radio') {
+      item = myForm.getElement(input.closest('fieldset').id);
+    }
+    else {
+      item = myForm.getElement(input.id);
+    }
+
+    item.value = value;
+  }
+
   _clearFields(entry) {
     const inputs = entry.querySelectorAll('input, select, textarea');
 
     inputs.forEach((input) => {
-      if (input.type === 'checkbox' || input.type === 'radio') {
-        input.checked = false;
-      } else {
-        input.value = '';
-      }
+      this._resetSingleValue(input, undefined);
 
       updateOrCreateInvalidMsg(input);
     });
