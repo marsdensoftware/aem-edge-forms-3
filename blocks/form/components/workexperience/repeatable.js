@@ -59,7 +59,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
   }
 
   _init(entry) {
-    const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
+    const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}>select`);
 
     const isFirst = this._isFirstEntry(entry);
 
@@ -92,7 +92,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
   /* eslint-disable class-methods-use-this */
   _bindEvents(el) {
     // Register change on still-working field to show hide endofwork
-    const stillWorkingRadios = el.querySelectorAll(`input[name="${FIELD_NAMES.STILL_WORKING}"]`);
+    const stillWorkingRadios = el.querySelectorAll(`.field-${FIELD_NAMES.STILL_WORKING} input[type="radio"]`);
 
     stillWorkingRadios.forEach((radio) => {
       radio.addEventListener('change', (event) => {
@@ -114,8 +114,9 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         const { value } = selectedRadio;
         // Copy radio value into type of work field. Because it is not visible initially for the
         // first entry
-        const typeOfWorkExperience = entry.querySelector(`[name="${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}"]`);
-        typeOfWorkExperience.value = value;
+        const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}`);
+
+        myForm.getElement(typeOfWorkExperience.dataset.id).value = value;
       }
     }
 

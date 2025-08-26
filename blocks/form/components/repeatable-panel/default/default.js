@@ -400,15 +400,27 @@ export class RepeatablePanel {
         const value = savedInputData.value ? savedInputData.value : undefined;
         const values = savedInputData.values ? savedInputData.values : [];
 
+        let item;
         if (input.type === 'checkbox' || input.type === 'radio') {
-          input.checked = values.includes(input.value) || input.value === value;
-        } else if (input.type === 'select') {
-          for (const option of input.options) {
-            option.selected = values.includes(option.value) || option.value === value;
-          }
-        } else {
-          input.value = value;
+          item = myForm.getElement(input.closest('fieldset').id);
         }
+        else {
+          item = myForm.getElement(input.id);
+        }
+
+
+        item.value = value || values;
+        /*
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                  input.checked = values.includes(input.value) || input.value === value;
+                } else if (input.type === 'select') {
+                  for (const option of input.options) {
+                    option.selected = values.includes(option.value) || option.value === value;
+                  }
+                } else {
+                  input.value = value;
+                }
+                */
       });
     } else {
       // Unsaved --> Clear all fields
