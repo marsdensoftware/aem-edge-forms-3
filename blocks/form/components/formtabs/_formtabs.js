@@ -4,11 +4,10 @@ export function handleTabNavigation(panel, index) {
 
   tabs.forEach((otherTab, i) => {
     // new selection
-    if (i == index) {
+    if (i === index) {
       otherTab.classList.add('formtab-current');
       navItems[i].classList.add('navitem-current');
-    }
-    else {
+    } else {
       otherTab.classList.remove('formtab-current');
       navItems[i].classList.remove('navitem-current');
     }

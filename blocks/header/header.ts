@@ -8,28 +8,12 @@ async function decorate(block: Element) {
     ? new URL(navMeta, window.location.href).pathname
     : '/nav'
   // eslint-disable-next-line no-unused-vars
-  const fragment = await loadFragment(navPath)
+  await loadFragment(navPath)
 
   block.textContent = ''
   const nav = document.createElement('nav')
   nav.id = 'nav'
   nav.className = 'nav'
-
-  // Fragment.firstElementChild is <main> element
-  // while (fragment?.firstElementChild) {
-  //   nav.append(fragment.firstElementChild)
-  // }
-
-  // const paras = nav.querySelectorAll('div.section .default-content-wrapper p')
-
-  // // Top nav
-  // paras.forEach((item, idx) => {
-  //   item.outerHTML = `<div class="${idx === 0 ? 'nav__logo' : 'nav__action'}">${
-  //     item.innerHTML
-  //   }</div>`
-  // })
-
-  // block.append(nav)
 }
 
 export default decorate

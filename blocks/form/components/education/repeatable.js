@@ -9,7 +9,7 @@ class Converter extends DefaultFieldConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[FIELD_NAMES.COMPLETION_STATUS]
-    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
+    if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
       // Completed
       const year = result[FIELD_NAMES.FINISH_YEAR]
       completionStatus.displayValue += ` ${year.displayValue}`

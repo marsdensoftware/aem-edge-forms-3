@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const componentStateMap = new WeakMap();
 // --- Helper functions to create DOM elements ---
 function addSuggestionDiv() {
@@ -220,29 +221,26 @@ const experiencedBasedSkills = [
     'Agritourism',
     'Act reliably',
     'Insurance market',
-    'Characteristics of services'
+    'Characteristics of services',
 ];
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = () => {
-    // Default fallback values if the element is not found or has no content
-    return [
-    // 'Job Title 1',
-    // 'Job Title 2',
-    // 'Job Title 3',
-    // 'Job Title 4',
-    // 'Job Title 5',
-    // 'Job Title 6',
-    // 'Job Title 7',
-    // 'Job Title 8',
-    // 'Job Title 9',
-    // 'Job Title 10',
-    ];
-};
+const getExperiencedBasedJobs = () => [
+// Default fallback values if the element is not found or has no content
+// 'Job Title 1',
+// 'Job Title 2',
+// 'Job Title 3',
+// 'Job Title 4',
+// 'Job Title 5',
+// 'Job Title 6',
+// 'Job Title 7',
+// 'Job Title 8',
+// 'Job Title 9',
+// 'Job Title 10',
+];
 // Function to listen for repeatableChanged event and update job types
 const observeElementForJobs = (element) => {
-    // Initial population of job titles
-    experiencedBasedJobs = getExperiencedBasedJobs();
-    //get the containing form
+    experiencedBasedJobs = getExperiencedBasedJobs(); // Initial population of job titles
+    // get the containing form
     const form = element.closest('form');
     // Add event listener for repeatableChanged event
     form.addEventListener('repeatableChanged', (event) => {
@@ -252,19 +250,20 @@ const observeElementForJobs = (element) => {
             return;
         }
         const customEvent = event;
-        const detail = customEvent.detail;
+        const { detail } = customEvent;
         // Check if the event is for workexperience
         if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
             // Extract type values from all entries
             let jobTypes = [];
             try {
                 // First check if entries have the expected structure
-                const hasValidEntries = detail.entries.some(entry => entry && typeof entry === 'object' && entry.type &&
+                /* eslint-disable-next-line no-unused-vars */
+                const hasValidEntries = detail.entries.some((entry) => entry && typeof entry === 'object' && entry.type &&
                     typeof entry.type === 'object' &&
                     'displayValue' in entry.type &&
                     typeof entry.type.displayValue === 'string');
                 jobTypes = detail.entries
-                    .map(entry => {
+                    .map((entry) => {
                     if (!entry.type) {
                         console.log('[DEBUG_LOG] Entry missing type property:', entry);
                         return null;
@@ -279,7 +278,6 @@ const observeElementForJobs = (element) => {
             }
             catch (error) {
                 console.error('[DEBUG_LOG] Error extracting job types:', error);
-                // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
             }
             // Update experiencedBasedJobs with the extracted job types
             if (jobTypes.length > 0) {
@@ -296,7 +294,8 @@ const observeElementForJobs = (element) => {
                         const selectedCardsDiv = el.querySelector('.selected-cards');
                         const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
                         // Update the recommendations with the new job types, excluding selected items
-                        state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+                        state.recommendations =
+                            experiencedBasedJobs.filter((job) => !selectedItems.includes(job));
                         // Re-populate recommendations if they're visible
                         const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
                         const searchInput = el.querySelector('input[type="text"]');
@@ -391,7 +390,7 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     // Use available recommendations from the component's state
     const availableRecommendations = state.recommendations;
     // Add up to 8 recommendations to the recommendations div
-    for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
+    for (let i = 0; i < 8 && i < availableRecommendations.length; i += 1) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
     }
 }

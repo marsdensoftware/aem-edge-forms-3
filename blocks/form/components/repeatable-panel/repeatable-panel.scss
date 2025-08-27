@@ -173,7 +173,7 @@
     margin-top: 0;
   }
 
-  &[data-variant='addRemoveButtons'] .item-remove {
+  &[data-variant='addDeleteButtons'] .item-remove {
     @extend %button;
     @extend %button--primary;
     display: none !important;

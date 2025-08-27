@@ -1,10 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { FIELD_NAMES } from './fieldnames.js'
-import { isNo , DefaultFieldConverter } from '../utils.js'
+import { isNo, DefaultFieldConverter } from '../utils.js'
 
 class Converter extends DefaultFieldConverter {
-
   convert(element) {
     const result = super.convert(element);
 
@@ -39,7 +38,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
   static FIELD_NAMES = {
     LICENCE_CLASS: 'licence-class',
     ENDORSEMENTS_AVAILABLE: 'endorsements-available',
-    ENDORSEMENTS: 'endorsements'
+    ENDORSEMENTS: 'endorsements',
   };
 
   constructor(el, properties) {
@@ -60,10 +59,9 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     endorsementsAvailableField.dataset.visible = false;
 
     const classStages = entry.querySelectorAll('[name^="class"][name$="-stage"]');
-    classStages.forEach(classStage => {
+    classStages.forEach((classStage) => {
       classStage.dataset.visible = false;
     });
-
   }
 
   /* eslint-disable class-methods-use-this */
@@ -76,11 +74,11 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     // Register change on endorsement to change dependent field
     const endorsementsField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS}"]`);
 
-    licenceClass.forEach(cb => {
+    licenceClass.forEach((cb) => {
       cb.addEventListener('change', () => {
         // class stage visibility
         const classStage = entry.querySelector(`fieldset[name="class${cb.value}-stage"]`);
-        const visible = cb.checked == true;
+        const visible = cb.checked === true;
 
         classStage.dataset.visible = visible;
 
@@ -88,18 +86,17 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
           super._clearFields(classStage);
         }
 
-        const anyClassChecked = Array.from(licenceClass).some(checkbox => checkbox.checked);
+        const anyClassChecked = Array.from(licenceClass).some((checkbox) => checkbox.checked);
         endorsementsAvailableField.dataset.visible = anyClassChecked;
         if (!anyClassChecked) {
           endorsementsField.dataset.visible = false;
           super._clearFields(endorsementsField);
           super._clearFields(endorsementsAvailableField);
         }
-
       });
     });
 
-    endorsementsAvailable.forEach(radio => {
+    endorsementsAvailable.forEach((radio) => {
       radio.addEventListener('change', (event) => {
         // Endorsements visibility
         const visible = !isNo(event.target);

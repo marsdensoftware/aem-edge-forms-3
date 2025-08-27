@@ -1,5 +1,8 @@
-[*.js]
-indent_size = 2
+root = true
 
-[*.css]
+[*.{js,mjs,cjs,ts,css,scss,json}]
+charset = utf-8
+indent_style = space
 indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true

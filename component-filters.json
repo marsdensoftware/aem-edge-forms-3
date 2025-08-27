@@ -107,7 +107,8 @@
       "tnc",
       "wizard",
       "icon-radio-group",
-      "extended-checkbox-container"
+      "extended-checkbox-container",
+      "range"
     ]
   },
   {

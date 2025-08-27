@@ -2,8 +2,64 @@
 import { i18n } from '../../../i18n/index.js';
 
 export class DefaultFieldConverter {
+  _collectFields(root) {
+    const result = [];
+
+    function traverse(node) {
+      if (!node.items || !Array.isArray(node.items)) return;
+
+      for (const child of node.items) {
+        if (child.isContainer) {
+          traverse(child); // go deeper
+        } else {
+          result.push(child); // collect non-container
+        }
+      }
+    }
+
+    traverse(root);
+    return result;
+  }
 
   convert(entry, fieldName) {
+    const dataModel = window.myForm.getElement(entry.id);
+    const fields = this._collectFields(dataModel);
+    return this._convertInternal(fields, fieldName);
+  }
+
+  convertSingle(item) {
+    const {
+      value, enumNames, type,
+    } = item;
+
+    const displayValues = [];
+    let values;
+
+    let displayValue = '';
+
+    if (!value) {
+      return { value: '', displayValue: '' };
+    }
+
+    if (enumNames) {
+      if (type.endsWith('[]')) {
+        values = value;
+        values.forEach((val) => {
+          const index = item.enum.indexOf(val);
+          displayValues.push(enumNames[index]);
+        });
+
+        return { values, displayValues };
+      }
+      const index = item.enum.indexOf(value);
+      displayValue = item.fieldType === 'checkbox' ? item?.label.value : enumNames[index];
+      return { value, displayValue };
+    }
+    displayValue = value;
+    return { value, displayValue };
+  }
+
+  _convertSearchBox(item) {
     function getDisplayText(input) {
       const labelEl = input.parentElement.querySelector('label');
       let result = '';
@@ -22,37 +78,34 @@ export class DefaultFieldConverter {
         if (descEl) {
           result += ` - ${descEl.textContent.trim()}`;
         }
-      }
-      else {
+      } else {
         result = labelEl.textContent.trim();
       }
 
       return result;
     }
 
-    let inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
-    if(fieldName){
-      inputs = inputs.filter(el => el.name === fieldName);
-    }
+    const entry = document.getElementById(item.id).closest('.search-box');
+
+    const inputs = Array.from(entry.querySelectorAll('input, select, textarea'));
 
     const result = {};
 
-    inputs.forEach(input => {
-      const {value} = input;
+    inputs.forEach((input) => {
+      const { value } = input;
       let displayValue = value;
-      const {name} = input;
+      const { name } = input;
 
-      const {type} = input;
+      const { type } = input;
 
       // ignore text input from search-box component
-      if(type === 'text' && input.parentElement.classList.contains('search-box__input')){
+      if (type === 'text' && input.parentElement.classList.contains('search-box__input')) {
         return;
       }
 
       if (input.tagName === 'SELECT') {
         displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-      }
-      else if (type === 'checkbox' || type === 'radio') {
+      } else if (type === 'checkbox' || type === 'radio') {
         // Ignore not checked
         if (!input.checked) {
           return;
@@ -75,10 +128,37 @@ export class DefaultFieldConverter {
           }
           e.values.push(value);
           e.displayValues.push(displayValue);
+        } else {
+          result[name] = { value, displayValue };
         }
-        else {
-          result[name] = { 'value': value, 'displayValue': displayValue };
-        }
+      }
+    });
+
+    return result;
+  }
+
+  _convertInternal(items, fieldName) {
+    const result = {};
+    let _items = items;
+    
+    /* eslint-disable no-param-reassign */
+    if (fieldName) {
+      _items = _items.filter((item) => item.name === fieldName);
+    }
+    
+    // ignore items without value
+    _items = _items.filter(item => item.value);
+
+    // ignore plain-text, image component
+    _items = _items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');
+    /* eslint-enable no-param-reassign */
+
+    _items.forEach((item) => {
+      if (item[':type'] === 'search-box') {
+        // convert search box
+        Object.assign(result, this._convertSearchBox(item));
+      } else {
+        result[item.name] = this.convertSingle(item);
       }
     });
 
@@ -102,7 +182,7 @@ export function onElementAdded(el) {
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   });
 }
@@ -112,7 +192,7 @@ export function onElementsAddedByClassName(className, callback) {
   const seen = new WeakSet();
 
   // Call callback on any existing matching elements
-  document.querySelectorAll(`.${className}`).forEach(el => {
+  document.querySelectorAll(`.${className}`).forEach((el) => {
     if (!seen.has(el)) {
       seen.add(el);
       callback(el);
@@ -120,17 +200,17 @@ export function onElementsAddedByClassName(className, callback) {
   });
 
   // Set up the MutationObserver
-  const observer = new MutationObserver(mutationsList => {
+  const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
+        mutation.addedNodes.forEach((node) => {
           if (node.nodeType === 1) {
             // Check if node matches or contains matching elements
             if (node.classList.contains(className) && !seen.has(node)) {
               seen.add(node);
               callback(node);
             }
-            node.querySelectorAll?.(`.${className}`)?.forEach(el => {
+            node.querySelectorAll?.(`.${className}`)?.forEach((el) => {
               if (!seen.has(el)) {
                 seen.add(el);
                 callback(el);
@@ -144,7 +224,6 @@ export function onElementsAddedByClassName(className, callback) {
 
   observer.observe(document.body, { childList: true, subtree: true });
 }
-
 
 export function getDurationString(startMonthStr, startYearStr, endMonthStr, endYearStr) {
   const startMonth = parseInt(startMonthStr, 10);
@@ -163,9 +242,8 @@ export function getDurationString(startMonthStr, startYearStr, endMonthStr, endY
   return yearStr || monthStr || `0 ${i18n('months')}`;
 }
 
-
 export function isNo(field) {
-  const {value} = field;
+  const { value } = field;
   if (!value) return true;
   if (typeof value === 'string') {
     const normalized = value.trim().toLowerCase();

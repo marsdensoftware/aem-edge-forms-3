@@ -17,8 +17,9 @@ function updateBackground(wizardEl, container) {
   const currentStepEl = wizardEl.querySelector('.current-wizard-step')
   if (!currentStepEl) return
 
-  // 2. Find which of the defined background classes is present on the active step.If none is found, use the default.
-  //    This uses short-circuiting: if currentStepEl is null, it immediately uses the default.
+  // 2. Find which of the defined background classes is present on the active step.If none
+  // is found, use the default. This uses short-circuiting: if currentStepEl is null, it
+  // immediately uses the default.
   const newBgClass =
     (currentStepEl &&
       BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) ||
@@ -48,7 +49,8 @@ function updateExitButtonText(wizardEl) {
 }
 
 function updateWizardNextButton(container) {
-  // if the current wizard step has a data-stepgroup of '4' set the value of the Net button to Finish
+  // if the current wizard step has a data-stepgroup of '4' set the value of the
+  // Net button to Finish
   const currentStepEl = container.querySelector('.current-wizard-step')
   if (!currentStepEl) return
   const nextBtn = currentStepEl
@@ -80,7 +82,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   for (const child of wizardChildren) {
     observer.observe(child, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ['class'],
     });
   }
 

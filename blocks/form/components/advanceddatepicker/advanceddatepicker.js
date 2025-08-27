@@ -75,6 +75,7 @@ class AdvancedDatepickerField {
 
 // Public method to decorate a single panel
 export default function decorate(panel, model) {
+  /* eslint-disable-next-line no-new */
   new AdvancedDatepickerField(panel, model);
   return panel;
 }

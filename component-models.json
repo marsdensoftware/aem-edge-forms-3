@@ -357,6 +357,12 @@
             "valueType": "boolean"
           },
           {
+            "component": "boolean",
+            "name": "useHtmlTemplate",
+            "label": "Use html template",
+            "valueType": "boolean"
+          },
+          {
             "component": "aem-content",
             "name": "templatePath",
             "label": "External template path",
@@ -1265,7 +1271,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -1301,7 +1307,8 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true
+            "multi": true,
+            "required": true
           },
           {
             "component": "text",
@@ -2262,7 +2269,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -2324,6 +2331,20 @@
             "name": "enableUncheckedValue",
             "label": "Preserve Uncheck state value.",
             "valueType": "boolean"
+          },
+          {
+            "component": "text",
+            "name": "uncheckedValue",
+            "label": "When Unchecked, return value",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "basic|enableUncheckedValue"
+                },
+                true
+              ]
+            }
           },
           {
             "component": "text",
@@ -3189,7 +3210,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -4160,7 +4181,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -4196,7 +4217,8 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true
+            "multi": true,
+            "required": true
           },
           {
             "component": "text",
@@ -4242,6 +4264,12 @@
             "valueType": "string"
           },
           {
+            "component": "boolean",
+            "label": "Allow multiple selection",
+            "name": "multiSelect",
+            "valueType": "boolean"
+          },
+          {
             "component": "select",
             "label": "Data type of submitted value",
             "name": "type",
@@ -4259,6 +4287,18 @@
               {
                 "name": "Number",
                 "value": "number"
+              },
+              {
+                "name": "String[]",
+                "value": "string[]"
+              },
+              {
+                "name": "Boolean[]",
+                "value": "boolean[]"
+              },
+              {
+                "name": "Number[]",
+                "value": "number[]"
               }
             ]
           },
@@ -5126,7 +5166,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -6069,7 +6109,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -6995,7 +7035,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -7030,7 +7070,16 @@
             "component": "aem-content",
             "name": "fragmentPath",
             "label": "Fragment reference",
-            "valueType": "string"
+            "valueType": "string",
+            "validation": {
+              "rootPath": "/content/forms/af"
+            }
+          },
+          {
+            "component": "edit-fragment",
+            "name": "editFragment",
+            "label": "Edit Fragment",
+            "valueType": "boolean"
           }
         ]
       },
@@ -8845,7 +8894,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -9800,7 +9849,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -10781,7 +10830,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -11809,7 +11858,7 @@
             "condition": {
               "===": [
                 {
-                  "var": "repeatable"
+                  "var": "repeat|repeatable"
                 },
                 true
               ]
@@ -11827,7 +11876,7 @@
                 {
                   "===": [
                     {
-                      "var": "repeatable"
+                      "var": "repeat|repeatable"
                     },
                     true
                   ]
@@ -11835,7 +11884,7 @@
                 {
                   "!==": [
                     {
-                      "var": "variant"
+                      "var": "repeat|variant"
                     },
                     "noButtons"
                   ]
@@ -11853,15 +11902,15 @@
                 "value": "noButtons"
               },
               {
-                "name": "Add & Remove Buttons",
-                "value": "addRemoveButtons"
+                "name": "Add & Delete Buttons",
+                "value": "addDeleteButtons"
               }
             ],
-            "value": "addRemoveButtons",
+            "value": "addDeleteButtons",
             "condition": {
               "===": [
                 {
-                  "var": "repeatable"
+                  "var": "repeat|repeatable"
                 },
                 true
               ]
@@ -11878,15 +11927,15 @@
                 {
                   "===": [
                     {
-                      "var": "variant"
+                      "var": "repeat|variant"
                     },
-                    "addRemoveButtons"
+                    "addDeleteButtons"
                   ]
                 },
                 {
                   "===": [
                     {
-                      "var": "repeatable"
+                      "var": "repeat|repeatable"
                     },
                     true
                   ]
@@ -11932,15 +11981,15 @@
                 {
                   "===": [
                     {
-                      "var": "variant"
+                      "var": "repeat|variant"
                     },
-                    "addRemoveButtons"
+                    "addDeleteButtons"
                   ]
                 },
                 {
                   "===": [
                     {
-                      "var": "repeatable"
+                      "var": "repeat|repeatable"
                     },
                     true
                   ]
@@ -12033,7 +12082,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -12069,7 +12118,8 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true
+            "multi": true,
+            "required": true
           },
           {
             "component": "text",
@@ -14715,7 +14765,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -15644,7 +15694,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -17429,7 +17479,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -19133,6 +19183,12 @@
             "name": "cardTitle",
             "label": "Card title",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
           }
         ]
       },
@@ -19935,6 +19991,12 @@
             "component": "text",
             "name": "jcr:title",
             "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
             "valueType": "string"
           }
         ]
@@ -20747,7 +20809,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -21863,7 +21925,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -25365,7 +25427,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -27096,7 +27158,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -27132,7 +27194,8 @@
             "name": "enum",
             "label": "Options (Data Value)",
             "valueType": "string",
-            "multi": true
+            "multi": true,
+            "required": true
           },
           {
             "component": "text",
@@ -28084,6 +28147,12 @@
             "name": "jcr:title",
             "label": "Title",
             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
+            "valueType": "string"
           }
         ]
       },
@@ -28895,7 +28964,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -29756,7 +29825,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -30654,6 +30723,166 @@
     ]
   },
   {
+    "id": "range",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hideTitle",
+            "label": "Hide title",
+            "valueType": "boolean"
+          },
+          {
+            "component": "datasource-bindref",
+            "name": "dataRef",
+            "label": "Bind reference",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "unboundFormElement",
+            "label": "Mark as Unbound Form Element",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "visible",
+            "label": "Show Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "enabled",
+            "label": "Enable Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "readOnly",
+            "label": "Read-only",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "help",
+        "label": "Help Content",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "richtext",
+            "name": "description",
+            "label": "Help text",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "tooltip",
+            "label": "Short description",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "validation",
+        "label": "Validation",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "boolean",
+            "name": "required",
+            "label": "Required",
+            "valueType": "boolean"
+          },
+          {
+            "component": "text",
+            "name": "mandatoryMessage",
+            "label": "Error message",
+            "valueType": "string",
+            "description": "Error message shown when required field is left empty."
+          },
+          {
+            "component": "text",
+            "name": "validateExpMessage",
+            "label": "Script validation message",
+            "valueType": "string",
+            "description": "Displayed when validation script fails."
+          },
+          {
+            "component": "number",
+            "name": "minimum",
+            "label": "Lowest number / Smallest number",
+            "valueType": "number",
+            "description": "Minimum number allowed in the field"
+          },
+          {
+            "component": "text",
+            "name": "minimumMessage",
+            "valueType": "string",
+            "label": "Minimum error message",
+            "description": "Error message shown when entered value is less than minimum."
+          },
+          {
+            "component": "number",
+            "name": "maximum",
+            "label": "Highest number / Largest number",
+            "valueType": "number",
+            "description": "Maximum number allowed in the field"
+          },
+          {
+            "component": "text",
+            "name": "maximumMessage",
+            "valueType": "string",
+            "label": "Maximum error message",
+            "description": "Error message shown when the entered value is more than maximum."
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "custom",
+        "label": "Custom Properties",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "number",
+            "name": "stepValue",
+            "label": "Step Value",
+            "valueType": "number",
+            "description": "Step value for the range"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "rating",
     "fields": [
       {
@@ -30687,7 +30916,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -31644,7 +31873,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -32745,7 +32974,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -33612,7 +33841,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -33783,7 +34012,7 @@
             "valueType": "boolean"
           },
           {
-            "component": "text",
+            "component": "datasource-bindref",
             "name": "dataRef",
             "label": "Bind reference",
             "valueType": "string"
@@ -33925,6 +34154,12 @@
             "component": "text",
             "name": "jcr:title",
             "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "addedTitle",
+            "label": "Added title",
             "valueType": "string"
           }
         ]

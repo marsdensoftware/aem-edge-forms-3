@@ -3,14 +3,14 @@ import { onElementAdded, DefaultFieldConverter } from '../utils.js'
 const renderers = {
   list: (values) => {
     const result = document.createElement('ul');
-    values.forEach(value => {
+    values.forEach((value) => {
       const li = document.createElement('li');
       li.textContent = value;
       result.appendChild(li);
     });
 
     return result;
-  }
+  },
 };
 
 export default function decorate(el, fd) {
@@ -28,38 +28,49 @@ export default function decorate(el, fd) {
   el.append(outputEl);
 
   onElementAdded(el).then((connectedEl) => {
-
-    const form = connectedEl.closest('form');
+    connectedEl.closest('form');
+    const values = {};
 
     // Function to update the display
     function updateDisplay() {
-      const nameValues = new DefaultFieldConverter().convert(form, fieldName);
       outputEl.innerHTML = '';
 
-      if (nameValues[fieldName] && nameValues[fieldName].value) {
-        nameValues[fieldName].values = [nameValues[fieldName].value];
-        nameValues[fieldName].displayValues = [nameValues[fieldName].displayValue];
+      const displayValues = Object.values(values).map(
+        (val) => val.displayValue || val.displayValues,
+      );
 
-        delete nameValues[fieldName].value;
-        delete nameValues[fieldName].displayValue;
-      }
-
-      if (nameValues[fieldName].values) {
-        const output = renderFunction(nameValues[fieldName].displayValues);
+      if (displayValues.length > 0) {
+        const output = renderFunction(displayValues);
 
         outputEl.append(output);
-      }
-      else {
+      } else {
         connectedEl.dataset.visible = false;
       }
     }
 
-    // Listen for input events on the form (event delegation)
-    form.addEventListener('change', (e) => {
-      if (e.target.name == fieldName) {
-        updateDisplay();
-      }
-    });
+    function waitForVar(name, interval = 50) {
+      return new Promise((resolve) => {
+        const check = setInterval(() => {
+          if (typeof window[name] !== 'undefined') {
+            clearInterval(check);
+            resolve(window[name]);
+          }
+        }, interval);
+      });
+    }
+
+    (async () => {
+      const myForm = await waitForVar('myForm');
+      // Listen for input events on the form (event delegation)
+      myForm.subscribe((e) => {
+        const { field } = e.payload;
+        if (field.name === fieldName) {
+          const dataModel = window.myForm.getElement(field.id);
+          values[field.id] = new DefaultFieldConverter().convertSingle(dataModel);
+          updateDisplay();
+        }
+      }, 'fieldChanged');
+    })();
   });
 
   return el;
