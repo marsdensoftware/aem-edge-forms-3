@@ -32,10 +32,16 @@ export class DefaultFieldConverter {
       value, enumNames, type,
     } = item;
 
-    const displayValues = [];
-    let values;
+    function getDisplayText(index) {
+      let result = enumNames[index];
+      const enumDescriptions = item.getPropertiesManager()?.properties?.enumDescriptions;
 
-    let displayValue = '';
+      if (enumDescriptions && enumDescriptions[index]) {
+        result += ` - ${enumDescriptions[index]}`;
+      }
+
+      return result;
+    }
 
     if (!value) {
       return { value: '', displayValue: '' };
@@ -43,19 +49,22 @@ export class DefaultFieldConverter {
 
     if (enumNames) {
       if (type.endsWith('[]')) {
-        values = value;
+        const values = value;
+        const displayValues = [];
+
         values.forEach((val) => {
           const index = item.enum.indexOf(val);
-          displayValues.push(enumNames[index]);
+          const displayValue = getDisplayText(index);
+          displayValues.push(displayValue);
         });
 
         return { values, displayValues };
       }
       const index = item.enum.indexOf(value);
-      displayValue = item.fieldType === 'checkbox' ? item?.label.value : enumNames[index];
+      const displayValue = item.fieldType === 'checkbox' ? item?.label.value : getDisplayText(index);
       return { value, displayValue };
     }
-    displayValue = value;
+    const displayValue = value;
     return { value, displayValue };
   }
 
