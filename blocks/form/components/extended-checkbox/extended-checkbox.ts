@@ -218,16 +218,6 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   destTextArea.classList.add('extended-checkbox--description')
   destTextArea.style.display = 'none'
 
-  // Create the description text:
-  const description = fieldJson.properties.description || 'Add description'
-
-  // Create a span element to hold the description text
-  const descriptionSpan = document.createElement('span')
-  if (description) {
-    descriptionSpan.classList.add('extended-checkbox--description-text', 'field-description')
-    descriptionSpan.textContent = description
-  }
-
   // Create the divider
   const divider = document.createElement('hr')
   divider.classList.add('checkbox-divider')
@@ -257,7 +247,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   editDiv.style.display = 'none'
 
   // Append all new elements to the main field div
-  fieldDiv.append(descriptionSpan, divider, destTextArea, editDiv)
+  fieldDiv.append(divider, destTextArea, editDiv)
 
   decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
   decorateModalCancelButton(fieldDiv, destTextArea);
