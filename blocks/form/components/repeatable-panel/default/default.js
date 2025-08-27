@@ -402,7 +402,6 @@ export class RepeatablePanel {
         const val = value || values;
 
         this._resetSingleValue(input, val);
-
       });
     } else {
       // Unsaved --> Clear all fields
@@ -413,10 +412,9 @@ export class RepeatablePanel {
   _resetSingleValue(input, value) {
     let item;
     if (input.type === 'checkbox' || input.type === 'radio') {
-      item = myForm.getElement(input.closest('fieldset').id);
-    }
-    else {
-      item = myForm.getElement(input.id);
+      item = window.myForm.getElement(input.closest('fieldset').id);
+    } else {
+      item = window.myForm.getElement(input.id);
     }
 
     item.value = value;

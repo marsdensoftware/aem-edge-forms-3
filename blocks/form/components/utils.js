@@ -140,14 +140,14 @@ export class DefaultFieldConverter {
   _convertInternal(items, fieldName) {
     const result = {};
     let _items = items;
-    
+
     /* eslint-disable no-param-reassign */
     if (fieldName) {
       _items = _items.filter((item) => item.name === fieldName);
     }
-    
+
     // ignore items without value
-    _items = _items.filter(item => item.value);
+    _items = _items.filter((item) => item.value);
 
     // ignore plain-text, image component
     _items = _items.filter((item) => item.fieldType !== 'plain-text' && item.fieldType !== 'image');

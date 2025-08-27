@@ -37,7 +37,7 @@ module.exports = {
     'no-nested-ternary': ['off'],
     'operator-linebreak': ['off', 'after'],
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
-    'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
+    'linebreak-style': 0, // we have Windows and nix devs
     'no-param-reassign': ['error', { props: false }], // allow modifying properties of param
     'import/prefer-default-export': ['off'],
     'import/no-extraneous-dependencies': [
