@@ -4,5 +4,8 @@
     "stylelint-config-standard",
     "stylelint-config-recommended",
     "stylelint-config-standard-scss"
-  ]
+  ],
+  "rules": {
+    "selector-class-pattern": null
+  }
 }
