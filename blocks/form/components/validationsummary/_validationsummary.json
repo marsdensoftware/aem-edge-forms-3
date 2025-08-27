@@ -1,0 +1,45 @@
+{
+  "definitions": [
+    {
+      "title": "Validation summary",
+      "id": "validationsummary",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Please correct the following error:",
+              "fieldType": "panel",
+              "fd:viewType": "validationsummary",
+              "helpType": "error",
+              "minOccur": 1,
+              "text": {
+                "jcr:title": "Text",
+                "fieldType": "plain-text",
+                "textIsRich": true,
+                "value": "Validation errors will be inserted here",
+                "sling:resourceType": "core/fd/components/form/text/v1/text"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "validationsummary",
+      "fields": [
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "validationsummary",
+      "components": null
+    }
+  ]
+}
