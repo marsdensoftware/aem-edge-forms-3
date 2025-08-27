@@ -1,7 +1,6 @@
 /*eslint-disable*/
 /* eslint-disable-next-line no-unused-vars */
 export default function decorate(fieldDiv, fieldJson) {
-    console.log('hi from extended-checkbox-container');
     fieldDiv.classList.add('extended-checkbox-container');
     // Maximum number of checkboxes that can be enabled at once
     const MAX_ENABLED_CHECKBOXES = 4;

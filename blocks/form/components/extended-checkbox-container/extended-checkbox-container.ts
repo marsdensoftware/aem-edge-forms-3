@@ -7,7 +7,6 @@ interface Field {
 
 /* eslint-disable-next-line no-unused-vars */
 export default function decorate(fieldDiv: Element, fieldJson: Field) {
-  console.log('hi from extended-checkbox-container')
   fieldDiv.classList.add('extended-checkbox-container')
 
   // Maximum number of checkboxes that can be enabled at once
