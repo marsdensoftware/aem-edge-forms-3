@@ -61,6 +61,7 @@ export function sorter(a, b) {
     // In progress, always comes first
     return 1;
   }
+
   if (bCompletionStatus === COMPLETION_STATUS.COMPLETED) {
     if (aCompletionStatus === COMPLETION_STATUS.COMPLETED) {
       // Both completed, compare finish year/month
@@ -82,12 +83,11 @@ export function sorter(a, b) {
     // Not completed
     return 1;
   }
-  if (bCompletionStatus === COMPLETION_STATUS.NOT_COMPLETED) {
-    if (aCompletionStatus === COMPLETION_STATUS.NOT_COMPLETED) {
-      // Both not completed, compare start year/month
-      return compareStartDateThenCourse();
-    }
 
-    return -1;
+  if (aCompletionStatus === COMPLETION_STATUS.NOT_COMPLETED) {
+    // Both not completed, compare start year/month
+    return compareStartDateThenCourse();
   }
+
+  return -1;
 }
