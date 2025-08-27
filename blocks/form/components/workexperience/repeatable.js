@@ -116,7 +116,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         // first entry
         const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}`);
 
-        myForm.getElement(typeOfWorkExperience.dataset.id).value = value;
+        window.myForm.getElement(typeOfWorkExperience.dataset.id).value = value;
       }
     }
 
