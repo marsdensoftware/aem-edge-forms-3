@@ -1160,12 +1160,6 @@
                     "sling:resourceType": "core/fd/components/form/checkbox/v1/checkbox",
                     "checkedValue": "on"
                   },
-                  "description": {
-                    "component": "text",
-                    "name": "description",
-                    "label": "Enter a description to be displayed below the text",
-                    "valueType": "string"
-                  },
                   "modal": {
                     "fd:viewType": "modal",
                     "fieldType": "panel",
