@@ -18,8 +18,7 @@
     &::before {
       content: '';
       position: absolute;
-      /*right: $spacing-400;*/
-      right: 0;
+      right: $spacing-400; /* ✅ restored globally */
       top: 50%;
       transform: translateY(-50%);
       display: block;
@@ -59,6 +58,7 @@
   input[type='checkbox'] {
     @extend %visually-hidden;
 
+    /* Fallback (label only) — keep border on checked, but NOT background */
     &:checked + label {
       border-color: $stroke-accent;
 
@@ -80,37 +80,16 @@
     font-weight: $font-weight-regular;
   }
 
-  .extended-checkbox--description,
-  .edit {
-    margin-inline-start: calc(1rem + 1.4rem);
-  }
-
-  .edit {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-200;
-
-    svg,
-    &::before,
-    img {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 auto;
-    }
-  }
-
+  /* Keep global defaults neutral to avoid side-effects on other pages */
   .text {
     font-weight: $font-weight-regular;
   }
 }
 
-.checkbox-wrapper:has(> input[type=checkbox]:checked) {
-  background-color: $color-shade-blue-10;
-  border-radius: 8px;
-  padding: $spacing-400;
-  border: 2px solid $color-primary;
-}
+/* Remove the global has() highlight to avoid affecting other pages */
+/* (Now scoped under .field-strengths-selection-panel below) */
 
+/* Existing group styles */
 .checkbox-group-wrapper {
   &.horizontal {
     > legend {
@@ -221,32 +200,74 @@
       }
     }
   }
+}
 
-  .modal {
-    .formtab {
-      text-align: left;
+/* ──────────────────────────────────────────────────────────
+   PAGE-SPECIFIC OVERRIDES
+   Only for the Strengths selection panel
+   ────────────────────────────────────────────────────────── */
+.field-strengths-selection-panel {
+  /* Whole-card highlight when checked (scoped) */
+  .checkbox-wrapper:has(> input[type=checkbox]:checked) {
+    background-color: $color-shade-blue-10;
+    border-radius: 8px;
+    padding: $spacing-400;
+    border: 2px solid $color-primary;
+  }
 
-      .plain-text-wrapper {
-        margin: 0; // remove any wrapper margin
-        padding: 0; // remove any padding if inherited
+  /* Icon position override (scoped) */
+  .checkbox-wrapper label::before {
+    right: 0;
+  }
 
-        p {
-          margin: 0; // kill <p> default margin
-          padding: 0;
-        }
+  /* Description + Edit link indent (scoped) */
+  .checkbox-wrapper {
+    .extended-checkbox--description,
+    .edit {
+      margin-inline-start: calc(1rem + 1.4rem);
+    }
 
-        ul {
-          margin: 0; // kill <ul> default indent
-          padding-left: 0; // remove left padding
-          list-style-position: inside; // optional: keep bullets but align with text
-        }
+    .edit {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-200;
 
-        li {
-          margin-left: 0; // no extra indent
-          padding-left: 0;
-        }
+      svg,
+      &::before,
+      img {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
       }
     }
   }
 
+  /* Left-align the tabbed content inside the modal (scoped) */
+  .modal {
+    fieldset.formtab {
+      margin: 0;
+      padding: 0;
+    }
+
+    fieldset.formtab .plain-text-wrapper {
+      margin: 0;
+      padding: 0;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 0;
+        list-style-position: inside;
+      }
+
+      li {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
 }
