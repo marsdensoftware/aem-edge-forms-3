@@ -18,7 +18,8 @@
     &::before {
       content: '';
       position: absolute;
-      right: $spacing-400;
+      /*right: $spacing-400;*/
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
       display: block;
