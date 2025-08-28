@@ -3,7 +3,7 @@
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  margin-top: $spacing-200; //SEPD-5540 checkbox-spacing
+  margin-top: $spacing-200; // SEPD-5540 checkbox-spacing
 
   label {
     @extend %label-common-style;
@@ -45,6 +45,14 @@
     &:active::before {
       border-color: $stroke-accent;
     }
+
+    .extended-checkbox__icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin-right: $spacing-200;
+      flex: 0 0 auto;
+    }
   }
 
   input[type='checkbox'] {
@@ -52,7 +60,6 @@
 
     &:checked + label {
       border-color: $stroke-accent;
-      background-color: $color-shade-blue-10;
 
       &::before {
         border-color: $stroke-accent;
@@ -65,15 +72,42 @@
     }
   }
 
-  .desc {
+  .desc,
+  .extended-checkbox--description {
     font-size: $size-font-body-default;
     color: $text-secondary;
     font-weight: $font-weight-regular;
   }
 
+  .extended-checkbox--description,
+  .edit {
+    margin-inline-start: calc(1rem + 1.4rem);
+  }
+
+  .edit {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-200;
+
+    svg,
+    &::before,
+    img {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+  }
+
   .text {
     font-weight: $font-weight-regular;
   }
+}
+
+.checkbox-wrapper:has(> input[type=checkbox]:checked) {
+  background-color: $color-shade-blue-10;
+  border-radius: 8px;
+  padding: $spacing-400;
+  border: 2px solid $color-primary;
 }
 
 .checkbox-group-wrapper {
@@ -173,7 +207,6 @@
       }
     }
 
-    // INSERTED CODE — properly scoped override for pills + horizontal
     &.horizontal {
       display: flex;
       flex-wrap: wrap;
