@@ -96,12 +96,6 @@
             },
             {
               "component": "text",
-              "name": "description",
-              "label": "Enter a description to be displayed below the text",
-              "valueType": "string"
-            },
-            {
-              "component": "text",
               "name": "iconName",
               "label": "Icon",
               "description": "Enter the name of the icon. list-search",
