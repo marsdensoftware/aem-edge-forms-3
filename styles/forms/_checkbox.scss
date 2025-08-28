@@ -72,8 +72,7 @@
     }
   }
 
-  .desc,
-  .extended-checkbox--description {
+  .desc {
     font-size: $size-font-body-default;
     color: $text-secondary;
     font-weight: $font-weight-regular;
@@ -211,7 +210,6 @@
 
   .checkbox-wrapper {
     .field-description,
-    .extended-checkbox--description,
     .edit {
       margin-inline-start: calc(1rem + 1.4rem);
     }
