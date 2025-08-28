@@ -221,4 +221,32 @@
       }
     }
   }
+
+  .modal {
+    .formtab {
+      text-align: left;
+
+      .plain-text-wrapper {
+        margin: 0; // remove any wrapper margin
+        padding: 0; // remove any padding if inherited
+
+        p {
+          margin: 0; // kill <p> default margin
+          padding: 0;
+        }
+
+        ul {
+          margin: 0; // kill <ul> default indent
+          padding-left: 0; // remove left padding
+          list-style-position: inside; // optional: keep bullets but align with text
+        }
+
+        li {
+          margin-left: 0; // no extra indent
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
 }
