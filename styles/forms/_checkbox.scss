@@ -1,9 +1,9 @@
-@use '../settings' as *;
+@use "../settings" as *;
 
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  margin-top: $spacing-200; // SEPD-5540 checkbox-spacing
+  margin-top: $spacing-200;
 
   label {
     @extend %label-common-style;
@@ -16,9 +16,9 @@
     transition: all 0.2s ease;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
-      right: $spacing-400; /* ✅ restored globally */
+      right: $spacing-400;
       top: 50%;
       transform: translateY(-50%);
       display: block;
@@ -55,17 +55,16 @@
     }
   }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     @extend %visually-hidden;
 
-    /* Fallback (label only) — keep border on checked, but NOT background */
     &:checked + label {
       border-color: $stroke-accent;
 
       &::before {
         border-color: $stroke-accent;
         background-color: $stroke-accent;
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
         background-size: 17px;
         width: $spacing-500;
         height: $spacing-500;
@@ -80,16 +79,11 @@
     font-weight: $font-weight-regular;
   }
 
-  /* Keep global defaults neutral to avoid side-effects on other pages */
   .text {
     font-weight: $font-weight-regular;
   }
 }
 
-/* Remove the global has() highlight to avoid affecting other pages */
-/* (Now scoped under .field-strengths-selection-panel below) */
-
-/* Existing group styles */
 .checkbox-group-wrapper {
   &.horizontal {
     > legend {
@@ -130,7 +124,7 @@
     .checkbox-wrapper {
       margin: 0;
 
-      input[type='checkbox'] {
+      input[type="checkbox"] {
         display: none;
       }
 
@@ -147,19 +141,20 @@
         line-height: 160%;
         color: $text-secondary;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease,
+        border 0.2s ease;
 
         &::before {
           display: none;
         }
 
         &::after {
-          content: '';
+          content: "";
           display: block;
           width: $spacing-400;
           height: $spacing-400;
           margin-left: $spacing-200;
-          background-image: url('../../icons/icon-plus.svg');
+          background-image: url("../../icons/icon-plus.svg");
           background-repeat: no-repeat;
           background-position: center;
           background-size: contain;
@@ -171,13 +166,13 @@
         }
       }
 
-      input[type='checkbox']:checked + label {
+      input[type="checkbox"]:checked + label {
         background-color: $bg-dark;
         color: $color-white;
         border: 1px solid $stroke-dark;
 
         &::after {
-          background-image: url('../../icons/icon-x.svg');
+          background-image: url("../../icons/icon-x.svg");
         }
 
         &:hover {
@@ -202,26 +197,20 @@
   }
 }
 
-/* ──────────────────────────────────────────────────────────
-   PAGE-SPECIFIC OVERRIDES
-   Only for the Strengths selection panel
-   ────────────────────────────────────────────────────────── */
 .field-strengths-selection-panel {
-  /* Whole-card highlight when checked (scoped) */
-  .checkbox-wrapper:has(> input[type=checkbox]:checked) {
+  .checkbox-wrapper:has(> input[type="checkbox"]:checked) {
     background-color: $color-shade-blue-10;
     border-radius: 8px;
     padding: $spacing-400;
-    border: 2px solid $color-primary;
+    border: 2px solid $color-accent;
   }
 
-  /* Icon position override (scoped) */
   .checkbox-wrapper label::before {
     right: 0;
   }
 
-  /* Description + Edit link indent (scoped) */
   .checkbox-wrapper {
+    .field-description,
     .extended-checkbox--description,
     .edit {
       margin-inline-start: calc(1rem + 1.4rem);
@@ -242,7 +231,6 @@
     }
   }
 
-  /* Left-align the tabbed content inside the modal (scoped) */
   .modal {
     fieldset.formtab {
       margin: 0;
