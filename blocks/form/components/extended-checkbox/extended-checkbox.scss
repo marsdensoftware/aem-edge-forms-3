@@ -2,8 +2,14 @@
 
 .extended-checkbox-container {
   .modal {
-    dialog { max-width: 696px; }
-    .close-button { right: $spacing-500; top: $spacing-500; }
+    dialog {
+      max-width: 696px;
+    }
+
+    .close-button {
+      right: $spacing-500;
+      top: $spacing-500;
+    }
   }
 
   .modal-content {
@@ -20,7 +26,9 @@
     }
 
     > fieldset:not(.field-modal-buttons),
-    fieldset.formtabs { padding: 0 $spacing-500; }
+    fieldset.formtabs {
+      padding: 0 $spacing-500;
+    }
   }
 }
 
@@ -45,7 +53,10 @@
     margin-bottom: 0;
   }
 
-  label, textarea { padding: 0; }
+  label,
+  textarea {
+    padding: 0;
+  }
 
   .edit {
     @extend %link-button;
@@ -57,7 +68,9 @@
     text-decoration: none;
   }
 
-  input[type='checkbox']:checked + label { background-color: transparent; }
+  input[type='checkbox']:checked + label {
+    background-color: transparent;
+  }
 
   .checkbox-divider {
     height: 1px;
@@ -73,12 +86,6 @@
     margin-bottom: 0;
     padding-bottom: 0;
     font-size: $size-font-label-subtitle;
-  }
-
-  .extended-checkbox--description {
-    font-size: $size-font-body-default;
-    color: $text-secondary;
-    font-weight: $font-weight-regular;
   }
 }
 
@@ -102,7 +109,9 @@
   }
 }
 
-.form .field-main-checkbox .field-label .text { font-weight: normal; }
+.form .field-main-checkbox .field-label .text {
+  font-weight: normal;
+}
 
 .extended-checkbox .field-label {
   display: inline-flex;
@@ -126,28 +135,70 @@
   }
 }
 
-.extended-checkbox__icon--critical-thinking { &::before { background-image: url('../../../../icons/ico-critical-thinking-1--critical-thinking-nut-bolt-cog-brain-plan-head.svg'); } }
-.extended-checkbox__icon--ear-hearing { &::before { background-image: url('../../../../icons/ico-ear-hearing-health-medical-hearing-ear.svg'); } }
-.extended-checkbox__icon--error-checking { &::before { background-image: url('../../../../icons/ico-error-checking-warning-sign.svg'); } }
-.extended-checkbox__icon--line-arrow-1 { &::before { background-image: url('../../../../icons/ico-line-arrow-transfer-horizontal-circle-2.svg'); } }
-.extended-checkbox__icon--megaphone-2 { &::before { background-image: url('../../../../icons/ico-megaphone-2--bullhorn-loud-megaphone-share-speaker-transmit.svg'); } }
-.extended-checkbox__icon--shield-check { &::before { background-image: url('../../../../icons/ico-Shield-Check.svg'); } }
-.extended-checkbox__icon--zoom-in-area { &::before { background-image: url('../../../../icons/ico-zoom-in-area.svg'); } }
-.extended-checkbox__icon--user-group-leader { &::before { background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg'); } }
+.extended-checkbox__icon--critical-thinking {
+  &::before {
+    background-image: url('../../../../icons/ico-critical-thinking-1--critical-thinking-nut-bolt-cog-brain-plan-head.svg');
+  }
+}
+
+.extended-checkbox__icon--ear-hearing {
+  &::before {
+    background-image: url('../../../../icons/ico-ear-hearing-health-medical-hearing-ear.svg');
+  }
+}
+
+.extended-checkbox__icon--error-checking {
+  &::before {
+    background-image: url('../../../../icons/ico-error-checking-warning-sign.svg');
+  }
+}
+
+.extended-checkbox__icon--line-arrow-1 {
+  &::before {
+    background-image: url('../../../../icons/ico-line-arrow-transfer-horizontal-circle-2.svg');
+  }
+}
+
+.extended-checkbox__icon--megaphone-2 {
+  &::before {
+    background-image: url('../../../../icons/ico-megaphone-2--bullhorn-loud-megaphone-share-speaker-transmit.svg');
+  }
+}
+
+.extended-checkbox__icon--shield-check {
+  &::before {
+    background-image: url('../../../../icons/ico-Shield-Check.svg');
+  }
+}
+
+.extended-checkbox__icon--zoom-in-area {
+  &::before {
+    background-image: url('../../../../icons/ico-zoom-in-area.svg');
+  }
+}
+
+.extended-checkbox__icon--user-group-leader {
+  &::before {
+    background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg');
+  }
+}
 
 .field-strengths-selection-panel {
   .extended-checkbox {
-    --ec-icon-width: 29px;
-    --ec-gap: 8px;
-
-    .field-label { display: inline-flex; align-items: center; gap: var(--ec-gap); }
-
-    .extended-checkbox__icon { margin-right: 0; }
+    .field-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
 
     .field-description,
     .extended-checkbox--description,
-    .edit { margin-inline-start: calc(var(--ec-icon-width) + var(--ec-gap)); }
+    .edit {
+      margin-inline-start: calc(1rem + 1.4rem);
+    }
 
-    .field-description p { margin: 0; }
+    .field-description p {
+      margin: 0;
+    }
   }
 }
