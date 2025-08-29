@@ -6,9 +6,12 @@ $nav-height-desktop: 117px;
 .main-menu {
   padding: $spacing-400 $spacing-450;
   background-color: $color-white;
-  border-bottom: 1px solid $color-shade-navy-40;
+  border-bottom: 3px solid $color-shade-navy-40;
   position: relative;
   max-height: $nav-height-mobile;
+  top: 0;
+  z-index: 1000;
+  position: sticky;
 
   @include media('desktop') {
     padding: $spacing-650 $spacing-600 $spacing-600;
