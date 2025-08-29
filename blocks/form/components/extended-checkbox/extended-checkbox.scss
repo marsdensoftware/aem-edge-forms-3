@@ -39,8 +39,8 @@
   border-radius: $border-radius-mid;
 
   &:has(> input[type='checkbox']:checked) {
-    border: 2px solid $color-primary;       // blue border
-    background-color: $color-shade-blue-10; // pink background
+    border: 2px solid $color-primary;
+    background-color: $color-shade-blue-10;
   }
 
   display: flex;
@@ -50,14 +50,18 @@
   padding: $spacing-400;
 
   .field-description {
-    margin-inline-start: $spacing-700; // updated indent
+    margin-inline-start: $spacing-700;
     color: $text-secondary;
 
     & p {
       color: $text-secondary;
       margin: 0;
     }
+  }
 
+  p.extended-checkbox--description {
+    margin-inline-start: 3rem;
+    color: $text-secondary;
   }
 
   label {
