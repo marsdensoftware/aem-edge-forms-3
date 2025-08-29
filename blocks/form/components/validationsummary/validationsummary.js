@@ -10,13 +10,29 @@ export default function decorate(panelEl, model) {
   // Reuse form contextual help decorate
   fchDecorate(panelEl, model);
 
+  const className = 'panel-validationsummary'
+  panelEl.classList.add(className);
+
   onElementAdded(panelEl).then((connectedEl) => {
     const errorContainer = document.createElement('ul');
     errorContainer.classList.add('error-container');
     connectedEl.append(errorContainer);
 
+    const parentElement = connectedEl.parentElement;
+
     function updateVisibility() {
-      const hasInvalidFields = errorContainer.querySelector("li:not(.d-none)") !== null;
+      const invalidFields = parentElement.querySelectorAll('.field-invalid');
+      const hasInvalidFields = invalidFields.length > 0;
+      errorContainer.innerHTML = '';
+
+      invalidFields.forEach((target) => {
+        const label = target.querySelector('legend')?.textContent;
+        const errorFieldContainer = document.createElement('li');
+        const errorMessage = target.dataset.requiredErrorMessage || target.querySelector('.field-description')?.textContent;
+
+        errorFieldContainer.innerHTML = `<span class="fieldname">${label}</span> <span class="errormessage">${errorMessage}</span>`;
+        errorContainer.append(errorFieldContainer);
+      });
 
       connectedEl.dataset.visible = hasInvalidFields;
     }
@@ -26,37 +42,35 @@ export default function decorate(panelEl, model) {
       for (let mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const target = mutation.target;
-          const id = target.dataset.id;
-          const field = myForm.getElement(id);
 
-          if (!field) {
+          if (!target.offsetParent) {
             return;
           }
 
-          let errorFieldContainer = errorContainer.querySelector(`li.error-${id}`);
+          const oldClasses = mutation.oldValue ? mutation.oldValue.split(/\s+/) : [];
+          const newClasses = target.classList;
 
-          if (target.classList.contains('field-invalid')) {
-            if (!errorFieldContainer) {
-              errorFieldContainer = document.createElement('li');
-              errorFieldContainer.classList.add(`error-${id}`);
-              errorFieldContainer.innerHTML = `<span class="fieldname">${field.label.value}<span> ${field.errorMessage}`;
-              errorContainer.append(errorFieldContainer);
-            }
+          const wasPresent = oldClasses.includes('field-invalid');
+          const isPresent = newClasses.contains('field-invalid');
+          const added = !wasPresent && isPresent;
+          const removed = wasPresent && !isPresent;
 
-            errorFieldContainer.classList.remove('d-none');
+          if (added || removed) {
+            updateVisibility();
           }
-          else {
-            errorFieldContainer?.classList.add('d-none');
+
+          if (added) {
+            connectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
-          updateVisibility();
         }
       }
     });
 
-    // Start observing for attribute changes
-    observer.observe(connectedEl.parentElement, {
+    // Start observing for attribute changes on parent element
+    observer.observe(parentElement, {
       attributes: true,
       attributeFilter: ['class'],
+      attributeOldValue: true,
       subtree: true
     });
   });

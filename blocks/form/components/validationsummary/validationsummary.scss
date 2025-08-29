@@ -1,0 +1,12 @@
+@use '../../../../styles/settings' as *;
+
+.panel-validationsummary {
+  .fieldname {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  >.plain-text-wrapper {
+    margin-left: $spacing-600;
+  }
+}

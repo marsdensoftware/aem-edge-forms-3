@@ -1,0 +1,7 @@
+@use '../settings' as *;
+
+.field-invalid {
+  &.radio-group--with-icon .radio-group--with-icon__label {
+    border-color: $color-feedback-red;
+  }
+}
