@@ -228,5 +228,18 @@
       }
     }
   }
+  .field-strengths-selection-panel {
+    .extended-checkbox {
+      background-color: $color-white;
+      border: 2px solid $color-shade-navy-40;
+      border-radius: $border-radius-mid;
+
+      &:has(> input[type='checkbox']:checked) {
+        border: 2px solid $color-primary;       // blue border
+        background-color: $color-shade-blue-10; // pink background
+      }
+    }
+  }
+
 
 }
