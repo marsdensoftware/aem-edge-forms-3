@@ -4,21 +4,17 @@ $nav-height-mobile: 76px;
 $nav-height-desktop: 117px;
 
 .main-menu {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
   padding: $spacing-400 $spacing-450;
   background-color: $color-white;
-  border-bottom: 3px solid $color-shade-navy-40;
-  min-height: $nav-height-mobile;
+  border-bottom: 1px solid $color-shade-navy-40;
+  position: relative;
+  max-height: $nav-height-mobile;
 
   @include media('desktop') {
     padding: $spacing-650 $spacing-600 $spacing-600;
-    min-height: $nav-height-desktop;
+    max-height: $nav-height-desktop;
   }
 }
-
 
 .main-menu__inner {
   display: flex;
