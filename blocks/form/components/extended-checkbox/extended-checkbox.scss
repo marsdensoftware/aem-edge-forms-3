@@ -190,8 +190,8 @@
     border-radius: $border-radius-mid;
 
     &:has(> input[type='checkbox']:checked) {
-      border: 2px solid $color-primary;       // blue border
-      background-color: $color-shade-blue-10; // pink background
+      border: 2px solid $color-primary;
+      background-color: $color-shade-blue-10;
     }
 
     .field-label {
@@ -203,7 +203,7 @@
     .field-description,
     .extended-checkbox--description,
     .edit {
-      margin-inline-start: 2.8rem; // updated indent
+      margin-inline-start: 2.8rem;
     }
 
     .field-description p {
