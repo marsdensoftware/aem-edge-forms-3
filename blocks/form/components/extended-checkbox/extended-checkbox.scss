@@ -33,7 +33,6 @@
 }
 
 .form .extended-checkbox {
-
   background-color: $color-white;
   border: 2px solid $color-shade-navy-40;
   border-radius: $border-radius-mid;
@@ -61,7 +60,7 @@
 
   p.extended-checkbox--description {
     margin-inline-start: 3rem;
-    color: $text-secondary;
+    color: $text-primary;
   }
 
   label {
