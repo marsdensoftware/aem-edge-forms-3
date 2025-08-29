@@ -184,7 +184,16 @@
 }
 
 .field-strengths-selection-panel {
-  .extended-checkbox {
+  .checkbox-wrapper {
+    background-color: $color-white;
+    border: 2px solid $color-shade-navy-40;
+    border-radius: $border-radius-mid;
+
+    &:has(> input[type='checkbox']:checked) {
+      border: 2px solid $color-primary;       // blue border
+      background-color: $color-shade-blue-10; // pink background
+    }
+
     .field-label {
       display: inline-flex;
       align-items: center;
@@ -194,52 +203,11 @@
     .field-description,
     .extended-checkbox--description,
     .edit {
-      margin-inline-start: calc(1rem + 1.4rem);
+      margin-inline-start: 2.8rem; // updated indent
     }
 
     .field-description p {
       margin: 0;
     }
   }
-
-  .field-strengths-selection-panel {
-    .extended-checkbox {
-      .field-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .field-description,
-      .extended-checkbox--description,
-      .edit {
-        margin-inline-start: calc(1rem + 1.4rem);
-      }
-
-      .field-description p {
-        margin: 0;
-      }
-
-      /* When the checkbox inside is checked, style the whole wrapper */
-      &:has(> input[type='checkbox']:checked) {
-        border: 2px solid $color-primary;       // blue border (your design token)
-        background-color: $color-shade-blue-10; // pink/blue-shade background
-        border-radius: $border-radius-mid;
-      }
-    }
-  }
-  .field-strengths-selection-panel {
-    .extended-checkbox {
-      background-color: $color-white;
-      border: 2px solid $color-shade-navy-40;
-      border-radius: $border-radius-mid;
-
-      &:has(> input[type='checkbox']:checked) {
-        border: 2px solid $color-primary;       // blue border
-        background-color: $color-shade-blue-10; // pink background
-      }
-    }
-  }
-
-
 }
