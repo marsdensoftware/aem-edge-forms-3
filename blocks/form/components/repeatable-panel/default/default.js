@@ -383,6 +383,9 @@ export class RepeatablePanel {
   }
 
   _resetChanges(entry) {
+    // Remove all validation errors
+    this._clearValidation(entry)
+
     if (!this._hasChanges(entry)) {
       return;
     }
@@ -418,6 +421,10 @@ export class RepeatablePanel {
     }
 
     item.value = value;
+  }
+
+  _clearValidation(entry) {
+    entry.querySelectorAll('.field-invalid').forEach((field) => { field.classList.remove('field-invalid'); });
   }
 
   _clearFields(entry) {

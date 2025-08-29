@@ -3,7 +3,9 @@
 .field-invalid {
 
   &.radio-group--with-icon .radio-group--with-icon__label,
-  .checkbox-wrapper label {
+  .radio-wrapper>.field-label
+  .checkbox-wrapper>.field-label,
+  select[required] {
     border-color: $color-feedback-red;
   }
 }

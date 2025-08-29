@@ -26,7 +26,18 @@ export default function decorate(panelEl, model) {
       errorContainer.innerHTML = '';
 
       invalidFields.forEach((target) => {
-        const label = target.querySelector('legend')?.textContent;
+        if (!target.offsetParent) {
+          // Consider only visible ones
+          return;
+        }
+
+        let label = target.querySelector('legend,label')?.textContent;
+        if (target.closest('.advanceddatepicker')) {
+          const adpLabel = target.closest('.advanceddatepicker').querySelector(':scope>legend')?.textContent;
+          if (adpLabel) {
+            label = `${adpLabel} - ${label}`;
+          }
+        }
         const errorFieldContainer = document.createElement('li');
         const errorMessage = target.dataset.requiredErrorMessage || target.querySelector('.field-description')?.textContent;
 
@@ -39,30 +50,29 @@ export default function decorate(panelEl, model) {
 
     // Create an observer
     const observer = new MutationObserver((mutationsList) => {
+      let added = false;
+      let removed = false;
+
       for (let mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const target = mutation.target;
-
-          if (!target.offsetParent) {
-            return;
-          }
 
           const oldClasses = mutation.oldValue ? mutation.oldValue.split(/\s+/) : [];
           const newClasses = target.classList;
 
           const wasPresent = oldClasses.includes('field-invalid');
           const isPresent = newClasses.contains('field-invalid');
-          const added = !wasPresent && isPresent;
-          const removed = wasPresent && !isPresent;
-
-          if (added || removed) {
-            updateVisibility();
-          }
-
-          if (added) {
-            connectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+          added = added || (!wasPresent && isPresent);
+          removed = removed || (wasPresent && !isPresent);
         }
+      }
+
+      if (added || removed) {
+        updateVisibility();
+      }
+
+      if (added) {
+        connectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
 
