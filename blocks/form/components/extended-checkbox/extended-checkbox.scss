@@ -33,13 +33,32 @@
 }
 
 .form .extended-checkbox {
-  border-radius: $border-radius-mid;
+
+  background-color: $color-white;
   border: 2px solid $color-shade-navy-40;
+  border-radius: $border-radius-mid;
+
+  &:has(> input[type='checkbox']:checked) {
+    border: 2px solid $color-primary;       // blue border
+    background-color: $color-shade-blue-10; // pink background
+  }
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   padding: $spacing-400;
+
+  .field-description {
+    margin-inline-start: $spacing-700; // updated indent
+    color: $text-secondary;
+
+    & p {
+      color: $text-secondary;
+      margin: 0;
+    }
+
+  }
 
   label {
     font-weight: 400;
@@ -51,6 +70,10 @@
     width: 100%;
     color: $text-dark-primary;
     margin-bottom: 0;
+
+    &::before {
+      top: 100%;
+    }
   }
 
   label,
@@ -116,7 +139,7 @@
 .extended-checkbox .field-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-200 $spacing-600;
 }
 
 .extended-checkbox__icon {
@@ -125,7 +148,7 @@
 
   &::before {
     content: '';
-    display: block;
+    position: absolute;
     width: 29px;
     height: 29px;
     background-repeat: no-repeat;
@@ -180,34 +203,5 @@
 .extended-checkbox__icon--user-group-leader {
   &::before {
     background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg');
-  }
-}
-
-.field-strengths-selection-panel {
-  .checkbox-wrapper {
-    background-color: $color-white;
-    border: 2px solid $color-shade-navy-40;
-    border-radius: $border-radius-mid;
-
-    &:has(> input[type='checkbox']:checked) {
-      border: 2px solid $color-primary;       // blue border
-      background-color: $color-shade-blue-10; // pink background
-    }
-
-    .field-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .field-description,
-    .extended-checkbox--description,
-    .edit {
-      margin-inline-start: 2.8rem; // updated indent
-    }
-
-    .field-description p {
-      margin: 0;
-    }
   }
 }
