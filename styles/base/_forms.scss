@@ -113,3 +113,10 @@ FORM required asterisk for radio and checkbox group
 .form .checkbox-wrapper > label::after {
   content: none;
 }
+
+.field-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
