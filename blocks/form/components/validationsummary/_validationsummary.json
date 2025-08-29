@@ -11,6 +11,7 @@
               "jcr:title": "Please correct the following error:",
               "fieldType": "panel",
               "fd:viewType": "validationsummary",
+              "visible": false,
               "helpType": "error",
               "minOccur": 1,
               "text": {
@@ -31,10 +32,17 @@
       "id": "validationsummary",
       "fields": [
         {
+          "component": "boolean",
+          "name": "visible",
+          "label": "Show Component",
+          "valueType": "boolean",
+          "value": true
+        },
+        {
           "...": "../../models/form-common/_responsive-columns-component.json"
         },
         {
-            "...": "../../models/form-common/_responsive-columns-component.json"
+          "...": "../../models/form-common/_responsive-columns-component.json"
         }
       ]
     }

@@ -33982,6 +33982,13 @@
     "id": "validationsummary",
     "fields": [
       {
+        "component": "boolean",
+        "name": "visible",
+        "label": "Show Component",
+        "valueType": "boolean",
+        "value": true
+      },
+      {
         "component": "container",
         "name": "responsive-column-spans",
         "label": "Responsive Column Spans",

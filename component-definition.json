@@ -1754,6 +1754,7 @@
                   "jcr:title": "Please correct the following error:",
                   "fieldType": "panel",
                   "fd:viewType": "validationsummary",
+                  "visible": false,
                   "helpType": "error",
                   "minOccur": 1,
                   "text": {

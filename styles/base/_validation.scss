@@ -1,7 +1,9 @@
 @use '../settings' as *;
 
 .field-invalid {
-  &.radio-group--with-icon .radio-group--with-icon__label {
+
+  &.radio-group--with-icon .radio-group--with-icon__label,
+  .checkbox-wrapper label {
     border-color: $color-feedback-red;
   }
 }
