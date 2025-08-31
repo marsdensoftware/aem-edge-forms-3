@@ -54,13 +54,24 @@
 
     & p {
       color: $text-secondary;
-      margin: 0;
     }
   }
 
-  p.extended-checkbox--description {
+  .extended-checkbox--footer {
     margin-inline-start: 3rem;
-    color: $text-primary;
+    color: $text-dark-primary;
+
+    & .edit {
+      @extend %link-button;
+      background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+      background-repeat: no-repeat;
+      background-position: left center;
+      display: block;
+      padding-left: 28px;
+      text-decoration: none;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   label {
@@ -92,6 +103,7 @@
     display: block;
     padding-left: 28px;
     text-decoration: none;
+    //margin-inline-start: 3rem;
   }
 
   input[type='checkbox']:checked + label {
