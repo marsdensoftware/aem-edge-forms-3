@@ -2,7 +2,7 @@
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
 import { isNo, DefaultFieldConverter } from '../../utils.js'
-import { updateOrCreateInvalidMsg } from '../../../util.js'
+import { updateOrCreateInvalidMsg, checkValidation } from '../../../util.js'
 import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
 
@@ -299,6 +299,15 @@ export class RepeatablePanel {
       if (valid) {
         // Save
         this._save(entry);
+      } else {
+        entry.querySelectorAll('input,textarea,select').forEach((input) => {
+          checkValidation(input);
+        });
+        // scroll to panel-validationsummary or first invalid field
+        const currentWizardStep = entry.closest('.current-wizard-step');
+        const scrollTo = currentWizardStep.querySelector('.panel-validationsummary')
+          || currentWizardStep.querySelector('.field-invalid');
+        scrollTo?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
 
@@ -658,6 +667,7 @@ export class ConditionalRepeatable extends RepeatablePanel {
     super._save(entry);
 
     this._updateCondition();
+    this._clearValidation(entry);
   }
 
   _updateCondition() {

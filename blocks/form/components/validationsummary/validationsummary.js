@@ -3,8 +3,7 @@ import fchDecorate from '../formcontextualhelp/formcontextualhelp.js'
 
 /*eslint-disable*/
 /**
- * This component looks for all fields within the same parent container and subscribes to invalid/valid events.
- * A list of errors for invalid fields is then displayed
+ * This component looks for all invalid fields within the current wizard step and displays a list of errors
  */
 export default function decorate(panelEl, model) {
   // Reuse form contextual help decorate
@@ -18,7 +17,7 @@ export default function decorate(panelEl, model) {
     errorContainer.classList.add('error-container');
     connectedEl.append(errorContainer);
 
-    const parentElement = connectedEl.parentElement;
+    const parentElement = connectedEl.closest('.field-wizard > fieldset');;
 
     function updateVisibility() {
       const invalidFields = parentElement.querySelectorAll('.field-invalid');
@@ -26,7 +25,7 @@ export default function decorate(panelEl, model) {
       errorContainer.innerHTML = '';
 
       invalidFields.forEach((target) => {
-        if (!target.offsetParent) {
+        if (!target.offsetParent || target.dataset.visible === 'false' || target.parentElement.dataset.visible === 'false') {
           // Consider only visible ones
           return;
         }
@@ -41,7 +40,7 @@ export default function decorate(panelEl, model) {
         const errorFieldContainer = document.createElement('li');
         const errorMessage = target.dataset.requiredErrorMessage || target.querySelector('.field-description')?.textContent;
 
-        errorFieldContainer.innerHTML = `<span class="fieldname">${label}</span> <span class="errormessage">${errorMessage}</span>`;
+        errorFieldContainer.innerHTML = `<a class="fieldname" href="#${target.dataset.id}">${label}</a> <span class="errormessage">${errorMessage}</span>`;
         errorContainer.append(errorFieldContainer);
       });
 

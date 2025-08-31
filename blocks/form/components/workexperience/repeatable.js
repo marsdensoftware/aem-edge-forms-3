@@ -101,6 +101,10 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
         const visible = isNo(event.target);
         endofwork.dataset.visible = visible;
         endofwork.disabled = !visible;
+
+        endofwork.querySelectorAll('.field-invalid').forEach((field) => {
+          field.classList.remove('field-invalid');
+        });
       });
     });
   }
