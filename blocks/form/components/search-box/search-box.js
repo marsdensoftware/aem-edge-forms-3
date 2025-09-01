@@ -395,8 +395,8 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     }
 }
 function initSearchBoxCounter(searchBox) {
-    const maxItems = searchBox.dataset.maxItems || -1;
-    if (maxItems <= 0) {
+    const maxAllowedItems = searchBox.dataset.maxAllowedItems || -1;
+    if (maxAllowedItems <= 0) {
         return;
     }
     const selectedCards = searchBox.querySelector('.selected-cards');
@@ -414,14 +414,14 @@ function initSearchBoxCounter(searchBox) {
     }
     function updateCounter() {
         const count = (selectedCards === null || selectedCards === void 0 ? void 0 : selectedCards.querySelectorAll('.selected-card').length) || 0;
-        if (count === 0 || count < maxItems - 5) {
+        if (count === 0 || count < maxAllowedItems - 5) {
             return;
         }
         if (counter) {
-            counter.textContent = `${count} of ${maxItems} added`;
+            counter.textContent = `${count} of ${maxAllowedItems} added`;
         }
         if (recWrapper) {
-            recWrapper.style.display = count >= maxItems ? 'none' : '';
+            recWrapper.style.display = count >= maxAllowedItems ? 'none' : '';
         }
     }
     // Observe for child additions/removals

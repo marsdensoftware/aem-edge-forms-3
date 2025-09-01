@@ -163,7 +163,7 @@
         },
         {
             "component": "number",
-            "name": "maxItems",
+            "name": "maxAllowedItems",
             "label": "Maximum number of items",
             "valueType": "number",
             "description": "Maximum number of items allowed to be selected. Leave empty for no limit"

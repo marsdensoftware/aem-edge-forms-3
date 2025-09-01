@@ -436,7 +436,7 @@ interface El extends Element {
   dataset: {
     datasource: string
     recommendationsDatasource?: string
-    maxItems?: number
+    maxAllowedItems?: number
   }
 }
 
@@ -539,8 +539,8 @@ function populateRecommendationsDiv(
 }
 
 function initSearchBoxCounter(searchBox: El) {
-  const maxItems = searchBox.dataset.maxItems || -1;
-  if (maxItems <= 0) {
+  const maxAllowedItems = searchBox.dataset.maxAllowedItems || -1;
+  if (maxAllowedItems <= 0) {
     return;
   }
 
@@ -562,16 +562,16 @@ function initSearchBoxCounter(searchBox: El) {
   function updateCounter() {
     const count = selectedCards?.querySelectorAll('.selected-card').length || 0;
 
-    if (count === 0 || count < maxItems - 5) {
+    if (count === 0 || count < maxAllowedItems - 5) {
       return;
     }
 
     if (counter) {
-      counter.textContent = `${count} of ${maxItems} added`;
+      counter.textContent = `${count} of ${maxAllowedItems} added`;
     }
 
     if (recWrapper) {
-      recWrapper.style.display = count >= maxItems ? 'none' : '';
+      recWrapper.style.display = count >= maxAllowedItems ? 'none' : '';
     }
   }
 
