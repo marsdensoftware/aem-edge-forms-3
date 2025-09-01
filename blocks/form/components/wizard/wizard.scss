@@ -16,6 +16,10 @@
   @include media('desktop') {
     min-height: $wizard-body-height-desktop;
   }
+  
+  .field-ticker.red{
+    color: $text-error;
+  }
 
   .field-save-changes {
     display: none;
