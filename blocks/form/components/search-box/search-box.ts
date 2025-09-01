@@ -436,6 +436,7 @@ interface El extends Element {
   dataset: {
     datasource: string
     recommendationsDatasource?: string
+    maxItems?: number
   }
 }
 
@@ -537,6 +538,51 @@ function populateRecommendationsDiv(
   }
 }
 
+function initSearchBoxCounter(searchBox: El) {
+  const maxItems = searchBox.dataset.maxItems || -1;
+  if (maxItems <= 0) {
+    return;
+  }
+
+  const selectedCards = searchBox.querySelector('.selected-cards');
+  if (!selectedCards) {
+    return;
+  }
+  const recWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLElement;
+  const inputWrapper = searchBox.querySelector('.search-box__input');
+
+  // Create / attach counter element under the input
+  let counter = inputWrapper?.querySelector('.counter');
+  if (!counter) {
+    counter = document.createElement('div');
+    counter.className = 'counter';
+    inputWrapper?.appendChild(counter);
+  }
+
+  function updateCounter() {
+    const count = selectedCards?.querySelectorAll('.selected-card').length || 0;
+
+    if (count === 0 || count < maxItems - 5) {
+      return;
+    }
+
+    if (counter) {
+      counter.textContent = `${count} of ${maxItems} added`;
+    }
+
+    if (recWrapper) {
+      recWrapper.style.display = count >= maxItems ? 'none' : '';
+    }
+  }
+
+  // Observe for child additions/removals
+  const observer = new MutationObserver(updateCounter);
+  observer.observe(selectedCards, { childList: true });
+
+  // Run initially
+  updateCounter();
+}
+
 export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
@@ -598,6 +644,8 @@ export default function decorate(element: El, field: Field) {
   if (showRecommendations) {
     populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl)
   }
+
+  initSearchBoxCounter(element)
 
   return element
 }

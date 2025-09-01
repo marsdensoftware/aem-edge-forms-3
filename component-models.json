@@ -31991,6 +31991,13 @@
         ]
       },
       {
+        "component": "number",
+        "name": "maxItems",
+        "label": "Maximum number of items",
+        "valueType": "number",
+        "description": "Maximum number of items allowed to be selected. Leave empty for no limit"
+      },
+      {
         "component": "container",
         "name": "responsive-column-spans",
         "label": "Responsive Column Spans",
