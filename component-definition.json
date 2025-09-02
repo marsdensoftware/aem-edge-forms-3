@@ -1744,6 +1744,40 @@
           }
         },
         {
+          "title": "Toast container",
+          "id": "toast-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast container",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast",
+          "id": "toast",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Toasts",
           "id": "toasts",
           "plugins": {
@@ -2174,6 +2208,40 @@
                   "fd:viewType": "range",
                   "enabled": true,
                   "visible": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast",
+          "id": "toast",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast container",
+          "id": "toast-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast container",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast-container"
                 }
               }
             }

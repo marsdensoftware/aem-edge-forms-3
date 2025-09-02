@@ -42,6 +42,12 @@
       "components": [
         {
           "...": "../blocks/form/components/range/_range.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/toast/_toast.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/toast-container/_toast-container.json#/definitions"
         }
       ]
     }

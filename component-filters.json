@@ -108,7 +108,9 @@
       "wizard",
       "icon-radio-group",
       "extended-checkbox-container",
-      "range"
+      "range",
+      "toast",
+      "toast-container"
     ]
   },
   {
