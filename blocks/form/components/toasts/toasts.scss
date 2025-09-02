@@ -5,21 +5,26 @@
 
 .checkbox-toast {
   @include elevation-3;
-  white-space: nowrap;
   position: fixed;
-  bottom: 128px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: $spacing-400;          // e.g. 16–24px
+  right: $spacing-400;        // e.g. 16–24px
+  left: auto;
+  bottom: auto;
+  transform: none;
+
   background: $color-white;
   color: $text-dark-primary;
   padding: 10px 20px;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green;
-  z-index: 4;
+  z-index: 10000;             // above sticky headers/editor chrome
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  max-width: min(480px, calc(100vw - (#{$spacing-400} * 2)));
 }
+
 
 .checkbox-toast__icon {
   display: flex;
