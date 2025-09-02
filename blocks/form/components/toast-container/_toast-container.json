@@ -32,341 +32,37 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "wizardtheme",
-          "label": "Wizard Theme",
+          "name": "notificationSources",
+          "label": "Notification Sources",
           "value": "",
+          "multiple": true,
           "options": [
             {
               "name": "None",
               "value": ""
             },
             {
-              "name": "Dark Blue Theme",
-              "value": "wizard--bg-dark"
+              "name": "Education",
+              "value": "education-panel"
             },
             {
-              "name": "Mid Blue Theme",
-              "value": "wizard--bg-mid"
+              "name": "Other languages",
+              "value": "additional-languages-panel"
             },
             {
-              "name": "Light Blue Theme",
-              "value": "wizard--bg-light"
+              "name": "Strengths",
+              "value": "skills-panel"
             }
           ]
-        },
-        {
-          "component": "select",
-          "valueType": "string",
-          "name": "panelrole",
-          "label": "Panel Role",
-          "value": "",
-          "options": [
-            {
-              "name": "None",
-              "value": ""
-            },
-            {
-              "name": "Wizard Intro",
-              "value": "wizard-intro"
-            },
-            {
-              "name": "Form Header",
-              "value": "form-panel-header"
-            },
-            {
-              "name": "Form Section Intro",
-              "value": "section-intro"
-            },
-            {
-              "name": "Form Content",
-              "value": "form-panel-content"
-            },
-            {
-              "name": "Form Footer",
-              "value": "form-panel-footer"
-            }
-          ]
-        },
-        {
-          "component": "text",
-          "name": "stepgroup",
-          "label": "Step group",
-          "valueType": "string",
-          "value": "1"
-        },
-        {
-          "...": "../../models/form-common/_responsive-container-component.json"
-        },
-        {
-          "...": "../../models/form-common/_responsive-columns-component.json"
-        },
-        {
-          "component": "container",
-          "name": "repeat",
-          "label": "Repeat Panel",
-          "collapsible": true,
-          "fields": [
-            {
-              "component": "boolean",
-              "name": "repeatable",
-              "label": "Make panel repeatable",
-              "valueType": "boolean"
-            },
-            {
-              "component": "text",
-              "name": "cardTitle",
-              "label": "Card title",
-              "valueType": "string",
-              "description": "Generic title for the card in the overview section",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "firstEntryTitle",
-              "label": "First entry title",
-              "valueType": "string",
-              "description": "Section title for the first entry",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "additionalEntriesTitle",
-              "label": "Additional entries title",
-              "valueType": "string",
-              "description": "Section title for any additional entry",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "overviewTitle",
-              "label": "Overview title",
-              "valueType": "string",
-              "description": "Title for the overview section showing all added entries",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "addedSuccessMsg",
-              "label": "Added success message",
-              "valueType": "string",
-              "description": "Success message when a new entry is added",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "number",
-              "name": "minOccur",
-              "label": "Minimum repetitions",
-              "valueType": "number",
-              "description": "Minimum number of times the panel appears on the form",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeat|repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "number",
-              "name": "maxOccur",
-              "label": "Maximum repetitions",
-              "valueType": "number",
-              "placeholder": "No Limit",
-              "description": "Maximum number of times the panel can appear on the form. No value indicates no limit.",
-              "condition": {
-                "and": [
-                  {
-                    "===": [
-                      {
-                        "var": "repeat|repeatable"
-                      },
-                      true
-                    ]
-                  },
-                  {
-                    "!==": [
-                      {
-                        "var": "repeat|variant"
-                      },
-                      "noButtons"
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "component": "select",
-              "name": "variant",
-              "label": "Variant",
-              "options": [
-                {
-                  "name": "No Actions",
-                  "value": "noButtons"
-                },
-                {
-                  "name": "Add & Delete Buttons",
-                  "value": "addDeleteButtons"
-                }
-              ],
-              "value": "addDeleteButtons",
-              "condition": {
-                "===": [
-                  {
-                    "var": "repeat|repeatable"
-                  },
-                  true
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "repeatAddButtonLabel",
-              "label": "Add Button Label",
-              "valueType": "string",
-              "value": "Add",
-              "condition": {
-                "and": [
-                  {
-                    "===": [
-                      {
-                        "var": "repeat|variant"
-                      },
-                      "addDeleteButtons"
-                    ]
-                  },
-                  {
-                    "===": [
-                      {
-                        "var": "repeat|repeatable"
-                      },
-                      true
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "repeatSaveButtonLabel",
-              "label": "Save Button Label",
-              "valueType": "string",
-              "value": "Save",
-              "condition": {
-                "and": [
-                  {
-                    "===": [
-                      {
-                        "var": "variant"
-                      },
-                      "addRemoveButtons"
-                    ]
-                  },
-                  {
-                    "===": [
-                      {
-                        "var": "repeatable"
-                      },
-                      true
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "repeatDeleteButtonLabel",
-              "label": "Delete Button Label",
-              "valueType": "string",
-              "value": "Delete",
-              "condition": {
-                "and": [
-                  {
-                    "===": [
-                      {
-                        "var": "repeat|variant"
-                      },
-                      "addDeleteButtons"
-                    ]
-                  },
-                  {
-                    "===": [
-                      {
-                        "var": "repeat|repeatable"
-                      },
-                      true
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "name": "repeatCancelButtonLabel",
-              "label": "Cancel Button Label",
-              "valueType": "string",
-              "value": "Cancel",
-              "condition": {
-                "and": [
-                  {
-                    "===": [
-                      {
-                        "var": "variant"
-                      },
-                      "addRemoveButtons"
-                    ]
-                  },
-                  {
-                    "===": [
-                      {
-                        "var": "repeatable"
-                      },
-                      true
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "...": "../../models/form-common/_help-container.json"
         }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "toast-container",
+      "components": [
+        "toast"
       ]
     }
   ]
