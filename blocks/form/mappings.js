@@ -17,6 +17,7 @@ let customComponents = [
   'summary',
   'search-box',
   'icon-radio-group',
+  'toasts',
   'extended-checkbox',
   'extended-checkbox-container',
   'range',
