@@ -7,8 +7,9 @@
   @include elevation-3;
   white-space: nowrap;
   position: fixed;
-  top: 140px;
-  right: -50px;
+  bottom: 128px;
+  left: 50%;
+  transform: translateX(-50%);
   background: $color-white;
   color: $text-dark-primary;
   padding: 10px 20px;
@@ -43,9 +44,6 @@
 .checkbox-toast__message-container {
   display: flex;
   flex-direction: column;
-  color: $text-dark-primary;
-  font-size: $size-font-body-large;
-  font-weight: $font-weight-medium;
 }
 
 .checkbox-toast__second-line {
