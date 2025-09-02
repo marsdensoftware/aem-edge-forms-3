@@ -246,8 +246,14 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   editDiv.appendChild(editLink)
   editDiv.style.display = 'none'
 
+  // add a div for the extended-0checkbox--footer which will contain the description adn edit link
+  const extendedCheckboxFooter = document.createElement('div')
+  extendedCheckboxFooter.classList.add('extended-checkbox--footer')
+  extendedCheckboxFooter.appendChild(destTextArea)
+  extendedCheckboxFooter.appendChild(editDiv)
+
   // Append all new elements to the main field div
-  fieldDiv.append(divider, destTextArea, editDiv)
+  fieldDiv.append(divider, extendedCheckboxFooter)
 
   decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv);
   decorateModalCancelButton(fieldDiv, destTextArea);

@@ -32,15 +32,49 @@
   }
 }
 
-/* Target labels that have a description to apply flex layout. */
 .form .extended-checkbox {
-  border-radius: $border-radius-mid;
+  background-color: $color-white;
   border: 2px solid $color-shade-navy-40;
+  border-radius: $border-radius-mid;
+
+  &:has(> input[type='checkbox']:checked) {
+    border: 2px solid $color-primary;
+    background-color: $color-shade-blue-10;
+  }
+
   display: flex;
-  flex-direction: column; /* Stacks the text and description vertically */
-  align-items: flex-start; /* Aligns items to the start of the cross axis */
-  gap: 4px; /* Adds a small space between the label text and description */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   padding: $spacing-400;
+
+  .field-description {
+    margin-inline-start: $spacing-700;
+    color: $text-secondary;
+
+    & p {
+      color: $text-secondary;
+      line-height: 130%;
+      margin-bottom: 0;
+    }
+  }
+
+  .extended-checkbox--footer {
+    margin-inline-start: 3rem;
+    color: $text-dark-primary;
+
+    & .edit {
+      @extend %link-button;
+      background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+      background-repeat: no-repeat;
+      background-position: left center;
+      display: block;
+      padding-left: 28px;
+      text-decoration: none;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 
   label {
     font-weight: 400;
@@ -52,6 +86,10 @@
     width: 100%;
     color: $text-dark-primary;
     margin-bottom: 0;
+
+    &::before {
+      top: 100%;
+    }
   }
 
   label,
@@ -67,6 +105,7 @@
     display: block;
     padding-left: 28px;
     text-decoration: none;
+    //margin-inline-start: 3rem;
   }
 
   input[type='checkbox']:checked + label {
@@ -110,37 +149,29 @@
   }
 }
 
-/* Style the main text span of the checkbox label. */
 .form .field-main-checkbox .field-label .text {
   font-weight: normal;
 }
 
-/* Use flexbox on the label for easy alignment of the icon and text */
 .extended-checkbox .field-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px; /* Adjust the space between the icon and the label text */
+  gap: $spacing-200 $spacing-600;
 }
 
-/*
- * This creates the "icon holder" for any checkbox that has an icon class.
- * The [class*="..."] selector is a flexible way to target any element
- * whose class contains "extended-checkbox--icon-".
- */
 .extended-checkbox__icon {
   display: block;
   margin-right: $spacing-400;
 
   &::before {
-    content: ''; /* This is required for a pseudo-element to be displayed */
-    display: block;
-    // Override size for each icon if needed below
+    content: '';
+    position: absolute;
     width: 29px;
     height: 29px;
     background-repeat: no-repeat;
     background-size: 29px;
     background-position: center;
-    flex-shrink: 0; /* Prevents the icon from shrinking if the label text is long */
+    flex-shrink: 0;
   }
 }
 
