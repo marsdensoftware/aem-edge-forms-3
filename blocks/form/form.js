@@ -33,9 +33,11 @@ let afModule;
 
 const withFieldWrapper = (element) => (fd) => {
   const wrapper = createFieldWrapper(fd);
+  // ### SEP-NJ Start set max remaining chars message
   if (fd?.properties?.maxRemainingCharsMessage) {
     wrapper.dataset.maxRemainingCharsMessage = fd.properties.maxRemainingCharsMessage;
   }
+  // ### SEP-NJ End
   wrapper.append(element(fd));
   return wrapper;
 };
@@ -96,7 +98,9 @@ const createTextArea = withFieldWrapper((fd) => {
   // ###NJ End Added spellcheck
 
   setPlaceholder(input, fd);
+  // ###SEP-NJ Start Call setContraints to set contraints related properties
   setConstraints(input, fd);
+  // ###SEP-NJ End
   return input;
 });
 
