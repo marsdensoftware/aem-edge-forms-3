@@ -4,18 +4,18 @@
 
 .checkbox-toast {
   @include elevation-3;
-  white-space: nowrap;
   position: fixed;
-  top: 140px;
-  right: -50px;
+  top: calc(env(safe-area-inset-top, 0px) + $spacing-400);
+  right: $spacing-400;
   background: $color-white;
   padding: 12px 8px;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green;
-  z-index: 4;
+  z-index: 10000;
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
 }
 
 .checkbox-toast__icon {
