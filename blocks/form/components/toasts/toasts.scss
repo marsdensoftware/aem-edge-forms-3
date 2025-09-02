@@ -1,13 +1,11 @@
 @use '../../../../styles/settings' as *;
 
-.toasts-container {
-}
-
-.checkbox-toast {
+/* Toast — top-right */
+.toast-container {
   @include elevation-3;
   position: fixed;
-  top: $spacing-400;          // e.g. 16–24px
-  right: $spacing-400;        // e.g. 16–24px
+  top: $spacing-400;        // e.g., 16–24px
+  right: $spacing-400;      // e.g., 16–24px
   left: auto;
   bottom: auto;
   transform: none;
@@ -17,7 +15,7 @@
   padding: 10px 20px;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green;
-  z-index: 10000;             // above sticky headers/editor chrome
+  z-index: 10000;           // above sticky headers/editor chrome
   display: flex;
   align-items: center;
   gap: 10px;
@@ -25,8 +23,8 @@
   max-width: min(480px, calc(100vw - (#{$spacing-400} * 2)));
 }
 
-
-.checkbox-toast__icon {
+/* Icon */
+.toast-container__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,24 +36,28 @@
   background-position: center;
 }
 
-.checkbox-toast__icon--success {
+/* Icon variants */
+.toast-container__icon--success {
   background-image: url('/icons/ico-info--circle-check.svg');
 }
-
-.checkbox-toast__icon--error {
+.toast-container__icon--error {
   background-image: url('/icons/ico-info--warning-circle.svg');
 }
 
-.checkbox-toast__message-container {
+/* Message container */
+.toast-container__message-container {
   display: flex;
   flex-direction: column;
+  color: $text-dark-primary;
+  font-size: $size-font-body-large;
+  font-weight: $font-weight-medium;
 }
-
-.checkbox-toast__second-line {
+.toast-container__second-line {
   margin-top: 5px;
 }
 
-.checkbox-toast__close-button {
+/* Close button */
+.toast-container__close-button {
   background: none;
   border: none;
   color: $text-dark-primary;
@@ -65,10 +67,10 @@
   padding: 0 5px;
 }
 
-.checkbox-toast--hidden {
+/* States */
+.toast-container--hidden {
   display: none;
 }
-
-.checkbox-toast--error {
+.toast-container--error {
   border-left: 8px solid $color-feedback-red;
 }
