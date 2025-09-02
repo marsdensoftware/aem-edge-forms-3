@@ -37,10 +37,10 @@
 
 /* Icon variants */
 .toast-container__icon--success {
-  background-image: url('/icons/ico-info--circle-check.svg');
+  background-image: url('../../../../icons/ico-info--circle-check.svg');
 }
 .toast-container__icon--error {
-  background-image: url('/icons/ico-info--warning-circle.svg');
+  background-image: url('../../../../icons/ico-info--warning-circle.svg');
 }
 
 /* Message container */
@@ -63,7 +63,7 @@
   background: none;
   border: none;
   color: $text-dark-primary;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
   margin-left: 10px;
   padding: 0 5px;
