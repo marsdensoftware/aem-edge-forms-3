@@ -33808,6 +33808,24 @@
     ]
   },
   {
+    "id": "toasts",
+    "fields": [
+      {
+        "component": "boolean",
+        "name": "autohide",
+        "label": "Make panel visible only once",
+        "valueType": "boolean"
+      },
+      {
+        "component": "number",
+        "name": "maxToasts",
+        "label": "Max toasts",
+        "valueType": "number",
+        "description": "Maximum number of toasts to show in the panel"
+      }
+    ]
+  },
+  {
     "id": "typeahead",
     "fields": [
       {

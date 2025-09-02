@@ -1744,6 +1744,23 @@
           }
         },
         {
+          "title": "Toasts",
+          "id": "toasts",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toasts",
+                  "fieldType": "panel",
+                  "fd:viewType": "toasts",
+                  "minOccur": 1
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Wizard",
           "id": "wizard",
           "plugins": {

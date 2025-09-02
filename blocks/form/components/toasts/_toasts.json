@@ -1,0 +1,41 @@
+{
+  "definitions": [
+    {
+      "title": "Toasts",
+      "id": "toasts",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Toasts",
+              "fieldType": "panel",
+              "fd:viewType": "toasts",
+              "minOccur": 1
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "toasts",
+      "fields": [
+        {
+          "component": "boolean",
+          "name": "autohide",
+          "label": "Make panel visible only once",
+          "valueType": "boolean"
+        },
+        {
+          "component": "number",
+          "name": "maxToasts",
+          "label": "Max toasts",
+          "valueType": "number",
+          "description": "Maximum number of toasts to show in the panel"
+        }
+      ]
+    }
+  ]
+}
