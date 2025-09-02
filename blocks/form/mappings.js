@@ -20,6 +20,8 @@ let customComponents = [
   'extended-checkbox',
   'extended-checkbox-container',
   'range',
+  'toast',
+  'toast-container',
 ]
 
 const OOTBComponentDecorators = [
