@@ -4,12 +4,11 @@
 .toast-container {
   @include elevation-3;
   position: fixed;
-  top: $spacing-400;        // e.g., 16–24px
-  right: $spacing-400;      // e.g., 16–24px
+  top: 145px;
+  right: 0;
   left: auto;
   bottom: auto;
   transform: none;
-
   background: $color-white;
   color: $text-dark-primary;
   padding: $spacing-300 $spacing-200;
