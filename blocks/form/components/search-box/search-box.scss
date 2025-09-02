@@ -17,6 +17,15 @@
       }
     }
   }
+  
+  &.max-items-reached{
+    .counter{
+      color: $text-error;
+    }
+    .recommendations-cards-wrapper{
+      display: none;
+    }
+  }
 }
 
 .search-box__input {
