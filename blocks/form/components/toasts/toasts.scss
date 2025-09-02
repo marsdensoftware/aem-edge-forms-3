@@ -11,7 +11,6 @@
   top: 140px;
   right: -50px;
   background: $color-white;
-  color: $text-dark-primary;
   padding: 10px 20px;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green;
@@ -44,6 +43,9 @@
 .checkbox-toast__message-container {
   display: flex;
   flex-direction: column;
+  color: $text-dark-primary;
+  font-size: $size-font-body-large;
+  font-weight: $font-weight-medium;
 }
 
 .checkbox-toast__second-line {
