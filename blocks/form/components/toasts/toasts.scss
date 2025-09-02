@@ -12,7 +12,7 @@
 
   background: $color-white;
   color: $text-dark-primary;
-  padding: 10px 20px;
+  padding: $spacing-300 $spacing-200;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green;
   z-index: 10000;           // above sticky headers/editor chrome
@@ -49,11 +49,14 @@
   display: flex;
   flex-direction: column;
   color: $text-dark-primary;
-  font-size: $size-font-body-large;
+  font-size: $size-font-toast-title;
   font-weight: $font-weight-medium;
 }
 .toast-container__second-line {
   margin-top: 5px;
+  color: $text-dark-primary;
+  font-size: $size-font-toast-desc;
+  font-weight: $font-weight-regular;
 }
 
 /* Close button */
