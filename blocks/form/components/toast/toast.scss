@@ -4,103 +4,87 @@
    Toast styles
 ---------------------------- */
 
-// Toasts
+/* Tokens (from your system) */
 $text-toast-primary: $text-dark-primary;
 $text-toast-secondary: $text-secondary;
 $text-toast-warning: $color-feedback-orange;
 $text-toast-error: $color-feedback-red;
 $text-toast-info: $color-feedback-green;
 
-// Sticky nav height (fallback if not provided elsewhere)
+/* Sticky nav height (fallback/tokenize if you have one) */
 $sticky-nav-height: 5.25rem;
 
 /* Icons */
 $icon-info: '/icons/icon-toast-green-tick.svg';
 $icon-warning: '/icons/icon-toast-red-error.svg';
 $icon-error: '/icons/icon-toast-red-error.svg';
-
 /* =========================================================
-   Container — top-right, offset below sticky nav
+   Container — layout only (stack + consistent width)
 ========================================================= */
 .toast-container {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0) + 123px + 48px);
-  right: $spacing-400;
+  right: 32px;
   left: auto;
   bottom: auto;
   transform: none;
 
-  /* Visual chrome */
-  @include elevation-1;
-  border-radius: var(--Corner-radius-Mid, 8px);
-  border-left: 8px solid $text-toast-info; // default = success/info
-  background: $color-white;
-  color: $text-toast-primary;
-
-  padding: 0.625rem 1.25rem;
-  z-index: 10000;
+  /* Stack toasts vertically and align edges */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;         /* make children take container width */
   gap: $spacing-300;
-  white-space: nowrap;
-  pointer-events: auto;
 
-  /* fieldset resets */
+  /* Pick a clean card width and keep it responsive */
+  width: 360px;
+  max-width: min(360px, calc(100vw - 32px - 16px)); /* viewport minus margins */
+
+  /* pointer/fieldset reset */
+  pointer-events: none; /* so clicks pass through unless on toast itself */
   margin: 0;
   border: 0;
   min-width: 0;
-
-  /* Variant sync */
-  &:has(.toast--warning) {
-    border-left-color: $text-toast-warning;
-  }
-  &:has(.toast--error) {
-    border-left-color: $text-toast-error;
-  }
-  &:has(.toast--info) {
-    border-left-color: $text-toast-info;
-  }
+  z-index: 10000;
 }
 
-/* Keep the inner toast layout-only (no extra chrome) */
+/* =========================================================
+   Toast card — chrome lives here (uniform width)
+========================================================= */
 .toast {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
+  pointer-events: auto;
+  width: 100%;                          /* align left edges perfectly */
+  @include elevation-1;
+  background: $color-white;
+  color: $text-toast-primary;
+  border-radius: var(--Corner-radius-Mid, 8px);
+  border-left: 8px solid $text-toast-info; /* default = info/success */
+  padding: 0.625rem 1.25rem;
 
+  /* Layout: icon | message | close */
   display: grid;
   grid-template-columns: 24px 1fr auto;
   align-items: start;
   column-gap: $spacing-300;
+
+  &.toast--warning { border-left-color: $text-toast-warning; }
+  &.toast--error   { border-left-color: $text-toast-error;   }
+  &.toast--info    { border-left-color: $text-toast-info;    }
 }
 
 /* Icon */
 .toast__icon {
   grid-column: 1;
-  width: 24px;
-  height: 24px;
+  width: 24px; height: 24px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
-  /* Default = info */
   background-image: url(#{$icon-info});
 }
-
 .toast--warning .toast__icon { background-image: url(#{$icon-warning}); }
 .toast--error   .toast__icon { background-image: url(#{$icon-error}); }
 
-/* Message container */
-.toast__message-container {
-  grid-column: 2;
-  display: grid;
-  gap: 2px;
-  min-width: 0; /* allow text to truncate */
-}
-
-/* Title */
+/* Message + typography (unchanged) */
+.toast__message-container { grid-column: 2; display: grid; gap: 2px; min-width: 0; }
 .toast__title,
 .toast > .field-label {
   @include heading-level-6;
@@ -113,7 +97,6 @@ $icon-error: '/icons/icon-toast-red-error.svg';
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
-/* Description */
 .toast__description,
 .toast > .field-description {
   margin: 0;
@@ -137,21 +120,16 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   margin-left: $spacing-200;
 
   &:hover,
-  &:focus-visible {
-    color: $text-toast-primary;
-    outline: none;
-  }
+  &:focus-visible { color: $text-toast-primary; outline: none; }
 }
 
-/* Accessibility nicety */
-.toast [aria-live='polite'] {}
-
-/* Small screens */
+/* Mobile: full-bleed-ish with consistent edges */
 @media (max-width: 480px) {
   .toast-container {
-    top: calc(env(safe-area-inset-top, 0) + #{$sticky-nav-height} + #{$spacing-200});
-    right: $spacing-300;
-    padding: 0.5rem 0.875rem;
+    top: calc(env(safe-area-inset-top, 0) + 123px + 24px);
+    right: 16px;
+    width: auto;
+    max-width: calc(100vw - 16px - 16px);
     gap: $spacing-200;
   }
   .toast {
@@ -161,7 +139,7 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   .toast__icon { width: 20px; height: 20px; }
 }
 
-/* Optional: truncate overly long single-line messages gracefully */
+/* Truncation (unchanged) */
 .toast__message-container > * {
   overflow: hidden;
   white-space: nowrap;
