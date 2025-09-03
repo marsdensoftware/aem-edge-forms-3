@@ -35,7 +35,7 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   align-items: stretch;
   gap: $spacing-300;
 
-  width: 370px;
+  width: 370px; /* max width of the whole toast stack */
   max-width: min(370px, calc(100vw - 32px - 16px));
 
   pointer-events: none; /* clicks pass through unless on toast itself */
@@ -46,12 +46,13 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
 }
 
 /* =========================================================
-   Toast card — chrome + grid layout
+   Toast card — chrome + grid
 ========================================================= */
 .toast {
+  position: relative;            /* anchor the close button */
   box-sizing: border-box;
   pointer-events: auto;
-  width: 100%; /* match container width responsively */
+  width: 100%;
   @include elevation-1;
   background: $color-white;
   color: $text-toast-primary;
@@ -60,16 +61,18 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   border-left: 8px solid $text-toast-info; /* default = info/success */
   padding: 0.625rem 1.25rem;
 
-  /* Grid: icon | title | close on first row; desc below */
+  /* Grid:
+     Row 1 = icon | title (close is absolutely positioned)
+     Row 2 = description spans full width */
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto; /* icon | flexible title | close */
+  grid-template-columns: auto minmax(0, 1fr);  /* icon | flexible title */
   grid-template-rows: auto auto;
   grid-template-areas:
-    "icon title close"
-    "icon desc  close";
+    "icon title"
+    "desc desc";
   align-items: start;
   column-gap: $spacing-300;
-  row-gap: $spacing-050;
+  row-gap: $spacing-100;
 
   /* Variant borders: both naming styles supported */
   &.warning, &.toast--warning { border-left-color: $text-toast-warning; }
@@ -77,7 +80,7 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   &.info,    &.toast--info    { border-left-color: $text-toast-info;    }
 }
 
-/* Icon — top-left (default = info) */
+/* Icon — first column, row 1 */
 .toast__icon {
   grid-area: icon;
   width: 24px;
@@ -99,19 +102,10 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
 .toast.info .toast__icon,
 .toast--info .toast__icon    { background-image: url(#{$icon-info}); }
 
-/* Let children of message container participate in the grid */
-.toast__message-container {
-  display: contents; /* allows .toast__title / .toast__description to be grid items */
-}
+/* Let children of message container participate directly in the grid */
+.toast__message-container { display: contents; }
 
-/* Optional header wrapper width */
-.toast__header-container {
-  width: 370px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Title (supports either .toast__title or native .field-label) */
+/* Title — same row as icon, with padding so it never collides with the close button */
 .toast__title,
 .toast > .field-label {
   grid-area: title;
@@ -122,21 +116,18 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   font-size: $size-font-toast-title;
   line-height: 1.2;
 
-  /* keep icon/title/close on one line */
-  min-width: 0;  /* allow the 1fr column to shrink */
-  max-width: min(
-    330px,
-    calc(100% - 24px - #{$spacing-300} - 24px - #{$spacing-300})
-  ); /* cap to 330px, but don't crowd the close */
-
-  white-space: nowrap;     /* single-line title */
+  /* Keep header inline: let title shrink and ellipsis instead of wrapping */
+  min-width: 0;                 /* allow the column to shrink */
+  max-width: 330px;             /* cap keeps room for the close */
+  padding-right: 2rem;          /* reserve space under the absolute close button */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
-/* Description (supports either .toast__description or native .field-description) */
+/* Description — FULL WIDTH on row 2 */
 .toast__description,
 .toast > .field-description {
   grid-area: desc;
@@ -145,15 +136,15 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   font-size: $size-font-toast-desc;
   line-height: 1.35;
   max-width: 100%;
-  white-space: normal; /* wrap description text */
+  white-space: normal;          /* wrap description text */
   overflow: visible;
 }
 
-/* Close button — top-right */
+/* Close button — absolute top-right so it never wraps */
 .toast__close-button {
-  grid-area: close;
-  justify-self: end;
-  align-self: start;
+  position: absolute;
+  top: $spacing-200;            /* ~8px */
+  right: $spacing-300;          /* ~12px */
   appearance: none;
   background: transparent;
   border: 0;
@@ -162,13 +153,12 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   line-height: 1;
   cursor: pointer;
   padding: 2px 6px;
-  margin-left: $spacing-200;
 
   &:hover,
   &:focus-visible { color: $text-toast-primary; outline: none; }
 }
 
-/* Mobile: consistent edges */
+/* Mobile */
 @media (max-width: 480px) {
   .toast-container {
     top: calc(env(safe-area-inset-top, 0) + 123px + 24px);
@@ -178,14 +168,5 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
     gap: $spacing-200;
   }
 
-  .toast {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-  }
-
   .toast__icon { width: 20px; height: 20px; }
-
-  .toast__header-container {
-    width: auto;
-    max-width: 100%;
-  }
 }
