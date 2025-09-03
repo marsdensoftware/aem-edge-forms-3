@@ -1,36 +1,18 @@
 @use '../../../../styles/settings' as *;
-.toast {
-  background-color: #35c0ba;
-}
-/* =========================================================
-   TOASTS — full SCSS (no HTML changes required)
-   Markup:
-   <fieldset class="toast-container">
-     <fieldset class="toast [toast--info|toast--warning|toast--error]">
-       <legend class="field-label">...</legend>
-       <div class="field-description" aria-live="polite">...</div>
-       <div class="toast__icon"></div>
-       <div class="toast__message-container">
-         <div class="toast__title"></div>
-         <div class="toast__description"></div>
-       </div>
-       <button class="toast__close-button">×</button>
-     </fieldset>
-   </fieldset>
-========================================================= */
 
 /* ---------------------------
-   Fallback tokens (safe defaults)
+   Toast styles
 ---------------------------- */
-$sticky-nav-height: if(
-    global-variable-exists(header-height), $header-height,
-    if(global-variable-exists(nav-height), $nav-height, 64px)
-);
 
-$text-toast-primary: if(global-variable-exists(text-toast-primary), $text-toast-primary, if(global-variable-exists(text-dark-primary), $text-dark-primary, #333));
-$text-toast-secondary: if(global-variable-exists(text-dark-secondary), $text-dark-secondary, rgba(#000, .65));
-$size-font-toast-title: if(global-variable-exists(size-font-toast-title), $size-font-toast-title, if(global-variable-exists(size-font-body-large), $size-font-body-large, 1rem));
-$color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color-feedback-orange, #f59e0b);
+// Toasts
+$text-toast-primary: $text-dark-primary;
+$text-toast-secondary: $text-secondary;
+$text-toast-warning: $color-feedback-orange;
+$text-toast-error: $color-feedback-red;
+$text-toast-info: $color-feedback-green;
+
+// Sticky nav height (fallback if not provided elsewhere)
+$sticky-nav-height: 5.25rem;
 
 /* Icons */
 $icon-info: '/icons/icon-toast-green-tick.svg';
@@ -39,28 +21,27 @@ $icon-error: '/icons/icon-toast-red-error.svg';
 
 /* =========================================================
    Container — top-right, offset below sticky nav
-   (Chrome lives on the container; inner .toast is layout-only)
 ========================================================= */
 .toast-container {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + #{$sticky-nav-height} + #{$spacing-300});
+  top: calc(env(safe-area-inset-top, 0) + 123px + 48px);
   right: $spacing-400;
   left: auto;
   bottom: auto;
   transform: none;
 
   /* Visual chrome */
-  box-shadow: 0 0.5rem 1rem rgba(22, 44, 69, 0.16);
-  background: #ffffff;
+  @include elevation-1;
+  border-radius: var(--Corner-radius-Mid, 8px);
+  border-left: 8px solid $text-toast-info; // default = success/info
+  background: $color-white;
   color: $text-toast-primary;
-  padding: 0.625rem 1.25rem;
-  border-radius: 8px;
-  border-left: 8px solid if(global-variable-exists(color-feedback-green), $color-feedback-green, #388314);
 
-  z-index: 10000; /* above page content */
+  padding: 0.625rem 1.25rem;
+  z-index: 10000;
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: $spacing-300;
   white-space: nowrap;
   pointer-events: auto;
 
@@ -69,25 +50,26 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   border: 0;
   min-width: 0;
 
-  /* Variant sync via :has() (modern browsers) */
+  /* Variant sync */
   &:has(.toast--warning) {
-    border-left-color: $color-feedback-orange;
+    border-left-color: $text-toast-warning;
   }
   &:has(.toast--error) {
-    border-left-color: if(global-variable-exists(color-feedback-red), $color-feedback-red, #dc2626);
+    border-left-color: $text-toast-error;
+  }
+  &:has(.toast--info) {
+    border-left-color: $text-toast-info;
   }
 }
 
 /* Keep the inner toast layout-only (no extra chrome) */
 .toast {
-  @include elevation-0; /* ensure no extra shadow if you have an elevation mixin */
   background: transparent;
   border: 0;
   box-shadow: none;
   padding: 0;
   margin: 0;
 
-  /* Layout: icon | message | close */
   display: grid;
   grid-template-columns: 24px 1fr auto;
   align-items: start;
@@ -106,7 +88,7 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   /* Default = info */
   background-image: url(#{$icon-info});
 }
-/* Per-toast fallback (works even without :has) */
+
 .toast--warning .toast__icon { background-image: url(#{$icon-warning}); }
 .toast--error   .toast__icon { background-image: url(#{$icon-error}); }
 
@@ -118,25 +100,25 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   min-width: 0; /* allow text to truncate */
 }
 
-/* Title: prefer .toast__title but support native legend */
+/* Title */
 .toast__title,
 .toast > .field-label {
   @include heading-level-6;
   margin: 0;
   color: $text-toast-primary;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-regular;
   font-size: $size-font-toast-title;
   line-height: 1.2;
 }
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
-/* Description: prefer .toast__description but support .field-description */
+/* Description */
 .toast__description,
 .toast > .field-description {
   margin: 0;
   color: $text-toast-secondary;
-  font-size: if(global-variable-exists(size-font-body-default), $size-font-body-default, 0.9375rem);
+  font-size: $size-font-toast-desc;
   line-height: 1.35;
 }
 
@@ -147,8 +129,8 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   appearance: none;
   background: transparent;
   border: 0;
-  color: $text-toast-secondary;
-  font-size: 18px;
+  color: $text-toast-primary;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
   padding: 2px 6px;
@@ -161,13 +143,13 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   }
 }
 
-/* Accessibility nicety (your markup already sets this) */
+/* Accessibility nicety */
 .toast [aria-live='polite'] {}
 
 /* Small screens */
 @media (max-width: 480px) {
   .toast-container {
-    top: calc(env(safe-area-inset-top, 0px) + #{$sticky-nav-height} + #{$spacing-200});
+    top: calc(env(safe-area-inset-top, 0) + #{$sticky-nav-height} + #{$spacing-200});
     right: $spacing-300;
     padding: 0.5rem 0.875rem;
     gap: $spacing-200;
