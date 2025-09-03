@@ -33907,9 +33907,36 @@
     "fields": [
       {
         "component": "text",
-        "name": "message",
-        "label": "Display message",
+        "name": "jcr:title",
+        "label": "Title",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "label": "Description Text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "helpType",
+        "label": "Type",
+        "valueType": "string",
+        "value": "text",
+        "options": [
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Error",
+            "value": "error"
+          },
+          {
+            "name": "Warning",
+            "value": "warning"
+          }
+        ]
       },
       {
         "component": "boolean",

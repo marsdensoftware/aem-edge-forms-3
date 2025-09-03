@@ -18,7 +18,50 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
 
   // TODO: Implement your custom component logic here
   // You can access the field properties via fieldJson.properties
-  fieldDiv.classList.add('toast');
+
+  const { properties } = fieldJson
+
+  fieldDiv.classList.add('toast')
+
+  // add the value of the type property as a class to the toast
+  const type = properties?.type
+  fieldDiv.classList.add(type)
+
+  // Create icon container
+  const iconContainer = document.createElement('div');
+  iconContainer.classList.add('toast__icon');
+
+  // Create message container
+  const messageContainer = document.createElement('div');
+  messageContainer.classList.add('toast__message-container');
+
+  // Create the title div
+  const titleDiv = document.createElement('div');
+  titleDiv.classList.add('toast__title');
+
+  // Create the description div
+  const descriptionDiv = document.createElement('div');
+  descriptionDiv.classList.add('toast__description');
+
+  // add title and description to the message container
+  messageContainer.appendChild(titleDiv);
+  messageContainer.appendChild(descriptionDiv);
+
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.classList.add('toast__close-button');
+  closeButton.innerHTML = '&times;';
+  closeButton.setAttribute('aria-label', 'Close');
+
+  // Add click event to close button
+  closeButton.addEventListener('click', () => {
+    fieldDiv.classList.add('toast__hidden');
+  });
+
+  // Append elements to toast
+  fieldDiv.appendChild(iconContainer);
+  fieldDiv.appendChild(messageContainer);
+  fieldDiv.appendChild(closeButton);
 
   return fieldDiv;
 }
