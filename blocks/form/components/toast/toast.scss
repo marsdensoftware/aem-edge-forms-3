@@ -104,22 +104,25 @@ $toast-ease-in: cubic-bezier(0.4, 0, 1, 1);
     animation: toast-out $toast-exit-duration $toast-ease-in both;
   }
 
-  /* Variant borders: both naming styles supported */
-  &.warning,
-  &.toast--warning {
-    border-left-color: $text-toast-warning;
-  }
-  &.error,
-  &.toast--error {
-    border-left-color: $text-toast-error;
-  }
+  /* Variant borders (fixed separation) */
   &.info,
   &.toast--info {
     border-left-color: $text-toast-info;
   }
-  &.info,
+
+  &.success,
   &.toast--success {
     border-left-color: $text-toast-success;
+  }
+
+  &.warning,
+  &.toast--warning {
+    border-left-color: $text-toast-warning;
+  }
+
+  &.error,
+  &.toast--error {
+    border-left-color: $text-toast-error;
   }
 }
 
@@ -145,7 +148,17 @@ $toast-ease-in: cubic-bezier(0.4, 0, 1, 1);
   background-image: url(#{$icon-info});
 }
 
-/* Variant icons */
+/* Variant icons (fixed separation) */
+.toast.info .toast__icon,
+.toast--info .toast__icon {
+  background-image: url(#{$icon-info});
+}
+
+.toast.success .toast__icon,
+.toast--success .toast__icon {
+  background-image: url(#{$icon-success});
+}
+
 .toast.warning .toast__icon,
 .toast--warning .toast__icon {
   background-image: url(#{$icon-warning});
@@ -154,11 +167,6 @@ $toast-ease-in: cubic-bezier(0.4, 0, 1, 1);
 .toast.error .toast__icon,
 .toast--error .toast__icon {
   background-image: url(#{$icon-error});
-}
-
-.toast.info .toast__icon,
-.toast--info .toast__icon {
-  background-image: url(#{$icon-info});
 }
 
 /* Title */
