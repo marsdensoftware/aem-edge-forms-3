@@ -7,12 +7,9 @@
 /* Tokens (keep for now; delete later if centralized) */
 $text-toast-primary: $text-dark-primary;
 $text-toast-secondary: $text-secondary;
-$text-toast-warning: $color-feedback-orange;
+$text-toast-warning: $color-primary;         /* per your last code */
 $text-toast-error: $color-feedback-red;
 $text-toast-info: $color-feedback-green;
-
-/* Sticky nav height */
-$sticky-nav-height: 5.25rem;
 
 /* Icons */
 $icon-info:    '/icons/icon-toast-green-tick.svg';
@@ -46,10 +43,9 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
 }
 
 /* =========================================================
-   Toast card — chrome + grid
+   Toast card
 ========================================================= */
 .toast {
-  position: relative;            /* anchor the close button */
   box-sizing: border-box;
   pointer-events: auto;
   width: 100%;
@@ -57,21 +53,12 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   background: $color-white;
   color: $text-toast-primary;
   border: 0; /* remove native fieldset border */
-  border-radius: var(--Corner-radius-Mid, 8px);
+  border-radius: $border-radius-mid;
   border-left: 8px solid $text-toast-info; /* default = info/success */
   padding: 0.625rem 1.25rem;
 
-  /* Grid:
-     Row 1 = icon | title (close is absolutely positioned)
-     Row 2 = description spans full width */
+  /* vertical spacing between header and description */
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);  /* icon | flexible title */
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "icon title"
-    "desc desc";
-  align-items: start;
-  column-gap: $spacing-300;
   row-gap: $spacing-100;
 
   /* Variant borders: both naming styles supported */
@@ -80,12 +67,22 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   &.info,    &.toast--info    { border-left-color: $text-toast-info;    }
 }
 
-/* Icon — first column, row 1 */
+/* =========================================================
+   Header row — icon | title | close (SAME LINE)
+========================================================= */
+.toast__header-container {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;  /* icon | flexible title | close */
+  align-items: start;
+  column-gap: $spacing-300;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Icon */
 .toast__icon {
-  grid-area: icon;
   width: 24px;
   height: 24px;
-  align-self: start;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -102,24 +99,18 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
 .toast.info .toast__icon,
 .toast--info .toast__icon    { background-image: url(#{$icon-info}); }
 
-/* Let children of message container participate directly in the grid */
-.toast__message-container { display: contents; }
-
-/* Title — same row as icon, with padding so it never collides with the close button */
+/* Title */
 .toast__title,
 .toast > .field-label {
-  grid-area: title;
-  @include heading-level-6;
   margin: 0;
   color: $text-toast-primary;
+  @include heading-level-6;
   font-weight: $font-weight-regular;
   font-size: $size-font-toast-title;
   line-height: 1.2;
 
-  /* Keep header inline: let title shrink and ellipsis instead of wrapping */
-  min-width: 0;                 /* allow the column to shrink */
-  max-width: 330px;             /* cap keeps room for the close */
-  padding-right: 2rem;          /* reserve space under the absolute close button */
+  /* keep on one line; allow shrink */
+  min-width: 0;              /* <-- critical for 1fr shrink/ellipsis */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -127,24 +118,10 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
-/* Description — FULL WIDTH on row 2 */
-.toast__description,
-.toast > .field-description {
-  grid-area: desc;
-  margin: 0;
-  color: $text-toast-secondary;
-  font-size: $size-font-toast-desc;
-  line-height: 1.35;
-  max-width: 100%;
-  white-space: normal;          /* wrap description text */
-  overflow: visible;
-}
-
-/* Close button — absolute top-right so it never wraps */
+/* Close button (top-right of header row) */
 .toast__close-button {
-  position: absolute;
-  top: $spacing-200;            /* ~8px */
-  right: $spacing-300;          /* ~12px */
+  justify-self: end;
+  align-self: start;
   appearance: none;
   background: transparent;
   border: 0;
@@ -158,7 +135,21 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
   &:focus-visible { color: $text-toast-primary; outline: none; }
 }
 
-/* Mobile */
+/* =========================================================
+   Description — full width below header
+========================================================= */
+.toast__description,
+.toast > .field-description {
+  margin: 0;
+  color: $text-toast-secondary;
+  font-size: $size-font-toast-desc;
+  line-height: 1.35;
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* Mobile tweaks */
 @media (max-width: 480px) {
   .toast-container {
     top: calc(env(safe-area-inset-top, 0) + 123px + 24px);
@@ -166,6 +157,10 @@ $icon-error:   '/icons/icon-toast-red-error.svg';
     width: auto;
     max-width: calc(100vw - 16px - 16px);
     gap: $spacing-200;
+  }
+
+  .toast__header-container {
+    grid-template-columns: 20px minmax(0, 1fr) auto;
   }
 
   .toast__icon { width: 20px; height: 20px; }
