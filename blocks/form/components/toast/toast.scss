@@ -116,6 +116,10 @@ $toast-ease-in: cubic-bezier(0.4, 0, 1, 1);
   &.toast--info {
     border-left-color: $text-toast-info;
   }
+  &.info,
+  &.toast--success {
+    border-left-color: $text-toast-success;
+  }
 }
 
 /* =========================================================

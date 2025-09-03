@@ -50,6 +50,10 @@
               "value": "error"
             },
             {
+              "name": "Success",
+              "value": "success"
+            },
+            {
               "name": "Warning",
               "value": "warning"
             }

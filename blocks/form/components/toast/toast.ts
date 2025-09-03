@@ -25,7 +25,7 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
 
   // add the value of the type property as a class to the toast
   const type = properties?.toastType as string;
-  fieldDiv.classList.add(type)
+  fieldDiv.classList.add(`toast--${type}`)
 
   // Create header container
   const headerContainer = document.createElement('div');

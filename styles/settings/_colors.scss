@@ -34,6 +34,7 @@ $color-grey-black-100: #000000;
 $color-white: #ffffff;
 
 // Feedback Colours
+$color-feedback-blue: #017ac9;
 $color-feedback-green: #388314;
 $color-feedback-orange: #fa7f14;
 $color-feedback-red: #d03633;
@@ -153,5 +154,6 @@ $text-toast-primary: $text-dark-primary;
 $text-toast-secondary: $text-secondary;
 $text-toast-warning: $color-feedback-orange;
 $text-toast-error: $color-feedback-red;
-$text-toast-info: $color-feedback-green;
+$text-toast-info: $color-feedback-blue;
+$text-toast-success: $color-feedback-green;
 

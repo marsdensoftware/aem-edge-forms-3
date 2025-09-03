@@ -25,7 +25,7 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
         fieldDiv.classList.add('toast');
         // add the value of the type property as a class to the toast
         const type = properties === null || properties === void 0 ? void 0 : properties.toastType;
-        fieldDiv.classList.add(type);
+        fieldDiv.classList.add(`toast--${type}`);
         // Create header container
         const headerContainer = document.createElement('div');
         headerContainer.classList.add('toast__header-container');
