@@ -1,5 +1,13 @@
 @use '../settings' as *;
 
+form .field-wrapper[data-required="true"]>.field-label::after {
+  content: '' !important;
+}
+
+html[lang="en"] form .field-wrapper[data-required="false"]>.field-label::after {
+  content: ' (Optional)' !important;
+}
+
 .field-invalid {
 
   &.radio-group--with-icon .radio-group--with-icon__label,
