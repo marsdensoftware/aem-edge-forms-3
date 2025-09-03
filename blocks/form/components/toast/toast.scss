@@ -4,7 +4,7 @@
    Toast styles
 ---------------------------- */
 
-/* Tokens (from your system) */
+/* Tokens (keep for now; delete later if centralized) */
 $text-toast-primary: $text-dark-primary;
 $text-toast-secondary: $text-secondary;
 $text-toast-warning: $color-feedback-orange;
@@ -15,9 +15,9 @@ $text-toast-info: $color-feedback-green;
 $sticky-nav-height: 5.25rem;
 
 /* Icons */
-$icon-info: '/icons/icon-toast-green-tick.svg';
-$icon-warning: '/icons/icon-toast-red-error.svg';
-$icon-error: '/icons/icon-toast-red-error.svg';
+$icon-info:    '/icons/icon-toast-green-tick.svg';
+$icon-warning: '/icons/icon-toast-orange-warning.svg';
+$icon-error:   '/icons/icon-toast-red-error.svg';
 
 /* =========================================================
    Container — layout only (stack + consistent width)
@@ -25,22 +25,19 @@ $icon-error: '/icons/icon-toast-red-error.svg';
 .toast-container {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0) + 123px + 48px);
-  right: 32px; /* set to 32px as requested earlier */
+  right: 32px;
   left: auto;
   bottom: auto;
   transform: none;
 
-  /* Stack toasts vertically and align edges */
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: $spacing-300;
 
-  /* Card width */
   width: 370px;
-  max-width: min(370px, calc(100vw - 32px - 16px)); /* viewport minus margins */
+  max-width: min(370px, calc(100vw - 32px - 16px));
 
-  /* pointer/fieldset reset */
   pointer-events: none; /* clicks pass through unless on toast itself */
   margin: 0;
   border: 0;
@@ -52,19 +49,20 @@ $icon-error: '/icons/icon-toast-red-error.svg';
    Toast card — chrome + grid layout
 ========================================================= */
 .toast {
-  box-sizing: border-box;          /* include padding + border in width */
+  box-sizing: border-box;
   pointer-events: auto;
-  width: 100%;
+  width: 100%; /* match container width responsively */
   @include elevation-1;
   background: $color-white;
   color: $text-toast-primary;
+  border: 0; /* remove native fieldset border */
   border-radius: var(--Corner-radius-Mid, 8px);
   border-left: 8px solid $text-toast-info; /* default = info/success */
   padding: 0.625rem 1.25rem;
 
-  /* Grid: icon | title/desc | close (two rows) */
+  /* Grid: icon | title | close on first row; desc below */
   display: grid;
-  grid-template-columns: 24px 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto; /* icon | flexible title | close */
   grid-template-rows: auto auto;
   grid-template-areas:
     "icon title close"
@@ -73,12 +71,13 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   column-gap: $spacing-300;
   row-gap: $spacing-050;
 
-  &.toast--warning { border-left-color: $text-toast-warning; }
-  &.toast--error   { border-left-color: $text-toast-error;   }
-  &.toast--info    { border-left-color: $text-toast-info;    }
+  /* Variant borders: both naming styles supported */
+  &.warning, &.toast--warning { border-left-color: $text-toast-warning; }
+  &.error,   &.toast--error   { border-left-color: $text-toast-error;   }
+  &.info,    &.toast--info    { border-left-color: $text-toast-info;    }
 }
 
-/* Icon — top-left */
+/* Icon — top-left (default = info) */
 .toast__icon {
   grid-area: icon;
   width: 24px;
@@ -89,12 +88,27 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   background-position: center;
   background-image: url(#{$icon-info});
 }
+
+/* Variant icons */
+.toast.warning .toast__icon,
 .toast--warning .toast__icon { background-image: url(#{$icon-warning}); }
-.toast--error   .toast__icon { background-image: url(#{$icon-error}); }
+
+.toast.error .toast__icon,
+.toast--error .toast__icon   { background-image: url(#{$icon-error}); }
+
+.toast.info .toast__icon,
+.toast--info .toast__icon    { background-image: url(#{$icon-info}); }
 
 /* Let children of message container participate in the grid */
 .toast__message-container {
   display: contents; /* allows .toast__title / .toast__description to be grid items */
+}
+
+/* Optional header wrapper width */
+.toast__header-container {
+  width: 370px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Title (supports either .toast__title or native .field-label) */
@@ -107,7 +121,15 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   font-weight: $font-weight-regular;
   font-size: $size-font-toast-title;
   line-height: 1.2;
-  white-space: nowrap;         /* single-line title */
+
+  /* keep icon/title/close on one line */
+  min-width: 0;  /* allow the 1fr column to shrink */
+  max-width: min(
+    330px,
+    calc(100% - 24px - #{$spacing-300} - 24px - #{$spacing-300})
+  ); /* cap to 330px, but don't crowd the close */
+
+  white-space: nowrap;     /* single-line title */
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -123,7 +145,7 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   font-size: $size-font-toast-desc;
   line-height: 1.35;
   max-width: 100%;
-  white-space: normal;         /* wrap description text */
+  white-space: normal; /* wrap description text */
   overflow: visible;
 }
 
@@ -157,8 +179,13 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   }
 
   .toast {
-    grid-template-columns: 20px 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
   .toast__icon { width: 20px; height: 20px; }
+
+  .toast__header-container {
+    width: auto;
+    max-width: 100%;
+  }
 }
