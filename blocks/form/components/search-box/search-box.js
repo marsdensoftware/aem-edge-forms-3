@@ -420,6 +420,9 @@ function initSearchBoxCounter(searchBox) {
     function updateCounter() {
         const count = (selectedCards === null || selectedCards === void 0 ? void 0 : selectedCards.querySelectorAll('.selected-card').length) || 0;
         if (count === 0 || count < maxAllowedItems - 5) {
+            if (counter) {
+                counter.textContent = '';
+            }
             return;
         }
         if (counter) {

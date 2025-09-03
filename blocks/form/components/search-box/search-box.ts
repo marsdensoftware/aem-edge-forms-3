@@ -570,6 +570,9 @@ function initSearchBoxCounter(searchBox: El) {
     const count = selectedCards?.querySelectorAll('.selected-card').length || 0;
 
     if (count === 0 || count < maxAllowedItems - 5) {
+      if (counter) {
+        counter.textContent = '';
+      }
       return;
     }
 
