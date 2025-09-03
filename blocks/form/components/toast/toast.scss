@@ -11,7 +11,7 @@ $text-toast-warning: $color-feedback-orange;
 $text-toast-error: $color-feedback-red;
 $text-toast-info: $color-feedback-green;
 
-/* Sticky nav height (fallback/tokenize if you have one) */
+/* Sticky nav height */
 $sticky-nav-height: 5.25rem;
 
 /* Icons */
@@ -37,8 +37,8 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   gap: $spacing-300;
 
   /* Card width */
-  width: 360px;
-  max-width: min(360px, calc(100vw - 32px - 16px)); /* viewport minus margins */
+  width: 370px;
+  max-width: min(370px, calc(100vw - 32px - 16px)); /* viewport minus margins */
 
   /* pointer/fieldset reset */
   pointer-events: none; /* clicks pass through unless on toast itself */
