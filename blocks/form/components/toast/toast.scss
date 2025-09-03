@@ -1,54 +1,100 @@
 @use '../../../../styles/settings' as *;
+.toast {
+  background-color: #35c0ba;
+}
+/* =========================================================
+   TOASTS — full SCSS (no HTML changes required)
+   Markup:
+   <fieldset class="toast-container">
+     <fieldset class="toast [toast--info|toast--warning|toast--error]">
+       <legend class="field-label">...</legend>
+       <div class="field-description" aria-live="polite">...</div>
+       <div class="toast__icon"></div>
+       <div class="toast__message-container">
+         <div class="toast__title"></div>
+         <div class="toast__description"></div>
+       </div>
+       <button class="toast__close-button">×</button>
+     </fieldset>
+   </fieldset>
+========================================================= */
 
-$icon-info: '/icons/icon-toast-green-tick.svg';
-$icon-warning: '/icons/icon-toast-red-error.svg';
-$icon-error: '/icons/icon-toast-red-error.svg'; // if not available, it will just 404—update to a valid icon
+/* ---------------------------
+   Fallback tokens (safe defaults)
+---------------------------- */
+$sticky-nav-height: if(
+    global-variable-exists(header-height), $header-height,
+    if(global-variable-exists(nav-height), $nav-height, 64px)
+);
 
-/* ===== Safe fallbacks if your orange token is named differently ===== */
+$text-toast-primary: if(global-variable-exists(text-toast-primary), $text-toast-primary, if(global-variable-exists(text-dark-primary), $text-dark-primary, #333));
+$text-toast-secondary: if(global-variable-exists(text-dark-secondary), $text-dark-secondary, rgba(#000, .65));
+$size-font-toast-title: if(global-variable-exists(size-font-toast-title), $size-font-toast-title, if(global-variable-exists(size-font-body-large), $size-font-body-large, 1rem));
 $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color-feedback-orange, #f59e0b);
 
-/* ===== Container (anchored top-right, stacks toasts vertically) ===== */
+/* Icons */
+$icon-info: '/icons/icon-toast-green-tick.svg';
+$icon-warning: '/icons/icon-toast-red-error.svg';
+$icon-error: '/icons/icon-toast-red-error.svg';
+
+/* =========================================================
+   Container — top-right, offset below sticky nav
+   (Chrome lives on the container; inner .toast is layout-only)
+========================================================= */
 .toast-container {
   position: fixed;
-  top: $spacing-400;
+  top: calc(env(safe-area-inset-top, 0px) + #{$sticky-nav-height} + #{$spacing-300});
   right: $spacing-400;
-  z-index: 10000;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-300;
-  pointer-events: none; // clicks pass through except on the toast itself
+  left: auto;
+  bottom: auto;
+  transform: none;
 
-  /* fieldset defaults off */
+  /* Visual chrome */
+  box-shadow: 0 0.5rem 1rem rgba(22, 44, 69, 0.16);
+  background: #ffffff;
+  color: $text-toast-primary;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  border-left: 8px solid if(global-variable-exists(color-feedback-green), $color-feedback-green, #388314);
+
+  z-index: 10000; /* above page content */
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  white-space: nowrap;
+  pointer-events: auto;
+
+  /* fieldset resets */
   margin: 0;
-  padding: 0;
   border: 0;
   min-width: 0;
+
+  /* Variant sync via :has() (modern browsers) */
+  &:has(.toast--warning) {
+    border-left-color: $color-feedback-orange;
+  }
+  &:has(.toast--error) {
+    border-left-color: if(global-variable-exists(color-feedback-red), $color-feedback-red, #dc2626);
+  }
 }
 
-/* ===== Single toast card ===== */
+/* Keep the inner toast layout-only (no extra chrome) */
 .toast {
-  @include elevation-3;
-  pointer-events: auto;
+  @include elevation-0; /* ensure no extra shadow if you have an elevation mixin */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+
+  /* Layout: icon | message | close */
   display: grid;
-  grid-template-columns: 24px 1fr auto; // icon | message | close
+  grid-template-columns: 24px 1fr auto;
   align-items: start;
   column-gap: $spacing-300;
-
-  background: $color-white;
-  color: $text-toast-primary;
-  padding: $spacing-350 $spacing-400;
-  border-radius: $border-radius-mid;
-  border-left: 8px solid $color-feedback-green; // default = info
-  max-width: min(520px, calc(100vw - (#{$spacing-400} * 2)));
-
-  /* fieldset defaults off */
-  margin: 0;
-  border: 0;
-  min-width: 0;
-  position: relative;
 }
 
-/* ===== Icon (always first column) ===== */
+/* Icon */
 .toast__icon {
   grid-column: 1;
   width: 24px;
@@ -56,44 +102,52 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-}
 
-/* ===== Message container ===== */
+  /* Default = info */
+  background-image: url(#{$icon-info});
+}
+/* Per-toast fallback (works even without :has) */
+.toast--warning .toast__icon { background-image: url(#{$icon-warning}); }
+.toast--error   .toast__icon { background-image: url(#{$icon-error}); }
+
+/* Message container */
 .toast__message-container {
   grid-column: 2;
   display: grid;
   gap: 2px;
+  min-width: 0; /* allow text to truncate */
 }
 
+/* Title: prefer .toast__title but support native legend */
 .toast__title,
-.toast > .field-label { // use legend as title when present (no HTML changes)
+.toast > .field-label {
   @include heading-level-6;
   margin: 0;
   color: $text-toast-primary;
   font-weight: $font-weight-semibold;
   font-size: $size-font-toast-title;
+  line-height: 1.2;
 }
-
-/* If you want to visually hide the native legend and rely on custom nodes, flip these: */
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
+/* Description: prefer .toast__description but support .field-description */
 .toast__description,
-.toast > .field-description { // use field-description as body text
+.toast > .field-description {
   margin: 0;
-  color: $text-toast-primary;
-  font-size: $size-font-body-default;
+  color: $text-toast-secondary;
+  font-size: if(global-variable-exists(size-font-body-default), $size-font-body-default, 0.9375rem);
   line-height: 1.35;
 }
 
-/* ===== Close button ===== */
+/* Close button */
 .toast__close-button {
   grid-column: 3;
   align-self: start;
   appearance: none;
   background: transparent;
   border: 0;
-  color: $text-toast-primary;
+  color: $text-toast-secondary;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -107,64 +161,27 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
   }
 }
 
-/* ===== Variants (type) =====
-   Apply these classes to the inner fieldset.toast (JS or server-side):
-   .toast--info | .toast--warning | .toast--error
-------------------------------------------------------- */
+/* Accessibility nicety (your markup already sets this) */
+.toast [aria-live='polite'] {}
 
-/* INFO (green) — default */
-.toast--info,
-.toast:not(.toast--warning):not(.toast--error) {
-  border-left-color: $color-feedback-green;
-
-  .toast__icon {
-    background-image: url(#{$icon-info});
-  }
-}
-
-/* WARNING (orange) */
-.toast--warning {
-  border-left-color: $color-feedback-orange;
-
-  .toast__icon {
-    background-image: url(#{$icon-warning});
-  }
-
-  .toast__title,
-  .toast > .field-label {
-    color: $text-toast-primary;
-  }
-}
-
-/* ERROR (red) */
-.toast--error {
-  border-left-color: $color-feedback-red;
-
-  .toast__icon {
-    background-image: url(#{$icon-error});
-  }
-
-  .toast__title,
-  .toast > .field-label {
-    color: $text-toast-error;
-  }
-}
-
-/* ===== Accessibility niceties ===== */
-.toast [aria-live='polite'] {
-  /* nothing required; present for clarity */
-}
-
-/* ===== Small screens: keep inside viewport ===== */
+/* Small screens */
 @media (max-width: 480px) {
   .toast-container {
-    top: $spacing-300;
+    top: calc(env(safe-area-inset-top, 0px) + #{$sticky-nav-height} + #{$spacing-200});
     right: $spacing-300;
+    padding: 0.5rem 0.875rem;
+    gap: $spacing-200;
   }
   .toast {
     grid-template-columns: 20px 1fr auto;
     column-gap: $spacing-200;
-    padding: $spacing-300 $spacing-350;
   }
   .toast__icon { width: 20px; height: 20px; }
+}
+
+/* Optional: truncate overly long single-line messages gracefully */
+.toast__message-container > * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
