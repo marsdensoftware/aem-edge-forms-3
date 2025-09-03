@@ -33907,14 +33907,14 @@
     "fields": [
       {
         "component": "text",
-        "name": "jcr:title",
-        "label": "Title",
+        "name": "toastTitle",
+        "label": "Message Title",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "description",
-        "label": "Description Text",
+        "name": "toastMessage",
+        "label": "Message Description",
         "valueType": "string"
       },
       {

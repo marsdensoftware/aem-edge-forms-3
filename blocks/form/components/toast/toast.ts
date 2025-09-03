@@ -27,25 +27,18 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
   const type = properties?.toastType as string;
   fieldDiv.classList.add(type)
 
+  // Create header container
+  const headerContainer = document.createElement('div');
+  headerContainer.classList.add('toast__header-container');
+
   // Create icon container
   const iconContainer = document.createElement('div');
   iconContainer.classList.add('toast__icon');
 
-  // Create message container
-  const messageContainer = document.createElement('div');
-  messageContainer.classList.add('toast__message-container');
-
   // Create the title div
   const titleDiv = document.createElement('div');
   titleDiv.classList.add('toast__title');
-
-  // Create the description div
-  const descriptionDiv = document.createElement('div');
-  descriptionDiv.classList.add('toast__description');
-
-  // add title and description to the message container
-  messageContainer.appendChild(titleDiv);
-  messageContainer.appendChild(descriptionDiv);
+  titleDiv.textContent = properties?.toastTitle as string;
 
   // Create close button
   const closeButton = document.createElement('button');
@@ -58,10 +51,19 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
     fieldDiv.classList.add('toast__hidden');
   });
 
+  // add the icon, title and close to the header container
+  headerContainer.appendChild(iconContainer);
+  headerContainer.appendChild(titleDiv);
+  headerContainer.appendChild(closeButton);
+
+  // Create the description div
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('toast__description');
+  messageDiv.textContent = properties?.toastMessage as string;
+
   // Append elements to toast
-  fieldDiv.appendChild(iconContainer);
-  fieldDiv.appendChild(messageContainer);
-  fieldDiv.appendChild(closeButton);
+  fieldDiv.appendChild(headerContainer);
+  fieldDiv.appendChild(messageDiv);
 
   return fieldDiv;
 }
