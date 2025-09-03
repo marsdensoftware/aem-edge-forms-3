@@ -35,7 +35,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
   column-gap: $spacing-300;
 
   background: $color-white;
-  color: $text-dark-primary;
+  color: $text-toast-primary;
   padding: $spacing-350 $spacing-400;
   border-radius: $border-radius-mid;
   border-left: 8px solid $color-feedback-green; // default = info
@@ -69,8 +69,9 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
 .toast > .field-label { // use legend as title when present (no HTML changes)
   @include heading-level-6;
   margin: 0;
-  color: $text-dark-primary;
+  color: $text-toast-primary;
   font-weight: $font-weight-semibold;
+  font-size: $size-font-toast-title;
 }
 
 /* If you want to visually hide the native legend and rely on custom nodes, flip these: */
@@ -80,7 +81,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
 .toast__description,
 .toast > .field-description { // use field-description as body text
   margin: 0;
-  color: $text-dark-secondary;
+  color: $text-toast-primary;
   font-size: $size-font-body-default;
   line-height: 1.35;
 }
@@ -92,7 +93,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
   appearance: none;
   background: transparent;
   border: 0;
-  color: $text-dark-secondary;
+  color: $text-toast-primary;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -101,7 +102,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
 
   &:hover,
   &:focus-visible {
-    color: $text-dark-primary;
+    color: $text-toast-primary;
     outline: none;
   }
 }
@@ -131,7 +132,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
 
   .toast__title,
   .toast > .field-label {
-    color: $text-dark-primary;
+    color: $text-toast-primary;
   }
 }
 
@@ -145,7 +146,7 @@ $color-feedback-orange: if(global-variable-exists(color-feedback-orange), $color
 
   .toast__title,
   .toast > .field-label {
-    color: $text-dark-primary;
+    color: $text-toast-error;
   }
 }
 
