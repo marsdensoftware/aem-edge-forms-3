@@ -24,7 +24,7 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
   fieldDiv.classList.add('toast')
 
   // add the value of the type property as a class to the toast
-  const type = properties?.type
+  const type = properties?.toastType as string;
   fieldDiv.classList.add(type)
 
   // Create icon container

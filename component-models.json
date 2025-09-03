@@ -33919,7 +33919,7 @@
       },
       {
         "component": "select",
-        "name": "helpType",
+        "name": "toastType",
         "label": "Type",
         "valueType": "string",
         "value": "text",

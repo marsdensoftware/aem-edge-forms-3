@@ -24,7 +24,7 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
         const { properties } = fieldJson;
         fieldDiv.classList.add('toast');
         // add the value of the type property as a class to the toast
-        const type = properties === null || properties === void 0 ? void 0 : properties.type;
+        const type = properties === null || properties === void 0 ? void 0 : properties.toastType;
         fieldDiv.classList.add(type);
         // Create icon container
         const iconContainer = document.createElement('div');
