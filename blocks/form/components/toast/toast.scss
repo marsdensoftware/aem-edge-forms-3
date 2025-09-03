@@ -18,13 +18,14 @@ $sticky-nav-height: 5.25rem;
 $icon-info: '/icons/icon-toast-green-tick.svg';
 $icon-warning: '/icons/icon-toast-red-error.svg';
 $icon-error: '/icons/icon-toast-red-error.svg';
+
 /* =========================================================
    Container — layout only (stack + consistent width)
 ========================================================= */
 .toast-container {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0) + 123px + 48px);
-  right: 32px;
+  right: 32px; /* set to 32px as requested earlier */
   left: auto;
   bottom: auto;
   transform: none;
@@ -32,15 +33,15 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   /* Stack toasts vertically and align edges */
   display: flex;
   flex-direction: column;
-  align-items: stretch;         /* make children take container width */
+  align-items: stretch;
   gap: $spacing-300;
 
-  /* Pick a clean card width and keep it responsive */
+  /* Card width */
   width: 360px;
   max-width: min(360px, calc(100vw - 32px - 16px)); /* viewport minus margins */
 
   /* pointer/fieldset reset */
-  pointer-events: none; /* so clicks pass through unless on toast itself */
+  pointer-events: none; /* clicks pass through unless on toast itself */
   margin: 0;
   border: 0;
   min-width: 0;
@@ -48,11 +49,12 @@ $icon-error: '/icons/icon-toast-red-error.svg';
 }
 
 /* =========================================================
-   Toast card — chrome lives here (uniform width)
+   Toast card — chrome + grid layout
 ========================================================= */
 .toast {
+  box-sizing: border-box;          /* include padding + border in width */
   pointer-events: auto;
-  width: 100%;                          /* align left edges perfectly */
+  width: 100%;
   @include elevation-1;
   background: $color-white;
   color: $text-toast-primary;
@@ -60,21 +62,28 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   border-left: 8px solid $text-toast-info; /* default = info/success */
   padding: 0.625rem 1.25rem;
 
-  /* Layout: icon | message | close */
+  /* Grid: icon | title/desc | close (two rows) */
   display: grid;
   grid-template-columns: 24px 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "icon title close"
+    "icon desc  close";
   align-items: start;
   column-gap: $spacing-300;
+  row-gap: $spacing-050;
 
   &.toast--warning { border-left-color: $text-toast-warning; }
   &.toast--error   { border-left-color: $text-toast-error;   }
   &.toast--info    { border-left-color: $text-toast-info;    }
 }
 
-/* Icon */
+/* Icon — top-left */
 .toast__icon {
-  grid-column: 1;
-  width: 24px; height: 24px;
+  grid-area: icon;
+  width: 24px;
+  height: 24px;
+  align-self: start;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -83,32 +92,45 @@ $icon-error: '/icons/icon-toast-red-error.svg';
 .toast--warning .toast__icon { background-image: url(#{$icon-warning}); }
 .toast--error   .toast__icon { background-image: url(#{$icon-error}); }
 
-/* Message + typography (unchanged) */
-.toast__message-container { grid-column: 2; display: grid; gap: 2px; min-width: 0; }
+/* Let children of message container participate in the grid */
+.toast__message-container {
+  display: contents; /* allows .toast__title / .toast__description to be grid items */
+}
+
+/* Title (supports either .toast__title or native .field-label) */
 .toast__title,
 .toast > .field-label {
+  grid-area: title;
   @include heading-level-6;
   margin: 0;
   color: $text-toast-primary;
   font-weight: $font-weight-regular;
   font-size: $size-font-toast-title;
   line-height: 1.2;
+  white-space: nowrap;         /* single-line title */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .toast__title:empty { display: none; }
 .toast > .field-label:empty { display: none; }
 
+/* Description (supports either .toast__description or native .field-description) */
 .toast__description,
 .toast > .field-description {
+  grid-area: desc;
   margin: 0;
   color: $text-toast-secondary;
   font-size: $size-font-toast-desc;
   line-height: 1.35;
-  width:540px;
+  max-width: 100%;
+  white-space: normal;         /* wrap description text */
+  overflow: visible;
 }
 
-/* Close button */
+/* Close button — top-right */
 .toast__close-button {
-  grid-column: 3;
+  grid-area: close;
+  justify-self: end;
   align-self: start;
   appearance: none;
   background: transparent;
@@ -124,7 +146,7 @@ $icon-error: '/icons/icon-toast-red-error.svg';
   &:focus-visible { color: $text-toast-primary; outline: none; }
 }
 
-/* Mobile: full-bleed-ish with consistent edges */
+/* Mobile: consistent edges */
 @media (max-width: 480px) {
   .toast-container {
     top: calc(env(safe-area-inset-top, 0) + 123px + 24px);
@@ -133,16 +155,10 @@ $icon-error: '/icons/icon-toast-red-error.svg';
     max-width: calc(100vw - 16px - 16px);
     gap: $spacing-200;
   }
+
   .toast {
     grid-template-columns: 20px 1fr auto;
-    column-gap: $spacing-200;
   }
-  .toast__icon { width: 20px; height: 20px; }
-}
 
-/* Truncation (unchanged) */
-.toast__message-container > * {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  .toast__icon { width: 20px; height: 20px; }
 }
