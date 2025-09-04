@@ -284,7 +284,9 @@ form .file-wrapper > button {
 }
 
 .radio-group-wrapper.horizontal .field-description,
-.checkbox-group-wrapper.horizontal .field-description {
+.radio-group-wrapper.horizontal .field-description-2,
+.checkbox-group-wrapper.horizontal .field-description,
+.checkbox-group-wrapper.horizontal .field-description-2 {
   p {
     font-size: $size-font-body-default;
     color: $text-dark-primary;

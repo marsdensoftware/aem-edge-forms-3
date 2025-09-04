@@ -33,6 +33,11 @@ let afModule;
 
 const withFieldWrapper = (element) => (fd) => {
   const wrapper = createFieldWrapper(fd);
+  // ### SEP-NJ Start set max remaining chars message
+  if (fd?.properties?.maxRemainingCharsMessage) {
+    wrapper.dataset.maxRemainingCharsMessage = fd.properties.maxRemainingCharsMessage;
+  }
+  // ### SEP-NJ End
   wrapper.append(element(fd));
   return wrapper;
 };
@@ -93,6 +98,9 @@ const createTextArea = withFieldWrapper((fd) => {
   // ###NJ End Added spellcheck
 
   setPlaceholder(input, fd);
+  // ###SEP-NJ Start Call setContraints to set contraints related properties
+  setConstraints(input, fd);
+  // ###SEP-NJ End
   return input;
 });
 
@@ -654,7 +662,11 @@ function renderField(fd) {
     // ###SEP-NJ START: add help text below label / legend
     const labelEl = field.querySelector('label, legend');
     if (labelEl && labelEl.nextSibling) {
-      field.insertBefore(helpEl, labelEl.nextSibling);
+      const newHelpEl = helpEl.cloneNode(true);
+      newHelpEl.className = 'field-description-2';
+      field.insertBefore(newHelpEl, labelEl.nextSibling);
+      helpEl.textContent = '';
+      field.append(helpEl);
     } else {
       field.append(helpEl);
     }

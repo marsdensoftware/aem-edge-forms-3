@@ -41,13 +41,22 @@ export class EducationRepeatable extends ConditionalRepeatable {
     )
     // Defaults to hidden, as there is no option of this in
     // UE for advanced date picker.
-    panel?.setAttribute('data-visible', false)
+    // Disable/Hide completion date to prevent validation
+
+    panel.disabled = true;
+    panel.dataset.visible = false;
 
     completionStatusRadios.forEach((radio) => {
       radio.addEventListener('change', () => {
-        panel?.setAttribute('data-visible', radio.value === '0')
-      })
-    })
+        const visible = radio.value === COMPLETION_STATUS.COMPLETED;
+        panel.dataset.visible = visible;
+        panel.disabled = !visible;
+
+        panel.querySelectorAll('.field-invalid').forEach((field) => {
+          field.classList.remove('field-invalid');
+        });
+      });
+    });
   }
 
   _onItemAdded(entry) {

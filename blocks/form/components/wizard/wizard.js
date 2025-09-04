@@ -1,5 +1,6 @@
 import { createButton } from '../../util.js';
 import './set-background-by-step.js';
+import './character-limits.js'
 
 export class WizardLayout {
   inputFields = 'input,textarea,select';

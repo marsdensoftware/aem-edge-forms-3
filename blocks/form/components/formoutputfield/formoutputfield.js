@@ -1,4 +1,4 @@
-import { onElementAdded, DefaultFieldConverter } from '../utils.js'
+import { onElementAdded, DefaultFieldConverter, waitForVar } from '../utils.js'
 
 const renderers = {
   list: (values) => {
@@ -48,20 +48,10 @@ export default function decorate(el, fd) {
       }
     }
 
-    function waitForVar(name, interval = 50) {
-      return new Promise((resolve) => {
-        const check = setInterval(() => {
-          if (typeof window[name] !== 'undefined') {
-            clearInterval(check);
-            resolve(window[name]);
-          }
-        }, interval);
-      });
-    }
-
     (async () => {
       const myForm = await waitForVar('myForm');
-      // Listen for input events on the form (event delegation)
+
+      // Subscribe to fieldChanged event on the form datamodel
       myForm.subscribe((e) => {
         const { field } = e.payload;
         if (field.name === fieldName) {

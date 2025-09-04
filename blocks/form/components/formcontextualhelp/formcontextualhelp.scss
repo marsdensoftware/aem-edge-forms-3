@@ -117,6 +117,18 @@
       margin-bottom: $spacing-200;
     }
   }
+  
+  &--error {
+    border: 1px solid $color-feedback-red;
+    background: $color-shade-red-05;
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-error-primary.svg');
+    }
+    
+    .panel-formcontextualhelp__title {
+      color: $color-feedback-red
+    }
+  }
 
   /* Shared styles for info and primary */
   &--info,

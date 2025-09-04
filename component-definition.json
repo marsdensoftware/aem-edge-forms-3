@@ -1744,6 +1744,32 @@
           }
         },
         {
+          "title": "Validation summary",
+          "id": "validationsummary",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Please correct the following error(s):",
+                  "fieldType": "panel",
+                  "fd:viewType": "validationsummary",
+                  "visible": false,
+                  "helpType": "error",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "value": "Validation errors will be inserted here",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Wizard",
           "id": "wizard",
           "plugins": {

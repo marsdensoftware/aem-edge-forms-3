@@ -179,12 +179,11 @@ export default function decorate(element: El, field: Field) {
 
   container.className = 'typeahead__input'
 
-  if (inputEl) {
+  if (inputEl && inputEl.parentNode) {
+    inputEl.parentNode.insertBefore(container, inputEl);
     container.appendChild(inputEl)
     container.append(iconEl)
   }
-
-  element.appendChild(container)
 
   // Add suggestion div
   const suggestionsDiv = addSuggestionDiv()
