@@ -654,7 +654,11 @@ function renderField(fd) {
     // ###SEP-NJ START: add help text below label / legend
     const labelEl = field.querySelector('label, legend');
     if (labelEl && labelEl.nextSibling) {
-      field.insertBefore(helpEl, labelEl.nextSibling);
+      const newHelpEl = helpEl.cloneNode(true);
+      newHelpEl.className = 'field-description-2';
+      field.insertBefore(newHelpEl, labelEl.nextSibling);
+      helpEl.textContent = '';
+      field.append(helpEl);
     } else {
       field.append(helpEl);
     }
