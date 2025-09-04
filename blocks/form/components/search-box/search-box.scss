@@ -18,6 +18,20 @@
       }
     }
   }
+  
+  .counter{
+    padding: 0.75em 0;
+  }
+  
+  &.max-items-reached{
+    .counter{
+      color: $text-error;
+      font-weight: $font-weight-bold;
+    }
+    .recommendations-cards-wrapper{
+      display: none;
+    }
+  }
 }
 
 .search-box__input {
