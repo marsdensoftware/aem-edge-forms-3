@@ -6059,6 +6059,13 @@
           },
           {
             "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
+          },
+          {
+            "component": "text",
             "name": "pattern",
             "valueType": "string",
             "label": "Pattern",
@@ -9796,6 +9803,13 @@
             "valueType": "string",
             "label": "Maximum characters error message",
             "description": "Error message shown when more than maximum characters are entered."
+          },
+          {
+            "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
           },
           {
             "component": "text",
@@ -16596,6 +16610,13 @@
             "valueType": "string",
             "label": "Maximum characters error message",
             "description": "Error message shown when more than maximum characters are entered."
+          },
+          {
+            "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
           },
           {
             "component": "text",
@@ -30706,6 +30727,13 @@
           },
           {
             "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
+          },
+          {
+            "component": "text",
             "name": "pattern",
             "valueType": "string",
             "label": "Pattern",
@@ -32838,6 +32866,13 @@
           },
           {
             "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
+          },
+          {
+            "component": "text",
             "name": "pattern",
             "valueType": "string",
             "label": "Pattern",
@@ -33959,6 +33994,13 @@
             "valueType": "string",
             "label": "Maximum characters error message",
             "description": "Error message shown when more than maximum characters are entered."
+          },
+          {
+            "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
           },
           {
             "component": "text",
