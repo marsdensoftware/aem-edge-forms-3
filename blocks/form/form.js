@@ -666,6 +666,7 @@ function renderField(fd) {
       newHelpEl.className = 'field-description-2';
       field.insertBefore(newHelpEl, labelEl.nextSibling);
       helpEl.textContent = '';
+      fd.description = '';
       field.append(helpEl);
     } else {
       field.append(helpEl);
