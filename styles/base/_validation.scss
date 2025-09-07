@@ -6,6 +6,7 @@ form .field-wrapper[data-required="true"]>.field-label::after {
 
 form .field-wrapper[data-required="false"]>.field-label::after {
   content: ' (Optional)' !important;
+  float: right;
 }
 
 .field-invalid {
