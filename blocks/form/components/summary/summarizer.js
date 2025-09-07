@@ -1,28 +1,36 @@
+/* eslint-disable max-classes-per-file */
 import { i18n } from '../../../../i18n/index.js';
-import { FIELD_NAMES as WorkExperienceFieldNames, sorter as workExperienceSorter, STILL_WORKING_STATUS } from '../workexperience/fieldnames.js';
-import { FIELD_NAMES as EducationFieldNames, sorter as educationSorter, COMPLETION_STATUS } from '../education/fieldnames.js';
+import {
+  FIELD_NAMES as WorkExperienceFieldNames,
+  sorter as workExperienceSorter,
+  STILL_WORKING_STATUS,
+} from '../workexperience/fieldnames.js';
+import {
+  FIELD_NAMES as EducationFieldNames,
+  sorter as educationSorter,
+  COMPLETION_STATUS,
+} from '../education/fieldnames.js';
 import { FIELD_NAMES as DriverLicenceFieldNames } from '../driverlicence/fieldnames.js';
 import { DefaultFieldConverter, isNo } from '../utils.js'
 
 class WorkExperienceConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="workexperience"]') != undefined;
   }
 
   static process(result) {
-
     // Customize rendering for completion-year, completion status
     const stillWorking = result[WorkExperienceFieldNames.STILL_WORKING];
     const startYear = result[WorkExperienceFieldNames.START_OF_WORK_YEAR].value;
     let employmentDetails = result[WorkExperienceFieldNames.EMPLOYER_NAME].displayValue;
 
     let endYear;
-    if (stillWorking?.value == STILL_WORKING_STATUS.NO) {
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
       // No longer working
       endYear = result[WorkExperienceFieldNames.END_OF_WORK_YEAR].value;
       employmentDetails += `, ${startYear} - ${endYear}`;
-    }
-    else {
+    } else {
       // Still working
       employmentDetails += `, ${i18n('Started')} ${startYear}`;
     }
@@ -31,7 +39,7 @@ class WorkExperienceConverter {
     newResult[WorkExperienceFieldNames.JOB_TITLE] = result[WorkExperienceFieldNames.JOB_TITLE];
     newResult.employmentDetails = {
       value: employmentDetails,
-      displayValue: employmentDetails
+      displayValue: employmentDetails,
     };
     newResult[WorkExperienceFieldNames.DESCRIPTION] = result[WorkExperienceFieldNames.DESCRIPTION];
 
@@ -41,6 +49,7 @@ class WorkExperienceConverter {
 
 class EducationConverter {
   static canProcess(element) {
+    /* eslint-disable-next-line eqeqeq */
     return element.closest('[name="education"]') != undefined;
   }
 
@@ -57,16 +66,14 @@ class EducationConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[EducationFieldNames.COMPLETION_STATUS];
-    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
+    if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
       // Completed
       const endYear = result[EducationFieldNames.FINISH_YEAR];
       summary.push(`${i18n('Finished')} ${endYear.displayValue}`);
-    }
-    else if (completionStatus?.value == COMPLETION_STATUS.IN_PROGRESS) {
+    } else if (completionStatus?.value === COMPLETION_STATUS.IN_PROGRESS) {
       // In progress, partially completed
       summary.push(`${i18n('Started')} ${startYear.displayValue}`, `${i18n('Partially complete')}`);
-    }
-    else {
+    } else {
       // Not completed
       summary.push(`${i18n('Started')} ${startYear?.displayValue}`, `${completionStatus?.displayValue}`);
     }
@@ -92,7 +99,8 @@ class DriverLicenceConverter {
     newResult[DriverLicenceFieldNames.LICENCE_CLASS] = { values: [], displayValues: [] };
     const hasEndorsements = !isNo(result[DriverLicenceFieldNames.ENDORSEMENTS_AVAILABLE]);
     if (hasEndorsements) {
-      newResult[DriverLicenceFieldNames.ENDORSEMENTS] = result[DriverLicenceFieldNames.ENDORSEMENTS];
+      newResult[DriverLicenceFieldNames.ENDORSEMENTS]
+        = result[DriverLicenceFieldNames.ENDORSEMENTS];
     }
 
     licenceClass.values.forEach((value, index) => {
@@ -108,11 +116,10 @@ class DriverLicenceConverter {
 }
 
 export class Summarizer {
-
   // List of converters
   static fieldConverters = [
     WorkExperienceConverter,
-    EducationConverter
+    EducationConverter,
   ];
 
   static navigate(wizardEl, index) {
@@ -142,7 +149,6 @@ export class Summarizer {
   }
 
   static markupFromNameValues(nameValues, properties) {
-
     const classPrefix = 'summary';
     const entries = [];
     let tagName = 'div';
@@ -152,8 +158,8 @@ export class Summarizer {
 
     Object.entries(nameValues).forEach(([name, data]) => {
       if (!data) return;
-      const value = data.value;
-      const displayValue = data.displayValue;
+      const { value } = data;
+      const { displayValue } = data;
 
       if (value) {
         const result = document.createElement(tagName);
@@ -165,8 +171,8 @@ export class Summarizer {
         entries.push(result);
       }
 
-      const values = data.values;
-      const displayValues = data.displayValues;
+      const { values } = data;
+      const { displayValues } = data;
       if (values) {
         const result = document.createElement(tagName);
         result.classList.add(`${classPrefix}-entry__${name}`);
@@ -181,7 +187,7 @@ export class Summarizer {
   }
 
   static getNameValues(entry) {
-    let nameValues = undefined;
+    let nameValues;
     try {
       nameValues = entry.dataset.savedData
         ? JSON.parse(entry.dataset.savedData)
@@ -197,7 +203,7 @@ export class Summarizer {
     let nameValues = Summarizer.getNameValues(entry);
 
     // Apply converters
-    Summarizer.fieldConverters.forEach(fieldConverter => {
+    Summarizer.fieldConverters.forEach((fieldConverter) => {
       if (fieldConverter.canProcess(entry)) {
         nameValues = fieldConverter.process(nameValues);
       }
@@ -211,14 +217,14 @@ export class Summarizer {
   }
 
   static gotoWizardStep(el) {
-    const stepName = el.dataset.stepName;
-    const entryId = el.dataset.entryId;
+    const { dataset: { stepName } } = el;
+    const { dataset: { entryId } } = el;
 
     const form = el.closest('form');
 
     const panelEl = form.querySelector(`[name="${stepName}"]`);
     const wizardEl = panelEl.closest('.wizard');
-    const index = panelEl.dataset.index;
+    const { index } = panelEl.dataset;
 
     Summarizer.navigate(wizardEl, index);
 
@@ -263,7 +269,7 @@ export class Summarizer {
     </div>
     `;
 
-  static itemContentTemplate = `<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>`;
+  static itemContentTemplate = '<{{summaryEntryTag}} class="summary-entry">{{content}}</{{summaryEntryTag}}>';
 
   static replace(template, params) {
     return template.replace(/{{(.*?)}}/g, (_, key) => params[key.trim()] ?? '');
@@ -276,20 +282,22 @@ export class Summarizer {
     let summaryEntryTag = 'div';
 
     if (properties && properties.summaryEntryTag) {
-      summaryEntryTag = properties.summaryEntryTag;
+      ({ summaryEntryTag } = properties);
     }
 
     const template = showEdit ? Summarizer.itemContentEditTemplate : Summarizer.itemContentTemplate;
 
-    return Summarizer.replace(template, { content, stepName, entryId, summaryEntryTag })
+    return Summarizer.replace(template, {
+      content, stepName, entryId, summaryEntryTag,
+    })
   }
 
   static createSummaryFromMarkupObjects(markupObjects) {
-    let summaryEntryItemsTag = 'div';
+    const summaryEntryItemsTag = 'div';
 
     const result = document.createElement(summaryEntryItemsTag);
 
-    markupObjects.forEach(mo => {
+    markupObjects.forEach((mo) => {
       result.append(mo);
     });
 
@@ -312,16 +320,18 @@ export class Summarizer {
       content = Summarizer.getItemContent(entry, stepName, properties);
     }
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: content });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content,
+    });
   }
 
   static defaultRepeatableSummarizer(stepName, el, properties, sorterFn) {
     const form = el.closest('form');
 
-    let contents = [];
+    const contents = [];
 
     let entries = form.querySelectorAll(`[name="${stepName}"] [data-repeatable].saved`);
 
@@ -329,16 +339,17 @@ export class Summarizer {
       entries = Array.from(entries).sort(sorterFn);
     }
 
-    entries.forEach(entry => {
-      let content = Summarizer.getItemContent(entry, stepName);
+    entries.forEach((entry) => {
+      const content = Summarizer.getItemContent(entry, stepName);
       contents.push(content);
     });
 
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
-
-    return Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    return Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content: contents.join(''),
+    });
   }
 
   static personal_details(el) {
@@ -367,9 +378,15 @@ export class Summarizer {
 
   static strengths(el, properties) {
     const form = el.closest('form');
-    const extendedCheckboxes = form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
+    const extendedCheckboxes =
+      form.querySelectorAll('[name="panel_soft_skills"] .extended-checkbox input[type="checkbox"]:checked');
 
-    let strengthsContent = [];
+    // TODO: Nono review, this was "const data = new DefaultFieldConverter()" and data was not
+    // used, but I'm not sure if .convert(form.querySelector('[name="panel_soft_skills"]'));
+    // is doing anything?
+    new DefaultFieldConverter().convert(form.querySelector('[name="panel_soft_skills"]'));
+
+    const strengthsContent = [];
 
     extendedCheckboxes.forEach((e) => {
       const container = e.closest('.extended-checkbox-container');
@@ -377,11 +394,12 @@ export class Summarizer {
       strengthsContent.push(content);
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join('') });
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, {
+      title: properties.title, description: descriptionHtml, stepName: 'panel_soft_skills', content: strengthsContent.join(''),
+    });
     el.innerHTML = content;
-
   }
 
   static experience(el, properties) {
@@ -395,7 +413,7 @@ export class Summarizer {
   static languages(el, properties) {
     const form = el.closest('form');
 
-    let languagesContent = [];
+    const languagesContent = [];
     let languageContent = '';
 
     // Read english language
@@ -404,31 +422,43 @@ export class Summarizer {
     if (englishFieldset) {
       const nameValues = {
         language: { value: 'english', displayValue: i18n('English') },
-        ...Summarizer.fieldToNameValues(englishFieldset)
+        ...Summarizer.fieldToNameValues(englishFieldset),
       };
 
       // English content
-      let languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
+      const languageContentMarkupObjects = Summarizer.markupFromNameValues(nameValues);
       languageContent = Summarizer.createSummaryFromMarkupObjects(languageContentMarkupObjects);
-      languageContent = Summarizer.replace(Summarizer.itemContentEditTemplate, { stepName: 'panel_english_skills', content: languageContent })
+      languageContent = Summarizer.replace(
+        Summarizer.itemContentEditTemplate,
+        {
+          stepName: 'panel_english_skills',
+          content: languageContent,
+        },
+      )
 
       languagesContent.push(languageContent);
     }
 
-
     // Read other languages
     const otherLanguages = form.querySelectorAll('fieldset[name="panel_other_languages"] [data-repeatable].saved');
     properties.showEdit = true;
-    otherLanguages.forEach(otherLanguage => {
+    otherLanguages.forEach((otherLanguage) => {
       languageContent = Summarizer.getItemContent(otherLanguage, 'panel_other_languages', properties);
       if (languageContent) {
         languagesContent.push(languageContent);
       }
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
-    const content = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: languagesContent.join('') });
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
+    const content = Summarizer.replace(
+      Summarizer.summaryTemplate,
+      {
+        title: properties.title,
+        description: descriptionHtml,
+        content: languagesContent.join(''),
+      },
+    );
     el.innerHTML = content;
   }
 
@@ -445,40 +475,41 @@ export class Summarizer {
 
       const entries = [
         {
-          'licenceClassTitle': {
+          licenceClassTitle: {
             value: 'licence-class-title',
-            displayValue: i18n('Classes')
-          }
-          ,
-          'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS]
-        }
+            displayValue: i18n('Classes'),
+          },
+          'licence-class': nameValues[DriverLicenceFieldNames.LICENCE_CLASS],
+        },
       ];
 
       if (nameValues[DriverLicenceFieldNames.ENDORSEMENTS]) {
         entries.push(
           {
-            'endorsementsTitle': {
+            endorsementsTitle: {
               value: 'endorsements-title',
-              displayValue: i18n('Endorsements')
+              displayValue: i18n('Endorsements'),
             },
 
-            'endorsements': nameValues[DriverLicenceFieldNames.ENDORSEMENTS]
-          }
+            endorsements: nameValues[DriverLicenceFieldNames.ENDORSEMENTS],
+          },
         );
       }
 
-      entries.forEach(entryNameValues => {
+      entries.forEach((entryNameValues) => {
         const markupObjects = Summarizer.markupFromNameValues(entryNameValues);
         let content = Summarizer.createSummaryFromMarkupObjects(markupObjects);
-        content = Summarizer.replace(Summarizer.itemContentTemplate, { content: content, summaryEntryTag: 'div' })
+        content = Summarizer.replace(Summarizer.itemContentTemplate, { content, summaryEntryTag: 'div' })
         contents.push(content);
       });
     }
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    const content = Summarizer.replace(Summarizer.summaryEditTemplate, { stepName: stepName, title: properties.title, description: descriptionHtml, content: contents.join('') });
+    const content = Summarizer.replace(Summarizer.summaryEditTemplate, {
+      stepName, title: properties.title, description: descriptionHtml, content: contents.join(''),
+    });
     el.innerHTML = content;
   }
 
@@ -497,74 +528,71 @@ export class Summarizer {
   }
 
   static work_preferences(el, properties) {
-
     function getContent(workEntryFieldset, stepName, title) {
       const nameValues = {
         title: { value: stepName, displayValue: title },
         ...Summarizer.fieldToNameValues(workEntryFieldset),
       }
 
-      if (stepName == 'panel_work_availability') {
+      if (stepName === 'panel_work_availability') {
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].value
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.value
         ) {
-          nameValues['days_you_can_work'].values = [
-            nameValues['days_you_can_work'].value,
+          nameValues.days_you_can_work.values = [
+            nameValues.days_you_can_work.value,
           ]
-          nameValues['days_you_can_work'].displayValues = [
-            nameValues['days_you_can_work'].displayValue,
+          nameValues.days_you_can_work.displayValues = [
+            nameValues.days_you_can_work.displayValue,
           ]
 
-          delete nameValues['days_you_can_work'].value
-          delete nameValues['days_you_can_work'].displayValue
+          delete nameValues.days_you_can_work.value
+          delete nameValues.days_you_can_work.displayValue
         }
 
         if (
-          nameValues['days_you_can_work'] &&
-          nameValues['days_you_can_work'].values &&
-          nameValues['days_you_can_work'].values.indexOf('3') > -1
+          nameValues.days_you_can_work &&
+          nameValues.days_you_can_work.values &&
+          nameValues.days_you_can_work.values.indexOf('3') > -1
         ) {
           // Specific days
-          const index = nameValues['days_you_can_work'].values.indexOf('3')
+          const index = nameValues.days_you_can_work.values.indexOf('3')
 
           if (
-            nameValues['specific_days_cb'] &&
-            nameValues['specific_days_cb'].value
+            nameValues.specific_days_cb &&
+            nameValues.specific_days_cb.value
           ) {
-            nameValues['specific_days_cb'].values = [
-              nameValues['specific_days_cb'].value,
+            nameValues.specific_days_cb.values = [
+              nameValues.specific_days_cb.value,
             ]
-            nameValues['specific_days_cb'].displayValues = [
-              nameValues['specific_days_cb'].displayValue,
+            nameValues.specific_days_cb.displayValues = [
+              nameValues.specific_days_cb.displayValue,
             ]
 
-            delete nameValues['specific_days_cb'].value
-            delete nameValues['specific_days_cb'].displayValue
+            delete nameValues.specific_days_cb.value
+            delete nameValues.specific_days_cb.displayValue
           }
 
-          if (nameValues['specific_days_cb']) {
-            nameValues['days_you_can_work'].displayValues[index] =
-              nameValues['specific_days_cb'].displayValues.join(', ')
+          if (nameValues.specific_days_cb) {
+            nameValues.days_you_can_work.displayValues[index] =
+              nameValues.specific_days_cb.displayValues.join(', ')
 
-            delete nameValues['specific_days_cb']
+            delete nameValues.specific_days_cb
+          } else {
+            delete nameValues.days_you_can_work.displayValues[index];
           }
-          else {
-            delete nameValues['days_you_can_work'].displayValues[index];
-          }
-        }
-        else {
-          delete nameValues['specific_days_cb'];
+        } else {
+          delete nameValues.specific_days_cb;
         }
       }
 
       if (
-        stepName == 'panel_working_locations' &&
+        stepName === 'panel_working_locations' &&
         nameValues['reliable-transport']
       ) {
         if (isNo(nameValues['reliable-transport'])) {
           nameValues['reliable-transport'].displayValue = i18n(
-            "I don't have reliable transport to get to work",
+            'I don\'t have reliable transport to get to work',
           )
         } else {
           nameValues['reliable-transport'].displayValue = i18n(
@@ -574,8 +602,8 @@ export class Summarizer {
       }
 
       // Content
-      let contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
-      let content =
+      const contentMarkupObjects = Summarizer.markupFromNameValues(nameValues)
+      const content =
         Summarizer.createSummaryFromMarkupObjects(contentMarkupObjects)
 
       return Summarizer.replace(Summarizer.itemContentEditTemplate, {
@@ -591,13 +619,12 @@ export class Summarizer {
       ['panel_jobs', i18n('Work you’re interested in')],
       ['panel_hours', i18n('Hours you’re looking for')],
       ['panel_work_availability', i18n('Work availability')],
-      ['panel_working_locations', i18n('Work location')]
+      ['panel_working_locations', i18n('Work location')],
     ];
     const contents = [];
 
-    childrenNames.forEach(step => {
-      const stepName = step[0];
-      const title = step[1];
+    childrenNames.forEach((step) => {
+      const [stepName, title] = step;
 
       const entry = form.querySelector(`[name="${stepName}"]`);
 
@@ -607,9 +634,16 @@ export class Summarizer {
       }
     });
 
-    const description = properties['description'];
-    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : "";
+    const { description } = properties;
+    const descriptionHtml = description ? `<p class="p-small">${description}</p>` : '';
 
-    el.innerHTML = Summarizer.replace(Summarizer.summaryTemplate, { title: properties.title, description: descriptionHtml, content: contents.join('') });
+    el.innerHTML = Summarizer.replace(
+      Summarizer.summaryTemplate,
+      {
+        title: properties.title,
+        description: descriptionHtml,
+        content: contents.join(''),
+      },
+    );
   }
 }

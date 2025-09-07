@@ -1,3 +1,5 @@
+/*eslint-disable*/
+import { onElementAdded } from '../utils.js';
 const componentStateMap = new WeakMap();
 // --- Helper functions to create DOM elements ---
 function addSuggestionDiv() {
@@ -220,29 +222,26 @@ const experiencedBasedSkills = [
     'Agritourism',
     'Act reliably',
     'Insurance market',
-    'Characteristics of services'
+    'Characteristics of services',
 ];
 // Function to extract job titles from the DOM element
-const getExperiencedBasedJobs = () => {
-    // Default fallback values if the element is not found or has no content
-    return [
-    // 'Job Title 1',
-    // 'Job Title 2',
-    // 'Job Title 3',
-    // 'Job Title 4',
-    // 'Job Title 5',
-    // 'Job Title 6',
-    // 'Job Title 7',
-    // 'Job Title 8',
-    // 'Job Title 9',
-    // 'Job Title 10',
-    ];
-};
+const getExperiencedBasedJobs = () => [
+// Default fallback values if the element is not found or has no content
+// 'Job Title 1',
+// 'Job Title 2',
+// 'Job Title 3',
+// 'Job Title 4',
+// 'Job Title 5',
+// 'Job Title 6',
+// 'Job Title 7',
+// 'Job Title 8',
+// 'Job Title 9',
+// 'Job Title 10',
+];
 // Function to listen for repeatableChanged event and update job types
 const observeElementForJobs = (element) => {
-    // Initial population of job titles
-    experiencedBasedJobs = getExperiencedBasedJobs();
-    //get the containing form
+    experiencedBasedJobs = getExperiencedBasedJobs(); // Initial population of job titles
+    // get the containing form
     const form = element.closest('form');
     // Add event listener for repeatableChanged event
     form.addEventListener('repeatableChanged', (event) => {
@@ -252,19 +251,20 @@ const observeElementForJobs = (element) => {
             return;
         }
         const customEvent = event;
-        const detail = customEvent.detail;
+        const { detail } = customEvent;
         // Check if the event is for workexperience
         if (detail && detail.name === 'workexperience' && detail.entries && Array.isArray(detail.entries)) {
             // Extract type values from all entries
             let jobTypes = [];
             try {
                 // First check if entries have the expected structure
-                const hasValidEntries = detail.entries.some(entry => entry && typeof entry === 'object' && entry.type &&
+                /* eslint-disable-next-line no-unused-vars */
+                const hasValidEntries = detail.entries.some((entry) => entry && typeof entry === 'object' && entry.type &&
                     typeof entry.type === 'object' &&
                     'displayValue' in entry.type &&
                     typeof entry.type.displayValue === 'string');
                 jobTypes = detail.entries
-                    .map(entry => {
+                    .map((entry) => {
                     if (!entry.type) {
                         console.log('[DEBUG_LOG] Entry missing type property:', entry);
                         return null;
@@ -279,7 +279,6 @@ const observeElementForJobs = (element) => {
             }
             catch (error) {
                 console.error('[DEBUG_LOG] Error extracting job types:', error);
-                // console.log('[DEBUG_LOG] Detail entries structure:', JSON.stringify(detail.entries, null, 2));
             }
             // Update experiencedBasedJobs with the extracted job types
             if (jobTypes.length > 0) {
@@ -296,7 +295,8 @@ const observeElementForJobs = (element) => {
                         const selectedCardsDiv = el.querySelector('.selected-cards');
                         const selectedItems = Array.from((selectedCardsDiv === null || selectedCardsDiv === void 0 ? void 0 : selectedCardsDiv.querySelectorAll('.selected-card input[type="hidden"]')) || []).map((input) => input.value);
                         // Update the recommendations with the new job types, excluding selected items
-                        state.recommendations = experiencedBasedJobs.filter(job => !selectedItems.includes(job));
+                        state.recommendations =
+                            experiencedBasedJobs.filter((job) => !selectedItems.includes(job));
                         // Re-populate recommendations if they're visible
                         const recommendationsWrapper = el.querySelector('.recommendations-cards-wrapper');
                         const searchInput = el.querySelector('input[type="text"]');
@@ -361,7 +361,12 @@ document.addEventListener('input', (event) => {
             div.classList.add('suggestion');
             div.textContent = item;
             div.dataset.source = 'main';
-            div.addEventListener('click', () => {
+            div.addEventListener('click', (e) => {
+                if (element.classList.contains('max-items-reached')) {
+                    // prevent addition of items
+                    e.stopPropagation();
+                    return;
+                }
                 // Remove item from the main state
                 state.main = state.main.filter((i) => i !== item);
                 searchInput.value = '';
@@ -391,9 +396,51 @@ function populateRecommendationsDiv(element, recommendationsCardsWrapper, select
     // Use available recommendations from the component's state
     const availableRecommendations = state.recommendations;
     // Add up to 8 recommendations to the recommendations div
-    for (let i = 0; i < 8 && i < availableRecommendations.length; i++) {
+    for (let i = 0; i < 8 && i < availableRecommendations.length; i += 1) {
         createRecommendationCard(availableRecommendations[i], recommendationsCards, selectedCardsDiv, inputEl);
     }
+}
+function initSearchBoxCounter(searchBox) {
+    const maxAllowedItems = parseInt(searchBox.dataset.maxAllowedItems || '-1', 10);
+    if (Number.isNaN(maxAllowedItems) || maxAllowedItems <= 0) {
+        return;
+    }
+    const selectedCards = searchBox.querySelector('.selected-cards');
+    if (!selectedCards) {
+        return;
+    }
+    const inputWrapper = searchBox.querySelector('.search-box__input');
+    // Create / attach counter element under the input
+    let counter = inputWrapper === null || inputWrapper === void 0 ? void 0 : inputWrapper.querySelector('.counter');
+    if (!counter) {
+        counter = document.createElement('div');
+        counter.className = 'counter';
+        inputWrapper === null || inputWrapper === void 0 ? void 0 : inputWrapper.appendChild(counter);
+    }
+    function updateCounter() {
+        const count = (selectedCards === null || selectedCards === void 0 ? void 0 : selectedCards.querySelectorAll('.selected-card').length) || 0;
+        if (count === 0 || count < maxAllowedItems - 5) {
+            if (counter) {
+                counter.textContent = '';
+            }
+            return;
+        }
+        if (counter) {
+            counter.textContent = `${count} of ${maxAllowedItems} added`;
+            if (count >= maxAllowedItems) {
+                counter.textContent += '. Remove a skill to add more.';
+                searchBox.classList.add('max-items-reached');
+            }
+            else {
+                searchBox.classList.remove('max-items-reached');
+            }
+        }
+    }
+    // Observe for child additions/removals
+    const observer = new MutationObserver(updateCounter);
+    observer.observe(selectedCards, { childList: true });
+    // Run initially
+    updateCounter();
 }
 export default function decorate(element, field) {
     const { datasource } = field.properties;
@@ -409,13 +456,14 @@ export default function decorate(element, field) {
     if (recommendationsDatasource === 'experiencedBasedJobs' && !window.experiencedBasedJobsObserverInitialized) {
         // Set the flag immediately to prevent multiple setTimeout calls
         window.experiencedBasedJobsObserverInitialized = true;
-        setTimeout(() => {
-            observeElementForJobs(element);
-        }, 500); // 500ms delay to allow the DOM to load
+        onElementAdded(element).then((connectedEl) => {
+            observeElementForJobs(connectedEl);
+        });
     }
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
     element.dataset.recommendationsDatasource = recommendationsDatasource;
+    element.dataset.maxAllowedItems = field.properties.maxAllowedItems;
     // --- Initialize State for this component instance ---
     const mainData = datasources[datasource] || [];
     const recData = datasources[recommendationsDatasource] || [];
@@ -442,5 +490,6 @@ export default function decorate(element, field) {
     if (showRecommendations) {
         populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl);
     }
+    initSearchBoxCounter(element);
     return element;
 }

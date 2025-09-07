@@ -7,7 +7,7 @@
   min-height: $wizard-body-height;
   height: 100%;
   position: relative;
-  z-index: 1; // needed for background
+  z-index: 1;
 
   @include media('tablet') {
     min-height: $wizard-body-height-tablet;
@@ -15,6 +15,10 @@
 
   @include media('desktop') {
     min-height: $wizard-body-height-desktop;
+  }
+  
+  .field-ticker.red{
+    color: $text-error;
   }
 
   .field-save-changes {
@@ -37,6 +41,7 @@
     display: flex;
 
     .wizard-menu-items {
+      display: flex;
       flex-direction: column;
       width: 300px;
     }
@@ -47,12 +52,7 @@
     display: none;
   }
 
-  > .current-wizard-step.panel-wrapper:first-of-type
-    ~ .wizard-button-wrapper
-    > .wizard-button-prev,
-  > .current-wizard-step.panel-wrapper:last-of-type
-    ~ .wizard-button-wrapper
-    > .wizard-button-next {
+  > .current-wizard-step.panel-wrapper:first-of-type ~ .wizard-button-wrapper > .wizard-button-prev {
     display: none;
   }
 
@@ -67,4 +67,11 @@
   .wizard-button-wrapper .field-wrapper {
     flex: unset;
   }
+}
+
+.field-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }

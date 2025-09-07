@@ -93,6 +93,7 @@
       "summary",
       "formwelcome",
       "formcontextualhelp",
+      "validationsummary",
       "formoutputfield",
       "formtabs",
       "number-input",
@@ -107,7 +108,8 @@
       "tnc",
       "wizard",
       "icon-radio-group",
-      "extended-checkbox-container"
+      "extended-checkbox-container",
+      "range"
     ]
   },
   {

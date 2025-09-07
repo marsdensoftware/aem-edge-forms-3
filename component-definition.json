@@ -244,7 +244,7 @@
           }
         },
         {
-          "title": "Date Picker",
+          "title": "Date Input",
           "id": "date-input",
           "plugins": {
             "xwalk": {
@@ -540,6 +540,7 @@
                   "jcr:title": "Advanced Date Picker",
                   "fieldType": "panel",
                   "fd:viewType": "advanceddatepicker",
+                  "minOccur": 1,
                   "name": "advanceddatepicker",
                   "month": {
                     "name": "month",
@@ -1610,6 +1611,24 @@
           }
         },
         {
+          "title": "Range",
+          "id": "range",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/numberinput/v1/numberinput",
+                "template": {
+                  "jcr:title": "Range",
+                  "fieldType": "number-input",
+                  "fd:viewType": "range",
+                  "enabled": true,
+                  "visible": true
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Rating",
           "id": "rating",
           "plugins": {
@@ -1718,6 +1737,32 @@
                     "enum": [
                       "true"
                     ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Validation summary",
+          "id": "validationsummary",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Please correct the following error(s):",
+                  "fieldType": "panel",
+                  "fd:viewType": "validationsummary",
+                  "visible": false,
+                  "helpType": "error",
+                  "minOccur": 1,
+                  "text": {
+                    "jcr:title": "Text",
+                    "fieldType": "plain-text",
+                    "textIsRich": true,
+                    "value": "Validation errors will be inserted here",
+                    "sling:resourceType": "core/fd/components/form/text/v1/text"
                   }
                 }
               }
@@ -2114,6 +2159,30 @@
                   "name": "Typography",
                   "model": "typography",
                   "text": "<p>Text</p>"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Custom Form Components",
+      "id": "custom-components",
+      "components": [
+        {
+          "title": "Range",
+          "id": "range",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/numberinput/v1/numberinput",
+                "template": {
+                  "jcr:title": "Range",
+                  "fieldType": "number-input",
+                  "fd:viewType": "range",
+                  "enabled": true,
+                  "visible": true
                 }
               }
             }

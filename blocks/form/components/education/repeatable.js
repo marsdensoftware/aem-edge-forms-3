@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
 import { FIELD_NAMES, sorter, COMPLETION_STATUS } from './fieldnames.js'
 import { DefaultFieldConverter } from '../utils.js'
@@ -8,7 +9,7 @@ class Converter extends DefaultFieldConverter {
 
     // Customize rendering for completion-year, completion status
     const completionStatus = result[FIELD_NAMES.COMPLETION_STATUS]
-    if (completionStatus?.value == COMPLETION_STATUS.COMPLETED) {
+    if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
       // Completed
       const year = result[FIELD_NAMES.FINISH_YEAR]
       completionStatus.displayValue += ` ${year.displayValue}`
@@ -40,13 +41,22 @@ export class EducationRepeatable extends ConditionalRepeatable {
     )
     // Defaults to hidden, as there is no option of this in
     // UE for advanced date picker.
-    panel?.setAttribute('data-visible', false)
+    // Disable/Hide completion date to prevent validation
+
+    panel.disabled = true;
+    panel.dataset.visible = false;
 
     completionStatusRadios.forEach((radio) => {
       radio.addEventListener('change', () => {
-        panel?.setAttribute('data-visible', radio.value === '0')
-      })
-    })
+        const visible = radio.value === COMPLETION_STATUS.COMPLETED;
+        panel.dataset.visible = visible;
+        panel.disabled = !visible;
+
+        panel.querySelectorAll('.field-invalid').forEach((field) => {
+          field.classList.remove('field-invalid');
+        });
+      });
+    });
   }
 
   _onItemAdded(entry) {

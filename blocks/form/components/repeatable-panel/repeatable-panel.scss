@@ -70,11 +70,11 @@
   }
 }
 
-.form .panel-repeatable-panel {
+.form .repeat-wrapper.panel-repeatable-panel {
   &[data-max='1'] button.item-add {
     display: none;
   }
-  
+
   > fieldset[data-index="0"]{
     .first-entry-title{
       display: block;
@@ -83,7 +83,7 @@
       display: none;
     }
   }
-  
+
   > fieldset:not([data-index="0"]){
     .first-entry-title{
       display: none;
@@ -196,7 +196,7 @@
     }
   }
 
-  &[data-variant='addRemoveButtons'] .item-remove {
+  &[data-variant='addDeleteButtons'] .item-remove {
     @extend %button;
     @extend %button--primary;
     display: none !important;

@@ -193,8 +193,7 @@ const withLock = async (fn, options = {}) => {
     return Number(expiry) < Date.now() // stale lock?
   }
 
-  const claim = () =>
-    localStorage.setItem(key, `${Date.now() + opts.maxAge}:${TAB_ID}`)
+  const claim = () => localStorage.setItem(key, `${Date.now() + opts.maxAge}:${TAB_ID}`)
 
   const release = () => {
     const value = localStorage.getItem(key)
@@ -208,10 +207,9 @@ const withLock = async (fn, options = {}) => {
     if (opts.ifAvailable) return undefined
 
     const deadline = Date.now() + opts.maxWait
-    const sleep = (ms) =>
-      new Promise((resolve) => {
-        setTimeout(resolve, ms)
-      })
+    const sleep = (ms) => new Promise((resolve) => {
+      setTimeout(resolve, ms)
+    })
 
     while (!isFree()) {
       if (Date.now() >= deadline) {
@@ -399,27 +397,25 @@ const createBackend = (origin, rootUri = '/session') => {
     // eslint-disable-next-line implicit-arrow-linebreak
     logout: () => post(`${rootUri}/logout`),
 
-    check: () =>
-      withLock(
-        async (lock) => {
-          if (!lock) return undefined
-          return post(`${rootUri}/check`)
-        },
-        { name: LOCK, ifAvailable: true },
-      ),
+    check: () => withLock(
+      async (lock) => {
+        if (!lock) return undefined
+        return post(`${rootUri}/check`)
+      },
+      { name: LOCK, ifAvailable: true },
+    ),
 
-    exchangeCodeForCookies: ({ code, verifier }, signal = undefined) =>
-      withLock(
-        async (lock) => {
-          if (!lock) return undefined
-          return post(
-            `${rootUri}/exchange`,
-            { code, code_verifier: verifier },
-            signal,
-          )
-        },
-        { name: LOCK, maxWait: 30_000 },
-      ),
+    exchangeCodeForCookies: ({ code, verifier }, signal = undefined) => withLock(
+      async (lock) => {
+        if (!lock) return undefined
+        return post(
+          `${rootUri}/exchange`,
+          { code, code_verifier: verifier },
+          signal,
+        )
+      },
+      { name: LOCK, maxWait: 30_000 },
+    ),
 
     teardown: () => {
       inflight.forEach((ac) => {
@@ -450,12 +446,11 @@ const makeChannel = (channelName = 'default-channel') => {
       bc.postMessage({ sender: id, msg })
     }
 
-    const on = (fn) =>
-      bc.addEventListener('message', (e) => {
-        debug('bc-event', { id, data: e.data })
-        if (e.data?.sender === id) return
-        fn(e.data)
-      })
+    const on = (fn) => bc.addEventListener('message', (e) => {
+      debug('bc-event', { id, data: e.data })
+      if (e.data?.sender === id) return
+      fn(e.data)
+    })
 
     return {
       post,
@@ -469,7 +464,7 @@ const makeChannel = (channelName = 'default-channel') => {
   }
   // ✱ Optional fallback; here we just no-op.
   warn('BroadcastChannel not supported in this browser')
-  const noop = () => {}
+  const noop = () => { }
   return { post: noop, on: noop, close: noop }
 }
 
@@ -573,17 +568,16 @@ const createAuthClient = ({
   })
 
   /* ---- last-check throttle (per-tab lock) ---- */
-  const canCheck = async (cooldownMs = 5_000) =>
-    withLock(
-      async (lock) => {
-        if (!lock) return false
-        const last = +localStorage.getItem('last-check')
-        const ok = !last || last + cooldownMs <= Date.now()
-        if (ok) localStorage.setItem('last-check', Date.now().toString())
-        return ok
-      },
-      { name: 'checkAllowed', ifAvailable: true },
-    )
+  const canCheck = async (cooldownMs = 5_000) => withLock(
+    async (lock) => {
+      if (!lock) return false
+      const last = +localStorage.getItem('last-check')
+      const ok = !last || last + cooldownMs <= Date.now()
+      if (ok) localStorage.setItem('last-check', Date.now().toString())
+      return ok
+    },
+    { name: 'checkAllowed', ifAvailable: true },
+  )
 
   /* ---- keep-alive loop ---- */
   const CHECK_COOLDOWN = 5_000

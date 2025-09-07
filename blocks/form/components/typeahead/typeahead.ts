@@ -1,3 +1,11 @@
+declare global {
+  /* eslint-disable-next-line no-unused-vars */
+  interface Window {
+    searchInput?: HTMLInputElement;
+    suggestionsDiv?: HTMLElement;
+  }
+}
+
 interface El extends Element {
   dataset: {
     datasource: string[]
@@ -57,63 +65,66 @@ const datasources = {
     'Use accounting software',
     'Adapt to changing work environments',
   ],
-}
+};
 
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-  if (window.searchInput && !window.searchInput.contains(e.target)) {
+  if (window.searchInput
+    && !window.searchInput.contains(e.target as Element)
+    && window.suggestionsDiv) {
     window.suggestionsDiv.innerHTML = ''
     window.suggestionsDiv.style.display = 'none'
   }
 
-  const el = e.target;
+  const el = e.target as HTMLElement;
 
-  if (el.classList.contains('typeahead__icon') && el.closest('.typeahead').classList.contains('has-input')) {
-    const inputEl = el.closest('.typeahead').querySelector('input[type="text"]')
-    inputEl.value = '';
-    el.closest('.typeahead').classList.remove('has-input')
+  if (el.classList.contains('typeahead__icon') && el.closest('.typeahead')?.classList.contains('has-input')) {
+    const inputEl = el.closest('.typeahead')?.querySelector('input[type="text"]') as HTMLInputElement
+    if (inputEl) {
+      inputEl.value = ''
+    }
+    el.closest('.typeahead')?.classList.remove('has-input')
   }
 })
 
 document.addEventListener('change', (event) => {
-  const element = event.target.closest('.typeahead')
+  const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
     const { datasource } = element.dataset
-    const entries = datasources[datasource]
-    const searchInput = element.querySelector('input[type="text"]')
+    const entries = datasources[datasource as keyof typeof datasources]
+    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
     const { value } = searchInput
 
     if (!entries.includes(value)) {
       // Dispatch custom event
-      const event = new CustomEvent('typeahead:invalid', {
+      const customEvent = new CustomEvent('typeahead:invalid', {
         detail: {},
         bubbles: true,
       })
-      searchInput.dispatchEvent(event)
+      searchInput.dispatchEvent(customEvent)
 
-      event.preventDefault()
+      customEvent.preventDefault()
     } else {
       // Dispatch custom event
-      const event = new CustomEvent('typeahead:valid', {
+      const customEvent = new CustomEvent('typeahead:valid', {
         detail: {},
         bubbles: true,
       })
-      searchInput.dispatchEvent(event)
+      searchInput.dispatchEvent(customEvent)
     }
 
     if (value && value.trim().length > 0) {
       element.classList.add('has-input');
-    }
-    else {
+    } else {
       element.classList.remove('has-input');
     }
   }
 })
 
 document.addEventListener('input', (event) => {
-  const element = event.target.closest('.typeahead')
+  const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
-    const searchInput = element.querySelector('input[type="text"]')
+    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
     window.searchInput = searchInput
     const query = searchInput.value.toLowerCase()
 
@@ -122,16 +133,17 @@ document.addEventListener('input', (event) => {
       return
     }
 
-    const suggestionsDiv = element.querySelector('.suggestions')
+    const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
+    if (!suggestionsDiv) {
+      return
+    }
     window.suggestionsDiv = suggestionsDiv
     suggestionsDiv.innerHTML = ''
 
     const { datasource } = element.dataset
-    const entries = datasources[datasource]
+    const entries = datasources[datasource as keyof typeof datasources]
 
-    const filtered = entries.filter((entry) =>
-      entry.toLowerCase().includes(query),
-    )
+    const filtered = entries.filter((entry) => entry.toLowerCase().includes(query))
 
     filtered.forEach((item) => {
       const div = document.createElement('div')
@@ -141,8 +153,8 @@ document.addEventListener('input', (event) => {
         searchInput.value = item
         suggestionsDiv.innerHTML = ''
         suggestionsDiv.style.display = 'none'
-        const event = new Event('change', { bubbles: true })
-        searchInput.dispatchEvent(event)
+        const customEvent = new Event('change', { bubbles: true })
+        searchInput.dispatchEvent(customEvent)
       })
       suggestionsDiv.appendChild(div)
     })
@@ -165,15 +177,13 @@ export default function decorate(element: El, field: Field) {
   const iconEl = document.createElement('span');
   iconEl.classList.add('typeahead__icon')
 
-
   container.className = 'typeahead__input'
 
-  if (inputEl) {
+  if (inputEl && inputEl.parentNode) {
+    inputEl.parentNode.insertBefore(container, inputEl);
     container.appendChild(inputEl)
     container.append(iconEl)
   }
-
-  element.appendChild(container)
 
   // Add suggestion div
   const suggestionsDiv = addSuggestionDiv()

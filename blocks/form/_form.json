@@ -135,6 +135,12 @@
                       "valueType": "boolean"
                   },
                   {
+                    "component": "boolean",
+                    "name": "useHtmlTemplate",
+                    "label": "Use html template",
+                    "valueType": "boolean"
+                  },
+                  {
                       "component": "aem-content",
                       "name": "templatePath",
                       "label": "External template path",
@@ -193,6 +199,7 @@
         "summary",
         "formwelcome",
         "formcontextualhelp",
+        "validationsummary",
         "formoutputfield",
         "formtabs",
         "number-input",
@@ -207,7 +214,8 @@
         "tnc",
         "wizard",
         "icon-radio-group",
-        "extended-checkbox-container"
+        "extended-checkbox-container",
+        "range"
       ]
     }
   ]

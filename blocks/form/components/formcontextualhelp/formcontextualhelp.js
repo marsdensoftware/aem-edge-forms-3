@@ -1,3 +1,4 @@
+/*eslint-disable*/
 export default function decorate(panelEl, model) {
     var _a;
     const { properties } = model;
@@ -20,9 +21,9 @@ export default function decorate(panelEl, model) {
     infoHeader.append(infoTitle);
     panelEl.prepend(infoHeader);
     legendEl === null || legendEl === void 0 ? void 0 : legendEl.remove();
-    const helpType = properties.helpType || 'info';
-    const hideIcon = properties.hideIcon;
-    const variant = properties.variant;
+    const { helpType = 'info' } = properties;
+    const { hideIcon } = properties;
+    const { variant } = properties;
     panelEl.classList.add(`${className}--${helpType}`);
     if (variant) {
         panelEl.classList.add(`${className}--${variant}`);

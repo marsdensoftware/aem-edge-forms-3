@@ -1,3 +1,4 @@
+/*stylelint-disable*/
 body.modal-open{overflow:hidden}.modal dialog{--dialog-border-radius: 1rem;padding:0;overscroll-behavior:none;border:none;border-radius:8px;width:100%;outline:none}.modal dialog .modal-content{max-height:calc(100dvh - 3.75rem)}.modal dialog::backdrop{background-color:rgba(0, 0, 0, 0.5)}.modal .close-button{position:absolute;top:0;right:0;width:1.5rem;height:1.5rem;padding:0.375rem;border-radius:8px;background-color:unset;text-overflow:clip;margin:0;border:none;padding-right:1.875rem;background-image:url("/icons/icon-x-dark.svg");background-position:center;background-size:1.5rem;background-repeat:no-repeat;cursor:pointer}.modal dialog .section{padding:0}
 
 /*# sourceMappingURL=modal.css.map */

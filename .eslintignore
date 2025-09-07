@@ -5,17 +5,9 @@ blocks/form/rules/model/*
 blocks/form/rules/functions.js
 scripts/editor-support.js
 scripts/editor-support-rte.js
+tools/forms-scaffolder.js
+tools/update-mappings.js
 /test
 
-# todo add these back in at some point.
-blocks/**/*.js
-scripts/**/*.js
-i18n/**/*.js
+# TODO add these back in at some point.
 component-models.json
-
-# include msd scripts
-#!scripts/msd/**
-#
-!scripts/msd/*
-!blocks/account/*
-!blocks/auth-redirect/*

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,23 +17,12 @@ function decorate(block) {
         const navPath = navMeta
             ? new URL(navMeta, window.location.href).pathname
             : '/nav';
-        const fragment = yield loadFragment(navPath);
+        // eslint-disable-next-line no-unused-vars
+        yield loadFragment(navPath);
         block.textContent = '';
         const nav = document.createElement('nav');
         nav.id = 'nav';
         nav.className = 'nav';
-        // Fragment.firstElementChild is <main> element
-        // while (fragment?.firstElementChild) {
-        //   nav.append(fragment.firstElementChild)
-        // }
-        // const paras = nav.querySelectorAll('div.section .default-content-wrapper p')
-        // // Top nav
-        // paras.forEach((item, idx) => {
-        //   item.outerHTML = `<div class="${idx === 0 ? 'nav__logo' : 'nav__action'}">${
-        //     item.innerHTML
-        //   }</div>`
-        // })
-        // block.append(nav)
     });
 }
 export default decorate;

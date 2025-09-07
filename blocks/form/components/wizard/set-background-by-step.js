@@ -4,6 +4,7 @@ import { createProgressBar, trackProgress } from './progress-bar.js'
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
 const DEFAULT_BG_CLASS = 'wizard--bg-light'
+const FINAL_STEP_GROUP = '4';
 
 /**
  * Finds the background class on the current wizard step and applies it to the container,
@@ -16,8 +17,9 @@ function updateBackground(wizardEl, container) {
   const currentStepEl = wizardEl.querySelector('.current-wizard-step')
   if (!currentStepEl) return
 
-  // 2. Find which of the defined background classes is present on the active step.If none is found, use the default.
-  //    This uses short-circuiting: if currentStepEl is null, it immediately uses the default.
+  // 2. Find which of the defined background classes is present on the active step.If none
+  // is found, use the default. This uses short-circuiting: if currentStepEl is null, it
+  // immediately uses the default.
   const newBgClass =
     (currentStepEl &&
       BG_CLASSES.find((cls) => currentStepEl.classList.contains(cls))) ||
@@ -46,8 +48,43 @@ function updateExitButtonText(wizardEl) {
     : 'Save & exit'
 }
 
+function updateWizardNextButton(container) {
+  // if the current wizard step has a data-stepgroup of '4' set the value of the
+  // Net button to Finish
+  const currentStepEl = container.querySelector('.current-wizard-step')
+  if (!currentStepEl) return
+  const nextBtn = currentStepEl
+    .closest('form')
+    .querySelector('#wizard-button-next')
+  if (!nextBtn) return
+  if (currentStepEl.dataset.stepgroup === FINAL_STEP_GROUP) {
+    nextBtn.textContent = 'Finish'
+  } else {
+    nextBtn.textContent = 'Next'
+  }
+}
+
 onElementsAddedByClassName('wizard', (wizardEl) => {
   const container = wizardEl.closest('main')
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (mutation.target.classList.contains('current-wizard-step')) {
+          updateBackground(wizardEl, container);
+          trackProgress();
+        }
+      }
+    });
+  });
+
+  const wizardChildren = wizardEl.children;
+  for (const child of wizardChildren) {
+    observer.observe(child, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
 
   // Set the initial background based on the default active step on page load.
   updateBackground(wizardEl, container)
@@ -56,8 +93,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
 
   // Add an event listener to update the background whenever the step changes.
   wizardEl.addEventListener('wizard:navigate', () => {
-    updateBackground(wizardEl, container)
     updateExitButtonText(wizardEl)
-    trackProgress()
+    updateWizardNextButton(container)
   })
 })
