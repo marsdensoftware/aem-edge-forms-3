@@ -8,54 +8,94 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+function decorateToast(toastDiv, options = {}) {
+    const { toastTitle, toastMessage, dismissible = true, timeoutMs, // auto-dismiss after N ms (undefined to disable)
+     } = options;
+    // Create a header container
+    const headerContainer = document.createElement('div');
+    headerContainer.classList.add('toast__header-container');
+    // Create icon container
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('toast__icon');
+    // Create the title div
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('toast__title');
+    if (toastTitle)
+        titleDiv.textContent = toastTitle;
+    // Create a close button
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('toast__close-button');
+    closeButton.innerHTML = '&times;';
+    closeButton.setAttribute('aria-label', 'Close');
+    // Add click event to close button
+    closeButton.addEventListener('click', () => {
+        toastDiv.classList.add('toast__hidden');
+        // remove the toast
+        if (toastDiv.isConnected)
+            toastDiv.remove();
+    });
+    // add the icon, title and close to the header container
+    headerContainer.appendChild(iconContainer);
+    headerContainer.appendChild(titleDiv);
+    if (dismissible) {
+        headerContainer.appendChild(closeButton);
+    }
+    // Create the description div
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('toast__description');
+    if (toastMessage)
+        messageDiv.textContent = toastMessage;
+    // Append elements to toast
+    toastDiv.appendChild(headerContainer);
+    toastDiv.appendChild(messageDiv);
+    // Optional auto-dismiss
+    if (timeoutMs && timeoutMs > 0) {
+        setTimeout(() => {
+            if (!toastDiv.classList.contains('toast__hidden')) {
+                toastDiv.classList.add('toast__hidden');
+                setTimeout(() => {
+                    if (toastDiv.isConnected)
+                        toastDiv.remove();
+                }, 400);
+            }
+        }, timeoutMs);
+    }
+}
+export function createToast(options = {}) {
+    const toastDiv = document.createElement('div');
+    toastDiv.classList.add('toast');
+    if (options.type)
+        toastDiv.classList.add(`toast--${options.type}`);
+    decorateToast(toastDiv, options);
+    return toastDiv;
+}
 /**
  * Decorates a custom form field component
  * @param {HTMLElement} fieldDiv - The DOM element containing the field wrapper. Refer to the documentation
  * for its structure for each component.
- * @param {Object} fieldJson - The form json object for the component.
+ * @param {Object} fieldJson - The form JSON object for the component.
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
 export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('⚙️ Decorating toast component:', fieldDiv, fieldJson, parentElement, formId);
-        // TODO: Implement your custom component logic here
-        // You can access the field properties via fieldJson.properties
+        console.log('Decorating toast component:', fieldDiv, fieldJson, parentElement, formId);
         const { properties } = fieldJson;
+        // Extract ToastOptions from properties
+        const toastOptions = {
+            type: properties === null || properties === void 0 ? void 0 : properties.toastType,
+            toastTitle: properties === null || properties === void 0 ? void 0 : properties.toastTitle,
+            toastMessage: properties === null || properties === void 0 ? void 0 : properties.toastMessage,
+            dismissible: (properties === null || properties === void 0 ? void 0 : properties.dismissible) !== false, // default to true if not specified
+            timeoutMs: properties === null || properties === void 0 ? void 0 : properties.timeoutMs,
+            iconClass: properties === null || properties === void 0 ? void 0 : properties.iconClass,
+        };
         fieldDiv.classList.add('toast');
-        // add the value of the type property as a class to the toast
-        const type = properties === null || properties === void 0 ? void 0 : properties.toastType;
-        fieldDiv.classList.add(`toast--${type}`);
-        // Create header container
-        const headerContainer = document.createElement('div');
-        headerContainer.classList.add('toast__header-container');
-        // Create icon container
-        const iconContainer = document.createElement('div');
-        iconContainer.classList.add('toast__icon');
-        // Create the title div
-        const titleDiv = document.createElement('div');
-        titleDiv.classList.add('toast__title');
-        titleDiv.textContent = properties === null || properties === void 0 ? void 0 : properties.toastTitle;
-        // Create close button
-        const closeButton = document.createElement('button');
-        closeButton.classList.add('toast__close-button');
-        closeButton.innerHTML = '&times;';
-        closeButton.setAttribute('aria-label', 'Close');
-        // Add click event to close button
-        closeButton.addEventListener('click', () => {
-            fieldDiv.classList.add('toast__hidden');
-        });
-        // add the icon, title and close to the header container
-        headerContainer.appendChild(iconContainer);
-        headerContainer.appendChild(titleDiv);
-        headerContainer.appendChild(closeButton);
-        // Create the description div
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('toast__description');
-        messageDiv.textContent = properties === null || properties === void 0 ? void 0 : properties.toastMessage;
-        // Append elements to toast
-        fieldDiv.appendChild(headerContainer);
-        fieldDiv.appendChild(messageDiv);
+        if (toastOptions.type) {
+            fieldDiv.classList.add(`toast--${toastOptions.type}`);
+        }
+        // Use the existing decorateToast function instead of recreating the elements
+        decorateToast(fieldDiv, toastOptions);
         return fieldDiv;
     });
 }
