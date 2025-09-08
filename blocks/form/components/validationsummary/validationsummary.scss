@@ -1,0 +1,11 @@
+@use '../../../../styles/settings' as *;
+
+.panel-validationsummary {
+  .fieldname {
+    font-weight: bold;
+  }
+
+  >.plain-text-wrapper {
+    margin-left: $spacing-600;
+  }
+}

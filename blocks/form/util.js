@@ -263,8 +263,10 @@ export function extractIdFromUrl(url) {
   const segments = url?.split('/');
   return segments?.[segments.length - 1];
 }
+// ###SEP-NJ Added multiline to the contraintsDef so that
+// contraints related properties are set on multiline properties
 const constraintsDef = Object.entries({
-  'password|tel|email|text': [['maxLength', 'maxlength'], ['minLength', 'minlength'], 'pattern'],
+  'password|tel|email|text|multiline': [['maxLength', 'maxlength'], ['minLength', 'minlength'], 'pattern'],
   'number|range|date': [['maximum', 'Max'], ['minimum', 'Min'], 'step'],
   file: ['accept', 'Multiple'],
   panel: [['maxOccur', 'data-max'], ['minOccur', 'data-min']],

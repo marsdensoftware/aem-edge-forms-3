@@ -24,6 +24,12 @@
     &:focus {
       color: $color-primary-navy;
     }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $stroke-focus;
+    }
   }
   
   ul.summary-entry{

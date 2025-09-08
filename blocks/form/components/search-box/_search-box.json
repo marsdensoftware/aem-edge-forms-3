@@ -162,6 +162,13 @@
           ]
         },
         {
+            "component": "number",
+            "name": "maxAllowedItems",
+            "label": "Maximum number of items",
+            "valueType": "number",
+            "description": "Maximum number of items allowed to be selected. Leave empty for no limit"
+        },
+        {
           "...": "../../models/form-common/_responsive-columns-component.json"
         },
         {

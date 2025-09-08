@@ -1,29 +1,29 @@
 /* eslint-disable class-methods-use-this */
 import { i18n } from '../../../i18n/index.js';
 
-export class DefaultFieldConverter {
-  _collectFields(root) {
-    const result = [];
+export function collectFields(root) {
+  const result = [];
 
-    function traverse(node) {
-      if (!node.items || !Array.isArray(node.items)) return;
+  function traverse(node) {
+    if (!node.items || !Array.isArray(node.items)) return;
 
-      for (const child of node.items) {
-        if (child.isContainer) {
-          traverse(child); // go deeper
-        } else {
-          result.push(child); // collect non-container
-        }
+    for (const child of node.items) {
+      if (child.isContainer) {
+        traverse(child); // go deeper
+      } else {
+        result.push(child); // collect non-container
       }
     }
-
-    traverse(root);
-    return result;
   }
 
+  traverse(root);
+  return result;
+}
+
+export class DefaultFieldConverter {
   convert(entry, fieldName) {
     const dataModel = window.myForm.getElement(entry.id);
-    const fields = this._collectFields(dataModel);
+    const fields = collectFields(dataModel);
     return this._convertInternal(fields, fieldName);
   }
 
@@ -259,4 +259,15 @@ export function isNo(field) {
     return normalized === 'no' || normalized === 'false' || normalized === '0';
   }
   return false;
+}
+
+export function waitForVar(name, interval = 100) {
+  return new Promise((resolve) => {
+    const check = setInterval(() => {
+      if (typeof window[name] !== 'undefined') {
+        clearInterval(check);
+        resolve(window[name]);
+      }
+    }, interval);
+  });
 }

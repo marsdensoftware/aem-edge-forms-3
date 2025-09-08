@@ -67,6 +67,13 @@
       text-decoration: none;
     }
 
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $stroke-focus;
+    }
+
     &::after {
       content: '';
       display: inline-block;
@@ -115,6 +122,18 @@
 
     .panel-formcontextualhelp__icon {
       margin-bottom: $spacing-200;
+    }
+  }
+  
+  &--error {
+    border: 1px solid $color-feedback-red;
+    background: $color-shade-red-05;
+    .panel-formcontextualhelp__icon::before {
+      background-image: url('/icons/icon-contextual-help-error-primary.svg');
+    }
+    
+    .panel-formcontextualhelp__title {
+      color: $color-feedback-red
     }
   }
 

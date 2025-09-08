@@ -1,3 +1,5 @@
+import { onElementAdded } from '../utils.js'
+
 /* eslint-disable no-use-before-define */
 /**
  * A WeakMap to hold the state for each search-box instance.
@@ -436,6 +438,7 @@ interface El extends Element {
   dataset: {
     datasource: string
     recommendationsDatasource?: string
+    maxAllowedItems?: string
   }
 }
 
@@ -443,6 +446,7 @@ interface Field {
   [key: string]: any
   properties: {
     datasource: string
+    maxAllowedItems?: string
     [key: string]: any
   }
 }
@@ -488,7 +492,12 @@ document.addEventListener('input', (event) => {
       div.classList.add('suggestion')
       div.textContent = item
       div.dataset.source = 'main'
-      div.addEventListener('click', () => {
+      div.addEventListener('click', (e) => {
+        if (element.classList.contains('max-items-reached')) {
+          // prevent addition of items
+          e.stopPropagation();
+          return;
+        }
         // Remove item from the main state
         state.main = state.main.filter((i) => i !== item)
 
@@ -537,6 +546,55 @@ function populateRecommendationsDiv(
   }
 }
 
+function initSearchBoxCounter(searchBox: El) {
+  const maxAllowedItems = parseInt(searchBox.dataset.maxAllowedItems || '-1', 10);
+  if (Number.isNaN(maxAllowedItems) || maxAllowedItems <= 0) {
+    return;
+  }
+
+  const selectedCards = searchBox.querySelector('.selected-cards');
+  if (!selectedCards) {
+    return;
+  }
+  const inputWrapper = searchBox.querySelector('.search-box__input');
+
+  // Create / attach counter element under the input
+  let counter = inputWrapper?.querySelector('.counter');
+  if (!counter) {
+    counter = document.createElement('div');
+    counter.className = 'counter';
+    inputWrapper?.appendChild(counter);
+  }
+
+  function updateCounter() {
+    const count = selectedCards?.querySelectorAll('.selected-card').length || 0;
+
+    if (count === 0 || count < maxAllowedItems - 5) {
+      if (counter) {
+        counter.textContent = '';
+      }
+      return;
+    }
+
+    if (counter) {
+      counter.textContent = `${count} of ${maxAllowedItems} added`;
+      if (count >= maxAllowedItems) {
+        counter.textContent += '. Remove a skill to add more.'
+        searchBox.classList.add('max-items-reached');
+      } else {
+        searchBox.classList.remove('max-items-reached');
+      }
+    }
+  }
+
+  // Observe for child additions/removals
+  const observer = new MutationObserver(updateCounter);
+  observer.observe(selectedCards, { childList: true });
+
+  // Run initially
+  updateCounter();
+}
+
 export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
@@ -553,14 +611,15 @@ export default function decorate(element: El, field: Field) {
     // Set the flag immediately to prevent multiple setTimeout calls
     window.experiencedBasedJobsObserverInitialized = true;
 
-    setTimeout(() => {
-      observeElementForJobs(element);
-    }, 500); // 500ms delay to allow the DOM to load
+    onElementAdded(element).then((connectedEl) => {
+      observeElementForJobs(connectedEl);
+    });
   }
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource
   element.dataset.recommendationsDatasource = recommendationsDatasource
+  element.dataset.maxAllowedItems = field.properties.maxAllowedItems
 
   // --- Initialize State for this component instance ---
   const mainData = datasources[datasource as keyof typeof datasources] || []
@@ -598,6 +657,8 @@ export default function decorate(element: El, field: Field) {
   if (showRecommendations) {
     populateRecommendationsDiv(element, recommendationsCardsDiv, selectedCardsDiv, inputEl)
   }
+
+  initSearchBoxCounter(element)
 
   return element
 }

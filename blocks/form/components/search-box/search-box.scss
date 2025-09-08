@@ -4,7 +4,8 @@
 .search-box {
   position: relative;
 
-  .field-description {
+  .field-description,
+  .field-description-2 {
     p {
       padding-bottom: 0;
       font-weight: $font-weight-regular;
@@ -15,6 +16,20 @@
       @include media('desktop') {
         font-size: $size-font-body-default;
       }
+    }
+  }
+
+  .counter{
+    padding: 0.75em 0;
+  }
+
+  &.max-items-reached{
+    .counter{
+      color: $text-error;
+      font-weight: $font-weight-bold;
+    }
+    .recommendations-cards-wrapper{
+      display: none;
     }
   }
 }
@@ -34,7 +49,7 @@
     height: $spacing-500;
     position: absolute;
     right: $spacing-400;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
   }
 

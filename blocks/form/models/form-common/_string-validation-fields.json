@@ -33,6 +33,13 @@
         },
         {
             "component": "text",
+            "name": "maxRemainingCharsMessage",
+            "valueType": "string",
+            "label": "Maximum remaining characters message",
+            "description": "Message shown for the maximum remaining characters. Use {remaining} as a placeholder for the number of remaining characters"
+        },
+        {
+            "component": "text",
             "name": "pattern",
             "valueType": "string",
             "label": "Pattern",
