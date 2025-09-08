@@ -5,7 +5,10 @@ form .field-wrapper[data-required="true"]>.field-label::after {
 }
 
 form .field-wrapper[data-required="false"]>.field-label::after {
-  content: ' (Optional)' !important;
+  content: ' Optional' !important;
+  float: right;
+  font-size: 1rem;
+  color: $text-secondary;
 }
 
 .field-invalid {
