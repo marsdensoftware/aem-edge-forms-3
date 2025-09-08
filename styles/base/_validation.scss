@@ -8,6 +8,7 @@ form .field-wrapper[data-required="false"]:not(.with-description)>.field-label,
 form .field-wrapper[data-required="false"].with-description>.field-description-2{
   position: relative;
   display: block;
+  padding-right: 70px;
 }
 
 form .field-wrapper[data-required="false"]:not(.with-description)>.field-label::after {
