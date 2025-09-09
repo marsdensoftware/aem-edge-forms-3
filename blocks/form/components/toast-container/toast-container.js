@@ -12,6 +12,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { createToast } from '../toast/toast.js';
 let globalContainerEl = null;
 let listenerInitialized = false;
+// Helper API: programmatically dispatch a toast event from anywhere
+export function dispatchToast(options = {}) {
+    const detail = Object.assign({ strategy: 'stack', max: 3 }, options);
+    window.dispatchEvent(new window.CustomEvent('app:toast', { detail }));
+}
+// Helper API: clear all toasts from the active toast container
+export function dispatchToastClear() {
+    window.dispatchEvent(new window.CustomEvent('app:toast-clear'));
+}
 export function getOrCreateToastContainer() {
     var _a;
     // Prefer an existing decorated container in the DOM which will be a child of the `form .current-wizard-step` element
@@ -42,12 +51,53 @@ function initToastEventBridge(containerEl) {
         return;
     listenerInitialized = true;
     // Listen for programmatic toasts from anywhere:
-    // window.dispatchEvent(new CustomEvent<ToastOptions>('app:toast', { detail: { type, title, description, timeoutMs } }))
+    // window.dispatchEvent(
+    //   new CustomEvent<ToastOptions>(
+    //     'app:toast', { detail: { type, title, description, timeoutMs, strategy: 'stack', max: 3 } }
+    //   )
+    // )
     window.addEventListener('app:toast', ((e) => {
         console.log('Toast event received:', e);
         const ce = e;
-        const toast = createToast(ce.detail || {});
-        appendToast(toast, containerEl);
+        const detail = ce.detail || {};
+        // Determine strategy: prefer explicit event detail, then container dataset, default to 'stack'
+        const containerStrategy = (containerEl.getAttribute('data-strategy') || '').toLowerCase();
+        const maxAttr = containerEl.getAttribute('data-max');
+        const maxFromAttr = maxAttr ? parseInt(maxAttr, 10) : undefined;
+        const strategy = detail.strategy
+            ? detail.strategy
+            : (containerStrategy === 'single' || maxFromAttr === 1 ? 'single' : 'stack');
+        const max = (typeof detail.max === 'number') ? detail.max : (maxFromAttr || undefined);
+        if (strategy === 'single' || max === 1) {
+            // Always replace any existing toast with a new one
+            const toast = createToast(detail);
+            while (containerEl.firstChild) {
+                containerEl.removeChild(containerEl.firstChild);
+            }
+            appendToast(toast, containerEl);
+        }
+        else {
+            // Stack behavior with optional max cap: remove oldest when max is reached
+            const toast = createToast(detail);
+            const maxCap = (typeof max === 'number' && max > 0) ? max : undefined;
+            if (maxCap !== undefined) {
+                while (containerEl.childElementCount >= maxCap) {
+                    const first = containerEl.firstElementChild;
+                    if (first)
+                        first.remove();
+                    else
+                        break;
+                }
+            }
+            appendToast(toast, containerEl);
+        }
+    }));
+    // Listen for events that will remove all toasts from the toast-container, without removing the toast-container
+    window.addEventListener('app:toast-clear', ((e) => {
+        console.log('Toast clear event received:', e);
+        while (containerEl.firstChild) {
+            containerEl.removeChild(containerEl.firstChild);
+        }
     }));
 }
 /**

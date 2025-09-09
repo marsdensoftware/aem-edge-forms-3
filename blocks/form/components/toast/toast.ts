@@ -22,6 +22,9 @@ function decorateToast(toastDiv: HTMLElement, options: ToastOptions = {}) {
     timeoutMs, // auto-dismiss after N ms (undefined to disable)
   } = options;
 
+  // make sure we have the `aria-alive="polite"` attribute on the toast container
+  toastDiv.setAttribute('aria-live', 'polite');
+
   // Create a header container
   const headerContainer = document.createElement('div');
   headerContainer.classList.add('toast__header-container');

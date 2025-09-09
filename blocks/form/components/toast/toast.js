@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 function decorateToast(toastDiv, options = {}) {
     const { toastTitle, toastMessage, dismissible = true, timeoutMs, // auto-dismiss after N ms (undefined to disable)
      } = options;
+    // make sure we have the `aria-alive="polite"` attribute on the toast container
+    toastDiv.setAttribute('aria-live', 'polite');
     // Create a header container
     const headerContainer = document.createElement('div');
     headerContainer.classList.add('toast__header-container');
