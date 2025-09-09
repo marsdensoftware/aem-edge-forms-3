@@ -59,6 +59,13 @@ export class RepeatablePanel {
   constructor(el, properties, name, converter, sorterFn) {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
+    this.maxOccur = this._repeatablePanel.dataset.max;
+    console.log(`Max occur: ${this.maxOccur}`);
+    this.toastTitle = properties.toastTitle;
+    console.log(`Toast title: ${this.toastTitle}`);
+    this.toastMessage = properties.toastMessage;
+    console.log(`Toast message: ${this.toastMessage}`);
+
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
     this._cancelModal = this._initModal(
       cancelModalEl,

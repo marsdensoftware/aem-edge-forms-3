@@ -28174,6 +28174,18 @@
             "name": "addedTitle",
             "label": "Added title",
             "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
           }
         ]
       },

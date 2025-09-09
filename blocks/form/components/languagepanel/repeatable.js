@@ -81,7 +81,7 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
       dismissible: true,
       timeoutMs: undefined,
       strategy: 'stack',
-      maxToasts: 3,
+      maxToasts: 2,
     });
   }
 }
