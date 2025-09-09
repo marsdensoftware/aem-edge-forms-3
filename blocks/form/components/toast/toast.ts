@@ -6,7 +6,7 @@
 import { FieldJson } from '@aemforms/af-core';
 
 export type ToastOptions = {
-  type?: string; // e.g., 'success' | 'error' | 'info' | 'warning'
+  type?: 'success' | 'error' | 'info' | 'warning';
   toastTitle?: string;
   toastMessage?: string;
   dismissible?: boolean; // default: true
@@ -103,7 +103,7 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJs
 
   // Extract ToastOptions from properties
   const toastOptions: ToastOptions = {
-    type: properties?.toastType as string,
+    type: properties?.toastType,
     toastTitle: properties?.toastTitle as string,
     toastMessage: properties?.toastMessage as string,
     dismissible: properties?.dismissible !== false, // default to true if not specified

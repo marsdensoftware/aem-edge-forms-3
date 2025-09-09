@@ -1,4 +1,5 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
+import { dispatchToast } from '../toast-container/toast-container.js';
 
 export class LanguagePanelRepeatable extends ConditionalRepeatable {
   static FIELD_NAMES = {
@@ -66,6 +67,21 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
       if (proficiency) {
         proficiency.style.display = 'none';
       }
+    });
+  }
+
+  _save(entry) {
+    super._save(entry);
+
+    // dispatch toast event with the max selection message (error state)
+    dispatchToast({
+      type: 'success',
+      toastTitle: 'Language added successfully.',
+      toastMessage: 'You can 3 more languages.',
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'stack',
+      maxToasts: 3,
     });
   }
 }

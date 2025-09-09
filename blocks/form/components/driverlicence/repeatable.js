@@ -2,6 +2,7 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { FIELD_NAMES } from './fieldnames.js'
 import { isNo, DefaultFieldConverter } from '../utils.js'
+import { dispatchToast } from '../toast-container/toast-container.js';
 
 class Converter extends DefaultFieldConverter {
   convert(element) {
@@ -113,5 +114,18 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
 
   _fieldToNameValues(entry) {
     super._fieldToNameValues(entry);
+  }
+
+  _save(entry) {
+    super._save(entry);
+
+    // dispatch toast event with the max selection message (error state)
+    dispatchToast({
+      type: 'success',
+      toastTitle: 'Driver licence added successfully.',
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'single',
+    });
   }
 }

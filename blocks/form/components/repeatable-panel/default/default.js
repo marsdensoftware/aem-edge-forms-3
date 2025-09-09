@@ -610,7 +610,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
   constructor(el, properties, name, converter, sorterFn) {
     super(el, properties, name, converter, sorterFn);
-
+    //
+    // console.log(`${name}Repeatable properties: `, properties);
+    // console.log(`${name}Repeatable el: `, el);
     // Add class
     this._repeatablePanel.classList.add('panel-repeatable-panel__conditional');
 

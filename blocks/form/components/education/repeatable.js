@@ -2,6 +2,7 @@
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
 import { FIELD_NAMES, sorter, COMPLETION_STATUS } from './fieldnames.js'
 import { DefaultFieldConverter } from '../utils.js'
+import { dispatchToast } from '../toast-container/toast-container.js';
 
 class Converter extends DefaultFieldConverter {
   convert(element) {
@@ -63,5 +64,18 @@ export class EducationRepeatable extends ConditionalRepeatable {
     this._init(entry)
 
     super._onItemAdded(entry)
+  }
+
+  _save(entry) {
+    super._save(entry)
+
+    dispatchToast({
+      type: 'success',
+      toastTitle: 'Education added successfully.',
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'stack',
+      maxToasts: 3,
+    })
   }
 }
