@@ -96,6 +96,11 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
         }
         // Use the existing decorateToast function instead of recreating the elements
         decorateToast(fieldDiv, toastOptions);
+        // get the sibling legend element and add the data-visible="false" attribute
+        const legend = fieldDiv.querySelector('legend');
+        if (legend) {
+            legend.setAttribute('data-visible', 'false');
+        }
         return fieldDiv;
     });
 }

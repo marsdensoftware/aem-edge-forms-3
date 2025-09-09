@@ -1,3 +1,7 @@
+import { createToast } from '../toast/toast.js';
+import { getOrCreateToastContainer, appendToast, removeToast } from '../toast-container/toast-container.js';
+import type { ToastOptions } from '../toast/toast.js';
+
 interface Field {
   [key: string]: any
   properties: {
@@ -12,102 +16,29 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
   // Maximum number of checkboxes that can be enabled at once
   const MAX_ENABLED_CHECKBOXES = 4;
 
-  // Toast element for displaying selection count - will be created on first checkbox click
-  let toastElement: HTMLElement | null = null;
+  // Track the currently displayed toast so we can replace or remove it as needed
+  let currentToastEl: HTMLElement | null = null;
 
-  // Function to create the toast element (called only when needed)
-  const createToastElement = () => {
-    if (document.querySelector('.checkbox-toast')) {
-      // If toast already exists in the DOM, use it
-      toastElement = document.querySelector('.checkbox-toast');
-      return;
-    }
-
-    // Create new toast element
-    toastElement = document.createElement('div');
-    toastElement.classList.add('checkbox-toast');
-
-    // Create icon container
-    const iconContainer = document.createElement('div');
-    iconContainer.classList.add('checkbox-toast__icon');
-
-    // Create message container
-    const messageContainer = document.createElement('div');
-    messageContainer.classList.add('checkbox-toast__message-container');
-
-    // Create close button
-    const closeButton = document.createElement('button');
-    closeButton.classList.add('checkbox-toast__close-button');
-    closeButton.innerHTML = '&times;';
-    closeButton.setAttribute('aria-label', 'Close');
-
-    // Add click event to close button
-    closeButton.addEventListener('click', () => {
-      if (toastElement) {
-        toastElement.classList.add('checkbox-toast--hidden');
-      }
-    });
-
-    // Append elements to toast
-    toastElement.appendChild(iconContainer);
-    toastElement.appendChild(messageContainer);
-    toastElement.appendChild(closeButton);
-
-    document.body.appendChild(toastElement);
-  };
-
-  // Toast will be created only when needed (on first checkbox click)
-
-  // Function to show toast with message
+  // Function to show a toast with a message using the shared toast + container
   const showToast = (message: string, secondLine?: string, isError: boolean = false) => {
-    if (!toastElement) {
-      // Create the toast element on first use (first checkbox click)
-      createToastElement();
+    // Remove any existing toast created by this component to keep a single active toast
+    if (currentToastEl) {
+      removeToast(currentToastEl);
+      currentToastEl = null;
     }
 
-    // Get the icon container
-    const iconContainer = toastElement!.querySelector('.checkbox-toast__icon');
-    if (iconContainer) {
-      // Remove any existing classes
-      iconContainer.classList.remove('checkbox-toast__icon--success', 'checkbox-toast__icon--error');
+    const options: ToastOptions = {
+      type: isError ? 'error' : 'success',
+      toastTitle: message,
+      toastMessage: secondLine,
+      dismissible: true,
+      timeoutMs: undefined,
+    };
 
-      // Add the appropriate class based on isError
-      if (isError) {
-        iconContainer.classList.add('checkbox-toast__icon--error');
-      } else {
-        iconContainer.classList.add('checkbox-toast__icon--success');
-      }
-    }
-
-    // Get the message container
-    const messageContainer = toastElement!.querySelector('.checkbox-toast__message-container');
-    if (messageContainer) {
-      // Clear existing content
-      messageContainer.innerHTML = '';
-
-      // Add main message
-      const mainMessage = document.createElement('div');
-      mainMessage.textContent = message;
-      messageContainer.appendChild(mainMessage);
-
-      // Add second line if provided
-      if (secondLine) {
-        const secondLineElement = document.createElement('div');
-        secondLineElement.classList.add('checkbox-toast__second-line');
-        secondLineElement.textContent = secondLine;
-        messageContainer.appendChild(secondLineElement);
-      }
-    }
-
-    // Apply the appropriate styling based on isError
-    if (isError) {
-      toastElement!.classList.add('checkbox-toast--error');
-    } else {
-      toastElement!.classList.remove('checkbox-toast--error');
-    }
-
-    // Make sure toast is visible
-    toastElement!.classList.remove('checkbox-toast--hidden');
+    const toast = createToast(options);
+    const container = getOrCreateToastContainer();
+    appendToast(toast, container);
+    currentToastEl = toast;
   };
 
   // Function to count the number of enabled checkboxes across all sibling containers
@@ -131,7 +62,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     return count;
   };
 
-  // Add event listener to the checkbox in this container
+  // Add an event listener to the checkbox in this container
   const setupCheckboxListeners = () => {
     // Get the single checkbox in this container
     const checkbox = fieldDiv.querySelector('input[type="checkbox"]');
@@ -161,7 +92,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             return;
           }
 
-          // Show toast with current selection count (success state)
+          // Show toast with the current selection count (success state)
           showToast(`${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`, undefined, false);
         } else {
           // Checkbox is being unchecked, update the count
@@ -192,8 +123,9 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
     wizardButtonWrapper.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
       if (target.id === 'wizard-button-next' || target.id === 'wizard-button-prev') {
-        if (toastElement) {
-          toastElement.classList.add('checkbox-toast--hidden');
+        if (currentToastEl) {
+          removeToast(currentToastEl);
+          currentToastEl = null;
         }
       }
     });
