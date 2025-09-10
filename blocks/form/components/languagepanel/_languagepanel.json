@@ -187,20 +187,11 @@
                             "name": "addedTitle",
                             "label": "Added title",
                             "valueType": "string"
-                        },
-                        {
-                          "component": "text",
-                          "name": "toastTitle",
-                          "label": "Toast title",
-                          "valueType": "string"
-                        },
-                        {
-                          "component": "text",
-                          "name": "toastMessage",
-                          "label": "Toast message",
-                          "valueType": "string"
                         }
                     ]
+                },
+                {
+                  "...": "../../models/form-common/_validation-toast-notification.json"
                 },
                 {
                     "...": "../../models/form-common/_responsive-columns-component.json"

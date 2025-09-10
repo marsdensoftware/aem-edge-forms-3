@@ -5,6 +5,7 @@ import { isNo, DefaultFieldConverter } from '../../utils.js'
 import { updateOrCreateInvalidMsg, checkValidation } from '../../../util.js'
 import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
+import { dispatchToast } from '../../toast-container/toast-container.js';
 
 class RepeatModal extends Modal {
   constructor(yesCallback, noCallback) {
@@ -358,7 +359,22 @@ export class RepeatablePanel {
 
     this.#dispatchChange();
 
+    this.#dispatchToast()
+
     this._renderOverview();
+  }
+
+  #dispatchToast() {
+    // dispatch toast event with the max selection message (error state)
+    dispatchToast({
+      type: 'success',
+      toastTitle: this.toastTitle,
+      toastMessage: this.toastMessage,
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'stack',
+      maxToasts: this.maxOccur,
+    });
   }
 
   #dispatchChange() {

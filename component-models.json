@@ -28174,7 +28174,15 @@
             "name": "addedTitle",
             "label": "Added title",
             "valueType": "string"
-          },
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
           {
             "component": "text",
             "name": "toastTitle",
@@ -28186,6 +28194,12 @@
             "name": "toastMessage",
             "label": "Toast message",
             "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
           }
         ]
       },
