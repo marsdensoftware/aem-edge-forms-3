@@ -26,7 +26,7 @@ stages:
               echo "Cleaned branch name: $BRANCH_NAME"
 
               echo "Adding GitHub remote"
-              git remote add github https://$(GITHUB_PAT)@github.com/marsdensoftware/aem-edge-forms-3
+              git remote add github https://$(GITHUB_PAT)@github.com/msddev01/sep-aem-ui
               echo "GitHub remote success"
 
               # Fetch the latest changes from both origin and github remotes
