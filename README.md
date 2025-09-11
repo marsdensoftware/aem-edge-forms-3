@@ -57,6 +57,7 @@ When developing Block keep this thing in mind:
 - Block's name needs to be all lowercase
 - In Block's `.json` file, definitions id, models id and filters id needs to be the same name and lowercase. The exception of definitions title and definition plugins name
 - Block needs to be added to one or more `models` inside the models folder that will use the newly created Block
+- A useful tool to create a block is available through the `create:custom-component` script target in the package.json file 
 
 ### Updating content source
 
