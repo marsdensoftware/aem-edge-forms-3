@@ -48,6 +48,9 @@
         },
         {
           "...": "../blocks/form/components/toast/_toast.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/extended-checkbox-group/_extended-checkbox-group.json#/definitions"
         }
       ]
     }

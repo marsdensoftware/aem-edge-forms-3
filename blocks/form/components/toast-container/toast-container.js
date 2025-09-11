@@ -15,6 +15,7 @@ let listenerInitialized = false;
 // Helper API: programmatically dispatch a toast event from anywhere
 export function dispatchToast(options = {}) {
     const detail = Object.assign({ strategy: 'stack', max: 3 }, options);
+    console.log('dispatching Toast', detail);
     window.dispatchEvent(new window.CustomEvent('app:toast', { detail }));
 }
 // Helper API: clear all toasts from the active toast container
@@ -56,14 +57,11 @@ function initToastEventBridge() {
         const detail = ce.detail || {};
         // Resolve container dynamically based on the current wizard step
         const containerEl = getOrCreateToastContainer();
-        // Determine strategy: prefer explicit event detail, then container dataset, default to 'stack'
-        const containerStrategy = (containerEl.getAttribute('data-strategy') || '').toLowerCase();
-        const maxAttr = containerEl.getAttribute('data-max');
-        const maxFromAttr = maxAttr ? parseInt(maxAttr, 10) : undefined;
-        const strategy = detail.strategy
-            ? detail.strategy
-            : (containerStrategy === 'single' || maxFromAttr === 1 ? 'single' : 'stack');
-        const max = (typeof detail.maxToasts === 'number') ? detail.maxToasts : (maxFromAttr || undefined);
+        /* eslint-disable prefer-destructuring */
+        const strategy = detail.strategy;
+        /* eslint-disable prefer-destructuring */
+        const max = detail.max;
+        console.log('strategy', strategy, 'max', max);
         if (strategy === 'single' || max === 1) {
             // Always replace any existing toast with a new one
             const toast = createToast(detail);

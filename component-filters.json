@@ -111,7 +111,8 @@
       "extended-checkbox-container",
       "range",
       "toast-container",
-      "toast"
+      "toast",
+      "extended-checkbox-group"
     ]
   },
   {

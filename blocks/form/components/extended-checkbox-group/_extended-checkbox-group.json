@@ -1,0 +1,55 @@
+{
+  "definitions": [
+    {
+      "title": "Extended checkbox group",
+      "id": "extended-checkbox-group",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Extended checkbox group",
+              "fieldType": "panel",
+              "minOccur": 1,
+              "fd:viewType": "extended-checkbox-group"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "extended-checkbox-group",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "...": "../../models/form-common/_basic-input-fields.json"
+        },
+        {
+          "component": "number",
+          "name": "maxOccur",
+          "label": "Maximum allowed items",
+          "valueType": "number",
+          "placeholder": "No Limit",
+          "description": "Maximum number of times the panel can appear on the form. No value indicates no limit."
+        },
+        {
+          "...": "../../models/form-common/_responsive-container-component.json"
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
+        },
+        {
+          "...": "../../models/form-common/_validation-toast-notification.json"
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
+        }
+      ]
+    }
+  ]
+}

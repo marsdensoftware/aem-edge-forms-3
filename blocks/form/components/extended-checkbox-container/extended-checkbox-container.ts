@@ -58,11 +58,12 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             // dispatch toast event with the max selection message (error state)
             dispatchToast({
               type: 'error',
-              toastTitle: `${MAX_ENABLED_CHECKBOXES} of ${MAX_ENABLED_CHECKBOXES} selected`,
-              toastMessage: 'Deselect a skill to select a new one',
+              toastTitle: 'Maximum strengths selected.',
+              toastMessage: 'Deselect a strength to select a new one',
               dismissible: true,
               timeoutMs: undefined,
-              strategy: 'single',
+              strategy: 'stack',
+              max: 4,
             });
 
             return;
@@ -70,9 +71,16 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
 
           // Show toast with the current selection count (success state)
           // showToast(`${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`, undefined, false);
+          let toastMessageFin = `You can add ${MAX_ENABLED_CHECKBOXES - enabledCount} strengths`;
+          if (MAX_ENABLED_CHECKBOXES - enabledCount === 1) {
+            toastMessageFin = 'You can add 1 more strength';
+          } else if (MAX_ENABLED_CHECKBOXES - enabledCount === 0) {
+            toastMessageFin = 'You can\'t add anymore strengths';
+          }
           dispatchToast({
             type: 'success',
-            toastTitle: `${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`,
+            toastTitle: 'Strength successfully added.',
+            toastMessage: toastMessageFin,
             dismissible: true,
             timeoutMs: undefined,
           });
@@ -83,10 +91,16 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
           setTimeout(() => {
             const enabledCount = countEnabledCheckboxes();
             if (enabledCount > 0) {
-              // showToast(`${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`, undefined, false);
+              let toastMessageFin = `You can add ${MAX_ENABLED_CHECKBOXES - enabledCount} strengths`;
+              if (MAX_ENABLED_CHECKBOXES - enabledCount === 1) {
+                toastMessageFin = 'You can add 1 more strength';
+              } else if (MAX_ENABLED_CHECKBOXES - enabledCount === 0) {
+                toastMessageFin = 'You can\'t add anymore strengths';
+              }
               dispatchToast({
                 type: 'success',
-                toastTitle: `${enabledCount} of ${MAX_ENABLED_CHECKBOXES} selected`,
+                toastTitle: 'Strength successfully added.',
+                toastMessage: toastMessageFin,
                 dismissible: true,
                 timeoutMs: undefined,
               });
