@@ -142,7 +142,7 @@ function createComponentFiles(componentName, baseComponent, targetDir) {
  * Based on: ${baseComponent.name}
  */
 /* eslint-disable-next-line import/no-extraneous-dependencies */
-import { FieldJson } from '@aemforms/af-core';
+import { Field } from '@aemforms/af-core';
 
 /**
  * Decorates a custom form field component
@@ -152,7 +152,7 @@ import { FieldJson } from '@aemforms/af-core';
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
-export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJson, parentElement: HTMLElement, formId: String) {
+export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, parentElement: HTMLElement, formId: String) {
   console.log('${emojis.gear} Decorating ${componentName} component:', fieldDiv, fieldJson, parentElement, formId);
 
   // TODO: Implement your custom component logic here

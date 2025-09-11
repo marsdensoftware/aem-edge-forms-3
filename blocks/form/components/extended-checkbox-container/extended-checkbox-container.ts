@@ -44,6 +44,10 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
       checkbox.addEventListener('click', (event) => {
         const target = event.target as HTMLInputElement;
 
+        // get the '.extended-checkbox-group' element and the data-toast-title attribute
+        const extendedCheckboxGroup = fieldDiv.closest('.extended-checkbox-group') as HTMLElement;
+        const toastTitle = extendedCheckboxGroup?.dataset.toastTitle;
+
         // If the checkbox is being checked
         if (target.checked) {
           // Count enabled checkboxes across all containers
@@ -58,7 +62,7 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
             // dispatch toast event with the max selection message (error state)
             dispatchToast({
               type: 'error',
-              toastTitle: 'Maximum strengths selected.',
+              toastTitle,
               toastMessage: 'Deselect a strength to select a new one',
               dismissible: true,
               timeoutMs: undefined,
@@ -79,33 +83,11 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
           }
           dispatchToast({
             type: 'success',
-            toastTitle: 'Strength successfully added.',
+            toastTitle,
             toastMessage: toastMessageFin,
             dismissible: true,
             timeoutMs: undefined,
           });
-        } else {
-          // Checkbox is being unchecked, update the count
-          // We need to call countEnabledCheckboxes() after the current event completes
-          // because the checkbox state hasn't been updated yet
-          setTimeout(() => {
-            const enabledCount = countEnabledCheckboxes();
-            if (enabledCount > 0) {
-              let toastMessageFin = `You can add ${MAX_ENABLED_CHECKBOXES - enabledCount} strengths`;
-              if (MAX_ENABLED_CHECKBOXES - enabledCount === 1) {
-                toastMessageFin = 'You can add 1 more strength';
-              } else if (MAX_ENABLED_CHECKBOXES - enabledCount === 0) {
-                toastMessageFin = 'You can\'t add anymore strengths';
-              }
-              dispatchToast({
-                type: 'success',
-                toastTitle: 'Strength successfully added.',
-                toastMessage: toastMessageFin,
-                dismissible: true,
-                timeoutMs: undefined,
-              });
-            }
-          }, 0);
         }
       }, true); // Use capturing to intercept the event before it reaches the checkbox
     }

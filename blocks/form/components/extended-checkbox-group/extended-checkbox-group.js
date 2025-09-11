@@ -19,8 +19,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('⚙️ Decorating extended-checkbox-group component:', fieldDiv, fieldJson, parentElement, formId);
-        // TODO: Implement your custom component logic here
-        // You can access the field properties via fieldJson.properties
+        fieldDiv.classList.add('extended-checkbox-group');
+        const toastTitleProp = fieldJson.properties.toastTitle;
+        // set the 'data-toast-title' on the fieldDiv
+        fieldDiv.setAttribute('data-toast-title', toastTitleProp);
         return fieldDiv;
     });
 }
