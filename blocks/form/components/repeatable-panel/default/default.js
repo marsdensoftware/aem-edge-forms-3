@@ -66,6 +66,8 @@ export class RepeatablePanel {
     console.log(`Toast title: ${this.toastTitle}`);
     this.toastMessage = properties.toastMessage;
     console.log(`Toast message: ${this.toastMessage}`);
+    this.toastMaxWarningThreshold = properties.toastMaxWarningThreshold;
+    console.log(`Toast max warning threshold: ${this.toastMaxWarningThreshold}`);
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
     this._cancelModal = this._initModal(
@@ -365,11 +367,24 @@ export class RepeatablePanel {
   }
 
   #dispatchToast() {
+    const maxThreshold = this.toastMaxWarningThreshold;
+
+    const currentCount = this.#getSavedEntries().length;
+    console.log('repeatable panel count: ', currentCount);
+
+    let toastMessageText = this.toastMessage || undefined;
+    if (currentCount >= maxThreshold) {
+      const remainingCount = this.maxOccur - currentCount;
+      toastMessageText = toastMessageText.replace('{remaining}', remainingCount);
+    } else {
+      toastMessageText = undefined;
+    }
+
     // dispatch toast event with the max selection message (error state)
     dispatchToast({
       type: 'success',
       toastTitle: this.toastTitle,
-      toastMessage: this.toastMessage,
+      toastMessage: toastMessageText,
       dismissible: true,
       timeoutMs: undefined,
       strategy: 'stack',

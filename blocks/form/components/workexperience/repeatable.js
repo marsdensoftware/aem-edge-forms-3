@@ -3,7 +3,7 @@ import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
 import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
 import { FIELD_NAMES, sorter, STILL_WORKING_STATUS } from './fieldnames.js';
-import { dispatchToast } from '../toast-container/toast-container.js';
+// import { dispatchToast } from '../toast-container/toast-container.js';
 
 class Converter extends DefaultFieldConverter {
   convert(element) {
@@ -126,17 +126,17 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     }
 
     super._save(entry);
-
-    // dispatch toast event with the max selection message (error state)
-    dispatchToast({
-      type: 'success',
-      toastTitle: 'Work experience added successfully.',
-      toastMessage: 'You can 3 more work experience.',
-      dismissible: true,
-      timeoutMs: undefined,
-      strategy: 'stack',
-      maxToasts: 3,
-    });
+    //
+    // // dispatch toast event with the max selection message (error state)
+    // dispatchToast({
+    //   type: 'success',
+    //   toastTitle: 'Work experience added successfully.',
+    //   toastMessage: 'You can 3 more work experience.',
+    //   dismissible: true,
+    //   timeoutMs: undefined,
+    //   strategy: 'stack',
+    //   maxToasts: 3,
+    // });
     // After save
   }
 }

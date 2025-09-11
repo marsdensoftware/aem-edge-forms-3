@@ -50,36 +50,17 @@ export function removeToast(toastEl: HTMLElement) {
   }
 }
 
-function resolveActiveToastContainer(): HTMLElement {
-  // Try to find a toast-container under the current wizard step
-  let target = document.querySelector<HTMLElement>('form .current-wizard-step .toast-container');
-  if (!target) {
-    // Fallback to any toast-container in the document
-    target = document.querySelector<HTMLElement>('.toast-container') || null;
-  }
-  if (!target) {
-    // Create one under the current wizard step (if exists) otherwise at end of form
-    const parent = document.querySelector('form .current-wizard-step') || document.querySelector('form') || document.body;
-    const container = document.createElement('div');
-    container.classList.add('toast-container');
-    parent.appendChild(container);
-    return container;
-  }
-  return target;
-}
-
 function initToastEventBridge() {
   if (listenerInitialized) return;
   listenerInitialized = true;
 
   // Listen for programmatic toasts from anywhere and route to the active step container
   window.addEventListener('app:toast', ((e: Event) => {
-    console.log('Toast event received:', e);
     const ce = e as CustomEvent<ToastOptions & { strategy?: 'single' | 'stack'; max?: number }>;
     const detail = ce.detail || {};
 
-    // Resolve container dynamically based on current wizard step
-    const containerEl = resolveActiveToastContainer();
+    // Resolve container dynamically based on the current wizard step
+    const containerEl = getOrCreateToastContainer();
 
     // Determine strategy: prefer explicit event detail, then container dataset, default to 'stack'
     const containerStrategy = (containerEl.getAttribute('data-strategy') || '').toLowerCase();
@@ -90,7 +71,7 @@ function initToastEventBridge() {
       ? ((detail as any).strategy as any)
       : (containerStrategy === 'single' || maxFromAttr === 1 ? 'single' : 'stack');
 
-    const max = (typeof (detail as any).max === 'number') ? (detail as any).max : (maxFromAttr || undefined);
+    const max = (typeof (detail as any).maxToasts === 'number') ? (detail as any).maxToasts : (maxFromAttr || undefined);
 
     if (strategy === 'single' || max === 1) {
       // Always replace any existing toast with a new one
@@ -114,9 +95,8 @@ function initToastEventBridge() {
   }));
 
   // Clear only the active step container
-  window.addEventListener('app:toast-clear', ((e: Event) => {
-    console.log('Toast clear event received:', e);
-    const containerEl = resolveActiveToastContainer();
+  window.addEventListener('app:toast-clear', (() => {
+    const containerEl = getOrCreateToastContainer();
     while (containerEl.firstChild) {
       containerEl.removeChild(containerEl.firstChild);
     }
@@ -131,9 +111,8 @@ function initToastEventBridge() {
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
+/* eslint-disable no-unused-vars */
 export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJson, parentElement: HTMLElement, formId: String) {
-  console.log('Decorating toast-container component:', fieldDiv, fieldJson, parentElement, formId);
-
   fieldDiv.classList.add('toast-container');
   // Ensure the global event bridge is initialized once; it will route to the active step container
   initToastEventBridge();
