@@ -61,13 +61,9 @@ export class RepeatablePanel {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
     this.maxOccur = this._repeatablePanel.dataset.max;
-    console.log(`Max occur: ${this.maxOccur}`);
     this.toastTitle = properties.toastTitle;
-    console.log(`Toast title: ${this.toastTitle}`);
     this.toastMessage = properties.toastMessage;
-    console.log(`Toast message: ${this.toastMessage}`);
     this.toastMaxWarningThreshold = properties.toastMaxWarningThreshold;
-    console.log(`Toast max warning threshold: ${this.toastMaxWarningThreshold}`);
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
     this._cancelModal = this._initModal(
@@ -373,7 +369,7 @@ export class RepeatablePanel {
     console.log('repeatable panel count: ', currentCount);
 
     let toastMessageText = this.toastMessage || undefined;
-    if (currentCount >= maxThreshold) {
+    if (currentCount >= maxThreshold && toastMessageText) {
       const remainingCount = this.maxOccur - currentCount;
       toastMessageText = toastMessageText.replace('{remaining}', remainingCount);
     } else {
@@ -393,7 +389,7 @@ export class RepeatablePanel {
   }
 
   #dispatchChange() {
-    // Trigger event with name of the repeatable as parameter and values
+    // Trigger event with the name of the repeatable as parameter and values
     const entries = this.#getSavedEntries();
     const params = { detail: { name: this._name, entries } };
     const event = new CustomEvent('repeatableChanged', params);
