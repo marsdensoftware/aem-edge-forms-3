@@ -658,6 +658,7 @@ function renderField(fd) {
   }
   if (fd.description) {
     const helpEl = createHelpText(fd);
+    field.classList.add('with-description');
 
     // ###SEP-NJ START: add help text below label / legend
     const labelEl = field.querySelector('label, legend');

@@ -178,9 +178,15 @@
     color: $text-accent;
 
     &:hover,
-    &:focus,
+
     &:visited {
       color: $text-dark;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $stroke-focus;
     }
   }
 

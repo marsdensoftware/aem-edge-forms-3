@@ -4,8 +4,29 @@ form .field-wrapper[data-required="true"]>.field-label::after {
   content: '' !important;
 }
 
-form .field-wrapper[data-required="false"]>.field-label::after {
-  content: ' (Optional)' !important;
+form .field-wrapper[data-required="false"]:not(.with-description)>.field-label,
+form .field-wrapper[data-required="false"].with-description>.field-description-2{
+  position: relative;
+  display: block;
+  padding-right: 70px;
+}
+
+form .field-wrapper[data-required="false"]:not(.with-description)>.field-label::after {
+  content: ' Optional' !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  color: $text-secondary;
+}
+
+form .field-wrapper[data-required="false"].with-description>.field-description-2::after {
+  content: ' Optional' !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  color: $text-secondary;
 }
 
 .field-invalid {
