@@ -1,4 +1,5 @@
 import { onElementAdded } from '../utils.js'
+import { fetchRemoteSuggestions, SUGGESTION_LIMIT } from '../refdatautils.js';
 
 /* eslint-disable no-use-before-define */
 /**
@@ -8,6 +9,8 @@ import { onElementAdded } from '../utils.js'
 interface ComponentState {
   main: string[]
   recommendations: string[]
+  // Keep an AbortController per component instance to cancel stale requests
+  abortController?: AbortController
 }
 const componentStateMap = new WeakMap<Element, ComponentState>()
 
@@ -79,6 +82,7 @@ function createSelectedCard(
   selectedCardsDiv: HTMLDivElement,
   searchInput: HTMLInputElement,
   source: 'main' | 'recommendation',
+  itemCode?: string,
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card', 'selected-card--is-selected')
@@ -87,7 +91,7 @@ function createSelectedCard(
   const hiddenInput = document.createElement('input')
   hiddenInput.type = 'hidden'
   hiddenInput.value = item
-  hiddenInput.name = `selected-item-${item.replace(/\s+/g, '-').toLowerCase()}`
+  hiddenInput.name = itemCode || `selected-item-${item.replace(/\s+/g, '-').toLowerCase()}`
 
   const text = document.createElement('div')
   text.textContent = item
@@ -147,6 +151,7 @@ function createRecommendationCard(
   recommendationsCardsDiv: HTMLDivElement,
   selectedCardsDiv: HTMLDivElement,
   searchInput: HTMLInputElement,
+  itemCode?: string,
 ) {
   const card = document.createElement('div')
   card.classList.add('selected-card')
@@ -164,7 +169,7 @@ function createRecommendationCard(
 
     card.remove()
     const selectedCards = (selectedCardsDiv.querySelector('.selected-cards') || selectedCardsDiv) as HTMLDivElement
-    createSelectedCard(item, selectedCards, searchInput, 'recommendation')
+    createSelectedCard(item, selectedCards, searchInput, 'recommendation', itemCode)
 
     if (searchBox) {
       const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
@@ -481,39 +486,63 @@ document.addEventListener('input', (event) => {
     const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper') as HTMLDivElement
     const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards') as HTMLDivElement
 
-    // Filter main datasource entries from the component's state
-    const filtered = state.main.filter(
-      (entry) => entry.toLowerCase().includes(query),
-    )
-
-    // Add suggestions from main datasource
-    filtered.forEach((item) => {
-      const div = document.createElement('div')
-      div.classList.add('suggestion')
-      div.textContent = item
-      div.dataset.source = 'main'
-      div.addEventListener('click', (e) => {
-        if (element.classList.contains('max-items-reached')) {
-          // prevent addition of items
-          e.stopPropagation();
-          return;
-        }
-        // Remove item from the main state
-        state.main = state.main.filter((i) => i !== item)
-
-        searchInput.value = ''
-        suggestionsDiv.innerHTML = ''
-        suggestionsDiv.style.display = 'none'
-        createSelectedCard(item, selectedCardsDiv, searchInput, 'main')
-      })
-      suggestionsDiv.appendChild(div)
-    })
-
-    if (filtered.length > 0) {
-      suggestionsDiv.style.display = 'block'
-    } else {
-      suggestionsDiv.style.display = 'none'
+    // Cancel any in-flight request for this component instance
+    if (state.abortController) {
+      try { state.abortController.abort() } catch (_) { /* noop */ }
     }
+    const controller = new AbortController()
+    state.abortController = controller
+
+    const category = element.dataset.datasource
+
+    // Fetch suggestions from the remote endpoint instead of filtering the local state
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller)
+      .then((items) => {
+        // If this request was aborted or superseded, do nothing
+        if (controller.signal.aborted) return
+
+        // Hide suggestions if the user cleared/changed to a short query while we were fetching
+        if (searchInput.value.toLowerCase().length < 3) {
+          suggestionsDiv.style.display = 'none'
+          suggestionsDiv.innerHTML = ''
+          return
+        }
+
+        // Build suggestion entries
+        items.forEach((item) => {
+          // if the item is already in the selected cards, don't show it in the suggestions
+          if (selectedCardsDiv.querySelector(`input[value="${item.description}"]`)) return
+
+          const div = document.createElement('div')
+          div.classList.add('suggestion')
+          div.textContent = item.description
+          div.dataset.source = 'main'
+          div.addEventListener('click', (e) => {
+            if (element.classList.contains('max-items-reached')) {
+              e.stopPropagation()
+              return
+            }
+            searchInput.value = ''
+            suggestionsDiv.innerHTML = ''
+            suggestionsDiv.style.display = 'none'
+            createSelectedCard(item.description, selectedCardsDiv, searchInput, 'main', item.code)
+          })
+          suggestionsDiv.appendChild(div)
+        })
+
+        suggestionsDiv.style.display = items.length > 0 ? 'block' : 'none'
+      })
+      .catch((err) => {
+        if (err?.name === 'AbortError') {
+          // Swallow aborts
+          return
+        }
+        // On error, hide suggestions
+        suggestionsDiv.style.display = 'none'
+        suggestionsDiv.innerHTML = ''
+        // Optionally, log to console for debugging
+        console.error(err)
+      })
   }
 })
 
