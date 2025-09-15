@@ -191,6 +191,9 @@
                     ]
                 },
                 {
+                  "...": "../../models/form-common/_validation-toast-notification.json"
+                },
+                {
                     "...": "../../models/form-common/_responsive-columns-component.json"
                 }
             ]
