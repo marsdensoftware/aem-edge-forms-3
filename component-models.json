@@ -240,6 +240,18 @@
         }
       },
       {
+        "component": "text",
+        "name": "genericErrorTitle",
+        "label": "Title for generic error",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "genericErrorDescription",
+        "label": "Description for the generic error",
+        "valueType": "string"
+      },
+      {
         "component": "select",
         "valueType": "string",
         "name": "actionType",

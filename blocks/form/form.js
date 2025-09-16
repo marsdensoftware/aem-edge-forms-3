@@ -946,6 +946,10 @@ export default async function decorate(block) {
     }
     form.dataset.redirectUrl = formDef.redirectUrl || '';
     form.dataset.thankYouMsg = formDef.thankYouMsg || '';
+    // ###SEP-NJ START generic error properties
+    form.dataset.genericErrorTitle = formDef.properties.genericErrorTitle || '';
+    form.dataset.genericErrorDescription = formDef.properties.genericErrorDescription || '';
+    // ###SEP-NJ END
     form.dataset.action = formDef.action || pathname?.split('.json')[0];
     form.dataset.source = source;
     form.dataset.rules = rules;

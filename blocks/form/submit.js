@@ -1,4 +1,5 @@
 import { DEFAULT_THANK_YOU_MESSAGE, getRouting, getSubmitBaseUrl } from './constant.js';
+import { reportSummaryError } from './components/validationsummary/validationsummary.js';
 
 export function submitSuccess(e, form) {
   const { payload } = e;
@@ -24,6 +25,13 @@ export function submitSuccess(e, form) {
 }
 
 export function submitFailure(e, form) {
+  // ###SEP-NJ Start custom generic error
+  const title = form.dataset.genericErrorTitle;
+  const content = form.dataset.genericErrorDescription;
+
+  reportSummaryError(title, content);
+  // ###SEP-NJ End
+  /*
   let errorMessage = form.querySelector('.form-message.error-message');
   if (!errorMessage) {
     errorMessage = document.createElement('div');
@@ -32,6 +40,7 @@ export function submitFailure(e, form) {
   errorMessage.innerHTML = 'Some error occured while submitting the form'; // TODO: translation
   form.prepend(errorMessage);
   errorMessage.scrollIntoView({ behavior: 'smooth' });
+  */
   form.setAttribute('data-submitting', 'false');
   form.querySelector('button[type="submit"]').disabled = false;
 }

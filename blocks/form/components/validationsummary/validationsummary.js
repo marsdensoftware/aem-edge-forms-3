@@ -86,3 +86,34 @@ export default function decorate(panelEl, model) {
 
   return panelEl;
 }
+
+export function reportSummaryError(title, content) {
+  const validationSummaryEl = document.querySelector('.wizard > .current-wizard-step .panel-validationsummary');
+  if (!validationSummaryEl) {
+    alert(`${title}: ${content}`);
+    return;
+  }
+  const errorContainer = validationSummaryEl.querySelector('.error-container');
+  errorContainer.innerHTML = '';
+
+  const errorFieldContainer = document.createElement('li');
+  errorFieldContainer.innerHTML = `<span class="errormessage">${content}</span>`;
+  
+  errorContainer.append(errorFieldContainer);
+  
+  validationSummaryEl.dataset.visible = true;
+
+}
+
+export function clearSummaryError(){
+  const validationSummaryEl = document.querySelector('.wizard > .current-wizard-step .panel-validationsummary');
+  if (validationSummaryEl) {
+    const errorContainer = validationSummaryEl.querySelector('.error-container');
+    errorContainer.innerHTML = '';
+    
+    validationSummaryEl.dataset.visible = false;
+  }
+}
+
+window.reportSummaryError = reportSummaryError;
+window.clearSummaryError = clearSummaryError;
