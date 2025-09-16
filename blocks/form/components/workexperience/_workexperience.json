@@ -310,6 +310,9 @@
                 "valueType": "string"
             }
           ]
+        },
+        {
+          "...": "../../models/form-common/_validation-toast-notification.json"
         }
       ]
     }

@@ -19227,6 +19227,32 @@
       },
       {
         "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
+          }
+        ]
+      },
+      {
+        "component": "container",
         "name": "responsive-column-spans",
         "label": "Responsive Column Spans",
         "collapsible": true,
@@ -20031,6 +20057,32 @@
             "name": "addedTitle",
             "label": "Added title",
             "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
           }
         ]
       },
@@ -21899,6 +21951,963 @@
                 }
               ]
             }
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "help",
+        "label": "Help Content",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "richtext",
+            "name": "description",
+            "label": "Help text",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "name": "tooltip",
+            "label": "Short description",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "extended-checkbox-group",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hideTitle",
+            "label": "Hide title",
+            "valueType": "boolean"
+          },
+          {
+            "component": "datasource-bindref",
+            "name": "dataRef",
+            "label": "Bind reference",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "unboundFormElement",
+            "label": "Mark as Unbound Form Element",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "visible",
+            "label": "Show Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "enabled",
+            "label": "Enable Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "readOnly",
+            "label": "Read-only",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "number",
+        "name": "maxOccur",
+        "label": "Maximum allowed items",
+        "valueType": "number",
+        "placeholder": "No Limit",
+        "description": "Maximum number of times the panel can appear on the form. No value indicates no limit."
+      },
+      {
+        "component": "container",
+        "name": "responsive-container",
+        "label": "Responsive Container",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "name": "container",
+            "label": "Container Type",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "None",
+                "value": ""
+              },
+              {
+                "name": "Default Container",
+                "value": "container"
+              },
+              {
+                "name": "Small Container",
+                "value": "container-sm"
+              },
+              {
+                "name": "Medium Container",
+                "value": "container-md"
+              },
+              {
+                "name": "Large Container",
+                "value": "container-lg"
+              },
+              {
+                "name": "Extra Large Container",
+                "value": "container-xl"
+              },
+              {
+                "name": "XX-Large Container",
+                "value": "container-xxl"
+              },
+              {
+                "name": "Fluid Container",
+                "value": "container-fluid"
+              }
+            ]
+          },
+          {
+            "component": "boolean",
+            "name": "row",
+            "label": "Add Row Class",
+            "valueType": "boolean",
+            "value": false
+          },
+          {
+            "component": "boolean",
+            "name": "flex-wrap-reverse",
+            "label": "Reverse Wrap Direction",
+            "valueType": "boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "responsive-column-spans",
+        "label": "Responsive Column Spans",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "name": "colspan",
+            "label": "Default Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-offset",
+            "label": "Default Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-sm",
+            "label": "Small Screen Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-sm-offset",
+            "label": "Small Screen Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Reset",
+                "value": "0"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-md",
+            "label": "Medium Screen Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-md-offset",
+            "label": "Medium Screen Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Reset",
+                "value": "0"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-lg",
+            "label": "Large Screen Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-lg-offset",
+            "label": "Large Screen Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Reset",
+                "value": "0"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-xl",
+            "label": "Extra Large Screen Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-xl-offset",
+            "label": "Extra Large Screen Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Reset",
+                "value": "0"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-xxl",
+            "label": "XX-Large Screen Column Span",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Fill remainder",
+                "value": "split"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "colspan-xxl-offset",
+            "label": "XX-Large Screen Column Offset",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": ""
+              },
+              {
+                "name": "Reset",
+                "value": "0"
+              },
+              {
+                "name": "1 column",
+                "value": "1"
+              },
+              {
+                "name": "2 columns",
+                "value": "2"
+              },
+              {
+                "name": "3 columns",
+                "value": "3"
+              },
+              {
+                "name": "4 columns",
+                "value": "4"
+              },
+              {
+                "name": "5 columns",
+                "value": "5"
+              },
+              {
+                "name": "6 columns",
+                "value": "6"
+              },
+              {
+                "name": "7 columns",
+                "value": "7"
+              },
+              {
+                "name": "8 columns",
+                "value": "8"
+              },
+              {
+                "name": "9 columns",
+                "value": "9"
+              },
+              {
+                "name": "10 columns",
+                "value": "10"
+              },
+              {
+                "name": "11 columns",
+                "value": "11"
+              },
+              {
+                "name": "12 columns",
+                "value": "12"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
           }
         ]
       },
@@ -28191,6 +29200,32 @@
       },
       {
         "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
+          }
+        ]
+      },
+      {
+        "component": "container",
         "name": "responsive-column-spans",
         "label": "Responsive Column Spans",
         "collapsible": true,
@@ -33862,6 +34897,156 @@
     ]
   },
   {
+    "id": "toast-container",
+    "fields": [
+      {
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Name",
+            "valueType": "string",
+            "required": true,
+            "valueFormat": "regexp",
+            "validation": {
+              "regExp": "^[^$].*",
+              "customErrorMsg": "Name cannot start with $"
+            }
+          },
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "hideTitle",
+            "label": "Hide title",
+            "valueType": "boolean"
+          },
+          {
+            "component": "datasource-bindref",
+            "name": "dataRef",
+            "label": "Bind reference",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "unboundFormElement",
+            "label": "Mark as Unbound Form Element",
+            "valueType": "boolean"
+          },
+          {
+            "component": "boolean",
+            "name": "visible",
+            "label": "Show Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "enabled",
+            "label": "Enable Component",
+            "valueType": "boolean",
+            "value": true
+          },
+          {
+            "component": "boolean",
+            "name": "readOnly",
+            "label": "Read-only",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "notificationSources",
+        "label": "Notification Sources",
+        "value": "",
+        "multiple": true,
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Education",
+            "value": "education-panel"
+          },
+          {
+            "name": "Other languages",
+            "value": "additional-languages-panel"
+          },
+          {
+            "name": "Strengths",
+            "value": "skills-panel"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "toast",
+    "fields": [
+      {
+        "component": "text",
+        "name": "toastTitle",
+        "label": "Message Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "toastMessage",
+        "label": "Message Description",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "toastType",
+        "label": "Type",
+        "valueType": "string",
+        "value": "text",
+        "options": [
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Error",
+            "value": "error"
+          },
+          {
+            "name": "Success",
+            "value": "success"
+          },
+          {
+            "name": "Warning",
+            "value": "warning"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "name": "userCanClose",
+        "label": "Is closable by user",
+        "valueType": "boolean"
+      },
+      {
+        "component": "number",
+        "name": "autoClose",
+        "label": "Auto close timeout in seconds. Leave blank to disable auto close.",
+        "valueType": "number",
+        "description": "Seconds to show before closing"
+      }
+    ]
+  },
+  {
     "id": "typeahead",
     "fields": [
       {
@@ -35778,6 +36963,32 @@
             "name": "addedTitle",
             "label": "Added title",
             "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "validation-toast-notification",
+        "label": "Toast Notifications",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "toastTitle",
+            "label": "Toast title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "toastMessage",
+            "label": "Toast message",
+            "valueType": "string"
+          },
+          {
+            "component": "number",
+            "name": "toastMaxWarningThreshold",
+            "label": "Warning threshold",
+            "valueType": "number"
           }
         ]
       }
