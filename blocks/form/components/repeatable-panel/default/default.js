@@ -245,9 +245,11 @@ export class RepeatablePanel {
       // Remove disable flag to enable validation
       entry.disabled = false;
       entry.classList.add('current');
+      entry.dataset.visible = true;
       panel.classList.add('editing');
     } else {
       entry.classList.remove('current');
+      entry.dataset.visible = false;
       panel.classList.remove('editing');
     }
 

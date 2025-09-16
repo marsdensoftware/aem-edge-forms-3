@@ -4990,7 +4990,12 @@ class Field extends Scriptable {
         }
     }
     validate() {
-        if (this.visible === false) {
+        // ###SEP-NJ START
+        const el = document.getElementById(this.id);
+        const isDisabled = el?.closest('[disabled]') != undefined;
+        const isHidden = el.closest('[data-visible="false"]') != undefined;
+        
+        if (isHidden || isDisabled || this.visible === false) {
             return [];
         }
         if (this.valid === false && this.errorMessage && this?.validity?.customConstraint) {
