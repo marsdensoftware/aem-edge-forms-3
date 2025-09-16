@@ -1,0 +1,69 @@
+{
+  "definitions": [
+    {
+      "title": "Toast container",
+      "id": "toast-container",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Toast container",
+              "fieldType": "panel",
+              "minOccur": 1,
+              "fd:viewType": "toast-container"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "toast-container",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "...": "../../models/form-common/_basic-input-fields.json"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "notificationSources",
+          "label": "Notification Sources",
+          "value": "",
+          "multiple": true,
+          "options": [
+            {
+              "name": "None",
+              "value": ""
+            },
+            {
+              "name": "Education",
+              "value": "education-panel"
+            },
+            {
+              "name": "Other languages",
+              "value": "additional-languages-panel"
+            },
+            {
+              "name": "Strengths",
+              "value": "skills-panel"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "toast-container",
+      "components": [
+        "toast"
+      ]
+    }
+  ]
+}

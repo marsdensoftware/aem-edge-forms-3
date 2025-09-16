@@ -215,7 +215,10 @@
         "wizard",
         "icon-radio-group",
         "extended-checkbox-container",
-        "range"
+        "range",
+        "toast-container",
+        "toast",
+        "extended-checkbox-group"
       ]
     }
   ]

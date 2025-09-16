@@ -1,5 +1,6 @@
 import { onElementsAddedByClassName } from '../utils.js'
 import { createProgressBar, trackProgress } from './progress-bar.js'
+import { dispatchToastClear } from '../toast-container/toast-container.js';
 
 // Define the possible background classes in a constant for clarity and reuse.
 const BG_CLASSES = ['wizard--bg-dark', 'wizard--bg-mid', 'wizard--bg-light']
@@ -95,5 +96,8 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
   wizardEl.addEventListener('wizard:navigate', () => {
     updateExitButtonText(wizardEl)
     updateWizardNextButton(container)
+
+    // clear the toasts in the container by triggering the toast-clear event
+    dispatchToastClear();
   })
 })
