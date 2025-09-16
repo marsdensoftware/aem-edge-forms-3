@@ -1,0 +1,78 @@
+{
+  "definitions": [
+    {
+      "title": "Toast",
+      "id": "toast",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+            "template": {
+              "jcr:title": "Toast",
+              "fieldType": "panel",
+              "minOccur": 1,
+              "fd:viewType": "toast"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "toast",
+      "fields": [
+        {
+          "component": "text",
+          "name": "toastTitle",
+          "label": "Message Title",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "toastMessage",
+          "label": "Message Description",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "toastType",
+          "label": "Type",
+          "valueType": "string",
+          "value": "text",
+          "options": [
+            {
+              "name": "Info",
+              "value": "info"
+            },
+            {
+              "name": "Error",
+              "value": "error"
+            },
+            {
+              "name": "Success",
+              "value": "success"
+            },
+            {
+              "name": "Warning",
+              "value": "warning"
+            }
+          ]
+        },
+        {
+          "component": "boolean",
+          "name": "userCanClose",
+          "label": "Is closable by user",
+          "valueType": "boolean"
+        },
+        {
+          "component": "number",
+          "name": "autoClose",
+          "label": "Auto close timeout in seconds. Leave blank to disable auto close.",
+          "valueType": "number",
+          "description": "Seconds to show before closing"
+        }
+      ]
+    }
+  ]
+}

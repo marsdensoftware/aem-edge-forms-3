@@ -2,49 +2,51 @@
 
 .wizard {
   .panel-formhero {
-    legend{
+    legend {
       display: none;
     }
-    
+  }
+
+  .panel-formhero.field-panelcontainer1751863678379 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
 
     @include media('desktop') {
       flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: $spacing-400;
+    }
+  }
+
+  .panel-formhero__inner {
+    @include media('desktop') {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      text-align: left;
+      gap: $spacing-400;
     }
   }
 
   .panel-formhero__picture {
-    width: 100%;
-    max-width: 160px;
     margin-bottom: $spacing-600;
-
-    @include media('desktop') {
-      max-width: 240px;
-    }
+    max-width: 311px;
+    display: none;
   }
 
   .panel-formhero__content {
-    order: 1;
-    text-align: left;
+    order: 0;
 
-    // 👇 Universal color style for all headings + text
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    .strap-title,
-    .strap-title-small,
-    .subtitle {
-      /*color: #ffffff;*/
+    picture {
+      margin-bottom: $spacing-600;
+
+      @include media('tablet') {
+        margin-bottom: $spacing-700;
+      }
+
+      @include media('desktop') {
+        margin-bottom: 0;
+      }
     }
 
     h2 {
@@ -57,14 +59,23 @@
       @include font-body-large;
       margin-bottom: 12px;
     }
+  }
 
-    @include media('desktop') {
-      order: 0;
-      width: 36rem;
+  .panel-formhero.field-intro1,
+  .panel-formhero.field-intro2,
+  .panel-formhero.field-intro3 {
+    .panel-formhero__content {
+      p {
+        p {
+          font-size: $size-font-subtitle;
+          color: $text-dark;
+          margin-bottom: $spacing-200;
+
+          @include media('desktop') {
+            margin-bottom: $spacing-300;
+          }
+        }
+      }
     }
   }
-}
-
-.wizard .panel-formhero__content p {
-  color: $text-dark;
 }

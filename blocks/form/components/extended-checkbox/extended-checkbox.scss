@@ -1,0 +1,225 @@
+@use '../../../../styles/settings' as *;
+
+.extended-checkbox-container {
+  .modal {
+    dialog {
+      max-width: 696px;
+    }
+
+    .close-button {
+      right: $spacing-500;
+      top: $spacing-500;
+    }
+  }
+
+  .modal-content {
+    background-color: $color-shade-blue-04;
+
+    > legend {
+      @include heading-level-4;
+      padding: $spacing-450;
+      color: $color-primary-navy;
+      font-weight: 700;
+      border-bottom: 2px solid $color-shade-navy-20;
+      margin-bottom: $spacing-500;
+      background-color: $color-white;
+    }
+
+    > fieldset:not(.field-modal-buttons),
+    fieldset.formtabs {
+      padding: 0 $spacing-500;
+    }
+  }
+}
+
+.form .extended-checkbox {
+  background-color: $color-white;
+  border: 2px solid $color-shade-navy-40;
+  border-radius: $border-radius-mid;
+
+  &:has(> input[type='checkbox']:checked) {
+    border: 2px solid $color-primary;
+    background-color: $color-shade-blue-10;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: $spacing-400;
+
+  .field-description,
+  .field-description-2 {
+    margin-inline-start: $spacing-700;
+    color: $text-secondary;
+
+    & p {
+      color: $text-secondary;
+      line-height: 130%;
+      margin-bottom: 0;
+    }
+  }
+
+  .extended-checkbox--footer {
+    margin-inline-start: 3rem;
+    color: $text-dark-primary;
+
+    & .edit {
+      @extend %link-button;
+      background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+      background-repeat: no-repeat;
+      background-position: left center;
+      display: block;
+      padding-left: 28px;
+      text-decoration: none;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  label {
+    font-weight: 400;
+    border: 0;
+    background: transparent;
+    order: 0;
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+    color: $text-dark-primary;
+    margin-bottom: 0;
+
+    &::before {
+      top: 100%;
+    }
+  }
+
+  label,
+  textarea {
+    padding: 0;
+  }
+
+  .edit {
+    @extend %link-button;
+    background-image: url('/icons/icon-repeatable-panel-edit-blue.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: block;
+    padding-left: 28px;
+    text-decoration: none;
+    //margin-inline-start: 3rem;
+  }
+
+  input[type='checkbox']:checked + label {
+    background-color: transparent;
+  }
+
+  .checkbox-divider {
+    height: 1px;
+    width: 100%;
+    border-width: 0;
+    background-color: $color-primary;
+    margin: $spacing-400 0 $spacing-300;
+  }
+
+  textarea {
+    border: 0;
+    background: transparent;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: $size-font-label-subtitle;
+  }
+}
+
+.field-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-white;
+  padding: $spacing-500;
+  border-top: 2px solid $color-shade-navy-20;
+
+  button[name='modal-cancel-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--hollow;
+  }
+
+  button[name='modal-save-button'] {
+    @include elevation-1;
+    @extend %button;
+    @extend %button--primary;
+  }
+}
+
+.form .field-main-checkbox .field-label .text {
+  font-weight: normal;
+}
+
+.extended-checkbox .field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-200 $spacing-600;
+}
+
+.extended-checkbox__icon {
+  display: block;
+  margin-right: $spacing-400;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    background-repeat: no-repeat;
+    background-size: 29px;
+    background-position: center;
+    flex-shrink: 0;
+  }
+}
+
+.extended-checkbox__icon--critical-thinking {
+  &::before {
+    background-image: url('../../../../icons/ico-critical-thinking-1--critical-thinking-nut-bolt-cog-brain-plan-head.svg');
+  }
+}
+
+.extended-checkbox__icon--ear-hearing {
+  &::before {
+    background-image: url('../../../../icons/ico-ear-hearing-health-medical-hearing-ear.svg');
+  }
+}
+
+.extended-checkbox__icon--error-checking {
+  &::before {
+    background-image: url('../../../../icons/ico-error-checking-warning-sign.svg');
+  }
+}
+
+.extended-checkbox__icon--line-arrow-1 {
+  &::before {
+    background-image: url('../../../../icons/ico-line-arrow-transfer-horizontal-circle-2.svg');
+  }
+}
+
+.extended-checkbox__icon--megaphone-2 {
+  &::before {
+    background-image: url('../../../../icons/ico-megaphone-2--bullhorn-loud-megaphone-share-speaker-transmit.svg');
+  }
+}
+
+.extended-checkbox__icon--shield-check {
+  &::before {
+    background-image: url('../../../../icons/ico-Shield-Check.svg');
+  }
+}
+
+.extended-checkbox__icon--zoom-in-area {
+  &::before {
+    background-image: url('../../../../icons/ico-zoom-in-area.svg');
+  }
+}
+
+.extended-checkbox__icon--user-group-leader {
+  &::before {
+    background-image: url('../../../../icons/user-group--user-group-meeting-leader.svg');
+  }
+}

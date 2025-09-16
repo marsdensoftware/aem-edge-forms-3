@@ -1,3 +1,4 @@
+/*eslint-disable*/
 export default function decorate(panelEl, model) {
     var _a;
     const { properties } = model;
@@ -20,8 +21,16 @@ export default function decorate(panelEl, model) {
     infoHeader.append(infoTitle);
     panelEl.prepend(infoHeader);
     legendEl === null || legendEl === void 0 ? void 0 : legendEl.remove();
-    const helpType = properties.helpType || 'info';
+    const { helpType = 'info' } = properties;
+    const { hideIcon } = properties;
+    const { variant } = properties;
     panelEl.classList.add(`${className}--${helpType}`);
+    if (variant) {
+        panelEl.classList.add(`${className}--${variant}`);
+    }
+    if (hideIcon) {
+        panelEl.classList.add(`${className}--no-icon`);
+    }
     if (properties.link && properties.linkText) {
         // Create the footer div
         const footerEl = document.createElement('div');

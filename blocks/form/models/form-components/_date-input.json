@@ -1,7 +1,7 @@
 {
     "definitions": [
         {
-            "title": "Date Picker",
+            "title": "Date Input",
             "id": "date-input",
             "plugins": {
                 "xwalk": {
@@ -36,6 +36,9 @@
                             "valueType": "date"
                         }
                     ]
+                },
+                {
+                    "...": "../form-common/_responsive-columns-component.json"
                 },
                 {
                     "...": "../form-common/_help-container.json"

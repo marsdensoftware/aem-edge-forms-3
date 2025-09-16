@@ -1,6 +1,7 @@
 import { createButton } from '../../util.js';
 import './set-background-by-step.js';
-
+import './character-limits.js'
+import './english-proficiency.js'
 
 export class WizardLayout {
   inputFields = 'input,textarea,select';
@@ -74,13 +75,12 @@ export class WizardLayout {
       const navigateToMenuItem = panel.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
       currentMenuItem.classList.remove('wizard-menu-active-item');
       navigateToMenuItem.classList.add('wizard-menu-active-item');
-      //###SEP-JN: Allow event bubbling
       const event = new CustomEvent('wizard:navigate', {
         detail: {
           prevStep: { id: current.id, index: +current.dataset.index },
           currStep: { id: navigateTo.id, index: +navigateTo.dataset.index },
         },
-        bubbles: true,
+        bubbles: false,
       });
       panel.dispatchEvent(event);
     }
@@ -166,23 +166,26 @@ export class WizardLayout {
 
     if (this.includeNextBtn && children.length) {
       this.addButton(wrapper, panel, {
-        label: { value: 'Next' }, fieldType: 'button', name: 'next', id: 'wizard-button-next',
-      });
+        label: { value: 'Next' },
+        fieldType: 'button',
+        name: 'next',
+        id: 'wizard-button-next',
+      })
     }
 
-    const resetBtn = panel.querySelector('.reset-wrapper');
+    const resetBtn = panel.querySelector('.reset-wrapper')
     if (resetBtn) {
-      wrapper.append(resetBtn);
+      wrapper.append(resetBtn)
     }
 
-    const submitBtn = panel.querySelector('.submit-wrapper');
+    const submitBtn = panel.querySelector('.submit-wrapper')
     if (submitBtn) {
-      wrapper.append(submitBtn);
+      wrapper.append(submitBtn)
     }
-    this.assignIndexToSteps(panel);
-    panel.append(wrapper);
-    panel.querySelector('fieldset')?.classList.add('current-wizard-step');
-    panel.classList.add('wizard');
+    this.assignIndexToSteps(panel)
+    panel.append(wrapper)
+    panel.querySelector('fieldset')?.classList.add('current-wizard-step')
+    panel.classList.add('wizard')
     // panel.classList.add('left');
   }
 }

@@ -1,28 +1,36 @@
-@use '../settings/colors' as *;
-@use '../settings/mixins' as *;
-@use '../settings/spacings' as *;
 @use '../settings' as *;
-@use '../base/forms' as *;
 
-/******************************
-  Checkbox Wrapper
-******************************/
 .checkbox-wrapper {
   display: flex;
   align-items: center;
+  margin-top: $spacing-200; //SEPD-5540 checkbox-spacing
 
   label {
     @extend %label-common-style;
+    position: relative;
+    padding: $spacing-400;
+    padding-right: $spacing-700;
+    border-radius: $border-radius-mid;
+    border: 2px solid $stroke-tertiary;
+    background-color: $color-white;
+    transition: all 0.2s ease;
 
     &::before {
       content: '';
-      margin-right: $spacing-200;
+      position: absolute;
+      right: $spacing-400;
+      top: 50%;
+      transform: translateY(-50%);
       display: block;
       width: 26px;
       height: 26px;
       border: 2px solid $stroke-tertiary;
       border-radius: $border-radius-mid;
+      background-color: transparent;
       background-image: none;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60% 60%;
       transition: all 0.1s ease-in-out;
     }
 
@@ -30,93 +38,153 @@
       color: $text-primary;
 
       &::before {
-        border: 2px solid $stroke-accent;
+        border-color: $stroke-accent;
       }
     }
 
-    &:active &::before {
-      border: 2px solid $stroke-accent;
+    &:active::before {
+      border-color: $stroke-accent;
     }
   }
 
   input[type='checkbox'] {
     @extend %visually-hidden;
 
-    &:checked + label::before {
-      border: 2px solid #017ac9;
-      background-color: #017ac9;
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIzSURBVHgBvZYxaBNhFMffe+ldqlMKghZBbyoGBFO36GLqpkOKq4JQdBMqTiJC7sDBrRZXBxc3LengaOwiVYR6iyg45BAqDkKDU9uY7/m9Lyam6V1yae76H5Lvu+9xP957/7t7CH2aePjxkmIoM6t5vXXgQEIfEXxltTxwi8Gek+7K/ZSjZrPCzHchQSHiE2VZGjzb+A/UMNxtvgXgAqQi9Nm2SgIl2Upm6cFEXGgzJEN33cFdqsMhiEmViJqZCiQsJ2eHXieVmSdOuJTOlA2123moXD6570yzyqR/EwXWbuV1hlm4OXss7NghSFBLV08ZWLC1A3PPvobGJAaUEi5eOGHWC6/qEDR2IDVgYfoIVObaPfPebMJa/Xdk7NhAMcnKjRmzXn73E7za5sD4SGBuMgNxtHJ9pts3r/ZjaHwoUPqxceds5PPUkZikMH20a5LG9h8YGSiZlfNTulTZfxYPhy5ePN41yb3X3yNNMhTY2G7BtRffzA2ioNK3pSunzVpMUv2yBXEVWtJOicKg5k2i96LnG7+GmiQWcBC01yRSylGF+OADDwpow84YiJgiNzlh/s8//Ry7b70a+hz2Ziow0cLL+oFgsYD90FFN0i9d0vf644tOnGApr8DHkE96qFmNGz0mTI8X6JMirsIhSamWR/CouIbAy5CyWBiPi4ExjbKzrs7Xh9SEPggDOi7V8yJbdimNTCWzzkxq0Psi7q87hOQywbkx5p1AG2RVUasqLes9+Avpc/A3WvIBkQAAAABJRU5ErkJggg==);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-  }
-}
-
-/******************************
-  Horizontal Checkbox Group
-******************************/
-.checkbox-group-wrapper.horizontal {
-  .checkbox-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
-
-    label {
-      width: 100%;
-      border: 2px solid $stroke-tertiary;
-      padding: 16px;
-      border-radius: $border-radius-mid;
-      position: relative;
-      background-color: $color-white;
-      transition: all 0.2s ease;
-
-      &::before {
-        position: absolute;
-        right: 16px;
-        top: 16px;
-      }
-
-      &:hover {
-        border-color: $stroke-accent;
-        background-color: $bg-light-primary;
-        box-shadow: 0px 4px 8px rgba(22, 44, 69, 0.18);
-      }
-
-      &:active {
-        border-color: $stroke-accent;
-      }
-    }
-
-    input[type='checkbox']:checked + label {
+    &:checked + label {
       border-color: $stroke-accent;
       background-color: $color-shade-blue-10;
+
+      &::before {
+        border-color: $stroke-accent;
+        background-color: $stroke-accent;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjkwMzEgMy41MDYwOUw3LjE3ODMgMTUuNzUyOUwxLjE2MjExIDkuNjkxNzNMMi40Mjk1IDguNDMzNzZMNy4wMjk3NSAxMy4wNjg0TDE1LjUwNDYgMi4zOTU2M0wxNi45MDMxIDMuNTA2MDlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+        background-size: 17px;
+        width: $spacing-500;
+        height: $spacing-500;
+      }
     }
   }
-}
 
-/******************************
-  Responsive Tweaks (Mobile First)
-******************************/
-@media (min-width: 744px) {
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper {
-    flex-direction: row;
-    align-items: center;
+  .desc {
+    font-size: $size-font-body-default;
+    color: $text-secondary;
+    font-weight: $font-weight-regular;
+  }
+
+  .text {
+    font-weight: $font-weight-regular;
   }
 }
 
-@media (max-width: 743px) {
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper label {
-    padding-right: 48px;
+.checkbox-group-wrapper {
+  &.horizontal {
+    > legend {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .checkbox-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+
+      @media (min-width: 744px) {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      label {
+        width: 100%;
+
+        @media (max-width: 743px) {
+          padding-right: $spacing-700;
+
+          &::before {
+            right: $spacing-300;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
   }
 
-  .checkbox-group-wrapper.horizontal .checkbox-wrapper label::before {
-    right: 12px;
-    top: auto;
-    bottom: 16px;
-    transform: translateY(0);
+  &.variant-pills {
+    .checkbox-wrapper {
+      margin: 0;
+
+      input[type='checkbox'] {
+        display: none;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        padding: $spacing-300 $spacing-450 $spacing-300 $spacing-450;
+        margin: 0;
+        background-color: $color-white;
+        border: 1px solid $stroke-tertiary;
+        border-radius: $border-radius-round;
+        font-size: clamp(15px, 1.25vw, 17px);
+        line-height: 160%;
+        color: $text-secondary;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+
+        &::before {
+          display: none;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          width: $spacing-400;
+          height: $spacing-400;
+          margin-left: $spacing-200;
+          background-image: url('../../icons/icon-plus.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+
+        > span.text {
+          margin: 0;
+          line-height: 1;
+        }
+      }
+
+      input[type='checkbox']:checked + label {
+        background-color: $bg-dark;
+        color: $color-white;
+        border: 1px solid $stroke-dark;
+
+        &::after {
+          background-image: url('../../icons/icon-x.svg');
+        }
+
+        &:hover {
+          background-color: $color-accent;
+          border-color: $color-accent;
+        }
+      }
+    }
+
+    // INSERTED CODE — properly scoped override for pills + horizontal
+    &.horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-200;
+      margin: $spacing-200 0 $spacing-600 0;
+
+      .checkbox-wrapper {
+        flex: 0 1 auto;
+        min-width: max-content;
+        margin-bottom: 0;
+      }
+    }
   }
 }

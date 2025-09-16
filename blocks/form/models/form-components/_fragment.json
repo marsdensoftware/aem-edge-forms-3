@@ -33,7 +33,16 @@
                             "component": "aem-content",
                             "name": "fragmentPath",
                             "label": "Fragment reference",
-                            "valueType": "string"
+                            "valueType": "string",
+                            "validation": {
+                                "rootPath": "/content/forms/af"
+                            }
+                        },
+                        {
+                            "component": "edit-fragment",
+                            "name": "editFragment",
+                            "label": "Edit Fragment",
+                            "valueType": "boolean"
                         }
                     ]
                 },
@@ -64,6 +73,9 @@
                             "description": "Maximum number of times the fragment can appear on the form"
                         }
                     ]
+                },
+                {
+                    "...": "../form-common/_responsive-columns-component.json"
                 },
                 {
                     "...": "../form-common/_help-container.json"

@@ -1,13 +1,9 @@
 # AEM EDGE DELIVERY SERVICES
 
-## Front End development checklist
-
-[Front end checklist milestone](/docs/checklist.md)
-
 ## Environments
 
-- Live: https://main--aem-edge-forms-3--marsdensoftware.aem.page/
-- Testing: https://dev--aem-edge-forms-3--marsdensoftware.aem.page/
+- Live: https://develop--dev01-jsp-test--msddev01.aem.page/grid-demo
+- Testing: https://develop--dev01-jsp-test--msddev01.aem.page/grid-demo
 
 ## Prerequisites
 
@@ -20,22 +16,34 @@
 npm i
 ```
 
-## Run development server
+## Local development
+
+[Gulp](https://gulpjs.com/) is use to compile `.scss` to `.css`, through various postcss plugins to support older browser and automate conversion of px value to rem. Tsx is use to compile `.ts` to `.js`.
+Only make changes in `.ts` and `.scss` files for development.
+
+### Environment
+
+Set your `.env` file to match the AEM site and branch you are working with.
+
+**Example:**
+
+```env
+AEM_PORT=3000
+AEM_OPEN=/index/grid-layout
+AEM_PAGES_URL=https://develop--aem-edge-forms-3--marsdensoftware.aem.live
+```
+
+### Run development server
 
 ```sh
 npm run dev
 ```
 
-## Linting
+### Linting
 
 ```sh
 npm run lint
 ```
-
-## Local development
-
-[Gulp](https://gulpjs.com/) is use to compile `.scss` to `.css`, through various postcss plugins to support older browser and automate conversion of px value to rem. Tsx is use to compile `.ts` to `.js`.
-Only make changes in `.ts` and `.scss` files for development.
 
 ### Configure AEM Edge Delivery Services repo
 
@@ -49,6 +57,7 @@ When developing Block keep this thing in mind:
 - Block's name needs to be all lowercase
 - In Block's `.json` file, definitions id, models id and filters id needs to be the same name and lowercase. The exception of definitions title and definition plugins name
 - Block needs to be added to one or more `models` inside the models folder that will use the newly created Block
+- A useful tool to create a block is available through the `create:custom-component` script target in the package.json file 
 
 ### Updating content source
 

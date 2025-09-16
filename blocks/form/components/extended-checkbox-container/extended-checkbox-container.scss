@@ -1,0 +1,66 @@
+@use '../../../../styles/settings' as *;
+
+.checkbox-toast {
+  @include elevation-3;
+  white-space: nowrap;
+  position: fixed;
+  bottom: 128px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $color-white;
+  color: $text-dark-primary;
+  padding: 10px 20px;
+  border-radius: $border-radius-mid;
+  border-left: 8px solid $color-feedback-green;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-toast__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkbox-toast__icon--success {
+  background-image: url('/icons/ico-info--circle-check.svg');
+}
+
+.checkbox-toast__icon--error {
+  background-image: url('/icons/ico-info--warning-circle.svg');
+}
+
+.checkbox-toast__message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-toast__second-line {
+  margin-top: 5px;
+}
+
+.checkbox-toast__close-button {
+  background: none;
+  border: none;
+  color: $text-dark-primary;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0 5px;
+}
+
+.checkbox-toast--hidden {
+  display: none;
+}
+
+.checkbox-toast--error {
+  border-left: 8px solid $color-feedback-red;
+}

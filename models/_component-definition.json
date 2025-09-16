@@ -35,6 +35,24 @@
           "...": "../blocks/*/_*.json#/definitions"
         }
       ]
+    },
+    {
+      "title": "Custom Form Components",
+      "id": "custom-components",
+      "components": [
+        {
+          "...": "../blocks/form/components/range/_range.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/toast-container/_toast-container.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/toast/_toast.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/extended-checkbox-group/_extended-checkbox-group.json#/definitions"
+        }
+      ]
     }
   ]
 }

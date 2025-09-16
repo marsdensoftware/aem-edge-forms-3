@@ -1,0 +1,257 @@
+@use "../../../../styles/settings" as *;
+
+/* Icons */
+$icon-info: "/icons/icon-toast-blue-info.svg";
+$icon-success: "/icons/icon-toast-green-tick.svg";
+$icon-warning: "/icons/icon-toast-orange-warning.svg";
+$icon-error: "/icons/icon-toast-red-error.svg";
+
+/* Animation */
+$toast-enter-distance: 16px;
+$toast-enter-duration: 650ms;
+$toast-exit-duration: 450ms;
+$toast-ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+$toast-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+/* Keyframes */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate3d($toast-enter-distance, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d($toast-enter-distance, 0, 0);
+  }
+}
+
+/* =========================================================
+   Container — layout only (stack + consistent width)
+========================================================= */
+.toast-container {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0) + 123px + 48px);
+  right: 32px;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: $spacing-300;
+  width: 370px; /* max width of the whole toast stack */
+  max-width: min(370px, calc(100vw - 32px - 16px));
+  pointer-events: none;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+  z-index: 10000;
+
+  /* Soft stagger so multiple toasts don't animate at once */
+  > .toast {
+    animation-delay: 0ms;
+  }
+  > .toast:nth-child(2) {
+    animation-delay: 180ms;
+  }
+  > .toast:nth-child(3) {
+    animation-delay: 360ms;
+  }
+  > .toast:nth-child(4) {
+    animation-delay: 540ms;
+  }
+}
+
+/* =========================================================
+   Toast card
+========================================================= */
+.toast {
+  box-sizing: border-box;
+  pointer-events: auto;
+  width: 100%;
+  @include elevation-1;
+  background: $color-white;
+  color: $text-toast-primary;
+  border: 0;
+  border-radius: $border-radius-mid;
+  border-left: 8px solid $text-toast-info;
+  padding: 0.625rem 1.25rem;
+  display: grid;
+  row-gap: $spacing-100;
+
+  /* ✨ Enter animation */
+  opacity: 0; /* starting state for animation */
+  transform: translate3d($toast-enter-distance, 0, 0);
+  animation: toast-in $toast-enter-duration $toast-ease-out both;
+
+  /* performance hint */
+  will-change: transform, opacity;
+
+  /* Optional exit animation hook (if you add a class when removing) */
+  &.is-exiting,
+  &[aria-hidden="true"] {
+    animation: toast-out $toast-exit-duration $toast-ease-in both;
+  }
+
+  /* Variant borders (fixed separation) */
+  &.info,
+  &.toast--info {
+    border-left-color: $text-toast-info;
+  }
+
+  &.success,
+  &.toast--success {
+    border-left-color: $text-toast-success;
+  }
+
+  &.warning,
+  &.toast--warning {
+    border-left-color: $text-toast-warning;
+  }
+
+  &.error,
+  &.toast--error {
+    border-left-color: $text-toast-error;
+  }
+}
+
+/* =========================================================
+   Header row — icon | title | close (SAME LINE)
+========================================================= */
+.toast__header-container {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto; /* icon | flexible title | close */
+  align-items: start;
+  column-gap: $spacing-300;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Icon */
+.toast__icon {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(#{$icon-info});
+}
+
+/* Variant icons (fixed separation) */
+.toast.info .toast__icon,
+.toast--info .toast__icon {
+  background-image: url(#{$icon-info});
+}
+
+.toast.success .toast__icon,
+.toast--success .toast__icon {
+  background-image: url(#{$icon-success});
+}
+
+.toast.warning .toast__icon,
+.toast--warning .toast__icon {
+  background-image: url(#{$icon-warning});
+}
+
+.toast.error .toast__icon,
+.toast--error .toast__icon {
+  background-image: url(#{$icon-error});
+}
+
+/* Title */
+.toast__title,
+.toast > .field-label {
+  margin: 0;
+  color: $text-toast-primary;
+  @include heading-level-6;
+  font-weight: $font-weight-regular;
+  font-size: $size-font-toast-title;
+  line-height: 1.2;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.toast__title:empty {
+  display: none;
+}
+.toast > .field-label:empty {
+  display: none;
+}
+
+.toast__close-button {
+  justify-self: end;
+  align-self: start;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: $text-toast-primary;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+
+  &:hover,
+  &:focus-visible {
+    color: $text-toast-primary;
+    outline: none;
+  }
+}
+
+/* Description */
+.toast__description,
+.toast > .field-description {
+  margin: 0;
+  color: $text-toast-primary;
+  font-size: $size-font-toast-desc;
+  line-height: 1.35;
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .toast-container > .toast {
+    animation-delay: 0ms !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+/* Full-width container at 744px and below — and bumped higher */
+@media (max-width: 744px) {
+  .toast-container {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: none; /* remove the 370px cap */
+    top: calc(env(safe-area-inset-top, 0) + 123px + 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .toast__header-container {
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+  }
+  .toast__icon {
+    width: 20px;
+    height: 20px;
+  }
+}

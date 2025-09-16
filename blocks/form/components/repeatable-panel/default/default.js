@@ -1,490 +1,735 @@
+/* eslint-disable max-classes-per-file, class-methods-use-this */
 import { validateContainer } from '../../wizard/wizard.js'
 import { loadCSS } from '../../../../../scripts/aem.js'
-import { isNo } from '../../utils.js'
+import { isNo, DefaultFieldConverter } from '../../utils.js'
+import { updateOrCreateInvalidMsg, checkValidation } from '../../../util.js'
+import { i18n } from '../../../../../i18n/index.js'
+import { Modal } from '../../modal/modal.js'
+import { dispatchToast } from '../../toast-container/toast-container.js';
+
+class RepeatModal extends Modal {
+  constructor(yesCallback, noCallback) {
+    super();
+
+    this._yesCallback = yesCallback;
+    this._noCallback = noCallback;
+  }
+
+  showModal() {
+    super.showModal();
+
+    this.dialog.addEventListener('close', () => {
+      this.panel.dataset.visible = false;
+    });
+
+    this.panel.dataset.visible = true;
+
+    this.dialog.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  hideModal() {
+    this.dialog.close();
+    this.panel.dataset.visible = false;
+  }
+
+  decorate(panelEl) {
+    super.decorate(panelEl);
+
+    // Register events on yes no buttons if any
+    const btnYes = panelEl.querySelector('button[name="btnYes"]');
+    btnYes?.addEventListener('click', () => {
+      this?._yesCallback();
+      this.hideModal();
+    });
+
+    const btnNo = panelEl.querySelector('button[name="btnNo"]');
+    btnNo?.addEventListener('click', () => {
+      this?._noCallback();
+      this.hideModal();
+    });
+  }
+}
 
 export class RepeatablePanel {
-    #overview;
-    constructor(repeatablePanel) {
-        // Load css
-        loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
+  #overview;
 
-        this._repeatablePanel = repeatablePanel;
-        this._repeatablePanel.classList.add('panel-repeatable-panel');
+  #converter;
 
-        // create overview
-        this.#overview = document.createElement('div');
-        this.#overview.classList.add('overview');
+  #sorterFn;
 
-        const content = document.createElement('div');
-        content.classList.add('repeatable-entries');
-        this.#overview.append(content);
+  constructor(el, properties, name, converter, sorterFn) {
+    this._repeatablePanel = el.querySelector('.repeat-wrapper');
 
-        this._repeatablePanel.prepend(this.#overview);
+    this.maxOccur = this._repeatablePanel.dataset.max;
+    this.toastTitle = properties.toastTitle;
+    this.toastMessage = properties.toastMessage;
+    this.toastMaxWarningThreshold = properties.toastMaxWarningThreshold;
 
-        const form = this._repeatablePanel.closest('form');
+    const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
+    this._cancelModal = this._initModal(
+      cancelModalEl,
+      this._yesCancel.bind(this),
+      this._noCancel.bind(this),
+    );
 
-        form.addEventListener('item:add', (event) => {
-            const added = event.detail.item.el;
-            // Check that added belongs to the current repeatable
-            if (this._repeatablePanel.contains(added)) {
-                this._onItemAdded(added);
-            }
-        });
+    const deleteModalEl = el.querySelector('fieldset[name="deleteModal"]');
+    this._deleteModal = this._initModal(
+      deleteModalEl,
+      this._yesDelete.bind(this),
+      this._noDelete.bind(this),
+    );
+    this._name = name;
 
-        form.addEventListener('item:remove', (event) => {
-            const removed = event.detail.item.el;
-            // At this point the element is no longer in the dom
-            const id = removed.dataset.id;
-            const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
-            if (repeatableEntry) {
-                // Find matching overview entry and remove
-                repeatableEntry.remove();
-                this._renderOverview();
-            }
-        });
-
-        const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
-        entries.forEach(entry => {
-            this._init(entry);
-        });
+    if (!this._repeatablePanel) {
+      throw new Error('No repeatable panel found');
     }
 
-    _init(entry) {
-        // Can be overriden in sub classes to perform entry initialization, event bindings, etc...
-        console.log(`Initializing ${entry.id}`);
+    this._addedTitle = properties.addedTitle;
+    this._cardTitle = properties.cardTitle;
+
+    // Load css
+    loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/repeatable-panel/repeatable-panel.css`)
+
+    this._repeatablePanel.classList.add('panel-repeatable-panel');
+
+    this.#converter = converter || new DefaultFieldConverter();
+    this.#sorterFn = sorterFn;
+
+    // create overview
+    this.#overview = document.createElement('div');
+    this.#overview.dataset.visible = false;
+    this.#overview.classList.add('overview');
+
+    if (this._addedTitle) {
+      const addedTitleContainer = document.createElement('div');
+      addedTitleContainer.classList.add('overview-title');
+      addedTitleContainer.innerHTML = this._addedTitle;
+      this.#overview.append(addedTitleContainer);
     }
 
-    _onItemAdded(entry) {
-        // make unique
-        this._makeUnique(entry);
-        this._toggleEditMode(entry, true);
-    }
+    const content = document.createElement('div');
+    content.classList.add('repeatable-entries');
+    this.#overview.append(content);
 
-    _makeUnique(el) {
-        // TODO NJ: Remove after bug fixed by Adobe
-        const index = new Date().getTime();//Array.from(el.parentNode.children).indexOf(el);
-        el.dataset.id = el.dataset.id + '-' + index;
-        // Update IDs and labels
-        const inputs = el.querySelectorAll('[data-id]');
+    this._repeatablePanel.prepend(this.#overview);
 
-        inputs.forEach((input) => {
-            input.dataset.id = input.dataset.id + '-' + index;
-            if (input.querySelector('input')) {
-                input.querySelector('input').id = input.dataset.id;
+    this.#watchForItemsModified();
+
+    const entries = this._repeatablePanel.querySelectorAll('[data-repeatable]');
+    entries.forEach((entry) => {
+      this._init(entry);
+    });
+  }
+
+  #watchForItemsModified() {
+    // Callback function to run when changes occur
+    const t = this;
+
+    const callback = (mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          // Check for added nodes
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeName.toLowerCase() === 'fieldset') {
+              t._onItemAdded(node);
             }
-            if (input.querySelector('label')) {
-                input.querySelector('label').htmlFor = input.dataset.id;
+          });
+
+          // Check for removed nodes
+          mutation.removedNodes.forEach((node) => {
+            if (node.nodeName.toLowerCase() === 'fieldset') {
+              console.log('A fieldset was removed!', node);
+              t._onItemRemoved(node);
             }
-
-        });
-    }
-
-    _toggleEditMode(entry, visible) {
-        const panel = entry.closest('.panel-repeatable-panel');
-        if (visible) {
-            entry.classList.add('current');
-            panel.classList.add('editing');
+          });
         }
-        else {
-            entry.classList.remove('current');
-            panel.classList.remove('editing');
-        }
+      }
+    };
 
-        this._toggleWizardButtons(!visible);
-        this._ensureButtonBar(entry);
+    // Create observer instance
+    const observer = new MutationObserver(callback);
+
+    // Start observing direct children of the div
+    observer.observe(this._repeatablePanel, { childList: true });
+  }
+
+  _initModal(panelEl, yesCallback, noCallback) {
+    if (panelEl) {
+      const modal = new RepeatModal(yesCallback, noCallback);
+      modal.decorate(panelEl);
+
+      return modal;
+    }
+    return null;
+  }
+
+  _yesCancel(entry) {
+    const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
+    this._resetChanges(currentEntry);
+    this._toggleEditMode(currentEntry, false);
+
+    if (!currentEntry.classList.contains('saved') && !this._isFirstEntry(currentEntry)) {
+      // Unsaved and not first one --> Delete
+      this.#triggerDeletion(currentEntry);
+    }
+  }
+
+  _noCancel() {
+
+  }
+
+  _yesDelete(entry) {
+    const currentEntry = entry || this._repeatablePanel.querySelector('[data-repeatable].current');
+    this._clearFields(currentEntry);
+    this._toggleEditMode(currentEntry, false);
+
+    if (this._isFirstEntry(currentEntry)) {
+      // Remove saved flag. We do not delete the first entry
+      currentEntry.classList.remove('saved');
+      // Disable to prevent validation
+      currentEntry.disabled = true;
+      currentEntry.dataset.savedData = '';
+      this._renderOverview();
+    } else {
+      this.#triggerDeletion(currentEntry);
     }
 
-    _toggleWizardButtons(visible) {
-        const wizardButtonWrapper = this._repeatablePanel.closest('.wizard')?.querySelector('.wizard-button-wrapper');
-        if (!wizardButtonWrapper) {
-            return;
-        }
-        if (visible) {
-            // show wizard buttons
-            wizardButtonWrapper.style.display = 'flex';
-        }
-        else {
-            // hide wizard buttons
-            wizardButtonWrapper.style.display = 'none';
-        }
+    // trigger change
+    this.#dispatchChange();
+  }
+
+  _noDelete() {
+
+  }
+
+  _init(entry) {
+    // Can be overriden in sub classes to perform entry initialization, event bindings, etc...
+    console.log(`Initializing ${entry.id}`);
+  }
+
+  _onItemAdded(entry) {
+    // make unique
+    this._makeUnique(entry);
+    this._toggleEditMode(entry, true);
+  }
+
+  _onItemRemoved(entry) {
+    const removed = entry;
+    // At this point the element is no longer in the dom
+    const { id } = removed.dataset;
+    const repeatableEntry = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${id}"]`);
+    if (repeatableEntry) {
+      // Find matching overview entry and remove
+      this._delete(repeatableEntry);
+    }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  _makeUnique(el) {
+    /*
+    // TODO NJ: Remove after bug fixed by Adobe
+    const index = new Date().getTime();// Array.from(el.parentNode.children).indexOf(el);
+    el.dataset.id = `${el.dataset.id}-${index}`;
+    // Update IDs and labels
+    const inputs = el.querySelectorAll('[data-id]');
+
+    inputs.forEach((input) => {
+      input.dataset.id = `${input.dataset.id}-${index}`;
+      if (input.querySelector('input')) {
+        input.querySelector('input').id = input.dataset.id;
+      }
+      if (input.querySelector('label')) {
+        input.querySelector('label').htmlFor = input.dataset.id;
+      }
+    });
+    */
+  }
+
+  _toggleEditMode(entry, visible) {
+    const panel = entry.closest('.panel-repeatable-panel');
+    if (visible) {
+      // Remove disable flag to enable validation
+      entry.disabled = false;
+      entry.classList.add('current');
+      panel.classList.add('editing');
+    } else {
+      entry.classList.remove('current');
+      panel.classList.remove('editing');
     }
 
-    _isFirstEntry(entry) {
-        return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) == 0;
+    this._toggleWizardButtons(!visible);
+    this._ensureButtonBar(entry);
+  }
+
+  _toggleWizardButtons(visible) {
+    const wizardButtonWrapper = this._repeatablePanel.closest('.wizard')?.querySelector('.wizard-button-wrapper');
+    if (!wizardButtonWrapper) {
+      return;
+    }
+    if (visible) {
+      // show wizard buttons
+      wizardButtonWrapper.style.display = 'grid';
+    } else {
+      // hide wizard buttons
+      wizardButtonWrapper.style.display = 'none';
+    }
+  }
+
+  _isFirstEntry(entry) {
+    return Array.from(this._repeatablePanel.querySelectorAll('[data-repeatable]')).indexOf(entry) === 0;
+  }
+
+  _validate(entry) {
+    // Can be used in subclasses to perform custom validations
+    return entry !== undefined;
+  }
+
+  _ensureButtonBar(entry) {
+    let buttonBar = entry.querySelector('.button-bar');
+    if (buttonBar) {
+      return;
     }
 
-    _validate(entry) {
-        // Can be used in subclasses to perform custom validations
-        return entry != undefined;
-    }
+    buttonBar = document.createElement('div');
+    buttonBar.className = 'button-bar';
+    entry.appendChild(buttonBar);
 
-    _ensureButtonBar(entry) {
-        let buttonBar = entry.querySelector('.button-bar');
-        if (buttonBar) {
-            return;
-        }
+    const saveBtnLabel = entry.dataset.repeatSaveButtonLabel || i18n('Save');
+    const saveBtn = this._createButton(saveBtnLabel);
+    saveBtn.classList.add('btn-save')
 
-        buttonBar = document.createElement('div');
-        buttonBar.className = 'button-bar';
-        entry.appendChild(buttonBar);
+    saveBtn.addEventListener('click', () => {
+      // Validate
+      const valid = validateContainer(entry) && this._validate(entry);
 
-        const saveBtn = this._createButton('Save');
-        saveBtn.classList.add('btn-save')
-
-        saveBtn.addEventListener('click', () => {
-            // Validate
-            const valid = validateContainer(entry) && this._validate(entry);
-
-            if (valid) {
-                // Save
-                this._save(entry);
-
-            }
+      if (valid) {
+        // Save
+        this._save(entry);
+      } else {
+        entry.querySelectorAll('input,textarea,select').forEach((input) => {
+          checkValidation(input);
         });
+        // scroll to panel-validationsummary or first invalid field
+        const currentWizardStep = entry.closest('.current-wizard-step');
+        const scrollTo = currentWizardStep.querySelector('.panel-validationsummary')
+          || currentWizardStep.querySelector('.field-invalid');
+        scrollTo?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
 
-        const cancelBtn = this._createButton('Cancel');
-        cancelBtn.classList.add('btn-cancel', 'link');
+    const cancelBtnLabel = entry.dataset.repeatCancelButtonLabel || i18n('Cancel');
+    const cancelBtn = this._createButton(cancelBtnLabel);
+    cancelBtn.classList.add('btn-cancel', 'link');
 
-        cancelBtn.addEventListener('click', () => {
+    cancelBtn.addEventListener('click', () => {
+      if (this._hasChanges(entry)) {
+        this._cancelModal ? this._cancelModal.showModal() : this._yesCancel(entry);
+      } else {
+        this._yesCancel(entry);
+      }
+    });
 
-            this._toggleEditMode(entry, false);
-            this._resetChanges(entry);
+    const deleteBtnLabel = this._repeatablePanel.dataset.repeatDeleteButtonLabel || i18n('Delete');
+    const deleteBtn = this._createButton(deleteBtnLabel);
+    deleteBtn.classList.add('btn-delete', 'link');
 
-            if (!entry.classList.contains('saved') && !this._isFirstEntry(entry)) {
-                // Unsaved and not first one --> Delete
-                this.#triggerDeletion(entry);
-            }
-            this._renderOverview();
+    deleteBtn.addEventListener('click', () => {
+      this._deleteModal ? this._deleteModal.showModal() : this._yesDelete(entry);
+    });
 
-        });
+    buttonBar.appendChild(cancelBtn);
+    buttonBar.appendChild(deleteBtn);
+    buttonBar.appendChild(saveBtn);
+  }
 
-        buttonBar.appendChild(saveBtn);
-        buttonBar.appendChild(cancelBtn);
+  /**
+   * Remove a repeatable entry from the overview
+   */
+  _delete(repeatableEntry) {
+    repeatableEntry.remove();
+  }
+
+  _save(entry) {
+    entry.classList.add('saved');
+    this._toggleEditMode(entry, false);
+
+    this._entryModified(entry);
+
+    this.#dispatchChange();
+
+    this.#dispatchToast()
+
+    this._renderOverview();
+  }
+
+  #dispatchToast() {
+    const maxThreshold = this.toastMaxWarningThreshold;
+
+    const currentCount = this.#getSavedEntries().length;
+    console.log('repeatable panel count: ', currentCount);
+
+    let toastMessageText = this.toastMessage || undefined;
+    if (currentCount >= maxThreshold && toastMessageText) {
+      const remainingCount = this.maxOccur - currentCount;
+      toastMessageText = toastMessageText.replace('{remaining}', remainingCount);
+    } else {
+      toastMessageText = undefined;
     }
 
-    _save(entry) {
-        entry.classList.add('saved');
-        this._toggleEditMode(entry, false);
+    // dispatch toast event with the max selection message (error state)
+    dispatchToast({
+      type: 'success',
+      toastTitle: this.toastTitle,
+      toastMessage: toastMessageText,
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'stack',
+      maxToasts: this.maxOccur,
+    });
+  }
 
-        this._entryModified(entry);
-    }
+  #dispatchChange() {
+    // Trigger event with the name of the repeatable as parameter and values
+    const entries = this.#getSavedEntries();
+    const params = { detail: { name: this._name, entries } };
+    const event = new CustomEvent('repeatableChanged', params);
 
-    _resetChanges(entry) {
-        const inputs = entry.querySelectorAll('input, select, textarea');
+    const form = this._repeatablePanel.closest('form');
 
-        if (entry.classList.contains('saved')) {
-            // Save entry, reset to previous values from repeatable-entry
-            const id = entry.dataset.id;
-            const repeatableEntry = this._repeatablePanel.querySelector(`[data-id="${id}"]`);
-            if (!repeatableEntry) {
-                // Clear fields
-                this._clearFields(inputs);
-                return;
-            }
+    form.dispatchEvent(event);
+  }
 
-            inputs.forEach(input => {
-                const el = repeatableEntry.querySelector(`[data-name="${input.name}"]`);
-                const value = el ? el.data.value : undefined;
+  _hasChanges(entry) {
+    function deepEqual(a, b) {
+      if (a === b) return true;
 
-                switch (input.type) {
-                    case 'checkbox':
-                    case 'radio':
-                        input.checked = input.value === value;
-                        break;
-                    default:
-                        input.value = value;
-                        break;
-                }
-            });
+      /* eslint-disable-next-line eqeqeq */
+      if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false;
+
+      const keysA = Object.keys(a);
+      const keysB = Object.keys(b);
+      if (keysA.length !== keysB.length) return false;
+
+      for (const key of keysA) {
+        if (!keysB.includes(key) || !deepEqual(a[key], b[key])) {
+          return false;
         }
-        else {
-            // Unsaved --> Clear all fields
-            this._clearFields(entry);
+      }
+
+      return true;
+    }
+
+    const savedData = JSON.parse(entry.dataset.savedData || '{}');
+    const currentData = new DefaultFieldConverter().convert(entry);
+
+    return !deepEqual(savedData, currentData);
+  }
+
+  _resetChanges(entry) {
+    // Remove all validation errors
+    this._clearValidation(entry)
+
+    if (!this._hasChanges(entry)) {
+      return;
+    }
+    const inputs = entry.querySelectorAll('input, select, textarea');
+
+    if (entry.classList.contains('saved')) {
+      // Saved entry, reset to previous saved values
+      const savedData = JSON.parse(entry.dataset.savedData);
+
+      inputs.forEach((input) => {
+        const savedInputData = savedData[input.name];
+        if (!savedInputData) {
+          return;
         }
+        const value = savedInputData.value ? savedInputData.value : undefined;
+        const values = savedInputData.values ? savedInputData.values : [];
+        const val = value || values;
+
+        this._resetSingleValue(input, val);
+      });
+    } else {
+      // Unsaved --> Clear all fields
+      this._clearFields(entry);
+    }
+  }
+
+  _resetSingleValue(input, value) {
+    let item;
+    if (input.type === 'checkbox' || input.type === 'radio') {
+      item = window.myForm.getElement(input.closest('fieldset').id);
+    } else {
+      item = window.myForm.getElement(input.id);
     }
 
-    _clearFields(entry) {
-        const inputs = entry.querySelectorAll('input, select, textarea');
+    item.value = value;
+  }
 
-        inputs.forEach(input => {
-            if (input.type === 'checkbox' || input.type === 'radio') {
-                input.checked = false;
-            } else {
-                input.value = '';
-            }
-        });
+  _clearValidation(entry) {
+    entry.querySelectorAll('.field-invalid').forEach((field) => { field.classList.remove('field-invalid'); });
+  }
+
+  _clearFields(entry) {
+    const inputs = entry.querySelectorAll('input, select, textarea');
+
+    inputs.forEach((input) => {
+      this._resetSingleValue(input, undefined);
+
+      updateOrCreateInvalidMsg(input);
+    });
+  }
+
+  #fieldToNameValues(element) {
+    const result = this.#converter.convert(element);
+
+    return result;
+  }
+
+  #entryToReadableString(entry) {
+    let nameValues = this.#fieldToNameValues(entry)
+    const entries = [];
+    const classPrefix = 'repeatable';
+
+    // Save original values to be used later to restore
+    entry.dataset.savedData = JSON.stringify(new DefaultFieldConverter().convert(entry));
+
+    if (this._cardTitle) {
+      // Add card title as first entry
+      nameValues = {
+        cardTitle: {
+          value: this._cardTitle,
+          displayValue: this._cardTitle,
+        },
+        ...nameValues,
+      };
     }
 
-    _fieldToNameValues(entry) {
-        const inputs = entry.querySelectorAll('input, select, textarea');
-        const result = {};
+    Object.entries(nameValues).forEach(([name, data]) => {
+      if (!data) {
+        return;
+      }
+      const { value } = data;
+      const { displayValue } = data;
 
-        inputs.forEach(input => {
-            const value = input.value;;
-            let displayValue = value;
-            const name = input.name;
-
-            const type = input.type;
-
-            if (input.tagName === 'SELECT') {
-                displayValue = input.options[input.selectedIndex]?.text.trim() || '';
-            }
-            else if (type === 'checkbox' || type === 'radio') {
-                // Ignore not checked
-                if (!input.checked) {
-                    return;
-                }
-
-                displayValue = input.checked ? input.parentElement.querySelector('label').textContent.trim() : '';
-            }
-
-            if (value) {
-                if (result[name]) {
-                    // multi values
-                    const e = result[name];
-                    if (!e.values) {
-                        e.values = [];
-                        e.values.push(e.value);
-                        delete e.value;
-                        e.displayValues = [];
-                        e.displayValues.push(e.displayValue);
-                        delete e.displayValue;
-                    }
-                    e.values.push(value);
-                    e.displayValues.push(displayValue);
-                }
-                else {
-                    result[name] = { 'value': value, 'displayValue': displayValue };
-                }
-            }
-        });
-
-        return result;
-    }
-
-    #entryToReadableString(entry) {
-        const nameValues = this._fieldToNameValues(entry)
-        const entries = [];
-
-        Object.entries(nameValues).forEach(([name, data]) => {
-            const value = data.value;
-            const displayValue = data.displayValue;
-
-            if (value) {
-                const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
-                result.dataset.value = value;
-                result.dataset.name = name;
-                result.innerHTML = displayValue;
-
-                entries.push(result);
-            }
-
-            const values = data.values;
-            const displayValues = data.displayValues;
-            if (values) {
-                const result = document.createElement('div');
-                result.classList.add(`repeatable-entry__${name}`);
-                result.dataset.values = values;
-                result.innerHTML = displayValues.join(', ');
-
-                entries.push(result);
-            }
-        });
-
-        return entries;
-    }
-
-    _renderEntry(entry) {
-        const readable = this.#entryToReadableString(entry);
-
+      if (value) {
         const result = document.createElement('div');
-        result.classList.add('education-entry', 'repeatable-entry');
-        result.dataset.id = entry.dataset.id;
+        result.classList.add(`${classPrefix}-entry__${name}`);
+        result.dataset.value = value;
+        result.dataset.name = name;
+        result.innerHTML = displayValue;
 
-        const editLink = document.createElement('a');
-        editLink.classList.add('repeatable-entry__edit');
-        editLink.textContent = 'Edit';
-        editLink.href = '#';
-        result.append(editLink);
+        entries.push(result);
+      }
 
-        editLink.addEventListener('click', (e) => {
-            alert('Coming soon...');
-            /*
-            this._toggleEditMode(entry, true);
-            */
+      const { values } = data;
+      const { displayValues } = data;
+      if (values) {
+        const result = document.createElement('div');
+        result.classList.add(`${classPrefix}-entry__${name}`);
+        result.dataset.values = values;
+        result.innerHTML = displayValues.join(', ');
 
-            e.preventDefault();
-        });
+        entries.push(result);
+      }
+    });
 
-        const deleteLink = document.createElement('a');
-        deleteLink.classList.add('repeatable-entry__delete');
-        deleteLink.textContent = 'Delete';
-        deleteLink.href = '#';
-        //result.append(deleteLink);
+    return entries;
+  }
 
-        // TODO Implement deletion
-        deleteLink.addEventListener('click', (e) => {
-            alert('Coming soon...');
-            /*
-            if (this._isFirstEntry(entry)) {
-                // First one --> Remove from overview
-                result.remove();
-                // Clear changes
-                this.#clearFields(entry);
-                // Remove saved flag
-                entry.classList.remove('saved');
-                this._renderOverview();
-            }
-            else {
-                this.#triggerDeletion(entry);
-            }
-            */
+  _renderEntry(entry) {
+    const readable = this.#entryToReadableString(entry);
 
-            e.preventDefault();
-        });
+    const result = document.createElement('div');
+    result.classList.add(`${this._name}-entry`, 'repeatable-entry');
+    result.dataset.id = entry.dataset.id;
 
-        readable.forEach(r => {
-            result.append(r);
-        });
+    const editLink = document.createElement('a');
+    editLink.classList.add('repeatable-entry__edit');
+    editLink.textContent = 'Edit';
+    editLink.href = '#';
+    result.append(editLink);
 
-        return result;
+    editLink.addEventListener('click', (e) => {
+      this._toggleEditMode(entry, true);
+
+      e.preventDefault();
+    });
+
+    readable.forEach((r) => {
+      result.append(r);
+    });
+
+    return result;
+  }
+
+  #triggerDeletion(entry) {
+    // Trigger click on framework item remove button
+    entry?.querySelector('.item-remove')?.click();
+  }
+
+  init() {
+    this._renderOverview();
+  }
+
+  _entryModified(entry) {
+    // Find existing rendered entry
+    const dataId = entry.dataset.id;
+    const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
+
+    const content = this._renderEntry(entry);
+
+    if (!e) {
+      // Create
+      this.#overview.querySelector('.repeatable-entries').append(content);
+      this.#overview.dataset.visible = true;
+    } else {
+      // Update
+      e.replaceWith(content);
     }
+  }
 
-    #triggerDeletion(entry) {
-        // Trigger click on framework item remove button
-        entry?.querySelector('.item-remove')?.click();
+  #getSavedEntries() {
+    const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+    const result = [];
+
+    savedEntries.forEach((entry) => {
+      const data = new DefaultFieldConverter().convert(entry);
+      result.push(data);
+    });
+
+    return result;
+  }
+
+  _renderOverview() {
+    let savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+
+    if (savedEntries.length > 0) {
+      if (this.#sorterFn) {
+        savedEntries = Array.from(savedEntries).sort(this.#sorterFn);
+      }
+
+      const content = this.#overview.querySelector('.repeatable-entries');
+
+      // Clear content
+      content.innerHTML = '';
+
+      savedEntries.forEach((entry) => {
+        content.append(this._renderEntry(entry));
+      });
+      this.#overview.dataset.visible = true;
+    } else {
+      this.#overview.dataset.visible = false;
     }
+  }
 
-    init() {
-        this._renderOverview();
-    }
+  _createButton(label) {
+    const button = document.createElement('button');
+    button.classList.add('button');
+    button.type = 'button';
+    const text = document.createElement('span');
+    text.textContent = label;
+    button.append(document.createElement('i'), text);
 
-    _entryModified(entry) {
-        // Find existing rendered entry
-        const dataId = entry.dataset.id;
-        const e = this._repeatablePanel.querySelector(`.repeatable-entry[data-id="${dataId}"]`);
-
-        const content = this._renderEntry(entry);
-
-        if (!e) {
-            // Create
-            this.#overview.firstElementChild.append(content);
-        }
-        else {
-            // Update
-            e.replaceWith(content);
-        }
-    }
-
-    _renderOverview() {
-        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
-
-        if (savedEntries.length > 0) {
-            const content = this.#overview.firstChild;
-
-            // Clear content
-            content.innerHTML = '';
-
-            savedEntries.forEach((entry) => {
-                content.append(this._renderEntry(entry));
-            });
-        }
-    }
-
-    _createButton(label) {
-        const button = document.createElement('button');
-        button.classList.add('button');
-        button.type = 'button';
-        const text = document.createElement('span');
-        text.textContent = label;
-        button.append(document.createElement('i'), text);
-
-        return button;
-    }
+    return button;
+  }
 }
 
 /**
  * Repeatable that is displayed when a condition is fullfiled, based on a radio group
  */
 export class ConditionalRepeatable extends RepeatablePanel {
-    // A field with many options with one that yields no,0,false as value
-    _conditionField;
+  // A field with many options with one that yields no,0,false as value
+  _conditionField;
 
-    constructor(repeatablePanel, name) {
-        super(repeatablePanel);
+  constructor(el, properties, name, converter, sorterFn) {
+    super(el, properties, name, converter, sorterFn);
+    //
+    // console.log(`${name}Repeatable properties: `, properties);
+    // console.log(`${name}Repeatable el: `, el);
+    // Add class
+    this._repeatablePanel.classList.add('panel-repeatable-panel__conditional');
 
-        // Add class
-        repeatablePanel.classList.add(`panel-repeatable-panel__conditional`);
+    // Add class
+    this._repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
 
-        // Add class
-        repeatablePanel.classList.add(`panel-repeatable-panel__${name}`);
+    this._conditionField = this._repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
+    if (this._conditionField) {
+      const radios = this._conditionField.querySelectorAll(`input[name="${name}-selection"]`);
 
-        this._conditionField = repeatablePanel.closest(`.field-${name}`).querySelector(`.field-${name}-selection`);
-        if (this._conditionField) {
-            const radios = this._conditionField.querySelectorAll(`input[name="${name}-selection"]`);
+      // register click on radios
+      radios.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          const entry = this._repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
 
-            // register click on radios
-            radios.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    if (isNo(radio)) {
-                        // hide repeatable panel
-                        repeatablePanel.style.display = 'none';
-                        // Show wizard buttons
-                        super._toggleWizardButtons(true);
-
-                        // TODO Clear all edits?
-
-                        // prevent validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-                    }
-                    else {
-                        // show repeatable panel
-                        repeatablePanel.style.display = 'block';
-                        // enable validation
-                        repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
-
-                        const el = repeatablePanel.querySelector(':scope>[data-repeatable]:not(.saved)')
-
-                        if (el) {
-                            // Edit first entry if any
-                            this._toggleEditMode(el, true);
-                        }
-                    }
-                });
-            });
-            // prevent validation
-            repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
-        }
-    }
-
-    _entryModified(entry) {
-        super._entryModified(entry);
-
-        this._updateCondition();
-    }
-
-    _updateCondition() {
-        const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
-        if (savedEntries.length > 0) {
-            // Hide question
-            this._conditionField.setAttribute('data-visible', false);
-        }
-        else {
-            // reset selection & condition field
-            const radios = this._conditionField.querySelectorAll('input[type="radio"]');
-
-            radios?.forEach(radio => { radio.checked = false; });
-            // Show condition field
-            this._conditionField.setAttribute('data-visible', true);
+          if (isNo(radio)) {
             // hide repeatable panel
             this._repeatablePanel.style.display = 'none';
-        }
-    }
+            // Show wizard buttons
+            super._toggleWizardButtons(true);
 
-    _renderOverview() {
-        super._renderOverview();
+            // TODO Clear all edits?
+            if (entry) {
+              this._clearFields(entry);
+            }
 
-        this._updateCondition();
+            // prevent validation
+            this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
+          } else {
+            // show repeatable panel
+            this._repeatablePanel.style.display = 'block';
+            // enable validation
+            this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = false;
+
+            if (entry) {
+              // Edit first entry if any
+              this._toggleEditMode(entry, true);
+            }
+          }
+        });
+      });
+      // prevent validation
+      this._repeatablePanel.closest(`.field-${name}-options-content`).disabled = true;
     }
+  }
+
+  _yesCancel(entry) {
+    super._yesCancel(entry);
+
+    this._updateCondition();
+  }
+
+  _save(entry) {
+    super._save(entry);
+
+    this._updateCondition();
+    this._clearValidation(entry);
+  }
+
+  _updateCondition() {
+    const savedEntries = this._repeatablePanel.querySelectorAll('[data-repeatable].saved');
+    if (savedEntries.length > 0) {
+      // Hide question
+      this._conditionField.setAttribute('data-visible', false);
+    } else {
+      // reset selection & condition field
+      const radios = this._conditionField.querySelectorAll('input[type="radio"]');
+
+      radios?.forEach((radio) => { radio.checked = false; });
+      // Show condition field
+      this._conditionField.setAttribute('data-visible', true);
+      // hide repeatable panel
+      this._repeatablePanel.style.display = 'none';
+    }
+  }
+
+  _delete(repeatableEntry) {
+    super._delete(repeatableEntry);
+    this._updateCondition();
+  }
+
+  _renderOverview() {
+    super._renderOverview();
+    this._updateCondition();
+  }
 }

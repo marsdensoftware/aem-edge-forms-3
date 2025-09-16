@@ -1,3 +1,4 @@
+/*eslint-disable*/
 function addSuggestionDiv() {
     const el = document.createElement('div');
     el.classList.add('suggestions');
@@ -16,7 +17,7 @@ const datasources = {
         'Assume responsibility for the management of a business',
         'Build trust',
     ],
-    languages: ['Te Reo', 'French', 'German', 'Portuguese', 'Hebrew'],
+    languages: ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew'],
     occupations: [
         'Software Developer',
         'Primary School Teacher',
@@ -44,9 +45,20 @@ const datasources = {
 };
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
-    if (window.searchInput && !window.searchInput.contains(e.target)) {
+    var _a, _b, _c;
+    if (window.searchInput
+        && !window.searchInput.contains(e.target)
+        && window.suggestionsDiv) {
         window.suggestionsDiv.innerHTML = '';
         window.suggestionsDiv.style.display = 'none';
+    }
+    const el = e.target;
+    if (el.classList.contains('typeahead__icon') && ((_a = el.closest('.typeahead')) === null || _a === void 0 ? void 0 : _a.classList.contains('has-input'))) {
+        const inputEl = (_b = el.closest('.typeahead')) === null || _b === void 0 ? void 0 : _b.querySelector('input[type="text"]');
+        if (inputEl) {
+            inputEl.value = '';
+        }
+        (_c = el.closest('.typeahead')) === null || _c === void 0 ? void 0 : _c.classList.remove('has-input');
     }
 });
 document.addEventListener('change', (event) => {
@@ -57,21 +69,27 @@ document.addEventListener('change', (event) => {
         const searchInput = element.querySelector('input[type="text"]');
         const { value } = searchInput;
         if (!entries.includes(value)) {
-            // Dispatch custom event2
-            const event = new CustomEvent('typeahead:invalid', {
+            // Dispatch custom event
+            const customEvent = new CustomEvent('typeahead:invalid', {
                 detail: {},
                 bubbles: true,
             });
-            searchInput.dispatchEvent(event);
-            event.preventDefault();
+            searchInput.dispatchEvent(customEvent);
+            customEvent.preventDefault();
         }
         else {
             // Dispatch custom event
-            const event = new CustomEvent('typeahead:valid', {
+            const customEvent = new CustomEvent('typeahead:valid', {
                 detail: {},
                 bubbles: true,
             });
-            searchInput.dispatchEvent(event);
+            searchInput.dispatchEvent(customEvent);
+        }
+        if (value && value.trim().length > 0) {
+            element.classList.add('has-input');
+        }
+        else {
+            element.classList.remove('has-input');
         }
     }
 });
@@ -86,6 +104,9 @@ document.addEventListener('input', (event) => {
             return;
         }
         const suggestionsDiv = element.querySelector('.suggestions');
+        if (!suggestionsDiv) {
+            return;
+        }
         window.suggestionsDiv = suggestionsDiv;
         suggestionsDiv.innerHTML = '';
         const { datasource } = element.dataset;
@@ -99,8 +120,8 @@ document.addEventListener('input', (event) => {
                 searchInput.value = item;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
-                const event = new Event('change', { bubbles: true });
-                searchInput.dispatchEvent(event);
+                const customEvent = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(customEvent);
             });
             suggestionsDiv.appendChild(div);
         });
@@ -116,12 +137,14 @@ export default function decorate(element, field) {
     // Moved input into container so we can attached icon input
     const inputEl = element.querySelector('input');
     const container = document.createElement('div');
+    const iconEl = document.createElement('span');
+    iconEl.classList.add('typeahead__icon');
     container.className = 'typeahead__input';
-    container.id = 'typeahead__input';
-    if (inputEl) {
+    if (inputEl && inputEl.parentNode) {
+        inputEl.parentNode.insertBefore(container, inputEl);
         container.appendChild(inputEl);
+        container.append(iconEl);
     }
-    element.appendChild(container);
     // Add suggestion div
     const suggestionsDiv = addSuggestionDiv();
     container.appendChild(suggestionsDiv);

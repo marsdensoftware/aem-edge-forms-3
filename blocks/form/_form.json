@@ -135,6 +135,12 @@
                       "valueType": "boolean"
                   },
                   {
+                    "component": "boolean",
+                    "name": "useHtmlTemplate",
+                    "label": "Use html template",
+                    "valueType": "boolean"
+                  },
+                  {
                       "component": "aem-content",
                       "name": "templatePath",
                       "label": "External template path",
@@ -175,6 +181,7 @@
         "date-input",
         "drop-down",
         "email",
+        "extended-checkbox",
         "file-input",
         "form-accordion",
         "form-button",
@@ -187,9 +194,13 @@
         "education",
         "languagepanel",
         "workexperience",
+        "driverlicence",
         "advanceddatepicker",
+        "summary",
         "formwelcome",
         "formcontextualhelp",
+        "validationsummary",
+        "formoutputfield",
         "formtabs",
         "number-input",
         "panel",
@@ -201,7 +212,13 @@
         "telephone-input",
         "text-input",
         "tnc",
-        "wizard"
+        "wizard",
+        "icon-radio-group",
+        "extended-checkbox-container",
+        "range",
+        "toast-container",
+        "toast",
+        "extended-checkbox-group"
       ]
     }
   ]

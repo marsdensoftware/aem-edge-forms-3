@@ -1,125 +1,101 @@
 @use '../../styles/settings' as *;
 
-/*****************************
-    WIZARD BUTTONS
-*****************************/
-
-%common-panel-spacing {
-  margin: 32px 0;
-
-  @include media('desktop') {
-    padding: 60px 0;
-  }
-}
-
-%common-wizard-button {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: block;
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.wizard .wizard-button-wrapper {
+.wizard-button-wrapper {
+  height: 100%;
+  max-height: $footer-height;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: $spacing-400;
-  background-color: $color-white;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  gap: $spacing-300;
-  border-top: 1px solid $stroke-secondary;
+  padding: $spacing-400 $spacing-400 $spacing-500;
+  background-color: $bg-light-primary;
+  z-index: 3;
+  border-top: 1px solid $color-shade-navy-20;
+  display: grid;
+  grid-template-areas: 'left . right';
+
+  @include media('tablet') {
+    max-height: $footer-height-tablet;
+    padding: $spacing-400 $spacing-400 $spacing-600;
+  }
+
+  @include media('desktop') {
+    max-height: $footer-height-desktop;
+    padding: $spacing-450 $spacing-700 $spacing-600;
+  }
+
+  .wizard-button-save-changes {
+    margin-left: auto;
+    grid-area: right;
+  }
+
+  .button[name='save-changes'] {
+    @extend %button;
+    @extend %button--primary;
+  }
 
   .wizard-button-next {
     margin-left: auto;
+    grid-area: right;
+  }
+
+  .button[name='next'],
+  .button[name='back'] {
+    @include elevation-1;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: block;
+      width: 20px;
+      height: 20px;
+      content: '';
+    }
   }
 
   .button[name='next'] {
     @extend %button;
     @extend %button--primary;
-    display: flex;
-    align-items: center;
 
     &::before {
-      @extend %common-wizard-button;
-      content: '';
-      background-image: url('/icons/icon-wizard-next-button-white-arrow-right.svg');
+      background-image: url('../../../../icons/icon-wizard-next-button-white-arrow-right.svg');
       order: 1;
-      margin-left: 0.5rem;
+      margin-left: 8px;
     }
   }
 
   .button[name='back'] {
     @extend %button;
     @extend %button--hollow;
-    display: flex;
-    align-items: center;
+    grid-area: left;
 
     &::before {
-      @extend %common-wizard-button;
-      content: '';
-      background-image: url('/icons/icon-wizard-back-button-navy-arrow-left.svg');
-      margin-right: 0.5rem;
+      background-image: url('../../../../icons/icon-wizard-back-button-navy-arrow-left.svg');
+      margin-right: 8px;
     }
   }
 }
 
-/*****************************
-    REPEAT ACTIONS BUTTON (Hollow Style)
-*****************************/
+.wizard-button-wrapper--progress-start {
+  max-height: $footer-height-progress-start;
+  grid-template-areas:
+    'header header header'
+    'left . right';
+
+  @include media('tablet') {
+    max-height: $footer-height-tablet-progress-start;
+  }
+
+  @include media('desktop') {
+    max-height: $footer-height-desktop-progress-start;
+  }
+}
+
 .repeat-actions .item-add {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--Spacing-Spacing-200, 8px);
-  font-family: var(--Typography-Font-family-Primary-font, 'Atkinson Hyperlegible Next');
-  font-size: var(--Typography-Sizes-Components-Button-default, 20px);
-  font-style: normal;
-  line-height: 24px;
-  letter-spacing: var(--Typography-Spacing-Character-Default, 0px);
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  border-radius: var(--Corner-radius-Round, 999px);
-  border: var(--Stroke-weight-Button-stroke, 2px) solid var(--Stroke-Tertiary, #A1B3C8);
-  background: var(--Background-Light-Primary, #FFF);
-  color: var(--Text-Dark-Primary, #333);
-
-  /* Elevation-1 */
-  box-shadow: var(--Elevation-Position-X-Level-1, 0px)
-  var(--Elevation-Position-Y-Level-1, 2px)
-  var(--Elevation-Blur-Level-1, 4px)
-  var(--Elevation-Spread-Level-1, 0px) rgba(22, 44, 69, 0.20);
-
-  &.default {
-    padding: var(--Spacing-Spacing-400, 16px) var(--Spacing-Spacing-500, 24px);
-  }
-
-  &.small {
-    padding: var(--Spacing-Spacing-300, 12px) var(--Spacing-Spacing-450, 20px);
-  }
-
-  &:hover {
-    border-color: var(--Stroke-Primary, #333);
-    background: var(--Background-Light-Primary, #fff);
-    color: var(--Stroke-Primary, #333);
-  }
-
-  &:active {
-    border-color: var(--Stroke-Accent, #017ac9);
-    background: var(--Background-Light-Primary, #fff);
-    color: var(--Stroke-Accent, #017ac9);
-    transform: scale(0.98);
-  }
-
-  &:focus {
-    background: var(--Background-Light-Primary, #fff);
-    box-shadow: 0px 0px 0px 2px #fff,
-    0px 0px 0px 4px var(--Stroke-Focus, #b53cde);
-  }
+  @include elevation-1;
+  @extend %button;
+  @extend %button--hollow;
 }

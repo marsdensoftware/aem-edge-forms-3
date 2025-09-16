@@ -51,6 +51,10 @@
                                 {
                                     "name": "Cards",
                                     "value": "cards"
+                                },
+                                {
+                                    "name": "Bar",
+                                    "value": "bar"
                                 }
                             ],
                             "value": "default"
@@ -93,6 +97,9 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "...": "../form-common/_responsive-columns-component.json"
                 },
                 {
                     "...": "../form-common/_help-container.json"

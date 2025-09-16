@@ -37,8 +37,17 @@
                             "name": "multiLine",
                             "label": "Allow multiple lines",
                             "valueType": "boolean"
+                        },
+                        {
+                          "component": "boolean",
+                          "valueType": "boolean",
+                          "name": "spellcheck",
+                          "label": "Enable spellcheck"
                         }
                     ]
+                },
+                {
+                    "...": "../form-common/_responsive-columns-component.json"
                 },
                 {
                     "...": "../form-common/_help-container.json"

@@ -64,11 +64,28 @@
                         },
                         {
                             "component": "text",
+                            "name": "uncheckedValue",
+                            "label": "When Unchecked, return value",
+                            "valueType": "string",
+                            "condition": {
+                                "===": [
+                                    {
+                                        "var": "basic|enableUncheckedValue"
+                                    },
+                                    true
+                                ]
+                            }
+                        },
+                        {
+                            "component": "text",
                             "name": "default",
                             "label": "Default Value",
                             "valueType": "string"
                         }
                     ]
+                },
+                {
+                    "...": "../form-common/_responsive-columns-component.json"
                 },
                 {
                     "...": "../form-common/_help-container.json"

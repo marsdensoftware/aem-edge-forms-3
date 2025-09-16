@@ -1,22 +1,24 @@
-/// min-width are widely supported all the way back
-/// to browser released on 2010
 @use 'sass:map';
 @use 'sass:meta';
-
+/// min-width are widely supported all the way back
+/// to browser released on 2010
 /// Mobile first approach
 /// Meaning the styling should be targeting for
 /// Small devices first and make changes as the
 /// Screen get larger
 $breakpoints: (
-        'tablet': (
-                min-width: 744px,
-        ),
-        'desktop': (
-                min-width: 1280px,
-        ),
-        'desktop-large': (
-                min-width: 1920px,
-        ),
+  'tablet': (
+    min-width: 744px,
+  ),
+  'up-to-desktop': (
+    max-width: 1279px,
+  ),
+  'desktop': (
+    min-width: 1280px,
+  ),
+  'desktop-large': (
+    min-width: 1920px,
+  ),
 ) !default;
 
 @mixin media($breakpoint) {
@@ -25,7 +27,6 @@ $breakpoints: (
       @content;
     }
   } @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    @error "There is no #{$breakpoint} breakpoint.";
   }
 }

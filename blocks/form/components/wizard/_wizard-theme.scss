@@ -1,0 +1,82 @@
+@use '../../../../styles/settings' as *;
+
+main {
+  position: relative;
+
+  &.wizard--bg-dark {
+    background: linear-gradient(
+                    135deg,
+                    $color-accent 25%,
+                    $color-primary-navy 100%
+    );
+  }
+
+  &.wizard--bg-mid {
+    background: linear-gradient(
+                    135deg,
+                    $color-shade-blue-10 25%,
+                    $color-shade-blue-25 100%
+    );
+  }
+
+  &.wizard--bg-light {
+    background: $color-shade-blue-04;
+  }
+
+  &.wizard--bg-dark,
+  &.wizard--bg-mid {
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 360px;
+      height: 388px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
+
+      @include media('tablet') {
+        top: 90px;
+        right: 0;
+        background-image: url('/images/mymsd-unity-pattern-top-right.svg');
+        background-position: top right;
+      }
+
+      @include media('desktop') {
+        top: auto;
+        right: auto;
+        left: 0;
+        bottom: 90px;
+        background-image: url('/images/mymsd-unity-pattern-bottom-left.svg');
+        background-position: bottom left;
+      }
+    }
+  }
+
+  &.wizard--bg-light {
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 360px;
+      height: 388px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
+
+      @include media('tablet') {
+        top: 122px;
+        right: 0;
+      }
+
+      @include media('desktop') {
+        top: 122px;
+        right: 0;
+        bottom: auto;
+        left: auto;
+        background-image: url('/images/mymsd-unity-pattern-top-right-light.svg');
+        background-position: top right;
+      }
+    }
+  }
+}

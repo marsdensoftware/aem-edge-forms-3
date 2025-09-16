@@ -1,15 +1,14 @@
 @use '../../styles/settings' as *;
-@use '../../styles/forms' as *;
+@use 'form-panel';
 
-
-// Fieldset reset
 fieldset {
   padding: 0;
   margin: 0;
+  border: 0;
 }
 
 // Hide debug output
-main .form pre {
+.form pre {
   display: none;
 }
 
@@ -20,58 +19,107 @@ form output {
 }
 
 form:not(.edit-mode) [data-visible='false'] {
-  display: none !important;
+  display: none;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
-// Only show first form step initially
-main .form > div:not(:first-child) {
+.form > div:not(:first-child) {
   display: none;
 }
 
-// Top navigation panel layout
-.panel-wrapper.field-top-nav {
+.field-top-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $spacing-500 $spacing-400 $spacing-000 $spacing-400;
+  padding: $nav-padding-top $spacing-400 $nav-padding-bottom;
+  max-height: $nav-height;
+  height: 100%;
+  border-bottom: 1px solid $color-shade-navy-40;
+  background-color: $color-white;
 
-  .image-wrapper picture {
-    max-width: 150px;
+  @include media('tablet') {
+    max-height: $nav-height-tablet;
+    padding: $nav-padding-top-tablet $spacing-600 $nav-padding-bottom-tablet;
+  }
 
-    @include media('desktop') {
-      max-width: 300px;
+  @include media('desktop') {
+    max-height: $nav-height-desktop;
+    padding: $nav-padding-top-desktop $spacing-700 $nav-padding-bottom-desktop;
+  }
+
+  .image-wrapper {
+    a {
+      line-height: 0;
+    }
+
+    picture {
+      max-width: 200px;
+
+      @include media('desktop') {
+        max-width: 240px;
+      }
+    }
+  }
+
+  .button-wrapper button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 0 $spacing-200;
+    font-size: clamp(15px, 1.25vw, 17px);
+    font-weight: 500;
+    line-height: 133%;
+    color: $color-primary;
+    text-decoration: none;
+    background-image: none;
+    border: none;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 16px;
+      background-image: url('/icons/icon-logout-exit-blue.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @include media('desktop') {
+        height: 18px;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      color: $color-primary-navy;
     }
   }
 }
 
-// Input overrides
-main .form input:disabled,
-main .form textarea:disabled,
-main .form select:disabled,
-main .form button:disabled {
+// Remaining unchanged styles
+.form input:disabled,
+.form textarea:disabled,
+.form select:disabled,
+.form button:disabled {
   background-color: var(--form-input-disable-color);
 }
 
-main .form input[type='file'] {
+.form input[type='file'] {
   border: none;
   padding-inline-start: 0;
   background: unset;
   color: unset;
 }
 
-main .form textarea {
-  min-height: 100px;
-  font-family: $font-family;
-  font-size: $size-font-body-default;
-}
-
-main .form label.required::after {
+.form label.required::after {
   content: '*';
   color: var(--form-label-color);
   padding-inline-start: 5px;
 }
 
-// File input styling
 input::file-selector-button {
   color: var(--form-upload-color);
   background: var(--form-upload-background-color);
@@ -79,29 +127,24 @@ input::file-selector-button {
   text-align: center;
 }
 
-// Buttons
-main .form button {
-  @extend %button--primary;
-}
-
-main form .file-wrapper > button {
+form .file-wrapper > button {
   display: flex;
 }
 
-main .submit-wrapper {
+.submit-wrapper {
   button {
     @extend %button--hollow;
+
     display: block;
     margin-left: auto;
   }
 }
 
-// File upload drag and drop area
-main .file-wrapper.decorated input[type='file'] {
+.file-wrapper.decorated input[type='file'] {
   display: none;
 }
 
-main .file-wrapper .field-dropregion {
+.file-wrapper .field-dropregion {
   background: rgb(0 0 0 / 2%);
   border: 1px dashed var(--form-input-border-color);
   border-radius: 4px;
@@ -110,66 +153,66 @@ main .file-wrapper .field-dropregion {
   text-align: center;
 }
 
-// Cards input (radio/checkbox)
-main .form form fieldset.cards > .radio-wrapper > input,
-main .form form fieldset.cards > .checkbox-wrapper > input {
+.form form fieldset.cards > .radio-wrapper > input,
+.form form fieldset.cards > .checkbox-wrapper > input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-main .form .form-image-wrapper img {
+.form .form-image-wrapper img {
   max-width: 100%;
   height: auto;
 }
 
-main .form form fieldset.cards > .radio-wrapper > label > img,
-main .form form fieldset.cards > .checkbox-wrapper > label > img {
+.form form fieldset.cards > .radio-wrapper > label > img,
+.form form fieldset.cards > .checkbox-wrapper > label > img {
   max-width: 18px;
   max-height: 18px;
   object-fit: contain;
 }
 
-// Repeatable field actions
-main .form form .repeat-actions {
+.form form .field-label--with-description:not(.radio-group--with-icon__label) {
+  flex-direction: column;
+  align-items: start;
+}
+
+.form form .repeat-actions {
   grid-column: span 12;
   order: 2;
 }
 
-main .form form .item-remove,
-main .form form .item-add {
+.form form .item-remove,
+.form form .item-add {
   overflow: unset;
 }
 
-main .form form .item-remove {
+.form form .item-remove {
   justify-self: end;
   grid-column: span 12;
   order: 1;
 }
 
-main .form form div[data-variant='addRemoveButtons'] .item-add,
-main .form form div[data-variant='addRemoveButtons'] .item-remove {
+.form div[data-variant='addRemoveButtons'] .item-add,
+.form div[data-variant='addRemoveButtons'] .item-remove {
   display: block;
 }
 
-// File list display
-main .form .file-description {
+.form .file-description {
   display: flex;
   gap: 20px;
   align-items: center;
   margin-top: 5px;
 }
 
-main .form .file-description .file-description-name {
+.form .file-description .file-description-name {
   cursor: pointer;
   text-decoration: underline;
   flex: 1;
 }
 
-main .file-wrapper .file-description button {
-  --form-button-padding: 15px;
-
+.file-wrapper .file-description button {
   width: 12px;
   height: 12px;
   border: none;
@@ -178,6 +221,8 @@ main .file-wrapper .file-description button {
   cursor: pointer;
   position: relative;
   border-radius: 3px;
+
+  --form-button-padding: 15px;
 
   &::after {
     content: 'X';
@@ -189,7 +234,7 @@ main .file-wrapper .file-description button {
   }
 }
 
-main .form .button-wrapper button[disabled] {
+.form .button-wrapper button[disabled] {
   cursor: auto;
 
   &:hover {
@@ -199,15 +244,13 @@ main .form .button-wrapper button[disabled] {
   }
 }
 
-// Form layout: repeat wrapper
-main .form form .repeat-wrapper {
+.form form .repeat-wrapper {
   display: grid;
   grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
   gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
-// Messages
-main .form .form-message.success-message {
+.form .form-message.success-message {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #badbcc;
@@ -216,7 +259,7 @@ main .form .form-message.success-message {
   padding: 10px;
 }
 
-main .form .form-message.error-message {
+.form .form-message.error-message {
   color: #842029;
   background-color: #f8d7da;
   border-color: #f5c2c7;
@@ -225,51 +268,92 @@ main .form .form-message.error-message {
   padding: 10px;
 }
 
-// Drag area in file wrapper
-main .form .file-wrapper .file-drag-area {
+.form .file-wrapper .file-drag-area {
   border: 1px dashed var(--border-color);
   border-radius: 5px;
   padding: 10px 5px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: $spacing-450;
   justify-content: center;
   align-items: center;
 }
 
-// Captcha
-main .form form:not(.edit-mode) .captcha-wrapper {
+.form form:not(.edit-mode) .captcha-wrapper {
   display: none;
 }
 
-// Inline group descriptions
-main .form form .radio-group-wrapper.horizontal .field-description,
-main .form form .checkbox-group-wrapper.horizontal .field-description {
-  width: 100%;
-  order: 1;
-  margin-top: 0.5rem;
+.radio-group-wrapper.horizontal .field-description,
+.radio-group-wrapper.horizontal .field-description-2,
+.checkbox-group-wrapper.horizontal .field-description,
+.checkbox-group-wrapper.horizontal .field-description-2 {
+  p {
+    font-size: $size-font-body-default;
+    color: $text-dark-primary;
+    margin-bottom: $spacing-200;
+  }
 }
 
-// Responsive adjustments for mobile
 @media (width <= 599px) {
   :root {
     --form-field-horz-gap: 10px;
   }
 
-  main .form form .wizard {
+  .form form .wizard {
     .wizard-menu-items {
-      gap: 20px;
+      gap: $spacing-450;
     }
 
     margin: 0;
   }
 }
 
-// SEP-specific ordering
 .checkbox-wrapper > input {
   order: 2;
 }
 
 .checkbox-wrapper > label {
   order: 1;
+}
+
+// Personal details
+.field-panel-personal-details {
+  .field-fullname,
+  .field-phone,
+  .field-email,
+  .field-address {
+    label {
+      color: $text-dark;
+      font-size: $size-font-label;
+      margin-top: 0;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input,
+    textarea {
+      border: none;
+      padding: 0;
+      background: none;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: $color-shade-navy-20;
+      margin: $spacing-500 0;
+    }
+  }
+
+  .field-address {
+    &::after {
+      display: none;
+    }
+  }
 }

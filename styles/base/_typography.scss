@@ -1,7 +1,8 @@
 @use '../settings/fonts' as *;
 @use '../settings/colors' as *;
 @use '../settings/spacings' as *;
-
+@use '../settings/breakpoints' as *;
+@use '../settings/mixins' as *;
 
 /* ------------------------------
    Headings
@@ -12,87 +13,49 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-family;
-  margin-bottom: $spacing-600;
+  margin-top: 0;
+  margin-bottom: $spacing-200;
 
   &:last-child:not(:first-child) {
     margin-bottom: 0;
   }
 }
 
-h1,
-h2,
-h3 {
-  /*background: $color-gradient-blue;*/
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 h1 {
   @include heading-level-1;
-  font-size: $size-font-h1;
 }
 
 h2 {
   @include heading-level-2;
-  font-size: $size-font-h2;
 }
 
 h3 {
   @include heading-level-3;
-  font-size: $size-font-h3;
 }
 
 h4 {
   @include heading-level-4;
-  font-size: $size-font-h4;
   color: $text-dark;
 }
 
 h5 {
   @include heading-level-5;
-  font-size: $size-font-h5;
   color: $text-dark;
 }
 
 h6 {
   @include heading-level-6;
-  font-size: $size-font-h6;
   color: $text-dark;
 }
 
-
-
 /* ------------------------------
    Paragraph Default
 ------------------------------ */
 p {
-  margin-bottom: $spacing-500;
+  margin-top: 0;
+  margin-bottom: $spacing-200;
   line-height: 160%;
   color: $text-primary;
-}
-
-.form-wrapper p {
-  margin: 0;
-  padding-bottom: $spacing-100;
-}
-
-/* ------------------------------
-   Form Lists
------------------------------- */
-.form-wrapper {
-  ol,
-  ul {
-    margin: 0;
-    padding: 0 0 0 2rem;
-  }
-}
-
-/* ------------------------------
-   Paragraph Default
------------------------------- */
-p {
   font-size: $size-font-body-default;
 }
 
@@ -110,48 +73,6 @@ p {
   font-size: $size-font-body-large;
 }
 
-/* ------------------------------
-   Typography Blocks – Explicit Link & List Styling
------------------------------- */
-
-.typography.p-small.block {
-  // Paragraphs
-  p {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  // Links
-  a {
-    font-size: $size-font-body-small;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  // Lists
-  ol li,
-  ul li {
-    font-size: $size-font-body-small;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
-}
-
-// Default paragraph block (no size class)
 .default-content-wrapper a {
   color: $text-accent;
   font-weight: 500;
@@ -172,105 +93,9 @@ p {
 ol li,
 ul li {
   @include font-body-default;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: $text-primary;
 }
-
-// Large paragraph block
-.typography.p-large.block {
-  // Paragraphs
-  p {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    color: $text-primary;
-  }
-
-  // Links
-  a {
-    font-size: $size-font-body-large;
-    font-weight: 500;
-    color: $text-accent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: $text-dark;
-    }
-
-    &:visited {
-      color: $text-dark;
-    }
-  }
-
-  // Lists
-  ol li,
-  ul li {
-    font-size: $size-font-body-large;
-    line-height: 160%;
-    margin-bottom: 0.5rem;
-    color: $text-primary;
-  }
-}
-
-
-/* ------------------------------
-   Form Heading Adjustments
------------------------------- */
-.wizard .panel-formwelcome .panel-formwelcome__item-content p {
-  margin: 0;
-  padding-bottom: $spacing-200;
-}
-
-.form-wrapper [class*='field-wrapper'] {
-  h1 {
-    margin: 0;
-    padding-bottom: $spacing-600;
-  }
-
-  h2 {
-    margin: 0;
-    padding-bottom: $spacing-500;
-  }
-
-  h3 {
-    margin: 0;
-    padding-bottom: $spacing-600; // was 200 but updated from UI
-  }
-
-  h4 {
-    margin: 0;
-    padding-bottom: $spacing-200;
-  }
-
-  h5 {
-    margin: 0;
-    padding-bottom: $spacing-100;
-  }
-
-  h6 {
-    margin: 0;
-    padding-bottom: $spacing-200;
-  }
-}
-
-
-/* ------------------------------
-   Subtitle
------------------------------- */
-.typography.subtitle.block p {
-  font-family: $font-family;
-  font-size: $size-font-subtitle;
-  line-height: 130%;
-  margin: 0 0 40px 0;
-  color: $text-dark;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
 
 /* ------------------------------
    Strap Title Default & Small
@@ -278,15 +103,16 @@ ul li {
 .strap-title,
 .strap-title-small {
   text-transform: uppercase;
-  line-height: 100%;
-  color: $text-dark;
 }
 
 .strap-title {
   font-size: $size-font-strap-title;
-  margin: 0 0 8px 0;
+  color: $color-primary-navy;
+  margin-bottom: $spacing-400;
 
-  &:last-child {
+  p {
+    color: $color-primary-navy;
+    font-size: $size-font-strap-title;
     margin-bottom: 0;
   }
 }
@@ -295,5 +121,16 @@ ul li {
   font-size: $size-font-strap-title-small;
 }
 
+.subtitle {
+  font-size: $size-font-subtitle;
+  font-weight: 300;
+  line-height: 130%;
+  margin-bottom: $spacing-500;
 
-
+  p {
+    font-size: $size-font-subtitle;
+    font-weight: 300;
+    line-height: 130%;
+    margin: 0;
+  }
+}

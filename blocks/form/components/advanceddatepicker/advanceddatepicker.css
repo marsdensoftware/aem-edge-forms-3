@@ -1,3 +1,4 @@
-fieldset.advanceddatepicker{display:flex}fieldset.advanceddatepicker > legend{font-size:clamp(1.0625rem, 1.5vw, 1.25rem);line-height:160%}fieldset.advanceddatepicker[data-required=true] > legend::after{content:"*";color:var(--form-error-color);padding-inline-start:0.3125rem}fieldset.advanceddatepicker > .drop-down-wrapper{flex:1}
+/*stylelint-disable*/
+.form .panel-repeatable-panel .advanceddatepicker{display:flex;flex-wrap:wrap;gap:1rem}.form .panel-repeatable-panel .advanceddatepicker > legend{font-size:clamp(1.0625rem, 1.5vw, 1.25rem);line-height:160%}.form .panel-repeatable-panel .advanceddatepicker[data-required=true] > legend::after{content:"*";color:#d03633;padding-inline-start:0.3125rem}.form .panel-repeatable-panel .advanceddatepicker > .drop-down-wrapper{flex:1 1 0%}.form .panel-repeatable-panel .advanceddatepicker .field-wrapper:not([data-visible=false]) + .field-wrapper.drop-down-wrapper{margin-top:0}
 
 /*# sourceMappingURL=advanceddatepicker.css.map */

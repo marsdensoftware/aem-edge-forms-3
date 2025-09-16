@@ -1,19 +1,31 @@
-import {
-  createButton, createFieldWrapper, createLabel, getHTMLRenderType,
-  createHelpText,
-  getId,
-  stripTags,
-  checkValidation,
-  toClassName,
-  getSitePageName,
-} from './util.js';
+import { createOptimizedPicture } from '../../scripts/aem.js';
+import transferRepeatableDOM, {
+  insertAddButton, insertRemoveButton, createButton as createRepeatButton,
+} from './components/repeat/repeat.js';
+import { emailPattern, getSubmitBaseUrl, SUBMISSION_SERVICE } from './constant.js';
 import GoogleReCaptcha from './integrations/recaptcha.js';
 import componentDecorator from './mappings.js';
-import DocBasedFormToAF from './transform.js';
-import transferRepeatableDOM, { insertAddButton, insertRemoveButton } from './components/repeat/repeat.js';
 import { handleSubmit } from './submit.js';
-import { getSubmitBaseUrl, emailPattern, SUBMISSION_SERVICE } from './constant.js';
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import DocBasedFormToAF from './transform.js';
+import {
+  /* eslint-disable no-unused-vars */ // getId is used in commented-out code for NJ to review
+  getId,
+  checkValidation,
+  createButton,
+  createDropdownUsingEnum,
+  createFieldWrapper,
+  createHelpText,
+  createLabel,
+  createRadioOrCheckboxUsingEnum,
+  extractIdFromUrl,
+  getHTMLRenderType,
+  getSitePageName,
+  setConstraints,
+  setPlaceholder,
+  stripTags,
+  createRadioOrCheckbox,
+  createInput,
+} from './util.js';
 
 export const DELAY_MS = 0;
 let captchaField;
@@ -21,106 +33,133 @@ let afModule;
 
 const withFieldWrapper = (element) => (fd) => {
   const wrapper = createFieldWrapper(fd);
+  // ### SEP-NJ Start set max remaining chars message
+  if (fd?.properties?.maxRemainingCharsMessage) {
+    wrapper.dataset.maxRemainingCharsMessage = fd.properties.maxRemainingCharsMessage;
+  }
+  // ### SEP-NJ End
   wrapper.append(element(fd));
   return wrapper;
 };
 
-function setPlaceholder(element, fd) {
-  if (fd.placeholder) {
-    element.setAttribute('placeholder', fd.placeholder);
-  }
-}
+// NONO TO CHECK AS THIS IS NOW IMPORTED
+// function setPlaceholder(element, fd) {
+//   if (fd.placeholder) {
+//     element.setAttribute('placeholder', fd.placeholder);
+//   }
+// }
 
-const constraintsDef = Object.entries({
-  'password|tel|email|text': [['maxLength', 'maxlength'], ['minLength', 'minlength'], 'pattern'],
-  'number|range|date': [['maximum', 'Max'], ['minimum', 'Min'], 'step'],
-  file: ['accept', 'Multiple'],
-  panel: [['maxOccur', 'data-max'], ['minOccur', 'data-min']],
-}).flatMap(([types, constraintDef]) => types.split('|')
-  .map((type) => [type, constraintDef.map((cd) => (Array.isArray(cd) ? cd : [cd, cd]))]));
+// NONO TO CHECK AS THIS IS NOW IMPORTED
+// const constraintsDef = Object.entries({
+//   'password|tel|email|text': [['maxLength', 'maxlength'], ['minLength', 'minlength'], 'pattern'],
+//   'number|range|date': [['maximum', 'Max'], ['minimum', 'Min'], 'step'],
+//   file: ['accept', 'Multiple'],
+//   panel: [['maxOccur', 'data-max'], ['minOccur', 'data-min']],
+// }).flatMap(([types, constraintDef]) => types.split('|')
+//   .map((type) => [type, constraintDef.map((cd) => (Array.isArray(cd) ? cd : [cd, cd]))]));
+//
+// const constraintsObject = Object.fromEntries(constraintsDef);
+//
+// function setConstraints(element, fd) {
+//   const renderType = getHTMLRenderType(fd);
+//   const constraints = constraintsObject[renderType];
+//   if (constraints) {
+//     constraints
+//       .filter(([nm]) => fd[nm])
+//       .forEach(([nm, htmlNm]) => {
+//         element.setAttribute(htmlNm, fd[nm]);
+//       });
+//   }
+// }
 
-const constraintsObject = Object.fromEntries(constraintsDef);
-
-function setConstraints(element, fd) {
-  const renderType = getHTMLRenderType(fd);
-  const constraints = constraintsObject[renderType];
-  if (constraints) {
-    constraints
-      .filter(([nm]) => fd[nm])
-      .forEach(([nm, htmlNm]) => {
-        element.setAttribute(htmlNm, fd[nm]);
-      });
-  }
-}
-
-function createInput(fd) {
-  const input = document.createElement('input');
-  input.type = getHTMLRenderType(fd);
-  setPlaceholder(input, fd);
-  setConstraints(input, fd);
-  return input;
-}
+// NONO TO CHECK AS THIS IS NOW IMPORTED
+// function createInput(fd) {
+//   const input = document.createElement('input');
+//   input.type = getHTMLRenderType(fd);
+//
+//   // ###NJ Start Added spellcheck
+//   if(fd.properties?.spellcheck){
+//     input.setAttribute('spellcheck', true);
+//   }
+//   // ###NJ End Added spellcheck
+//
+//   setPlaceholder(input, fd);
+//   setConstraints(input, fd);
+//   return input;
+// }
 
 const createTextArea = withFieldWrapper((fd) => {
   const input = document.createElement('textarea');
+
+  // ###NJ Start Added spellcheck
+  if (fd.properties?.spellcheck) {
+    input.setAttribute('spellcheck', true);
+  }
+  // ###NJ End Added spellcheck
+
   setPlaceholder(input, fd);
+  // ###SEP-NJ Start Call setContraints to set contraints related properties
+  setConstraints(input, fd);
+  // ###SEP-NJ End
   return input;
 });
 
 const createSelect = withFieldWrapper((fd) => {
   const select = document.createElement('select');
-  select.required = fd.required;
-  select.title = fd.tooltip ? stripTags(fd.tooltip, '') : '';
-  select.readOnly = fd.readOnly;
-  select.multiple = fd.type === 'string[]' || fd.type === 'boolean[]' || fd.type === 'number[]';
-  let ph;
-  if (fd.placeholder) {
-    ph = document.createElement('option');
-    ph.textContent = fd.placeholder;
-    ph.setAttribute('disabled', '');
-    ph.setAttribute('value', '');
-    select.append(ph);
-  }
-  let optionSelected = false;
-
-  const addOption = (label, value) => {
-    const option = document.createElement('option');
-    option.textContent = label instanceof Object ? label?.value?.trim() : label?.trim();
-    option.value = (typeof value === 'string' ? value.trim() : value) || label?.trim();
-    if (fd.value === option.value || (Array.isArray(fd.value) && fd.value.includes(option.value))) {
-      option.setAttribute('selected', '');
-      optionSelected = true;
-    }
-    select.append(option);
-    return option;
-  };
-
-  const options = fd?.enum || [];
-  const optionNames = fd?.enumNames ?? options;
-
-  if (options.length === 1
-    && options?.[0]?.startsWith('https://')) {
-    const optionsUrl = new URL(options?.[0]);
-    // using async to avoid rendering
-    if (optionsUrl.hostname.endsWith('hlx.page')
-    || optionsUrl.hostname.endsWith('hlx.live')) {
-      fetch(`${optionsUrl.pathname}${optionsUrl.search}`)
-        .then(async (response) => {
-          const json = await response.json();
-          const values = [];
-          json.data.forEach((opt) => {
-            addOption(opt.Option, opt.Value);
-            values.push(opt.Value || opt.Option);
-          });
-        });
-    }
-  } else {
-    options.forEach((value, index) => addOption(optionNames?.[index], value));
-  }
-
-  if (ph && optionSelected === false) {
-    ph.setAttribute('selected', '');
-  }
+  createDropdownUsingEnum(fd, select);
+  // NONO TO CHECK
+  // select.required = fd.required;
+  // select.title = fd.tooltip ? stripTags(fd.tooltip, '') : '';
+  // select.readOnly = fd.readOnly;
+  // select.multiple = fd.type === 'string[]' || fd.type === 'boolean[]' || fd.type === 'number[]';
+  // let ph;
+  // if (fd.placeholder) {
+  //   ph = document.createElement('option');
+  //   ph.textContent = fd.placeholder;
+  //   ph.setAttribute('disabled', '');
+  //   ph.setAttribute('value', '');
+  //   select.append(ph);
+  // }
+  // let optionSelected = false;
+  //
+  // const addOption = (label, value) => {
+  //   const option = document.createElement('option');
+  //   option.textContent = label instanceof Object ? label?.value?.trim() : label?.trim();
+  //   option.value = (typeof value === 'string' ? value.trim() : value) || label?.trim();
+  //   if (fd.value === option.value || (Array.isArray(fd.value) && fd.value.includes(option.value))) {
+  //     option.setAttribute('selected', '');
+  //     optionSelected = true;
+  //   }
+  //   select.append(option);
+  //   return option;
+  // };
+  //
+  // const options = fd?.enum || [];
+  // const optionNames = fd?.enumNames ?? options;
+  //
+  // if (options.length === 1
+  //   && options?.[0]?.startsWith('https://')) {
+  //   const optionsUrl = new URL(options?.[0]);
+  //   // using async to avoid rendering
+  //   if (optionsUrl.hostname.endsWith('hlx.page')
+  //   || optionsUrl.hostname.endsWith('hlx.live')) {
+  //     fetch(`${optionsUrl.pathname}${optionsUrl.search}`)
+  //       .then(async (response) => {
+  //         const json = await response.json();
+  //         const values = [];
+  //         json.data.forEach((opt) => {
+  //           addOption(opt.Option, opt.Value);
+  //           values.push(opt.Value || opt.Option);
+  //         });
+  //       });
+  //   }
+  // } else {
+  //   options.forEach((value, index) => addOption(optionNames?.[index], value));
+  // }
+  //
+  // if (ph && optionSelected === false) {
+  //   ph.setAttribute('selected', '');
+  // }
   return select;
 });
 
@@ -134,17 +173,18 @@ function createHeading(fd) {
   return wrapper;
 }
 
-function createRadioOrCheckbox(fd) {
-  const wrapper = createFieldWrapper(fd);
-  const input = createInput(fd);
-  const [value, uncheckedValue] = fd.enum || [];
-  input.value = value;
-  if (typeof uncheckedValue !== 'undefined') {
-    input.dataset.uncheckedValue = uncheckedValue;
-  }
-  wrapper.insertAdjacentElement('afterbegin', input);
-  return wrapper;
-}
+// NONO TO CHECK AS THIS IS NOW IMPORTED
+// function createRadioOrCheckbox(fd) {
+//   const wrapper = createFieldWrapper(fd);
+//   const input = createInput(fd);
+//   const [value, uncheckedValue] = fd.enum || [];
+//   input.value = value;
+//   if (typeof uncheckedValue !== 'undefined') {
+//     input.dataset.uncheckedValue = uncheckedValue;
+//   }
+//   wrapper.insertAdjacentElement('afterbegin', input);
+//   return wrapper;
+// }
 
 function createLegend(fd) {
   return createLabel(fd, 'legend');
@@ -173,6 +213,17 @@ function createFieldSet(fd) {
   wrapper.name = fd.name;
   if (fd.fieldType === 'panel') {
     wrapper.classList.add('panel-wrapper');
+    // ###GKW Added option to add a theme class
+    if (fd.properties?.wizardtheme) {
+      wrapper.classList.add(fd.properties.wizardtheme);
+    }
+    if (fd.properties?.panelrole) {
+      wrapper.classList.add(fd.properties.panelrole);
+    }
+    if (fd.properties?.stepgroup) {
+      wrapper.dataset.stepgroup = fd.properties.stepgroup;
+    }
+    // ###GKW END
   }
   if (fd.repeatable === true) {
     createRepeatablePanel(wrapper, fd);
@@ -188,44 +239,91 @@ function setConstraintsMessage(field, messages = {}) {
 
 function createRadioOrCheckboxGroup(fd) {
   const wrapper = createFieldSet({ ...fd });
-  const type = fd.fieldType.split('-')[0];
-  fd?.enum?.forEach((value, index) => {
-    const label = (typeof fd?.enumNames?.[index] === 'object' && fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
-    const id = getId(fd.name);
-    const field = createRadioOrCheckbox({
-      name: fd.name,
-      id,
-      label: { value: label },
-      fieldType: type,
-      enum: [value],
-      required: fd.required,
-    });
-    const { variant, 'afs:layout': layout } = fd.properties;
-    if (variant === 'cards') {
-      wrapper.classList.add(variant);
-    } else {
-      wrapper.classList.remove('cards');
-    }
-    if (layout?.orientation === 'horizontal') {
-      wrapper.classList.add('horizontal');
-    }
-    if (layout?.orientation === 'vertical') {
-      wrapper.classList.remove('horizontal');
-    }
-    field.classList.remove('field-wrapper', `field-${toClassName(fd.name)}`);
-    const input = field.querySelector('input');
-    input.id = id;
-    input.dataset.fieldType = fd.fieldType;
-    input.name = fd.name;
-    input.checked = Array.isArray(fd.value) ? fd.value.includes(value) : value === fd.value;
-    if ((index === 0 && type === 'radio') || type === 'checkbox') {
-      input.required = fd.required;
-    }
-    if (fd.enabled === false || fd.readOnly === true) {
-      input.setAttribute('disabled', 'disabled');
-    }
-    wrapper.appendChild(field);
-  });
+  createRadioOrCheckboxUsingEnum(fd, wrapper);
+  // NONO TO CHECK - GKW HAS COPIED IT ACROSS
+  // const type = fd.fieldType.split('-')[0];
+  // fd?.enum?.forEach((value, index) => {
+  // const label = (typeof fd?.enumNames?.[index] === 'object' &&
+  //   fd?.enumNames?.[index] !== null) ? fd?.enumNames[index].value : fd?.enumNames?.[index] || value;
+  //   const id = getId(fd.name);
+  //   const field = createRadioOrCheckbox({
+  //     name: fd.name,
+  //     id,
+  //     label: { value: label },
+  //     fieldType: type,
+  //     enum: [value],
+  //     required: fd.required,
+  //   });
+  //
+  //   // ###SEP-NJ START Display description below field label
+  //   // Wrap text inside label into a span
+  //   // Get the original text content and clear the label
+  //   const labelEl = field.querySelector('label');
+  //   if(labelEl){
+  //     const textContent = labelEl.textContent.trim();
+  //     labelEl.textContent = '';
+  //
+  //     // Create and append the span.text
+  //     const textSpan = document.createElement('span');
+  //     textSpan.className = 'text';
+  //     textSpan.textContent = textContent;
+  //     labelEl.appendChild(textSpan);
+  //
+  //     const description = fd.properties?.enumDescriptions?.[index];
+  //
+  //     if(description){
+  //       // Create and append the span.desc
+  //       const descSpan = document.createElement('span');
+  //       descSpan.className = 'desc';
+  //       descSpan.textContent = description;
+  //       labelEl.appendChild(descSpan);
+  //       labelEl.classList.add('field-label--with-description');
+  //     }
+  //   }
+  //   // ###SEP-NJ END Display description
+  //
+  //   const { variant, 'afs:layout': layout } = fd.properties;
+  //   // ###SEP-NJ START Always show variant if defined
+  //   if (variant) {
+  //     wrapper.classList.add(`variant-${variant}`);
+  //   }
+  //   // ###SEP-NJ END
+  //   if (layout?.orientation === 'horizontal') {
+  //     wrapper.classList.add('horizontal');
+  //   }
+  //   if (layout?.orientation === 'vertical') {
+  //     wrapper.classList.remove('horizontal');
+  //   }
+  //   field.classList.remove('field-wrapper', `field-${toClassName(fd.name)}`);
+  //   const input = field.querySelector('input');
+  //   input.id = id;
+  //   input.dataset.fieldType = fd.fieldType;
+  //   input.name = fd.name;
+  //   input.checked = Array.isArray(fd.value) ? fd.value.includes(value) : value === fd.value;
+  //   if ((index === 0 && type === 'radio') || type === 'checkbox') {
+  //     input.required = fd.required;
+  //   }
+  //   if (fd.enabled === false || fd.readOnly === true) {
+  //     input.setAttribute('disabled', 'disabled');
+  //   }
+  //   wrapper.appendChild(field);
+  // });
+
+  // ###SEP-NJ START Wrap radios in a container if bar display
+  if (wrapper.classList.contains('variant-bar')) {
+    const wrappers = wrapper.querySelectorAll('.radio-wrapper');
+
+    const radiosWrapper = document.createElement('div');
+    radiosWrapper.className = 'radios-wrapper';
+
+    // Insert before the first .radio-wrapper
+    wrappers[0].parentNode.insertBefore(radiosWrapper, wrappers[0]);
+
+    // Move the all elements inside the new wrapper
+    wrappers.forEach((el) => radiosWrapper.appendChild(el));
+  }
+  // ###SEP-NJ END
+
   wrapper.dataset.required = fd.required;
   if (fd.tooltip) {
     wrapper.title = stripTags(fd.tooltip, '');
@@ -241,7 +339,7 @@ function createPlainText(fd) {
   } else {
     paragraph.textContent = fd.value;
   }
-  //###SEF-NJ Added option to render a class
+  // ###SEF-NJ Added option to render a class
   if (fd.properties?.classes) {
     paragraph.classList.add(fd.properties.classes);
   }
@@ -253,20 +351,20 @@ function createPlainText(fd) {
 }
 
 function addLinkSupport(field, fd) {
-    if (fd.properties.url) {
-        const picture = field.querySelector('picture');
+  if (fd.properties.url) {
+    const picture = field.querySelector('picture');
 
-        if (picture) {
-            const link = document.createElement('a');
-            link.href = `${fd.properties.url}`;
-            link.className = 'image-link';
-            link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
+    if (picture) {
+      const link = document.createElement('a');
+      link.href = `${fd.properties.url}`;
+      link.className = 'image-link';
+      link.target = fd.properties.urlOpenInNewTab ? '_blank' : '';
 
-            // Move the picture inside the new anchor element
-            picture.parentNode.insertBefore(link, picture);
-            link.appendChild(picture);
-        }
+      // Move the picture inside the new anchor element
+      picture.parentNode.insertBefore(link, picture);
+      link.appendChild(picture);
     }
+  }
 }
 
 function createImage(fd) {
@@ -276,9 +374,9 @@ function createImage(fd) {
   const altText = fd.altText || fd.name;
   field.append(createOptimizedPicture(imagePath, altText));
 
-  //###SEP-NJ START Add support for link url
+  // ###SEP-NJ START Add support for link url
   addLinkSupport(field, fd);
-  //###SEP-NJ END
+  // ###SEP-NJ END
   return field;
 }
 
@@ -297,10 +395,118 @@ const fieldRenderers = {
 };
 
 function colSpanDecorator(field, element) {
-  const colSpan = field['Column Span'] || field.properties?.colspan;
-  if (colSpan && element) {
-    element.classList.add(`col-${colSpan}`);
+  // SEPD-4286 - START RESPONSIVE GRID COLSPAN CHANGES - consider moving the code into a separate
+  // js file and importing it.
+  // Get the default colspan
+  const defaultColSpan = field['Column Span'] || field.properties?.colspan;
+  const defaultOffset = field['Column Offset'] || field.properties?.['colspan-offset'];
+  const defaultDisplay = field['Column Display'] || field.properties?.display;
+  const defaultOrder = field['Column Order'] || field.properties?.['d-order'];
+
+  // Get responsive colspans from properties
+  const responsiveColSpans = {
+    sm: field.properties?.['colspan-sm'],
+    md: field.properties?.['colspan-md'],
+    lg: field.properties?.['colspan-lg'],
+    xl: field.properties?.['colspan-xl'],
+    xxl: field.properties?.['colspan-xxl'],
+  };
+
+  // Get responsive offsets from properties
+  const responsiveOffsets = {
+    sm: field.properties?.['colspan-sm-offset'],
+    md: field.properties?.['colspan-md-offset'],
+    lg: field.properties?.['colspan-lg-offset'],
+    xl: field.properties?.['colspan-xl-offset'],
+    xxl: field.properties?.['colspan-xxl-offset'],
+  };
+
+  // Get the responsive display options from properties
+  const responsiveDisplayOptions = {
+    sm: field.properties?.['display-sm'],
+    md: field.properties?.['display-md'],
+    lg: field.properties?.['display-lg'],
+    xl: field.properties?.['display-xl'],
+    xxl: field.properties?.['display-xxl'],
   }
+
+  // Get the responsive display orders from properties
+  const responsiveDisplayOrders = {
+    sm: field.properties?.['d-order-sm'],
+    md: field.properties?.['d-order-md'],
+    lg: field.properties?.['d-order-lg'],
+    xl: field.properties?.['d-order-xl'],
+    xxl: field.properties?.['d-order-xxl'],
+  }
+
+  // Get container classes from properties
+  const containerClass = field.properties?.container;
+  const rowClass = field.properties?.row;
+  const reverseRowWrap = field.properties?.['flex-wrap-reverse']
+
+  if (element) {
+    // Add default colspan class if defined
+    if (defaultColSpan) {
+      element.classList.add(`col${defaultColSpan === 'split' ? '' : `-${defaultColSpan}`}`);
+    }
+
+    // set a default offset - ideally, we should delete the value from the jcr
+    if (defaultOffset) {
+      element.classList.add(`offset-${defaultOffset}`);
+    }
+
+    // Add the default display value
+    if (defaultDisplay) {
+      element.classList.add(`d-${defaultDisplay}`);
+    }
+
+    // Add the default order value
+    if (defaultOrder) {
+      element.classList.add(`order-${defaultOrder}`);
+    }
+
+    // Add responsive colspan classes if defined
+    Object.entries(responsiveColSpans).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`col-${size}${value === 'split' ? '' : `-${value}`}`);
+      }
+    });
+
+    // Add responsive offset classes if defined
+    Object.entries(responsiveOffsets).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`offset-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display options classes if defined
+    Object.entries(responsiveDisplayOptions).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`d-${size}-${value}`);
+      }
+    });
+
+    // Add responsive display order classes if defined
+    Object.entries(responsiveDisplayOrders).forEach(([size, value]) => {
+      if (value) {
+        element.classList.add(`order-${size}-${value}`);
+      }
+    });
+
+    // Add container class if defined
+    if (containerClass) {
+      element.classList.add(containerClass);
+    }
+
+    // Add row class if defined
+    if (rowClass === true) {
+      element.classList.add('row');
+      if (reverseRowWrap) {
+        element.classList.add('flex-wrap-reverse');
+      }
+    }
+  }
+  // SEPD-4286 - END RESPONSIVE GRID COLSPAN CHANGES
 }
 
 const handleFocus = (input, field) => {
@@ -336,8 +542,27 @@ function inputDecorator(field, element) {
       input.setAttribute('display-value', field.displayValue ?? '');
       input.type = 'text';
       input.value = field.displayValue ?? '';
-      input.addEventListener('touchstart', () => { input.type = field.type; }); // in mobile devices the input type needs to be toggled before focus
-      input.addEventListener('focus', () => handleFocus(input, field));
+      // Handle mobile touch events to enable native date picker
+      let isMobileTouch = false;
+      input.addEventListener('touchstart', () => {
+        isMobileTouch = true;
+        input.type = field.type;
+        // Set the edit value immediately to prevent empty field
+        const editValue = input.getAttribute('edit-value');
+        if (editValue) {
+          input.value = editValue;
+        }
+      });
+
+      input.addEventListener('focus', () => {
+        // Only change type on desktop or if not already changed by touchstart
+        if (!isMobileTouch && input.type !== field.type) {
+          input.type = field.type;
+        }
+        handleFocus(input, field);
+        // Reset mobile touch flag
+        isMobileTouch = false;
+      });
       input.addEventListener('blur', () => handleFocusOut(input));
     } else if (input.type !== 'file') {
       input.value = field.value ?? '';
@@ -374,6 +599,53 @@ function inputDecorator(field, element) {
   }
 }
 
+function decoratePanelContainer(panelDefinition, panelContainer) {
+  if (!panelContainer) return;
+
+  const isPanelWrapper = (container) => container.classList?.contains('panel-wrapper');
+
+  const shouldAddLabel = (container, panel) => panel.label && !container.querySelector(`legend[for=${container.dataset.id}]`);
+
+  if (isPanelWrapper(panelContainer)) {
+    if (shouldAddLabel(panelContainer, panelDefinition)) {
+      const legend = createLegend(panelDefinition);
+      if (legend) {
+        panelContainer.insertAdjacentElement('afterbegin', legend);
+      }
+    }
+
+    const form = panelContainer.closest('form');
+    const isEditMode = form && form.classList.contains('edit-mode');
+    const isRepeatable = panelDefinition.repeatable === true || panelContainer.dataset.repeatable === 'true';
+
+    if (isEditMode && isRepeatable) {
+      const hasAddButton = panelContainer.querySelector('.repeat-actions .item-add');
+      const hasRemoveButton = panelContainer.querySelector('.item-remove');
+
+      if (!hasAddButton) {
+        let repeatActions = panelContainer.querySelector('.repeat-actions');
+        if (!repeatActions) {
+          repeatActions = document.createElement('div');
+          repeatActions.className = 'repeat-actions';
+          const legend = panelContainer.querySelector('legend');
+          if (legend) {
+            legend.insertAdjacentElement('afterend', repeatActions);
+          } else {
+            panelContainer.insertAdjacentElement('afterbegin', repeatActions);
+          }
+        }
+        const addButton = createRepeatButton('Add', 'add');
+        repeatActions.appendChild(addButton);
+      }
+
+      if (!hasRemoveButton) {
+        const removeButton = createRepeatButton('Delete', 'remove');
+        panelContainer.appendChild(removeButton);
+      }
+    }
+  }
+}
+
 function renderField(fd) {
   const fieldType = fd?.fieldType?.replace('-input', '') ?? 'text';
   const renderer = fieldRenderers[fieldType];
@@ -386,15 +658,21 @@ function renderField(fd) {
   }
   if (fd.description) {
     const helpEl = createHelpText(fd);
+    field.classList.add('with-description');
 
-    //###SEP-NJ START: add help text below label / legend
+    // ###SEP-NJ START: add help text below label / legend
     const labelEl = field.querySelector('label, legend');
     if (labelEl && labelEl.nextSibling) {
-      field.insertBefore(helpEl, labelEl.nextSibling);
+      const newHelpEl = helpEl.cloneNode(true);
+      newHelpEl.className = 'field-description-2';
+      field.insertBefore(newHelpEl, labelEl.nextSibling);
+      helpEl.textContent = '';
+      fd.description = '';
+      field.append(helpEl);
     } else {
       field.append(helpEl);
     }
-    //###SEP-NJ END: add help text below label / legend
+    // ###SEP-NJ END: add help text below label / legend
     field.dataset.description = fd.description; // In case overriden by error message
   }
   if (fd.fieldType !== 'radio-group' && fd.fieldType !== 'checkbox-group' && fd.fieldType !== 'captcha') {
@@ -403,7 +681,7 @@ function renderField(fd) {
   return field;
 }
 
-export async function generateFormRendition(panel, container, getItems = (p) => p?.items) {
+export async function generateFormRendition(panel, container, formId, getItems = (p) => p?.items) {
   const items = getItems(panel) || [];
   const promises = items.map(async (field) => {
     field.value = field.value ?? '';
@@ -420,16 +698,17 @@ export async function generateFormRendition(panel, container, getItems = (p) => 
     }
     colSpanDecorator(field, element);
     if (field?.fieldType === 'panel') {
-      await generateFormRendition(field, element, getItems);
+      await generateFormRendition(field, element, formId, getItems);
       return element;
     }
-    await componentDecorator(element, field, container);
+    await componentDecorator(element, field, container, formId);
     return element;
   });
 
   const children = await Promise.all(promises);
   container.append(...children.filter((_) => _ != null));
-  await componentDecorator(container, panel);
+  decoratePanelContainer(panel, container);
+  await componentDecorator(container, panel, null, formId);
 }
 
 function enableValidation(form) {
@@ -444,9 +723,13 @@ function enableValidation(form) {
   });
 }
 
+function isDocumentBasedForm(formDef) {
+  return formDef?.[':type'] === 'sheet' && formDef?.data;
+}
+
 async function createFormForAuthoring(formDef) {
   const form = document.createElement('form');
-  await generateFormRendition(formDef, form, (container) => {
+  await generateFormRendition(formDef, form, formDef.id, (container) => {
     if (container[':itemsOrder'] && container[':items']) {
       return container[':itemsOrder'].map((itemKey) => container[':items'][itemKey]);
     }
@@ -455,15 +738,17 @@ async function createFormForAuthoring(formDef) {
   return form;
 }
 
-export async function createForm(formDef, data) {
+export async function createForm(formDef, data, source = 'aem') {
   const { action: formPath } = formDef;
   const form = document.createElement('form');
   form.dataset.action = formPath;
+  form.dataset.source = source;
   form.noValidate = true;
   if (formDef.appliedCssClassNames) {
     form.className = formDef.appliedCssClassNames;
   }
-  await generateFormRendition(formDef, form);
+  const formId = extractIdFromUrl(formPath); // formDef.id returns $form after getState()
+  await generateFormRendition(formDef, form, formId);
 
   let captcha;
   if (captchaField) {
@@ -481,28 +766,31 @@ export async function createForm(formDef, data) {
   }
 
   enableValidation(form);
-  transferRepeatableDOM(form);
+  transferRepeatableDOM(form, formDef, form, formId);
 
-  if (afModule) {
+  if (afModule && typeof Worker === 'undefined') {
     window.setTimeout(async () => {
       afModule.loadRuleEngine(formDef, form, captcha, generateFormRendition, data);
     }, DELAY_MS);
   }
 
   form.addEventListener('reset', async () => {
-    const newForm = await createForm(formDef);
-    document.querySelector(`[data-action="${form?.dataset?.action}"]`)?.replaceWith(newForm);
+    const response = await createForm(formDef);
+    if (response?.form) {
+      document.querySelector(`[data-action="${form?.dataset?.action}"]`)?.replaceWith(response?.form);
+    }
   });
 
   form.addEventListener('submit', (e) => {
     handleSubmit(e, form, captcha);
   });
 
-  return form;
-}
-
-function isDocumentBasedForm(formDef) {
-  return formDef?.[':type'] === 'sheet' && formDef?.data;
+  return {
+    form,
+    captcha,
+    generateFormRendition,
+    data,
+  };
 }
 
 function cleanUp(content) {
@@ -549,7 +837,7 @@ export async function fetchForm(pathname) {
   // get the main form
   let data;
   let path = pathname;
-  if (path.startsWith(window.location.origin) && !path.endsWith('.json')) {
+  if (path.startsWith(window.location.origin) && !path.includes('.json')) {
     if (path.endsWith('.html')) {
       path = path.substring(0, path.lastIndexOf('.html'));
     }
@@ -569,12 +857,46 @@ export async function fetchForm(pathname) {
         }
         return doc;
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.error('Unable to fetch form definition for path', pathname, path);
         return null;
       }
     });
   }
   return data;
+}
+
+function addRequestContextToForm(formDef) {
+  if (formDef && typeof formDef === 'object') {
+    formDef.properties = formDef.properties || {};
+
+    // Add URL parameters
+    try {
+      const urlParams = new URLSearchParams(window?.location?.search || '');
+      if (!formDef.properties.queryParams) {
+        formDef.properties.queryParams = {};
+      }
+      urlParams?.forEach((value, key) => {
+        formDef.properties.queryParams[key?.toLowerCase()] = value;
+      });
+    } catch (e) {
+      console.warn('Error reading URL parameters:', e);
+    }
+
+    // Add cookies
+    try {
+      const cookies = document?.cookie.split(';');
+      formDef.properties.cookies = {};
+      cookies?.forEach((cookie) => {
+        if (cookie.trim()) {
+          const [key, value] = cookie.trim().split('=');
+          formDef.properties.cookies[key.trim()] = value || '';
+        }
+      });
+    } catch (e) {
+      console.warn('Error reading cookies:', e);
+    }
+  }
 }
 
 export default async function decorate(block) {
@@ -591,9 +913,13 @@ export default async function decorate(block) {
   let rules = true;
   let form;
   if (formDef) {
-    const { actionType, spreadsheetUrl } = formDef?.properties || {};
-    if (!formDef?.properties?.['fd:submit'] && actionType === 'spreadsheet' && spreadsheetUrl) {
-      // Check if we're in an iframe and use parent window's path if available
+    const submitProps = formDef?.properties?.['fd:submit'];
+    const actionType = submitProps?.actionName || formDef?.properties?.actionType;
+    const spreadsheetUrl = submitProps?.spreadsheet?.spreadsheetUrl
+      || formDef?.properties?.spreadsheetUrl;
+
+    if (actionType === 'spreadsheet' && spreadsheetUrl) {
+      // Check if we're in an iframe and use parent window path if available
       const iframePath = window.frameElement ? window.parent.location.pathname
         : window.location.pathname;
       formDef.action = SUBMISSION_SERVICE + btoa(pathname || iframePath);
@@ -604,12 +930,14 @@ export default async function decorate(block) {
       const transform = new DocBasedFormToAF();
       formDef = transform.transform(formDef);
       source = 'sheet';
-      form = await createForm(formDef);
+      const response = await createForm(formDef);
+      form = response?.form;
       const docRuleEngine = await import('./rules-doc/index.js');
       docRuleEngine.default(formDef, form);
       rules = false;
     } else {
       afModule = await import('./rules/index.js');
+      addRequestContextToForm(formDef);
       if (afModule && afModule.initAdaptiveForm && !block.classList.contains('edit-mode')) {
         form = await afModule.initAdaptiveForm(formDef, createForm);
       } else {
@@ -622,7 +950,7 @@ export default async function decorate(block) {
     form.dataset.source = source;
     form.dataset.rules = rules;
     form.dataset.id = formDef.id;
-    if (source === 'aem' && formDef.properties) {
+    if (source === 'aem' && formDef.properties && formDef.properties['fd:path']) {
       form.dataset.formpath = formDef.properties['fd:path'];
     }
     container.replaceWith(form);

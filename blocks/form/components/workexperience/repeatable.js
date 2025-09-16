@@ -1,130 +1,142 @@
-import { ConditionalRepeatable } from "../repeatable-panel/default/default.js";
-import { isNo, getDurationString } from '../utils.js'
-import { i18n } from '../../../../i18n/index.js';
+/* eslint-disable max-classes-per-file */
+import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
+import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
+import { i18n } from '../../../../i18n/index.js'
+import { FIELD_NAMES, sorter, STILL_WORKING_STATUS } from './fieldnames.js';
+// import { dispatchToast } from '../toast-container/toast-container.js';
+
+class Converter extends DefaultFieldConverter {
+  convert(element) {
+    const result = super.convert(element)
+
+    // Customize rendering for completion-year, completion status
+    const startMonth = result[FIELD_NAMES.START_OF_WORK_MONTH]?.value;
+    if (!startMonth) {
+      return result;
+    }
+    const stillWorking = result[FIELD_NAMES.STILL_WORKING];
+    const startYear = result[FIELD_NAMES.START_OF_WORK_YEAR].value;
+    let endMonth;
+    let endYear;
+    let workperiod = `${i18n(`month_${result[FIELD_NAMES.START_OF_WORK_MONTH].displayValue}`)} ${result[FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
+    let endofwork;
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
+      // No longer working
+      endofwork = `${i18n(`month_${result[FIELD_NAMES.END_OF_WORK_MONTH].displayValue}`)} ${result[FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
+      endMonth = result[FIELD_NAMES.END_OF_WORK_MONTH].value;
+      endYear = result[FIELD_NAMES.END_OF_WORK_YEAR].value;
+    } else {
+      // Still working
+      const now = new Date();
+
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth() + 1;
+
+      endofwork = i18n('present');
+      endMonth = currentMonth;
+      endYear = currentYear;
+    }
+
+    workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
+
+    const newResult = {};
+    newResult[FIELD_NAMES.JOB_TITLE] = result[FIELD_NAMES.JOB_TITLE];
+    newResult[FIELD_NAMES.EMPLOYER_NAME] = result[FIELD_NAMES.EMPLOYER_NAME];
+    if (result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value !== FIELD_NAMES.PAID_WORK) {
+      // Not paid work
+      newResult[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
+    }
+    newResult.workperiod = { value: workperiod, displayValue: workperiod };
+
+    return newResult;
+  }
+}
 
 export class WorkExperienceRepeatable extends ConditionalRepeatable {
-    static FIELD_NAMES = {
-        'TYPE_OF_WE': 'type-of-work-experience',
-        'FIELDS_CONTAINER': 'fields-container',
-        'START_OF_WORK_MONTH': 'startofwork-month',
-        'START_OF_WORK_YEAR': 'startofwork-year',
-        'END_OF_WORK_MONTH': 'endofwork-month',
-        'END_OF_WORK_YEAR': 'endofwork-year',
-        'STILL_WORKING': 'still-working',
-        'TYPE_OF_WORK_EXPERIENCE': 'type-of-work-experience',
-        'JOB_TITLE': 'title',
-        'EMPLOYER_NAME': 'employer'
-    };
+  static PAID_WORK = '1';
 
-    static PAID_WORK = '1';
+  constructor(repeatablePanel, properties) {
+    super(repeatablePanel, properties, 'workexperience', new Converter(), sorter);
+  }
 
-    constructor(repeatablePanel) {
-        super(repeatablePanel, 'workexperience');
-    }
+  _init(entry) {
+    const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}>select`);
 
-    _fieldToNameValues(entry) {
-        const result = super._fieldToNameValues(entry);
+    const isFirst = this._isFirstEntry(entry);
 
-        // Customize rendering for completion-year, completion status
-        const stillWorking = result[WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING];
-        const startMonth = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].value;
-        const startYear = result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].value;
-        let endMonth;
-        let endYear;
-        let workperiod = `${result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_MONTH].displayValue} ${result[WorkExperienceRepeatable.FIELD_NAMES.START_OF_WORK_YEAR].displayValue}`;
-        let endofwork;
-        if (stillWorking.value == '0') {
-            // No longer working
-            endofwork = `${result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].displayValue} ${result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].displayValue}`;
-            endMonth = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_MONTH].value;
-            endYear = result[WorkExperienceRepeatable.FIELD_NAMES.END_OF_WORK_YEAR].value;
-        }
-        else {
-            // Still working
-            const now = new Date();
+    // Make type of work experience visible if not first entry
+    typeOfWorkExperience.parentElement.dataset.visible = !isFirst;
 
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth() + 1;
+    // Show below fields if it is first. Or until a type of work experience has been selected.
+    entry.querySelector(`[name="${FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = isFirst;
 
-            endofwork = i18n('present');
-            endMonth = currentMonth;
-            endYear = currentYear;
-        }
+    typeOfWorkExperience.addEventListener('change', () => {
+      // Show fields below now that a type of work has been selected
+      entry.querySelector(`[name="${FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = true;
+    });
 
-        workperiod += ` - ${endofwork} (${getDurationString(startMonth, startYear, endMonth, endYear)})`;
+    // Disable/Hide endofwork to prevent validation
+    const endofwork = entry.querySelector('.field-endofwork');
+    const visible = false;
+    endofwork.disabled = !visible;
+    endofwork.dataset.visible = visible;
 
-        const newResult = {};
-        newResult[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE] = result[WorkExperienceRepeatable.FIELD_NAMES.JOB_TITLE];
-        newResult[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME] = result[WorkExperienceRepeatable.FIELD_NAMES.EMPLOYER_NAME];
-        if (result[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE].value != WorkExperienceRepeatable.PAID_WORK) {
-            // Not paid work
-            newResult[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE] = result[WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE];
-        }
-        newResult['workperiod'] = { 'value': workperiod, 'displayValue': workperiod };
+    this._bindEvents(entry);
+  }
 
-        return newResult;
-    }
+  _onItemAdded(entry) {
+    this._init(entry);
 
-    _init(entry) {
-        const typeOfWorkExperience = entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WE}"]`);
+    super._onItemAdded(entry);
+  }
 
-        const isFirst = this._isFirstEntry(entry);
+  /* eslint-disable class-methods-use-this */
+  _bindEvents(el) {
+    // Register change on still-working field to show hide endofwork
+    const stillWorkingRadios = el.querySelectorAll(`.field-${FIELD_NAMES.STILL_WORKING} input[type="radio"]`);
 
-        // Make type of work experience visible if not first entry
-        typeOfWorkExperience.parentElement.dataset.visible = !isFirst;
-
-        // Show below fields if it is first. Or until a type of work experience has been selected.
-        entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = isFirst;
-
-        typeOfWorkExperience.addEventListener('change', () => {
-            // Show fields below now that a type of work has been selected
-            entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).dataset.visible = true;
-        });
-
-        // Disable/Hide endofwork to prevent validation
-        const endofwork = entry.querySelector('.field-endofwork');
-        const visible = false;
-        endofwork.disabled = !visible;
+    stillWorkingRadios.forEach((radio) => {
+      radio.addEventListener('change', (event) => {
+        // endofwork visibility
+        const endofwork = radio.closest(`[name="${FIELD_NAMES.FIELDS_CONTAINER}"]`).querySelector('.field-endofwork');
+        const visible = isNo(event.target);
         endofwork.dataset.visible = visible;
+        endofwork.disabled = !visible;
 
-        this._bindEvents(entry);
-    }
-
-    _onItemAdded(entry) {
-        this._init(entry);
-
-        super._onItemAdded(entry);
-    }
-
-    _bindEvents(el) {
-        // Register change on still-working field to show hide endofwork
-        const stillWorkingRadios = el.querySelectorAll(`input[name="${WorkExperienceRepeatable.FIELD_NAMES.STILL_WORKING}"]`);
-
-        stillWorkingRadios.forEach(radio => {
-            radio.addEventListener('change', (event) => {
-                // endofwork visibility
-                const endofwork = radio.closest(`[name="${WorkExperienceRepeatable.FIELD_NAMES.FIELDS_CONTAINER}"]`).querySelector('.field-endofwork');
-                const visible = isNo(event.target);
-                endofwork.dataset.visible = visible;
-                endofwork.disabled = !visible;
-            });
+        endofwork.querySelectorAll('.field-invalid').forEach((field) => {
+          field.classList.remove('field-invalid');
         });
+      });
+    });
+  }
+  /* eslint-enable-next class-methods-use-this */
+
+  _save(entry) {
+    // Before save
+    if (this._isFirstEntry(entry)) {
+      const selectedRadio = this._conditionField.querySelector('input[type="radio"]:checked');
+      if (selectedRadio) {
+        const { value } = selectedRadio;
+        // Copy radio value into type of work field. Because it is not visible initially for the
+        // first entry
+        const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}`);
+
+        window.myForm.getElement(typeOfWorkExperience.dataset.id).value = value;
+      }
     }
 
-    _save(entry) {
-        // Before save
-        if (this._isFirstEntry(entry)) {
-            const selectedRadio = this._conditionField.querySelector('input[type="radio"]:checked');
-            if (selectedRadio) {
-                const value = selectedRadio.value;
-                // Copy radio value into type of work field. Because it is not visible initially for the first entry
-                const typeOfWorkExperience = entry.querySelector(`[name="${WorkExperienceRepeatable.FIELD_NAMES.TYPE_OF_WE}"]`);
-                typeOfWorkExperience.value = value;
-            }
-        }
-
-        super._save(entry);
-        // After save
-
-    }
+    super._save(entry);
+    //
+    // // dispatch toast event with the max selection message (error state)
+    // dispatchToast({
+    //   type: 'success',
+    //   toastTitle: 'Work experience added successfully.',
+    //   toastMessage: 'You can 3 more work experience.',
+    //   dismissible: true,
+    //   timeoutMs: undefined,
+    //   strategy: 'stack',
+    //   maxToasts: 3,
+    // });
+    // After save
+  }
 }

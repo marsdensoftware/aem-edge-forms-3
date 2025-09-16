@@ -1,14 +1,12 @@
-@use '../settings/colors' as *;
-@use '../settings/spacings' as *;
-@use '../settings/borders' as *;
-@use '../settings/elevations' as *;
-@use '../settings/utils' as *;
-@use '../settings/mixins' as *;
-
 @use '../settings' as *;
 
 .button {
   @extend %button;
+}
+
+.button--hollow {
+  @extend %button;
+  @extend %button--hollow;
 }
 
 .link {
@@ -39,4 +37,3 @@
     font-size: 20px;
   }
 }
-

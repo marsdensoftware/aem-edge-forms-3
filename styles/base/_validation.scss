@@ -1,0 +1,48 @@
+@use '../settings' as *;
+
+form .field-wrapper[data-required="true"]>.field-label::after {
+  content: '' !important;
+}
+
+form .field-wrapper[data-required="false"]:not(.with-description)>.field-label,
+form .field-wrapper[data-required="false"].with-description>.field-description-2{
+  position: relative;
+  display: block;
+  padding-right: 70px;
+}
+
+form .field-wrapper[data-required="false"]:not(.with-description)>.field-label::after {
+  content: ' Optional' !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  color: $text-secondary;
+}
+
+form .field-wrapper[data-required="false"].with-description>.field-description-2::after {
+  content: ' Optional' !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  color: $text-secondary;
+}
+
+.field-invalid {
+
+  &.radio-group--with-icon .radio-group--with-icon__label,
+  .radio-wrapper>.field-label,
+  .checkbox-wrapper>.field-label,
+  select[required] {
+    border-color: $color-feedback-red !important;
+  }
+}
+
+.form form .field-wrapper.field-invalid .field-description {
+  padding-left: clamp(1rem, 5vw, 1.25rem);
+
+  &::before {
+    background-image: url('/icons/ico-info--warning-circle.svg');
+  }
+}

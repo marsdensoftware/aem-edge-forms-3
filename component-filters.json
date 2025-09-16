@@ -10,6 +10,7 @@
     "components": [
       "text",
       "typography",
+      "link-with-icon",
       "image",
       "button",
       "title",
@@ -18,7 +19,28 @@
       "columns",
       "fragment",
       "form",
-      "embed-adaptive-form"
+      "embed-adaptive-form",
+      "account-menu",
+      "auth-redirect",
+      "main-menu"
+    ]
+  },
+  {
+    "id": "account-menu",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "auth-redirect",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -36,6 +58,8 @@
   {
     "id": "column",
     "components": [
+      "typography",
+      "link-with-icon",
       "text",
       "image",
       "button",
@@ -51,6 +75,7 @@
       "date-input",
       "drop-down",
       "email",
+      "extended-checkbox",
       "file-input",
       "form-accordion",
       "form-button",
@@ -63,9 +88,13 @@
       "education",
       "languagepanel",
       "workexperience",
+      "driverlicence",
       "advanceddatepicker",
+      "summary",
       "formwelcome",
       "formcontextualhelp",
+      "validationsummary",
+      "formoutputfield",
       "formtabs",
       "number-input",
       "panel",
@@ -77,12 +106,14 @@
       "telephone-input",
       "text-input",
       "tnc",
-      "wizard"
+      "wizard",
+      "icon-radio-group",
+      "extended-checkbox-container",
+      "range",
+      "toast-container",
+      "toast",
+      "extended-checkbox-group"
     ]
-  },
-  {
-    "id": "iconwithtext",
-    "components": null
   },
   {
     "id": "jobseekerintro",

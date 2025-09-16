@@ -6,11 +6,12 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/fd/components/form/textinput/v1/textinput",
+            "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "template": {
               "jcr:title": "Form Output Field",
-              "fieldType": "text-input",
-              "fd:viewType": "formoutputfield"
+              "fieldType": "panel",
+              "fd:viewType": "formoutputfield",
+              "minOccur": 1
             }
           }
         }
@@ -35,37 +36,40 @@
             },
             {
               "component": "text",
-              "name": "dataRef",
-              "label": "Bind reference",
-              "valueType": "string"
+              "name": "fieldName",
+              "label": "Field name",
+              "valueType": "string",
+              "required": true,
+              "validation": {
+                "regExp": "^[^$].*",
+                "customErrorMsg": "Name cannot start with $"
+              }
             },
             {
               "component": "select",
-              "name": "type",
-              "label": "Type",
+              "name": "renderer",
+              "label": "Renderer",
               "valueType": "string",
               "value": "text",
               "options": [
                 {
-                  "name": "text",
-                  "value": "Text"
-                },
-                {
-                  "name": "number",
-                  "value": "Number"
-                },
-                {
-                  "name": "date",
-                  "value": "Date"
+                  "name": "List",
+                  "value": "list"
                 }
               ]
             }
           ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
         }
       ]
     }
   ],
   "filters": [
-
+    {
+      "id": "formoutputfield",
+      "components": null
+    }
   ]
 }

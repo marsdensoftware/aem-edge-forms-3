@@ -1,25 +1,101 @@
 @use '../../../../styles/settings' as *;
 
-main .form form .panel-repeatable-panel__education {
-    .repeatable-entry {
-        &__course {
-            @include font-body-large;
-        }
-
-        &__nc-search--box {
-            @include font-body-large;
-            color: $text-primary;
-            font-weight: 700;
-        }
-
-        &__start-year,
-        &__completion-status {
-            line-height: 160%;
-        }
-
-        &__completion-status {
-            color: $text-secondary;
-        }
+.form form .panel-repeatable-panel__education {
+  .repeatable-entry {
+    &__course {
+      @include font-body-large;
     }
 
+    &__nc-search--box {
+      @include font-body-large;
+      color: $text-primary;
+      font-weight: 700;
+    }
+
+    &__start-year,
+    &__completion-status {
+      line-height: 160%;
+    }
+
+    &__completion-status {
+      color: $text-secondary;
+    }
+  }
+}
+
+.field-panel-education {
+  .plain-text-wrapper.field-wrapper {
+    p {
+      padding-bottom: 0;
+    }
+
+    p p,
+    p.p-large p {
+      padding-bottom: 0;
+      margin-bottom: 16px;
+    }
+
+    p.p-large {
+      max-width: 578px;
+    }
+
+    strong {
+      @include font-body-large;
+      color: $text-dark-primary;
+      margin-bottom: 8px;
+    }
+
+    ul li {
+      margin-bottom: 0;
+    }
+  }
+
+  .field-education {
+    .radio-group--with-icon {
+      margin-top: $spacing-600;
+      gap: $spacing-400 0;
+      padding-bottom: 0;
+
+      @media (max-width: 1279px) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @include media('desktop') {
+        gap: 0 $spacing-400;
+        max-width: 694px;
+      }
+
+      .radio-group--with-icon__label {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .field-education-options-content {
+    margin-top: $spacing-700;
+
+    @include media('desktop') {
+      max-width: 456px;
+    }
+
+    [class*='field-wrapper'] {
+      margin-bottom: $spacing-600;
+
+      h6 {
+        padding-bottom: 0;
+        margin-bottom: $spacing-600;
+        font-size: 24px;
+
+        @include media('desktop') {
+          font-size: 32px;
+        }
+      }
+
+      .field-label {
+        margin-top: 0;
+        margin-bottom: $spacing-200;
+      }
+    }
+  }
 }

@@ -1,0 +1,181 @@
+@use '../../styles/settings' as *;
+
+$nav-height-mobile: 76px;
+$nav-height-desktop: 117px;
+
+.main-menu {
+  padding: $spacing-400 $spacing-450;
+  background-color: $color-white;
+  border-bottom: 1px solid $color-shade-navy-40;
+  position: relative;
+  max-height: $nav-height-mobile;
+
+  @include media('desktop') {
+    padding: $spacing-650 $spacing-600 $spacing-600;
+    max-height: $nav-height-desktop;
+  }
+}
+
+.main-menu__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  // !!! Why AEM need to add extra div?
+  div:first-child {
+    display: none;
+  }
+}
+
+.main-menu__user-button,
+.main-menu__logo {
+  cursor: pointer;
+}
+
+.main-menu__logo {
+  display: block;
+  width: 200px;
+  height: 32px;
+  background-image: url('/images/msd-logo-new.svg');
+  background-position: left top;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  @include media('desktop') {
+    width: 241px;
+  }
+
+  span {
+    @extend %visually-hidden;
+  }
+}
+
+.main-menu__user-button {
+  @include elevation-1;
+
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 2px solid $color-shade-navy-40;
+  border-radius: $border-radius-round;
+  background-image: url('/icons/icon-user.svg');
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+
+  @include media('desktop') {
+    width: 44px;
+    height: 44px;
+  }
+
+  span {
+    @extend %visually-hidden;
+  }
+}
+
+.main-menu__user-button--is-active {
+  background-image: url('/icons/icon-delete-active.svg');
+  border-color: $color-primary-navy;
+}
+
+.main-menu__account-menu {
+  display: none;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: $nav-height-mobile;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  background-color: $color-white;
+
+  @include media('desktop') {
+    top: $nav-height-desktop;
+    max-width: 343px;
+    border-left: 1px solid $color-shade-navy-40;
+    border-bottom: 1px solid $color-shade-navy-40;
+  }
+}
+
+.main-menu__account-menu--is-visible {
+  display: block;
+}
+
+.main-menu__account-menu-item {
+  margin-bottom: 0;
+  padding: 0 $spacing-400;
+
+  &:not(:last-child) {
+    .main-menu__account-menu-link {
+      border-bottom: 2px solid $color-shade-navy-20;
+    }
+  }
+
+  &:first-child {
+    .main-menu__account-menu-link {
+      color: $color-primary-navy;
+
+      @include media('desktop') {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.main-menu__account-menu-link {
+  display: flex;
+  align-items: center;
+  padding: $spacing-400 $spacing-200;
+  color: $color-accent;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 18px;
+
+  @include media('desktop') {
+    font-size: 17px;
+    padding: $spacing-300 $spacing-200;
+  }
+}
+
+.main-menu__account-menu-icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+  margin-right: $spacing-200;
+}
+
+.main-menu__account-menu-item--is-active {
+  position: relative;
+
+  .main-menu__account-menu-link {
+    color: $color-primary-navy;
+
+    &::before {
+      content: '';
+      display: block;
+      background-color: $color-primary-navy;
+      width: 8px;
+      height: 34px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      position: absolute;
+    }
+  }
+}
+
+.main-menu__account-menu-logout {
+  @include elevation-1;
+
+  margin: $spacing-450 0;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+}
+
+.main-menu__account-menu-logout-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: $spacing-200;
+}

@@ -5,14 +5,26 @@ let customComponents = [
   'formhero',
   'formwelcome',
   'formcontextualhelp',
+  'validationsummary',
+  'formoutputfield',
   'typeahead',
   'repeatable-panel',
   'formtabs',
   'education',
   'languagepanel',
   'workexperience',
+  'driverlicence',
   'advanceddatepicker',
-  'search-box']
+  'summary',
+  'search-box',
+  'icon-radio-group',
+  'extended-checkbox',
+  'extended-checkbox-container',
+  'extended-checkbox-group',
+  'range',
+  'toast',
+  'toast-container',
+]
 
 const OOTBComponentDecorators = [
   'file-input',
@@ -26,79 +38,100 @@ const OOTBComponentDecorators = [
   'location',
   'accordion',
   'password',
+  'file',
+  'repeat',
 ]
 
 export function setCustomComponents(components) {
-  customComponents = components
+  customComponents = components;
 }
 
 export function getOOTBComponents() {
-  return OOTBComponentDecorators
+  return OOTBComponentDecorators;
 }
 
 export function getCustomComponents() {
-  return customComponents
+  return customComponents;
 }
 
 /**
- * Loads JS and CSS for a block.
- * @param {Element} block The block element
+ * Loads a component from the components directory
+ * @param {string} componentName - The name of the component to load
+ * @param {HTMLElement} element - The DOM element to decorate
+ * @param {Object} fd - The form definition object
+ * @param {HTMLElement} container - The container element
+ * @param {string} formId - The form ID
+ * @returns {Promise<HTMLElement>} The decorated element
  */
-async function loadComponent(componentName, element, fd, container) {
-  const status = element.dataset.componentStatus
+// ### SEP-NJ: Map to keep track of loaded scripts
+const map = {};
+
+async function loadComponent(componentName, element, fd, container, formId) {
+  const status = element.dataset.componentStatus;
   if (status !== 'loading' && status !== 'loaded') {
-    element.dataset.componentStatus = 'loading'
-    const { blockName } = element.dataset
+    element.dataset.componentStatus = 'loading';
+    const { blockName } = element.dataset;
+
+    // ### SEP-NJ: Start load script only once
+    if (map[componentName]) {
+      await map[componentName](element, fd, container, formId);
+      element.dataset.componentStatus = 'loaded';
+      return element;
+    }
+    // ### SEP-NJ: End
+
     try {
-      loadCSS(
-        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`,
-      )
+      loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
       const decorationComplete = new Promise((resolve) => {
-        ;(async () => {
+        (async () => {
           try {
             const mod = await import(
               `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.js`
-            )
+            );
             if (mod.default) {
-              await mod.default(element, fd, container)
+              map[componentName] = mod.default;
+              await mod.default(element, fd, container, formId);
             }
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log(`failed to load component for ${blockName}`, error)
+            console.log('component details: ', {
+              componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items,
+            })
           }
-          resolve()
-        })()
-      })
-      await Promise.all([decorationComplete])
+          resolve();
+        })();
+      });
+      await Promise.all([decorationComplete]);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(`failed to load component ${blockName}`, error)
+      console.log(`failed to load component ${blockName}`, error);
+      console.log('component details: ', {
+        componentName, blockName, fdId: fd?.id, fdName: fd?.name, fdItems: fd?.items,
+      })
     }
-    element.dataset.componentStatus = 'loaded'
+    element.dataset.componentStatus = 'loaded';
   }
-  return element
+  return element;
 }
 
 /**
  * returns a decorator to decorate the field definition
  *
  * */
-export default async function componentDecorator(element, fd, container) {
-  const { ':type': type = '', fieldType } = fd
+export default async function componentDecorator(element, fd, container, formId) {
+  const { ':type': type = '', fieldType } = fd;
   if (fieldType === 'file-input') {
-    await loadComponent('file', element, fd, container)
+    await loadComponent('file', element, fd, container, formId);
   }
 
   if (type.endsWith('wizard')) {
-    await loadComponent('wizard', element, fd, container)
+    await loadComponent('wizard', element, fd, container, formId);
   }
 
-  if (
-    getCustomComponents().includes(type) ||
-    getOOTBComponents().includes(type)
-  ) {
-    await loadComponent(type, element, fd, container)
+  if (getCustomComponents().includes(type) || getOOTBComponents().includes(type)) {
+    await loadComponent(type, element, fd, container, formId);
   }
 
-  return null
+  return null;
 }
