@@ -391,3 +391,4 @@ export default function transferRepeatableDOM(form, formDef, container, formId) 
 export {
   insertRemoveButton, addInstance, updateButtonVisibility, createButton,
 };
+// export
