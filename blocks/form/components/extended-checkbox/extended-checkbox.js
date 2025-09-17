@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import { onElementsAddedByClassName } from '../utils.js';
 /**
  * Enhances the modal save button functionality by adding event listeners and updating UI elements
  * based on user interactions.
@@ -16,50 +17,52 @@
  dynamically.
  */
 function decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, editDiv) {
-    setTimeout(() => {
+    onElementsAddedByClassName('modal-content', ((modalContainer) => {
         var _a;
-        const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
-        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-content-panel textarea');
-        if (sourceTextarea && destTextArea) {
-            destTextArea.textContent = sourceTextarea.value;
-        }
-        // console log the saveButton as soon as we get it
-        const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
-        if (saveButton) {
-            // console.log('Save button:', saveButton)
-            saveButton.textContent = 'Save';
-            // add an onclick listener to the save button which will simply console
-            // log the value from the sourceTextArea
-            saveButton.addEventListener('click', () => {
-                if (sourceTextarea && destTextArea) {
-                    if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
-                        destTextArea.textContent = sourceTextarea.value;
-                        destTextArea.style.display = 'block';
-                        editLink.textContent = 'Edit description';
+        // check is the connectedEl is a child of the fieldDiv's parent
+        if ((_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.contains(modalContainer)) {
+            const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-content-panel textarea');
+            if (sourceTextarea && destTextArea) {
+                destTextArea.textContent = sourceTextarea.value;
+            }
+            // console log the saveButton as soon as we get it
+            const saveButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-save-button"]');
+            if (saveButton) {
+                // console.log('Save button:', saveButton)
+                saveButton.textContent = 'Save';
+                // add an onclick listener to the save button which will simply console
+                // log the value from the sourceTextArea
+                saveButton.addEventListener('click', () => {
+                    if (sourceTextarea && destTextArea) {
+                        if (sourceTextarea === null || sourceTextarea === void 0 ? void 0 : sourceTextarea.value) {
+                            destTextArea.textContent = sourceTextarea.value;
+                            destTextArea.style.display = 'block';
+                            editLink.textContent = 'Edit description';
+                        }
+                        else {
+                            destTextArea.style.display = 'none';
+                            editLink.textContent = 'Add description';
+                        }
+                        // the divider element has its display set to none - remove that style
+                        divider.style.display = 'block';
+                        editDiv.style.display = 'block';
+                    }
+                    // get the closest dialog element
+                    const dialog = saveButton === null || saveButton === void 0 ? void 0 : saveButton.closest('dialog');
+                    if (dialog) {
+                        // console.log('got the dialog', dialog)
+                        dialog.close();
                     }
                     else {
-                        destTextArea.style.display = 'none';
-                        editLink.textContent = 'Add description';
+                        console.log('no dialog found');
                     }
-                    // the divider element has its display set to none - remove that style
-                    divider.style.display = 'block';
-                    editDiv.style.display = 'block';
-                }
-                // get the closest dialog element
-                const dialog = saveButton === null || saveButton === void 0 ? void 0 : saveButton.closest('dialog');
-                if (dialog) {
-                    // console.log('got the dialog', dialog)
-                    dialog.close();
-                }
-                else {
-                    console.log('no dialog found');
-                }
-            });
+                });
+            }
+            else {
+                console.log('Save button not found');
+            }
         }
-        else {
-            console.log('Save button not found');
-        }
-    }, 500);
+    }));
 }
 /**
  * Decorates the cancel button of a modal dialog with custom logic.
@@ -72,58 +75,61 @@ function decorateModalSaveButton(fieldDiv, destTextArea, editLink, divider, edit
  * @return {void} This function does not return a value.
  */
 function decorateModalCancelButton(fieldDiv, destTextArea) {
-    setTimeout(() => {
+    onElementsAddedByClassName('modal-content', ((modalContainer) => {
         var _a;
-        const modalContainer = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('.modal-content');
-        const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-content-panel textarea');
-        // console log the saveButton as soon as we get it
-        const cancelButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-cancel-button"]');
-        if (cancelButton) {
-            // console.log('Save button:', saveButton)
-            cancelButton.textContent = 'Cancel';
-            // add an onclick listener to the cancel button which will simply close the modal
-            cancelButton.addEventListener('click', () => {
-                if (sourceTextarea && destTextArea) {
-                    // copy the text from the destTextArea (which is a <p> element) into the
-                    // sourceTextArea.value
-                    sourceTextarea.value = destTextArea.textContent || '';
-                }
-                // get the closest dialog element
-                const dialog = cancelButton === null || cancelButton === void 0 ? void 0 : cancelButton.closest('dialog');
-                if (dialog) {
-                    dialog.close();
-                }
-                else {
-                    console.log('no dialog found');
-                }
-            });
+        if ((_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.contains(modalContainer)) {
+            const sourceTextarea = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('.field-modal-content-panel textarea');
+            // console log the saveButton as soon as we get it
+            const cancelButton = modalContainer === null || modalContainer === void 0 ? void 0 : modalContainer.querySelector('button[name="modal-cancel-button"]');
+            if (cancelButton) {
+                // console.log('Save button:', saveButton)
+                cancelButton.textContent = 'Cancel';
+                // add an onclick listener to the cancel button which will simply close the modal
+                cancelButton.addEventListener('click', () => {
+                    if (sourceTextarea && destTextArea) {
+                        // copy the text from the destTextArea (which is a <p> element) into the
+                        // sourceTextArea.value
+                        sourceTextarea.value = destTextArea.textContent || '';
+                    }
+                    // get the closest dialog element
+                    const dialog = cancelButton === null || cancelButton === void 0 ? void 0 : cancelButton.closest('dialog');
+                    if (dialog) {
+                        dialog.close();
+                    }
+                    else {
+                        console.log('no dialog found');
+                    }
+                });
+            }
+            else {
+                console.log('Cancel button not found');
+            }
         }
-        else {
-            console.log('Cancel button not found');
-        }
-    }, 500);
+    }));
 }
 function decorateDialogCloseButton(fieldDiv, destTextArea) {
-    setTimeout(() => {
+    onElementsAddedByClassName('modal', ((modalDialogDiv) => {
         var _a;
-        const modalDialog = (_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('dialog');
-        const sourceTextarea = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.field-modal-content-panel textarea');
-        // console log the saveButton as soon as we get it
-        const closeButton = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.close-button');
-        if (closeButton) {
-            // add an onclick listener to the cancel button which will simply close the modal
-            closeButton.addEventListener('click', () => {
-                if (sourceTextarea && destTextArea) {
-                    // copy the text from the destTextArea (which is a <p> element) into the
-                    // sourceTextArea.value
-                    sourceTextarea.value = destTextArea.textContent || '';
-                }
-            });
+        if ((_a = fieldDiv.parentElement) === null || _a === void 0 ? void 0 : _a.contains(modalDialogDiv)) {
+            const modalDialog = modalDialogDiv === null || modalDialogDiv === void 0 ? void 0 : modalDialogDiv.querySelector('dialog');
+            const sourceTextarea = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.field-modal-content-panel textarea');
+            // console log the saveButton as soon as we get it
+            const closeButton = modalDialog === null || modalDialog === void 0 ? void 0 : modalDialog.querySelector('.close-button');
+            if (closeButton) {
+                // add an onclick listener to the cancel button which will simply close the modal
+                closeButton.addEventListener('click', () => {
+                    if (sourceTextarea && destTextArea) {
+                        // copy the text from the destTextArea (which is a <p> element) into the
+                        // sourceTextArea.value
+                        sourceTextarea.value = destTextArea.textContent || '';
+                    }
+                });
+            }
+            else {
+                console.log('Dialog close button not found');
+            }
         }
-        else {
-            console.log('Dialog close button not found');
-        }
-    }, 500);
+    }));
 }
 /**
  * Configures the behavior of a checkbox such that when it is checked,
