@@ -66,8 +66,6 @@ export default function decorate(fieldDiv: Element, fieldJson: Field) {
               toastMessage: 'Deselect a strength to select a new one',
               dismissible: true,
               timeoutMs: undefined,
-              strategy: 'stack',
-              max: 4,
             });
 
             return;
