@@ -465,13 +465,13 @@ document.addEventListener('click', (e) => {
 })
 
 function createSelectedCheckbox(fd: {
-  name: string;
-  id: string;
-  label: { value: string; text: string };
-  fieldType: string;
-  enum: string[];
-  required: boolean
-}, item: string) {
+    name: string;
+    id: string;
+    label: { value: string; text: string };
+    fieldType: string;
+    enum: string[];
+    required: boolean
+  }) {
   const fieldset = document.createElement('div');
   fieldset.classList.add(`${fd.fieldType}-wrapper`);
   fieldset.dataset.id = fd.id;
@@ -479,12 +479,23 @@ function createSelectedCheckbox(fd: {
 
   const input = document.createElement('input');
   input.type = fd.fieldType;
-  input.value = item;
+  // eslint-disable-next-line prefer-destructuring
+  input.value = fd.enum[0];
   input.id = fd.id;
   input.dataset.fieldType = `${fd.fieldType}-group`;
   input.name = fd.name;
   input.checked = true;
   fieldset.appendChild(input);
+
+  const label = document.createElement('label');
+  label.htmlFor = fd.id;
+  label.classList.add('field-label');
+  const span1 = document.createElement('span');
+  span1.classList.add('text');
+  // eslint-disable-next-line prefer-destructuring
+  span1.textContent = fd.enum[1];
+  label.appendChild(span1);
+  fieldset.appendChild(label);
 
   return { fieldset, input };
 }
@@ -560,12 +571,12 @@ document.addEventListener('input', (event) => {
         const fd = {
           name: groupContainerName,
           id: fieldName,
-          label: { value: item, text: item },
+          label: { value: 'item-abc', text: item },
           fieldType: 'checkbox',
-          enum: [item],
+          enum: ['item-abc', item],
           required: false,
         }
-        const { fieldset, input } = createSelectedCheckbox(fd, item);
+        const { fieldset, input } = createSelectedCheckbox(fd);
 
         groupContainerElement.appendChild(fieldset);
         input.click();
