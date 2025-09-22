@@ -11,6 +11,9 @@ export default function decorate(panelEl, model) {
 
   const className = 'panel-validationsummary'
   panelEl.classList.add(className);
+  
+  // Add role alert
+  panelEl.setAttribute('role', 'alert');
 
   onElementAdded(panelEl).then((connectedEl) => {
     const errorContainer = document.createElement('ul');
@@ -87,33 +90,34 @@ export default function decorate(panelEl, model) {
   return panelEl;
 }
 
-export function reportSummaryError(title, content) {
+export function reportGenericError(title, content) {
   const validationSummaryEl = document.querySelector('.wizard > .current-wizard-step .panel-validationsummary');
   if (!validationSummaryEl) {
     alert(`${title}: ${content}`);
     return;
   }
+  
+  validationSummaryEl.querySelector('.panel-formcontextualhelp__title').textContent = title;
+  
   const errorContainer = validationSummaryEl.querySelector('.error-container');
   errorContainer.innerHTML = '';
 
   const errorFieldContainer = document.createElement('li');
   errorFieldContainer.innerHTML = `<span class="errormessage">${content}</span>`;
-  
+
   errorContainer.append(errorFieldContainer);
-  
+
   validationSummaryEl.dataset.visible = true;
+  validationSummaryEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
 }
 
-export function clearSummaryError(){
+export function clearGenericError() {
   const validationSummaryEl = document.querySelector('.wizard > .current-wizard-step .panel-validationsummary');
   if (validationSummaryEl) {
     const errorContainer = validationSummaryEl.querySelector('.error-container');
     errorContainer.innerHTML = '';
-    
+
     validationSummaryEl.dataset.visible = false;
   }
 }
-
-window.reportSummaryError = reportSummaryError;
-window.clearSummaryError = clearSummaryError;

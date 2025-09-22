@@ -1,5 +1,5 @@
 import { DEFAULT_THANK_YOU_MESSAGE, getRouting, getSubmitBaseUrl } from './constant.js';
-import { reportSummaryError } from './components/validationsummary/validationsummary.js';
+import { reportGenericError } from './components/validationsummary/validationsummary.js';
 
 export function submitSuccess(e, form) {
   const { payload } = e;
@@ -29,7 +29,7 @@ export function submitFailure(e, form) {
   const title = form.dataset.genericErrorTitle;
   const content = form.dataset.genericErrorDescription;
 
-  reportSummaryError(title, content);
+  reportGenericError(title, content);
   // ###SEP-NJ End
   /*
   let errorMessage = form.querySelector('.form-message.error-message');
