@@ -32989,6 +32989,12 @@
           },
           {
             "component": "text",
+            "name": "selection-container",
+            "label": "Name of the selected items checkbox group.",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
             "name": "empty-selection-message",
             "label": "Empty selection message",
             "valueType": "string"

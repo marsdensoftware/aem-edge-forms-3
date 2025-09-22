@@ -339,6 +339,21 @@ document.addEventListener('click', (e) => {
         }
     });
 });
+function createSelectedCheckbox(fd, item) {
+    const fieldset = document.createElement('div');
+    fieldset.classList.add(`${fd.fieldType}-wrapper`);
+    fieldset.dataset.id = fd.id;
+    fieldset.innerHTML = '';
+    const input = document.createElement('input');
+    input.type = fd.fieldType;
+    input.value = item;
+    input.id = fd.id;
+    input.dataset.fieldType = `${fd.fieldType}-group`;
+    input.name = fd.name;
+    input.checked = true;
+    fieldset.appendChild(input);
+    return { fieldset, input };
+}
 document.addEventListener('input', (event) => {
     const element = event.target.closest('.search-box');
     if (element && componentStateMap.has(element)) {
@@ -346,6 +361,8 @@ document.addEventListener('input', (event) => {
         const query = searchInput.value.toLowerCase();
         const suggestionsDiv = element.querySelector('.suggestions');
         suggestionsDiv.innerHTML = '';
+        // the name of the selected items group container
+        const groupContainerName = element.dataset.selectionContainer || 'extra_skills_cbg';
         if (query.length < 3) {
             suggestionsDiv.style.display = 'none';
             return;
@@ -372,6 +389,43 @@ document.addEventListener('input', (event) => {
                 searchInput.value = '';
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
+                // get the closest parent `.panel-wrapper` element
+                const panelWrapper = searchInput.closest('.panel-wrapper');
+                // get the element contained in the panel-wrapper with a name = 'extra_skills_cbg'
+                const groupContainerElement = panelWrapper.querySelector(`.panel-wrapper [name=${groupContainerName}]`);
+                // if the element has a child input with a value of 0, then delete that child
+                if (groupContainerElement.childElementCount > 0) {
+                    const extraSkillsCbgChildren = Array.from(groupContainerElement.querySelectorAll('input[type="checkbox"]'));
+                    extraSkillsCbgChildren.forEach((checkbox) => {
+                        var _a;
+                        if (checkbox.value === '0') {
+                            (_a = checkbox.closest('.checkbox-wrapper')) === null || _a === void 0 ? void 0 : _a.remove();
+                        }
+                    });
+                }
+                // get the number of children in the groupContainerElement
+                const groupContainerChildrenCount = groupContainerElement.childElementCount;
+                const fieldName = `${groupContainerName}_${groupContainerChildrenCount}`;
+                const fd = {
+                    name: groupContainerName,
+                    id: fieldName,
+                    label: { value: item, text: item },
+                    fieldType: 'checkbox',
+                    enum: [item],
+                    required: false,
+                };
+                const { fieldset, input } = createSelectedCheckbox(fd, item);
+                groupContainerElement.appendChild(fieldset);
+                input.click();
+                // get all the checkboxes in the groupContainerElement and programmatically call click on them
+                const extraSkillsCbgCheckboxes = Array.from(groupContainerElement.querySelectorAll('input[type="checkbox"]'));
+                extraSkillsCbgCheckboxes.forEach((checkbox) => {
+                    // if the checkbox is checked, do nothing
+                    if (checkbox.checked) {
+                        return;
+                    }
+                    checkbox.click();
+                });
                 createSelectedCard(item, selectedCardsDiv, searchInput, 'main');
             });
             suggestionsDiv.appendChild(div);
@@ -444,6 +498,7 @@ function initSearchBoxCounter(searchBox) {
 }
 export default function decorate(element, field) {
     const { datasource } = field.properties;
+    const selectionContainer = field.properties['selection-container'] || 'extra_skills_cbg';
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
     const recommendationsLabel = field.properties['recommendations-label'];
@@ -462,6 +517,7 @@ export default function decorate(element, field) {
     }
     element.classList.add('search-box');
     element.dataset.datasource = datasource;
+    element.dataset.selectionContainer = selectionContainer;
     element.dataset.recommendationsDatasource = recommendationsDatasource;
     element.dataset.maxAllowedItems = field.properties.maxAllowedItems;
     // --- Initialize State for this component instance ---

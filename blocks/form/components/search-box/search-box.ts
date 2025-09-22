@@ -439,6 +439,7 @@ interface El extends Element {
     datasource: string
     recommendationsDatasource?: string
     maxAllowedItems?: string
+    selectionContainer?: string
   }
 }
 
@@ -463,6 +464,31 @@ document.addEventListener('click', (e) => {
   })
 })
 
+function createSelectedCheckbox(fd: {
+  name: string;
+  id: string;
+  label: { value: string; text: string };
+  fieldType: string;
+  enum: string[];
+  required: boolean
+}, item: string) {
+  const fieldset = document.createElement('div');
+  fieldset.classList.add(`${fd.fieldType}-wrapper`);
+  fieldset.dataset.id = fd.id;
+  fieldset.innerHTML = ''
+
+  const input = document.createElement('input');
+  input.type = fd.fieldType;
+  input.value = item;
+  input.id = fd.id;
+  input.dataset.fieldType = `${fd.fieldType}-group`;
+  input.name = fd.name;
+  input.checked = true;
+  fieldset.appendChild(input);
+
+  return { fieldset, input };
+}
+
 document.addEventListener('input', (event) => {
   const element = (event.target as Element).closest('.search-box') as El
 
@@ -471,6 +497,9 @@ document.addEventListener('input', (event) => {
     const query = searchInput.value.toLowerCase()
     const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
     suggestionsDiv.innerHTML = ''
+
+    // the name of the selected items group container
+    const groupContainerName = element.dataset.selectionContainer || 'extra_skills_cbg';
 
     if (query.length < 3) {
       suggestionsDiv.style.display = 'none'
@@ -504,6 +533,55 @@ document.addEventListener('input', (event) => {
         searchInput.value = ''
         suggestionsDiv.innerHTML = ''
         suggestionsDiv.style.display = 'none'
+
+        // get the closest parent `.panel-wrapper` element
+        const panelWrapper = searchInput.closest('.panel-wrapper') as HTMLDivElement
+
+        // get the element contained in the panel-wrapper with a name = 'extra_skills_cbg'
+        const groupContainerElement = panelWrapper.querySelector(`.panel-wrapper [name=${groupContainerName}]`) as HTMLInputElement;
+
+        // if the element has a child input with a value of 0, then delete that child
+        if (groupContainerElement.childElementCount > 0) {
+          const extraSkillsCbgChildren = Array.from(
+            groupContainerElement.querySelectorAll('input[type="checkbox"]'),
+          ) as HTMLInputElement[];
+          extraSkillsCbgChildren.forEach((checkbox) => {
+            if (checkbox.value === '0') {
+              checkbox.closest('.checkbox-wrapper')?.remove();
+            }
+          })
+        }
+
+        // get the number of children in the groupContainerElement
+        const groupContainerChildrenCount = groupContainerElement.childElementCount;
+
+        const fieldName = `${groupContainerName}_${groupContainerChildrenCount}`;
+
+        const fd = {
+          name: groupContainerName,
+          id: fieldName,
+          label: { value: item, text: item },
+          fieldType: 'checkbox',
+          enum: [item],
+          required: false,
+        }
+        const { fieldset, input } = createSelectedCheckbox(fd, item);
+
+        groupContainerElement.appendChild(fieldset);
+        input.click();
+
+        // get all the checkboxes in the groupContainerElement and programmatically call click on them
+        const extraSkillsCbgCheckboxes = Array.from(
+          groupContainerElement.querySelectorAll('input[type="checkbox"]'),
+        ) as HTMLInputElement[];
+        extraSkillsCbgCheckboxes.forEach((checkbox) => {
+          // if the checkbox is checked, do nothing
+          if (checkbox.checked) {
+            return;
+          }
+          checkbox.click();
+        })
+
         createSelectedCard(item, selectedCardsDiv, searchInput, 'main')
       })
       suggestionsDiv.appendChild(div)
@@ -597,6 +675,7 @@ function initSearchBoxCounter(searchBox: El) {
 
 export default function decorate(element: El, field: Field) {
   const { datasource } = field.properties
+  const selectionContainer = field.properties['selection-container'] || 'extra_skills_cbg';
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
   const recommendationsLabel = field.properties['recommendations-label']
@@ -618,6 +697,7 @@ export default function decorate(element: El, field: Field) {
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource
+  element.dataset.selectionContainer = selectionContainer
   element.dataset.recommendationsDatasource = recommendationsDatasource
   element.dataset.maxAllowedItems = field.properties.maxAllowedItems
 
