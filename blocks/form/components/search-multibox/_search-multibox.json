@@ -1,0 +1,117 @@
+{
+  "definitions": [
+    {
+      "title": "Search multibox",
+      "id": "search-multibox",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+            "template": {
+              "jcr:title": "Search multibox",
+              "fieldType": "checkbox-group",
+              "enum": [
+                "0"
+              ],
+              "enumNames": [
+                "Default"
+              ],
+              "orientation": "horizontal",
+              "type": "string[]",
+              "fd:viewType": "search-multibox"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "search-multibox",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "...": "../../models/form-common/_basic-select-fields.json#/fields"
+            },
+            {
+              "component": "select",
+              "name": "variant",
+              "label": "Variant",
+              "options": [
+                {
+                  "name": "Default",
+                  "value": "default"
+                },
+                {
+                  "name": "Cards",
+                  "value": "cards"
+                },
+                {
+                  "name": "Pills",
+                  "value": "pills"
+                }
+              ],
+              "value": "default"
+            },
+            {
+              "component": "select",
+              "label": "Data type of submitted value",
+              "name": "type",
+              "valueType": "string",
+              "value": "string[]",
+              "options": [
+                {
+                  "name": "String",
+                  "value": "string[]"
+                },
+                {
+                  "name": "Boolean",
+                  "value": "boolean[]"
+                },
+                {
+                  "name": "Number",
+                  "value": "number[]"
+                }
+              ]
+            },
+            {
+              "component": "radio-group",
+              "label": "Display Options",
+              "name": "orientation",
+              "valueType": "string",
+              "value": "horizontal",
+              "options": [
+                {
+                  "name": "Horizontally",
+                  "value": "horizontal"
+                },
+                {
+                  "name": "Vertically",
+                  "value": "vertical"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
+        },
+        {
+          "component": "container",
+          "name": "validation",
+          "label": "Validation",
+          "collapsible": true,
+          "...": "../../models/form-common/_basic-validation-fields.json"
+        }
+      ]
+    }
+  ]
+}

@@ -112,7 +112,8 @@
       "range",
       "toast-container",
       "toast",
-      "extended-checkbox-group"
+      "extended-checkbox-group",
+      "search-multibox"
     ]
   },
   {

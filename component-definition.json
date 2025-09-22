@@ -1689,6 +1689,30 @@
           }
         },
         {
+          "title": "Search multibox",
+          "id": "search-multibox",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                "template": {
+                  "jcr:title": "Search multibox",
+                  "fieldType": "checkbox-group",
+                  "enum": [
+                    "0"
+                  ],
+                  "enumNames": [
+                    "Default"
+                  ],
+                  "orientation": "horizontal",
+                  "type": "string[]",
+                  "fd:viewType": "search-multibox"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Summary",
           "id": "summary",
           "plugins": {
@@ -2285,6 +2309,30 @@
                   "fieldType": "panel",
                   "minOccur": 1,
                   "fd:viewType": "extended-checkbox-group"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Search multibox",
+          "id": "search-multibox",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/checkboxgroup/v1/checkboxgroup",
+                "template": {
+                  "jcr:title": "Search multibox",
+                  "fieldType": "checkbox-group",
+                  "enum": [
+                    "0"
+                  ],
+                  "enumNames": [
+                    "Default"
+                  ],
+                  "orientation": "horizontal",
+                  "type": "string[]",
+                  "fd:viewType": "search-multibox"
                 }
               }
             }
