@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
 import { FIELD_NAMES, sorter, COMPLETION_STATUS } from './fieldnames.js'
-import { DefaultFieldConverter } from '../utils.js'
+import { DefaultFieldConverter, isAfter } from '../utils.js'
 // import { dispatchToast } from '../toast-container/toast-container.js';
 
 class Converter extends DefaultFieldConverter {
@@ -13,7 +13,7 @@ class Converter extends DefaultFieldConverter {
     if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
       // Completed
       const year = result[FIELD_NAMES.FINISH_YEAR]
-      completionStatus.displayValue += ` ${year.displayValue}`
+      completionStatus.displayValue += ` ${year?.displayValue}`
     }
 
     // Delete start and finish
@@ -58,6 +58,40 @@ export class EducationRepeatable extends ConditionalRepeatable {
         });
       });
     });
+  }
+
+  _validate(entry) {
+    let valid = super._validate(entry);
+
+    if (!valid) {
+      return false;
+    }
+
+    const data = new DefaultFieldConverter().convert(entry);
+
+    const completionStatus = data[FIELD_NAMES.COMPLETION_STATUS];
+    if (completionStatus?.value === COMPLETION_STATUS.COMPLETED) {
+      // Completed
+      const finishMonth = data[FIELD_NAMES.FINISH_MONTH]?.value;
+      const finishYear = data[FIELD_NAMES.FINISH_YEAR]?.value;
+      const startMonth = data[FIELD_NAMES.START_MONTH]?.value;
+      const startYear = data[FIELD_NAMES.START_YEAR]?.value;
+
+      const input = entry.querySelector(`select[name="${FIELD_NAMES.FINISH_YEAR}"]`);
+
+      valid = isAfter(startYear, startMonth, finishYear, finishMonth);
+      if (!valid) {
+        // Mark finish Year and finish month invalid
+        input.setCustomValidity('Finish date must be after start date!');
+      } else {
+        // Clear validation
+        input.setCustomValidity('');
+        window.myForm.getElement(input.id).valid = true;
+      }
+      input.reportValidity();
+    }
+
+    return valid;
   }
 
   _onItemAdded(entry) {

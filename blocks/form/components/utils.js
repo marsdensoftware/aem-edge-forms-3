@@ -251,6 +251,27 @@ export function getDurationString(startMonthStr, startYearStr, endMonthStr, endY
   return yearStr || monthStr || `0 ${i18n('months')}`;
 }
 
+export function isAfter(startYear, startMonth, finishYear, finishMonth) {
+  const sYear = parseInt(startYear, 10);
+  const sMonth = parseInt(startMonth, 10);
+  const fYear = parseInt(finishYear, 10);
+  const fMonth = parseInt(finishMonth, 10);
+
+  // Validate numbers
+  if (
+    Number.isNaN(sYear) || Number.isNaN(sMonth) || Number.isNaN(fYear) || Number.isNaN(fMonth) ||
+    sMonth < 1 || sMonth > 12 ||
+    fMonth < 1 || fMonth > 12
+  ) {
+    return false; // invalid input
+  }
+
+  const startValue = sYear * 12 + (sMonth - 1);
+  const finishValue = fYear * 12 + (fMonth - 1);
+
+  return finishValue > startValue;
+}
+
 export function isNo(field) {
   const { value } = field;
   if (!value) return true;

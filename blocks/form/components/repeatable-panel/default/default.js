@@ -300,7 +300,7 @@ export class RepeatablePanel {
 
     saveBtn.addEventListener('click', () => {
       // Validate
-      const valid = validateContainer(entry) && this._validate(entry);
+      const valid = this._validate(entry) && validateContainer(entry);
 
       if (valid) {
         // Save
