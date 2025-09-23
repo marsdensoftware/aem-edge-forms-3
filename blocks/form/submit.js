@@ -131,9 +131,23 @@ async function submitDocBasedForm(form, captcha) {
   }
 }
 
+// ###SEP-NJ START function to validate fields inside the current step
+function validateCurrentWizardStep(form) {
+  const stepEl = form.querySelector('.wizard>.current-wizard-step');
+  const fields = stepEl.querySelectorAll('input, select, textarea');
+  for (const field of fields) {
+    if (!field.checkValidity()) {
+      return false;
+    }
+  }
+  return true;
+}
+// ###SEP-NJ END
+
 export async function handleSubmit(e, form, captcha) {
   e.preventDefault();
-  const valid = form.checkValidity();
+  // ###SEP-NJ Validate only fields inside the current step
+  const valid = validateCurrentWizardStep(form); // form.checkValidity();
   if (valid) {
     e.submitter?.setAttribute('disabled', '');
     if (form.getAttribute('data-submitting') !== 'true') {

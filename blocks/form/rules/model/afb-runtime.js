@@ -4992,6 +4992,13 @@ class Field extends Scriptable {
     validate() {
         // ###SEP-NJ START
         const el = document.getElementById(this.id);
+        // Validate only elements inside the current wizard step
+        const inCurrentWizardStep = el.closest('.wizard>.current-wizard-step');
+        
+        if (!inCurrentWizardStep) {
+          return [];
+        }
+
         const isDisabled = el?.closest('[disabled]') != undefined;
         const isHidden = el.closest('[data-visible="false"]') != undefined;
         

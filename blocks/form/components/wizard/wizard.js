@@ -69,6 +69,16 @@ export class WizardLayout {
     const navigateTo = valid ? this.getEligibleSibling(current, forward) : current;
 
     if (navigateTo && current !== navigateTo) {
+      // ###SEP-NJ START
+      if (forward) {
+        // submit data if there are any inputs in the current step
+        const fields = current.querySelectorAll('input, select, textarea');
+        if (fields.length > 0) {
+          alert('Submitting data');
+        }
+      }
+      // ###SEP-NJ END
+
       current.classList.remove('current-wizard-step');
       navigateTo.classList.add('current-wizard-step');
       // add/remove active class from menu item
