@@ -37,8 +37,7 @@
               "component": "boolean",
               "name": "multiLine",
               "label": "Allow multiple lines",
-              "valueType": "boolean",
-              "value": true
+              "valueType": "boolean"
             },
             {
               "component": "number",
