@@ -34107,15 +34107,7 @@
             "valueType": "number",
             "value": 5,
             "min": 3,
-            "max": 10,
-            "condition": {
-              "===": [
-                {
-                  "var": "multiLine"
-                },
-                true
-              ]
-            }
+            "max": 10
           },
           {
             "component": "boolean",
