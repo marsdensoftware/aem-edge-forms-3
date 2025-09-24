@@ -28,6 +28,7 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, 
       if (textarea) {
         textarea.setAttribute('rows', rows);
       }
+      console.log('textarea: ', textarea);
     }, 500)
   }
 

@@ -29,6 +29,7 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
                 if (textarea) {
                     textarea.setAttribute('rows', rows);
                 }
+                console.log('textarea: ', textarea);
             }, 500);
         }
         return fieldDiv;
