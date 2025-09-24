@@ -1,4 +1,4 @@
 /*stylelint-disable*/
-.panel-validationsummary .fieldname{font-weight:bold}.panel-validationsummary > .plain-text-wrapper{margin-left:2rem}
+.panel-validationsummary .fieldname{font-weight:bold}.panel-validationsummary ul.error-container{list-style-type:none}.panel-validationsummary > .plain-text-wrapper{margin-left:2rem}
 
 /*# sourceMappingURL=validationsummary.css.map */

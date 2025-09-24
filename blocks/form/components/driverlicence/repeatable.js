@@ -74,14 +74,19 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
     const endorsementsAvailableField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS_AVAILABLE}"]`);
     // Register change on endorsement to change dependent field
     const endorsementsField = entry.querySelector(`fieldset[name="${FIELD_NAMES.ENDORSEMENTS}"]`);
+    endorsementsField.disabled = true;
 
     licenceClass.forEach((cb) => {
+      const classStage = entry.querySelector(`fieldset[name="class${cb.value}-stage"]`);
+      classStage.dataset.visible = false;
+      classStage.disabled = true;
+
       cb.addEventListener('change', () => {
         // class stage visibility
-        const classStage = entry.querySelector(`fieldset[name="class${cb.value}-stage"]`);
         const visible = cb.checked === true;
 
         classStage.dataset.visible = visible;
+        classStage.disabled = !visible;
 
         if (!visible) {
           super._clearFields(classStage);
@@ -103,6 +108,7 @@ export class DriverLicenceRepeatable extends ConditionalRepeatable {
         const visible = !isNo(event.target);
 
         endorsementsField.dataset.visible = visible;
+        endorsementsField.disabled = !visible;
 
         if (!visible) {
           super._clearFields(endorsementsField);

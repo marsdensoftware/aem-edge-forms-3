@@ -5,6 +5,10 @@
     font-weight: bold;
   }
 
+  ul.error-container {
+    list-style-type: none;
+  }
+
   >.plain-text-wrapper {
     margin-left: $spacing-600;
   }

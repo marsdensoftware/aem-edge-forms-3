@@ -11,9 +11,12 @@ export default function decorate(panelEl, model) {
 
   const className = 'panel-validationsummary'
   panelEl.classList.add(className);
-  
+
   // Add role alert
   panelEl.setAttribute('role', 'alert');
+  panelEl.setAttribute('tabindex', '-1');
+
+  const textContent = panelEl.querySelector('.panel-formcontextualhelp__title')?.textContent;
 
   onElementAdded(panelEl).then((connectedEl) => {
     const errorContainer = document.createElement('ul');
@@ -26,6 +29,9 @@ export default function decorate(panelEl, model) {
       const invalidFields = parentElement.querySelectorAll('.field-invalid');
       const hasInvalidFields = invalidFields.length > 0;
       errorContainer.innerHTML = '';
+
+      // Reset original title
+      connectedEl.querySelector('.panel-formcontextualhelp__title').textContent = textContent;
 
       invalidFields.forEach((target) => {
         if (!target.offsetParent || target.dataset.visible === 'false' || target.parentElement.dataset.visible === 'false') {
@@ -75,6 +81,7 @@ export default function decorate(panelEl, model) {
 
       if (added) {
         connectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        connectedEl.focus();
       }
     });
 
@@ -93,12 +100,12 @@ export default function decorate(panelEl, model) {
 export function reportGenericError(title, content) {
   const validationSummaryEl = document.querySelector('.wizard > .current-wizard-step .panel-validationsummary');
   if (!validationSummaryEl) {
-    alert(`${title}: ${content}`);
+    console.error(`${title}: ${content}`);
     return;
   }
-  
+
   validationSummaryEl.querySelector('.panel-formcontextualhelp__title').textContent = title;
-  
+
   const errorContainer = validationSummaryEl.querySelector('.error-container');
   errorContainer.innerHTML = '';
 
@@ -109,6 +116,7 @@ export function reportGenericError(title, content) {
 
   validationSummaryEl.dataset.visible = true;
   validationSummaryEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  validationSummaryEl.focus();
 
 }
 

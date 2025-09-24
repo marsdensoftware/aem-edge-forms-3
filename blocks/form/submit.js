@@ -1,7 +1,17 @@
 import { DEFAULT_THANK_YOU_MESSAGE, getRouting, getSubmitBaseUrl } from './constant.js';
 import { reportGenericError } from './components/validationsummary/validationsummary.js';
+import { gotoNextStep } from './components/wizard/wizard.js';
+import { i18n } from '../../i18n/index.js';
 
 export function submitSuccess(e, form) {
+  // ###SEP-NJ START check where to go after submit
+  if (form.dataset.submitSource === 'wizard:btnNext') {
+    const wizard = form.querySelector('.wizard');
+    gotoNextStep(wizard);
+    form.dataset.submitSource = undefined;
+    return;
+  }
+  // ###SEP-NJ END
   const { payload } = e;
   const redirectUrl = form.dataset.redirectUrl || payload?.body?.redirectUrl;
   const thankYouMsg = form.dataset.thankYouMsg || payload?.body?.thankYouMessage;
@@ -26,8 +36,15 @@ export function submitSuccess(e, form) {
 
 export function submitFailure(e, form) {
   // ###SEP-NJ Start custom generic error
-  const title = form.dataset.genericErrorTitle;
-  const content = form.dataset.genericErrorDescription;
+  const title = form.dataset.genericErrorTitle || i18n('Something went wrong.');
+  const defaultErrorContent = 'Please try again. If it doesn’t work, come back later or call us on 0800 XXX.';
+  const content = form.dataset.genericErrorDescription || i18n(defaultErrorContent);
+
+  // Reset label of next button
+  const wizard = form.querySelector('.wizard');
+  if (wizard) {
+    wizard.querySelector('button[name="next"]').textContent = i18n('Next');
+  }
 
   reportGenericError(title, content);
   // ###SEP-NJ End

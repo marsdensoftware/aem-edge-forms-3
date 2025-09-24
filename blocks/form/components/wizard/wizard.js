@@ -1,4 +1,5 @@
 import { createButton } from '../../util.js';
+import { i18n } from '../../../../i18n/index.js';
 import './set-background-by-step.js';
 import './character-limits.js'
 import './english-proficiency.js'
@@ -58,6 +59,28 @@ export class WizardLayout {
     return isValid;
   }
 
+  // ###SEP-NJ START Method to navigate to the next step
+  gotoNextStep(panel) {
+    const current = panel.querySelector('.current-wizard-step');
+    const currentMenuItem = panel.querySelector('.wizard-menu-active-item');
+    const navigateTo = this.getEligibleSibling(current, true);
+    current.classList.remove('current-wizard-step');
+    navigateTo.classList.add('current-wizard-step');
+    // add/remove active class from menu item
+    const navigateToMenuItem = panel.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
+    currentMenuItem.classList.remove('wizard-menu-active-item');
+    navigateToMenuItem.classList.add('wizard-menu-active-item');
+    const event = new CustomEvent('wizard:navigate', {
+      detail: {
+        prevStep: { id: current.id, index: +current.dataset.index },
+        currStep: { id: navigateTo.id, index: +navigateTo.dataset.index },
+      },
+      bubbles: false,
+    });
+    panel.dispatchEvent(event);
+  }
+  // ###SEP-NJ END
+
   navigate(panel, forward = true) {
     const current = panel.querySelector('.current-wizard-step');
     const currentMenuItem = panel.querySelector('.wizard-menu-active-item');
@@ -72,9 +95,16 @@ export class WizardLayout {
       // ###SEP-NJ START
       if (forward) {
         // submit data if there are any inputs in the current step
-        const fields = current.querySelectorAll('input, select, textarea');
+        const fields = current.querySelectorAll('input:not([disabled]), select:not([disabled]), textarea:not([disabled])');
         if (fields.length > 0) {
-          alert('Submitting data');
+          // Find and trigger the submit button
+          // Set a flag that we should go to next step after submit success
+          const form = current.closest('form');
+          form.dataset.submitSource = 'wizard:btnNext';
+          // Change label of next button
+          panel.querySelector('button[name="next"]').textContent = i18n('please wait');
+          form.querySelector('button[type="submit"]').click();
+          return;
         }
       }
       // ###SEP-NJ END
@@ -208,4 +238,7 @@ export default function wizardLayout(panel) {
 }
 
 export const navigate = layout.navigate.bind(layout);
+// ###SEP-NJ START Add method to go to next step
+export const gotoNextStep = layout.gotoNextStep.bind(layout);
+// ###SEP-NJ END
 export const validateContainer = layout.validateContainer.bind(layout);
