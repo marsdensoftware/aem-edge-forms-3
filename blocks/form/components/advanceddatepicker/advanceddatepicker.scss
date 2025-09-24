@@ -5,24 +5,36 @@
   flex-wrap: wrap;
   gap: $spacing-400;
 
-  > legend {
+  .field-description {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  &.field-invalid {
+    .field-description {
+      display: block;
+    }
+  }
+
+  >legend {
     @include font-body-large;
   }
 
-  &[data-required='true'] > legend::after {
+  &[data-required='true']>legend::after {
     content: '*';
     color: $color-feedback-red;
     padding-inline-start: 0.3125rem;
   }
 
-  > .drop-down-wrapper {
+  >.drop-down-wrapper {
     flex: 1 1 0%;
   }
 
   .field-wrapper:not([data-visible='false']) {
+
     // Added specificity to override
     // Clash class from repeatable panel
-    + .field-wrapper.drop-down-wrapper {
+    +.field-wrapper.drop-down-wrapper {
       margin-top: 0;
     }
   }

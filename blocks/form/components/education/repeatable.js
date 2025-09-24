@@ -77,18 +77,17 @@ export class EducationRepeatable extends ConditionalRepeatable {
       const startMonth = data[FIELD_NAMES.START_MONTH]?.value;
       const startYear = data[FIELD_NAMES.START_YEAR]?.value;
 
-      const input = entry.querySelector(`select[name="${FIELD_NAMES.FINISH_YEAR}"]`);
-
       valid = isAfter(startYear, startMonth, finishYear, finishMonth);
+
+      const whenFinish = entry.querySelector('fieldset[name="when-finish"]');
       if (!valid) {
-        // Mark finish Year and finish month invalid
-        input.setCustomValidity('Finish date must be after start date!');
+        whenFinish.classList.add('field-invalid');
+        whenFinish.querySelector('.field-description').textContent = 'Finish date must be after start date!';
       } else {
         // Clear validation
-        input.setCustomValidity('');
-        window.myForm.getElement(input.id).valid = true;
+        whenFinish.classList.remove('field-invalid');
+        whenFinish.querySelector('.field-description').textContent = '';
       }
-      input.reportValidity();
     }
 
     return valid;

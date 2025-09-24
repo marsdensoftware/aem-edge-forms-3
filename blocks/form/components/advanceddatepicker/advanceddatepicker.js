@@ -25,6 +25,10 @@ class AdvancedDatepickerField {
   }
 
   init() {
+    const descriptionEl = document.createElement('div');
+    descriptionEl.classList.add('field-description');
+    this.panel.append(descriptionEl);
+
     this.panel.classList.add('advanceddatepicker');
     this.panel.dataset.yearMax = this.model.properties.yearMax;
     this.panel.dataset.yearMin = this.model.properties.yearMin;
