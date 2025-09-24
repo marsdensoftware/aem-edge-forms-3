@@ -1,0 +1,84 @@
+{
+  "definitions": [
+    {
+      "title": "Textarea",
+      "id": "textarea",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/fd/components/form/textinput/v1/textinput",
+            "template": {
+              "jcr:title": "Textarea",
+              "fieldType": "text-input",
+              "fd:viewType": "textarea"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "textarea",
+      "fields": [
+        {
+          "component": "container",
+          "name": "basic",
+          "label": "Basic",
+          "collapsible": false,
+          "fields": [
+            {
+              "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
+            },
+            {
+              "...": "../../models/form-common/_basic-input-default-value-fields.json#/fields"
+            },
+            {
+              "component": "boolean",
+              "name": "multiLine",
+              "label": "Allow multiple lines",
+              "valueType": "boolean",
+              "value": true
+            },
+            {
+              "component": "number",
+              "name": "rows",
+              "label": "Number of rows to render",
+              "valueType": "number",
+              "value": 5,
+              "min": 3,
+              "max": 10,
+              "condition": {
+                "===": [
+                  {
+                    "var": "multiLine"
+                  },
+                  true
+                ]
+              }
+            },
+            {
+              "component": "boolean",
+              "valueType": "boolean",
+              "name": "spellcheck",
+              "label": "Enable spellcheck"
+            }
+          ]
+        },
+        {
+          "...": "../../models/form-common/_responsive-columns-component.json"
+        },
+        {
+          "...": "../../models/form-common/_help-container.json"
+        },
+        {
+          "component": "container",
+          "name": "validation",
+          "label": "Validation",
+          "collapsible": true,
+          "...": "../../models/form-common/_string-validation-fields.json"
+        }
+      ]
+    }
+  ]
+}

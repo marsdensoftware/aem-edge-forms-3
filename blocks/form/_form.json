@@ -230,7 +230,8 @@
         "range",
         "toast-container",
         "toast",
-        "extended-checkbox-group"
+        "extended-checkbox-group",
+        "textarea"
       ]
     }
   ]
