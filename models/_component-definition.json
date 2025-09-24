@@ -51,6 +51,9 @@
         },
         {
           "...": "../blocks/form/components/extended-checkbox-group/_extended-checkbox-group.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/components/textarea/_textarea.json#/definitions"
         }
       ]
     }
