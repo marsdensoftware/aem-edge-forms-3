@@ -24,6 +24,7 @@ let customComponents = [
   'range',
   'toast',
   'toast-container',
+  'textarea',
 ]
 
 const OOTBComponentDecorators = [

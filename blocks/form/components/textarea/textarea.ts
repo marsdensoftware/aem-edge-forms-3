@@ -21,8 +21,9 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, 
   // add the row attribute to the textarea element
   // eslint-disable-next-line prefer-destructuring
   const rows = fieldJson.properties.rows;
+  // get the `textarea` element and set the `rows` attribute
   if (rows) {
-    fieldDiv.setAttribute('rows', rows);
+    fieldDiv.querySelector('textarea')?.setAttribute('rows', rows);
   }
 
   return fieldDiv;
