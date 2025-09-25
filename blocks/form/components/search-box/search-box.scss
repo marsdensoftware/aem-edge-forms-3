@@ -45,17 +45,11 @@
   input[type='text'] {
     width: 100%;
     padding-right: $spacing-700;
-  }
-
-  &::after {
-    content: url('../../../../icons/search.svg');
-    display: block;
-    width: $spacing-500;
-    height: $spacing-500;
-    position: absolute;
-    right: $spacing-400;
-    top: 35%;
-    transform: translateY(-50%);
+    // place the search icon on the input so it's centered relative to the input's height
+    background-image: url('../../../../icons/search.svg');
+    background-repeat: no-repeat;
+    background-position: right $spacing-400 center;
+    background-size: $spacing-500 $spacing-500;
   }
 
   .suggestions {
