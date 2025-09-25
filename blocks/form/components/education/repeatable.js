@@ -39,12 +39,12 @@ export class EducationRepeatable extends ConditionalRepeatable {
     // Defaults to hidden, as there is no option of this in
     // UE for advanced date picker.
     // Disable/Hide completion date to prevent validation
-    EducationRepeatable._toggleFinishDate(entry);
+    EducationRepeatable.toggleFinishDate(entry);
 
-    EducationRepeatable._bindEvents(entry);
+    EducationRepeatable.bindEvents(entry);
   }
 
-  static _bindEvents(entry) {
+  static bindEvents(entry) {
     // Register listener on completion status
     const completionStatusRadios = entry.querySelectorAll(
       `fieldset[name="${FIELD_NAMES.COMPLETION_STATUS}"] input[type="radio"]`,
@@ -53,7 +53,7 @@ export class EducationRepeatable extends ConditionalRepeatable {
     completionStatusRadios.forEach((radio) => {
       radio.addEventListener('change', () => {
         const visible = radio.value === COMPLETION_STATUS.COMPLETED;
-        EducationRepeatable._toggleFinishDate(entry, visible);
+        EducationRepeatable.toggleFinishDate(entry, visible);
       });
     });
   }
@@ -102,7 +102,7 @@ export class EducationRepeatable extends ConditionalRepeatable {
   _resetChanges(entry) {
     super._resetChanges(entry);
 
-    EducationRepeatable._toggleFinishDate(entry);
+    EducationRepeatable.toggleFinishDate(entry);
   }
 
   _onItemAdded(entry) {

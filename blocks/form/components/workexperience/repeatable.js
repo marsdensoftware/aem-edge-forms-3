@@ -81,12 +81,12 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     });
 
     // Disable/Hide endofwork to prevent validation
-    WorkExperienceRepeatable._toggleFinishDate(entry);
+    WorkExperienceRepeatable.toggleFinishDate(entry);
 
-    WorkExperienceRepeatable._bindEvents(entry);
+    WorkExperienceRepeatable.bindEvents(entry);
   }
 
-  static _toggleFinishDate(entry, visible) {
+  static toggleFinishDate(entry, visible) {
     const panel = entry.querySelector(`fieldset[name="${FIELD_NAMES.END_OF_WORK}"]`);
 
     toggle(panel, visible);
@@ -95,7 +95,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
   _resetChanges(entry) {
     super._resetChanges(entry);
 
-    WorkExperienceRepeatable._toggleFinishDate(entry);
+    WorkExperienceRepeatable.toggleFinishDate(entry);
   }
 
   _onItemAdded(entry) {
@@ -140,7 +140,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
   }
 
   /* eslint-disable class-methods-use-this */
-  static _bindEvents(entry) {
+  static bindEvents(entry) {
     entry.querySelector(`fieldset[name="${FIELD_NAMES.END_OF_WORK}"]`).addEventListener('change', () => {
       this._validate(entry);
     })
@@ -152,7 +152,7 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
       radio.addEventListener('change', (event) => {
         // endofwork visibility
         const visible = isNo(event.target);
-        WorkExperienceRepeatable._toggleFinishDate(entry, visible);
+        WorkExperienceRepeatable.toggleFinishDate(entry, visible);
       });
     });
   }
