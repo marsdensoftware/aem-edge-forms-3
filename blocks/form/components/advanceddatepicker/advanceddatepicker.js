@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { i18n } from '../../../../i18n/index.js';
+import { updateOrCreateInvalidMsg } from '../../util.js'
 
 class AdvancedDatepickerField {
   constructor(panel, model) {
@@ -25,6 +26,10 @@ class AdvancedDatepickerField {
   }
 
   init() {
+    const descriptionEl = document.createElement('div');
+    descriptionEl.classList.add('field-description-2');
+    this.panel.append(descriptionEl);
+
     this.panel.classList.add('advanceddatepicker');
     this.panel.dataset.yearMax = this.model.properties.yearMax;
     this.panel.dataset.yearMin = this.model.properties.yearMin;
@@ -70,6 +75,28 @@ class AdvancedDatepickerField {
         this.monthDD.appendChild(option);
       }
     }
+  }
+}
+
+export function toggle(panel, visible) {
+  if (visible) {
+    panel.dataset.visible = visible;
+    panel.disabled = !visible;
+
+    panel.classList.remove('field-invalid');
+
+    panel.querySelectorAll('select').forEach((select) => {
+      select.closest('.field-wrapper').dataset.visible = true;
+    });
+  } else {
+    panel.disabled = true;
+    panel.dataset.visible = false;
+
+    panel.querySelectorAll('select').forEach((select) => {
+      select.closest('.field-wrapper').classList.remove('field-invalid');
+      select.closest('.field-wrapper').dataset.visible = false;
+      updateOrCreateInvalidMsg(select);
+    });
   }
 }
 

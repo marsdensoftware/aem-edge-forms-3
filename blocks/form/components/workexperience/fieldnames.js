@@ -2,6 +2,7 @@ export const FIELD_NAMES = {
   FIELDS_CONTAINER: 'fields-container',
   START_OF_WORK_MONTH: 'startofwork-month',
   START_OF_WORK_YEAR: 'startofwork-year',
+  END_OF_WORK: 'endofwork',
   END_OF_WORK_MONTH: 'endofwork-month',
   END_OF_WORK_YEAR: 'endofwork-year',
   STILL_WORKING: 'still-working',
