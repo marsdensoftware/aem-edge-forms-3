@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import { onElementAdded } from '../utils.js';
+import { updateOrCreateInvalidMsg } from '../../util.js';
 const componentStateMap = new WeakMap();
 // --- Helper functions to create DOM elements ---
 function addSuggestionDiv() {
@@ -74,10 +75,17 @@ function createSelectedCard(item, selectedCardsDiv, searchInput, source) {
             const state = componentStateMap.get(searchBox);
             state.recommendations = originalRecs.filter((i) => !remainingSelectedItems.includes(i));
             state.main = originalMain.filter((i) => !remainingSelectedItems.includes(i));
-            // 4. Re-populate the recommendations UI to show the newly available item.
+            // 4. Re-populate the recommendationsUI to show the newly available item.
             const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper');
             if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
                 populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput);
+            }
+            // 5. remove the required attribute if the searchInput is required and the selected cards div is not empty
+            if (searchBox.dataset.required && !selectedCardsDiv.querySelector('.selected-card')) {
+                searchInput.setAttribute('required', 'required');
+                setTimeout(() => {
+                    updateOrCreateInvalidMsg(searchInput);
+                }, 0);
             }
         }
         // Finally, trigger a change event for form validation.
@@ -88,6 +96,10 @@ function createSelectedCard(item, selectedCardsDiv, searchInput, source) {
     card.appendChild(text);
     card.appendChild(removeBtn);
     selectedCardsDiv.appendChild(card);
+    // if the searchInput is required, and the selected cards div is not empty, then remove the required attribute
+    if (searchInput.required && selectedCardsDiv.querySelector('.selected-card')) {
+        searchInput.removeAttribute('required');
+    }
 }
 function createRecommendationCard(item, recommendationsCardsDiv, selectedCardsDiv, searchInput) {
     const card = document.createElement('div');
@@ -442,7 +454,16 @@ function initSearchBoxCounter(searchBox) {
     // Run initially
     updateCounter();
 }
-export default function decorate(element, field) {
+/**
+ * Decorates a custom form field component
+ * @param {HTMLElement} element - The DOM element containing the field wrapper. Refer to the documentation
+ * for its structure for each component.
+ * @param {Object} field - The form json object for the component.
+ * @param {HTMLElement} parentElement - The parent element of the field.
+ * @param {string} formId - The unique identifier of the form.
+ */
+/* eslint-disable-next-line no-unused-vars */
+export default function decorate(element, field, parentElement, formId) {
     const { datasource } = field.properties;
     const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs';
     const selectionLabel = field.properties['selection-label'];
@@ -450,6 +471,10 @@ export default function decorate(element, field) {
     const emptySelectionMessage = field.properties['empty-selection-message'];
     const emptyRecommendationsMessage = field.properties['empty-recommendations-message'];
     const showRecommendations = field.properties['show-recommendations'] || false;
+    // if the required property is on the field, then add it as a data attribute
+    if (field.properties.required) {
+        element.dataset.required = 'true';
+    }
     // Set up the event listener for repeatableChanged events
     // This only needs to be done once when the page loads
     // Using setTimeout to ensure the DOM has loaded before attaching the event listener
@@ -478,7 +503,14 @@ export default function decorate(element, field) {
     if (inputEl) {
         container.appendChild(inputEl);
     }
-    element.appendChild(container);
+    // add the container to the element but place it just before the last element
+    const descriptionEl = element.querySelector('.field-description');
+    if (descriptionEl) {
+        element.insertBefore(container, descriptionEl);
+    }
+    else {
+        element.appendChild(container);
+    }
     const suggestionsDiv = addSuggestionDiv();
     const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage);
     const recommendationsCardsDiv = addRecommendationsCardsDiv(recommendationsLabel, emptyRecommendationsMessage);
