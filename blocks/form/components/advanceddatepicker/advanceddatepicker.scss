@@ -7,7 +7,27 @@
 
   .field-description-2 {
     display: none;
+    position: relative;
+    padding-left: clamp(1rem, 5vw, 1.25rem);
+    padding-right: clamp(1rem, 5vw, 4rem);
+    margin-top: 0.5rem;
+    color: #134276;
+    font-size: clamp(0.75rem, 1.1vw, 0.875rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
     flex-basis: 100%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0.1875rem;
+      left: 0;
+      width: 1rem;
+      height: 1rem;
+      background: url('/icons/ico-info--warning-circle.svg') no-repeat center / contain;
+      ;
+    }
   }
 
   &.field-invalid {
