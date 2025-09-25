@@ -492,7 +492,7 @@ function initSearchBoxCounter(searchBox) {
         if (counter) {
             counter.textContent = `${count} of ${maxAllowedItems} added`;
             if (count >= maxAllowedItems) {
-                counter.textContent += '. Remove a skill to add more.';
+                counter.textContent += '. Remove an item to add a new one.';
                 searchBox.classList.add('max-items-reached');
             }
             else {

@@ -1705,6 +1705,23 @@
           }
         },
         {
+          "title": "Textarea",
+          "id": "textarea",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Textarea",
+                  "fieldType": "text-input",
+                  "fd:viewType": "textarea",
+                  "multiLine": true
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {
@@ -2285,6 +2302,23 @@
                   "fieldType": "panel",
                   "minOccur": 1,
                   "fd:viewType": "extended-checkbox-group"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Textarea",
+          "id": "textarea",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Textarea",
+                  "fieldType": "text-input",
+                  "fd:viewType": "textarea",
+                  "multiLine": true
                 }
               }
             }
