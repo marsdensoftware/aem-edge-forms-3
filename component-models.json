@@ -34095,28 +34095,13 @@
             "valueType": "string"
           },
           {
-            "component": "boolean",
-            "name": "multiLine",
-            "label": "Allow multiple lines",
-            "valueType": "boolean",
-            "value": true
-          },
-          {
             "component": "number",
             "name": "rows",
             "label": "Number of rows to render",
             "valueType": "number",
             "value": 5,
             "min": 3,
-            "max": 10,
-            "condition": {
-              "===": [
-                {
-                  "var": "multiLine"
-                },
-                true
-              ]
-            }
+            "max": 10
           },
           {
             "component": "boolean",

@@ -1714,7 +1714,8 @@
                 "template": {
                   "jcr:title": "Textarea",
                   "fieldType": "text-input",
-                  "fd:viewType": "textarea"
+                  "fd:viewType": "textarea",
+                  "multiLine": true
                 }
               }
             }
@@ -2316,7 +2317,8 @@
                 "template": {
                   "jcr:title": "Textarea",
                   "fieldType": "text-input",
-                  "fd:viewType": "textarea"
+                  "fd:viewType": "textarea",
+                  "multiLine": true
                 }
               }
             }

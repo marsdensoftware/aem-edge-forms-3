@@ -13,18 +13,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  * @param {HTMLElement} fieldDiv - The DOM element containing the field wrapper. Refer to the documentation
  * for its structure for each component.
  * @param {Object} fieldJson - The form json object for the component.
- * @param {HTMLElement} parentElement - The parent element of the field.
- * @param {string} formId - The unique identifier of the form.
  */
-export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
+export default function decorate(fieldDiv, fieldJson) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
-        console.log('⚙️ Decorating textarea component:', fieldDiv, fieldJson, parentElement, formId);
         fieldDiv.classList.add('textarea');
-        // add the row attribute to the textarea element
         // eslint-disable-next-line prefer-destructuring
         const rows = fieldJson.properties.rows;
-        // get the `textarea` element and set the `rows` attribute
         if (rows) {
             (_a = fieldDiv.querySelector('textarea')) === null || _a === void 0 ? void 0 : _a.setAttribute('rows', rows);
         }
