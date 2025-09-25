@@ -31,16 +31,17 @@ export default function decorate(panelEl, model) {
         }
 
         let label = target.querySelector('legend,label')?.textContent;
-        if (target.closest('.advanceddatepicker')) {
+        if (!target.classList.contains('advanceddatepicker') && target.closest('.advanceddatepicker')) {
           const adpLabel = target.closest('.advanceddatepicker').querySelector(':scope>legend')?.textContent;
           if (adpLabel) {
             label = `${adpLabel} - ${label}`;
           }
         }
         const errorFieldContainer = document.createElement('li');
-        const errorMessage = target.dataset.requiredErrorMessage || target.querySelector('.field-description')?.textContent;
+        const errorMessage = target.dataset.requiredErrorMessage || target.querySelector(':scope>.field-description-2,:scope>.field-description')?.textContent;
 
         errorFieldContainer.innerHTML = `<a class="fieldname" href="#${target.dataset.id}">${label}</a> <span class="errormessage">${errorMessage}</span>`;
+        errorFieldContainer.setAttribute('aria-live', 'polite');
         errorContainer.append(errorFieldContainer);
       });
 
