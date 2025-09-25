@@ -20,7 +20,11 @@
     }
   }
 
-  .counter{
+  .counter:empty {
+    display: none;
+  }
+
+  .counter {
     padding: 0.75em 0;
   }
 
