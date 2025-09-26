@@ -26,12 +26,13 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
             // Move description to the bottom
             fieldDiv.append(description);
         }
-        if (fieldJson.required) {
+        if (fieldJson.properties.mandatory) {
             const input = document.createElement('input');
             input.required = true;
             input.type = 'text';
             input.style.display = 'none';
-            fieldDiv.dataset.requiredErrorMessage = fieldJson.mandatoryMessage || 'Please select at least one from up to four';
+            const defaultErrorMsg = 'Please select at least one from up to four';
+            fieldDiv.dataset.requiredErrorMessage = fieldJson.properties.mandatoryErrorMessage || defaultErrorMsg;
             fieldDiv.addEventListener('change', () => {
                 const required = fieldDiv.querySelectorAll('input[type="checkbox"]:checked').length === 0;
                 if (!required) {

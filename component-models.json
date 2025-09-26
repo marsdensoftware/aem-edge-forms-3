@@ -22907,23 +22907,16 @@
         "fields": [
           {
             "component": "boolean",
-            "name": "required",
+            "name": "mandatory",
             "label": "Required",
             "valueType": "boolean"
           },
           {
             "component": "text",
-            "name": "mandatoryMessage",
+            "name": "mandatoryErrorMessage",
             "label": "Error message",
             "valueType": "string",
-            "description": "Error message shown when required field is left empty."
-          },
-          {
-            "component": "text",
-            "name": "validateExpMessage",
-            "label": "Script validation message",
-            "valueType": "string",
-            "description": "Displayed when validation script fails."
+            "description": "Error message shown when no skil is selected."
           }
         ]
       },

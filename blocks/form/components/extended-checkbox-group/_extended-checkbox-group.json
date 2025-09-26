@@ -51,7 +51,21 @@
           "name": "validation",
           "label": "Validation",
           "collapsible": true,
-          "...": "../../models/form-common/_basic-validation-fields.json"
+          "fields": [
+            {
+              "component": "boolean",
+              "name": "mandatory",
+              "label": "Required",
+              "valueType": "boolean"
+            },
+            {
+              "component": "text",
+              "name": "mandatoryErrorMessage",
+              "label": "Error message",
+              "valueType": "string",
+              "description": "Error message shown when no skil is selected."
+            }
+          ]
         },
         {
           "...": "../../models/form-common/_help-container.json"
