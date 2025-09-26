@@ -22034,7 +22034,7 @@
       {
         "component": "number",
         "name": "maxOccur",
-        "label": "Maximum allowed items",
+        "label": "Maximum allowed items in container",
         "valueType": "number",
         "placeholder": "No Limit",
         "description": "Maximum number of times the panel can appear on the form. No value indicates no limit."
@@ -22900,6 +22900,10 @@
         ]
       },
       {
+        "component": "container",
+        "name": "validation",
+        "label": "Validation",
+        "collapsible": true,
         "fields": [
           {
             "component": "boolean",
