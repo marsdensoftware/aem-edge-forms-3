@@ -52,10 +52,10 @@ textarea {
 /******************************
    Error State
 *******************************/
-.field-wrapper.field-invalid input,
-.field-wrapper.field-invalid textarea,
-.field-wrapper.field-invalid input[type='email'],
-.field-wrapper.field-invalid input[type='number'] {
+.field-wrapper.field-invalid>input,
+.field-wrapper.field-invalid>textarea,
+.field-wrapper.field-invalid>input[type='email'],
+.field-wrapper.field-invalid>input[type='number'] {
   @include input-error;
 }
 

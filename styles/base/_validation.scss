@@ -39,7 +39,7 @@ form .field-wrapper[data-required="false"].with-description>.field-description-2
   }
 }
 
-.form form .field-wrapper.field-invalid .field-description {
+.form form .field-wrapper.field-invalid>.field-description {
   padding-left: clamp(1rem, 5vw, 1.25rem);
 
   &::before {
