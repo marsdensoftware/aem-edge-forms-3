@@ -22916,7 +22916,7 @@
             "name": "requiredErrorMessage",
             "label": "Error message",
             "valueType": "string",
-            "description": "Error message shown when no skil is selected."
+            "description": "Error message shown when no skill is selected."
           }
         ]
       },
