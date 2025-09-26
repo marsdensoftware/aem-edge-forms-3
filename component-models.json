@@ -22907,13 +22907,13 @@
         "fields": [
           {
             "component": "boolean",
-            "name": "mandatory",
+            "name": "isRequired",
             "label": "Required",
             "valueType": "boolean"
           },
           {
             "component": "text",
-            "name": "mandatoryErrorMessage",
+            "name": "requiredErrorMessage",
             "label": "Error message",
             "valueType": "string",
             "description": "Error message shown when no skil is selected."
