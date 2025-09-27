@@ -9,6 +9,9 @@ export function submitSuccess(e, form) {
     const wizard = form.querySelector('.wizard');
     gotoNextStep(wizard);
     form.dataset.submitSource = undefined;
+    form.setAttribute('data-submitting', 'false');
+    form.querySelector('button[type="submit"]').disabled = false;
+
     return;
   }
   // ###SEP-NJ END
