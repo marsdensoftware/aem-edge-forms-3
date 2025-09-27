@@ -3,15 +3,45 @@ import { reportGenericError } from './components/validationsummary/validationsum
 import { gotoNextStep } from './components/wizard/wizard.js';
 import { i18n } from '../../i18n/index.js';
 
-export function submitSuccess(e, form) {
-  // ###SEP-NJ START check where to go after submit
-  if (form.dataset.submitSource === 'wizard:btnNext') {
-    const wizard = form.querySelector('.wizard');
-    gotoNextStep(wizard);
-    form.dataset.submitSource = undefined;
-    form.setAttribute('data-submitting', 'false');
-    form.querySelector('button[type="submit"]').disabled = false;
+function handleSubmitSource(form, success) {
+  let result = false;
+  const btnNext = form.querySelector('.wizard button[name="next"]');
 
+  if (success) {
+    if (form.dataset.submitSource === 'wizard:btnNext') {
+      const wizard = form.querySelector('.wizard');
+      gotoNextStep(wizard);
+      form.dataset.submitSource = undefined;
+      form.setAttribute('data-submitting', 'false');
+      form.querySelector('button[type="submit"]').disabled = false;
+
+      result = true;
+    }
+  } else {
+    // Custom generic error
+    const title = form.dataset.genericErrorTitle || i18n('Something went wrong.');
+    const defaultErrorContent = 'Please try again. If it doesn’t work, come back later or call us on 0800 XXX.';
+    const content = form.dataset.genericErrorDescription || i18n(defaultErrorContent);
+
+    // Reset label of next button
+    if (btnNext) {
+      btnNext.textContent = i18n('Next');
+    }
+
+    reportGenericError(title, content);
+  }
+
+  if (btnNext) {
+    btnNext.classList.remove('submitting');
+    btnNext.disabled = false;
+  }
+
+  return result;
+}
+
+export function submitSuccess(e, form) {
+  // ###SEP-NJ START handle submit source
+  if (handleSubmitSource(form, true)) {
     return;
   }
   // ###SEP-NJ END
@@ -38,19 +68,10 @@ export function submitSuccess(e, form) {
 }
 
 export function submitFailure(e, form) {
-  // ###SEP-NJ Start custom generic error
-  const title = form.dataset.genericErrorTitle || i18n('Something went wrong.');
-  const defaultErrorContent = 'Please try again. If it doesn’t work, come back later or call us on 0800 XXX.';
-  const content = form.dataset.genericErrorDescription || i18n(defaultErrorContent);
+  // ###SEP-NJ START handle submit source
+  handleSubmitSource(form, false);
+  // ###SEP-NJ END
 
-  // Reset label of next button
-  const wizard = form.querySelector('.wizard');
-  if (wizard) {
-    wizard.querySelector('button[name="next"]').textContent = i18n('Next');
-  }
-
-  reportGenericError(title, content);
-  // ###SEP-NJ End
   /*
   let errorMessage = form.querySelector('.form-message.error-message');
   if (!errorMessage) {

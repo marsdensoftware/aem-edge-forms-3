@@ -36,6 +36,10 @@
       display: none;
     }
   }
+  
+  .wizard-button-wrapper button[name=next].submitting {
+    background-color: pink;
+  }
 
   &.left {
     display: flex;

@@ -102,7 +102,10 @@ export class WizardLayout {
           const form = current.closest('form');
           form.dataset.submitSource = 'wizard:btnNext';
           // Change label of next button
-          panel.querySelector('button[name="next"]').textContent = i18n('please wait');
+          const btnNext = panel.querySelector('button[name="next"]');
+          btnNext.textContent = i18n('Please wait');
+          btnNext.classList.add('submitting');
+          btnNext.disabled = true;
           form.querySelector('button[type="submit"]').click();
           return;
         }
