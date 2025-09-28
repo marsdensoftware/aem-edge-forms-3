@@ -14,6 +14,24 @@ export type ToastOptions = {
   iconClass?: string; // optional extra class for the icon node
 };
 
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    if (document.querySelector('dialog')?.clientWidth > 0) {
+      // Do nothing if there is a dialog open
+      return;
+    }
+
+    const toastDivs = document.querySelectorAll('.toast');
+    const toastDiv = toastDivs[toastDivs.length - 1] || null;
+
+    if (toastDiv) {
+      toastDiv.classList.add('toast__hidden');
+      // remove the toast
+      if (toastDiv.isConnected) toastDiv.remove();
+    }
+  }
+});
+
 function decorateToast(toastDiv: HTMLElement, options: ToastOptions = {}) {
   const {
     toastTitle,
