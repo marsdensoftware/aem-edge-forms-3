@@ -300,14 +300,19 @@ export class RepeatablePanel {
 
     saveBtn.addEventListener('click', () => {
       // Validate
-      const valid = validateContainer(entry) && this._validate(entry);
+      const valid = this._validate(entry) && validateContainer(entry);
 
       if (valid) {
         // Save
         this._save(entry);
       } else {
         entry.querySelectorAll('input,textarea,select').forEach((input) => {
-          checkValidation(input);
+          const isHidden = input.closest('.field-wrapper')?.dataset.visible === 'false';
+          if (!isHidden) {
+            checkValidation(input);
+          } else {
+            updateOrCreateInvalidMsg(input);
+          }
         });
         // scroll to panel-validationsummary or first invalid field
         const currentWizardStep = entry.closest('.current-wizard-step');
@@ -467,7 +472,12 @@ export class RepeatablePanel {
   }
 
   _clearValidation(entry) {
-    entry.querySelectorAll('.field-invalid').forEach((field) => { field.classList.remove('field-invalid'); });
+    entry.querySelectorAll('input,select,textarea').forEach((field) => {
+      updateOrCreateInvalidMsg(field);
+    });
+    entry.querySelectorAll('.field-invalid').forEach((field) => {
+      field.classList.remove('field-invalid');
+    });
   }
 
   _clearFields(entry) {

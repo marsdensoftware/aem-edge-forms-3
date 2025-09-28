@@ -1,2 +1,5 @@
 /* Extended-checkbox-group component styles */
-  /* Add your custom styles here */
+/* Add your custom styles here */
+.extended-checkbox-group.field-invalid>.extended-checkbox-container>.checkbox-wrapper {
+  border-color: rgb(208, 54, 51) !important;
+}
