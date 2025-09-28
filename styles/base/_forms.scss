@@ -73,7 +73,7 @@ FORM required asterisk for radio and checkbox group
 /********************
  FORM ERROR MESSAGE
 ********************/
-.form form .field-wrapper.field-invalid .field-description {
+.form form .field-wrapper.field-invalid>.field-description {
   position: relative;
   padding-left: clamp(1rem, 5vw, 4rem);
   padding-right: clamp(1rem, 5vw, 4rem);
