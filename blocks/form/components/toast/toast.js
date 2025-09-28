@@ -8,6 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+window.addEventListener('keydown', (event) => {
+    var _a;
+    if (event.key === 'Escape') {
+        if (((_a = document.querySelector('dialog')) === null || _a === void 0 ? void 0 : _a.clientWidth) > 0) {
+            // Do nothing if there is a dialog open
+            return;
+        }
+        const toastDivs = document.querySelectorAll('.toast');
+        const toastDiv = toastDivs[toastDivs.length - 1] || null;
+        if (toastDiv) {
+            toastDiv.classList.add('toast__hidden');
+            // remove the toast
+            if (toastDiv.isConnected)
+                toastDiv.remove();
+        }
+    }
+});
 function decorateToast(toastDiv, options = {}) {
     const { toastTitle, toastMessage, dismissible = true, timeoutMs, // auto-dismiss after N ms (undefined to disable)
      } = options;
