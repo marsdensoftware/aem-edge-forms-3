@@ -20,7 +20,11 @@ let customComponents = [
   'icon-radio-group',
   'extended-checkbox',
   'extended-checkbox-container',
+  'extended-checkbox-group',
   'range',
+  'toast',
+  'toast-container',
+  'textarea',
 ]
 
 const OOTBComponentDecorators = [

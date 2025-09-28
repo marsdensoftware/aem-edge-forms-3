@@ -1,4 +1,5 @@
 import { onElementAdded } from '../utils.js'
+import { updateOrCreateInvalidMsg } from '../../util.js';
 import { fetchRemoteSuggestions, SUGGESTION_LIMIT } from '../refdatautils.js';
 
 /* eslint-disable no-use-before-define */
@@ -128,10 +129,18 @@ function createSelectedCard(
       state.recommendations = originalRecs.filter((i) => !remainingSelectedItems.includes(i))
       state.main = originalMain.filter((i) => !remainingSelectedItems.includes(i))
 
-      // 4. Re-populate the recommendations UI to show the newly available item.
+      // 4. Re-populate the recommendationsUI to show the newly available item.
       const recommendationsWrapper = searchBox.querySelector('.recommendations-cards-wrapper') as HTMLDivElement
       if (recommendationsWrapper && recommendationsWrapper.style.display !== 'none') {
         populateRecommendationsDiv(searchBox, recommendationsWrapper, selectedCardsDiv, searchInput)
+      }
+
+      // 5. remove the required attribute if the searchInput is required and the selected cards div is not empty
+      if (searchBox.dataset.required && !selectedCardsDiv.querySelector('.selected-card')) {
+        searchInput.setAttribute('required', 'required')
+        setTimeout(() => {
+          updateOrCreateInvalidMsg(searchInput);
+        }, 0)
       }
     }
 
@@ -144,6 +153,11 @@ function createSelectedCard(
   card.appendChild(text)
   card.appendChild(removeBtn)
   selectedCardsDiv.appendChild(card)
+
+  // if the searchInput is required, and the selected cards div is not empty, then remove the required attribute
+  if (searchInput.required && selectedCardsDiv.querySelector('.selected-card')) {
+    searchInput.removeAttribute('required')
+  }
 }
 
 function createRecommendationCard(
@@ -444,6 +458,7 @@ interface El extends Element {
     datasource: string
     recommendationsDatasource?: string
     maxAllowedItems?: string
+    required?: string
   }
 }
 
@@ -608,7 +623,7 @@ function initSearchBoxCounter(searchBox: El) {
     if (counter) {
       counter.textContent = `${count} of ${maxAllowedItems} added`;
       if (count >= maxAllowedItems) {
-        counter.textContent += '. Remove a skill to add more.'
+        counter.textContent += '. Remove an item to add a new one.'
         searchBox.classList.add('max-items-reached');
       } else {
         searchBox.classList.remove('max-items-reached');
@@ -624,7 +639,16 @@ function initSearchBoxCounter(searchBox: El) {
   updateCounter();
 }
 
-export default function decorate(element: El, field: Field) {
+/**
+ * Decorates a custom form field component
+ * @param {HTMLElement} element - The DOM element containing the field wrapper. Refer to the documentation
+ * for its structure for each component.
+ * @param {Object} field - The form json object for the component.
+ * @param {HTMLElement} parentElement - The parent element of the field.
+ * @param {string} formId - The unique identifier of the form.
+ */
+/* eslint-disable-next-line no-unused-vars */
+export default function decorate(element: El, field: Field, parentElement: HTMLElement, formId: String) {
   const { datasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
@@ -632,6 +656,11 @@ export default function decorate(element: El, field: Field) {
   const emptySelectionMessage = field.properties['empty-selection-message']
   const emptyRecommendationsMessage = field.properties['empty-recommendations-message']
   const showRecommendations = field.properties['show-recommendations'] || false
+
+  // if the required property is on the field, then add it as a data attribute
+  if (field.properties.required) {
+    element.dataset.required = 'true'
+  }
 
   // Set up the event listener for repeatableChanged events
   // This only needs to be done once when the page loads
@@ -667,7 +696,13 @@ export default function decorate(element: El, field: Field) {
     container.appendChild(inputEl)
   }
 
-  element.appendChild(container)
+  // add the container to the element but place it just before the last element
+  const descriptionEl = element.querySelector('.field-description')
+  if (descriptionEl) {
+    element.insertBefore(container, descriptionEl)
+  } else {
+    element.appendChild(container)
+  }
 
   const suggestionsDiv = addSuggestionDiv()
   const selectedCardsDiv = addSelectedCardsDiv(selectionLabel, emptySelectionMessage)

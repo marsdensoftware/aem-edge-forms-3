@@ -113,3 +113,8 @@ $size-font-error-message: clamp(12px, 1vw, 14px);
 $size-font-hint: clamp(15px, 1.1vw, 18px);
 $size-font-input-text: clamp(18px, 1.25vw, 20px);
 $size-font-label: clamp(18px, 1.25vw, 20px);
+
+
+// Toast
+$size-font-toast-title: clamp(17px, 1.5vw, 20px);
+$size-font-toast-desc: clamp(15px, 1.25vw, 17px);

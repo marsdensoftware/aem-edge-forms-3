@@ -5,6 +5,7 @@ import { isNo, DefaultFieldConverter } from '../../utils.js'
 import { updateOrCreateInvalidMsg, checkValidation } from '../../../util.js'
 import { i18n } from '../../../../../i18n/index.js'
 import { Modal } from '../../modal/modal.js'
+import { dispatchToast } from '../../toast-container/toast-container.js';
 
 class RepeatModal extends Modal {
   constructor(yesCallback, noCallback) {
@@ -58,6 +59,11 @@ export class RepeatablePanel {
 
   constructor(el, properties, name, converter, sorterFn) {
     this._repeatablePanel = el.querySelector('.repeat-wrapper');
+
+    this.maxOccur = this._repeatablePanel.dataset.max;
+    this.toastTitle = properties.toastTitle;
+    this.toastMessage = properties.toastMessage;
+    this.toastMaxWarningThreshold = properties.toastMaxWarningThreshold;
 
     const cancelModalEl = el.querySelector('fieldset[name="cancelModal"]');
     this._cancelModal = this._initModal(
@@ -294,14 +300,19 @@ export class RepeatablePanel {
 
     saveBtn.addEventListener('click', () => {
       // Validate
-      const valid = validateContainer(entry) && this._validate(entry);
+      const valid = this._validate(entry) && validateContainer(entry);
 
       if (valid) {
         // Save
         this._save(entry);
       } else {
         entry.querySelectorAll('input,textarea,select').forEach((input) => {
-          checkValidation(input);
+          const isHidden = input.closest('.field-wrapper')?.dataset.visible === 'false';
+          if (!isHidden) {
+            checkValidation(input);
+          } else {
+            updateOrCreateInvalidMsg(input);
+          }
         });
         // scroll to panel-validationsummary or first invalid field
         const currentWizardStep = entry.closest('.current-wizard-step');
@@ -351,11 +362,39 @@ export class RepeatablePanel {
 
     this.#dispatchChange();
 
+    this.#dispatchToast()
+
     this._renderOverview();
   }
 
+  #dispatchToast() {
+    const maxThreshold = this.toastMaxWarningThreshold;
+
+    const currentCount = this.#getSavedEntries().length;
+    console.log('repeatable panel count: ', currentCount);
+
+    let toastMessageText = this.toastMessage || undefined;
+    if (currentCount >= maxThreshold && toastMessageText) {
+      const remainingCount = this.maxOccur - currentCount;
+      toastMessageText = toastMessageText.replace('{remaining}', remainingCount);
+    } else {
+      toastMessageText = undefined;
+    }
+
+    // dispatch toast event with the max selection message (error state)
+    dispatchToast({
+      type: 'success',
+      toastTitle: this.toastTitle,
+      toastMessage: toastMessageText,
+      dismissible: true,
+      timeoutMs: undefined,
+      strategy: 'stack',
+      maxToasts: this.maxOccur,
+    });
+  }
+
   #dispatchChange() {
-    // Trigger event with name of the repeatable as parameter and values
+    // Trigger event with the name of the repeatable as parameter and values
     const entries = this.#getSavedEntries();
     const params = { detail: { name: this._name, entries } };
     const event = new CustomEvent('repeatableChanged', params);
@@ -433,7 +472,12 @@ export class RepeatablePanel {
   }
 
   _clearValidation(entry) {
-    entry.querySelectorAll('.field-invalid').forEach((field) => { field.classList.remove('field-invalid'); });
+    entry.querySelectorAll('input,select,textarea').forEach((field) => {
+      updateOrCreateInvalidMsg(field);
+    });
+    entry.querySelectorAll('.field-invalid').forEach((field) => {
+      field.classList.remove('field-invalid');
+    });
   }
 
   _clearFields(entry) {
@@ -610,7 +654,9 @@ export class ConditionalRepeatable extends RepeatablePanel {
 
   constructor(el, properties, name, converter, sorterFn) {
     super(el, properties, name, converter, sorterFn);
-
+    //
+    // console.log(`${name}Repeatable properties: `, properties);
+    // console.log(`${name}Repeatable el: `, el);
     // Add class
     this._repeatablePanel.classList.add('panel-repeatable-panel__conditional');
 

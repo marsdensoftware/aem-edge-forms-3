@@ -1,8 +1,12 @@
 /* eslint-disable max-classes-per-file */
-import { ConditionalRepeatable } from '../repeatable-panel/default/default.js';
-import { isNo, getDurationString, DefaultFieldConverter } from '../utils.js'
+import { ConditionalRepeatable } from '../repeatable-panel/default/default.js'
+import {
+  isNo, getDurationString, DefaultFieldConverter, isAfter,
+} from '../utils.js'
 import { i18n } from '../../../../i18n/index.js'
+import { toggle } from '../advanceddatepicker/advanceddatepicker.js'
 import { FIELD_NAMES, sorter, STILL_WORKING_STATUS } from './fieldnames.js';
+// import { dispatchToast } from '../toast-container/toast-container.js';
 
 class Converter extends DefaultFieldConverter {
   convert(element) {
@@ -59,6 +63,8 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
   }
 
   _init(entry) {
+    super._init(entry);
+
     const typeOfWorkExperience = entry.querySelector(`.field-${FIELD_NAMES.TYPE_OF_WORK_EXPERIENCE}>select`);
 
     const isFirst = this._isFirstEntry(entry);
@@ -75,12 +81,21 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     });
 
     // Disable/Hide endofwork to prevent validation
-    const endofwork = entry.querySelector('.field-endofwork');
-    const visible = false;
-    endofwork.disabled = !visible;
-    endofwork.dataset.visible = visible;
+    WorkExperienceRepeatable.toggleFinishDate(entry);
 
-    this._bindEvents(entry);
+    WorkExperienceRepeatable.bindEvents(entry);
+  }
+
+  static toggleFinishDate(entry, visible) {
+    const panel = entry.querySelector(`fieldset[name="${FIELD_NAMES.END_OF_WORK}"]`);
+
+    toggle(panel, visible);
+  }
+
+  _resetChanges(entry) {
+    super._resetChanges(entry);
+
+    WorkExperienceRepeatable.toggleFinishDate(entry);
   }
 
   _onItemAdded(entry) {
@@ -89,22 +104,55 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     super._onItemAdded(entry);
   }
 
+  _validate(entry) {
+    let valid = super._validate(entry);
+
+    if (!valid) {
+      return false;
+    }
+
+    const data = new DefaultFieldConverter().convert(entry);
+
+    const stillWorking = data[FIELD_NAMES.STILL_WORKING];
+    if (stillWorking?.value === STILL_WORKING_STATUS.NO) {
+      // Completed
+      const finishMonth = data[FIELD_NAMES.END_OF_WORK_MONTH]?.value;
+      const finishYear = data[FIELD_NAMES.END_OF_WORK_YEAR]?.value;
+      const startMonth = data[FIELD_NAMES.START_OF_WORK_MONTH]?.value;
+      const startYear = data[FIELD_NAMES.START_OF_WORK_YEAR]?.value;
+
+      if (finishYear && finishMonth) {
+        valid = isAfter(startYear, startMonth, finishYear, finishMonth);
+
+        const endOfWork = entry.querySelector(`fieldset[name="${FIELD_NAMES.END_OF_WORK}"]`);
+        if (!valid) {
+          endOfWork.querySelector('.field-description-2').textContent = 'Finish date must be after start date!';
+          endOfWork.classList.add('field-invalid');
+        } else {
+          // Clear validation
+          endOfWork.classList.remove('field-invalid');
+          endOfWork.querySelector('.field-description-2').textContent = '';
+        }
+      }
+    }
+
+    return valid;
+  }
+
   /* eslint-disable class-methods-use-this */
-  _bindEvents(el) {
+  static bindEvents(entry) {
+    entry.querySelector(`fieldset[name="${FIELD_NAMES.END_OF_WORK}"]`).addEventListener('change', () => {
+      this._validate(entry);
+    })
+
     // Register change on still-working field to show hide endofwork
-    const stillWorkingRadios = el.querySelectorAll(`.field-${FIELD_NAMES.STILL_WORKING} input[type="radio"]`);
+    const stillWorkingRadios = entry.querySelectorAll(`fieldset[name="${FIELD_NAMES.STILL_WORKING}"] input[type="radio"]`);
 
     stillWorkingRadios.forEach((radio) => {
       radio.addEventListener('change', (event) => {
         // endofwork visibility
-        const endofwork = radio.closest(`[name="${FIELD_NAMES.FIELDS_CONTAINER}"]`).querySelector('.field-endofwork');
         const visible = isNo(event.target);
-        endofwork.dataset.visible = visible;
-        endofwork.disabled = !visible;
-
-        endofwork.querySelectorAll('.field-invalid').forEach((field) => {
-          field.classList.remove('field-invalid');
-        });
+        WorkExperienceRepeatable.toggleFinishDate(entry, visible);
       });
     });
   }
@@ -125,6 +173,17 @@ export class WorkExperienceRepeatable extends ConditionalRepeatable {
     }
 
     super._save(entry);
+    //
+    // // dispatch toast event with the max selection message (error state)
+    // dispatchToast({
+    //   type: 'success',
+    //   toastTitle: 'Work experience added successfully.',
+    //   toastMessage: 'You can 3 more work experience.',
+    //   dismissible: true,
+    //   timeoutMs: undefined,
+    //   strategy: 'stack',
+    //   maxToasts: 3,
+    // });
     // After save
   }
 }

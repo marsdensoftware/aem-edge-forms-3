@@ -1139,6 +1139,23 @@
           }
         },
         {
+          "title": "Extended checkbox group",
+          "id": "extended-checkbox-group",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Extended checkbox group",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "extended-checkbox-group"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Extended Checkbox",
           "id": "extended-checkbox",
           "plugins": {
@@ -1688,6 +1705,23 @@
           }
         },
         {
+          "title": "Textarea",
+          "id": "textarea",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Textarea",
+                  "fieldType": "text-input",
+                  "fd:viewType": "textarea",
+                  "multiLine": true
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Terms and conditions",
           "id": "tnc",
           "plugins": {
@@ -1738,6 +1772,40 @@
                       "true"
                     ]
                   }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast container",
+          "id": "toast-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast container",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast",
+          "id": "toast",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast"
                 }
               }
             }
@@ -2183,6 +2251,74 @@
                   "fd:viewType": "range",
                   "enabled": true,
                   "visible": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast container",
+          "id": "toast-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast container",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Toast",
+          "id": "toast",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Toast",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "toast"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Extended checkbox group",
+          "id": "extended-checkbox-group",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/panelcontainer/v1/panelcontainer",
+                "template": {
+                  "jcr:title": "Extended checkbox group",
+                  "fieldType": "panel",
+                  "minOccur": 1,
+                  "fd:viewType": "extended-checkbox-group"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Textarea",
+          "id": "textarea",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/fd/components/form/textinput/v1/textinput",
+                "template": {
+                  "jcr:title": "Textarea",
+                  "fieldType": "text-input",
+                  "fd:viewType": "textarea",
+                  "multiLine": true
                 }
               }
             }
