@@ -13,9 +13,8 @@ import { updateOrCreateInvalidMsg } from '../../util.js'
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
+/* eslint-disable-next-line no-unused-vars */
 export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, parentElement: HTMLElement, formId: String) {
-  console.log('⚙️ Decorating extended-checkbox-group component:', fieldDiv, fieldJson, parentElement, formId);
-
   fieldDiv.classList.add('extended-checkbox-group');
   const description = fieldDiv.querySelector(':scope>.field-description');
 

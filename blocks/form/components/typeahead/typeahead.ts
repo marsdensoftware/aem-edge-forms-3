@@ -1,3 +1,5 @@
+import { fetchRemoteSuggestions, SUGGESTION_LIMIT } from '../refdatautils.js'
+
 declare global {
   /* eslint-disable-next-line no-unused-vars */
   interface Window {
@@ -27,46 +29,6 @@ function addSuggestionDiv() {
   return el
 }
 
-const datasources = {
-  courses: [
-    'Marketing management',
-    'Financial management',
-    'Financial statements',
-    'Business process modelling',
-    'Company policies',
-    'Develop company strategies',
-    'Plan medium to long term objectives',
-    'Define organisational standards',
-    'Assume responsibility for the management of a business',
-    'Build trust',
-  ],
-  languages: ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew'],
-  occupations: [
-    'Software Developer',
-    'Primary School Teacher',
-    'Registered Nurse',
-    'Electrician',
-    'Construction Project Manager',
-    'Chef',
-    'General Practitioner (GP)',
-    'Mechanical Engineer',
-    'Retail Sales Assistant',
-    'Truck Driver (General)',
-  ],
-  skills: [
-    'Communicate effectively in English',
-    'Apply health and safety standards',
-    'Work in a team',
-    'Use digital collaboration tools',
-    'Operate machinery safely',
-    'Provide customer service',
-    'Interpret technical drawings',
-    'Manage time effectively',
-    'Use accounting software',
-    'Adapt to changing work environments',
-  ],
-};
-
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
   if (window.searchInput
@@ -87,6 +49,7 @@ document.addEventListener('click', (e) => {
   }
 })
 
+/*
 document.addEventListener('change', (event) => {
   const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
@@ -120,6 +83,10 @@ document.addEventListener('change', (event) => {
     }
   }
 })
+*/
+
+// Per-instance abort controller to avoid races
+const typeaheadAbortMap = new WeakMap<HTMLElement, AbortController>()
 
 document.addEventListener('input', (event) => {
   const element = (event.target as Element).closest('.typeahead') as HTMLElement
@@ -128,8 +95,8 @@ document.addEventListener('input', (event) => {
     window.searchInput = searchInput
     const query = searchInput.value.toLowerCase()
 
-    // Minimum 4 chars
-    if (query.length < 4) {
+    // Minimum 3 chars
+    if (query.length < 3) {
       return
     }
 
@@ -140,28 +107,56 @@ document.addEventListener('input', (event) => {
     window.suggestionsDiv = suggestionsDiv
     suggestionsDiv.innerHTML = ''
 
-    const { datasource } = element.dataset
-    const entries = datasources[datasource as keyof typeof datasources]
+    const category = element.dataset.datasource as unknown as string
 
-    const filtered = entries.filter((entry) => entry.toLowerCase().includes(query))
-
-    filtered.forEach((item) => {
-      const div = document.createElement('div')
-      div.classList.add('suggestion')
-      div.textContent = item
-      div.addEventListener('click', () => {
-        searchInput.value = item
-        suggestionsDiv.innerHTML = ''
-        suggestionsDiv.style.display = 'none'
-        const customEvent = new Event('change', { bubbles: true })
-        searchInput.dispatchEvent(customEvent)
-      })
-      suggestionsDiv.appendChild(div)
-    })
-
-    if (filtered.length > 0) {
-      suggestionsDiv.style.display = 'block'
+    // Cancel any in-flight request
+    const prev = typeaheadAbortMap.get(element)
+    if (prev) {
+      try { prev.abort() } catch (_) { /* noop */ }
     }
+    const controller = new AbortController()
+    typeaheadAbortMap.set(element, controller)
+
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
+      .then((items) => {
+        if (controller.signal.aborted) return
+        // If the user cleared the input during fetch, stop
+        if ((element.querySelector('input[type="text"]') as HTMLInputElement)?.value.toLowerCase().length < 3) {
+          suggestionsDiv.style.display = 'none'
+          suggestionsDiv.innerHTML = ''
+          return
+        }
+
+        items.forEach((item) => {
+          // TODO: do something with the CODE as its the ID from the reference data and
+          console.log(`typeahead reference search result:  ${item}`)
+          const div = document.createElement('div')
+          div.classList.add('suggestion')
+          div.textContent = item.description
+          div.addEventListener('click', () => {
+            searchInput.value = item.description
+            suggestionsDiv.innerHTML = ''
+            suggestionsDiv.style.display = 'none'
+            const changeEvent = new Event('change', { bubbles: true })
+            searchInput.dispatchEvent(changeEvent)
+            const customEvent = new CustomEvent('typeahead:valid', { bubbles: true, detail: item })
+            searchInput.dispatchEvent(customEvent)
+          })
+          suggestionsDiv.appendChild(div)
+        })
+
+        if (items.length > 0) {
+          suggestionsDiv.style.display = 'block'
+        } else {
+          suggestionsDiv.style.display = 'none'
+        }
+      })
+      .catch((err) => {
+        if (err?.name === 'AbortError') return
+        suggestionsDiv.style.display = 'none'
+        suggestionsDiv.innerHTML = ''
+        console.error(err)
+      })
   }
 })
 
