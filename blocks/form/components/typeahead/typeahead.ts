@@ -29,46 +29,6 @@ function addSuggestionDiv() {
   return el
 }
 
-const datasources = {
-  courses: [
-    'Marketing management',
-    'Financial management',
-    'Financial statements',
-    'Business process modelling',
-    'Company policies',
-    'Develop company strategies',
-    'Plan medium to long term objectives',
-    'Define organisational standards',
-    'Assume responsibility for the management of a business',
-    'Build trust',
-  ],
-  languages: ['Te Reo Māori', 'French', 'German', 'Portuguese', 'Hebrew'],
-  occupations: [
-    'Software Developer',
-    'Primary School Teacher',
-    'Registered Nurse',
-    'Electrician',
-    'Construction Project Manager',
-    'Chef',
-    'General Practitioner (GP)',
-    'Mechanical Engineer',
-    'Retail Sales Assistant',
-    'Truck Driver (General)',
-  ],
-  skills: [
-    'Communicate effectively in English',
-    'Apply health and safety standards',
-    'Work in a team',
-    'Use digital collaboration tools',
-    'Operate machinery safely',
-    'Provide customer service',
-    'Interpret technical drawings',
-    'Manage time effectively',
-    'Use accounting software',
-    'Adapt to changing work environments',
-  ],
-};
-
 // Optional: Close suggestions when clicking outside
 document.addEventListener('click', (e) => {
   if (window.searchInput
@@ -89,6 +49,7 @@ document.addEventListener('click', (e) => {
   }
 })
 
+/*
 document.addEventListener('change', (event) => {
   const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
@@ -122,6 +83,7 @@ document.addEventListener('change', (event) => {
     }
   }
 })
+*/
 
 // Per-instance abort controller to avoid races
 const typeaheadAbortMap = new WeakMap<HTMLElement, AbortController>()
@@ -129,7 +91,7 @@ const typeaheadAbortMap = new WeakMap<HTMLElement, AbortController>()
 document.addEventListener('input', (event) => {
   const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
-    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
+    const searchInput = element.querySelector('input[name="text"]') as HTMLInputElement
     window.searchInput = searchInput
     const query = searchInput.value.toLowerCase()
 
@@ -165,17 +127,17 @@ document.addEventListener('input', (event) => {
           return
         }
 
-        items.forEach(({ description, code }) => {
+        items.forEach((item) => {
           // TODO: do something with the CODE as its the ID from the reference data and
-          console.log(`typeahead reference search result:  ${description} - ${code}`)
+          console.log(`typeahead reference search result:  ${item}`)
           const div = document.createElement('div')
           div.classList.add('suggestion')
-          div.textContent = description
+          div.textContent = item.description
           div.addEventListener('click', () => {
-            searchInput.value = description
+            searchInput.value = item.description
             suggestionsDiv.innerHTML = ''
             suggestionsDiv.style.display = 'none'
-            const customEvent = new Event('change', { bubbles: true })
+            const customEvent = new CustomEvent('typeahead:valid', { bubbles: true, detail: item })
             searchInput.dispatchEvent(customEvent)
           })
           suggestionsDiv.appendChild(div)
