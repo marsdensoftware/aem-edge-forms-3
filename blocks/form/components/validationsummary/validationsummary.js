@@ -38,7 +38,9 @@ export default function decorate(panelEl, model) {
           }
         }
         const errorFieldContainer = document.createElement('li');
-        const errorMessage = target.dataset.requiredErrorMessage || target.querySelector(':scope>.field-description-2,:scope>.field-description')?.textContent;
+        const errorMessage = target.dataset.requiredErrorMessage
+          || target.querySelector(':scope>.field-description')?.textContent
+          || target.querySelector(':scope>.field-description-2')?.textContent;
 
         errorFieldContainer.innerHTML = `<a class="fieldname" href="#${target.dataset.id}">${label}</a> <span class="errormessage">${errorMessage}</span>`;
         errorFieldContainer.setAttribute('aria-live', 'polite');
