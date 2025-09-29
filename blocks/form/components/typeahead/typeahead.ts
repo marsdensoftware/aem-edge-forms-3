@@ -117,7 +117,7 @@ document.addEventListener('input', (event) => {
     const controller = new AbortController()
     typeaheadAbortMap.set(element, controller)
 
-    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller)
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
       .then((items) => {
         if (controller.signal.aborted) return
         // If the user cleared the input during fetch, stop

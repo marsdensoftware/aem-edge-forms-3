@@ -87,7 +87,7 @@ document.addEventListener('input', (event) => {
         }
         const controller = new AbortController();
         typeaheadAbortMap.set(element, controller);
-        fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller)
+        fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
             .then((items) => {
             var _a;
             if (controller.signal.aborted)

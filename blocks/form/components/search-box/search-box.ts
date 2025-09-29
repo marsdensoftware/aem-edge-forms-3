@@ -511,7 +511,7 @@ document.addEventListener('input', (event) => {
     const category = element.dataset.datasource
 
     // Fetch suggestions from the remote endpoint instead of filtering the local state
-    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller)
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
       .then((items) => {
         // If this request was aborted or superseded, do nothing
         if (controller.signal.aborted) return

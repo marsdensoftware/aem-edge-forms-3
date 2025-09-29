@@ -58,9 +58,12 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
       const { target } = event;
       const { code, proficiencyCodes } = event.detail;
 
+      console.log('detail: ', event.detail);
+
       const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
       if (proficiency) {
-        window.myForm.getElement(proficiency.id).value = ''
+        /* eslint-disable-next-line no-undef */
+        myForm.getElement(proficiency.id).value = ''
         proficiency.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
           cb.parentElement.dataset.visible = proficiencyCodes.includes(cb.value);
         });
