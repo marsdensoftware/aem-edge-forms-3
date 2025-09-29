@@ -91,7 +91,7 @@ const typeaheadAbortMap = new WeakMap<HTMLElement, AbortController>()
 document.addEventListener('input', (event) => {
   const element = (event.target as Element).closest('.typeahead') as HTMLElement
   if (element) {
-    const searchInput = element.querySelector('input[name="text"]') as HTMLInputElement
+    const searchInput = element.querySelector('input[type="text"]') as HTMLInputElement
     window.searchInput = searchInput
     const query = searchInput.value.toLowerCase()
 
@@ -137,6 +137,8 @@ document.addEventListener('input', (event) => {
             searchInput.value = item.description
             suggestionsDiv.innerHTML = ''
             suggestionsDiv.style.display = 'none'
+            const changeEvent = new Event('change', { bubbles: true })
+            searchInput.dispatchEvent(changeEvent)
             const customEvent = new CustomEvent('typeahead:valid', { bubbles: true, detail: item })
             searchInput.dispatchEvent(customEvent)
           })

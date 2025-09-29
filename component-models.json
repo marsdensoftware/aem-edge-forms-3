@@ -275,6 +275,19 @@
         }
       },
       {
+        "component": "container",
+        "name": "refDataEndpoints",
+        "label": "Reference Data Endpoints",
+        "fields": [
+          {
+            "component": "text",
+            "name": "referenceDataUrl",
+            "label": "URL For Reference Data Search requests",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "restEndpointPostUrl",
         "label": "URL For POST request",

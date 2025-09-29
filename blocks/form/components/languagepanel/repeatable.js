@@ -60,15 +60,18 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
 
       const proficiency = target.closest('fieldset').querySelector(`[name="${LanguagePanelRepeatable.FIELD_NAMES.PROFICIENCY}"]`);
       if (proficiency) {
+        window.myForm.getElement(proficiency.id).value = ''
         proficiency.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
-          cb.parentElement.dataset.visible = proficiencyCodes.contains(cb.value);
+          cb.parentElement.dataset.visible = proficiencyCodes.includes(cb.value);
         });
         proficiency.style.display = 'block';
       }
 
       // Set code
-      const codeField = codeFieldset.querySelector('input[type="text"]');
-      codeField.value = code;
+      const codeField = codeFieldset?.querySelector('input[type="checkbox"]');
+      if (codeField) {
+        codeField.value = code;
+      }
     });
 
     // Register typeahead invalid listener
@@ -84,5 +87,11 @@ export class LanguagePanelRepeatable extends ConditionalRepeatable {
       const codeField = codeFieldset.querySelector('input[type="text"]');
       codeField.value = undefined;
     });
+  }
+
+  _onItemAdded(entry) {
+    this._init(entry)
+
+    super._onItemAdded(entry)
   }
 }

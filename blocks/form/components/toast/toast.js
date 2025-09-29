@@ -9,9 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 window.addEventListener('keydown', (event) => {
-    var _a;
     if (event.key === 'Escape') {
-        if (((_a = document.querySelector('dialog')) === null || _a === void 0 ? void 0 : _a.clientWidth) > 0) {
+        if (document.querySelector('dialog[open]')) {
             // Do nothing if there is a dialog open
             return;
         }
@@ -96,9 +95,9 @@ export function createToast(options = {}) {
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
+/* eslint-disable-next-line no-unused-vars */
 export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Decorating toast component:', fieldDiv, fieldJson, parentElement, formId);
         const { properties } = fieldJson;
         // Extract ToastOptions from properties
         const toastOptions = {

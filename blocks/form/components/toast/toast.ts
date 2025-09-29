@@ -16,7 +16,7 @@ export type ToastOptions = {
 
 window.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
-    if (document.querySelector('dialog')?.clientWidth > 0) {
+    if (document.querySelector('dialog[open]')) {
       // Do nothing if there is a dialog open
       return;
     }
@@ -114,9 +114,8 @@ export function createToast(options: ToastOptions = {}): HTMLDivElement {
  * @param {HTMLElement} parentElement - The parent element of the field.
  * @param {string} formId - The unique identifier of the form.
  */
+/* eslint-disable-next-line no-unused-vars */
 export default async function decorate(fieldDiv: HTMLElement, fieldJson: FieldJson, parentElement: HTMLElement, formId: String) {
-  console.log('Decorating toast component:', fieldDiv, fieldJson, parentElement, formId);
-
   const { properties } = fieldJson;
 
   // Extract ToastOptions from properties

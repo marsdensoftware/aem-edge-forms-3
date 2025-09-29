@@ -21,8 +21,9 @@ export function fetchRemoteSuggestions(category, query, limit, controller) {
             throw new Error(`Failed to fetch suggestions: ${res.status} ${res.statusText}`);
         }
         const data = yield res.json();
+        console.log(data);
         return (data.results || [])
             .filter((r) => r && r.description)
-            .map((r) => ({ code: r.code, description: r.description }));
+            .map((r) => ({ code: r.code, description: r.description, proficiencyCodes: r.proficiencyCodes }));
     });
 }

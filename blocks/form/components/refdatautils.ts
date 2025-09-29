@@ -23,9 +23,17 @@ export async function fetchRemoteSuggestions(
     query: string
     limit: number
     total: number
-    results: Array<{ code: string; description: string; category: string }>
+    results: Array<{
+      code: string;
+      description: string;
+      category: string;
+      proficiencyCodes?: string[]
+    }>
   }
+
+  console.log(data)
+
   return (data.results || [])
     .filter((r) => r && r.description)
-    .map((r) => ({ code: r.code, description: r.description }))
+    .map((r) => ({ code: r.code, description: r.description, proficiencyCodes: r.proficiencyCodes }))
 }

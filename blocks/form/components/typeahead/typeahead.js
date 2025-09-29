@@ -63,7 +63,7 @@ const typeaheadAbortMap = new WeakMap();
 document.addEventListener('input', (event) => {
     const element = event.target.closest('.typeahead');
     if (element) {
-        const searchInput = element.querySelector('input[name="text"]');
+        const searchInput = element.querySelector('input[type="text"]');
         window.searchInput = searchInput;
         const query = searchInput.value.toLowerCase();
         // Minimum 3 chars
@@ -108,6 +108,8 @@ document.addEventListener('input', (event) => {
                     searchInput.value = item.description;
                     suggestionsDiv.innerHTML = '';
                     suggestionsDiv.style.display = 'none';
+                    const changeEvent = new Event('change', { bubbles: true });
+                    searchInput.dispatchEvent(changeEvent);
                     const customEvent = new CustomEvent('typeahead:valid', { bubbles: true, detail: item });
                     searchInput.dispatchEvent(customEvent);
                 });
