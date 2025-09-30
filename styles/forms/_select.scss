@@ -30,6 +30,12 @@
   height: $spacing-800;
   background-color: $color-white;
   color: $text-secondary;
+  // add space for and place the chevron on the select input itself to avoid wrapper alignment issues
+  padding-right: $spacing-700;
+  background-image: url('/icons/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right $spacing-400 center;
+  background-size: $spacing-500 $spacing-500;
 
   &:focus-visible,
   &:focus,
@@ -77,9 +83,6 @@
     position: relative;
   }
 
-  &::after {
-    @include select-chevron;
-  }
 }
 
 select[required] {
@@ -87,6 +90,3 @@ select[required] {
   position: relative;
 }
 
-select[required]::after {
-  @include select-chevron;
-}
