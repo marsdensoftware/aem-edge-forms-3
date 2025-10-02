@@ -16,11 +16,23 @@ import { updateOrCreateInvalidMsg } from '../../util.js'
 /* eslint-disable-next-line no-unused-vars */
 export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, parentElement: HTMLElement, formId: String) {
   fieldDiv.classList.add('extended-checkbox-group');
-  const description = fieldDiv.querySelector(':scope>.field-description');
+  const description = fieldDiv.querySelector(':scope>.field-description') as HTMLDivElement;
+
+  const description2 = description?.cloneNode(true) as HTMLElement;
+  if (description2) {
+    description2.classList.remove('field-description');
+    description2.classList.add('field-description-2');
+  }
+
+  // add the description2 to the fieldDiv just below the `legend` element
+  const legend = fieldDiv.querySelector(':scope>.field-label');
+  if (legend && description2) {
+    legend.insertAdjacentElement('afterend', description2);
+  }
 
   if (description) {
-    // Move description to the bottom
     fieldDiv.append(description);
+    description.dataset.visible = 'false';
   }
 
   if (fieldJson.properties.isRequired) {
@@ -28,7 +40,12 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, 
     input.required = true;
     input.type = 'text';
     input.style.display = 'none';
-
+    input.addEventListener('invalid', () => {
+      description.dataset.visible = 'true';
+    });
+    input.addEventListener('valid', () => {
+      description.dataset.visible = 'false';
+    });
     const defaultErrorMsg = 'Please select at least one from up to four';
     fieldDiv.dataset.requiredErrorMessage = fieldJson.properties.requiredErrorMessage || defaultErrorMsg;
 
@@ -36,6 +53,7 @@ export default async function decorate(fieldDiv: HTMLElement, fieldJson: Field, 
       const required = fieldDiv.querySelectorAll('input[type="checkbox"]:checked').length === 0;
       if (!required) {
         updateOrCreateInvalidMsg(input)
+        input.dispatchEvent(new Event('valid'));
       }
       input.required = required;
     });
