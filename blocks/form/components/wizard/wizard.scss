@@ -26,7 +26,8 @@
     margin-left: auto;
   }
 
-  &.from-review {
+  &.from-review,
+  &.single-step {
     .field-save-changes {
       display: block;
     }
