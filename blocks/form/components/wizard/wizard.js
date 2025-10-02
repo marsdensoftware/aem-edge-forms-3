@@ -98,7 +98,7 @@ export class WizardLayout {
   static navigateTo(panel, stepName) {
     const destination = panel.querySelector(`:scope>fieldset[name="${stepName}"]`);
     if (!destination) {
-      return;
+      return false;
     }
 
     const current = panel.querySelector('.current-wizard-step');
@@ -120,6 +120,8 @@ export class WizardLayout {
     });
 
     panel.dispatchEvent(event);
+
+    return true;
   }
 
   static handleMutation(panel, mutationsList) {
@@ -267,7 +269,7 @@ export class WizardLayout {
       });
     }
 
-    function navigateByHash(singleStep) {
+    function navigateByHash() {
       const hash = window.location.hash.substring(1); // remove "#"
       const params = new URLSearchParams(hash);
       const stepName = params.get('step');
@@ -276,28 +278,18 @@ export class WizardLayout {
           stepNameField.value = stepName;
         }
 
-        if (singleStep) {
-          if (stepName === 'panel_review') {
-            return;
-          }
-          panel.classList.add('single-step');
+        if (stepName === 'panel_review') {
+          return;
         }
 
-        WizardLayout.navigateTo(panel, stepName);
-      }
-
-      const entryId = params.get('entryId');
-      if (entryId) {
-        const editEl = panel.querySelector(`[data-id="${entryId}"] .repeatable-entry__edit`);
-        if (editEl) {
-          // Switch to edit mode by triggering click on edit link;
-          editEl.click();
+        if (WizardLayout.navigateTo(panel, stepName)) {
+          panel.classList.add('single-step');
         }
       }
     }
 
     // Init from hash
-    navigateByHash(true);
+    navigateByHash();
 
     window.addEventListener('hashchange', () => {
       navigateByHash();
