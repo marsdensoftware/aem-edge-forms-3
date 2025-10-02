@@ -22,21 +22,38 @@ export default function decorate(fieldDiv, fieldJson, parentElement, formId) {
     return __awaiter(this, void 0, void 0, function* () {
         fieldDiv.classList.add('extended-checkbox-group');
         const description = fieldDiv.querySelector(':scope>.field-description');
+        const description2 = description === null || description === void 0 ? void 0 : description.cloneNode(true);
+        if (description2) {
+            description2.classList.remove('field-description');
+            description2.classList.add('field-description-2');
+        }
+        // add the description2 to the fieldDiv just below the `legend` element
+        const legend = fieldDiv.querySelector(':scope>.field-label');
+        if (legend && description2) {
+            legend.insertAdjacentElement('afterend', description2);
+        }
         if (description) {
-            // Move description to the bottom
             fieldDiv.append(description);
+            description.dataset.visible = 'false';
         }
         if (fieldJson.properties.isRequired) {
             const input = document.createElement('input');
             input.required = true;
             input.type = 'text';
             input.style.display = 'none';
+            input.addEventListener('invalid', () => {
+                description.dataset.visible = 'true';
+            });
+            input.addEventListener('valid', () => {
+                description.dataset.visible = 'false';
+            });
             const defaultErrorMsg = 'Please select at least one from up to four';
             fieldDiv.dataset.requiredErrorMessage = fieldJson.properties.requiredErrorMessage || defaultErrorMsg;
             fieldDiv.addEventListener('change', () => {
                 const required = fieldDiv.querySelectorAll('input[type="checkbox"]:checked').length === 0;
                 if (!required) {
                     updateOrCreateInvalidMsg(input);
+                    input.dispatchEvent(new Event('valid'));
                 }
                 input.required = required;
             });
