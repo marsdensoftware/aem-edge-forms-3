@@ -79,6 +79,18 @@
               ]
             },
             {
+            "component": "select",
+            "name": "semanticDatasource",
+            "label": "Semantic Data Source",
+            "valueType": "string",
+            "options": [
+                {
+                  "name": "Full search",
+                  "value": "all"
+                }
+              ]
+            },
+            {
               "...": "../../models/form-common/_basic-input-placeholder-fields.json#/fields"
             }
           ]

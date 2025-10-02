@@ -32946,6 +32946,18 @@
             ]
           },
           {
+            "component": "select",
+            "name": "semanticDatasource",
+            "label": "Semantic Data Source",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Full search",
+                "value": "all"
+              }
+            ]
+          },
+          {
             "component": "text",
             "name": "name",
             "label": "Name",

@@ -48,6 +48,8 @@ export type Suggestion = {
  * @param query The user-entered query string to match suggestions against.
  * @param limit Maximum number of results to request from the service.
  * @param controller AbortController used to cancel the in-flight request if needed.
+ * @param filterMode Optional search filter mode. Defaults to splitwith which searches
+ * the start of all strings in a candidate
  * @param element Optional DOM element inside a form; used to locate the form and its data attributes.
  * @returns A promise that resolves to an array of Suggestion items.
  * @throws Error if the HTTP response is not ok (non-2xx status).
@@ -58,6 +60,7 @@ export async function fetchRemoteSuggestions(
   limit: number,
   controller: AbortController,
   element?: Element,
+  filterMode: 'startswith' | 'contains' | 'splitwith' = 'splitwith',
 ): Promise<Suggestion[]> {
   // Determine the base URL from the nearest form element
   const form = element?.closest('form')
@@ -69,6 +72,7 @@ export async function fetchRemoteSuggestions(
   // Append query parameters
   url.searchParams.set('category', category)
   url.searchParams.set('q', query)
+  url.searchParams.set('mode', filterMode)
   url.searchParams.set('limit', String(limit))
 
   // Fire the request with CORS and credentials so server-side sessions/cookies apply

@@ -54,10 +54,44 @@
 
   .suggestions {
     @extend %suggestions;
+    max-height: 8rem;
   }
 
   .suggestion {
     @extend %suggestion;
+  }
+
+  // Ensure the status area and its divider have the same side padding as text
+  .suggestions-status {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  // Status text default style (searching state)
+  .suggestions-status-text {
+    font-style: italic;
+    //font-weight: $font-weight-regular;
+    font-size: 0.9rem;
+  }
+
+  // When "Did you mean ..." is shown
+  .suggestions-status-text.semantic-options {
+    font-style: normal;
+    font-weight: $font-weight-bold;
+    font-size: 0.9rem;
+  }
+
+  // Spinner icon inside status
+  .suggestions-spinner {
+    display: inline-block;
+    width: $spacing-400; // 16px typical
+    height: $spacing-400;
+    background-image: url('../../../../icons/icon-spinner.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: $spacing-400 $spacing-400;
+    margin-bottom: $spacing-200;
+    vertical-align: text-bottom;
   }
 }
 
