@@ -255,7 +255,6 @@ export class WizardLayout {
         }
 
         panel.classList.remove('single-step');
-        panel.classList.remove('from-review');
       }
     });
 

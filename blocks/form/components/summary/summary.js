@@ -15,7 +15,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
           // Register click on edit
           summary.el.querySelectorAll('.edit').forEach((a) => {
             a.addEventListener('click', () => {
-              wizardEl.classList.add('from-review');
+              wizardEl.classList.add('single-step');
               Summarizer.gotoWizardStep(a);
             });
           });
