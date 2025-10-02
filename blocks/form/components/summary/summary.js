@@ -16,6 +16,7 @@ onElementsAddedByClassName('wizard', (wizardEl) => {
           summary.el.querySelectorAll('.edit').forEach((a) => {
             a.addEventListener('click', () => {
               wizardEl.classList.add('from-review');
+              Summarizer.gotoWizardStep(a);
             });
           });
         } catch {

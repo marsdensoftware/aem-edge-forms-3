@@ -216,12 +216,33 @@ export class Summarizer {
     return new DefaultFieldConverter().convert(element);
   }
 
+  static gotoWizardStep(el) {
+    const { dataset: { stepName } } = el;
+    const { dataset: { entryId } } = el;
+
+    const form = el.closest('form');
+
+    const panelEl = form.querySelector(`[name="${stepName}"]`);
+    const wizardEl = panelEl.closest('.wizard');
+    const { index } = panelEl.dataset;
+
+    Summarizer.navigate(wizardEl, index);
+
+    if (entryId) {
+      const editEl = panelEl.querySelector(`[data-id="${entryId}"] .repeatable-entry__edit`);
+      if (editEl) {
+        // Switch to edit mode by triggering click on edit link;
+        editEl.click();
+      }
+    }
+  }
+
   static summaryEditTemplate = `
     <div class="row">
         <div class="col-md-5">
             <h4 class="title">{{title}}</h4>
             {{description}}
-            <div><a class="edit" href="#step={{stepName}}">${i18n('Edit')}</a></div>
+            <div><a class="edit" href="#" data-step-name="{{stepName}}">${i18n('Edit')}</a></div>
         </div>
         <div class="col-md-7">{{content}}</div>
     </div>
@@ -243,7 +264,7 @@ export class Summarizer {
             {{content}}
         </div>
         <div class="col-md-1">
-            <a class="edit" href="#step={{stepName}}&entryId={{entryId}}">${i18n('Edit')}</a>
+            <a class="edit" href="#" data-step-name="{{stepName}}" data-entry-id="{{entryId}}">${i18n('Edit')}</a>
         </div>
     </div>
     `;
@@ -346,7 +367,7 @@ export class Summarizer {
                 <div class="col-md-3 address"><i></i><span>${address}</span></div>
                 <div class="col-md-2 phone"><i></i><span>${phone}</phone></div>
                 <div class="col-md-4 email"><i></i><span>${email}</span></div>
-                <div class="col-md-1"><a href="#step=panel_personal_details" class="edit">${i18n('Edit')}</a></div>
+                <div class="col-md-1"><a href="#" class="edit" data-step-name="panel_personal_details">${i18n('Edit')}</a></div>
             </div>
         `;
   }

@@ -82,7 +82,7 @@ export class WizardLayout {
       if (stepNameField) {
         stepNameField.value = navigateTo.name;
       }
-      window.history.replaceState(null, null, `#step=${navigateTo.name}`);
+
       // ###SEP-NJ End
       const event = new CustomEvent('wizard:navigate', {
         detail: {
@@ -250,7 +250,7 @@ export class WizardLayout {
           window.location.href = 'https://www.google.com'
           break;
         default:
-          window.location.hash = 'step=panel_review';
+          WizardLayout.navigateTo(panel, 'panel_review');
           break;
         }
 
