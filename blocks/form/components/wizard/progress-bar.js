@@ -96,8 +96,8 @@ export const trackProgress = () => {
     const currentWizard = document.querySelector('.current-wizard-step');
     const wizardIdx = Number(currentWizard === null || currentWizard === void 0 ? void 0 : currentWizard.getAttribute('data-index'));
     const mainWizard = document.querySelector('fieldset.wizard');
-    const fromReview = (mainWizard === null || mainWizard === void 0 ? void 0 : mainWizard.classList.contains('from-review')) || false;
-    const showBar = !fromReview && wizardIdx !== 0 && wizardIdx !== 1;
+    const singleStep = (mainWizard === null || mainWizard === void 0 ? void 0 : mainWizard.classList.contains('single-step')) || false;
+    const showBar = !singleStep && wizardIdx !== 0 && wizardIdx !== 1;
     // Reset progress bar state
     if (!showBar) {
         progressBar === null || progressBar === void 0 ? void 0 : progressBar.classList.add('progress-bar--is-hidden');
