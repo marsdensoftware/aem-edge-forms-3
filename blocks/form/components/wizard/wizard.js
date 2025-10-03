@@ -1,4 +1,5 @@
 import { createButton } from '../../util.js';
+import { i18n } from '../../../../i18n/index.js';
 import './set-background-by-step.js';
 import './character-limits.js'
 import './english-proficiency.js'
@@ -75,6 +76,14 @@ export class WizardLayout {
       const navigateToMenuItem = panel.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
       currentMenuItem.classList.remove('wizard-menu-active-item');
       navigateToMenuItem.classList.add('wizard-menu-active-item');
+
+      // ###SEP-NJ remember last step
+      const stepNameField = panel.querySelector('input[name="stepname"]');
+      if (stepNameField) {
+        stepNameField.value = navigateTo.name;
+      }
+
+      // ###SEP-NJ End
       const event = new CustomEvent('wizard:navigate', {
         detail: {
           prevStep: { id: current.id, index: +current.dataset.index },
@@ -84,6 +93,33 @@ export class WizardLayout {
       });
       panel.dispatchEvent(event);
     }
+  }
+
+  static navigateTo(panel, stepName) {
+    const destination = panel.querySelector(`:scope>fieldset[name="${stepName}"]`);
+    if (!destination) {
+      return;
+    }
+
+    const current = panel.querySelector('.current-wizard-step');
+    const currentMenuItem = panel.querySelector('.wizard-menu-active-item');
+
+    current.classList.remove('current-wizard-step');
+    destination.classList.add('current-wizard-step');
+    // add/remove active class from menu item
+    const navigateToMenuItem = panel.querySelector(`li[data-index="${destination.dataset.index}"]`);
+    currentMenuItem.classList.remove('wizard-menu-active-item');
+    navigateToMenuItem.classList.add('wizard-menu-active-item');
+
+    const event = new CustomEvent('wizard:navigate', {
+      detail: {
+        prevStep: { id: current.id, index: +current.dataset.index },
+        currStep: { id: destination.id, index: +destination.dataset.index },
+      },
+      bubbles: true,
+    });
+
+    panel.dispatchEvent(event);
   }
 
   static handleMutation(panel, mutationsList) {
@@ -188,12 +224,93 @@ export class WizardLayout {
     panel.classList.add('wizard')
     // panel.classList.add('left');
   }
+
+  init(panel) {
+    // Add save button to go back to the calling page/step after save
+    const def = {
+      label: { value: i18n('Save changes') }, fieldType: 'button', name: 'save-changes', id: 'wizard-button-save-changes',
+    };
+
+    const saveBtn = createButton(def);
+    saveBtn.classList.add(def.id);
+
+    panel.querySelector('.wizard-button-wrapper').append(saveBtn);
+
+    saveBtn.addEventListener('click', () => {
+      // Save changes and go to the point of origin or review panel_summary
+      const stepEl = panel.querySelector('.current-wizard-step');
+
+      if (this.validateContainer(stepEl)) {
+        const hash = window.location.hash.substring(1); // remove "#"
+        const params = new URLSearchParams(hash);
+        const returnTo = params.get('returnTo');
+
+        switch (returnTo) {
+        case 'homepage':
+          window.location.href = 'https://www.google.com'
+          break;
+        default:
+          WizardLayout.navigateTo(panel, 'panel_review');
+          break;
+        }
+
+        panel.classList.remove('single-step');
+      }
+    });
+
+    const stepNameField = panel.querySelector('input[name="stepname"]');
+
+    if (stepNameField) {
+      stepNameField.addEventListener('change', () => {
+        const stepName = stepNameField.value;
+        WizardLayout.navigateTo(panel, stepName);
+      });
+    }
+
+    function navigateByHash(singleStep) {
+      const hash = window.location.hash.substring(1); // remove "#"
+      const params = new URLSearchParams(hash);
+      const stepName = params.get('step');
+      if (stepName) {
+        if (stepNameField) {
+          stepNameField.value = stepName;
+        }
+
+        if (singleStep) {
+          if (stepName === 'panel_review') {
+            return;
+          }
+          panel.classList.add('single-step');
+        }
+
+        WizardLayout.navigateTo(panel, stepName);
+      }
+
+      const entryId = params.get('entryId');
+      if (entryId) {
+        const editEl = panel.querySelector(`[data-id="${entryId}"] .repeatable-entry__edit`);
+        if (editEl) {
+          // Switch to edit mode by triggering click on edit link;
+          editEl.click();
+        }
+      }
+    }
+
+    // Init from hash
+    navigateByHash(true);
+
+    window.addEventListener('hashchange', () => {
+      navigateByHash();
+    });
+  }
 }
 
 const layout = new WizardLayout();
 
 export default function wizardLayout(panel) {
   layout.applyLayout(panel);
+  // ###SEP-NJ init wizard
+  layout.init(panel);
   return panel;
 }
 
