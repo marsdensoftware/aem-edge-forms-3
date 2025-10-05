@@ -95,9 +95,6 @@ export async function fetchRemoteSuggestions(
     }>
   }
 
-  // Helpful during development; consider removing or gating behind a debug flag in production
-  console.log(data)
-
   // Normalize and return suggestions, dropping any entries without a description
   return (data.results || [])
     .filter((r) => r && r.description)

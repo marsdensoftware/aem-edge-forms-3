@@ -404,7 +404,6 @@ document.addEventListener('input', (event) => {
         }
         // only fire semantic search if we have a semanticCategory configured
         if (semanticCategory && semanticCategory !== 'undefined') {
-            console.log('semanticCategory: ', semanticCategory);
             // Schedule a secondary fetch for category 'all' after 1.5s of inactivity
             state.delayedAllTimerId = window.setTimeout(() => {
                 // If the input has changed to a short query by the time timer fires, skip

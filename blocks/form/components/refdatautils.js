@@ -69,8 +69,6 @@ export function fetchRemoteSuggestions(category_1, query_1, limit_1, controller_
         }
         // Expected response shape from the service
         const data = yield res.json();
-        // Helpful during development; consider removing or gating behind a debug flag in production
-        console.log(data);
         // Normalize and return suggestions, dropping any entries without a description
         return (data.results || [])
             .filter((r) => r && r.description)

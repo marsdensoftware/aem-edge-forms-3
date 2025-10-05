@@ -100,7 +100,6 @@ document.addEventListener('input', (event) => {
             }
             items.forEach((item) => {
                 // TODO: do something with the CODE as its the ID from the reference data and
-                console.log(`typeahead reference search result:  ${item}`);
                 const div = document.createElement('div');
                 div.classList.add('suggestion');
                 div.textContent = item.description;
