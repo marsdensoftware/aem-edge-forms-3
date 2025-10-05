@@ -1,6 +1,7 @@
 import { onElementAdded } from '../utils.js'
 import { updateOrCreateInvalidMsg } from '../../util.js';
 import { fetchRemoteSuggestions, SUGGESTION_LIMIT } from '../refdatautils.js';
+import { i18n } from '../../../../i18n/index.js';
 
 /* eslint-disable no-use-before-define */
 /**
@@ -12,6 +13,10 @@ interface ComponentState {
   recommendations: string[]
   // Keep an AbortController per component instance to cancel stale requests
   abortController?: AbortController
+  // Timer to trigger a secondary fetch for the 'all' category after idle
+  delayedAllTimerId?: number
+  // Separate abort controller for the 'all' category fetch
+  allAbortController?: AbortController
 }
 const componentStateMap = new WeakMap<Element, ComponentState>()
 
@@ -456,6 +461,7 @@ declare global {
 interface El extends Element {
   dataset: {
     datasource: string
+    semanticDatasource?: string
     recommendationsDatasource?: string
     maxAllowedItems?: string
     required?: string
@@ -492,12 +498,22 @@ document.addEventListener('input', (event) => {
     const suggestionsDiv = element.querySelector('.suggestions') as HTMLElement
     suggestionsDiv.innerHTML = ''
 
+    const state = componentStateMap.get(element)!
+
+    // If query is too short, hide suggestions and cancel any pending 'all' timer/fetch
     if (query.length < 3) {
       suggestionsDiv.style.display = 'none'
+      if (state.delayedAllTimerId) {
+        clearTimeout(state.delayedAllTimerId)
+        state.delayedAllTimerId = undefined
+      }
+      if (state.allAbortController) {
+        try { state.allAbortController.abort() } catch (_) { /* noop */ }
+        state.allAbortController = undefined
+      }
       return
     }
 
-    const state = componentStateMap.get(element)!
     const selectedCardsWrapper = element.querySelector('.selected-cards-wrapper') as HTMLDivElement
     const selectedCardsDiv = selectedCardsWrapper.querySelector('.selected-cards') as HTMLDivElement
 
@@ -509,9 +525,129 @@ document.addEventListener('input', (event) => {
     state.abortController = controller
 
     const category = element.dataset.datasource
+    const semanticCategory = element.dataset.semanticDatasource
+
+    // Reset any pending secondary 'all' fetch/timer when we have a new qualifying input
+    if (state.delayedAllTimerId) {
+      clearTimeout(state.delayedAllTimerId)
+      state.delayedAllTimerId = undefined
+    }
+    if (state.allAbortController) {
+      try { state.allAbortController.abort() } catch (_) { /* noop */ }
+      state.allAbortController = undefined
+    }
+
+    // only fire semantic search if we have a semanticCategory configured
+    if (semanticCategory && semanticCategory !== 'undefined') {
+      // Schedule a secondary fetch for category 'all' after 1.5s of inactivity
+      state.delayedAllTimerId = window.setTimeout(() => {
+        // If the input has changed to a short query by the time timer fires, skip
+        const latestQuery = searchInput.value.toLowerCase()
+        if (latestQuery.length < 3) return
+
+        // Abort any previous 'all' fetch before starting a new one
+        if (state.allAbortController) {
+          try {
+            state.allAbortController.abort()
+          } catch (_) { /* noop */
+          }
+        }
+        const allController = new AbortController()
+        state.allAbortController = allController
+
+        fetchRemoteSuggestions(semanticCategory, latestQuery, SUGGESTION_LIMIT, allController, element, 'contains')
+          .then((allItems) => {
+            if (allController.signal.aborted) return
+
+            // If the input has changed to a short query by the time results return, skip rendering
+            if (searchInput.value.toLowerCase().length < 3) return
+
+            // Append 'all' results under existing suggestions, avoiding duplicates and already selected items
+            const existingTexts = new Set(
+              Array.from(suggestionsDiv.querySelectorAll('.suggestion')).map((el) => el.textContent || ''),
+            )
+
+            // Determine which 'all' items we will actually append
+            const itemsToAppend = allItems.filter((item) => {
+              // Skip if already selected
+              if (selectedCardsDiv.querySelector(`input[value="${item.description}"]`)) return false
+              // Skip if already shown in suggestions (from main or earlier all results)
+              if (existingTexts.has(item.description)) return false
+              return true
+            })
+
+            // Update status text and spinner when we have 'all' items to add
+            if (itemsToAppend.length > 0) {
+              let statusEl = suggestionsDiv.querySelector('.suggestions-status') as HTMLElement | null
+              if (!statusEl) {
+                statusEl = document.createElement('div')
+                statusEl.classList.add('suggestions-status')
+                suggestionsDiv.appendChild(statusEl)
+              }
+
+              // Ensure an HR exists inside the status element
+              let hr = statusEl.querySelector('.suggestions-divider') as HTMLHRElement | null
+              if (!hr) {
+                hr = document.createElement('hr')
+                hr.classList.add('suggestions-divider')
+                statusEl.appendChild(hr)
+              }
+
+              // Ensure a text node container exists for status text
+              let statusText = statusEl.querySelector('.suggestions-status-text') as HTMLElement | null
+              if (!statusText) {
+                statusText = document.createElement('div')
+                statusText.classList.add('suggestions-status-text')
+                statusEl.appendChild(statusText)
+              }
+              statusText.textContent = i18n('Did you mean ...')
+              statusText.classList.add('semantic-options')
+
+              const spinnerEl = statusEl.querySelector('.suggestions-spinner') as HTMLElement | null
+              if (spinnerEl) {
+                spinnerEl.style.display = 'none'
+              }
+            }
+
+            // No need to insert a sibling separator anymore; the HR lives inside .suggestions-status
+
+            // Now append the filtered 'all' items
+            itemsToAppend.forEach((item) => {
+              const div = document.createElement('div')
+              div.classList.add('suggestion')
+              div.textContent = item.description
+              div.dataset.source = 'all'
+              div.addEventListener('click', (e) => {
+                if (element.classList.contains('max-items-reached')) {
+                  e.stopPropagation()
+                  return
+                }
+                searchInput.value = ''
+                suggestionsDiv.innerHTML = ''
+                suggestionsDiv.style.display = 'none'
+                createSelectedCard(item.description, selectedCardsDiv, searchInput, 'main', item.code)
+              })
+              suggestionsDiv.appendChild(div)
+              existingTexts.add(item.description)
+            })
+
+            // Ensure suggestions are visible if we appended anything
+            if (suggestionsDiv.children.length > 0) {
+              suggestionsDiv.style.display = 'block'
+            }
+          })
+          .catch((err) => {
+            if (err?.name === 'AbortError') return
+            try {
+              console.error(err)
+            } catch (_) { /* noop */
+            }
+          })
+      }, 1500)
+    }
 
     // Fetch suggestions from the remote endpoint instead of filtering the local state
-    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element, 'splitwith')
       .then((items) => {
         // If this request was aborted or superseded, do nothing
         if (controller.signal.aborted) return
@@ -544,6 +680,46 @@ document.addEventListener('input', (event) => {
           })
           suggestionsDiv.appendChild(div)
         })
+
+        // only need to deal with semantic search if we have a semanticCategory configured
+        // After initial suggestions, add status container (with internal divider), text, and a spinner placeholder
+        if (semanticCategory && semanticCategory !== 'undefined' && items.length > 0) {
+          let statusEl = suggestionsDiv.querySelector('.suggestions-status') as HTMLElement | null
+          if (!statusEl) {
+            statusEl = document.createElement('div')
+            statusEl.classList.add('suggestions-status')
+            suggestionsDiv.appendChild(statusEl)
+          }
+
+          // Ensure an HR exists inside the status element
+          let hr = statusEl.querySelector('.suggestions-divider') as HTMLHRElement | null
+          if (!hr) {
+            hr = document.createElement('hr')
+            hr.classList.add('suggestions-divider')
+            statusEl.appendChild(hr)
+          }
+
+          // Ensure a text node container exists for status text
+          let statusText = statusEl.querySelector('.suggestions-status-text') as HTMLElement | null
+          if (!statusText) {
+            statusText = document.createElement('div')
+            statusText.classList.add('suggestions-status-text')
+            statusEl.appendChild(statusText)
+          }
+          statusText.textContent = i18n('Searching for more ...')
+          statusText.classList.remove('semantic-options')
+
+          // Ensure a spinner exists inside the status element
+          let spinnerEl = statusEl.querySelector('.suggestions-spinner') as HTMLElement | null
+          if (!spinnerEl) {
+            spinnerEl = document.createElement('div')
+            spinnerEl.classList.add('suggestions-spinner')
+            spinnerEl.setAttribute('aria-hidden', 'true')
+            statusEl.appendChild(spinnerEl)
+          } else {
+            spinnerEl.style.display = ''
+          }
+        }
 
         suggestionsDiv.style.display = items.length > 0 ? 'block' : 'none'
       })
@@ -649,7 +825,7 @@ function initSearchBoxCounter(searchBox: El) {
  */
 /* eslint-disable-next-line no-unused-vars */
 export default function decorate(element: El, field: Field, parentElement: HTMLElement, formId: String) {
-  const { datasource } = field.properties
+  const { datasource, semanticDatasource } = field.properties
   const recommendationsDatasource = field.properties['recommendations-datasource'] || 'experiencedBasedJobs'
   const selectionLabel = field.properties['selection-label']
   const recommendationsLabel = field.properties['recommendations-label']
@@ -676,6 +852,12 @@ export default function decorate(element: El, field: Field, parentElement: HTMLE
 
   element.classList.add('search-box')
   element.dataset.datasource = datasource
+  if (semanticDatasource !== undefined && semanticDatasource !== null && String(semanticDatasource).trim() !== '') {
+    element.dataset.semanticDatasource = String(semanticDatasource)
+  } else {
+    // Ensure the attribute is not present if no value is provided
+    delete (element.dataset as any).semanticDatasource
+  }
   element.dataset.recommendationsDatasource = recommendationsDatasource
   element.dataset.maxAllowedItems = field.properties.maxAllowedItems
 

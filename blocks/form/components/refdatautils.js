@@ -43,12 +43,14 @@ export const SUGGESTION_LIMIT = 8;
  * @param query The user-entered query string to match suggestions against.
  * @param limit Maximum number of results to request from the service.
  * @param controller AbortController used to cancel the in-flight request if needed.
+ * @param filterMode Optional search filter mode. Defaults to splitwith which searches
+ * the start of all strings in a candidate
  * @param element Optional DOM element inside a form; used to locate the form and its data attributes.
  * @returns A promise that resolves to an array of Suggestion items.
  * @throws Error if the HTTP response is not ok (non-2xx status).
  */
-export function fetchRemoteSuggestions(category, query, limit, controller, element) {
-    return __awaiter(this, void 0, void 0, function* () {
+export function fetchRemoteSuggestions(category_1, query_1, limit_1, controller_1, element_1) {
+    return __awaiter(this, arguments, void 0, function* (category, query, limit, controller, element, filterMode = 'splitwith') {
         var _a;
         // Determine the base URL from the nearest form element
         const form = element === null || element === void 0 ? void 0 : element.closest('form');
@@ -58,6 +60,7 @@ export function fetchRemoteSuggestions(category, query, limit, controller, eleme
         // Append query parameters
         url.searchParams.set('category', category);
         url.searchParams.set('q', query);
+        url.searchParams.set('mode', filterMode);
         url.searchParams.set('limit', String(limit));
         // Fire the request with CORS and credentials so server-side sessions/cookies apply
         const res = yield fetch(url.toString(), { signal: controller.signal, mode: 'cors', credentials: 'include' });
@@ -66,8 +69,6 @@ export function fetchRemoteSuggestions(category, query, limit, controller, eleme
         }
         // Expected response shape from the service
         const data = yield res.json();
-        // Helpful during development; consider removing or gating behind a debug flag in production
-        console.log(data);
         // Normalize and return suggestions, dropping any entries without a description
         return (data.results || [])
             .filter((r) => r && r.description)

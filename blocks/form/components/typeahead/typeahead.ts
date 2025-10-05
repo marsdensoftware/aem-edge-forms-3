@@ -117,7 +117,7 @@ document.addEventListener('input', (event) => {
     const controller = new AbortController()
     typeaheadAbortMap.set(element, controller)
 
-    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element)
+    fetchRemoteSuggestions(category, query, SUGGESTION_LIMIT, controller, element, 'splitwith')
       .then((items) => {
         if (controller.signal.aborted) return
         // If the user cleared the input during fetch, stop
@@ -129,7 +129,6 @@ document.addEventListener('input', (event) => {
 
         items.forEach((item) => {
           // TODO: do something with the CODE as its the ID from the reference data and
-          console.log(`typeahead reference search result:  ${item}`)
           const div = document.createElement('div')
           div.classList.add('suggestion')
           div.textContent = item.description

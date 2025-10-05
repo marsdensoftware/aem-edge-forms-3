@@ -950,8 +950,9 @@ export default async function decorate(block) {
     form.dataset.source = source;
     form.dataset.rules = rules;
     form.dataset.id = formDef.id;
-    console.log('formDef', formDef.properties.referenceDataUrl);
+    /* GKW SEPD6805: START - Add support for reference data */
     form.dataset.referenceDataUrl = formDef.properties.referenceDataUrl || '';
+    /* GKW SEPD6805: END - Add support for reference data */
     if (source === 'aem' && formDef.properties && formDef.properties['fd:path']) {
       form.dataset.formpath = formDef.properties['fd:path'];
     }
